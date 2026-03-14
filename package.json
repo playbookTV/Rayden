@@ -1,5 +1,5 @@
 {
-  "name": "@rayden/ui",
+  "name": "@raydenui/ui",
   "version": "0.1.0",
   "description": "A modern React UI component library",
   "type": "module",
