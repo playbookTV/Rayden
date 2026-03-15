@@ -31,7 +31,8 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_22e6810e48a2640"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -63,6 +64,7 @@
     "@vitest/browser-playwright": "^4.1.0",
     "@vitest/coverage-v8": "^4.1.0",
     "autoprefixer": "^10.4.27",
+    "chromatic": "^15.2.0",
     "clsx": "^2.1.1",
     "playwright": "^1.58.2",
     "postcss": "^8.5.8",
