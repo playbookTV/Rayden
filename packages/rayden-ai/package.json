@@ -1,6 +1,6 @@
 {
   "name": "@raydenui/ai",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI compatibility layer for Rayden UI - enables LLMs to reliably generate UI without hallucination",
   "type": "module",
   "main": "./dist/index.cjs",

@@ -9,7 +9,7 @@
 // Handle CLI flags before starting server
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(`
-Rayden AI MCP Server v0.1.0
+Rayden AI MCP Server v0.1.1
 
 An MCP server that provides AI assistants with Rayden UI component
 information, design tokens, and layout recipes.
@@ -70,7 +70,7 @@ import { handleGetLayoutRecipes } from './handlers/getLayoutRecipes.js';
 const server = new Server(
   {
     name: 'rayden-ai',
-    version: '0.1.0',
+    version: '0.1.1',
   },
   {
     capabilities: {
