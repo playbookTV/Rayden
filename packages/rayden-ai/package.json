@@ -40,6 +40,7 @@
     "./RAYDEN_RULES.md": "./RAYDEN_RULES.md"
   },
   "bin": {
+    "@raydenui/ai": "./dist/mcp/server.js",
     "rayden-ai-mcp": "./dist/mcp/server.js"
   },
   "files": [

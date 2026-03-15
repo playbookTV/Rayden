@@ -6,6 +6,53 @@
  * Rayden UI component information, design tokens, and layout recipes.
  */
 
+// Handle CLI flags before starting server
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(`
+Rayden AI MCP Server v0.1.0
+
+An MCP server that provides AI assistants with Rayden UI component
+information, design tokens, and layout recipes.
+
+Usage:
+  npx @raydenui/ai          Start MCP server (stdio transport)
+  npx @raydenui/ai --help   Show this help message
+
+Available Tools:
+  get_components      List all Rayden UI components (filterable by category)
+  get_component_props Get detailed props, examples, and usage for a component
+  get_tokens          Design tokens (colors, spacing, typography, shadows)
+  get_layout_recipes  Pre-built layout patterns for common UI scenarios
+
+Claude Desktop Integration:
+  Add to ~/Library/Application Support/Claude/claude_desktop_config.json:
+
+  {
+    "mcpServers": {
+      "rayden-ai": {
+        "command": "npx",
+        "args": ["@raydenui/ai"]
+      }
+    }
+  }
+
+Claude Code Integration:
+  Add to your project's .mcp.json:
+
+  {
+    "mcpServers": {
+      "rayden-ai": {
+        "command": "npx",
+        "args": ["@raydenui/ai"]
+      }
+    }
+  }
+
+Learn more: https://github.com/raydenui/rayden
+`);
+  process.exit(0);
+}
+
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {

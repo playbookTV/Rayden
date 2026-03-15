@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "rayden-ai": {
+      "command": "node",
+      "args": ["./packages/rayden-ai/dist/mcp/server.js"]
+    }
+  }
+}
