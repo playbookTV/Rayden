@@ -1,0 +1,64 @@
+{
+  "$schema": "./schema.json",
+  "name": "EmptyStateIllustration",
+  "displayName": "Empty State Illustration",
+  "description": "Illustration component for empty states, error pages, and placeholder content.",
+  "category": "data-display",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "name": {
+      "type": "enum",
+      "values": ["no-data", "no-results", "no-connection", "error", "success", "empty-inbox", "empty-folder", "no-notifications"],
+      "required": true,
+      "description": "Illustration name from predefined set"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "md", "lg"],
+      "default": "md",
+      "description": "Illustration size"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "sizes": ["sm", "md", "lg"],
+  "accessibility": {
+    "screenReaderNotes": "Illustrations are decorative. Ensure surrounding text explains the state."
+  },
+  "antiHallucination": {
+    "aliases": ["EmptyState", "Illustration", "Placeholder", "NoData"],
+    "doesNotExist": [
+      "title (add separately)",
+      "description (add separately)",
+      "action (add Button separately)",
+      "children",
+      "type (use name)",
+      "src (uses predefined illustrations)"
+    ],
+    "commonMistakes": [
+      { "mistake": "<EmptyState>", "correction": "<EmptyStateIllustration name='...' /> (then add text/buttons separately)" },
+      { "mistake": "src='...'", "correction": "Use name prop with predefined illustration name" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "No Data State",
+      "code": "<div className=\"text-center py-12\">\n  <EmptyStateIllustration name=\"no-data\" />\n  <h3 className=\"text-h5 font-semibold mt-4\">No data yet</h3>\n  <p className=\"text-body-sm text-grey-500 mt-2\">Start by adding some items</p>\n  <Button variant=\"primary\" className=\"mt-4\">Add Item</Button>\n</div>"
+    },
+    {
+      "title": "No Search Results",
+      "code": "<div className=\"text-center py-12\">\n  <EmptyStateIllustration name=\"no-results\" size=\"sm\" />\n  <h3 className=\"text-h6 font-semibold mt-4\">No results found</h3>\n  <p className=\"text-body-sm text-grey-500 mt-2\">Try adjusting your search</p>\n</div>"
+    },
+    {
+      "title": "Error State",
+      "code": "<div className=\"text-center py-12\">\n  <EmptyStateIllustration name=\"error\" />\n  <h3 className=\"text-h5 font-semibold mt-4\">Something went wrong</h3>\n  <p className=\"text-body-sm text-grey-500 mt-2\">Please try again later</p>\n  <Button variant=\"primary\" className=\"mt-4\" onClick={retry}>Retry</Button>\n</div>"
+    },
+    {
+      "title": "Empty Inbox",
+      "code": "<div className=\"text-center py-12\">\n  <EmptyStateIllustration name=\"empty-inbox\" />\n  <h3 className=\"text-h5 font-semibold mt-4\">Your inbox is empty</h3>\n  <p className=\"text-body-sm text-grey-500 mt-2\">Messages will appear here</p>\n</div>"
+    }
+  ]
+}

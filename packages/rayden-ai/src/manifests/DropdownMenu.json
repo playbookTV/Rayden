@@ -1,0 +1,167 @@
+{
+  "$schema": "./schema.json",
+  "name": "DropdownMenu",
+  "displayName": "Dropdown Menu",
+  "description": "Context menu or action dropdown. Compound component with trigger and content containing menu items.",
+  "category": "composite",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "DropdownMenuTrigger and DropdownMenuContent"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "specific",
+    "accepts": ["DropdownMenuTrigger", "DropdownMenuContent"],
+    "description": "Must contain DropdownMenuTrigger and DropdownMenuContent"
+  },
+  "subComponents": {
+    "DropdownMenuTrigger": {
+      "name": "DropdownMenuTrigger",
+      "description": "Element that triggers the dropdown. Usually wraps a Button.",
+      "props": {
+        "asChild": {
+          "type": "boolean",
+          "default": false,
+          "description": "Merge props onto child element instead of wrapping"
+        }
+      },
+      "children": {
+        "type": "any",
+        "required": true,
+        "description": "Trigger element (typically a Button)"
+      }
+    },
+    "DropdownMenuContent": {
+      "name": "DropdownMenuContent",
+      "description": "Container for menu items. Opens when trigger is activated.",
+      "props": {
+        "align": {
+          "type": "enum",
+          "values": ["start", "center", "end"],
+          "default": "start",
+          "description": "Alignment relative to trigger"
+        },
+        "side": {
+          "type": "enum",
+          "values": ["top", "right", "bottom", "left"],
+          "default": "bottom",
+          "description": "Side to open on"
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional CSS classes"
+        }
+      },
+      "children": {
+        "type": "specific",
+        "accepts": ["DropdownMenuGroup", "DropdownMenuLabel", "DropdownMenuItem", "DropdownMenuSeparator"]
+      }
+    },
+    "DropdownMenuGroup": {
+      "name": "DropdownMenuGroup",
+      "description": "Groups related menu items together",
+      "children": {
+        "type": "specific",
+        "accepts": ["DropdownMenuItem", "DropdownMenuLabel", "DropdownMenuSeparator"]
+      }
+    },
+    "DropdownMenuLabel": {
+      "name": "DropdownMenuLabel",
+      "description": "Non-interactive label for a section of items",
+      "props": {
+        "className": { "type": "string" }
+      },
+      "children": {
+        "type": "text",
+        "description": "Label text"
+      }
+    },
+    "DropdownMenuItem": {
+      "name": "DropdownMenuItem",
+      "description": "Interactive menu item",
+      "props": {
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether item is disabled"
+        },
+        "onSelect": {
+          "type": "function",
+          "description": "Callback when item is selected"
+        },
+        "className": { "type": "string" }
+      },
+      "children": {
+        "type": "any",
+        "description": "Item label content"
+      }
+    },
+    "DropdownMenuSeparator": {
+      "name": "DropdownMenuSeparator",
+      "description": "Visual separator between items",
+      "props": {
+        "className": { "type": "string" }
+      },
+      "children": {
+        "type": "none"
+      }
+    }
+  },
+  "composition": {
+    "mustContain": ["DropdownMenuTrigger", "DropdownMenuContent"],
+    "relatedComponents": ["Button", "Icon"]
+  },
+  "accessibility": {
+    "role": "menu",
+    "keyboardNav": [
+      { "key": "Enter/Space", "action": "Open menu (on trigger)" },
+      { "key": "ArrowDown/Up", "action": "Navigate items" },
+      { "key": "Enter", "action": "Select item" },
+      { "key": "Escape", "action": "Close menu" }
+    ],
+    "focusManagement": "Focus moves to first item when opened, returns to trigger on close",
+    "screenReaderNotes": "Menu items announced with role='menuitem'"
+  },
+  "antiHallucination": {
+    "aliases": ["Menu", "ContextMenu", "ActionMenu", "Popover"],
+    "notTheSameAs": ["Select", "Tooltip", "Modal"],
+    "doesNotExist": [
+      "items (use DropdownMenuItem children)",
+      "options (use DropdownMenuItem children)",
+      "trigger (use DropdownMenuTrigger)",
+      "onOpen",
+      "onClose",
+      "isOpen",
+      "defaultOpen",
+      "placement (use align and side on Content)"
+    ],
+    "commonMistakes": [
+      { "mistake": "items={[...]}",  "correction": "Use DropdownMenuItem components inside DropdownMenuContent" },
+      { "mistake": "trigger={<Button />}", "correction": "Use <DropdownMenuTrigger><Button /></DropdownMenuTrigger>" },
+      { "mistake": "<DropdownMenu><Button /></DropdownMenu>", "correction": "Wrap Button in DropdownMenuTrigger and add DropdownMenuContent" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Dropdown",
+      "code": "<DropdownMenu>\n  <DropdownMenuTrigger>\n    <Button variant=\"grey\">Options</Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuItem onSelect={() => console.log('Edit')}>Edit</DropdownMenuItem>\n    <DropdownMenuItem onSelect={() => console.log('Delete')}>Delete</DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>"
+    },
+    {
+      "title": "With Labels and Separators",
+      "code": "<DropdownMenu>\n  <DropdownMenuTrigger>\n    <Button variant=\"grey\" icon=\"more-horizontal\" iconPosition=\"icon-only\" aria-label=\"Actions\" />\n  </DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuLabel>Actions</DropdownMenuLabel>\n    <DropdownMenuItem>View</DropdownMenuItem>\n    <DropdownMenuItem>Edit</DropdownMenuItem>\n    <DropdownMenuSeparator />\n    <DropdownMenuItem>Delete</DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>"
+    },
+    {
+      "title": "With Groups",
+      "code": "<DropdownMenu>\n  <DropdownMenuTrigger>\n    <Button>Menu</Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuGroup>\n      <DropdownMenuLabel>Account</DropdownMenuLabel>\n      <DropdownMenuItem>Profile</DropdownMenuItem>\n      <DropdownMenuItem>Settings</DropdownMenuItem>\n    </DropdownMenuGroup>\n    <DropdownMenuSeparator />\n    <DropdownMenuGroup>\n      <DropdownMenuLabel>Support</DropdownMenuLabel>\n      <DropdownMenuItem>Help</DropdownMenuItem>\n      <DropdownMenuItem>Contact</DropdownMenuItem>\n    </DropdownMenuGroup>\n  </DropdownMenuContent>\n</DropdownMenu>"
+    },
+    {
+      "title": "With Disabled Item",
+      "code": "<DropdownMenu>\n  <DropdownMenuTrigger>\n    <Button>Actions</Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuItem>Edit</DropdownMenuItem>\n    <DropdownMenuItem disabled>Archive (not available)</DropdownMenuItem>\n    <DropdownMenuItem>Delete</DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>"
+    }
+  ]
+}

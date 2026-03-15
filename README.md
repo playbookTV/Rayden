@@ -7,7 +7,9 @@ A modern, accessible React component library built with Tailwind CSS v4. Rayden 
 
 ## Features
 
-- **15+ Production-Ready Components** — Buttons, Inputs, Tabs, Alerts, and more
+- **24+ Production-Ready Components** — Buttons, Inputs, Tables, Selects, Sidebars, and more
+- **Pre-built Blocks** — Login forms, notifications, tables, and more ready to drop in
+- **AI Compatibility** — `@raydenui/ai` package for reliable LLM code generation
 - **Tailwind CSS v4** — Modern styling with custom design tokens
 - **Fully Typed** — Complete TypeScript support with exported types
 - **Accessible** — Built with ARIA attributes and keyboard navigation
@@ -84,10 +86,12 @@ function App() {
 | [Button](./docs/components/Button.md) | Primary action buttons with variants and icon support |
 | [ButtonGroup](./docs/components/ButtonGroup.md) | Horizontal grouping of related buttons |
 | [Input](./docs/components/Input.md) | Text input with label, helper text, and validation states |
+| [Select](./docs/components/Select.md) | Dropdown select with icons, avatars, and status indicators |
 | [Checkbox](./docs/components/FormControl.md#checkbox) | Checkbox input with label and description |
 | [Radio](./docs/components/FormControl.md#radio) | Radio button input with label and description |
 | [Toggle](./docs/components/FormControl.md#toggle) | Switch/toggle input for boolean values |
 | [Chip](./docs/components/Chip.md) | Compact input tags with close/filter actions |
+| [FileUpload](./docs/components/FileUpload.md) | Drag-and-drop file upload with progress and states |
 
 ### Navigation
 
@@ -96,6 +100,19 @@ function App() {
 | [Tabs](./docs/components/Tabs.md) | Tabbed navigation with line and pill variants |
 | [Breadcrumb](./docs/components/Breadcrumb.md) | Hierarchical page navigation |
 | [Pagination](./docs/components/Pagination.md) | Page navigation with prev/next controls |
+| [SidebarMenu](./docs/components/SidebarMenu.md) | Collapsible sidebar navigation with sections |
+| [DropdownMenu](./docs/components/DropdownMenu.md) | Accessible dropdown menu with keyboard navigation |
+
+### Data Display
+
+| Component | Description |
+|-----------|-------------|
+| [Table](./docs/components/Table.md) | Data table with sorting, selection, and avatars |
+| [Avatar](./docs/components/Avatar.md) | User avatar with image, initials, icon, and status |
+| [ActivityFeed](./docs/components/ActivityFeed.md) | Activity timelines and notification feeds |
+| [MetricsCard](./docs/components/MetricsCard.md) | Dashboard metric cards with 6 layout variations |
+| [Icon](./docs/components/Icon.md) | 200+ icons with outline and solid variants |
+| [EmptyStateIllustration](./docs/components/EmptyStateIllustration.md) | 19 empty state illustrations with custom palettes |
 
 ### Feedback
 
@@ -112,6 +129,62 @@ function App() {
 | Component | Description |
 |-----------|-------------|
 | [Divider](./docs/components/Divider.md) | Content separator with optional label/button |
+
+## Blocks
+
+Pre-built UI patterns combining multiple components for common use cases. [View all blocks →](./docs/blocks.md)
+
+| Block | Description |
+|-------|-------------|
+| [LoginBlock](./docs/blocks.md#loginblock) | Complete login form with social providers |
+| [NotificationsBlock](./docs/blocks.md#notificationsblock) | Notification feed with actions and timestamps |
+| [TableBlock](./docs/blocks.md#tableblock) | Full-featured data table with search and filters |
+| [QuickSendBlock](./docs/blocks.md#quicksendblock) | Quick send interface for payments/transfers |
+| [RecentTransactionsBlock](./docs/blocks.md#recenttransactionsblock) | Transaction history display |
+| [EmptyStateBlock](./docs/blocks.md#emptystateblock) | Empty state with illustration and CTA |
+| [SearchableTableBlock](./docs/blocks.md#searchabletableblock) | Table with integrated search |
+
+```tsx
+import { LoginBlock, NotificationsBlock } from "@raydenui/ui";
+
+function App() {
+  return (
+    <LoginBlock
+      variant="split"
+      onSubmit={handleLogin}
+      socialProviders={["google", "github"]}
+    />
+  );
+}
+```
+
+## AI Integration
+
+The `@raydenui/ai` package enables LLMs to reliably generate Rayden UI code without hallucination.
+
+```bash
+pnpm add @raydenui/ai
+```
+
+### Features
+
+- **Component Manifests** — Structured definitions of all components, props, and examples
+- **Design Tokens** — Complete token system in JSON format
+- **Composition Rules** — Guidelines for combining components correctly
+- **MCP Server** — Model Context Protocol server for AI assistants
+
+### Usage with AI Assistants
+
+Add the rules to your AI assistant's context:
+
+```tsx
+import { RAYDEN_RULES } from "@raydenui/ai/rules";
+
+// Or use the MCP server for Claude, Cursor, etc.
+// npx rayden-ai-mcp
+```
+
+See the full [AI Integration Guide](./docs/rayden-ai.md) for setup instructions.
 
 ## Design Tokens
 

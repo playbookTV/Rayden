@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raydenui.com/schemas/component-manifest.json",
+  "title": "Rayden UI Component Manifest",
+  "description": "Schema for Rayden UI component manifest files used by AI agents",
+  "type": "object",
+  "required": ["name", "description", "category", "importPath", "props"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Exact component name as exported from @raydenui/ui"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable component name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of component purpose and capabilities"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["primitives", "inputs", "feedback", "navigation", "data-display", "composite"],
+      "description": "Component category for organization"
+    },
+    "importPath": {
+      "type": "string",
+      "description": "Package import path, e.g., '@raydenui/ui'"
+    },
+    "figmaNodeId": {
+      "type": "string",
+      "description": "Figma node ID for design reference"
+    },
+    "figmaFileKey": {
+      "type": "string",
+      "description": "Figma file key containing the component"
+    },
+    "props": {
+      "type": "object",
+      "description": "Component props definition",
+      "additionalProperties": {
+        "$ref": "#/definitions/prop"
+      }
+    },
+    "sizes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Available size values if component has size prop"
+    },
+    "slots": {
+      "type": "object",
+      "description": "Named content slots for component customization",
+      "additionalProperties": {
+        "$ref": "#/definitions/slot"
+      }
+    },
+    "children": {
+      "$ref": "#/definitions/childrenSpec",
+      "description": "Specification for component children"
+    },
+    "subComponents": {
+      "type": "object",
+      "description": "Sub-components for compound components",
+      "additionalProperties": {
+        "$ref": "#/definitions/subComponent"
+      }
+    },
+    "composition": {
+      "$ref": "#/definitions/compositionRules",
+      "description": "Rules for component composition and relationships"
+    },
+    "accessibility": {
+      "$ref": "#/definitions/accessibilitySpec",
+      "description": "Accessibility requirements and guidance"
+    },
+    "antiHallucination": {
+      "$ref": "#/definitions/antiHallucinationSpec",
+      "description": "Anti-hallucination guidance for AI agents"
+    },
+    "examples": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/example" },
+      "description": "Usage examples with code"
+    }
+  },
+  "definitions": {
+    "prop": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["string", "number", "boolean", "ReactNode", "function", "enum", "union", "object", "IconName", "array"],
+          "description": "Prop type"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what the prop does"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the prop is required"
+        },
+        "default": {
+          "description": "Default value for the prop"
+        },
+        "values": {
+          "type": "array",
+          "description": "Allowed values for enum/union types"
+        },
+        "deprecated": {
+          "type": "boolean",
+          "description": "Whether the prop is deprecated"
+        },
+        "deprecatedMessage": {
+          "type": "string",
+          "description": "Message explaining deprecation"
+        }
+      }
+    },
+    "slot": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "What the slot is for"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether content is required in this slot"
+        },
+        "accepts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Component names that can fill this slot"
+        }
+      }
+    },
+    "childrenSpec": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "description": "Whether children are required"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["any", "text", "specific", "none"],
+          "description": "Type of children accepted"
+        },
+        "accepts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific component names accepted as children"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of children requirements"
+        }
+      }
+    },
+    "subComponent": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sub-component name"
+        },
+        "description": {
+          "type": "string",
+          "description": "What the sub-component does"
+        },
+        "props": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/prop"
+          }
+        },
+        "children": {
+          "$ref": "#/definitions/childrenSpec"
+        }
+      }
+    },
+    "compositionRules": {
+      "type": "object",
+      "properties": {
+        "mustBeChildOf": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Parent components this must be a child of"
+        },
+        "mustContain": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components that must be children"
+        },
+        "canContain": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components that can be children"
+        },
+        "relatedComponents": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related components commonly used together"
+        },
+        "exclusiveWith": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components that should not be used together"
+        }
+      }
+    },
+    "accessibilitySpec": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "ARIA role of the component"
+        },
+        "requiredAriaProps": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Required ARIA attributes"
+        },
+        "keyboardNav": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": { "type": "string" },
+              "action": { "type": "string" }
+            }
+          },
+          "description": "Keyboard navigation patterns"
+        },
+        "focusManagement": {
+          "type": "string",
+          "description": "How focus is managed"
+        },
+        "screenReaderNotes": {
+          "type": "string",
+          "description": "Notes for screen reader compatibility"
+        }
+      }
+    },
+    "antiHallucinationSpec": {
+      "type": "object",
+      "properties": {
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Alternative names users might use for this component"
+        },
+        "notTheSameAs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components this is often confused with"
+        },
+        "doesNotExist": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Props/variants that DO NOT exist on this component"
+        },
+        "commonMistakes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mistake": { "type": "string" },
+              "correction": { "type": "string" }
+            }
+          },
+          "description": "Common mistakes and their corrections"
+        }
+      }
+    },
+    "example": {
+      "type": "object",
+      "required": ["title", "code"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Example title"
+        },
+        "description": {
+          "type": "string",
+          "description": "What the example demonstrates"
+        },
+        "code": {
+          "type": "string",
+          "description": "Example JSX code"
+        }
+      }
+    }
+  }
+}

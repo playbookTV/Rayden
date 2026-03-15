@@ -1,0 +1,201 @@
+{
+  "$schema": "https://raydenui.com/schemas/composition.json",
+  "version": "0.2.1",
+  "description": "Composition rules for Rayden UI compound components",
+
+  "compounds": {
+    "Table": {
+      "root": "Table",
+      "description": "Data table with sortable columns and selectable rows",
+      "requiredChildren": ["TableHeader", "TableBody"],
+      "structure": {
+        "Table": {
+          "children": ["TableHeader", "TableBody"],
+          "minChildren": 2,
+          "maxChildren": 2,
+          "order": ["TableHeader", "TableBody"]
+        },
+        "TableHeader": {
+          "parent": "Table",
+          "children": ["TableRow"],
+          "minChildren": 1
+        },
+        "TableBody": {
+          "parent": "Table",
+          "children": ["TableRow"],
+          "minChildren": 0
+        },
+        "TableRow": {
+          "parent": ["TableHeader", "TableBody"],
+          "children": ["TableHead", "TableCell"]
+        },
+        "TableHead": {
+          "parent": "TableRow",
+          "mustBeInsideOf": "TableHeader"
+        },
+        "TableCell": {
+          "parent": "TableRow",
+          "mustBeInsideOf": "TableBody"
+        }
+      },
+      "validationRules": [
+        "TableHead should only be used in TableRow within TableHeader",
+        "TableCell should only be used in TableRow within TableBody",
+        "First child of Table must be TableHeader",
+        "Second child of Table must be TableBody"
+      ]
+    },
+
+    "DropdownMenu": {
+      "root": "DropdownMenu",
+      "description": "Context menu or dropdown with keyboard navigation",
+      "requiredChildren": ["DropdownMenuTrigger", "DropdownMenuContent"],
+      "structure": {
+        "DropdownMenu": {
+          "children": ["DropdownMenuTrigger", "DropdownMenuContent"],
+          "minChildren": 2,
+          "maxChildren": 2
+        },
+        "DropdownMenuTrigger": {
+          "parent": "DropdownMenu",
+          "children": "any",
+          "notes": "Usually wraps a Button component"
+        },
+        "DropdownMenuContent": {
+          "parent": "DropdownMenu",
+          "children": ["DropdownMenuGroup", "DropdownMenuLabel", "DropdownMenuItem", "DropdownMenuSeparator"]
+        },
+        "DropdownMenuGroup": {
+          "parent": "DropdownMenuContent",
+          "children": ["DropdownMenuItem", "DropdownMenuLabel", "DropdownMenuSeparator"]
+        },
+        "DropdownMenuItem": {
+          "parent": ["DropdownMenuContent", "DropdownMenuGroup"]
+        },
+        "DropdownMenuLabel": {
+          "parent": ["DropdownMenuContent", "DropdownMenuGroup"]
+        },
+        "DropdownMenuSeparator": {
+          "parent": ["DropdownMenuContent", "DropdownMenuGroup"]
+        }
+      }
+    },
+
+    "Select": {
+      "root": "Select",
+      "description": "Dropdown select input",
+      "requiredChildren": ["SelectOption"],
+      "structure": {
+        "Select": {
+          "children": ["SelectOption"],
+          "minChildren": 1
+        },
+        "SelectOption": {
+          "parent": "Select"
+        }
+      }
+    },
+
+    "Tabs": {
+      "root": "Tabs",
+      "description": "Tabbed navigation",
+      "requiredChildren": ["Tab"],
+      "structure": {
+        "Tabs": {
+          "children": ["Tab"],
+          "minChildren": 1
+        },
+        "Tab": {
+          "parent": "Tabs"
+        }
+      }
+    },
+
+    "ButtonGroup": {
+      "root": "ButtonGroup",
+      "description": "Grouped buttons with connected borders",
+      "requiredChildren": ["ButtonGroupItem"],
+      "structure": {
+        "ButtonGroup": {
+          "children": ["ButtonGroupItem"],
+          "minChildren": 2
+        },
+        "ButtonGroupItem": {
+          "parent": "ButtonGroup"
+        }
+      }
+    },
+
+    "SidebarMenu": {
+      "root": "SidebarMenu",
+      "description": "Navigation sidebar with sections and items",
+      "structure": {
+        "SidebarMenu": {
+          "children": ["SidebarMenuSection", "SidebarMenuItem"]
+        },
+        "SidebarMenuSection": {
+          "parent": "SidebarMenu",
+          "children": ["SidebarMenuItem", "SidebarMenuSub"]
+        },
+        "SidebarMenuItem": {
+          "parent": ["SidebarMenu", "SidebarMenuSection"]
+        },
+        "SidebarMenuSub": {
+          "parent": "SidebarMenuSection",
+          "children": ["SidebarMenuSubItem"]
+        },
+        "SidebarMenuSubItem": {
+          "parent": "SidebarMenuSub"
+        }
+      }
+    },
+
+    "FileUpload": {
+      "root": "FileUpload",
+      "description": "File upload with drop zone",
+      "structure": {
+        "FileUpload": {
+          "children": ["FileUploadDropZone", "FileUploadItem"]
+        },
+        "FileUploadDropZone": {
+          "parent": "FileUpload"
+        },
+        "FileUploadItem": {
+          "parent": "FileUpload"
+        }
+      }
+    },
+
+    "Avatar": {
+      "root": "AvatarGroup",
+      "description": "Avatar group for multiple users",
+      "structure": {
+        "AvatarGroup": {
+          "children": ["Avatar"]
+        },
+        "Avatar": {
+          "parent": ["AvatarGroup", null]
+        }
+      }
+    }
+  },
+
+  "relatedPairs": {
+    "Table+Pagination": {
+      "description": "Use Pagination below Table for paginated data",
+      "pattern": "<div className=\"space-y-4\">\n  <Table>...</Table>\n  <Pagination currentPage={page} totalPages={total} onPageChange={setPage} />\n</div>"
+    },
+    "Input+label": {
+      "description": "Input has built-in label prop",
+      "pattern": "<Input label=\"Email\" placeholder=\"Enter email\" />"
+    },
+    "Button+Tooltip": {
+      "description": "Wrap Button in Tooltip for additional context",
+      "pattern": "<Tooltip content=\"Click to save\"><Button>Save</Button></Tooltip>"
+    },
+    "DropdownMenu+Button": {
+      "description": "Use Button inside DropdownMenuTrigger",
+      "pattern": "<DropdownMenu>\n  <DropdownMenuTrigger>\n    <Button variant=\"grey\">Options</Button>\n  </DropdownMenuTrigger>\n  <DropdownMenuContent>...</DropdownMenuContent>\n</DropdownMenu>"
+    }
+  }
+}

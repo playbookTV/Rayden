@@ -1,0 +1,103 @@
+{
+  "$schema": "./schema.json",
+  "name": "ButtonGroup",
+  "displayName": "Button Group",
+  "description": "Horizontal group of connected buttons with shared styling. Compound component with ButtonGroupItem children.",
+  "category": "composite",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "ButtonGroupItem components"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "specific",
+    "accepts": ["ButtonGroupItem"],
+    "description": "Two or more ButtonGroupItem components"
+  },
+  "subComponents": {
+    "ButtonGroupItem": {
+      "name": "ButtonGroupItem",
+      "description": "Individual button within a ButtonGroup",
+      "props": {
+        "active": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this item is active/selected"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this item is disabled"
+        },
+        "onClick": {
+          "type": "function",
+          "description": "Click handler"
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional CSS classes"
+        }
+      },
+      "children": {
+        "type": "any",
+        "required": true,
+        "description": "Button label content"
+      }
+    }
+  },
+  "composition": {
+    "mustContain": ["ButtonGroupItem"],
+    "relatedComponents": ["Button", "Icon"]
+  },
+  "accessibility": {
+    "role": "group",
+    "keyboardNav": [
+      { "key": "Tab", "action": "Navigate between items" },
+      { "key": "Enter/Space", "action": "Activate item" }
+    ],
+    "screenReaderNotes": "Group announced as button group. Active state indicated."
+  },
+  "antiHallucination": {
+    "aliases": ["SegmentedControl", "ToggleGroup", "ButtonBar"],
+    "notTheSameAs": ["Tabs", "Radio"],
+    "doesNotExist": [
+      "items (use ButtonGroupItem children)",
+      "options (use ButtonGroupItem children)",
+      "value (manage active state per item)",
+      "onChange (use onClick on items)",
+      "size",
+      "variant"
+    ],
+    "commonMistakes": [
+      { "mistake": "items={[...]}",  "correction": "Use ButtonGroupItem children" },
+      { "mistake": "<Button> inside ButtonGroup",  "correction": "Use <ButtonGroupItem> not <Button>" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Button Group",
+      "code": "<ButtonGroup>\n  <ButtonGroupItem active>Day</ButtonGroupItem>\n  <ButtonGroupItem>Week</ButtonGroupItem>\n  <ButtonGroupItem>Month</ButtonGroupItem>\n</ButtonGroup>"
+    },
+    {
+      "title": "Controlled Selection",
+      "code": "<ButtonGroup>\n  <ButtonGroupItem active={view === 'list'} onClick={() => setView('list')}>List</ButtonGroupItem>\n  <ButtonGroupItem active={view === 'grid'} onClick={() => setView('grid')}>Grid</ButtonGroupItem>\n</ButtonGroup>"
+    },
+    {
+      "title": "With Icons",
+      "code": "<ButtonGroup>\n  <ButtonGroupItem active={view === 'list'} onClick={() => setView('list')}>\n    <Icon name=\"list\" size=\"sm\" />\n  </ButtonGroupItem>\n  <ButtonGroupItem active={view === 'grid'} onClick={() => setView('grid')}>\n    <Icon name=\"grid\" size=\"sm\" />\n  </ButtonGroupItem>\n</ButtonGroup>"
+    },
+    {
+      "title": "With Disabled Item",
+      "code": "<ButtonGroup>\n  <ButtonGroupItem>Option 1</ButtonGroupItem>\n  <ButtonGroupItem disabled>Option 2</ButtonGroupItem>\n  <ButtonGroupItem>Option 3</ButtonGroupItem>\n</ButtonGroup>"
+    }
+  ]
+}

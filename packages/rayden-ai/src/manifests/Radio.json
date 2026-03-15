@@ -1,0 +1,84 @@
+{
+  "$schema": "./schema.json",
+  "name": "Radio",
+  "displayName": "Radio",
+  "description": "Radio button for single selection from a group of options.",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "checked": {
+      "type": "boolean",
+      "description": "Controlled checked state"
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "description": "Default checked state for uncontrolled mode"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Change handler: (event: ChangeEvent) => void"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether radio is disabled"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text displayed next to radio"
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "description": "Form field name (must be same for radio group)"
+    },
+    "value": {
+      "type": "string",
+      "required": true,
+      "description": "Form field value"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "accessibility": {
+    "role": "radio",
+    "keyboardNav": [
+      { "key": "ArrowUp/Down", "action": "Navigate between radios in group" },
+      { "key": "Space", "action": "Select radio" }
+    ],
+    "screenReaderNotes": "Group radios with same name attribute. Provide label for each."
+  },
+  "antiHallucination": {
+    "aliases": ["RadioButton", "RadioInput", "RadioOption"],
+    "notTheSameAs": ["Checkbox", "Toggle", "Switch"],
+    "doesNotExist": [
+      "isChecked (use checked)",
+      "onCheckedChange (use onChange)",
+      "RadioGroup (group with same name)",
+      "size",
+      "color",
+      "children (use label prop)"
+    ],
+    "commonMistakes": [
+      { "mistake": "<RadioGroup>", "correction": "Group Radio components with same name prop" },
+      { "mistake": "<Radio>Label</Radio>", "correction": "<Radio label='Label' />" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Radio Group",
+      "code": "<div className=\"space-y-2\">\n  <Radio name=\"size\" value=\"small\" label=\"Small\" />\n  <Radio name=\"size\" value=\"medium\" label=\"Medium\" />\n  <Radio name=\"size\" value=\"large\" label=\"Large\" />\n</div>"
+    },
+    {
+      "title": "Controlled Radio Group",
+      "code": "<div className=\"space-y-2\">\n  <Radio name=\"plan\" value=\"free\" label=\"Free\" checked={plan === 'free'} onChange={() => setPlan('free')} />\n  <Radio name=\"plan\" value=\"pro\" label=\"Pro\" checked={plan === 'pro'} onChange={() => setPlan('pro')} />\n</div>"
+    },
+    {
+      "title": "With Disabled Option",
+      "code": "<div className=\"space-y-2\">\n  <Radio name=\"tier\" value=\"basic\" label=\"Basic\" />\n  <Radio name=\"tier\" value=\"premium\" label=\"Premium\" disabled />\n</div>"
+    }
+  ]
+}

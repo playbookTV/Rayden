@@ -1,0 +1,138 @@
+{
+  "$schema": "./schema.json",
+  "name": "Tabs",
+  "displayName": "Tabs",
+  "description": "Tabbed navigation component with line and pill variants. Compound component with Tab children.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": ["line", "pill"],
+      "default": "line",
+      "description": "Visual style variant"
+    },
+    "value": {
+      "type": "string",
+      "description": "Controlled active tab value"
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "Default active tab for uncontrolled mode"
+    },
+    "onValueChange": {
+      "type": "function",
+      "description": "Callback when active tab changes: (value: string) => void"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "Tab components"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "specific",
+    "accepts": ["Tab"],
+    "description": "One or more Tab components"
+  },
+  "subComponents": {
+    "Tab": {
+      "name": "Tab",
+      "description": "Individual tab within Tabs",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Unique value for this tab"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether tab is disabled"
+        },
+        "badge": {
+          "type": "union",
+          "values": ["string", "number"],
+          "description": "Badge content to display on tab"
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional CSS classes"
+        }
+      },
+      "children": {
+        "type": "any",
+        "required": true,
+        "description": "Tab label content"
+      }
+    }
+  },
+  "composition": {
+    "mustContain": ["Tab"],
+    "relatedComponents": ["Badge"]
+  },
+  "accessibility": {
+    "role": "tablist",
+    "keyboardNav": [
+      { "key": "ArrowLeft/Right", "action": "Navigate between tabs" },
+      { "key": "Home", "action": "Go to first tab" },
+      { "key": "End", "action": "Go to last tab" }
+    ],
+    "focusManagement": "Focus moves between tab triggers",
+    "screenReaderNotes": "Tabs use role='tab' and aria-selected"
+  },
+  "antiHallucination": {
+    "aliases": ["TabList", "TabPanel", "TabGroup", "TabNavigation"],
+    "notTheSameAs": ["ButtonGroup", "SidebarMenu"],
+    "doesNotExist": [
+      "items (use Tab children)",
+      "tabs (use Tab children)",
+      "onChange (use onValueChange)",
+      "activeKey (use value)",
+      "defaultActiveKey (use defaultValue)",
+      "TabPanel (content is managed externally)",
+      "TabContent",
+      "size",
+      "orientation",
+      "centered"
+    ],
+    "commonMistakes": [
+      { "mistake": "items={[...]}",  "correction": "Use Tab children" },
+      { "mistake": "onChange={fn}", "correction": "onValueChange={fn}" },
+      { "mistake": "activeKey='...'", "correction": "value='...'" },
+      { "mistake": "<TabPanel>", "correction": "Manage tab content externally based on active value" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Tabs",
+      "code": "<Tabs defaultValue=\"tab1\">\n  <Tab value=\"tab1\">Overview</Tab>\n  <Tab value=\"tab2\">Details</Tab>\n  <Tab value=\"tab3\">Settings</Tab>\n</Tabs>"
+    },
+    {
+      "title": "Controlled Tabs",
+      "code": "<Tabs value={activeTab} onValueChange={setActiveTab}>\n  <Tab value=\"profile\">Profile</Tab>\n  <Tab value=\"account\">Account</Tab>\n  <Tab value=\"billing\">Billing</Tab>\n</Tabs>"
+    },
+    {
+      "title": "Pill Variant",
+      "code": "<Tabs variant=\"pill\" defaultValue=\"all\">\n  <Tab value=\"all\">All</Tab>\n  <Tab value=\"active\">Active</Tab>\n  <Tab value=\"completed\">Completed</Tab>\n</Tabs>"
+    },
+    {
+      "title": "With Badge",
+      "code": "<Tabs defaultValue=\"inbox\">\n  <Tab value=\"inbox\" badge={12}>Inbox</Tab>\n  <Tab value=\"sent\">Sent</Tab>\n  <Tab value=\"drafts\" badge={3}>Drafts</Tab>\n</Tabs>"
+    },
+    {
+      "title": "With Disabled Tab",
+      "code": "<Tabs defaultValue=\"tab1\">\n  <Tab value=\"tab1\">Available</Tab>\n  <Tab value=\"tab2\" disabled>Locked</Tab>\n  <Tab value=\"tab3\">Open</Tab>\n</Tabs>"
+    },
+    {
+      "title": "Full Example with Content",
+      "code": "const [tab, setTab] = useState('overview');\n\nreturn (\n  <div>\n    <Tabs value={tab} onValueChange={setTab}>\n      <Tab value=\"overview\">Overview</Tab>\n      <Tab value=\"analytics\">Analytics</Tab>\n    </Tabs>\n    <div className=\"mt-4\">\n      {tab === 'overview' && <OverviewContent />}\n      {tab === 'analytics' && <AnalyticsContent />}\n    </div>\n  </div>\n);"
+    }
+  ]
+}

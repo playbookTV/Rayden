@@ -1,0 +1,112 @@
+{
+  "$schema": "./schema.json",
+  "name": "Alert",
+  "displayName": "Alert",
+  "description": "Notification component for displaying messages, alerts, and notifications. Supports toast and banner variants with multiple states.",
+  "category": "feedback",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": ["toast", "banner"],
+      "default": "toast",
+      "description": "Alert display variant - toast for floating notifications, banner for inline"
+    },
+    "state": {
+      "type": "enum",
+      "values": ["information", "success", "warning", "error"],
+      "default": "information",
+      "description": "Alert state determining color and default icon"
+    },
+    "title": {
+      "type": "string",
+      "description": "Alert title text"
+    },
+    "description": {
+      "type": "string",
+      "description": "Alert description/body text"
+    },
+    "icon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Custom icon (default icon based on state if not provided)"
+    },
+    "showIcon": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show the icon"
+    },
+    "onClose": {
+      "type": "function",
+      "description": "Callback when close button is clicked. If provided, close button is shown."
+    },
+    "primaryAction": {
+      "type": "object",
+      "description": "Primary action button config: { label: string, onClick: () => void }"
+    },
+    "secondaryAction": {
+      "type": "object",
+      "description": "Secondary action button config: { label: string, onClick: () => void }"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "accessibility": {
+    "role": "alert",
+    "screenReaderNotes": "Alert uses role='alert' for screen reader announcement. Provide meaningful title and description."
+  },
+  "antiHallucination": {
+    "aliases": ["Notification", "Toast", "Snackbar", "Banner", "Message", "Notice"],
+    "notTheSameAs": ["Badge", "Tooltip"],
+    "doesNotExist": [
+      "type (use variant and state)",
+      "severity (use state)",
+      "status (use state)",
+      "closable (use onClose)",
+      "closeText",
+      "action (use primaryAction/secondaryAction)",
+      "duration",
+      "autoClose",
+      "position"
+    ],
+    "commonMistakes": [
+      { "mistake": "type='error'", "correction": "state='error'" },
+      { "mistake": "severity='warning'", "correction": "state='warning'" },
+      { "mistake": "closable={true}", "correction": "Provide onClose callback to show close button" },
+      { "mistake": "action={<Button>...</Button>}", "correction": "Use primaryAction={{ label: '...', onClick: fn }}" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Information Alert",
+      "code": "<Alert state=\"information\" title=\"Update Available\" description=\"A new version is available for download.\" />"
+    },
+    {
+      "title": "Success Alert",
+      "code": "<Alert state=\"success\" title=\"Success!\" description=\"Your changes have been saved.\" />"
+    },
+    {
+      "title": "Warning Alert",
+      "code": "<Alert state=\"warning\" title=\"Warning\" description=\"This action cannot be undone.\" />"
+    },
+    {
+      "title": "Error Alert",
+      "code": "<Alert state=\"error\" title=\"Error\" description=\"Something went wrong. Please try again.\" />"
+    },
+    {
+      "title": "With Close Button",
+      "code": "<Alert state=\"information\" title=\"Notification\" description=\"Click X to dismiss.\" onClose={() => setShow(false)} />"
+    },
+    {
+      "title": "With Actions",
+      "code": "<Alert\n  state=\"information\"\n  title=\"Confirm Action\"\n  description=\"Do you want to proceed?\"\n  primaryAction={{ label: 'Confirm', onClick: handleConfirm }}\n  secondaryAction={{ label: 'Cancel', onClick: handleCancel }}\n/>"
+    },
+    {
+      "title": "Banner Variant",
+      "code": "<Alert variant=\"banner\" state=\"warning\" title=\"Maintenance\" description=\"System maintenance scheduled for tonight.\" />"
+    }
+  ]
+}

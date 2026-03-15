@@ -1,0 +1,88 @@
+{
+  "$schema": "./schema.json",
+  "name": "ProgressBar",
+  "displayName": "Progress Bar",
+  "description": "Linear progress indicator showing completion percentage with optional label and metadata.",
+  "category": "feedback",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "value": {
+      "type": "number",
+      "required": true,
+      "description": "Progress value (0-100)"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "lg"],
+      "default": "sm",
+      "description": "Progress bar size"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text above progress bar"
+    },
+    "metadata": {
+      "type": "string",
+      "description": "Additional metadata text"
+    },
+    "showPercentage": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show percentage value"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "sizes": ["sm", "lg"],
+  "accessibility": {
+    "role": "progressbar",
+    "requiredAriaProps": ["aria-valuenow", "aria-valuemin", "aria-valuemax"],
+    "screenReaderNotes": "Progress value announced as percentage"
+  },
+  "antiHallucination": {
+    "aliases": ["Progress", "LinearProgress", "LoadingBar"],
+    "notTheSameAs": ["ProgressCircle", "Slider"],
+    "doesNotExist": [
+      "percent (use value)",
+      "percentage (use value)",
+      "color",
+      "variant",
+      "indeterminate",
+      "striped",
+      "animated"
+    ],
+    "commonMistakes": [
+      { "mistake": "percent={50}", "correction": "value={50}" },
+      { "mistake": "indeterminate", "correction": "Not supported - always determinate" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Progress",
+      "code": "<ProgressBar value={75} />"
+    },
+    {
+      "title": "With Label",
+      "code": "<ProgressBar value={60} label=\"Upload Progress\" />"
+    },
+    {
+      "title": "With Metadata",
+      "code": "<ProgressBar value={45} label=\"Storage Used\" metadata=\"4.5 GB of 10 GB\" />"
+    },
+    {
+      "title": "Large Size",
+      "code": "<ProgressBar value={80} size=\"lg\" label=\"Course Progress\" />"
+    },
+    {
+      "title": "Without Percentage",
+      "code": "<ProgressBar value={30} showPercentage={false} />"
+    },
+    {
+      "title": "Full Example",
+      "code": "<ProgressBar\n  value={67}\n  size=\"lg\"\n  label=\"Project Completion\"\n  metadata=\"67 of 100 tasks\"\n/>"
+    }
+  ]
+}

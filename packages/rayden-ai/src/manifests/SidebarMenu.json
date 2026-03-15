@@ -1,0 +1,168 @@
+{
+  "$schema": "./schema.json",
+  "name": "SidebarMenu",
+  "displayName": "Sidebar Menu",
+  "description": "Sidebar navigation menu with sections, items, and nested sub-menus. Compound component.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "theme": {
+      "type": "enum",
+      "values": ["light", "dark"],
+      "default": "light",
+      "description": "Color theme"
+    },
+    "collapsed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether sidebar is collapsed"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "SidebarMenuSection or SidebarMenuItem components"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "specific",
+    "accepts": ["SidebarMenuSection", "SidebarMenuItem"],
+    "description": "Menu sections and items"
+  },
+  "subComponents": {
+    "SidebarMenuSection": {
+      "name": "SidebarMenuSection",
+      "description": "Section container with optional title",
+      "props": {
+        "title": {
+          "type": "string",
+          "description": "Section title"
+        }
+      },
+      "children": {
+        "type": "specific",
+        "accepts": ["SidebarMenuItem", "SidebarMenuSub"]
+      }
+    },
+    "SidebarMenuItem": {
+      "name": "SidebarMenuItem",
+      "description": "Navigation menu item",
+      "props": {
+        "icon": {
+          "type": "union",
+          "values": ["ReactNode", "IconName"],
+          "description": "Item icon"
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Item label"
+        },
+        "active": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether item is active"
+        },
+        "href": {
+          "type": "string",
+          "description": "Link destination"
+        },
+        "onClick": {
+          "type": "function",
+          "description": "Click handler"
+        },
+        "badge": {
+          "type": "union",
+          "values": ["string", "number"],
+          "description": "Badge content"
+        }
+      }
+    },
+    "SidebarMenuSub": {
+      "name": "SidebarMenuSub",
+      "description": "Collapsible sub-menu container",
+      "props": {
+        "icon": {
+          "type": "union",
+          "values": ["ReactNode", "IconName"]
+        },
+        "label": {
+          "type": "string",
+          "required": true
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "children": {
+        "type": "specific",
+        "accepts": ["SidebarMenuSubItem"]
+      }
+    },
+    "SidebarMenuSubItem": {
+      "name": "SidebarMenuSubItem",
+      "description": "Sub-menu item",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": true
+        },
+        "active": {
+          "type": "boolean",
+          "default": false
+        },
+        "href": {
+          "type": "string"
+        },
+        "onClick": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "composition": {
+    "relatedComponents": ["Icon", "Badge"]
+  },
+  "accessibility": {
+    "role": "navigation",
+    "keyboardNav": [
+      { "key": "ArrowUp/Down", "action": "Navigate items" },
+      { "key": "Enter", "action": "Activate item or expand sub-menu" }
+    ],
+    "screenReaderNotes": "Uses nav element. Active item indicated with aria-current."
+  },
+  "antiHallucination": {
+    "aliases": ["Sidebar", "Navigation", "Nav", "Menu", "VerticalNav"],
+    "notTheSameAs": ["DropdownMenu", "Tabs"],
+    "doesNotExist": [
+      "items (use children)",
+      "links (use children)",
+      "mode",
+      "inlineCollapsed (use collapsed)"
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Sidebar",
+      "code": "<SidebarMenu>\n  <SidebarMenuItem icon=\"home\" label=\"Dashboard\" active />\n  <SidebarMenuItem icon=\"users\" label=\"Users\" />\n  <SidebarMenuItem icon=\"settings\" label=\"Settings\" />\n</SidebarMenu>"
+    },
+    {
+      "title": "With Sections",
+      "code": "<SidebarMenu>\n  <SidebarMenuSection title=\"Main\">\n    <SidebarMenuItem icon=\"home\" label=\"Dashboard\" active />\n    <SidebarMenuItem icon=\"chart\" label=\"Analytics\" />\n  </SidebarMenuSection>\n  <SidebarMenuSection title=\"Management\">\n    <SidebarMenuItem icon=\"users\" label=\"Users\" />\n    <SidebarMenuItem icon=\"folder\" label=\"Projects\" />\n  </SidebarMenuSection>\n</SidebarMenu>"
+    },
+    {
+      "title": "With Sub-menu",
+      "code": "<SidebarMenu>\n  <SidebarMenuItem icon=\"home\" label=\"Dashboard\" />\n  <SidebarMenuSub icon=\"settings\" label=\"Settings\" defaultOpen>\n    <SidebarMenuSubItem label=\"General\" active />\n    <SidebarMenuSubItem label=\"Security\" />\n    <SidebarMenuSubItem label=\"Notifications\" />\n  </SidebarMenuSub>\n</SidebarMenu>"
+    },
+    {
+      "title": "Dark Theme",
+      "code": "<SidebarMenu theme=\"dark\">\n  <SidebarMenuItem icon=\"home\" label=\"Home\" active />\n  <SidebarMenuItem icon=\"inbox\" label=\"Inbox\" badge={5} />\n</SidebarMenu>"
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "$schema": "./schema.json",
+  "version": "0.1.0",
+  "recipes": [
+    {
+      "id": "pricing-three-tier",
+      "name": "Three-Tier Pricing",
+      "description": "Classic three-tier pricing section with highlighted recommended plan",
+      "category": "marketing",
+      "tags": ["pricing", "saas", "subscription", "plans"],
+      "components": ["Button", "Badge"],
+      "code": "function PricingSection() {\n  const plans = [\n    { name: 'Starter', price: '$9', period: '/month', features: ['5 projects', '10GB storage', 'Email support'] },\n    { name: 'Pro', price: '$29', period: '/month', features: ['Unlimited projects', '100GB storage', 'Priority support', 'API access'], recommended: true },\n    { name: 'Enterprise', price: '$99', period: '/month', features: ['Everything in Pro', 'Unlimited storage', 'Dedicated support', 'Custom integrations', 'SLA guarantee'] }\n  ];\n\n  return (\n    <section className=\"py-16 px-4\">\n      <div className=\"text-center mb-12\">\n        <h2 className=\"text-h2 text-grey-900\">Simple, transparent pricing</h2>\n        <p className=\"text-body-lg text-grey-500 mt-4\">Choose the plan that's right for you</p>\n      </div>\n      <div className=\"grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto\">\n        {plans.map((plan) => (\n          <div\n            key={plan.name}\n            className={`p-8 rounded-xl border ${plan.recommended ? 'border-primary-500 shadow-soft-md' : 'border-grey-200'}`}\n          >\n            {plan.recommended && (\n              <Badge color=\"orange\" className=\"mb-4\">Most Popular</Badge>\n            )}\n            <h3 className=\"text-h4 text-grey-900\">{plan.name}</h3>\n            <div className=\"mt-4\">\n              <span className=\"text-display-sm text-grey-900\">{plan.price}</span>\n              <span className=\"text-body-md text-grey-500\">{plan.period}</span>\n            </div>\n            <ul className=\"mt-6 space-y-3\">\n              {plan.features.map((feature) => (\n                <li key={feature} className=\"flex items-center gap-2 text-body-md text-grey-700\">\n                  <Icon name=\"check\" className=\"text-success-500\" size=\"sm\" />\n                  {feature}\n                </li>\n              ))}\n            </ul>\n            <Button\n              variant={plan.recommended ? 'primary' : 'grey'}\n              appearance={plan.recommended ? 'solid' : 'outlined'}\n              className=\"w-full mt-8\"\n            >\n              Get Started\n            </Button>\n          </div>\n        ))}\n      </div>\n    </section>\n  );\n}",
+      "customizationPoints": [
+        { "id": "plans", "type": "array", "description": "Array of plan objects with name, price, period, features" },
+        { "id": "highlightIndex", "type": "number", "default": 1, "description": "Index of the recommended plan" }
+      ]
+    },
+    {
+      "id": "pricing-comparison",
+      "name": "Pricing Comparison Table",
+      "description": "Feature comparison table for multiple pricing tiers",
+      "category": "marketing",
+      "tags": ["pricing", "comparison", "table", "features"],
+      "components": ["Table", "TableHeader", "TableBody", "TableRow", "TableHead", "TableCell", "Badge", "Button", "Icon"],
+      "code": "function PricingComparison() {\n  const features = [\n    { name: 'Projects', starter: '5', pro: 'Unlimited', enterprise: 'Unlimited' },\n    { name: 'Storage', starter: '10GB', pro: '100GB', enterprise: 'Unlimited' },\n    { name: 'Team members', starter: '1', pro: '10', enterprise: 'Unlimited' },\n    { name: 'API access', starter: false, pro: true, enterprise: true },\n    { name: 'Custom domains', starter: false, pro: true, enterprise: true },\n    { name: 'Priority support', starter: false, pro: true, enterprise: true },\n    { name: 'SLA guarantee', starter: false, pro: false, enterprise: true }\n  ];\n\n  const Check = () => <Icon name=\"check\" className=\"text-success-500\" />;\n  const Cross = () => <Icon name=\"x\" className=\"text-grey-300\" />;\n\n  return (\n    <div className=\"py-16 px-4\">\n      <Table>\n        <TableHeader>\n          <TableRow>\n            <TableHead className=\"w-1/4\">Features</TableHead>\n            <TableHead className=\"text-center\">Starter<br/><span className=\"text-h5\">$9/mo</span></TableHead>\n            <TableHead className=\"text-center bg-primary-50\">Pro<br/><span className=\"text-h5\">$29/mo</span></TableHead>\n            <TableHead className=\"text-center\">Enterprise<br/><span className=\"text-h5\">$99/mo</span></TableHead>\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          {features.map((feature) => (\n            <TableRow key={feature.name}>\n              <TableCell className=\"font-medium\">{feature.name}</TableCell>\n              <TableCell className=\"text-center\">\n                {typeof feature.starter === 'boolean' ? (feature.starter ? <Check /> : <Cross />) : feature.starter}\n              </TableCell>\n              <TableCell className=\"text-center bg-primary-50\">\n                {typeof feature.pro === 'boolean' ? (feature.pro ? <Check /> : <Cross />) : feature.pro}\n              </TableCell>\n              <TableCell className=\"text-center\">\n                {typeof feature.enterprise === 'boolean' ? (feature.enterprise ? <Check /> : <Cross />) : feature.enterprise}\n              </TableCell>\n            </TableRow>\n          ))}\n          <TableRow>\n            <TableCell></TableCell>\n            <TableCell className=\"text-center pt-6\">\n              <Button variant=\"grey\" appearance=\"outlined\">Choose Starter</Button>\n            </TableCell>\n            <TableCell className=\"text-center bg-primary-50 pt-6\">\n              <Button variant=\"primary\">Choose Pro</Button>\n            </TableCell>\n            <TableCell className=\"text-center pt-6\">\n              <Button variant=\"grey\" appearance=\"outlined\">Contact Sales</Button>\n            </TableCell>\n          </TableRow>\n        </TableBody>\n      </Table>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "features", "type": "array", "description": "Feature comparison data" },
+        { "id": "plans", "type": "array", "description": "Plan names and prices" }
+      ]
+    },
+    {
+      "id": "hero-centered",
+      "name": "Centered Hero Section",
+      "description": "Classic centered hero with headline, subtext, and CTA buttons",
+      "category": "marketing",
+      "tags": ["hero", "landing", "headline", "cta"],
+      "components": ["Button"],
+      "code": "function HeroCentered() {\n  return (\n    <section className=\"py-24 px-4 text-center\">\n      <div className=\"max-w-3xl mx-auto\">\n        <h1 className=\"text-display-lg text-grey-900\">\n          Build beautiful UIs <span className=\"text-primary-500\">faster</span>\n        </h1>\n        <p className=\"text-body-lg text-grey-500 mt-6 max-w-2xl mx-auto\">\n          Rayden UI provides production-ready components that help you ship features in record time. Focus on what matters — your product.\n        </p>\n        <div className=\"flex flex-col sm:flex-row gap-4 justify-center mt-10\">\n          <Button variant=\"primary\" size=\"lg\" icon=\"arrow-right\" iconPosition=\"trailing\">\n            Get Started Free\n          </Button>\n          <Button variant=\"grey\" appearance=\"outlined\" size=\"lg\">\n            View Documentation\n          </Button>\n        </div>\n        <p className=\"text-body-sm text-grey-400 mt-6\">\n          No credit card required • Free forever for individuals\n        </p>\n      </div>\n    </section>\n  );\n}",
+      "customizationPoints": [
+        { "id": "headline", "type": "string", "description": "Main headline text" },
+        { "id": "subtext", "type": "string", "description": "Supporting paragraph" },
+        { "id": "primaryCta", "type": "object", "description": "Primary button text and action" },
+        { "id": "secondaryCta", "type": "object", "description": "Secondary button text and action" }
+      ]
+    },
+    {
+      "id": "hero-split",
+      "name": "Split Hero with Image",
+      "description": "Hero section with content on left and image/illustration on right",
+      "category": "marketing",
+      "tags": ["hero", "landing", "split", "image"],
+      "components": ["Button", "Badge"],
+      "code": "function HeroSplit() {\n  return (\n    <section className=\"py-16 px-4\">\n      <div className=\"max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center\">\n        <div>\n          <Badge color=\"blue\" type=\"accent\">Now in Beta</Badge>\n          <h1 className=\"text-display-sm text-grey-900 mt-4\">\n            The modern toolkit for building great products\n          </h1>\n          <p className=\"text-body-lg text-grey-500 mt-6\">\n            Everything you need to design, develop, and deploy beautiful applications. Built by developers, for developers.\n          </p>\n          <div className=\"flex flex-wrap gap-4 mt-8\">\n            <Button variant=\"primary\" size=\"lg\">\n              Start Building\n            </Button>\n            <Button variant=\"grey\" appearance=\"outlined\" size=\"lg\" icon=\"play\" iconPosition=\"leading\">\n              Watch Demo\n            </Button>\n          </div>\n          <div className=\"flex items-center gap-6 mt-8 text-body-sm text-grey-500\">\n            <span className=\"flex items-center gap-2\">\n              <Icon name=\"check\" className=\"text-success-500\" />\n              Free tier available\n            </span>\n            <span className=\"flex items-center gap-2\">\n              <Icon name=\"check\" className=\"text-success-500\" />\n              No credit card\n            </span>\n          </div>\n        </div>\n        <div className=\"bg-grey-100 rounded-2xl aspect-video flex items-center justify-center\">\n          <span className=\"text-grey-400\">Product Screenshot</span>\n        </div>\n      </div>\n    </section>\n  );\n}",
+      "customizationPoints": [
+        { "id": "badge", "type": "object", "description": "Optional badge above headline" },
+        { "id": "headline", "type": "string", "description": "Main headline" },
+        { "id": "image", "type": "string", "description": "Hero image URL" }
+      ]
+    },
+    {
+      "id": "feature-grid",
+      "name": "Feature Grid",
+      "description": "Grid of feature cards with icons and descriptions",
+      "category": "marketing",
+      "tags": ["features", "grid", "cards", "benefits"],
+      "components": ["Icon"],
+      "code": "function FeatureGrid() {\n  const features = [\n    { icon: 'zap', title: 'Lightning Fast', description: 'Optimized for performance with lazy loading and code splitting built-in.' },\n    { icon: 'shield', title: 'Secure by Default', description: 'Enterprise-grade security with SOC 2 compliance and end-to-end encryption.' },\n    { icon: 'refresh', title: 'Real-time Sync', description: 'Changes sync instantly across all devices and team members.' },\n    { icon: 'layers', title: 'Flexible Architecture', description: 'Build exactly what you need with our modular component system.' },\n    { icon: 'users', title: 'Team Collaboration', description: 'Work together seamlessly with built-in collaboration tools.' },\n    { icon: 'bar-chart', title: 'Advanced Analytics', description: 'Gain insights with comprehensive analytics and reporting.' }\n  ];\n\n  return (\n    <section className=\"py-16 px-4 bg-grey-50\">\n      <div className=\"max-w-6xl mx-auto\">\n        <div className=\"text-center mb-12\">\n          <h2 className=\"text-h2 text-grey-900\">Everything you need</h2>\n          <p className=\"text-body-lg text-grey-500 mt-4\">Powerful features to help you build faster</p>\n        </div>\n        <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8\">\n          {features.map((feature) => (\n            <div key={feature.title} className=\"bg-white p-6 rounded-xl border border-grey-200\">\n              <div className=\"w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center\">\n                <Icon name={feature.icon} className=\"text-primary-500\" />\n              </div>\n              <h3 className=\"text-h6 text-grey-900 mt-4\">{feature.title}</h3>\n              <p className=\"text-body-md text-grey-500 mt-2\">{feature.description}</p>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}",
+      "customizationPoints": [
+        { "id": "features", "type": "array", "description": "Array of feature objects with icon, title, description" },
+        { "id": "columns", "type": "number", "default": 3, "description": "Number of columns on large screens" }
+      ]
+    },
+    {
+      "id": "testimonial-cards",
+      "name": "Testimonial Cards",
+      "description": "Customer testimonials in a responsive card grid",
+      "category": "marketing",
+      "tags": ["testimonials", "social-proof", "reviews", "quotes"],
+      "components": ["Avatar"],
+      "code": "function TestimonialCards() {\n  const testimonials = [\n    { quote: 'Rayden UI has transformed how we build products. We shipped our MVP in half the time.', name: 'Sarah Chen', role: 'CTO at TechStart', avatar: '/avatars/sarah.jpg' },\n    { quote: 'The component quality is incredible. Our designers and developers finally speak the same language.', name: 'Marcus Johnson', role: 'Lead Developer at Scale', avatar: '/avatars/marcus.jpg' },\n    { quote: 'Best investment we made this year. The consistency across our product has never been better.', name: 'Emily Rodriguez', role: 'Product Manager at Growth', avatar: '/avatars/emily.jpg' }\n  ];\n\n  return (\n    <section className=\"py-16 px-4\">\n      <div className=\"max-w-6xl mx-auto\">\n        <div className=\"text-center mb-12\">\n          <h2 className=\"text-h2 text-grey-900\">Loved by teams everywhere</h2>\n          <p className=\"text-body-lg text-grey-500 mt-4\">See what our customers have to say</p>\n        </div>\n        <div className=\"grid grid-cols-1 md:grid-cols-3 gap-8\">\n          {testimonials.map((testimonial) => (\n            <div key={testimonial.name} className=\"bg-white p-6 rounded-xl border border-grey-200\">\n              <p className=\"text-body-md text-grey-700 italic\">\"{testimonial.quote}\"</p>\n              <div className=\"flex items-center gap-3 mt-6\">\n                <Avatar src={testimonial.avatar} alt={testimonial.name} />\n                <div>\n                  <p className=\"text-body-sm font-semibold text-grey-900\">{testimonial.name}</p>\n                  <p className=\"text-body-xs text-grey-500\">{testimonial.role}</p>\n                </div>\n              </div>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}",
+      "customizationPoints": [
+        { "id": "testimonials", "type": "array", "description": "Array of testimonial objects" }
+      ]
+    },
+    {
+      "id": "cta-banner",
+      "name": "CTA Banner",
+      "description": "Full-width call-to-action banner with gradient background",
+      "category": "marketing",
+      "tags": ["cta", "banner", "conversion", "signup"],
+      "components": ["Button"],
+      "code": "function CTABanner() {\n  return (\n    <section className=\"py-16 px-4 bg-gradient-to-r from-primary-600 to-primary-500\">\n      <div className=\"max-w-4xl mx-auto text-center\">\n        <h2 className=\"text-h2 text-white\">Ready to get started?</h2>\n        <p className=\"text-body-lg text-white/80 mt-4\">\n          Join thousands of teams already using Rayden UI to build better products.\n        </p>\n        <div className=\"flex flex-col sm:flex-row gap-4 justify-center mt-8\">\n          <Button variant=\"secondary\" size=\"lg\" className=\"bg-white text-primary-600 hover:bg-grey-100\">\n            Start Free Trial\n          </Button>\n          <Button variant=\"text\" size=\"lg\" className=\"text-white hover:bg-white/10\">\n            Talk to Sales\n          </Button>\n        </div>\n      </div>\n    </section>\n  );\n}",
+      "customizationPoints": [
+        { "id": "headline", "type": "string", "description": "CTA headline" },
+        { "id": "subtext", "type": "string", "description": "Supporting text" },
+        { "id": "gradientColors", "type": "object", "description": "Gradient from/to colors" }
+      ]
+    },
+    {
+      "id": "dashboard-header",
+      "name": "Dashboard Header",
+      "description": "Page header with title, description, and action buttons",
+      "category": "dashboard",
+      "tags": ["header", "page-title", "actions", "breadcrumb"],
+      "components": ["Button", "Breadcrumb", "BreadcrumbItem", "DropdownMenu", "DropdownMenuTrigger", "DropdownMenuContent", "DropdownMenuItem"],
+      "code": "function DashboardHeader() {\n  return (\n    <div className=\"border-b border-grey-200 bg-white\">\n      <div className=\"px-6 py-4\">\n        <Breadcrumb>\n          <BreadcrumbItem href=\"/\">Home</BreadcrumbItem>\n          <BreadcrumbItem href=\"/projects\">Projects</BreadcrumbItem>\n          <BreadcrumbItem current>Dashboard</BreadcrumbItem>\n        </Breadcrumb>\n      </div>\n      <div className=\"px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4\">\n        <div>\n          <h1 className=\"text-h4 text-grey-900\">Project Dashboard</h1>\n          <p className=\"text-body-md text-grey-500 mt-1\">Monitor your project's performance and metrics</p>\n        </div>\n        <div className=\"flex items-center gap-3\">\n          <Button variant=\"grey\" appearance=\"outlined\" icon=\"download\" iconPosition=\"leading\">\n            Export\n          </Button>\n          <DropdownMenu>\n            <DropdownMenuTrigger>\n              <Button variant=\"grey\" appearance=\"outlined\" icon=\"more-vertical\" iconPosition=\"icon-only\" aria-label=\"More options\" />\n            </DropdownMenuTrigger>\n            <DropdownMenuContent>\n              <DropdownMenuItem>Edit</DropdownMenuItem>\n              <DropdownMenuItem>Duplicate</DropdownMenuItem>\n              <DropdownMenuItem>Archive</DropdownMenuItem>\n            </DropdownMenuContent>\n          </DropdownMenu>\n          <Button variant=\"primary\" icon=\"plus\" iconPosition=\"leading\">\n            New Item\n          </Button>\n        </div>\n      </div>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "title", "type": "string", "description": "Page title" },
+        { "id": "description", "type": "string", "description": "Page description" },
+        { "id": "breadcrumbs", "type": "array", "description": "Breadcrumb items" },
+        { "id": "actions", "type": "array", "description": "Action buttons" }
+      ]
+    },
+    {
+      "id": "stats-cards",
+      "name": "Stats Cards Row",
+      "description": "Row of metric cards showing key statistics",
+      "category": "dashboard",
+      "tags": ["stats", "metrics", "kpi", "cards"],
+      "components": ["MetricsCard"],
+      "code": "function StatsCards() {\n  const stats = [\n    { title: 'Total Revenue', value: '$45,231', trend: { label: '+20.1%', type: 'up' } },\n    { title: 'Active Users', value: '2,543', trend: { label: '+15.3%', type: 'up' } },\n    { title: 'Conversion Rate', value: '3.24%', trend: { label: '-2.1%', type: 'down' } },\n    { title: 'Avg. Order Value', value: '$124', trend: { label: '+8.4%', type: 'up' } }\n  ];\n\n  return (\n    <div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-6\">\n      {stats.map((stat) => (\n        <MetricsCard\n          key={stat.title}\n          title={stat.title}\n          value={stat.value}\n          trend={stat.trend}\n        />\n      ))}\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "stats", "type": "array", "description": "Array of stat objects with title, value, trend" },
+        { "id": "columns", "type": "number", "default": 4, "description": "Number of columns" }
+      ]
+    },
+    {
+      "id": "data-table-page",
+      "name": "Data Table with Filters",
+      "description": "Complete data table page with search, filters, and pagination",
+      "category": "dashboard",
+      "tags": ["table", "data", "filters", "search", "pagination"],
+      "components": ["Table", "TableHeader", "TableBody", "TableRow", "TableHead", "TableCell", "Input", "Select", "SelectOption", "Button", "Badge", "Pagination", "Checkbox"],
+      "code": "function DataTablePage() {\n  const [search, setSearch] = useState('');\n  const [status, setStatus] = useState('all');\n  const [page, setPage] = useState(1);\n\n  const users = [\n    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'active' },\n    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'Editor', status: 'active' },\n    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Viewer', status: 'inactive' },\n    { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Editor', status: 'active' },\n    { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', role: 'Viewer', status: 'pending' }\n  ];\n\n  const statusColors = { active: 'success', inactive: 'neutral', pending: 'warning' };\n\n  return (\n    <div className=\"p-6 space-y-6\">\n      {/* Filters */}\n      <div className=\"flex flex-col sm:flex-row gap-4\">\n        <Input\n          placeholder=\"Search users...\"\n          leadingIcon=\"search\"\n          value={search}\n          onChange={(e) => setSearch(e.target.value)}\n          className=\"sm:w-64\"\n        />\n        <Select value={status} onValueChange={setStatus} placeholder=\"All statuses\">\n          <SelectOption value=\"all\">All Statuses</SelectOption>\n          <SelectOption value=\"active\">Active</SelectOption>\n          <SelectOption value=\"inactive\">Inactive</SelectOption>\n          <SelectOption value=\"pending\">Pending</SelectOption>\n        </Select>\n        <div className=\"flex-1\" />\n        <Button variant=\"primary\" icon=\"plus\" iconPosition=\"leading\">\n          Add User\n        </Button>\n      </div>\n\n      {/* Table */}\n      <Table>\n        <TableHeader>\n          <TableRow>\n            <TableHead className=\"w-12\"><Checkbox /></TableHead>\n            <TableHead sortable>Name</TableHead>\n            <TableHead>Email</TableHead>\n            <TableHead>Role</TableHead>\n            <TableHead>Status</TableHead>\n            <TableHead className=\"w-20\">Actions</TableHead>\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          {users.map((user) => (\n            <TableRow key={user.id}>\n              <TableCell><Checkbox /></TableCell>\n              <TableCell className=\"font-medium\">{user.name}</TableCell>\n              <TableCell>{user.email}</TableCell>\n              <TableCell>{user.role}</TableCell>\n              <TableCell>\n                <Badge color={statusColors[user.status]} size=\"sm\">\n                  {user.status}\n                </Badge>\n              </TableCell>\n              <TableCell>\n                <Button variant=\"text\" size=\"sm\" icon=\"more-horizontal\" iconPosition=\"icon-only\" aria-label=\"Actions\" />\n              </TableCell>\n            </TableRow>\n          ))}\n        </TableBody>\n      </Table>\n\n      {/* Pagination */}\n      <div className=\"flex items-center justify-between\">\n        <p className=\"text-body-sm text-grey-500\">Showing 1-5 of 24 results</p>\n        <Pagination currentPage={page} totalPages={5} onPageChange={setPage} />\n      </div>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "columns", "type": "array", "description": "Table column definitions" },
+        { "id": "filters", "type": "array", "description": "Filter options" },
+        { "id": "data", "type": "array", "description": "Table data" }
+      ]
+    },
+    {
+      "id": "sidebar-layout",
+      "name": "Sidebar Navigation Layout",
+      "description": "Full page layout with collapsible sidebar navigation",
+      "category": "dashboard",
+      "tags": ["sidebar", "navigation", "layout", "shell"],
+      "components": ["SidebarMenu", "SidebarMenuSection", "SidebarMenuItem", "SidebarMenuSub", "SidebarMenuSubItem", "Avatar", "Button", "DropdownMenu", "DropdownMenuTrigger", "DropdownMenuContent", "DropdownMenuItem"],
+      "code": "function SidebarLayout({ children }) {\n  return (\n    <div className=\"flex h-screen\">\n      {/* Sidebar */}\n      <aside className=\"w-64 border-r border-grey-200 bg-white flex flex-col\">\n        {/* Logo */}\n        <div className=\"h-16 px-4 flex items-center border-b border-grey-200\">\n          <span className=\"text-h5 font-bold text-primary-500\">Rayden</span>\n        </div>\n\n        {/* Navigation */}\n        <nav className=\"flex-1 overflow-y-auto p-4\">\n          <SidebarMenu>\n            <SidebarMenuSection label=\"Main\">\n              <SidebarMenuItem icon=\"home\" active>Dashboard</SidebarMenuItem>\n              <SidebarMenuItem icon=\"folder\">Projects</SidebarMenuItem>\n              <SidebarMenuItem icon=\"users\">Team</SidebarMenuItem>\n              <SidebarMenuItem icon=\"bar-chart\">Analytics</SidebarMenuItem>\n            </SidebarMenuSection>\n            <SidebarMenuSection label=\"Settings\">\n              <SidebarMenuItem icon=\"settings\">\n                Preferences\n                <SidebarMenuSub>\n                  <SidebarMenuSubItem>Account</SidebarMenuSubItem>\n                  <SidebarMenuSubItem>Security</SidebarMenuSubItem>\n                  <SidebarMenuSubItem>Notifications</SidebarMenuSubItem>\n                </SidebarMenuSub>\n              </SidebarMenuItem>\n              <SidebarMenuItem icon=\"help-circle\">Help</SidebarMenuItem>\n            </SidebarMenuSection>\n          </SidebarMenu>\n        </nav>\n\n        {/* User */}\n        <div className=\"p-4 border-t border-grey-200\">\n          <DropdownMenu>\n            <DropdownMenuTrigger className=\"w-full\">\n              <div className=\"flex items-center gap-3 p-2 rounded-lg hover:bg-grey-50 cursor-pointer\">\n                <Avatar src=\"/avatar.jpg\" alt=\"John Doe\" />\n                <div className=\"flex-1 text-left\">\n                  <p className=\"text-body-sm font-medium text-grey-900\">John Doe</p>\n                  <p className=\"text-body-xs text-grey-500\">john@example.com</p>\n                </div>\n              </div>\n            </DropdownMenuTrigger>\n            <DropdownMenuContent>\n              <DropdownMenuItem>Profile</DropdownMenuItem>\n              <DropdownMenuItem>Settings</DropdownMenuItem>\n              <DropdownMenuItem>Sign out</DropdownMenuItem>\n            </DropdownMenuContent>\n          </DropdownMenu>\n        </div>\n      </aside>\n\n      {/* Main Content */}\n      <main className=\"flex-1 overflow-y-auto bg-grey-50\">\n        {children}\n      </main>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "logo", "type": "ReactNode", "description": "Logo component" },
+        { "id": "menuItems", "type": "array", "description": "Navigation menu items" },
+        { "id": "user", "type": "object", "description": "User information" }
+      ]
+    },
+    {
+      "id": "login-form",
+      "name": "Login Form",
+      "description": "Simple login form with email and password",
+      "category": "forms",
+      "tags": ["login", "auth", "form", "signin"],
+      "components": ["Input", "Button", "Checkbox", "Divider"],
+      "code": "function LoginForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [remember, setRemember] = useState(false);\n\n  const handleSubmit = (e) => {\n    e.preventDefault();\n    // Handle login\n  };\n\n  return (\n    <div className=\"min-h-screen flex items-center justify-center bg-grey-50 py-12 px-4\">\n      <div className=\"max-w-md w-full bg-white rounded-xl shadow-soft-md p-8\">\n        <div className=\"text-center mb-8\">\n          <h1 className=\"text-h4 text-grey-900\">Welcome back</h1>\n          <p className=\"text-body-md text-grey-500 mt-2\">Sign in to your account</p>\n        </div>\n\n        <form onSubmit={handleSubmit} className=\"space-y-4\">\n          <Input\n            label=\"Email\"\n            type=\"email\"\n            placeholder=\"you@example.com\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            leadingIcon=\"mail\"\n          />\n          <Input\n            label=\"Password\"\n            type=\"password\"\n            placeholder=\"••••••••\"\n            value={password}\n            onChange={(e) => setPassword(e.target.value)}\n            leadingIcon=\"lock\"\n          />\n\n          <div className=\"flex items-center justify-between\">\n            <Checkbox\n              label=\"Remember me\"\n              checked={remember}\n              onChange={(e) => setRemember(e.target.checked)}\n            />\n            <a href=\"/forgot-password\" className=\"text-body-sm text-primary-500 hover:text-primary-600\">\n              Forgot password?\n            </a>\n          </div>\n\n          <Button type=\"submit\" variant=\"primary\" className=\"w-full\">\n            Sign in\n          </Button>\n        </form>\n\n        <Divider label=\"OR\" className=\"my-6\" />\n\n        <Button variant=\"grey\" appearance=\"outlined\" className=\"w-full\" icon=\"github\" iconPosition=\"leading\">\n          Continue with GitHub\n        </Button>\n\n        <p className=\"text-center text-body-sm text-grey-500 mt-6\">\n          Don't have an account?{' '}\n          <a href=\"/signup\" className=\"text-primary-500 hover:text-primary-600 font-medium\">\n            Sign up\n          </a>\n        </p>\n      </div>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "socialLogins", "type": "array", "description": "Social login providers" },
+        { "id": "showRemember", "type": "boolean", "default": true, "description": "Show remember me checkbox" },
+        { "id": "showForgot", "type": "boolean", "default": true, "description": "Show forgot password link" }
+      ]
+    },
+    {
+      "id": "signup-form",
+      "name": "Signup Form",
+      "description": "User registration form with validation",
+      "category": "forms",
+      "tags": ["signup", "register", "auth", "form"],
+      "components": ["Input", "Button", "Checkbox"],
+      "code": "function SignupForm() {\n  const [formData, setFormData] = useState({\n    name: '',\n    email: '',\n    password: '',\n    confirmPassword: ''\n  });\n  const [agreed, setAgreed] = useState(false);\n\n  const handleChange = (field) => (e) => {\n    setFormData({ ...formData, [field]: e.target.value });\n  };\n\n  const handleSubmit = (e) => {\n    e.preventDefault();\n    // Handle signup\n  };\n\n  return (\n    <div className=\"min-h-screen flex items-center justify-center bg-grey-50 py-12 px-4\">\n      <div className=\"max-w-md w-full bg-white rounded-xl shadow-soft-md p-8\">\n        <div className=\"text-center mb-8\">\n          <h1 className=\"text-h4 text-grey-900\">Create your account</h1>\n          <p className=\"text-body-md text-grey-500 mt-2\">Start your 14-day free trial</p>\n        </div>\n\n        <form onSubmit={handleSubmit} className=\"space-y-4\">\n          <Input\n            label=\"Full name\"\n            placeholder=\"John Doe\"\n            value={formData.name}\n            onChange={handleChange('name')}\n            leadingIcon=\"user\"\n          />\n          <Input\n            label=\"Email\"\n            type=\"email\"\n            placeholder=\"you@example.com\"\n            value={formData.email}\n            onChange={handleChange('email')}\n            leadingIcon=\"mail\"\n          />\n          <Input\n            label=\"Password\"\n            type=\"password\"\n            placeholder=\"Create a password\"\n            value={formData.password}\n            onChange={handleChange('password')}\n            leadingIcon=\"lock\"\n            helperText=\"Must be at least 8 characters\"\n          />\n          <Input\n            label=\"Confirm password\"\n            type=\"password\"\n            placeholder=\"Confirm your password\"\n            value={formData.confirmPassword}\n            onChange={handleChange('confirmPassword')}\n            leadingIcon=\"lock\"\n            error={formData.confirmPassword && formData.password !== formData.confirmPassword ? 'Passwords do not match' : undefined}\n          />\n\n          <Checkbox\n            label=\"I agree to the Terms of Service and Privacy Policy\"\n            checked={agreed}\n            onChange={(e) => setAgreed(e.target.checked)}\n          />\n\n          <Button type=\"submit\" variant=\"primary\" className=\"w-full\" disabled={!agreed}>\n            Create account\n          </Button>\n        </form>\n\n        <p className=\"text-center text-body-sm text-grey-500 mt-6\">\n          Already have an account?{' '}\n          <a href=\"/login\" className=\"text-primary-500 hover:text-primary-600 font-medium\">\n            Sign in\n          </a>\n        </p>\n      </div>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "fields", "type": "array", "description": "Form fields to collect" },
+        { "id": "termsRequired", "type": "boolean", "default": true, "description": "Require terms agreement" }
+      ]
+    },
+    {
+      "id": "settings-form",
+      "name": "Settings Form",
+      "description": "Profile settings form with sections and save button",
+      "category": "forms",
+      "tags": ["settings", "profile", "form", "account"],
+      "components": ["Input", "Button", "Toggle", "Select", "SelectOption", "Divider", "Avatar"],
+      "code": "function SettingsForm() {\n  return (\n    <div className=\"max-w-2xl mx-auto p-6\">\n      <h1 className=\"text-h4 text-grey-900\">Account Settings</h1>\n      <p className=\"text-body-md text-grey-500 mt-1\">Manage your account preferences</p>\n\n      <form className=\"mt-8 space-y-8\">\n        {/* Profile Section */}\n        <section>\n          <h2 className=\"text-h6 text-grey-900\">Profile</h2>\n          <p className=\"text-body-sm text-grey-500 mt-1\">Update your personal information</p>\n          <div className=\"mt-4 space-y-4\">\n            <div className=\"flex items-center gap-4\">\n              <Avatar src=\"/avatar.jpg\" alt=\"Profile\" size=\"lg\" />\n              <Button variant=\"grey\" appearance=\"outlined\" size=\"sm\">Change photo</Button>\n            </div>\n            <div className=\"grid grid-cols-1 sm:grid-cols-2 gap-4\">\n              <Input label=\"First name\" placeholder=\"John\" />\n              <Input label=\"Last name\" placeholder=\"Doe\" />\n            </div>\n            <Input label=\"Email\" type=\"email\" placeholder=\"john@example.com\" />\n            <Input label=\"Bio\" placeholder=\"Tell us about yourself...\" />\n          </div>\n        </section>\n\n        <Divider />\n\n        {/* Preferences Section */}\n        <section>\n          <h2 className=\"text-h6 text-grey-900\">Preferences</h2>\n          <p className=\"text-body-sm text-grey-500 mt-1\">Customize your experience</p>\n          <div className=\"mt-4 space-y-4\">\n            <Select label=\"Language\" defaultValue=\"en\">\n              <SelectOption value=\"en\">English</SelectOption>\n              <SelectOption value=\"es\">Spanish</SelectOption>\n              <SelectOption value=\"fr\">French</SelectOption>\n            </Select>\n            <Select label=\"Timezone\" defaultValue=\"utc\">\n              <SelectOption value=\"utc\">UTC</SelectOption>\n              <SelectOption value=\"est\">Eastern Time</SelectOption>\n              <SelectOption value=\"pst\">Pacific Time</SelectOption>\n            </Select>\n          </div>\n        </section>\n\n        <Divider />\n\n        {/* Notifications Section */}\n        <section>\n          <h2 className=\"text-h6 text-grey-900\">Notifications</h2>\n          <p className=\"text-body-sm text-grey-500 mt-1\">Control how you receive notifications</p>\n          <div className=\"mt-4 space-y-4\">\n            <Toggle label=\"Email notifications\" defaultChecked />\n            <Toggle label=\"Push notifications\" />\n            <Toggle label=\"Weekly digest\" defaultChecked />\n          </div>\n        </section>\n\n        <Divider />\n\n        {/* Actions */}\n        <div className=\"flex justify-end gap-3\">\n          <Button variant=\"grey\" appearance=\"outlined\">Cancel</Button>\n          <Button variant=\"primary\">Save changes</Button>\n        </div>\n      </form>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "sections", "type": "array", "description": "Form sections" },
+        { "id": "fields", "type": "array", "description": "Form fields per section" }
+      ]
+    },
+    {
+      "id": "empty-state",
+      "name": "Empty State",
+      "description": "Empty state with illustration and call to action",
+      "category": "content",
+      "tags": ["empty", "placeholder", "no-data", "illustration"],
+      "components": ["EmptyStateIllustration", "Button"],
+      "code": "function EmptyState() {\n  return (\n    <div className=\"flex flex-col items-center justify-center py-16 px-4 text-center\">\n      <EmptyStateIllustration name=\"no-data\" size=\"lg\" />\n      <h3 className=\"text-h5 text-grey-900 mt-6\">No projects yet</h3>\n      <p className=\"text-body-md text-grey-500 mt-2 max-w-sm\">\n        Get started by creating your first project. It only takes a few seconds.\n      </p>\n      <div className=\"flex gap-3 mt-6\">\n        <Button variant=\"grey\" appearance=\"outlined\">\n          Learn More\n        </Button>\n        <Button variant=\"primary\" icon=\"plus\" iconPosition=\"leading\">\n          Create Project\n        </Button>\n      </div>\n    </div>\n  );\n}",
+      "customizationPoints": [
+        { "id": "illustration", "type": "string", "default": "no-data", "description": "Illustration name" },
+        { "id": "title", "type": "string", "description": "Empty state title" },
+        { "id": "description", "type": "string", "description": "Empty state description" },
+        { "id": "actions", "type": "array", "description": "CTA buttons" }
+      ]
+    }
+  ]
+}

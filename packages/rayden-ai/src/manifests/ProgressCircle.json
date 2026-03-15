@@ -1,0 +1,81 @@
+{
+  "$schema": "./schema.json",
+  "name": "ProgressCircle",
+  "displayName": "Progress Circle",
+  "description": "Circular progress indicator showing completion percentage with optional center text.",
+  "category": "feedback",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "value": {
+      "type": "number",
+      "required": true,
+      "description": "Progress value (0-100)"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "description": "Circle size"
+    },
+    "showValue": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show percentage in center"
+    },
+    "centerText": {
+      "type": "string",
+      "description": "Custom center text (overrides percentage display)"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "sizes": ["xs", "sm", "md", "lg", "xl"],
+  "accessibility": {
+    "role": "progressbar",
+    "requiredAriaProps": ["aria-valuenow", "aria-valuemin", "aria-valuemax"],
+    "screenReaderNotes": "Progress value announced as percentage"
+  },
+  "antiHallucination": {
+    "aliases": ["CircularProgress", "Spinner", "Loading", "Loader", "RadialProgress"],
+    "notTheSameAs": ["ProgressBar"],
+    "doesNotExist": [
+      "percent (use value)",
+      "percentage (use value)",
+      "color",
+      "variant",
+      "indeterminate",
+      "thickness",
+      "strokeWidth"
+    ],
+    "commonMistakes": [
+      { "mistake": "<Spinner>", "correction": "<ProgressCircle value={...} />" },
+      { "mistake": "<Loading>", "correction": "<ProgressCircle value={...} />" },
+      { "mistake": "indeterminate", "correction": "Not supported - always shows value" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Progress Circle",
+      "code": "<ProgressCircle value={75} />"
+    },
+    {
+      "title": "Different Sizes",
+      "code": "<div className=\"flex items-center gap-4\">\n  <ProgressCircle value={60} size=\"xs\" />\n  <ProgressCircle value={60} size=\"sm\" />\n  <ProgressCircle value={60} size=\"md\" />\n  <ProgressCircle value={60} size=\"lg\" />\n  <ProgressCircle value={60} size=\"xl\" />\n</div>"
+    },
+    {
+      "title": "With Custom Center Text",
+      "code": "<ProgressCircle value={85} centerText=\"85pts\" />"
+    },
+    {
+      "title": "Without Value Display",
+      "code": "<ProgressCircle value={40} showValue={false} />"
+    },
+    {
+      "title": "In Stats Card",
+      "code": "<div className=\"flex items-center gap-4\">\n  <ProgressCircle value={92} size=\"lg\" />\n  <div>\n    <p className=\"text-h5 font-semibold\">92%</p>\n    <p className=\"text-body-sm text-grey-500\">Completion Rate</p>\n  </div>\n</div>"
+    }
+  ]
+}

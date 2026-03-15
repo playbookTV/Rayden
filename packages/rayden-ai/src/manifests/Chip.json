@@ -1,0 +1,102 @@
+{
+  "$schema": "./schema.json",
+  "name": "Chip",
+  "displayName": "Chip",
+  "description": "Compact element for input or filtering. Supports input variant (with close button) and filter variant (with chevron).",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": ["input", "filter"],
+      "default": "input",
+      "description": "Chip variant - input has close button, filter has chevron"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether chip is disabled"
+    },
+    "focused": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether chip appears focused"
+    },
+    "icon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Optional leading icon"
+    },
+    "onClose": {
+      "type": "function",
+      "description": "Close button click handler (for input variant)"
+    },
+    "onClick": {
+      "type": "function",
+      "description": "Click handler (for filter variant)"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "Chip label content"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "any",
+    "description": "Chip label text"
+  },
+  "accessibility": {
+    "keyboardNav": [
+      { "key": "Enter/Space", "action": "Activate chip or close button" },
+      { "key": "Backspace/Delete", "action": "Close chip (input variant)" }
+    ],
+    "screenReaderNotes": "Announces chip label and available actions"
+  },
+  "antiHallucination": {
+    "aliases": ["Tag", "Token", "FilterChip"],
+    "notTheSameAs": ["Badge", "Button"],
+    "doesNotExist": [
+      "removable (input variant always has close)",
+      "selected (use focused)",
+      "color",
+      "size",
+      "avatar"
+    ],
+    "commonMistakes": [
+      { "mistake": "removable={true}", "correction": "Use variant='input' which includes close button" },
+      { "mistake": "selected={true}", "correction": "Use focused={true}" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Input Chip",
+      "code": "<Chip variant=\"input\" onClose={() => removeTag('react')}>React</Chip>"
+    },
+    {
+      "title": "Filter Chip",
+      "code": "<Chip variant=\"filter\" onClick={() => openFilter('status')}>Status: Active</Chip>"
+    },
+    {
+      "title": "With Icon",
+      "code": "<Chip variant=\"input\" icon=\"user\" onClose={handleClose}>John Doe</Chip>"
+    },
+    {
+      "title": "Focused State",
+      "code": "<Chip variant=\"filter\" focused onClick={handleClick}>Category</Chip>"
+    },
+    {
+      "title": "Disabled",
+      "code": "<Chip variant=\"input\" disabled>Locked</Chip>"
+    },
+    {
+      "title": "Tag Input Example",
+      "code": "<div className=\"flex flex-wrap gap-2\">\n  {tags.map(tag => (\n    <Chip key={tag} variant=\"input\" onClose={() => removeTag(tag)}>{tag}</Chip>\n  ))}\n</div>"
+    }
+  ]
+}

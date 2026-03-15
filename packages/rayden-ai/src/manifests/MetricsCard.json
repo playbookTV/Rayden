@@ -1,0 +1,91 @@
+{
+  "$schema": "./schema.json",
+  "name": "MetricsCard",
+  "displayName": "Metrics Card",
+  "description": "Card displaying key metrics and statistics with trend indicators and optional actions.",
+  "category": "data-display",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Metric title/label"
+    },
+    "value": {
+      "type": "union",
+      "values": ["string", "number"],
+      "required": true,
+      "description": "Main metric value"
+    },
+    "variation": {
+      "type": "object",
+      "description": "Trend variation: { value: string, type: 'increase' | 'decrease' }"
+    },
+    "trend": {
+      "type": "object",
+      "description": "Trend badge: { label: string, type: 'up' | 'down' }"
+    },
+    "statusBadge": {
+      "type": "object",
+      "description": "Status badge: { label: string, color: BadgeColor }"
+    },
+    "cta": {
+      "type": "object",
+      "description": "Call to action: { label: string, onClick: () => void }"
+    },
+    "icon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Optional icon"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "composition": {
+    "relatedComponents": ["Badge", "Icon", "ProgressCircle"]
+  },
+  "antiHallucination": {
+    "aliases": ["StatCard", "StatsCard", "KPICard", "MetricCard"],
+    "notTheSameAs": ["Card", "Alert"],
+    "doesNotExist": [
+      "Card (MetricsCard is self-contained)",
+      "description",
+      "footer",
+      "header",
+      "children"
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Metrics Card",
+      "code": "<MetricsCard title=\"Total Revenue\" value=\"$45,231\" />"
+    },
+    {
+      "title": "With Trend",
+      "code": "<MetricsCard\n  title=\"Active Users\"\n  value=\"2,543\"\n  trend={{ label: '+12%', type: 'up' }}\n/>"
+    },
+    {
+      "title": "With Variation",
+      "code": "<MetricsCard\n  title=\"Monthly Sales\"\n  value=\"$12,500\"\n  variation={{ value: '+$2,100', type: 'increase' }}\n/>"
+    },
+    {
+      "title": "With Status Badge",
+      "code": "<MetricsCard\n  title=\"Server Status\"\n  value=\"Operational\"\n  statusBadge={{ label: 'Healthy', color: 'success' }}\n/>"
+    },
+    {
+      "title": "With CTA",
+      "code": "<MetricsCard\n  title=\"Pending Orders\"\n  value=\"24\"\n  cta={{ label: 'View All', onClick: () => navigate('/orders') }}\n/>"
+    },
+    {
+      "title": "Full Example",
+      "code": "<MetricsCard\n  title=\"Revenue\"\n  value=\"$125,430\"\n  icon=\"dollar-sign\"\n  variation={{ value: '+15.3%', type: 'increase' }}\n  trend={{ label: 'vs last month', type: 'up' }}\n  cta={{ label: 'View Report', onClick: handleViewReport }}\n/>"
+    },
+    {
+      "title": "Stats Grid",
+      "code": "<div className=\"grid grid-cols-1 md:grid-cols-3 gap-4\">\n  <MetricsCard title=\"Users\" value=\"12,543\" trend={{ label: '+5%', type: 'up' }} />\n  <MetricsCard title=\"Revenue\" value=\"$89,000\" trend={{ label: '+12%', type: 'up' }} />\n  <MetricsCard title=\"Orders\" value=\"456\" trend={{ label: '-2%', type: 'down' }} />\n</div>"
+    }
+  ]
+}

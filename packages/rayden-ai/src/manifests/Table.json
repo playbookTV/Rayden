@@ -1,0 +1,171 @@
+{
+  "$schema": "./schema.json",
+  "name": "Table",
+  "displayName": "Table",
+  "description": "Data table with sortable columns and row selection. Compound component requiring TableHeader, TableBody, TableRow, TableHead, and TableCell sub-components.",
+  "category": "data-display",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes for the table element"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "Must contain TableHeader and TableBody components"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "specific",
+    "accepts": ["TableHeader", "TableBody"],
+    "description": "Must contain TableHeader followed by TableBody"
+  },
+  "subComponents": {
+    "TableHeader": {
+      "name": "TableHeader",
+      "description": "Container for table header row(s). Contains the column headers.",
+      "props": {
+        "className": { "type": "string", "description": "Additional CSS classes" }
+      },
+      "children": {
+        "type": "specific",
+        "accepts": ["TableRow"],
+        "required": true
+      }
+    },
+    "TableBody": {
+      "name": "TableBody",
+      "description": "Container for table data rows.",
+      "props": {
+        "className": { "type": "string", "description": "Additional CSS classes" }
+      },
+      "children": {
+        "type": "specific",
+        "accepts": ["TableRow"]
+      }
+    },
+    "TableRow": {
+      "name": "TableRow",
+      "description": "A single row in the table. Use inside TableHeader or TableBody.",
+      "props": {
+        "selected": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this row is selected (applies selected styling)"
+        },
+        "className": { "type": "string", "description": "Additional CSS classes" }
+      },
+      "children": {
+        "type": "specific",
+        "accepts": ["TableHead", "TableCell"]
+      }
+    },
+    "TableHead": {
+      "name": "TableHead",
+      "description": "Header cell with optional sorting functionality. Use inside TableRow within TableHeader.",
+      "props": {
+        "sortable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable sort indicator and click behavior"
+        },
+        "sortDirection": {
+          "type": "enum",
+          "values": ["asc", "desc", null],
+          "description": "Current sort direction. null means not sorted."
+        },
+        "onSort": {
+          "type": "function",
+          "description": "Callback when sort is clicked"
+        },
+        "className": { "type": "string", "description": "Additional CSS classes" }
+      },
+      "children": {
+        "type": "any",
+        "description": "Header cell content (text or elements)"
+      }
+    },
+    "TableCell": {
+      "name": "TableCell",
+      "description": "Data cell. Use inside TableRow within TableBody.",
+      "props": {
+        "colSpan": { "type": "number", "description": "Number of columns to span" },
+        "rowSpan": { "type": "number", "description": "Number of rows to span" },
+        "className": { "type": "string", "description": "Additional CSS classes" }
+      },
+      "children": {
+        "type": "any",
+        "description": "Cell content (text, components, etc.)"
+      }
+    }
+  },
+  "composition": {
+    "mustContain": ["TableHeader", "TableBody"],
+    "relatedComponents": ["Pagination", "Badge", "Checkbox", "Button", "DropdownMenu"]
+  },
+  "accessibility": {
+    "role": "table",
+    "requiredAriaProps": [],
+    "keyboardNav": [
+      { "key": "Tab", "action": "Moves focus between sortable headers and interactive elements" }
+    ],
+    "focusManagement": "Sortable TableHead cells are focusable and clickable",
+    "screenReaderNotes": "Use aria-sort on TableHead when sorting is active. TableRow uses aria-selected for selected state."
+  },
+  "antiHallucination": {
+    "aliases": ["DataTable", "DataGrid", "Grid", "List"],
+    "notTheSameAs": ["div with table display", "HTML table without components"],
+    "doesNotExist": [
+      "columns (build structure with TableHead/TableCell)",
+      "data (map data to TableRow components)",
+      "rows (map to TableRow components)",
+      "dataSource (map to TableRow components)",
+      "pagination (use separate Pagination component)",
+      "TableFooter",
+      "TableCaption",
+      "striped",
+      "bordered",
+      "hoverable",
+      "sortable (per-column via TableHead sortable prop)",
+      "onRowClick (use onClick on TableRow)",
+      "selectable (use Checkbox in first column)",
+      "loading",
+      "emptyText (use EmptyStateIllustration)"
+    ],
+    "commonMistakes": [
+      { "mistake": "<Table data={rows} columns={cols} />", "correction": "Map data to TableRow components manually" },
+      { "mistake": "<Table columns={[...]} />", "correction": "Define columns by rendering TableHead cells in TableHeader" },
+      { "mistake": "Using <th>", "correction": "Use <TableHead> component" },
+      { "mistake": "Using <td>", "correction": "Use <TableCell> component" },
+      { "mistake": "Using <thead>", "correction": "Use <TableHeader> component" },
+      { "mistake": "Using <tbody>", "correction": "Use <TableBody> component" },
+      { "mistake": "Using <tr>", "correction": "Use <TableRow> component" },
+      { "mistake": "pagination prop", "correction": "Use separate <Pagination /> component below the table" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Table",
+      "code": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>Name</TableHead>\n      <TableHead>Email</TableHead>\n      <TableHead>Status</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    <TableRow>\n      <TableCell>John Doe</TableCell>\n      <TableCell>john@example.com</TableCell>\n      <TableCell><Badge color=\"success\">Active</Badge></TableCell>\n    </TableRow>\n  </TableBody>\n</Table>"
+    },
+    {
+      "title": "Sortable Table",
+      "code": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead sortable sortDirection={sortKey === 'name' ? sortDir : null} onSort={() => handleSort('name')}>\n        Name\n      </TableHead>\n      <TableHead sortable sortDirection={sortKey === 'date' ? sortDir : null} onSort={() => handleSort('date')}>\n        Date\n      </TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    {sortedData.map(row => (\n      <TableRow key={row.id}>\n        <TableCell>{row.name}</TableCell>\n        <TableCell>{row.date}</TableCell>\n      </TableRow>\n    ))}\n  </TableBody>\n</Table>"
+    },
+    {
+      "title": "Table with Selection",
+      "code": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead><Checkbox checked={allSelected} onChange={toggleAll} /></TableHead>\n      <TableHead>Name</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    {data.map(row => (\n      <TableRow key={row.id} selected={selectedIds.includes(row.id)}>\n        <TableCell><Checkbox checked={selectedIds.includes(row.id)} onChange={() => toggleSelect(row.id)} /></TableCell>\n        <TableCell>{row.name}</TableCell>\n      </TableRow>\n    ))}\n  </TableBody>\n</Table>"
+    },
+    {
+      "title": "Table with Actions",
+      "code": "<Table>\n  <TableHeader>\n    <TableRow>\n      <TableHead>Name</TableHead>\n      <TableHead>Actions</TableHead>\n    </TableRow>\n  </TableHeader>\n  <TableBody>\n    {data.map(row => (\n      <TableRow key={row.id}>\n        <TableCell>{row.name}</TableCell>\n        <TableCell>\n          <DropdownMenu>\n            <DropdownMenuTrigger><Button variant=\"grey\" icon=\"more-horizontal\" iconPosition=\"icon-only\" aria-label=\"Actions\" /></DropdownMenuTrigger>\n            <DropdownMenuContent>\n              <DropdownMenuItem>Edit</DropdownMenuItem>\n              <DropdownMenuItem>Delete</DropdownMenuItem>\n            </DropdownMenuContent>\n          </DropdownMenu>\n        </TableCell>\n      </TableRow>\n    ))}\n  </TableBody>\n</Table>"
+    },
+    {
+      "title": "Table with Pagination",
+      "code": "<div className=\"space-y-4\">\n  <Table>\n    <TableHeader>\n      <TableRow>\n        <TableHead>Name</TableHead>\n        <TableHead>Email</TableHead>\n      </TableRow>\n    </TableHeader>\n    <TableBody>\n      {paginatedData.map(row => (\n        <TableRow key={row.id}>\n          <TableCell>{row.name}</TableCell>\n          <TableCell>{row.email}</TableCell>\n        </TableRow>\n      ))}\n    </TableBody>\n  </Table>\n  <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />\n</div>"
+    }
+  ]
+}

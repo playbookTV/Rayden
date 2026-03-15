@@ -1,0 +1,165 @@
+{
+  "$schema": "./schema.json",
+  "name": "Button",
+  "displayName": "Button",
+  "description": "Primary interactive element for triggering actions. Supports 8 variants, 2 appearances, 2 sizes, and icon positions.",
+  "category": "primitives",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": ["primary", "secondary", "grey", "destructive", "text", "success", "warning", "info"],
+      "default": "primary",
+      "description": "Visual style variant determining colors and styling"
+    },
+    "appearance": {
+      "type": "enum",
+      "values": ["solid", "outlined"],
+      "default": "solid",
+      "description": "Solid fill or outlined border style"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "lg"],
+      "default": "sm",
+      "description": "Button size - sm (36px height) or lg (56px height)"
+    },
+    "icon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Icon element or registered icon name string"
+    },
+    "iconPosition": {
+      "type": "enum",
+      "values": ["none", "leading", "trailing", "icon-only"],
+      "default": "none",
+      "description": "Position of the icon relative to button text"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the button is disabled"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes to apply"
+    },
+    "children": {
+      "type": "ReactNode",
+      "description": "Button label content"
+    },
+    "type": {
+      "type": "enum",
+      "values": ["button", "submit", "reset"],
+      "default": "button",
+      "description": "HTML button type attribute"
+    },
+    "onClick": {
+      "type": "function",
+      "description": "Click event handler"
+    }
+  },
+  "sizes": ["sm", "lg"],
+  "children": {
+    "required": false,
+    "type": "any",
+    "description": "Button label text or elements. Not required when iconPosition is 'icon-only'."
+  },
+  "composition": {
+    "canContain": ["Icon", "Badge"],
+    "relatedComponents": ["ButtonGroup", "ButtonGroupItem"]
+  },
+  "accessibility": {
+    "role": "button",
+    "keyboardNav": [
+      { "key": "Enter", "action": "Activates the button" },
+      { "key": "Space", "action": "Activates the button" }
+    ],
+    "focusManagement": "Receives focus via Tab. Focus ring visible on focus-visible state.",
+    "screenReaderNotes": "Icon-only buttons MUST have aria-label for accessible name. Ensure button has accessible name via children text or aria-label."
+  },
+  "antiHallucination": {
+    "aliases": ["Btn", "CTA", "Action", "Submit", "ActionButton", "PrimaryButton", "SecondaryButton"],
+    "notTheSameAs": ["ButtonGroup", "ButtonGroupItem", "IconButton", "Link", "Anchor"],
+    "doesNotExist": [
+      "loading",
+      "isLoading",
+      "fullWidth",
+      "block",
+      "color",
+      "outline",
+      "rounded",
+      "md (size)",
+      "xl (size)",
+      "xs (size)",
+      "href",
+      "leftIcon",
+      "rightIcon",
+      "startIcon",
+      "endIcon",
+      "isDisabled",
+      "intent",
+      "kind",
+      "colorScheme",
+      "leftElement",
+      "rightElement"
+    ],
+    "commonMistakes": [
+      { "mistake": "color='red'", "correction": "variant='destructive'" },
+      { "mistake": "color='primary'", "correction": "variant='primary'" },
+      { "mistake": "outline={true}", "correction": "appearance='outlined'" },
+      { "mistake": "outlined", "correction": "appearance='outlined'" },
+      { "mistake": "size='medium'", "correction": "size='sm' or size='lg' (only two sizes)" },
+      { "mistake": "size='md'", "correction": "size='sm' (no md size exists)" },
+      { "mistake": "leftIcon={<Icon />}", "correction": "icon={<Icon />} iconPosition='leading'" },
+      { "mistake": "rightIcon={<Icon />}", "correction": "icon={<Icon />} iconPosition='trailing'" },
+      { "mistake": "loading={true}", "correction": "Not supported. Disable button and show spinner in children." },
+      { "mistake": "fullWidth", "correction": "className='w-full'" },
+      { "mistake": "block", "correction": "className='w-full'" },
+      { "mistake": "as='a' href='...'", "correction": "Button is not a link. Use <a> element styled with button classes." }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Primary Button",
+      "code": "<Button variant=\"primary\">Click me</Button>"
+    },
+    {
+      "title": "Outlined Secondary",
+      "code": "<Button variant=\"secondary\" appearance=\"outlined\">Cancel</Button>"
+    },
+    {
+      "title": "With Leading Icon",
+      "code": "<Button variant=\"primary\" icon=\"plus\" iconPosition=\"leading\">Add Item</Button>"
+    },
+    {
+      "title": "With Trailing Icon",
+      "code": "<Button variant=\"grey\" icon=\"arrow-right\" iconPosition=\"trailing\">Next</Button>"
+    },
+    {
+      "title": "Icon Only",
+      "code": "<Button variant=\"grey\" icon=\"settings\" iconPosition=\"icon-only\" aria-label=\"Settings\" />"
+    },
+    {
+      "title": "Large Destructive",
+      "code": "<Button variant=\"destructive\" size=\"lg\">Delete Account</Button>"
+    },
+    {
+      "title": "Full Width",
+      "code": "<Button variant=\"primary\" className=\"w-full\">Submit</Button>"
+    },
+    {
+      "title": "Disabled",
+      "code": "<Button variant=\"primary\" disabled>Cannot Click</Button>"
+    },
+    {
+      "title": "Success Variant",
+      "code": "<Button variant=\"success\">Confirm</Button>"
+    },
+    {
+      "title": "Warning Variant",
+      "code": "<Button variant=\"warning\">Proceed with Caution</Button>"
+    }
+  ]
+}

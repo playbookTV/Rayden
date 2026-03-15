@@ -1,0 +1,86 @@
+{
+  "$schema": "./schema.json",
+  "name": "Divider",
+  "displayName": "Divider",
+  "description": "Visual separator between content sections. Supports multiple variants including with icon, label, title, and button.",
+  "category": "primitives",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": ["default", "with-icon", "with-label", "with-title", "with-button", "with-title-and-button"],
+      "default": "default",
+      "description": "Divider variant"
+    },
+    "icon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Icon for with-icon variant"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text for with-label variant"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title text for with-title variants"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "description": "Button label for with-button variants"
+    },
+    "onButtonClick": {
+      "type": "function",
+      "description": "Button click handler"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "accessibility": {
+    "role": "separator",
+    "screenReaderNotes": "Divider is decorative. Content within variants is accessible."
+  },
+  "antiHallucination": {
+    "aliases": ["Separator", "HR", "Line"],
+    "doesNotExist": [
+      "orientation (always horizontal)",
+      "vertical",
+      "dashed",
+      "dotted",
+      "thickness",
+      "color"
+    ],
+    "commonMistakes": [
+      { "mistake": "orientation='vertical'", "correction": "Divider is always horizontal" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Default Divider",
+      "code": "<Divider />"
+    },
+    {
+      "title": "With Icon",
+      "code": "<Divider variant=\"with-icon\" icon=\"star\" />"
+    },
+    {
+      "title": "With Label",
+      "code": "<Divider variant=\"with-label\" label=\"OR\" />"
+    },
+    {
+      "title": "With Title",
+      "code": "<Divider variant=\"with-title\" title=\"Section Title\" />"
+    },
+    {
+      "title": "With Button",
+      "code": "<Divider variant=\"with-button\" buttonLabel=\"Load More\" onButtonClick={handleLoadMore} />"
+    },
+    {
+      "title": "With Title and Button",
+      "code": "<Divider variant=\"with-title-and-button\" title=\"Recent Items\" buttonLabel=\"View All\" onButtonClick={handleViewAll} />"
+    }
+  ]
+}

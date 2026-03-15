@@ -1,0 +1,94 @@
+{
+  "$schema": "./schema.json",
+  "name": "Badge",
+  "displayName": "Badge",
+  "description": "Status indicator or label component with multiple colors, types, and sizes.",
+  "category": "primitives",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "color": {
+      "type": "enum",
+      "values": ["orange", "blue", "success", "warning", "error", "neutral", "disabled"],
+      "default": "neutral",
+      "description": "Badge color theme"
+    },
+    "type": {
+      "type": "enum",
+      "values": ["filled", "accent", "outline"],
+      "default": "filled",
+      "description": "Visual style type"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "md", "lg"],
+      "default": "md",
+      "description": "Badge size"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "Badge label content"
+    }
+  },
+  "sizes": ["sm", "md", "lg"],
+  "children": {
+    "required": true,
+    "type": "any",
+    "description": "Badge label text or elements"
+  },
+  "accessibility": {
+    "screenReaderNotes": "Badge content is read by screen readers. Use meaningful labels."
+  },
+  "antiHallucination": {
+    "aliases": ["Tag", "Label", "Pill", "Chip", "Status"],
+    "notTheSameAs": ["Chip", "Button", "Alert"],
+    "doesNotExist": [
+      "variant (use color and type)",
+      "status (use color)",
+      "closable",
+      "onClose",
+      "icon",
+      "leftIcon",
+      "rightIcon",
+      "dot",
+      "count",
+      "rounded"
+    ],
+    "commonMistakes": [
+      { "mistake": "variant='success'", "correction": "color='success'" },
+      { "mistake": "variant='error'", "correction": "color='error'" },
+      { "mistake": "status='active'", "correction": "color='success' with text 'Active'" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Success Badge",
+      "code": "<Badge color=\"success\">Active</Badge>"
+    },
+    {
+      "title": "Error Badge",
+      "code": "<Badge color=\"error\">Failed</Badge>"
+    },
+    {
+      "title": "Outline Style",
+      "code": "<Badge color=\"blue\" type=\"outline\">New</Badge>"
+    },
+    {
+      "title": "Accent Style",
+      "code": "<Badge color=\"orange\" type=\"accent\">Featured</Badge>"
+    },
+    {
+      "title": "Small Badge",
+      "code": "<Badge color=\"neutral\" size=\"sm\">Draft</Badge>"
+    },
+    {
+      "title": "Large Badge",
+      "code": "<Badge color=\"warning\" size=\"lg\">Pending Review</Badge>"
+    }
+  ]
+}

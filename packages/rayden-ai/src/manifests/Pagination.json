@@ -1,0 +1,74 @@
+{
+  "$schema": "./schema.json",
+  "name": "Pagination",
+  "displayName": "Pagination",
+  "description": "Page navigation component for navigating through paginated content.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "currentPage": {
+      "type": "number",
+      "required": true,
+      "description": "Current active page (1-indexed)"
+    },
+    "totalPages": {
+      "type": "number",
+      "required": true,
+      "description": "Total number of pages"
+    },
+    "onPageChange": {
+      "type": "function",
+      "required": true,
+      "description": "Callback when page changes: (page: number) => void"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "composition": {
+    "relatedComponents": ["Table", "Button"]
+  },
+  "accessibility": {
+    "role": "navigation",
+    "keyboardNav": [
+      { "key": "Tab", "action": "Navigate between page buttons" },
+      { "key": "Enter/Space", "action": "Select page" }
+    ],
+    "screenReaderNotes": "Uses nav element with aria-label. Current page indicated."
+  },
+  "antiHallucination": {
+    "aliases": ["Pager", "PageNavigation", "Pages"],
+    "notTheSameAs": ["Tabs", "Breadcrumb"],
+    "doesNotExist": [
+      "page (use currentPage)",
+      "total (use totalPages)",
+      "onChange (use onPageChange)",
+      "pageSize",
+      "showSizeChanger",
+      "showQuickJumper",
+      "simple",
+      "size"
+    ],
+    "commonMistakes": [
+      { "mistake": "page={1}", "correction": "currentPage={1}" },
+      { "mistake": "total={10}", "correction": "totalPages={10}" },
+      { "mistake": "onChange={fn}", "correction": "onPageChange={fn}" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Pagination",
+      "code": "<Pagination currentPage={1} totalPages={10} onPageChange={setPage} />"
+    },
+    {
+      "title": "With Table",
+      "code": "<div className=\"space-y-4\">\n  <Table>{/* table content */}</Table>\n  <Pagination\n    currentPage={page}\n    totalPages={Math.ceil(totalItems / pageSize)}\n    onPageChange={setPage}\n  />\n</div>"
+    },
+    {
+      "title": "Controlled Pagination",
+      "code": "const [page, setPage] = useState(1);\nconst totalPages = 15;\n\nreturn (\n  <Pagination\n    currentPage={page}\n    totalPages={totalPages}\n    onPageChange={(newPage) => {\n      setPage(newPage);\n      fetchData(newPage);\n    }}\n  />\n);"
+    }
+  ]
+}

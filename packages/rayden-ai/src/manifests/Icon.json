@@ -1,0 +1,74 @@
+{
+  "$schema": "./schema.json",
+  "name": "Icon",
+  "displayName": "Icon",
+  "description": "SVG icon component with predefined icon set. Supports multiple sizes and variants.",
+  "category": "primitives",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "name": {
+      "type": "IconName",
+      "required": true,
+      "description": "Name of the icon from the icon set"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["xs", "sm", "md", "lg", "xl"],
+      "default": "md",
+      "description": "Icon size"
+    },
+    "variant": {
+      "type": "enum",
+      "values": ["line", "solid"],
+      "default": "line",
+      "description": "Icon style variant"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes for styling (use for color)"
+    }
+  },
+  "sizes": ["xs", "sm", "md", "lg", "xl"],
+  "accessibility": {
+    "screenReaderNotes": "Icons are decorative by default. Add aria-label when icon conveys meaning alone."
+  },
+  "antiHallucination": {
+    "aliases": ["SVGIcon", "IconComponent"],
+    "doesNotExist": [
+      "icon (use name)",
+      "type (use name)",
+      "color (use className with text-* class)",
+      "fill",
+      "stroke",
+      "onClick (wrap in button for interactive icons)"
+    ],
+    "commonMistakes": [
+      { "mistake": "icon='settings'", "correction": "name='settings'" },
+      { "mistake": "color='primary'", "correction": "className='text-primary-500'" },
+      { "mistake": "<Icon onClick={...}>", "correction": "Wrap in Button with iconPosition='icon-only' for interactive icons" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Icon",
+      "code": "<Icon name=\"settings\" />"
+    },
+    {
+      "title": "With Size",
+      "code": "<Icon name=\"user\" size=\"lg\" />"
+    },
+    {
+      "title": "Solid Variant",
+      "code": "<Icon name=\"heart\" variant=\"solid\" />"
+    },
+    {
+      "title": "With Color",
+      "code": "<Icon name=\"check\" className=\"text-success-500\" />"
+    },
+    {
+      "title": "Small Icon",
+      "code": "<Icon name=\"x\" size=\"sm\" className=\"text-grey-500\" />"
+    }
+  ]
+}

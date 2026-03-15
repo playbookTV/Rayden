@@ -1,0 +1,178 @@
+{
+  "$schema": "./schema.json",
+  "name": "Input",
+  "displayName": "Input",
+  "description": "Text input field with label, helper text, leading/trailing icons, and validation states (error/success).",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "size": {
+      "type": "enum",
+      "values": ["sm", "lg"],
+      "default": "sm",
+      "description": "Input size"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text displayed above the input"
+    },
+    "helperText": {
+      "type": "string",
+      "description": "Helper text displayed below the input"
+    },
+    "error": {
+      "type": "union",
+      "values": ["string", "boolean"],
+      "description": "Error message string or boolean to show error state"
+    },
+    "success": {
+      "type": "union",
+      "values": ["string", "boolean"],
+      "description": "Success message string or boolean to show success state"
+    },
+    "leadingIcon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Icon displayed at the start of the input"
+    },
+    "trailingIcon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Icon displayed at the end of the input"
+    },
+    "addonRight": {
+      "type": "string",
+      "description": "Text addon displayed on the right side of input"
+    },
+    "wrapperClassName": {
+      "type": "string",
+      "description": "Additional CSS classes for the wrapper element"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes for the input element"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the input is disabled"
+    },
+    "readOnly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the input is read-only"
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Placeholder text"
+    },
+    "type": {
+      "type": "string",
+      "default": "text",
+      "description": "HTML input type (text, email, password, etc.)"
+    },
+    "value": {
+      "type": "string",
+      "description": "Controlled input value"
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "Default value for uncontrolled input"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Change event handler"
+    },
+    "id": {
+      "type": "string",
+      "description": "Input ID (auto-generated from label if not provided)"
+    }
+  },
+  "sizes": ["sm", "lg"],
+  "accessibility": {
+    "role": "textbox",
+    "requiredAriaProps": [],
+    "focusManagement": "Input receives focus on click or Tab. Focus ring on focus-visible.",
+    "screenReaderNotes": "Always provide label prop for accessibility. Input auto-generates ID from label if not provided."
+  },
+  "antiHallucination": {
+    "aliases": ["TextInput", "TextField", "TextBox", "FormInput", "TextArea"],
+    "notTheSameAs": ["Select", "Checkbox", "Radio", "Toggle"],
+    "doesNotExist": [
+      "leftIcon (use leadingIcon)",
+      "rightIcon (use trailingIcon)",
+      "startIcon (use leadingIcon)",
+      "endIcon (use trailingIcon)",
+      "startAdornment",
+      "endAdornment",
+      "errorText (use error)",
+      "errorMessage (use error)",
+      "isError (use error)",
+      "isSuccess (use success)",
+      "isInvalid (use error)",
+      "isValid (use success)",
+      "variant",
+      "outlined",
+      "filled",
+      "underlined",
+      "prefix (use leadingIcon)",
+      "suffix (use trailingIcon or addonRight)",
+      "md (size)",
+      "xs (size)",
+      "xl (size)",
+      "invalid",
+      "valid"
+    ],
+    "commonMistakes": [
+      { "mistake": "leftIcon", "correction": "leadingIcon" },
+      { "mistake": "rightIcon", "correction": "trailingIcon" },
+      { "mistake": "errorMessage='...'", "correction": "error='...'" },
+      { "mistake": "isInvalid={true}", "correction": "error={true} or error='message'" },
+      { "mistake": "variant='outlined'", "correction": "No variant prop - input is always outlined style" },
+      { "mistake": "size='medium'", "correction": "size='sm' or size='lg'" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Input",
+      "code": "<Input label=\"Email\" placeholder=\"Enter your email\" />"
+    },
+    {
+      "title": "With Helper Text",
+      "code": "<Input label=\"Password\" type=\"password\" helperText=\"Must be at least 8 characters\" />"
+    },
+    {
+      "title": "With Error",
+      "code": "<Input label=\"Email\" error=\"Please enter a valid email address\" />"
+    },
+    {
+      "title": "With Success",
+      "code": "<Input label=\"Username\" success=\"Username is available\" />"
+    },
+    {
+      "title": "With Leading Icon",
+      "code": "<Input label=\"Search\" leadingIcon=\"search\" placeholder=\"Search...\" />"
+    },
+    {
+      "title": "With Trailing Icon",
+      "code": "<Input label=\"Password\" type=\"password\" trailingIcon=\"eye\" />"
+    },
+    {
+      "title": "With Both Icons",
+      "code": "<Input leadingIcon=\"mail\" trailingIcon=\"check\" placeholder=\"Email\" />"
+    },
+    {
+      "title": "Large Size",
+      "code": "<Input size=\"lg\" label=\"Full Name\" placeholder=\"John Doe\" />"
+    },
+    {
+      "title": "Disabled",
+      "code": "<Input label=\"Disabled\" disabled value=\"Cannot edit\" />"
+    },
+    {
+      "title": "Read Only",
+      "code": "<Input label=\"Read Only\" readOnly value=\"Read only value\" />"
+    }
+  ]
+}

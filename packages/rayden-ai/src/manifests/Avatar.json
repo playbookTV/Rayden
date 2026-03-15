@@ -1,0 +1,116 @@
+{
+  "$schema": "./schema.json",
+  "name": "Avatar",
+  "displayName": "Avatar",
+  "description": "User avatar displaying image, initials, or icon with optional status indicator.",
+  "category": "data-display",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "type": {
+      "type": "enum",
+      "values": ["image", "initials", "icon"],
+      "default": "initials",
+      "description": "Avatar content type"
+    },
+    "src": {
+      "type": "string",
+      "description": "Image URL (for type='image')"
+    },
+    "alt": {
+      "type": "string",
+      "description": "Alt text for image"
+    },
+    "initials": {
+      "type": "string",
+      "description": "Initials to display (for type='initials')"
+    },
+    "icon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Icon to display (for type='icon')"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["xs", "sm", "md", "lg", "xl", "2xl"],
+      "default": "md",
+      "description": "Avatar size"
+    },
+    "status": {
+      "type": "enum",
+      "values": ["online", "offline", "away", "busy"],
+      "description": "Status indicator"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "sizes": ["xs", "sm", "md", "lg", "xl", "2xl"],
+  "subComponents": {
+    "AvatarGroup": {
+      "name": "AvatarGroup",
+      "description": "Container for displaying multiple avatars with overlap",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": ["xs", "sm", "md", "lg", "xl", "2xl"],
+          "default": "md",
+          "description": "Size for all avatars in group"
+        },
+        "max": {
+          "type": "number",
+          "description": "Maximum avatars to show before +N indicator"
+        }
+      },
+      "children": {
+        "type": "specific",
+        "accepts": ["Avatar"]
+      }
+    }
+  },
+  "accessibility": {
+    "screenReaderNotes": "Provide alt text for images. Initials/icons need aria-label for context."
+  },
+  "antiHallucination": {
+    "aliases": ["UserAvatar", "ProfileImage", "ProfilePic"],
+    "doesNotExist": [
+      "name (use initials)",
+      "image (use src with type='image')",
+      "fallback (handled automatically)",
+      "shape",
+      "variant",
+      "color"
+    ],
+    "commonMistakes": [
+      { "mistake": "name='John Doe'", "correction": "initials='JD' or derive initials from name" },
+      { "mistake": "image='url'", "correction": "type='image' src='url'" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Image Avatar",
+      "code": "<Avatar type=\"image\" src=\"/avatar.jpg\" alt=\"John Doe\" />"
+    },
+    {
+      "title": "Initials Avatar",
+      "code": "<Avatar type=\"initials\" initials=\"JD\" />"
+    },
+    {
+      "title": "Icon Avatar",
+      "code": "<Avatar type=\"icon\" icon=\"user\" />"
+    },
+    {
+      "title": "With Status",
+      "code": "<Avatar type=\"image\" src=\"/avatar.jpg\" status=\"online\" />"
+    },
+    {
+      "title": "Different Sizes",
+      "code": "<div className=\"flex items-center gap-2\">\n  <Avatar type=\"initials\" initials=\"JD\" size=\"xs\" />\n  <Avatar type=\"initials\" initials=\"JD\" size=\"sm\" />\n  <Avatar type=\"initials\" initials=\"JD\" size=\"md\" />\n  <Avatar type=\"initials\" initials=\"JD\" size=\"lg\" />\n</div>"
+    },
+    {
+      "title": "Avatar Group",
+      "code": "<AvatarGroup size=\"md\" max={3}>\n  <Avatar type=\"image\" src=\"/user1.jpg\" />\n  <Avatar type=\"image\" src=\"/user2.jpg\" />\n  <Avatar type=\"image\" src=\"/user3.jpg\" />\n  <Avatar type=\"image\" src=\"/user4.jpg\" />\n  <Avatar type=\"image\" src=\"/user5.jpg\" />\n</AvatarGroup>"
+    }
+  ]
+}

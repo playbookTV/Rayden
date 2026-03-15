@@ -56,7 +56,7 @@ export const WithLeadingIcon: Story = {
   args: {
     children: "Label",
     variant: "primary",
-    icon: <PlusIcon />,
+    icon: "plus",
     iconPosition: "leading",
   },
 };
@@ -65,7 +65,7 @@ export const WithTrailingIcon: Story = {
   args: {
     children: "Label",
     variant: "primary",
-    icon: <PlusIcon />,
+    icon: "plus",
     iconPosition: "trailing",
   },
 };
@@ -73,7 +73,7 @@ export const WithTrailingIcon: Story = {
 export const IconOnly: Story = {
   args: {
     variant: "primary",
-    icon: <PlusIcon />,
+    icon: "plus",
     iconPosition: "icon-only",
   },
 };

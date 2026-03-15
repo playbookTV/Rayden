@@ -1,0 +1,131 @@
+{
+  "$schema": "./schema.json",
+  "name": "Select",
+  "displayName": "Select",
+  "description": "Dropdown select component with options. Compound component requiring SelectOption children.",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "value": {
+      "type": "string",
+      "description": "Controlled selected value"
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "Default value for uncontrolled select"
+    },
+    "onValueChange": {
+      "type": "function",
+      "description": "Callback when value changes: (value: string) => void"
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Placeholder text when no value selected"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the select is disabled"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "SelectOption components"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "specific",
+    "accepts": ["SelectOption"],
+    "description": "One or more SelectOption components"
+  },
+  "subComponents": {
+    "SelectOption": {
+      "name": "SelectOption",
+      "description": "Individual option within a Select",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Option value"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this option is disabled"
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional CSS classes"
+        }
+      },
+      "children": {
+        "type": "any",
+        "required": true,
+        "description": "Option label content"
+      }
+    }
+  },
+  "composition": {
+    "mustContain": ["SelectOption"],
+    "relatedComponents": ["Input", "Checkbox", "Radio"]
+  },
+  "accessibility": {
+    "role": "combobox",
+    "keyboardNav": [
+      { "key": "Enter/Space", "action": "Open dropdown" },
+      { "key": "ArrowDown/Up", "action": "Navigate options" },
+      { "key": "Enter", "action": "Select option" },
+      { "key": "Escape", "action": "Close dropdown" }
+    ],
+    "focusManagement": "Focus on trigger, moves to options when open",
+    "screenReaderNotes": "Announces selected value and available options"
+  },
+  "antiHallucination": {
+    "aliases": ["Dropdown", "Combobox", "Picker", "DropdownSelect"],
+    "notTheSameAs": ["DropdownMenu", "Input", "Autocomplete"],
+    "doesNotExist": [
+      "options (use SelectOption children)",
+      "items (use SelectOption children)",
+      "data (use SelectOption children)",
+      "onChange (use onValueChange)",
+      "onSelect (use onValueChange)",
+      "searchable",
+      "filterable",
+      "multiple",
+      "multiSelect",
+      "clearable",
+      "loading",
+      "size",
+      "variant"
+    ],
+    "commonMistakes": [
+      { "mistake": "options={[...]}",  "correction": "Use SelectOption children: <Select><SelectOption value='1'>One</SelectOption></Select>" },
+      { "mistake": "onChange={fn}", "correction": "onValueChange={fn}" },
+      { "mistake": "<option>", "correction": "Use <SelectOption> component" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Select",
+      "code": "<Select placeholder=\"Select an option\">\n  <SelectOption value=\"1\">Option 1</SelectOption>\n  <SelectOption value=\"2\">Option 2</SelectOption>\n  <SelectOption value=\"3\">Option 3</SelectOption>\n</Select>"
+    },
+    {
+      "title": "Controlled Select",
+      "code": "<Select value={value} onValueChange={setValue} placeholder=\"Choose...\">\n  <SelectOption value=\"apple\">Apple</SelectOption>\n  <SelectOption value=\"banana\">Banana</SelectOption>\n  <SelectOption value=\"orange\">Orange</SelectOption>\n</Select>"
+    },
+    {
+      "title": "With Disabled Option",
+      "code": "<Select placeholder=\"Select status\">\n  <SelectOption value=\"active\">Active</SelectOption>\n  <SelectOption value=\"pending\">Pending</SelectOption>\n  <SelectOption value=\"archived\" disabled>Archived</SelectOption>\n</Select>"
+    },
+    {
+      "title": "Disabled Select",
+      "code": "<Select disabled placeholder=\"Cannot select\">\n  <SelectOption value=\"1\">Option 1</SelectOption>\n</Select>"
+    }
+  ]
+}

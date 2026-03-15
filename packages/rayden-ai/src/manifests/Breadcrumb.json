@@ -1,0 +1,53 @@
+{
+  "$schema": "./schema.json",
+  "name": "Breadcrumb",
+  "displayName": "Breadcrumb",
+  "description": "Navigation breadcrumb trail showing current location in hierarchy.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "items": {
+      "type": "array",
+      "required": true,
+      "description": "Array of breadcrumb items: { label: string, href?: string, onClick?: () => void }"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "accessibility": {
+    "role": "navigation",
+    "screenReaderNotes": "Uses nav element with aria-label='Breadcrumb'. Last item indicates current page."
+  },
+  "antiHallucination": {
+    "aliases": ["BreadcrumbTrail", "Breadcrumbs", "PathNav"],
+    "notTheSameAs": ["Tabs", "Pagination"],
+    "doesNotExist": [
+      "children (use items array)",
+      "separator",
+      "BreadcrumbItem (use items array)",
+      "maxItems",
+      "itemsBeforeCollapse"
+    ],
+    "commonMistakes": [
+      { "mistake": "<Breadcrumb><BreadcrumbItem>...", "correction": "Use items prop: <Breadcrumb items={[...]} />" },
+      { "mistake": "separator='/'", "correction": "Separator is built-in, not customizable" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Breadcrumb",
+      "code": "<Breadcrumb\n  items={[\n    { label: 'Home', href: '/' },\n    { label: 'Products', href: '/products' },\n    { label: 'Electronics' }\n  ]}\n/>"
+    },
+    {
+      "title": "With onClick Handlers",
+      "code": "<Breadcrumb\n  items={[\n    { label: 'Dashboard', onClick: () => navigate('/') },\n    { label: 'Settings', onClick: () => navigate('/settings') },\n    { label: 'Profile' }\n  ]}\n/>"
+    },
+    {
+      "title": "Simple Two-Level",
+      "code": "<Breadcrumb\n  items={[\n    { label: 'Users', href: '/users' },\n    { label: 'John Doe' }\n  ]}\n/>"
+    }
+  ]
+}

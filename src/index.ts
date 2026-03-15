@@ -69,5 +69,8 @@ export type { DropdownMenuProps, DropdownMenuTriggerProps, DropdownMenuContentPr
 export { Select, SelectOption } from "./components/Select";
 export type { SelectProps, SelectOptionProps } from "./components/Select";
 
+export { ActivityItem, ActivityContent } from "./components/ActivityFeed";
+export type { ActivityItemProps, ActivityItemLink, ActivityContentProps, ActivityContentVariant, ActivityContentStyle, ActivityContentAttachment, ActivityContentAction } from "./components/ActivityFeed";
+
 // Utilities
 export { cn } from "./utils/cn";

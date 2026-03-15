@@ -1,0 +1,86 @@
+{
+  "$schema": "./schema.json",
+  "name": "Tooltip",
+  "displayName": "Tooltip",
+  "description": "Contextual popup with additional information. Shows on hover/focus.",
+  "category": "primitives",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "content": {
+      "type": "string",
+      "required": true,
+      "description": "Tooltip content text"
+    },
+    "position": {
+      "type": "enum",
+      "values": ["top", "right", "bottom", "left"],
+      "default": "top",
+      "description": "Position relative to trigger"
+    },
+    "theme": {
+      "type": "enum",
+      "values": ["dark", "light"],
+      "default": "dark",
+      "description": "Color theme"
+    },
+    "action": {
+      "type": "object",
+      "description": "Optional action button: { label: string, onClick: () => void }"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "Trigger element"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "any",
+    "description": "Element that triggers the tooltip on hover/focus"
+  },
+  "accessibility": {
+    "role": "tooltip",
+    "screenReaderNotes": "Tooltip content announced on focus. Ensure trigger is focusable."
+  },
+  "antiHallucination": {
+    "aliases": ["Popover", "Hint", "Info"],
+    "notTheSameAs": ["DropdownMenu", "Modal", "Alert"],
+    "doesNotExist": [
+      "title (use content)",
+      "text (use content)",
+      "trigger (use children)",
+      "placement (use position)",
+      "arrow",
+      "delay",
+      "interactive"
+    ],
+    "commonMistakes": [
+      { "mistake": "title='...'", "correction": "content='...'" },
+      { "mistake": "placement='top'", "correction": "position='top'" },
+      { "mistake": "trigger={<Button />}", "correction": "Use children: <Tooltip content='...'><Button /></Tooltip>" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Tooltip",
+      "code": "<Tooltip content=\"This is helpful information\">\n  <Button variant=\"grey\" icon=\"info\" iconPosition=\"icon-only\" aria-label=\"Info\" />\n</Tooltip>"
+    },
+    {
+      "title": "With Position",
+      "code": "<Tooltip content=\"Tooltip on the right\" position=\"right\">\n  <span>Hover me</span>\n</Tooltip>"
+    },
+    {
+      "title": "Light Theme",
+      "code": "<Tooltip content=\"Light tooltip\" theme=\"light\">\n  <Button>Hover</Button>\n</Tooltip>"
+    },
+    {
+      "title": "With Action",
+      "code": "<Tooltip content=\"Click to learn more\" action={{ label: 'Learn More', onClick: handleLearnMore }}>\n  <Icon name=\"help-circle\" />\n</Tooltip>"
+    }
+  ]
+}

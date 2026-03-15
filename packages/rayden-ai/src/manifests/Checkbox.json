@@ -1,0 +1,90 @@
+{
+  "$schema": "./schema.json",
+  "name": "Checkbox",
+  "displayName": "Checkbox",
+  "description": "Checkbox input for boolean selections with optional label.",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "checked": {
+      "type": "boolean",
+      "description": "Controlled checked state"
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "description": "Default checked state for uncontrolled mode"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Change handler: (event: ChangeEvent) => void"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether checkbox is disabled"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text displayed next to checkbox"
+    },
+    "name": {
+      "type": "string",
+      "description": "Form field name"
+    },
+    "value": {
+      "type": "string",
+      "description": "Form field value"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "accessibility": {
+    "role": "checkbox",
+    "keyboardNav": [
+      { "key": "Space", "action": "Toggle checked state" }
+    ],
+    "screenReaderNotes": "Always provide label prop or aria-label for accessibility"
+  },
+  "antiHallucination": {
+    "aliases": ["Check", "CheckBox", "CheckInput"],
+    "notTheSameAs": ["Radio", "Toggle", "Switch"],
+    "doesNotExist": [
+      "isChecked (use checked)",
+      "onCheckedChange (use onChange)",
+      "size",
+      "color",
+      "indeterminate",
+      "children (use label prop)"
+    ],
+    "commonMistakes": [
+      { "mistake": "isChecked={true}", "correction": "checked={true}" },
+      { "mistake": "onCheckedChange={fn}", "correction": "onChange={fn}" },
+      { "mistake": "<Checkbox>Label</Checkbox>", "correction": "<Checkbox label='Label' />" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Checkbox",
+      "code": "<Checkbox label=\"I agree to the terms\" />"
+    },
+    {
+      "title": "Controlled Checkbox",
+      "code": "<Checkbox checked={agreed} onChange={(e) => setAgreed(e.target.checked)} label=\"Subscribe to newsletter\" />"
+    },
+    {
+      "title": "Disabled",
+      "code": "<Checkbox disabled label=\"Cannot change\" />"
+    },
+    {
+      "title": "Checked and Disabled",
+      "code": "<Checkbox checked disabled label=\"Locked selection\" />"
+    },
+    {
+      "title": "Without Label",
+      "code": "<Checkbox aria-label=\"Select row\" checked={selected} onChange={toggleSelect} />"
+    }
+  ]
+}

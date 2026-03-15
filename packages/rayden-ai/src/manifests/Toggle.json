@@ -1,0 +1,82 @@
+{
+  "$schema": "./schema.json",
+  "name": "Toggle",
+  "displayName": "Toggle",
+  "description": "Toggle switch for on/off states.",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "checked": {
+      "type": "boolean",
+      "description": "Controlled checked state"
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "description": "Default checked state for uncontrolled mode"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Change handler: (event: ChangeEvent) => void"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether toggle is disabled"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text displayed next to toggle"
+    },
+    "name": {
+      "type": "string",
+      "description": "Form field name"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  },
+  "accessibility": {
+    "role": "switch",
+    "keyboardNav": [
+      { "key": "Space", "action": "Toggle state" }
+    ],
+    "screenReaderNotes": "Uses role='switch'. Provide label for context."
+  },
+  "antiHallucination": {
+    "aliases": ["Switch", "ToggleSwitch", "SwitchInput"],
+    "notTheSameAs": ["Checkbox", "Radio"],
+    "doesNotExist": [
+      "isOn (use checked)",
+      "onToggle (use onChange)",
+      "onCheckedChange (use onChange)",
+      "size",
+      "color",
+      "children (use label prop)"
+    ],
+    "commonMistakes": [
+      { "mistake": "<Switch>", "correction": "<Toggle>" },
+      { "mistake": "isOn={true}", "correction": "checked={true}" },
+      { "mistake": "onToggle={fn}", "correction": "onChange={fn}" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Toggle",
+      "code": "<Toggle label=\"Enable notifications\" />"
+    },
+    {
+      "title": "Controlled Toggle",
+      "code": "<Toggle checked={enabled} onChange={(e) => setEnabled(e.target.checked)} label=\"Dark mode\" />"
+    },
+    {
+      "title": "Disabled",
+      "code": "<Toggle disabled label=\"Cannot toggle\" />"
+    },
+    {
+      "title": "In Settings Form",
+      "code": "<div className=\"space-y-4\">\n  <Toggle label=\"Email notifications\" defaultChecked />\n  <Toggle label=\"Push notifications\" />\n  <Toggle label=\"SMS notifications\" disabled />\n</div>"
+    }
+  ]
+}

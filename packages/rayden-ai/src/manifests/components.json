@@ -1,0 +1,287 @@
+{
+  "$schema": "./schema.json",
+  "version": "0.2.1",
+  "name": "Rayden UI Components",
+  "description": "Complete registry of all Rayden UI components",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "categories": {
+    "primitives": {
+      "description": "Basic building block components",
+      "components": ["Button", "Badge", "Icon", "Divider", "Tooltip"]
+    },
+    "inputs": {
+      "description": "Form input components",
+      "components": ["Input", "Select", "Checkbox", "Radio", "Toggle", "Chip"]
+    },
+    "feedback": {
+      "description": "User feedback components",
+      "components": ["Alert", "ProgressBar", "ProgressCircle"]
+    },
+    "navigation": {
+      "description": "Navigation components",
+      "components": ["Tabs", "Breadcrumb", "Pagination", "SidebarMenu"]
+    },
+    "data-display": {
+      "description": "Data presentation components",
+      "components": ["Table", "Avatar", "MetricsCard", "EmptyStateIllustration"]
+    },
+    "composite": {
+      "description": "Complex compound components",
+      "components": ["ButtonGroup", "DropdownMenu", "FileUpload"]
+    }
+  },
+  "components": [
+    {
+      "name": "Button",
+      "displayName": "Button",
+      "category": "primitives",
+      "description": "Primary interactive element for triggering actions",
+      "hasSubComponents": false,
+      "manifestFile": "Button.json"
+    },
+    {
+      "name": "Badge",
+      "displayName": "Badge",
+      "category": "primitives",
+      "description": "Status indicator or label component",
+      "hasSubComponents": false,
+      "manifestFile": "Badge.json"
+    },
+    {
+      "name": "Icon",
+      "displayName": "Icon",
+      "category": "primitives",
+      "description": "SVG icon component with predefined icon set",
+      "hasSubComponents": false,
+      "manifestFile": "Icon.json"
+    },
+    {
+      "name": "Divider",
+      "displayName": "Divider",
+      "category": "primitives",
+      "description": "Visual separator between content sections",
+      "hasSubComponents": false,
+      "manifestFile": "Divider.json"
+    },
+    {
+      "name": "Tooltip",
+      "displayName": "Tooltip",
+      "category": "primitives",
+      "description": "Contextual popup with additional information",
+      "hasSubComponents": false,
+      "manifestFile": "Tooltip.json"
+    },
+    {
+      "name": "Input",
+      "displayName": "Input",
+      "category": "inputs",
+      "description": "Text input field with label, validation, and icons",
+      "hasSubComponents": false,
+      "manifestFile": "Input.json"
+    },
+    {
+      "name": "Select",
+      "displayName": "Select",
+      "category": "inputs",
+      "description": "Dropdown select with options",
+      "hasSubComponents": true,
+      "subComponents": ["SelectOption"],
+      "manifestFile": "Select.json"
+    },
+    {
+      "name": "Checkbox",
+      "displayName": "Checkbox",
+      "category": "inputs",
+      "description": "Checkbox input for boolean selections",
+      "hasSubComponents": false,
+      "manifestFile": "Checkbox.json"
+    },
+    {
+      "name": "Radio",
+      "displayName": "Radio",
+      "category": "inputs",
+      "description": "Radio button for single selection from options",
+      "hasSubComponents": false,
+      "manifestFile": "Radio.json"
+    },
+    {
+      "name": "Toggle",
+      "displayName": "Toggle",
+      "category": "inputs",
+      "description": "Toggle switch for on/off states",
+      "hasSubComponents": false,
+      "manifestFile": "Toggle.json"
+    },
+    {
+      "name": "Chip",
+      "displayName": "Chip",
+      "category": "inputs",
+      "description": "Compact element for input or filtering",
+      "hasSubComponents": false,
+      "manifestFile": "Chip.json"
+    },
+    {
+      "name": "Alert",
+      "displayName": "Alert",
+      "category": "feedback",
+      "description": "Notification component for messages and alerts",
+      "hasSubComponents": false,
+      "manifestFile": "Alert.json"
+    },
+    {
+      "name": "ProgressBar",
+      "displayName": "Progress Bar",
+      "category": "feedback",
+      "description": "Linear progress indicator",
+      "hasSubComponents": false,
+      "manifestFile": "ProgressBar.json"
+    },
+    {
+      "name": "ProgressCircle",
+      "displayName": "Progress Circle",
+      "category": "feedback",
+      "description": "Circular progress indicator",
+      "hasSubComponents": false,
+      "manifestFile": "ProgressCircle.json"
+    },
+    {
+      "name": "Tabs",
+      "displayName": "Tabs",
+      "category": "navigation",
+      "description": "Tabbed navigation component",
+      "hasSubComponents": true,
+      "subComponents": ["Tab"],
+      "manifestFile": "Tabs.json"
+    },
+    {
+      "name": "Breadcrumb",
+      "displayName": "Breadcrumb",
+      "category": "navigation",
+      "description": "Navigation breadcrumb trail",
+      "hasSubComponents": false,
+      "manifestFile": "Breadcrumb.json"
+    },
+    {
+      "name": "Pagination",
+      "displayName": "Pagination",
+      "category": "navigation",
+      "description": "Page navigation component",
+      "hasSubComponents": false,
+      "manifestFile": "Pagination.json"
+    },
+    {
+      "name": "SidebarMenu",
+      "displayName": "Sidebar Menu",
+      "category": "navigation",
+      "description": "Sidebar navigation menu",
+      "hasSubComponents": true,
+      "subComponents": ["SidebarMenuItem", "SidebarMenuSection", "SidebarMenuSub", "SidebarMenuSubItem"],
+      "manifestFile": "SidebarMenu.json"
+    },
+    {
+      "name": "Table",
+      "displayName": "Table",
+      "category": "data-display",
+      "description": "Data table with sorting and selection",
+      "hasSubComponents": true,
+      "subComponents": ["TableHeader", "TableBody", "TableRow", "TableHead", "TableCell"],
+      "manifestFile": "Table.json"
+    },
+    {
+      "name": "Avatar",
+      "displayName": "Avatar",
+      "category": "data-display",
+      "description": "User avatar with image or initials",
+      "hasSubComponents": true,
+      "subComponents": ["AvatarGroup"],
+      "manifestFile": "Avatar.json"
+    },
+    {
+      "name": "MetricsCard",
+      "displayName": "Metrics Card",
+      "category": "data-display",
+      "description": "Card displaying key metrics and statistics",
+      "hasSubComponents": false,
+      "manifestFile": "MetricsCard.json"
+    },
+    {
+      "name": "EmptyStateIllustration",
+      "displayName": "Empty State Illustration",
+      "category": "data-display",
+      "description": "Illustration for empty states",
+      "hasSubComponents": false,
+      "manifestFile": "EmptyStateIllustration.json"
+    },
+    {
+      "name": "ButtonGroup",
+      "displayName": "Button Group",
+      "category": "composite",
+      "description": "Grouped buttons with connected styling",
+      "hasSubComponents": true,
+      "subComponents": ["ButtonGroupItem"],
+      "manifestFile": "ButtonGroup.json"
+    },
+    {
+      "name": "DropdownMenu",
+      "displayName": "Dropdown Menu",
+      "category": "composite",
+      "description": "Context menu or action dropdown",
+      "hasSubComponents": true,
+      "subComponents": ["DropdownMenuTrigger", "DropdownMenuContent", "DropdownMenuGroup", "DropdownMenuLabel", "DropdownMenuItem", "DropdownMenuSeparator"],
+      "manifestFile": "DropdownMenu.json"
+    },
+    {
+      "name": "FileUpload",
+      "displayName": "File Upload",
+      "category": "composite",
+      "description": "File upload with drag and drop",
+      "hasSubComponents": true,
+      "subComponents": ["FileUploadDropZone", "FileUploadItem"],
+      "manifestFile": "FileUpload.json"
+    }
+  ],
+  "doesNotExist": [
+    "Modal",
+    "Dialog",
+    "Popup",
+    "Overlay",
+    "Card",
+    "Panel",
+    "Box",
+    "Container",
+    "Accordion",
+    "Collapse",
+    "Expandable",
+    "Carousel",
+    "Slider",
+    "RangeSlider",
+    "DatePicker",
+    "TimePicker",
+    "Calendar",
+    "ColorPicker",
+    "Tree",
+    "TreeView",
+    "Drawer",
+    "Sheet",
+    "Popover",
+    "HoverCard",
+    "ContextMenu",
+    "Command",
+    "CommandPalette",
+    "Autocomplete",
+    "Combobox",
+    "Skeleton",
+    "AspectRatio",
+    "ScrollArea",
+    "Separator",
+    "Stepper",
+    "Steps",
+    "Timeline",
+    "Rating",
+    "Stars",
+    "Spinner",
+    "Loading",
+    "Loader"
+  ]
+}

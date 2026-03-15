@@ -1,0 +1,129 @@
+{
+  "$schema": "./schema.json",
+  "name": "FileUpload",
+  "displayName": "File Upload",
+  "description": "File upload component with drag and drop support. Compound component with drop zone and file items.",
+  "category": "composite",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "children": {
+      "type": "ReactNode",
+      "required": true,
+      "description": "FileUploadDropZone and FileUploadItem components"
+    }
+  },
+  "children": {
+    "required": true,
+    "type": "specific",
+    "accepts": ["FileUploadDropZone", "FileUploadItem"],
+    "description": "Drop zone and uploaded file items"
+  },
+  "subComponents": {
+    "FileUploadDropZone": {
+      "name": "FileUploadDropZone",
+      "description": "Drag and drop zone for file upload",
+      "props": {
+        "onDrop": {
+          "type": "function",
+          "description": "Handler when files are dropped: (files: File[]) => void"
+        },
+        "accept": {
+          "type": "string",
+          "description": "Accepted file types (e.g., 'image/*,.pdf')"
+        },
+        "multiple": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow multiple file selection"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable the drop zone"
+        },
+        "state": {
+          "type": "enum",
+          "values": ["default", "hover", "error"],
+          "default": "default",
+          "description": "Visual state"
+        }
+      }
+    },
+    "FileUploadItem": {
+      "name": "FileUploadItem",
+      "description": "Uploaded file item display",
+      "props": {
+        "file": {
+          "type": "object",
+          "required": true,
+          "description": "File data: { name: string, size: number, type: string }"
+        },
+        "status": {
+          "type": "enum",
+          "values": ["uploading", "complete", "error"],
+          "default": "complete",
+          "description": "Upload status"
+        },
+        "progress": {
+          "type": "number",
+          "description": "Upload progress (0-100) when status is 'uploading'"
+        },
+        "onRemove": {
+          "type": "function",
+          "description": "Remove file handler"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message when status is 'error'"
+        }
+      }
+    }
+  },
+  "composition": {
+    "relatedComponents": ["Button", "Icon", "ProgressBar"]
+  },
+  "accessibility": {
+    "keyboardNav": [
+      { "key": "Enter/Space", "action": "Open file dialog (on drop zone)" }
+    ],
+    "screenReaderNotes": "Drop zone announces accepted file types. File items announce name and status."
+  },
+  "antiHallucination": {
+    "aliases": ["FileInput", "Upload", "Dropzone", "FileDrop"],
+    "notTheSameAs": ["Input"],
+    "doesNotExist": [
+      "files (manage files externally)",
+      "onUpload (handle in onDrop)",
+      "onChange (use onDrop)",
+      "maxSize (validate in handler)",
+      "maxFiles (validate in handler)"
+    ],
+    "commonMistakes": [
+      { "mistake": "<FileUpload onChange={...}>", "correction": "Use FileUploadDropZone with onDrop" },
+      { "mistake": "files={[...]}",  "correction": "Map files to FileUploadItem components" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic File Upload",
+      "code": "<FileUpload>\n  <FileUploadDropZone onDrop={handleDrop} accept=\"image/*\" />\n</FileUpload>"
+    },
+    {
+      "title": "With Uploaded Files",
+      "code": "<FileUpload>\n  <FileUploadDropZone onDrop={handleDrop} accept=\".pdf,.doc,.docx\" multiple />\n  {files.map(file => (\n    <FileUploadItem\n      key={file.name}\n      file={file}\n      status=\"complete\"\n      onRemove={() => removeFile(file)}\n    />\n  ))}\n</FileUpload>"
+    },
+    {
+      "title": "With Upload Progress",
+      "code": "<FileUpload>\n  <FileUploadDropZone onDrop={handleDrop} />\n  {uploading.map(file => (\n    <FileUploadItem\n      key={file.name}\n      file={file}\n      status=\"uploading\"\n      progress={file.progress}\n    />\n  ))}\n  {completed.map(file => (\n    <FileUploadItem\n      key={file.name}\n      file={file}\n      status=\"complete\"\n      onRemove={() => removeFile(file)}\n    />\n  ))}\n</FileUpload>"
+    },
+    {
+      "title": "With Error State",
+      "code": "<FileUpload>\n  <FileUploadDropZone onDrop={handleDrop} />\n  <FileUploadItem\n    file={{ name: 'document.pdf', size: 15000000, type: 'application/pdf' }}\n    status=\"error\"\n    error=\"File size exceeds limit\"\n    onRemove={handleRemove}\n  />\n</FileUpload>"
+    }
+  ]
+}

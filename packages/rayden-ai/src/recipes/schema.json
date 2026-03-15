@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raydenui.com/schemas/recipe.json",
+  "title": "Rayden UI Layout Recipe",
+  "description": "Pre-built layout pattern using Rayden UI components",
+  "type": "object",
+  "required": ["id", "name", "description", "category", "components", "code"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique recipe identifier (kebab-case)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable recipe name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the layout pattern"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["marketing", "dashboard", "forms", "content"],
+      "description": "Recipe category"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Searchable tags"
+    },
+    "components": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of Rayden UI components used"
+    },
+    "code": {
+      "type": "string",
+      "description": "Complete JSX code for the recipe"
+    },
+    "customizationPoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "description"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "default": {},
+          "description": { "type": "string" }
+        }
+      },
+      "description": "Customizable aspects of the recipe"
+    },
+    "preview": {
+      "type": "string",
+      "description": "Preview image URL"
+    }
+  }
+}
