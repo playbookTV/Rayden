@@ -1,6 +1,6 @@
 # Rayden UI
 
-A modern, accessible React component library built with Tailwind CSS v4. Rayden UI brings the [Rayna UI](https://www.figma.com/community/file/1229854793310881425) Figma design system to life with pixel-perfect React components.
+A modern, accessible React component library built with Tailwind CSS v4. Rayden UI brings the [Rayna UI](https://www.raynaui.com/) Figma design system to life with pixel-perfect React components.
 
 [![npm version](https://img.shields.io/npm/v/@raydenui/ui.svg)](https://www.npmjs.com/package/@raydenui/ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -309,4 +309,4 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 ---
 
-Made with care for the React community.
+Made with care for the React community. By Ovalay Studios (https://ovalay.studio)
