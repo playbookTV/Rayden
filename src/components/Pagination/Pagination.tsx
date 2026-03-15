@@ -1,5 +1,6 @@
 import type { HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
+import { Icon } from "../Icon";
 
 export interface PaginationProps extends HTMLAttributes<HTMLElement> {
   currentPage: number;
@@ -47,17 +48,8 @@ function getPageNumbers(
   return [1, "...", ...middleRange, "...", totalPages];
 }
 
-const ChevronLeft = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} className="size-5">
-    <path d="M12 5l-5 5 5 5" />
-  </svg>
-);
-
-const ChevronRight = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} className="size-5">
-    <path d="M8 5l5 5-5 5" />
-  </svg>
-);
+const ChevronLeft = () => <Icon name="chevron-left" size="md" />;
+const ChevronRight = () => <Icon name="chevron-right" size="md" />;
 
 export function Pagination({
   currentPage,

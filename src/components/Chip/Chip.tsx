@@ -1,9 +1,12 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import { Icon } from "../Icon";
+import type { IconName } from "../Icon";
 
 export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "input" | "filter";
-  icon?: ReactNode;
+  icon?: ReactNode | IconName;
   disabled?: boolean;
   onClose?: () => void;
   onDropdown?: () => void;
@@ -35,7 +38,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
         )}
         {...rest}
       >
-        {icon && <span className="shrink-0 size-4">{icon}</span>}
+        {icon && <span className="shrink-0 size-4">{resolveIcon(icon, "sm")}</span>}
         <span>{children}</span>
         {variant === "input" && onClose && (
           <button
@@ -50,15 +53,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
             )}
             aria-label="Remove"
           >
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="size-3"
-            >
-              <path d="M4 4l8 8M12 4l-8 8" />
-            </svg>
+            <Icon name="multiply" size="xs" />
           </button>
         )}
         {variant === "filter" && (
@@ -74,15 +69,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
             )}
             aria-label="Open filter"
           >
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="size-3"
-            >
-              <path d="M4 6l4 4 4-4" />
-            </svg>
+            <Icon name="chevron-down" size="xs" />
           </button>
         )}
       </div>

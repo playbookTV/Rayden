@@ -41,5 +41,24 @@ export type { CheckboxProps, RadioProps, ToggleProps } from "./components/FormCo
 export { Breadcrumb } from "./components/Breadcrumb";
 export type { BreadcrumbProps, BreadcrumbItem } from "./components/Breadcrumb";
 
+export { Icon } from "./components/Icon";
+export type { IconProps, IconName, IconSize, IconVariant } from "./components/Icon";
+
+export { Avatar, AvatarGroup } from "./components/Avatar";
+export type { AvatarProps, AvatarType, AvatarSize, AvatarStatus, AvatarGroupProps, AvatarGroupSize } from "./components/Avatar";
+
+// Elements
+export { MetricsCard } from "./components/MetricsCard";
+export type { MetricsCardProps, MetricsCardVariation, MetricsCardTrend, MetricsCardTrendBadge, MetricsCardStatusBadge, MetricsCardCta } from "./components/MetricsCard";
+
+export { FileUpload, FileUploadDropZone, FileUploadItem } from "./components/FileUpload";
+export type { FileUploadProps, FileUploadDropZoneProps, DropZoneState, FileUploadItemProps, FileUploadFileData, FileUploadItemStatus } from "./components/FileUpload";
+
+export { SidebarMenu, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubItem, SidebarMenuSection } from "./components/SidebarMenu";
+export type { SidebarMenuProps, SidebarMenuContextValue, SidebarMenuTheme, SidebarMenuItemProps, SidebarMenuSubProps, SidebarMenuSubItemProps, SidebarMenuSectionProps } from "./components/SidebarMenu";
+
+export { EmptyStateIllustration, illustrationNames } from "./components/EmptyStateIllustration";
+export type { EmptyStateIllustrationProps, IllustrationName } from "./components/EmptyStateIllustration";
+
 // Utilities
 export { cn } from "./utils/cn";

@@ -1,5 +1,7 @@
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconName } from "../Icon";
 
 export type InputSize = "sm" | "lg";
 
@@ -16,9 +18,9 @@ export interface InputProps
   /** Success message or boolean. Overrides helperText styling. */
   success?: string | boolean;
   /** Icon on the left side of the input */
-  leadingIcon?: ReactNode;
+  leadingIcon?: ReactNode | IconName;
   /** Icon on the right side of the input */
-  trailingIcon?: ReactNode;
+  trailingIcon?: ReactNode | IconName;
   /** Text addon on the right side */
   addonRight?: string;
   /** Wrapper className */
@@ -89,7 +91,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         >
           {leadingIcon && (
             <span className="shrink-0 size-5 text-grey-400">
-              {leadingIcon}
+              {resolveIcon(leadingIcon, "md")}
             </span>
           )}
           <input
@@ -108,7 +110,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
           {trailingIcon && (
             <span className="shrink-0 size-5 text-grey-400">
-              {trailingIcon}
+              {resolveIcon(trailingIcon, "md")}
             </span>
           )}
         </div>

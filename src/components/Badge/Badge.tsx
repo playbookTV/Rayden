@@ -1,5 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconName } from "../Icon";
 
 export type BadgeColor =
   | "orange"
@@ -17,8 +19,8 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   color?: BadgeColor;
   type?: BadgeType;
   size?: BadgeSize;
-  leadingIcon?: ReactNode;
-  trailingIcon?: ReactNode;
+  leadingIcon?: ReactNode | IconName;
+  trailingIcon?: ReactNode | IconName;
 }
 
 const colorStyles: Record<BadgeColor, Record<BadgeType, string>> = {
@@ -89,11 +91,11 @@ export function Badge({
       {...rest}
     >
       {leadingIcon && (
-        <span className={cn("shrink-0", sizeConfig.icon)}>{leadingIcon}</span>
+        <span className={cn("shrink-0", sizeConfig.icon)}>{resolveIcon(leadingIcon, "xs")}</span>
       )}
       {children}
       {trailingIcon && (
-        <span className={cn("shrink-0", sizeConfig.icon)}>{trailingIcon}</span>
+        <span className={cn("shrink-0", sizeConfig.icon)}>{resolveIcon(trailingIcon, "xs")}</span>
       )}
     </span>
   );

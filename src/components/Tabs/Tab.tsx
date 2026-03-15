@@ -1,10 +1,12 @@
 import { type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconName } from "../Icon";
 import { useTabsContext } from "./Tabs";
 
 export interface TabProps {
   value: string;
-  icon?: ReactNode;
+  icon?: ReactNode | IconName;
   badge?: number | string;
   disabled?: boolean;
   children: ReactNode;
@@ -39,7 +41,7 @@ export function Tab({
           className
         )}
       >
-        {icon && <span className="shrink-0 size-4">{icon}</span>}
+        {icon && <span className="shrink-0 size-4">{resolveIcon(icon, "sm")}</span>}
         {children}
         {badge !== undefined && (
           <span
@@ -73,7 +75,7 @@ export function Tab({
       )}
     >
       <div className="flex items-center gap-2 px-4 pt-4 pb-[15px]">
-        {icon && <span className="shrink-0 size-5">{icon}</span>}
+        {icon && <span className="shrink-0 size-5">{resolveIcon(icon, "md")}</span>}
         <span
           className={cn(
             "text-sm font-medium transition-colors",

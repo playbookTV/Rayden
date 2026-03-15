@@ -1,10 +1,12 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconName } from "../Icon";
 
 export interface ButtonGroupItemProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
-  leadingIcon?: ReactNode;
-  trailingIcon?: ReactNode;
+  leadingIcon?: ReactNode | IconName;
+  trailingIcon?: ReactNode | IconName;
   active?: boolean;
 }
 
@@ -42,10 +44,10 @@ export const ButtonGroupItem = forwardRef<
         )}
         {...rest}
       >
-        {leadingIcon && <span className="shrink-0 size-5">{leadingIcon}</span>}
+        {leadingIcon && <span className="shrink-0 size-5">{resolveIcon(leadingIcon, "md")}</span>}
         {children}
         {trailingIcon && (
-          <span className="shrink-0 size-5">{trailingIcon}</span>
+          <span className="shrink-0 size-5">{resolveIcon(trailingIcon, "md")}</span>
         )}
       </button>
     );

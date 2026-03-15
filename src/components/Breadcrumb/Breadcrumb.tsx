@@ -1,10 +1,12 @@
 import { type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconName } from "../Icon";
 
 export interface BreadcrumbItem {
   label: string;
   href?: string;
-  icon?: ReactNode;
+  icon?: ReactNode | IconName;
   disabled?: boolean;
   active?: boolean;
 }
@@ -38,7 +40,7 @@ export function Breadcrumb({
               </span>
             )}
             {item.icon && (
-              <span className="size-4 shrink-0">{item.icon}</span>
+              <span className="size-4 shrink-0">{resolveIcon(item.icon, "sm")}</span>
             )}
             {item.href && !item.disabled && !item.active ? (
               <a

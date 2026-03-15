@@ -1,5 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconName } from "../Icon";
 
 export type ButtonVariant =
   | "primary"
@@ -18,7 +20,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   appearance?: ButtonAppearance;
   size?: ButtonSize;
-  icon?: ReactNode;
+  icon?: ReactNode | IconName;
   iconPosition?: "none" | "leading" | "trailing" | "icon-only";
 }
 
@@ -97,7 +99,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ? "icon"
           : "none";
 
-    const iconSize = size === "sm" ? "size-5" : "size-6";
+    const iconSizeClass = size === "sm" ? "size-5" : "size-6";
+    const resolvedIcon = resolveIcon(icon, size === "sm" ? "md" : "lg");
 
     return (
       <button
@@ -112,16 +115,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...rest}
       >
-        {iconPosition === "leading" && icon && (
-          <span className={cn("shrink-0", iconSize)}>{icon}</span>
+        {iconPosition === "leading" && resolvedIcon && (
+          <span className={cn("shrink-0", iconSizeClass)}>{resolvedIcon}</span>
         )}
-        {iconPosition === "icon-only" && icon ? (
-          <span className={cn("shrink-0", iconSize)}>{icon}</span>
+        {iconPosition === "icon-only" && resolvedIcon ? (
+          <span className={cn("shrink-0", iconSizeClass)}>{resolvedIcon}</span>
         ) : (
           iconPosition !== "icon-only" && children
         )}
-        {iconPosition === "trailing" && icon && (
-          <span className={cn("shrink-0", iconSize)}>{icon}</span>
+        {iconPosition === "trailing" && resolvedIcon && (
+          <span className={cn("shrink-0", iconSizeClass)}>{resolvedIcon}</span>
         )}
       </button>
     );

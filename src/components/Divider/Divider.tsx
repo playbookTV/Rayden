@@ -1,5 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconName } from "../Icon";
 
 export type DividerVariant =
   | "default"
@@ -12,9 +14,9 @@ export type DividerVariant =
 export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   variant?: DividerVariant;
   label?: string;
-  icon?: ReactNode;
+  icon?: ReactNode | IconName;
   buttonLabel?: string;
-  buttonIcon?: ReactNode;
+  buttonIcon?: ReactNode | IconName;
   onButtonClick?: () => void;
 }
 
@@ -37,7 +39,7 @@ function DividerButton({
       onClick={onClick}
       className="inline-flex items-center gap-2 rounded-lg border border-grey-300 bg-white px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50"
     >
-      {icon && <span className="size-5 shrink-0">{icon}</span>}
+      {icon && <span className="size-5 shrink-0">{resolveIcon(icon, "md")}</span>}
       {label && <span>{label}</span>}
     </button>
   );
@@ -62,7 +64,7 @@ export function Divider({
       <div className={cn("relative w-full", className)} {...rest}>
         <DividerLine />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-1 py-0.5 flex items-center justify-center">
-          <span className="size-6">{icon}</span>
+          <span className="size-6">{resolveIcon(icon, "lg")}</span>
         </div>
       </div>
     );

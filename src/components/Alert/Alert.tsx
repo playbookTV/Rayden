@@ -1,5 +1,8 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import { Icon } from "../Icon";
+import type { IconName } from "../Icon";
 
 export type AlertVariant = "toast" | "banner";
 export type AlertState = "information" | "success" | "warning" | "error";
@@ -14,7 +17,7 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   state?: AlertState;
   title?: string;
   description?: string;
-  icon?: ReactNode;
+  icon?: ReactNode | IconName;
   showIcon?: boolean;
   onClose?: () => void;
   primaryAction?: AlertAction;
@@ -106,7 +109,7 @@ export function Alert({
               isBanner ? "size-8" : "size-6"
             )}
           >
-            <span className={isBanner ? "size-4" : "size-3"}>{icon}</span>
+            <span className={isBanner ? "size-4" : "size-3"}>{resolveIcon(icon, "sm")}</span>
           </div>
         )}
 
@@ -176,15 +179,7 @@ export function Alert({
               className="shrink-0 inline-flex items-center justify-center text-grey-500 hover:text-grey-700 cursor-pointer"
               aria-label="Close"
             >
-              <svg
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="size-5"
-              >
-                <path d="M5 5l10 10M15 5L5 15" />
-              </svg>
+              <Icon name="multiply" size="md" />
             </button>
           </div>
         )}
