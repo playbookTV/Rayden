@@ -4,6 +4,7 @@ import { Tooltip } from "./Tooltip";
 const meta: Meta<typeof Tooltip> = {
   title: "Components/Tooltip",
   component: Tooltip,
+  tags: ["autodocs"],
   argTypes: {
     theme: { control: "select", options: ["light", "dark"] },
     position: {

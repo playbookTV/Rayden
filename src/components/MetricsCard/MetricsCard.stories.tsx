@@ -4,6 +4,7 @@ import { MetricsCard } from "./MetricsCard";
 const meta: Meta<typeof MetricsCard> = {
   title: "Elements/MetricsCard",
   component: MetricsCard,
+  tags: ["autodocs"],
   argTypes: {
     variation: {
       control: "select",

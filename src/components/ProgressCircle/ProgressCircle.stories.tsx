@@ -4,6 +4,7 @@ import { ProgressCircle } from "./ProgressCircle";
 const meta: Meta<typeof ProgressCircle> = {
   title: "Components/ProgressCircle",
   component: ProgressCircle,
+  tags: ["autodocs"],
   argTypes: {
     value: { control: { type: "range", min: 0, max: 100 } },
     size: { control: "select", options: ["xs", "sm", "md", "lg", "xl"] },

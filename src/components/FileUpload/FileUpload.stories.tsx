@@ -9,6 +9,7 @@ import type { FileUploadFileData } from "./FileUploadItem";
 const dropZoneMeta: Meta<typeof FileUploadDropZone> = {
   title: "Elements/FileUpload/DropZone",
   component: FileUploadDropZone,
+  tags: ["autodocs"],
 };
 
 export default dropZoneMeta;

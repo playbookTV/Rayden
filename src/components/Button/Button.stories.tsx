@@ -1,15 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 
-const PlusIcon = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2}>
-    <path d="M10 4v12M4 10h12" />
-  </svg>
-);
-
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
+  tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",
@@ -105,9 +100,9 @@ export const AllVariants: Story = {
         <Button variant="grey" size="lg">Grey Large</Button>
       </div>
       <div className="flex items-center gap-3 flex-wrap">
-        <Button variant="primary" icon={<PlusIcon />} iconPosition="leading">Leading</Button>
-        <Button variant="primary" icon={<PlusIcon />} iconPosition="trailing">Trailing</Button>
-        <Button variant="primary" icon={<PlusIcon />} iconPosition="icon-only" />
+        <Button variant="primary" icon="plus" iconPosition="leading">Leading</Button>
+        <Button variant="primary" icon="plus" iconPosition="trailing">Trailing</Button>
+        <Button variant="primary" icon="plus" iconPosition="icon-only" />
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <Button variant="success">Success</Button>

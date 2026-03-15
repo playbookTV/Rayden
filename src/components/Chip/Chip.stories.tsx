@@ -11,6 +11,7 @@ const UserIcon = () => (
 const meta: Meta<typeof Chip> = {
   title: "Components/Chip",
   component: Chip,
+  tags: ["autodocs"],
   argTypes: {
     variant: { control: "select", options: ["input", "filter"] },
     disabled: { control: "boolean" },

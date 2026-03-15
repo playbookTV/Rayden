@@ -60,5 +60,14 @@ export type { SidebarMenuProps, SidebarMenuContextValue, SidebarMenuTheme, Sideb
 export { EmptyStateIllustration, illustrationNames } from "./components/EmptyStateIllustration";
 export type { EmptyStateIllustrationProps, IllustrationName } from "./components/EmptyStateIllustration";
 
+export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "./components/Table";
+export type { TableProps, TableHeaderProps, TableBodyProps, TableRowProps, TableHeadProps, TableCellProps, SortDirection } from "./components/Table";
+
+export { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from "./components/DropdownMenu";
+export type { DropdownMenuProps, DropdownMenuTriggerProps, DropdownMenuContentProps, DropdownMenuGroupProps, DropdownMenuLabelProps, DropdownMenuItemProps, DropdownMenuSeparatorProps } from "./components/DropdownMenu";
+
+export { Select, SelectOption } from "./components/Select";
+export type { SelectProps, SelectOptionProps } from "./components/Select";
+
 // Utilities
 export { cn } from "./utils/cn";

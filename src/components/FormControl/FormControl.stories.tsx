@@ -5,6 +5,7 @@ import { Toggle } from "./Toggle";
 
 const meta: Meta = {
   title: "Components/FormControl",
+  tags: ["autodocs"],
 };
 
 export default meta;

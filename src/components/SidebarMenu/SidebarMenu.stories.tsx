@@ -11,6 +11,7 @@ import { Input } from "../Input";
 const meta: Meta<typeof SidebarMenu> = {
   title: "Elements/SidebarMenu",
   component: SidebarMenu,
+  tags: ["autodocs"],
 };
 
 export default meta;

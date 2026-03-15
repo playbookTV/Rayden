@@ -7,6 +7,7 @@ const allNames = Object.keys(icons) as IconName[];
 const meta: Meta<typeof Icon> = {
   title: "Components/Icon",
   component: Icon,
+  tags: ["autodocs"],
   argTypes: {
     name: { control: "select", options: allNames },
     size: { control: "select", options: ["xs", "sm", "md", "lg", "xl"] },

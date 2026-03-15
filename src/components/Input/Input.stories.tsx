@@ -32,6 +32,7 @@ const ErrorIcon = () => (
 const meta: Meta<typeof Input> = {
   title: "Components/Input",
   component: Input,
+  tags: ["autodocs"],
   argTypes: {
     size: { control: "select", options: ["sm", "lg"] },
     disabled: { control: "boolean" },

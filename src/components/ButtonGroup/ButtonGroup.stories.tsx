@@ -2,21 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ButtonGroup } from "./ButtonGroup";
 import { ButtonGroupItem } from "./ButtonGroupItem";
 
-const ArrowLeft = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2}>
-    <path d="M15 10H5M5 10l4-4M5 10l4 4" />
-  </svg>
-);
-
-const ArrowRight = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2}>
-    <path d="M5 10h10M15 10l-4-4M15 10l-4 4" />
-  </svg>
-);
-
 const meta: Meta<typeof ButtonGroup> = {
   title: "Components/ButtonGroup",
   component: ButtonGroup,
+  tags: ["autodocs"],
 };
 
 export default meta;
@@ -35,13 +24,13 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: () => (
     <ButtonGroup>
-      <ButtonGroupItem leadingIcon={<ArrowLeft />} trailingIcon={<ArrowRight />}>
+      <ButtonGroupItem leadingIcon="arrow-left" trailingIcon="arrow-right">
         First
       </ButtonGroupItem>
-      <ButtonGroupItem leadingIcon={<ArrowLeft />} trailingIcon={<ArrowRight />}>
+      <ButtonGroupItem leadingIcon="arrow-left" trailingIcon="arrow-right">
         Middle
       </ButtonGroupItem>
-      <ButtonGroupItem leadingIcon={<ArrowLeft />} trailingIcon={<ArrowRight />}>
+      <ButtonGroupItem leadingIcon="arrow-left" trailingIcon="arrow-right">
         Last
       </ButtonGroupItem>
     </ButtonGroup>

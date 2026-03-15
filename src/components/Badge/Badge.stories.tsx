@@ -10,6 +10,7 @@ const DotIcon = () => (
 const meta: Meta<typeof Badge> = {
   title: "Components/Badge",
   component: Badge,
+  tags: ["autodocs"],
   argTypes: {
     color: {
       control: "select",

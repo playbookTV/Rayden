@@ -3,8 +3,9 @@ import { EmptyStateIllustration } from "./EmptyStateIllustration";
 import { illustrationNames } from "./illustrations";
 
 const meta: Meta<typeof EmptyStateIllustration> = {
-  title: "Elements/EmptyStateIllustration",
+  title: "Components/EmptyStateIllustration",
   component: EmptyStateIllustration,
+  tags: ["autodocs"],
 };
 
 export default meta;

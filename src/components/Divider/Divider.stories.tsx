@@ -10,6 +10,7 @@ const PlusIcon = () => (
 const meta: Meta<typeof Divider> = {
   title: "Components/Divider",
   component: Divider,
+  tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",
