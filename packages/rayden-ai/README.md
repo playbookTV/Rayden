@@ -1,3 +1,9 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../../public/MacBook Air - 18.png">
+  <source media="(prefers-color-scheme: light)" srcset="../../public/MacBook Air - 18.png">
+  <img alt="Rayden AI - AI compatibility layer for Rayden UI. Supercharge your LLMs to reliably generate UI components without hallucination." src="../../public/MacBook Air - 18.png" width="100%">
+</picture>
+
 # @raydenui/ai
 
 AI compatibility layer for Rayden UI — enables LLMs to reliably generate UI components without hallucination.

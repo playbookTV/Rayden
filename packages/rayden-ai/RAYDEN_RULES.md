@@ -42,6 +42,460 @@ import '@raydenui/ui/styles.css';
 
 ---
 
+## Design Philosophy — Premium, Minimal, Clean UI
+
+**Every screen you generate must feel intentional, polished, and premium.** Rayden UI is built on professional design principles — the code you produce should reflect that. Follow these design directives precisely.
+
+### The 5 Pillars of Rayden UI Design
+
+#### 1. Breathing Room — Generous Whitespace
+Premium UI is defined by what you *leave out*, not what you put in. Space is a design element.
+
+```tsx
+// BAD — cramped, amateur layout
+<div className="p-2 space-y-1">
+  <h3 className="text-h6">Settings</h3>
+  <Input label="Name" />
+  <Input label="Email" />
+  <Button variant="primary">Save</Button>
+</div>
+
+// GOOD — spacious, premium layout
+<div className="p-8 space-y-6 max-w-lg">
+  <div>
+    <h3 className="text-h4 font-semibold text-grey-900">Settings</h3>
+    <p className="text-body-sm text-grey-500 mt-1">Manage your account preferences</p>
+  </div>
+  <div className="space-y-4">
+    <Input label="Name" placeholder="Your full name" />
+    <Input label="Email" placeholder="you@company.com" />
+  </div>
+  <Button variant="primary" className="w-full">Save Changes</Button>
+</div>
+```
+
+**Spacing rules:**
+- Page-level padding: `p-6` minimum, `p-8` to `p-12` preferred
+- Section gaps: `space-y-6` or `space-y-8` between major sections
+- Form field gaps: `space-y-4` between inputs
+- Inline element gaps: `gap-2` to `gap-3`
+- Always constrain content width: `max-w-sm`, `max-w-md`, `max-w-lg`, `max-w-xl`, `max-w-2xl`
+
+#### 2. Visual Hierarchy — Guide the Eye
+Every screen needs a clear reading order. Use size, weight, and color contrast deliberately.
+
+```tsx
+// Heading hierarchy pattern
+<div>
+  <span className="text-caption-sm uppercase tracking-wider text-grey-400 font-medium">Dashboard</span>
+  <h1 className="text-h3 font-semibold text-grey-900 mt-1">Good morning, Alex</h1>
+  <p className="text-body-md text-grey-500 mt-2">Here's what's happening with your projects today.</p>
+</div>
+```
+
+**Hierarchy rules:**
+- Page titles: `text-h3` or `text-h4` in `text-grey-900 font-semibold`
+- Section headers: `text-h5` or `text-h6` in `text-grey-800 font-semibold`
+- Overlines/labels: `text-caption-sm uppercase tracking-wider text-grey-400 font-medium`
+- Body text: `text-body-md text-grey-700` (primary), `text-body-sm text-grey-500` (secondary)
+- Helper/meta text: `text-body-xs text-grey-400`
+- Never use `text-grey-900` for body text — reserve it for headings
+- Never use more than 3 font sizes on one screen section
+
+#### 3. Restraint — Minimal Color, Maximum Impact
+Color should be purposeful, not decorative. A premium interface is mostly neutral with strategic color accents.
+
+```tsx
+// BAD — color overload
+<div className="bg-primary-50 border-2 border-primary-500 p-4 rounded-xl">
+  <Badge color="orange">New</Badge>
+  <h3 className="text-primary-600">Dashboard</h3>
+  <Button variant="primary">View</Button>
+  <Button variant="success">Approve</Button>
+  <Button variant="warning">Flag</Button>
+</div>
+
+// GOOD — neutral base, single accent
+<div className="bg-white border border-grey-200 p-6 rounded-xl">
+  <div className="flex items-center justify-between">
+    <h3 className="text-h6 font-semibold text-grey-800">Dashboard</h3>
+    <Badge color="orange" type="accent" size="sm">New</Badge>
+  </div>
+  <p className="text-body-sm text-grey-500 mt-1">3 items need your attention</p>
+  <div className="flex gap-3 mt-4">
+    <Button variant="primary" size="sm">Review</Button>
+    <Button variant="grey" appearance="outlined" size="sm">Dismiss</Button>
+  </div>
+</div>
+```
+
+**Color rules:**
+- Backgrounds: `bg-white` or `bg-grey-50` — never colored backgrounds for containers
+- One primary action per section (one `variant="primary"` button)
+- Secondary actions: `variant="grey"` with `appearance="outlined"`
+- Use `primary-500` sparingly: active tabs, primary buttons, key links
+- Status colors (`success`, `error`, `warning`) only for actual status indicators
+- Never use more than 2 accent colors in one view
+
+#### 4. Polish — Shadows, Borders, and Radius
+The difference between good and great UI is in the subtle details.
+
+```tsx
+// Card pattern — clean, elevated
+<div className="bg-white rounded-xl border border-grey-200 shadow-soft-xs p-6">
+  {/* content */}
+</div>
+
+// Card pattern — minimal, flat
+<div className="bg-white rounded-lg border border-grey-200 p-6">
+  {/* content */}
+</div>
+
+// Card pattern — elevated, premium
+<div className="bg-white rounded-2xl shadow-soft-sm p-8">
+  {/* content */}
+</div>
+```
+
+**Polish rules:**
+- Cards: `rounded-xl` or `rounded-2xl` with `border border-grey-200` or `shadow-soft-xs`
+- Never use both heavy borders AND heavy shadows — pick one elevation strategy
+- Use `shadow-soft-xs` for cards, `shadow-soft-sm` for elevated panels, `shadow-soft-md` for overlays
+- Dividers between sections: use `<Divider />` or `border-b border-grey-100`
+- Input radius matches surrounding card radius (both use `rounded-lg` by default)
+- Consistent radius: don't mix `rounded-md` and `rounded-2xl` in the same section
+
+#### 5. Composition — Intentional Layout Structure
+Premium layouts follow predictable, grid-aligned patterns.
+
+```tsx
+// Page shell pattern
+<div className="min-h-screen bg-grey-50">
+  {/* Top bar */}
+  <header className="bg-white border-b border-grey-200 px-6 py-4">
+    <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <h1 className="text-h6 font-semibold text-grey-900">App Name</h1>
+      <Avatar src="/user.jpg" alt="User" />
+    </div>
+  </header>
+
+  {/* Content */}
+  <main className="max-w-7xl mx-auto px-6 py-8">
+    {/* page content */}
+  </main>
+</div>
+```
+
+**Layout rules:**
+- Page backgrounds: `bg-grey-50` or `bg-white`
+- Content containers: `max-w-7xl mx-auto` for full pages
+- Grid systems: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
+- Sidebar layouts: `flex` with sidebar as fixed-width, content as `flex-1`
+- Always use responsive breakpoints: `sm:`, `md:`, `lg:`
+- Sticky headers: `sticky top-0 z-10 bg-white border-b border-grey-200`
+
+---
+
+## Design Patterns by Context
+
+### Premium Dashboard
+```tsx
+<div className="min-h-screen bg-grey-50">
+  <header className="bg-white border-b border-grey-200 px-8 py-5">
+    <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div>
+        <h1 className="text-h5 font-semibold text-grey-900">Dashboard</h1>
+        <p className="text-body-xs text-grey-400 mt-0.5">Last updated 5 min ago</p>
+      </div>
+      <div className="flex items-center gap-3">
+        <Button variant="grey" appearance="outlined" icon="download" iconPosition="leading" size="sm">Export</Button>
+        <Button variant="primary" icon="plus" iconPosition="leading" size="sm">New Report</Button>
+      </div>
+    </div>
+  </header>
+
+  <main className="max-w-7xl mx-auto px-8 py-8 space-y-8">
+    {/* KPI strip */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <MetricsCard title="Total Revenue" value="$45,231" trend={{ label: "+20.1%", type: "up" }} />
+      <MetricsCard title="Subscriptions" value="2,350" trend={{ label: "+180", type: "up" }} />
+      <MetricsCard title="Active Now" value="573" statusBadge={{ label: "Live", color: "success" }} />
+      <MetricsCard title="Churn Rate" value="2.4%" trend={{ label: "-0.3%", type: "down" }} />
+    </div>
+
+    {/* Content sections */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2 bg-white rounded-xl border border-grey-200 p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-h6 font-semibold text-grey-800">Recent Orders</h2>
+          <Button variant="text" size="sm">View All</Button>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Customer</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <div className="flex items-center gap-3">
+                  <Avatar alt="Olivia Martin" />
+                  <div>
+                    <p className="text-body-sm font-medium text-grey-800">Olivia Martin</p>
+                    <p className="text-body-xs text-grey-400">olivia@email.com</p>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell><Badge color="success" size="sm">Paid</Badge></TableCell>
+              <TableCell className="text-body-sm font-medium text-grey-800">$1,999.00</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+
+      <div className="bg-white rounded-xl border border-grey-200 p-6">
+        <h2 className="text-h6 font-semibold text-grey-800 mb-6">Activity</h2>
+        <div className="space-y-4">
+          {/* Activity items */}
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+```
+
+### Minimal Settings Page
+```tsx
+<div className="max-w-2xl mx-auto py-12 px-6">
+  <div className="mb-8">
+    <Breadcrumb>
+      <BreadcrumbItem href="/">Home</BreadcrumbItem>
+      <BreadcrumbItem current>Settings</BreadcrumbItem>
+    </Breadcrumb>
+    <h1 className="text-h3 font-semibold text-grey-900 mt-4">Settings</h1>
+    <p className="text-body-md text-grey-500 mt-2">Manage your account and preferences.</p>
+  </div>
+
+  <Tabs value={activeTab} onValueChange={setActiveTab}>
+    <Tab value="profile">Profile</Tab>
+    <Tab value="notifications">Notifications</Tab>
+    <Tab value="security">Security</Tab>
+  </Tabs>
+
+  <div className="mt-8 space-y-8">
+    {/* Section */}
+    <div>
+      <h2 className="text-h6 font-semibold text-grey-800">Personal Information</h2>
+      <p className="text-body-sm text-grey-500 mt-1">Update your photo and personal details.</p>
+      <Divider className="my-5" />
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Input label="First name" placeholder="Alex" />
+          <Input label="Last name" placeholder="Johnson" />
+        </div>
+        <Input label="Email" type="email" placeholder="alex@company.com" leadingIcon="mail" />
+      </div>
+    </div>
+
+    {/* Actions */}
+    <div className="flex justify-end gap-3 pt-4 border-t border-grey-100">
+      <Button variant="grey" appearance="outlined">Cancel</Button>
+      <Button variant="primary">Save Changes</Button>
+    </div>
+  </div>
+</div>
+```
+
+### Clean Data Table Page
+```tsx
+<div className="bg-white rounded-xl border border-grey-200">
+  {/* Table header bar */}
+  <div className="px-6 py-5 flex items-center justify-between border-b border-grey-100">
+    <div>
+      <h2 className="text-h6 font-semibold text-grey-800">Team Members</h2>
+      <p className="text-body-xs text-grey-400 mt-0.5">Manage your team and their account permissions.</p>
+    </div>
+    <div className="flex items-center gap-3">
+      <Input leadingIcon="search" placeholder="Search members..." size="sm" />
+      <Button variant="primary" icon="plus" iconPosition="leading" size="sm">Invite</Button>
+    </div>
+  </div>
+
+  {/* Filter bar */}
+  <div className="px-6 py-3 border-b border-grey-100 flex items-center gap-2">
+    <Chip variant="filter">Role</Chip>
+    <Chip variant="filter">Status</Chip>
+    <Chip variant="filter">Department</Chip>
+  </div>
+
+  {/* Table */}
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead sortable sortDirection="asc" onSort={() => handleSort('name')}>Name</TableHead>
+        <TableHead>Role</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead sortable onSort={() => handleSort('joined')}>Joined</TableHead>
+        <TableHead></TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {members.map(member => (
+        <TableRow key={member.id}>
+          <TableCell>
+            <div className="flex items-center gap-3">
+              <Avatar src={member.avatar} alt={member.name} />
+              <div>
+                <p className="text-body-sm font-medium text-grey-800">{member.name}</p>
+                <p className="text-body-xs text-grey-400">{member.email}</p>
+              </div>
+            </div>
+          </TableCell>
+          <TableCell className="text-body-sm text-grey-600">{member.role}</TableCell>
+          <TableCell>
+            <Badge color={member.active ? "success" : "neutral"} size="sm">
+              {member.active ? "Active" : "Inactive"}
+            </Badge>
+          </TableCell>
+          <TableCell className="text-body-sm text-grey-500">{member.joined}</TableCell>
+          <TableCell>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button icon="dots-horizontal" iconPosition="icon-only" variant="text" size="sm" aria-label="Actions" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem>Remove</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+
+  {/* Pagination footer */}
+  <div className="px-6 py-4 border-t border-grey-100 flex items-center justify-between">
+    <p className="text-body-xs text-grey-400">Showing 1-10 of 48 members</p>
+    <Pagination currentPage={page} totalPages={5} onPageChange={setPage} />
+  </div>
+</div>
+```
+
+### Premium Empty State
+```tsx
+<div className="flex flex-col items-center justify-center py-20 text-center max-w-md mx-auto">
+  <EmptyStateIllustration name="no-data" size="lg" />
+  <h3 className="text-h5 font-semibold text-grey-900 mt-8">No projects yet</h3>
+  <p className="text-body-md text-grey-500 mt-3 leading-relaxed">
+    Create your first project to start tracking progress and collaborating with your team.
+  </p>
+  <div className="flex gap-3 mt-8">
+    <Button variant="grey" appearance="outlined">Learn More</Button>
+    <Button variant="primary" icon="plus" iconPosition="leading">Create Project</Button>
+  </div>
+</div>
+```
+
+### Clean Login / Auth Page
+```tsx
+<div className="min-h-screen bg-grey-50 flex items-center justify-center px-4">
+  <div className="w-full max-w-sm">
+    {/* Logo area */}
+    <div className="text-center mb-8">
+      <h1 className="text-h4 font-semibold text-grey-900">Welcome back</h1>
+      <p className="text-body-md text-grey-500 mt-2">Sign in to your account to continue</p>
+    </div>
+
+    {/* Form card */}
+    <div className="bg-white rounded-2xl shadow-soft-sm p-8">
+      <form className="space-y-4">
+        <Input label="Email" type="email" placeholder="you@company.com" leadingIcon="mail" />
+        <Input label="Password" type="password" placeholder="Enter your password" />
+        <div className="flex items-center justify-between">
+          <Checkbox label="Remember me" />
+          <button type="button" className="text-body-sm text-primary-600 font-medium">Forgot password?</button>
+        </div>
+        <Button variant="primary" className="w-full" size="lg">Sign In</Button>
+      </form>
+      <Divider label="OR" className="my-6" />
+      <Button variant="grey" appearance="outlined" className="w-full">Continue with Google</Button>
+    </div>
+
+    <p className="text-center text-body-sm text-grey-400 mt-6">
+      Don't have an account? <button type="button" className="text-primary-600 font-medium">Sign up</button>
+    </p>
+  </div>
+</div>
+```
+
+### Minimal Profile / Detail Page
+```tsx
+<div className="max-w-3xl mx-auto py-12 px-6">
+  {/* Profile header */}
+  <div className="flex items-start gap-6">
+    <Avatar src="/user.jpg" alt="Alex Johnson" size="lg" />
+    <div className="flex-1">
+      <div className="flex items-center gap-3">
+        <h1 className="text-h4 font-semibold text-grey-900">Alex Johnson</h1>
+        <Badge color="success" size="sm">Active</Badge>
+      </div>
+      <p className="text-body-md text-grey-500 mt-1">Product Designer at Acme Inc.</p>
+      <div className="flex gap-3 mt-4">
+        <Button variant="primary" size="sm">Edit Profile</Button>
+        <Button variant="grey" appearance="outlined" size="sm" icon="mail" iconPosition="leading">Message</Button>
+      </div>
+    </div>
+  </div>
+
+  <Divider className="my-8" />
+
+  {/* Stats row */}
+  <div className="grid grid-cols-3 gap-6">
+    <MetricsCard title="Projects" value="24" />
+    <MetricsCard title="Completed" value="18" trend={{ label: "75%", type: "up" }} />
+    <MetricsCard title="Hours Logged" value="1,240" />
+  </div>
+
+  <Divider className="my-8" />
+
+  {/* Detail sections */}
+  <div className="space-y-6">
+    <div>
+      <h2 className="text-h6 font-semibold text-grey-800">About</h2>
+      <p className="text-body-md text-grey-600 mt-3 leading-relaxed">
+        Product designer with 8+ years of experience building digital products.
+        Passionate about design systems and accessible interfaces.
+      </p>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## UI Quality Anti-Patterns — NEVER Do These
+
+| Anti-Pattern | Why It's Bad | What To Do Instead |
+|---|---|---|
+| Colored backgrounds on containers | Looks dated and cluttered | `bg-white` or `bg-grey-50` with `border border-grey-200` |
+| Multiple primary buttons in one view | Confuses the user's focus | One `variant="primary"`, rest are `variant="grey"` |
+| Tiny padding (`p-1`, `p-2`) on sections | Feels cramped and cheap | `p-6` minimum for card/section padding |
+| Missing subtitle text under headings | Headers feel disconnected | Add `text-body-sm text-grey-500 mt-1` descriptor |
+| All text same size/color | No visual hierarchy | Use the hierarchy rules above — size + weight + color |
+| Raw data without formatting | Looks unfinished | Format numbers (`$1,234`), use relative dates, add units |
+| Full-width layouts without `max-w-*` | Content stretches, hard to read | Constrain with `max-w-2xl` to `max-w-7xl` |
+| Borders AND heavy shadows together | Double elevation looks wrong | Pick one: `border border-grey-200` OR `shadow-soft-xs` |
+| Putting everything in a grid | Monotonous, no focus | Mix grid sections with full-width sections |
+| No empty/loading/error states | Feels unfinished | Handle all three states with EmptyStateIllustration + Alert |
+| Using `text-black` or `text-white` | Off-brand, harsh contrast | Use `text-grey-900` (darkest) or `text-white` only on dark bg |
+| Inconsistent spacing between sections | Looks unpolished | Use `space-y-6` or `space-y-8` consistently |
+
+---
+
 ## Available Components (23 Total)
 
 ### Primitives
@@ -119,6 +573,20 @@ import '@raydenui/ui/styles.css';
 - `Portal`, `VisuallyHidden`
 - `ResizablePanel`, `Splitter`
 
+**How to build what's missing with native HTML + Tailwind:**
+
+| Need | Solution |
+|------|----------|
+| Card / Panel | `<div className="bg-white rounded-xl border border-grey-200 p-6">` |
+| Modal / Dialog | Native `<dialog>` element + Tailwind styling |
+| Sidebar layout | `<div className="flex"><aside className="w-64 shrink-0">` + `<main className="flex-1">` |
+| Grid layout | `<div className="grid grid-cols-1 md:grid-cols-3 gap-6">` |
+| Skeleton loading | `<div className="animate-pulse bg-grey-100 rounded-lg h-4 w-3/4">` |
+| Sticky header | `<header className="sticky top-0 z-10 bg-white border-b border-grey-200">` |
+| Scrollable area | `<div className="overflow-y-auto max-h-96">` |
+| Aspect ratio | `<div className="aspect-video">` (native Tailwind) |
+| Visually hidden | `<span className="sr-only">` |
+
 ---
 
 ## Button
@@ -152,17 +620,41 @@ import '@raydenui/ui/styles.css';
 
 ### Button — Common Mistakes
 
-| ❌ Wrong | ✅ Correct |
+| Wrong | Correct |
 |----------|-----------|
 | `color="red"` | `variant="destructive"` |
 | `color="primary"` | `variant="primary"` |
 | `outline` or `outline={true}` | `appearance="outlined"` |
 | `size="medium"` or `size="md"` | `size="sm"` (only sm and lg exist) |
-| `leftIcon={<Icon />}` | `icon={<Icon />} iconPosition="leading"` |
-| `rightIcon={<Icon />}` | `icon={<Icon />} iconPosition="trailing"` |
+| `leftIcon={<Icon />}` | `icon="name" iconPosition="leading"` |
+| `rightIcon={<Icon />}` | `icon="name" iconPosition="trailing"` |
 | `loading` or `isLoading` | Not supported — disable button and show separate spinner |
 | `fullWidth` or `block` | `className="w-full"` |
 | `href="/path"` | Use `<a>` or router Link component wrapping Button |
+
+### Button — Design Best Practices
+
+```tsx
+// Action bar pattern — one primary, rest secondary
+<div className="flex justify-end gap-3">
+  <Button variant="grey" appearance="outlined">Cancel</Button>
+  <Button variant="primary">Save Changes</Button>
+</div>
+
+// Destructive action — confirm pattern
+<div className="flex justify-end gap-3">
+  <Button variant="grey" appearance="outlined">Keep</Button>
+  <Button variant="destructive">Delete Account</Button>
+</div>
+
+// Toolbar pattern — icon buttons with tooltips
+<div className="flex items-center gap-1">
+  <Tooltip content="Bold"><Button icon="bold" iconPosition="icon-only" variant="text" size="sm" aria-label="Bold" /></Tooltip>
+  <Tooltip content="Italic"><Button icon="italic" iconPosition="icon-only" variant="text" size="sm" aria-label="Italic" /></Tooltip>
+  <Divider />
+  <Tooltip content="Link"><Button icon="link" iconPosition="icon-only" variant="text" size="sm" aria-label="Link" /></Tooltip>
+</div>
+```
 
 ---
 
@@ -200,7 +692,7 @@ import '@raydenui/ui/styles.css';
 
 ### Input — Common Mistakes
 
-| ❌ Wrong | ✅ Correct |
+| Wrong | Correct |
 |----------|-----------|
 | `leftIcon` | `leadingIcon` |
 | `rightIcon` | `trailingIcon` |
@@ -258,7 +750,7 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 
 ### Table — Common Mistakes
 
-| ❌ Wrong | ✅ Correct |
+| Wrong | Correct |
 |----------|-----------|
 | `<Table data={[...]} columns={[...]} />` | Map data to `<TableRow>` components manually |
 | `<th>` | `<TableHead>` |
@@ -266,6 +758,47 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 | `<thead>` | `<TableHeader>` |
 | `<tbody>` | `<TableBody>` |
 | `pagination` prop | Use separate `<Pagination>` component below table |
+
+### Table — Premium Cell Patterns
+
+```tsx
+// User cell with avatar
+<TableCell>
+  <div className="flex items-center gap-3">
+    <Avatar src={user.avatar} alt={user.name} />
+    <div>
+      <p className="text-body-sm font-medium text-grey-800">{user.name}</p>
+      <p className="text-body-xs text-grey-400">{user.email}</p>
+    </div>
+  </div>
+</TableCell>
+
+// Status cell
+<TableCell>
+  <Badge color={status === 'active' ? 'success' : 'neutral'} size="sm">{status}</Badge>
+</TableCell>
+
+// Numeric/money cell — right-aligned, monospace feel
+<TableCell className="text-right text-body-sm font-medium text-grey-800 tabular-nums">
+  $1,234.56
+</TableCell>
+
+// Actions cell
+<TableCell>
+  <div className="flex justify-end">
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Button icon="dots-horizontal" iconPosition="icon-only" variant="text" size="sm" aria-label="Actions" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>Edit</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Delete</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </div>
+</TableCell>
+```
 
 ---
 
@@ -286,7 +819,7 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 
 ### Select — Common Mistakes
 
-| ❌ Wrong | ✅ Correct |
+| Wrong | Correct |
 |----------|-----------|
 | `options={[...]}` | Use `<SelectOption>` children |
 | `onChange` | `onValueChange` |
@@ -326,7 +859,7 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 
 ### DropdownMenu — Common Mistakes
 
-| ❌ Wrong | ✅ Correct |
+| Wrong | Correct |
 |----------|-----------|
 | `items={[...]}` | Use `<DropdownMenuItem>` children |
 | `trigger={<Button />}` | Wrap in `<DropdownMenuTrigger><Button /></DropdownMenuTrigger>` |
@@ -374,7 +907,7 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 
 ### ButtonGroup — Common Mistakes
 
-| ❌ Wrong | ✅ Correct |
+| Wrong | Correct |
 |----------|-----------|
 | `items={[...]}` | Use `<ButtonGroupItem>` children |
 | `<Button>` inside ButtonGroup | Use `<ButtonGroupItem>` not `<Button>` |
@@ -507,7 +1040,7 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 />
 
 // Stats grid
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
   <MetricsCard title="Users" value="12,543" trend={{ label: "+5%", type: "up" }} />
   <MetricsCard title="Revenue" value="$89,000" trend={{ label: "+12%", type: "up" }} />
   <MetricsCard title="Orders" value="456" trend={{ label: "-2%", type: "down" }} />
@@ -522,11 +1055,11 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 // Names: no-data | no-results | no-connection | error | success | empty-inbox | empty-folder | no-notifications
 // Sizes: sm | md | lg
 
-<div className="text-center py-12">
-  <EmptyStateIllustration name="no-data" />
-  <h3 className="text-h5 font-semibold mt-4">No data yet</h3>
-  <p className="text-body-sm text-grey-500 mt-2">Start by adding some items</p>
-  <Button variant="primary" className="mt-4">Add Item</Button>
+<div className="flex flex-col items-center justify-center py-20 text-center max-w-md mx-auto">
+  <EmptyStateIllustration name="no-data" size="lg" />
+  <h3 className="text-h5 font-semibold text-grey-900 mt-8">No data yet</h3>
+  <p className="text-body-md text-grey-500 mt-3">Start by adding some items to get started.</p>
+  <Button variant="primary" icon="plus" iconPosition="leading" className="mt-6">Add Item</Button>
 </div>
 ```
 
@@ -716,49 +1249,72 @@ Use Tailwind classes with these tokens — never use raw hex values.
 ### Primary (Orange)
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `primary-50` | #FFECE5 | Light backgrounds |
-| `primary-100` | #FCB59A | Borders |
+| `primary-50` | #FFECE5 | Light backgrounds, hover tints |
+| `primary-100` | #FCB59A | Subtle borders |
 | `primary-400` | #F56630 | Hover states |
-| `primary-500` | #EB5017 | **Primary button default** |
-| `primary-600` | #CC400C | Links, active states |
+| `primary-500` | #EB5017 | **Primary button default, key accents** |
+| `primary-600` | #CC400C | Links, active states, text links |
 | `primary-700` | #AD3307 | Focus rings |
+
+### Secondary (Blue)
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `secondary-50` | #E3EFFC | Light blue backgrounds |
+| `secondary-500` | #0065C2 | Secondary accents |
+| `secondary-900` | #001633 | Deep contrast |
 
 ### Grey
 | Token | Hex | Usage |
 |-------|-----|-------|
 | `grey-50` | #F9FAFB | Page backgrounds |
-| `grey-100` | #F0F2F5 | Disabled backgrounds |
-| `grey-200` | #E4E7EC | Card borders |
+| `grey-75` | #F7F9FC | Alternate row backgrounds |
+| `grey-100` | #F0F2F5 | Disabled backgrounds, skeleton loading |
+| `grey-200` | #E4E7EC | Card borders, dividers |
 | `grey-300` | #D0D5DD | Input borders |
-| `grey-400` | #98A2B3 | Placeholder text |
-| `grey-500` | #667185 | Secondary text |
-| `grey-600` | #475367 | Muted text |
+| `grey-400` | #98A2B3 | Placeholder text, meta text |
+| `grey-500` | #667185 | Secondary/descriptive text |
+| `grey-600` | #475367 | Muted text, labels |
 | `grey-700` | #344054 | **Body text (primary)** |
-| `grey-800` | #1D2739 | Headings |
-| `grey-900` | #101928 | Highest contrast |
+| `grey-800` | #1D2739 | Headings, emphasis |
+| `grey-900` | #101928 | Highest contrast, page titles |
 
 ### Semantic Colors
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `success-500` | #099137 | Success states |
-| `error-500` | #CB1A14 | Error states |
+| `success-50` | #E7F6EC | Success backgrounds |
+| `success-500` | #099137 | Success states, badges |
+| `error-50` | #FBEAE9 | Error backgrounds |
+| `error-500` | #CB1A14 | Error states, destructive |
+| `warning-50` | #FEF6E7 | Warning backgrounds |
 | `warning-500` | #DD900D | Warning states |
+| `info-400` | #0BA5EC | Info accents |
 | `info-500` | #0086C9 | Info states |
 
-### Examples
+### Color Usage Examples
 ```tsx
-// Backgrounds
-<div className="bg-primary-500">Primary bg</div>
-<div className="bg-grey-50">Page bg</div>
+// Page background
+<div className="min-h-screen bg-grey-50">
 
-// Text
+// Card
+<div className="bg-white rounded-xl border border-grey-200 p-6">
+
+// Text hierarchy
+<h2 className="text-grey-900">Page Title</h2>
+<h3 className="text-grey-800">Section Heading</h3>
 <p className="text-grey-700">Body text</p>
 <p className="text-grey-500">Secondary text</p>
-<p className="text-error-500">Error message</p>
+<span className="text-grey-400">Meta / timestamp</span>
 
-// Borders
-<div className="border border-grey-200">Card</div>
-<div className="border-2 border-primary-500">Focus</div>
+// Semantic backgrounds for inline alerts
+<div className="bg-success-50 border border-success-500 rounded-lg p-4">
+<div className="bg-error-50 border border-error-500 rounded-lg p-4">
+<div className="bg-warning-50 border border-warning-500 rounded-lg p-4">
+
+// Hover state on interactive elements
+<div className="hover:bg-grey-50 transition-colors rounded-lg p-3 cursor-pointer">
+
+// Active / selected state
+<div className="bg-primary-50 border border-primary-500 rounded-lg p-3">
 ```
 
 ---
@@ -782,9 +1338,32 @@ Use Tailwind classes with these tokens — never use raw hex values.
 <p className="text-body-sm">Small body (14px)</p>
 <p className="text-body-xs">Extra small (12px)</p>
 
-// Captions
-<span className="text-caption-lg uppercase tracking-wider">Caption Large</span>
-<span className="text-caption-sm uppercase tracking-wider">Caption Small</span>
+// Captions (always uppercase with tracking)
+<span className="text-caption-lg uppercase tracking-wider font-medium">Caption Large (14px)</span>
+<span className="text-caption-sm uppercase tracking-wider font-medium">Caption Small (12px)</span>
+<span className="text-caption-xs uppercase tracking-wider font-medium">Caption XS (10px)</span>
+```
+
+### Typography Best Practices
+```tsx
+// Page header with overline
+<div>
+  <span className="text-caption-sm uppercase tracking-wider text-primary-500 font-medium">Overview</span>
+  <h1 className="text-h3 font-semibold text-grey-900 mt-1">Dashboard</h1>
+  <p className="text-body-md text-grey-500 mt-2">Track your key metrics and recent activity.</p>
+</div>
+
+// Section header with description
+<div>
+  <h2 className="text-h6 font-semibold text-grey-800">Billing</h2>
+  <p className="text-body-sm text-grey-500 mt-1">Manage your subscription and payment methods.</p>
+</div>
+
+// Readable paragraph text
+<p className="text-body-md text-grey-700 leading-relaxed max-w-prose">
+  Long-form content should use relaxed line height and be constrained
+  to a comfortable reading width.
+</p>
 ```
 
 ---
@@ -792,15 +1371,15 @@ Use Tailwind classes with these tokens — never use raw hex values.
 ## Shadows
 
 ```tsx
-// Soft shadows (for cards, dropdowns)
-<div className="shadow-soft-xxs">Minimal shadow</div>
-<div className="shadow-soft-xs">Extra small</div>
-<div className="shadow-soft-sm">Small</div>
-<div className="shadow-soft-md">Medium (modals)</div>
-<div className="shadow-soft-lg">Large</div>
+// Soft shadows (for cards, dropdowns, floating elements)
+<div className="shadow-soft-xxs">Minimal lift</div>
+<div className="shadow-soft-xs">Cards, subtle elevation</div>
+<div className="shadow-soft-sm">Dropdowns, floating panels</div>
+<div className="shadow-soft-md">Modals, dialogs</div>
+<div className="shadow-soft-lg">Prominent floating elements</div>
 <div className="shadow-soft-xl">Extra large</div>
 <div className="shadow-soft-2xl">2X large</div>
-<div className="shadow-soft-3xl">3X large</div>
+<div className="shadow-soft-3xl">Maximum elevation</div>
 
 // Hard shadows (for buttons, interactive elements)
 <div className="shadow-hard-xxs">Button shadow</div>
@@ -809,24 +1388,119 @@ Use Tailwind classes with these tokens — never use raw hex values.
 <div className="shadow-hard-md">Medium</div>
 ```
 
+### Shadow Usage Guide
+| Context | Recommended Shadow |
+|---------|-------------------|
+| Cards at rest | `shadow-soft-xs` or `border border-grey-200` (not both) |
+| Cards on hover | `shadow-soft-sm` with `transition-shadow` |
+| Dropdowns / popovers | `shadow-soft-sm` |
+| Modals / dialogs | `shadow-soft-md` |
+| Sticky headers | `shadow-soft-xxs` |
+| Floating action buttons | `shadow-soft-sm` |
+
+---
+
+## Blur Tokens
+
+```tsx
+// Backdrop blur for overlays and frosted glass effects
+<div className="backdrop-blur-xs">Subtle blur (2px)</div>
+<div className="backdrop-blur-sm">Light blur (4px)</div>
+<div className="backdrop-blur-md">Medium blur (12px)</div>
+<div className="backdrop-blur-lg">Strong blur (16px)</div>
+<div className="backdrop-blur-xl">Maximum blur (20px)</div>
+
+// Frosted glass overlay pattern
+<div className="bg-white/80 backdrop-blur-md border border-grey-200 rounded-xl p-6">
+  {/* Content with frosted glass effect */}
+</div>
+```
+
 ---
 
 ## Spacing Scale
 
 Use Tailwind spacing utilities. The scale is based on 4px increments.
 
-| Class | Size | Pixels |
-|-------|------|--------|
-| `p-1`, `m-1`, `gap-1` | 0.25rem | 4px |
-| `p-2`, `m-2`, `gap-2` | 0.5rem | 8px |
-| `p-3`, `m-3`, `gap-3` | 0.75rem | 12px |
-| `p-4`, `m-4`, `gap-4` | 1rem | 16px |
-| `p-5`, `m-5`, `gap-5` | 1.25rem | 20px |
-| `p-6`, `m-6`, `gap-6` | 1.5rem | 24px |
-| `p-8`, `m-8`, `gap-8` | 2rem | 32px |
-| `p-10`, `m-10`, `gap-10` | 2.5rem | 40px |
-| `p-12`, `m-12`, `gap-12` | 3rem | 48px |
-| `p-16`, `m-16`, `gap-16` | 4rem | 64px |
+| Class | Size | Pixels | Common Use |
+|-------|------|--------|------------|
+| `p-1`, `m-1`, `gap-1` | 0.25rem | 4px | Tight icon gaps |
+| `p-2`, `m-2`, `gap-2` | 0.5rem | 8px | Inline element gaps |
+| `p-3`, `m-3`, `gap-3` | 0.75rem | 12px | Small component padding |
+| `p-4`, `m-4`, `gap-4` | 1rem | 16px | Form field gaps |
+| `p-5`, `m-5`, `gap-5` | 1.25rem | 20px | Component padding |
+| `p-6`, `m-6`, `gap-6` | 1.5rem | 24px | Card padding, grid gaps |
+| `p-8`, `m-8`, `gap-8` | 2rem | 32px | Section spacing |
+| `p-10`, `m-10`, `gap-10` | 2.5rem | 40px | Large section gaps |
+| `p-12`, `m-12`, `gap-12` | 3rem | 48px | Page padding |
+| `p-16`, `m-16`, `gap-16` | 4rem | 64px | Hero sections |
+| `p-20`, `m-20`, `gap-20` | 5rem | 80px | Extra large spacing |
+| `p-24`, `m-24`, `gap-24` | 6rem | 96px | Generous vertical space |
+
+---
+
+## Responsive Design
+
+### Breakpoints
+| Prefix | Min Width | Typical Use |
+|--------|-----------|-------------|
+| (none) | 0px | Mobile-first base styles |
+| `sm:` | 320px | Small mobile adjustments |
+| `md:` | 600px | Tablet layouts |
+| `lg:` | 1136px | Desktop layouts |
+
+### Responsive Patterns
+```tsx
+// Responsive grid — stacks on mobile, expands on desktop
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <MetricsCard title="Users" value="12,543" />
+  <MetricsCard title="Revenue" value="$89,000" />
+  <MetricsCard title="Orders" value="1,234" />
+  <MetricsCard title="Conversion" value="3.2%" />
+</div>
+
+// Responsive sidebar layout
+<div className="flex flex-col lg:flex-row">
+  <aside className="w-full lg:w-64 shrink-0 border-b lg:border-b-0 lg:border-r border-grey-200">
+    <SidebarMenu>{/* ... */}</SidebarMenu>
+  </aside>
+  <main className="flex-1 p-6 lg:p-8">{/* ... */}</main>
+</div>
+
+// Responsive text sizing
+<h1 className="text-h4 md:text-h3 lg:text-h2 font-semibold text-grey-900">Welcome Back</h1>
+
+// Responsive spacing
+<div className="px-4 py-6 md:px-8 md:py-8 lg:px-12 lg:py-12">
+```
+
+---
+
+## Transitions and Motion
+
+Rayden UI uses subtle, purposeful transitions. Never add gratuitous animation.
+
+```tsx
+// Color transitions (buttons, links, interactive elements)
+<div className="transition-colors hover:bg-grey-50">
+
+// Shadow transitions (card hover effects)
+<div className="bg-white rounded-xl border border-grey-200 shadow-soft-xs hover:shadow-soft-sm transition-shadow">
+
+// Combined transitions
+<div className="transition-all duration-200 hover:bg-grey-50 hover:shadow-soft-xs">
+
+// Transform transitions (chevrons, toggles)
+<Icon name="chevron-down" className="transition-transform duration-200 rotate-0 data-[open]:rotate-180" />
+```
+
+**Motion rules:**
+- Use `transition-colors` for hover/focus color changes
+- Use `transition-shadow` for elevation changes on hover
+- Use `duration-200` for most transitions (fast, responsive)
+- Use `duration-300` for progress bar animations
+- Never use `animate-bounce`, `animate-spin` on UI elements (except loading spinners)
+- Skeleton loading: `animate-pulse` with `bg-grey-100`
 
 ---
 
@@ -836,7 +1510,7 @@ Use Tailwind spacing utilities. The scale is based on 4px increments.
 ```tsx
 <form className="space-y-4 max-w-md">
   <Input label="Email" type="email" placeholder="you@example.com" />
-  <Input label="Password" type="password" placeholder="••••••••" />
+  <Input label="Password" type="password" placeholder="Enter password" />
   <Checkbox label="Remember me" />
   <Button variant="primary" className="w-full">Sign In</Button>
 </form>
@@ -844,7 +1518,7 @@ Use Tailwind spacing utilities. The scale is based on 4px increments.
 
 ### Data Table with Pagination
 ```tsx
-<div className="space-y-4">
+<div className="bg-white rounded-xl border border-grey-200">
   <Table>
     <TableHeader>
       <TableRow>
@@ -858,18 +1532,21 @@ Use Tailwind spacing utilities. The scale is based on 4px increments.
         <TableRow key={row.id}>
           <TableCell>{row.name}</TableCell>
           <TableCell><Badge color={row.statusColor}>{row.status}</Badge></TableCell>
-          <TableCell>{row.date}</TableCell>
+          <TableCell className="text-body-sm text-grey-500">{row.date}</TableCell>
         </TableRow>
       ))}
     </TableBody>
   </Table>
-  <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+  <div className="px-6 py-4 border-t border-grey-100 flex items-center justify-between">
+    <p className="text-body-xs text-grey-400">Showing 1-10 of {total}</p>
+    <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+  </div>
 </div>
 ```
 
 ### Dashboard Stats
 ```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   <MetricsCard title="Total Users" value="12,543" trend={{ label: "+12%", type: "up" }} />
   <MetricsCard title="Revenue" value="$89,000" trend={{ label: "+8%", type: "up" }} />
   <MetricsCard title="Orders" value="1,234" trend={{ label: "-3%", type: "down" }} />
@@ -879,15 +1556,90 @@ Use Tailwind spacing utilities. The scale is based on 4px increments.
 
 ### Empty State
 ```tsx
-<div className="flex flex-col items-center justify-center py-16 text-center">
+<div className="flex flex-col items-center justify-center py-20 text-center max-w-md mx-auto">
   <EmptyStateIllustration name="no-data" size="lg" />
-  <h3 className="text-h5 font-semibold mt-6">No projects yet</h3>
-  <p className="text-body-md text-grey-500 mt-2 max-w-sm">
+  <h3 className="text-h5 font-semibold text-grey-900 mt-8">No projects yet</h3>
+  <p className="text-body-md text-grey-500 mt-3 leading-relaxed">
     Get started by creating your first project
   </p>
-  <Button variant="primary" icon="plus" iconPosition="leading" className="mt-6">
+  <Button variant="primary" icon="plus" iconPosition="leading" className="mt-8">
     Create Project
   </Button>
+</div>
+```
+
+### Sidebar App Shell
+```tsx
+<div className="flex min-h-screen bg-grey-50">
+  {/* Sidebar */}
+  <aside className="w-64 shrink-0 bg-white border-r border-grey-200">
+    <div className="p-6">
+      <h1 className="text-h6 font-semibold text-grey-900">App Name</h1>
+    </div>
+    <SidebarMenu>
+      <SidebarMenuSection label="Main">
+        <SidebarMenuItem icon="home" active>Dashboard</SidebarMenuItem>
+        <SidebarMenuItem icon="users">Team</SidebarMenuItem>
+        <SidebarMenuItem icon="folder">Projects</SidebarMenuItem>
+      </SidebarMenuSection>
+    </SidebarMenu>
+  </aside>
+
+  {/* Main content */}
+  <div className="flex-1 flex flex-col">
+    <header className="bg-white border-b border-grey-200 px-8 py-4 flex items-center justify-between">
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem current>Dashboard</BreadcrumbItem>
+      </Breadcrumb>
+      <div className="flex items-center gap-3">
+        <Button icon="bell" iconPosition="icon-only" variant="text" aria-label="Notifications" />
+        <Avatar src="/user.jpg" alt="User" />
+      </div>
+    </header>
+    <main className="flex-1 p-8">
+      {/* Page content */}
+    </main>
+  </div>
+</div>
+```
+
+### Split Form Layout (Two Column)
+```tsx
+<div className="max-w-4xl mx-auto py-12 px-6 space-y-10">
+  {/* Each section: description left, form right */}
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <h2 className="text-h6 font-semibold text-grey-800">Profile</h2>
+      <p className="text-body-sm text-grey-500 mt-2">
+        This information will be displayed publicly so be careful what you share.
+      </p>
+    </div>
+    <div className="md:col-span-2 bg-white rounded-xl border border-grey-200 p-6 space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Input label="First name" />
+        <Input label="Last name" />
+      </div>
+      <Input label="Email" type="email" leadingIcon="mail" />
+      <Input label="Bio" placeholder="Tell us about yourself" />
+    </div>
+  </div>
+
+  <Divider />
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <h2 className="text-h6 font-semibold text-grey-800">Notifications</h2>
+      <p className="text-body-sm text-grey-500 mt-2">
+        Choose how you want to be notified.
+      </p>
+    </div>
+    <div className="md:col-span-2 bg-white rounded-xl border border-grey-200 p-6 space-y-4">
+      <Toggle label="Email notifications" />
+      <Toggle label="Push notifications" />
+      <Toggle label="SMS notifications" />
+    </div>
+  </div>
 </div>
 ```
 
@@ -897,10 +1649,14 @@ Use Tailwind spacing utilities. The scale is based on 4px increments.
 
 - [ ] All interactive elements are keyboard accessible
 - [ ] Icon-only buttons have `aria-label`
-- [ ] Form inputs have associated labels
+- [ ] Form inputs have associated labels (use `label` prop)
 - [ ] Color is not the only indicator of state (use icons/text too)
-- [ ] Focus states are visible
+- [ ] Focus states are visible (built-in with `focus-visible:` ring)
 - [ ] Contrast ratios meet WCAG AA (grey-700 on white = 4.5:1+)
+- [ ] Radio groups are wrapped in `role="radiogroup"`
+- [ ] Tables use proper `TableHeader` / `TableHead` for screen readers
+- [ ] Meaningful alt text on all `Avatar` components
+- [ ] Error messages are associated with their inputs via `error` prop
 
 ---
 
@@ -923,17 +1679,30 @@ If you see these names, use the correct Rayden UI component:
 | `TabList`, `TabGroup` | `Tabs` |
 | `Check` | `Checkbox` |
 | `Separator`, `HR` | `Divider` |
+| `Card`, `Panel`, `Surface` | `<div>` with Tailwind classes |
+| `Modal`, `Dialog` | Native `<dialog>` element |
+| `Skeleton` | `<div className="animate-pulse bg-grey-100">` |
 
 ---
 
 ## Final Checklist Before Generating Code
 
-1. ✅ Is every component in this file? If not, don't use it
-2. ✅ Is every prop documented for that component? If not, don't use it
-3. ✅ Am I using token classes (`bg-primary-500`) not hex values?
-4. ✅ For compound components, is the nesting correct?
-5. ✅ Do icon-only buttons have `aria-label`?
-6. ✅ Am I using `size="sm"` or `size="lg"` (not `size="md"`)?
+### Correctness
+1. Is every component in this file? If not, don't use it
+2. Is every prop documented for that component? If not, don't use it
+3. Am I using token classes (`bg-primary-500`) not hex values?
+4. For compound components, is the nesting correct?
+5. Do icon-only buttons have `aria-label`?
+6. Am I using `size="sm"` or `size="lg"` (not `size="md"` for Buttons)?
+
+### Design Quality
+7. Does the layout have generous whitespace? (`p-6`+ for containers, `space-y-6`+ between sections)
+8. Is there a clear visual hierarchy? (title → subtitle → body → meta)
+9. Is color used with restraint? (one primary action per section, neutral base)
+10. Are cards/containers using consistent radius and elevation?
+11. Is content width constrained? (`max-w-*` on content areas)
+12. Are all three states handled? (data, empty, error)
+13. Does it look good on mobile, tablet, and desktop?
 
 ---
 

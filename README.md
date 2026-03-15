@@ -1,3 +1,9 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/MacBook Air - 17.png">
+  <source media="(prefers-color-scheme: light)" srcset="./public/MacBook Air - 17.png">
+  <img alt="Rayden UI - Build UI faster. A React UI system designed for humans and AI." src="./public/MacBook Air - 17.png" width="100%">
+</picture>
+
 # Rayden UI
 
 A modern, accessible React component library built with Tailwind CSS v4. Rayden UI brings the [Rayna UI](https://www.raynaui.com/) Figma design system to life with pixel-perfect React components.
@@ -163,7 +169,11 @@ function App() {
 The `@raydenui/ai` package enables LLMs to reliably generate Rayden UI code without hallucination.
 
 ```bash
-pnpm add @raydenui/ai
+# Run directly with npx (no install needed)
+npx @raydenui/ai
+
+# Or install globally
+npm install -g @raydenui/ai
 ```
 
 ### Features
@@ -173,15 +183,47 @@ pnpm add @raydenui/ai
 - **Composition Rules** — Guidelines for combining components correctly
 - **MCP Server** — Model Context Protocol server for AI assistants
 
-### Usage with AI Assistants
+### Claude Desktop Integration
 
-Add the rules to your AI assistant's context:
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "rayden-ai": {
+      "command": "npx",
+      "args": ["@raydenui/ai"]
+    }
+  }
+}
+```
+
+### Claude Code Integration
+
+Add to your project's `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "rayden-ai": {
+      "command": "npx",
+      "args": ["@raydenui/ai"]
+    }
+  }
+}
+```
+
+### Programmatic Usage
 
 ```tsx
-import { RAYDEN_RULES } from "@raydenui/ai/rules";
+import { getComponentManifest, getAllManifests } from "@raydenui/ai/manifests";
+import { tokens } from "@raydenui/ai/tokens";
 
-// Or use the MCP server for Claude, Cursor, etc.
-// npx rayden-ai-mcp
+// Get all component definitions
+const manifests = getAllManifests();
+
+// Get a specific component
+const buttonManifest = getComponentManifest("Button");
 ```
 
 See the full [AI Integration Guide](./docs/rayden-ai.md) for setup instructions.
