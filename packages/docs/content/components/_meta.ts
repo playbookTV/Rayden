@@ -1,9 +1,5 @@
 export default {
   index: "Overview",
-  "---forms": {
-    type: "separator",
-    title: "Forms & Inputs",
-  },
   button: "Button",
   "button-group": "ButtonGroup",
   input: "Input",
@@ -11,37 +7,21 @@ export default {
   "form-control": "FormControl",
   chip: "Chip",
   "file-upload": "FileUpload",
-  "---navigation": {
-    type: "separator",
-    title: "Navigation",
-  },
   tabs: "Tabs",
   breadcrumb: "Breadcrumb",
   pagination: "Pagination",
   "sidebar-menu": "SidebarMenu",
   "dropdown-menu": "DropdownMenu",
-  "---data": {
-    type: "separator",
-    title: "Data Display",
-  },
   table: "Table",
   avatar: "Avatar",
   "activity-feed": "ActivityFeed",
   "metrics-card": "MetricsCard",
   icon: "Icon",
   "empty-state-illustration": "EmptyStateIllustration",
-  "---feedback": {
-    type: "separator",
-    title: "Feedback",
-  },
   alert: "Alert",
   badge: "Badge",
   "progress-bar": "ProgressBar",
   "progress-circle": "ProgressCircle",
   tooltip: "Tooltip",
-  "---layout": {
-    type: "separator",
-    title: "Layout",
-  },
   divider: "Divider",
 };

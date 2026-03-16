@@ -1,10 +1,11 @@
 @import "nextra-theme-docs/style.css";
 
 :root {
-  /* Override Nextra primary color with Rayden orange */
-  /* Primary color #F56630 → HSL(17, 91%, 58%) */
+  /* Override Nextra primary color with Rayden orange #F56630 */
+  /* HSL(17, 91%, 58%) */
   --nextra-primary-hue: 17deg;
   --nextra-primary-saturation: 91%;
+  --nextra-primary-lightness: 58%;
 
   /* Rayden UI color tokens */
   --rayden-primary-50: #ffece5;
@@ -34,6 +35,24 @@
   /* Slightly lighter primary for dark mode readability */
   --nextra-primary-hue: 17deg;
   --nextra-primary-saturation: 91%;
+  --nextra-primary-lightness: 62%;
+}
+
+/* Override link colors with Rayden orange */
+a {
+  color: var(--rayden-primary-500);
+}
+
+a:hover {
+  color: var(--rayden-primary-600);
+}
+
+.dark a {
+  color: var(--rayden-primary-400);
+}
+
+.dark a:hover {
+  color: var(--rayden-primary-300);
 }
 
 /* Custom accent for code blocks */

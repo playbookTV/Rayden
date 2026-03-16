@@ -1,10 +1,9 @@
 import { useMDXComponents as getDocsMDXComponents } from "nextra-theme-docs";
 
-const docsComponents = getDocsMDXComponents();
-
-export function useMDXComponents(components?: Record<string, React.ComponentType>) {
+export const useMDXComponents: typeof getDocsMDXComponents = (components) => {
+  const docsComponents = getDocsMDXComponents(components);
   return {
     ...docsComponents,
     ...components,
   };
-}
+};

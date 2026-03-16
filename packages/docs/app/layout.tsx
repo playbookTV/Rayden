@@ -11,41 +11,11 @@ export const metadata: Metadata = {
     template: "%s - Rayden UI",
   },
   description: "A modern React component library with 24+ components built on Tailwind CSS v4",
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
-const navbar = (
-  <Navbar
-    logo={
-      <span className="flex items-center gap-2 font-bold text-lg">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="24" height="24" rx="6" fill="#F56630" />
-          <path d="M7 8h4l2 4-2 4H7l2-4-2-4z" fill="white" />
-          <path d="M13 8h4l-2 4 2 4h-4l-2-4 2-4z" fill="white" fillOpacity="0.7" />
-        </svg>
-        Rayden UI
-      </span>
-    }
-    projectLink="https://github.com/raydenui/rayden"
-  />
-);
-
-const footer = (
-  <Footer>
-    <div className="flex w-full flex-col items-center sm:items-start">
-      <p className="text-sm text-gray-500">
-        MIT {new Date().getFullYear()} © Rayden UI. Built with Rayna UI Design System.
-      </p>
-    </div>
-  </Footer>
+const logo = (
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/logo.svg" alt="Rayden UI" style={{ maxWidth: "20%", height: "auto" }} />
 );
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -56,18 +26,14 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <Head faviconGlyph="🔶" />
       <body>
         <Layout
-          navbar={navbar}
+          navbar={<Navbar logo={logo} projectLink="https://github.com/playbookTV/Rayden" />}
           pageMap={pageMap}
-          docsRepositoryBase="https://github.com/raydenui/rayden/tree/main/packages/docs/content"
-          footer={footer}
-          sidebar={{
-            defaultMenuCollapseLevel: 1,
-            autoCollapse: true,
-          }}
-          toc={{
-            backToTop: true,
-          }}
-          editLink="Edit this page on GitHub"
+          docsRepositoryBase="https://github.com/playbookTV/Rayden/tree/main/packages/docs/content"
+          footer={
+            <Footer>
+              <span>MIT {new Date().getFullYear()} © Rayden UI</span>
+            </Footer>
+          }
         >
           {children}
         </Layout>
