@@ -1,9 +1,9 @@
 import { useMDXComponents as getDocsMDXComponents } from "nextra-theme-docs";
+import type { MDXComponents } from "mdx/types";
 
-export const useMDXComponents: typeof getDocsMDXComponents = (components) => {
-  const docsComponents = getDocsMDXComponents(components);
+export function useMDXComponents(components?: MDXComponents): MDXComponents {
   return {
-    ...docsComponents,
+    ...getDocsMDXComponents(),
     ...components,
   };
-};
+}
