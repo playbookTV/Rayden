@@ -17,9 +17,15 @@ type Story = StoryObj<typeof Tabs>;
 export const LineTabs: Story = {
   render: () => (
     <Tabs variant="line" defaultValue="tab1">
-      <Tab value="tab1" icon="home" badge={3}>Overview</Tab>
-      <Tab value="tab2" icon="home" badge={5}>Details</Tab>
-      <Tab value="tab3" icon="home" badge={0}>Settings</Tab>
+      <Tab value="tab1" icon="home" badge={3}>
+        Overview
+      </Tab>
+      <Tab value="tab2" icon="home" badge={5}>
+        Details
+      </Tab>
+      <Tab value="tab3" icon="home" badge={0}>
+        Settings
+      </Tab>
     </Tabs>
   ),
 };
@@ -27,9 +33,15 @@ export const LineTabs: Story = {
 export const PillTabs: Story = {
   render: () => (
     <Tabs variant="pill" defaultValue="tab1">
-      <Tab value="tab1" icon="home" badge={3}>Overview</Tab>
-      <Tab value="tab2" icon="home" badge={5}>Details</Tab>
-      <Tab value="tab3" icon="home" badge={0}>Settings</Tab>
+      <Tab value="tab1" icon="home" badge={3}>
+        Overview
+      </Tab>
+      <Tab value="tab2" icon="home" badge={5}>
+        Details
+      </Tab>
+      <Tab value="tab3" icon="home" badge={0}>
+        Settings
+      </Tab>
     </Tabs>
   ),
 };
@@ -37,9 +49,15 @@ export const PillTabs: Story = {
 export const LineWithDisabled: Story = {
   render: () => (
     <Tabs variant="line" defaultValue="tab1">
-      <Tab value="tab1" icon="home" badge={3}>Active</Tab>
-      <Tab value="tab2" icon="home" badge={5}>Normal</Tab>
-      <Tab value="tab3" icon="home" badge={0} disabled>Disabled</Tab>
+      <Tab value="tab1" icon="home" badge={3}>
+        Active
+      </Tab>
+      <Tab value="tab2" icon="home" badge={5}>
+        Normal
+      </Tab>
+      <Tab value="tab3" icon="home" badge={0} disabled>
+        Disabled
+      </Tab>
     </Tabs>
   ),
 };
@@ -47,9 +65,15 @@ export const LineWithDisabled: Story = {
 export const PillWithDisabled: Story = {
   render: () => (
     <Tabs variant="pill" defaultValue="tab1">
-      <Tab value="tab1" icon="home" badge={3}>Active</Tab>
-      <Tab value="tab2" icon="home" badge={5}>Normal</Tab>
-      <Tab value="tab3" icon="home" badge={0} disabled>Disabled</Tab>
+      <Tab value="tab1" icon="home" badge={3}>
+        Active
+      </Tab>
+      <Tab value="tab2" icon="home" badge={5}>
+        Normal
+      </Tab>
+      <Tab value="tab3" icon="home" badge={0} disabled>
+        Disabled
+      </Tab>
     </Tabs>
   ),
 };

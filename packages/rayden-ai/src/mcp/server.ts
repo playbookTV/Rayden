@@ -7,7 +7,7 @@
  */
 
 // Handle CLI flags before starting server
-if (process.argv.includes('--help') || process.argv.includes('-h')) {
+if (process.argv.includes("--help") || process.argv.includes("-h")) {
   console.log(`
 Rayden AI MCP Server v0.1.1
 
@@ -53,24 +53,21 @@ Learn more: https://github.com/raydenui/rayden
   process.exit(0);
 }
 
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
-import { tools } from './tools.js';
-import { handleGetComponents } from './handlers/getComponents.js';
-import { handleGetComponentProps } from './handlers/getComponentProps.js';
-import { handleGetTokens } from './handlers/getTokens.js';
-import { handleGetLayoutRecipes } from './handlers/getLayoutRecipes.js';
+import { tools } from "./tools.js";
+import { handleGetComponents } from "./handlers/getComponents.js";
+import { handleGetComponentProps } from "./handlers/getComponentProps.js";
+import { handleGetTokens } from "./handlers/getTokens.js";
+import { handleGetLayoutRecipes } from "./handlers/getLayoutRecipes.js";
 
 // Create server instance
 const server = new Server(
   {
-    name: 'rayden-ai',
-    version: '0.1.1',
+    name: "rayden-ai",
+    version: "0.1.1",
   },
   {
     capabilities: {
@@ -89,39 +86,34 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args = {} } = request.params;
 
   switch (name) {
-    case 'get_components':
+    case "get_components":
       return handleGetComponents({ category: args.category as string | undefined });
 
-    case 'get_component_props':
+    case "get_component_props":
       return handleGetComponentProps({ component: args.component as string });
 
-    case 'get_tokens':
+    case "get_tokens":
       return handleGetTokens({
         category: args.category as
-          | 'colors'
-          | 'spacing'
-          | 'typography'
-          | 'shadows'
-          | 'borderRadius'
-          | 'breakpoints'
+          | "colors"
+          | "spacing"
+          | "typography"
+          | "shadows"
+          | "borderRadius"
+          | "breakpoints"
           | undefined,
       });
 
-    case 'get_layout_recipes':
+    case "get_layout_recipes":
       return handleGetLayoutRecipes({
-        category: args.category as
-          | 'marketing'
-          | 'dashboard'
-          | 'forms'
-          | 'content'
-          | undefined,
+        category: args.category as "marketing" | "dashboard" | "forms" | "content" | undefined,
       });
 
     default:
       return {
         content: [
           {
-            type: 'text' as const,
+            type: "text" as const,
             text: JSON.stringify({ error: `Unknown tool: ${name}` }),
           },
         ],
@@ -133,10 +125,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('Rayden AI MCP Server running');
+  console.error("Rayden AI MCP Server running");
 }
 
 main().catch((error) => {
-  console.error('Server error:', error);
+  console.error("Server error:", error);
   process.exit(1);
 });

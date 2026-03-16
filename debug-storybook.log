@@ -1,0 +1,19 @@
+[19:25:30.779] [INFO] storybook v10.2.19
+[19:25:32.712] [DEBUG] Getting package.json info for /Users/leslieisah/Rayden/package.json...
+[19:25:33.127] [DEBUG] Serving static files from [36mnode_modules/.pnpm/@chromatic-com+storybook@5.0.1_storybook@10.2.19_@testing-library+dom@10.4.0_prettier@3_8ccd5b59f1fa19d7fb33b5efe95bdf2f/node_modules/@chromatic-com/storybook/assets[39m at [36m/addon-visual-tests-assets[39m
+[19:25:33.127] [INFO] Starting...
+[19:25:33.313] [ERROR] [38;2;241;97;97mError: Build failed with 2 errors:
+.storybook/manager.ts:1:23: ERROR: Could not resolve "@storybook/manager-api"
+.storybook/manager.ts:2:23: ERROR: Could not resolve "@storybook/theming/create"[39m
+    at failureErrorWithLog (./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:1748:15)
+    at ./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:1207:25
+    at runOnEndCallbacks (./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:1588:45)
+    at buildResponseToResult (./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:1205:7)
+    at ./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:1232:16
+    at responseCallbacks.<computed> (./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:884:9)
+    at handleIncomingPacket (./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:939:12)
+    at Socket.readFromStdout (./node_modules/.pnpm/esbuild@0.27.4/node_modules/esbuild/lib/main.js:862:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+[19:25:33.314] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.

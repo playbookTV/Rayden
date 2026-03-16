@@ -12,11 +12,11 @@ export interface GetComponentPropsInput {
 }
 
 export interface GetTokensInput {
-  category?: 'colors' | 'spacing' | 'typography' | 'shadows' | 'borderRadius' | 'breakpoints';
+  category?: "colors" | "spacing" | "typography" | "shadows" | "borderRadius" | "breakpoints";
 }
 
 export interface GetLayoutRecipesInput {
-  category?: 'marketing' | 'dashboard' | 'forms' | 'content';
+  category?: "marketing" | "dashboard" | "forms" | "content";
 }
 
 // Tool response types
@@ -72,7 +72,7 @@ export interface ToolDefinition {
   name: string;
   description: string;
   inputSchema: {
-    type: 'object';
+    type: "object";
     properties: Record<string, unknown>;
     required?: string[];
   };
@@ -81,7 +81,7 @@ export interface ToolDefinition {
 // MCP Response
 export interface ToolResponse {
   content: Array<{
-    type: 'text';
+    type: "text";
     text: string;
   }>;
 }

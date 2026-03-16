@@ -3,14 +3,7 @@ import { cn } from "../utils/cn";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from "../components/Table";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../components/Table";
 import type { SortDirection } from "../components/Table";
 import { Checkbox } from "../components/FormControl";
 import { Pagination } from "../components/Pagination";
@@ -225,10 +218,7 @@ export function SearchableTableBlock({
           <TableRow>
             {selectable && (
               <TableHead className="w-[52px]">
-                <Checkbox
-                  checked={allSelected || selectedIds.size > 0}
-                  onChange={toggleAll}
-                />
+                <Checkbox checked={allSelected || selectedIds.size > 0} onChange={toggleAll} />
               </TableHead>
             )}
             {columns.map((col) => (
@@ -250,17 +240,12 @@ export function SearchableTableBlock({
             <TableRow key={row.id} selected={selectedIds.has(row.id)}>
               {selectable && (
                 <TableCell>
-                  <Checkbox
-                    checked={selectedIds.has(row.id)}
-                    onChange={() => toggleRow(row.id)}
-                  />
+                  <Checkbox checked={selectedIds.has(row.id)} onChange={() => toggleRow(row.id)} />
                 </TableCell>
               )}
               {columns.map((col) => (
                 <TableCell key={col.key}>
-                  {col.render
-                    ? col.render(row[col.key], row)
-                    : String(row[col.key] ?? "")}
+                  {col.render ? col.render(row[col.key], row) : String(row[col.key] ?? "")}
                 </TableCell>
               ))}
               {onRowAction && (
@@ -274,11 +259,7 @@ export function SearchableTableBlock({
       </Table>
 
       {totalPages != null && page != null && onPageChange && (
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-        />
+        <Pagination currentPage={page} totalPages={totalPages} onPageChange={onPageChange} />
       )}
     </div>
   );

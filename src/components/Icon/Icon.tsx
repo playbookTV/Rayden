@@ -14,8 +14,7 @@ const sizeMap: Record<IconSize, number> = {
   xl: 32,
 };
 
-export interface IconProps
-  extends Omit<SVGAttributes<SVGSVGElement>, "children"> {
+export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, "children"> {
   /** Icon name from the registry. */
   name: IconName;
   /** Preset size or pixel value. @default "md" */
@@ -28,16 +27,8 @@ export interface IconProps
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(
   (
-    {
-      name,
-      size = "md",
-      color = "currentColor",
-      variant = "outline",
-      className,
-      style,
-      ...rest
-    },
-    ref,
+    { name, size = "md", color = "currentColor", variant = "outline", className, style, ...rest },
+    ref
   ) => {
     const iconData = icons[name]?.[variant];
 
@@ -62,7 +53,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
         {...rest}
       />
     );
-  },
+  }
 );
 
 Icon.displayName = "Icon";

@@ -176,7 +176,12 @@
       "category": "navigation",
       "description": "Sidebar navigation menu",
       "hasSubComponents": true,
-      "subComponents": ["SidebarMenuItem", "SidebarMenuSection", "SidebarMenuSub", "SidebarMenuSubItem"],
+      "subComponents": [
+        "SidebarMenuItem",
+        "SidebarMenuSection",
+        "SidebarMenuSub",
+        "SidebarMenuSubItem"
+      ],
       "manifestFile": "SidebarMenu.json"
     },
     {
@@ -228,7 +233,14 @@
       "category": "composite",
       "description": "Context menu or action dropdown",
       "hasSubComponents": true,
-      "subComponents": ["DropdownMenuTrigger", "DropdownMenuContent", "DropdownMenuGroup", "DropdownMenuLabel", "DropdownMenuItem", "DropdownMenuSeparator"],
+      "subComponents": [
+        "DropdownMenuTrigger",
+        "DropdownMenuContent",
+        "DropdownMenuGroup",
+        "DropdownMenuLabel",
+        "DropdownMenuItem",
+        "DropdownMenuSeparator"
+      ],
       "manifestFile": "DropdownMenu.json"
     },
     {

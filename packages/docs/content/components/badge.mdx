@@ -1,0 +1,89 @@
+---
+title: Badge
+description: Status indicators and labels
+---
+
+# Badge
+
+Badges are small status indicators used to highlight information or show counts.
+
+## Import
+
+```tsx
+import { Badge } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Badge>Default</Badge>
+```
+
+### Colors
+
+```tsx
+<Badge color="orange">Orange</Badge>
+<Badge color="blue">Blue</Badge>
+<Badge color="success">Success</Badge>
+<Badge color="warning">Warning</Badge>
+<Badge color="error">Error</Badge>
+<Badge color="neutral">Neutral</Badge>
+<Badge color="disabled">Disabled</Badge>
+```
+
+### Types
+
+```tsx
+// Filled (default)
+<Badge type="filled" color="success">Active</Badge>
+
+// Accent (lighter background)
+<Badge type="accent" color="success">Active</Badge>
+
+// Outline
+<Badge type="outline" color="success">Active</Badge>
+```
+
+### With Dot
+
+```tsx
+<Badge color="success" dot>Online</Badge>
+<Badge color="error" dot>Offline</Badge>
+```
+
+### In Context
+
+```tsx
+// In a table cell
+<TableCell>
+  <Badge color="success">Active</Badge>
+</TableCell>
+
+// With a tab
+<Tab label="Messages" badge={<Badge color="orange">12</Badge>}>
+  Content
+</Tab>
+
+// Next to text
+<div className="flex items-center gap-2">
+  <span>Premium Plan</span>
+  <Badge color="blue" type="accent">Recommended</Badge>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `"orange" \| "blue" \| "success" \| "warning" \| "error" \| "neutral" \| "disabled"` | `"neutral"` | Badge color |
+| `type` | `"filled" \| "accent" \| "outline"` | `"filled"` | Visual type |
+| `dot` | `boolean` | `false` | Show dot indicator |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Badges are inline elements
+- Use with descriptive text for context
+- Color is not the only indicator of meaning

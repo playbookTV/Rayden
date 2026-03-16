@@ -63,7 +63,12 @@
         },
         "DropdownMenuContent": {
           "parent": "DropdownMenu",
-          "children": ["DropdownMenuGroup", "DropdownMenuLabel", "DropdownMenuItem", "DropdownMenuSeparator"]
+          "children": [
+            "DropdownMenuGroup",
+            "DropdownMenuLabel",
+            "DropdownMenuItem",
+            "DropdownMenuSeparator"
+          ]
         },
         "DropdownMenuGroup": {
           "parent": "DropdownMenuContent",

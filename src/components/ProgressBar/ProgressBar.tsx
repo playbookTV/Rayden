@@ -28,21 +28,14 @@ export function ProgressBar({
     <div className={cn("w-full", className)} {...rest}>
       {(label || showPercentage) && (
         <div className="flex items-center justify-between mb-2">
-          {label && (
-            <span className="text-sm font-medium text-grey-900">{label}</span>
-          )}
+          {label && <span className="text-sm font-medium text-grey-900">{label}</span>}
           {showPercentage && (
-            <span className="text-sm font-medium text-grey-900">
-              {Math.round(clamped)}%
-            </span>
+            <span className="text-sm font-medium text-grey-900">{Math.round(clamped)}%</span>
           )}
         </div>
       )}
       <div
-        className={cn(
-          "w-full rounded-full bg-grey-100",
-          size === "lg" ? "h-3" : "h-2"
-        )}
+        className={cn("w-full rounded-full bg-grey-100", size === "lg" ? "h-3" : "h-2")}
         role="progressbar"
         aria-valuenow={clamped}
         aria-valuemin={0}

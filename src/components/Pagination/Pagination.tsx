@@ -63,17 +63,13 @@ export function Pagination({
   const pages = getPageNumbers(currentPage, totalPages, siblingCount);
 
   return (
-    <nav
-      className={cn("flex items-center gap-1", className)}
-      aria-label="Pagination"
-      {...rest}
-    >
+    <nav className={cn("flex items-center gap-1", className)} aria-label="Pagination" {...rest}>
       {showPrevNext && (
         <button
           type="button"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
-          className="inline-flex items-center gap-2 rounded-lg border border-grey-300 bg-white px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 rounded-lg border border-grey-300 bg-white dark:bg-grey-50 px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Previous page"
         >
           <ChevronLeft />
@@ -114,7 +110,7 @@ export function Pagination({
           type="button"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
-          className="inline-flex items-center gap-2 rounded-lg border border-grey-300 bg-white px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 rounded-lg border border-grey-300 bg-white dark:bg-grey-50 px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Next page"
         >
           <span>Next</span>

@@ -90,7 +90,18 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["string", "number", "boolean", "ReactNode", "function", "enum", "union", "object", "IconName", "array"],
+          "enum": [
+            "string",
+            "number",
+            "boolean",
+            "ReactNode",
+            "function",
+            "enum",
+            "union",
+            "object",
+            "IconName",
+            "array"
+          ],
           "description": "Prop type"
         },
         "description": {

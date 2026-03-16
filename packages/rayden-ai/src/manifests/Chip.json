@@ -69,7 +69,10 @@
       "avatar"
     ],
     "commonMistakes": [
-      { "mistake": "removable={true}", "correction": "Use variant='input' which includes close button" },
+      {
+        "mistake": "removable={true}",
+        "correction": "Use variant='input' which includes close button"
+      },
       { "mistake": "selected={true}", "correction": "Use focused={true}" }
     ]
   },

@@ -2,14 +2,14 @@
  * Handler for get_layout_recipes tool
  */
 
-import type { GetLayoutRecipesInput, RecipeSummary } from '../types.js';
+import type { GetLayoutRecipesInput, RecipeSummary } from "../types.js";
 
 // Import recipes - this will be populated when we create recipes
 let recipesData: { recipes: Array<RecipeSummary & { code: string }> } | null = null;
 
 try {
   // Dynamic import for recipes
-  recipesData = require('../../recipes/recipes.json');
+  recipesData = require("../../recipes/recipes.json");
 } catch {
   recipesData = null;
 }
@@ -21,11 +21,11 @@ export function handleGetLayoutRecipes(input: GetLayoutRecipesInput) {
     return {
       content: [
         {
-          type: 'text' as const,
+          type: "text" as const,
           text: JSON.stringify(
             {
-              error: 'Recipes data not found',
-              note: 'Layout recipes are being developed',
+              error: "Recipes data not found",
+              note: "Layout recipes are being developed",
             },
             null,
             2
@@ -52,14 +52,14 @@ export function handleGetLayoutRecipes(input: GetLayoutRecipesInput) {
       components: r.components,
       code: r.code,
     })),
-    categories: ['marketing', 'dashboard', 'forms', 'content'],
-    note: 'Each recipe includes complete, working code using Rayden UI components',
+    categories: ["marketing", "dashboard", "forms", "content"],
+    note: "Each recipe includes complete, working code using Rayden UI components",
   };
 
   return {
     content: [
       {
-        type: 'text' as const,
+        type: "text" as const,
         text: JSON.stringify(response, null, 2),
       },
     ],

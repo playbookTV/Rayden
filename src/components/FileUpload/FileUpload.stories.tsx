@@ -210,11 +210,7 @@ export const MultipleFileUpload: StoryObj = {
               )
             );
           } else {
-            setFiles((prev) =>
-              prev.map((f) =>
-                f.id === newFile.id ? { ...f, progress } : f
-              )
-            );
+            setFiles((prev) => prev.map((f) => (f.id === newFile.id ? { ...f, progress } : f)));
           }
         }, 300);
       };

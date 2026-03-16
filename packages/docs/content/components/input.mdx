@@ -1,0 +1,94 @@
+---
+title: Input
+description: Text input with label, helper text, and validation states
+---
+
+# Input
+
+A flexible text input component with support for labels, helper text, icons, and validation states.
+
+## Import
+
+```tsx
+import { Input } from "@raydenui/ui";
+import type { InputProps, InputSize, InputState } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Input placeholder="Enter your name" />
+```
+
+### With Label
+
+```tsx
+<Input label="Email" placeholder="you@example.com" />
+```
+
+### With Helper Text
+
+```tsx
+<Input label="Password" type="password" helperText="Must be at least 8 characters" />
+```
+
+### Sizes
+
+```tsx
+<Input size="sm" placeholder="Small input" />
+<Input size="lg" placeholder="Large input" />
+```
+
+### States
+
+```tsx
+// Success
+<Input state="success" label="Email" helperText="Email is available" />
+
+// Error
+<Input state="error" label="Email" helperText="Please enter a valid email" />
+
+// Readonly
+<Input state="readonly" label="ID" value="USR-12345" />
+```
+
+### With Icons
+
+```tsx
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
+
+<Input
+  leftIcon={<MagnifyingGlassIcon />}
+  placeholder="Search..."
+/>
+
+<Input
+  rightIcon={<XMarkIcon />}
+  onRightIconClick={() => clearInput()}
+  placeholder="Clearable input"
+/>
+```
+
+## Props
+
+| Prop               | Type                                                                    | Default     | Description                      |
+| ------------------ | ----------------------------------------------------------------------- | ----------- | -------------------------------- |
+| `label`            | `string`                                                                | —           | Input label                      |
+| `helperText`       | `string`                                                                | —           | Helper or error text below input |
+| `size`             | `"sm" \| "lg"`                                                          | `"sm"`      | Input size                       |
+| `state`            | `"default" \| "hover" \| "focus" \| "success" \| "error" \| "readonly"` | `"default"` | Visual state                     |
+| `leftIcon`         | `ReactNode`                                                             | —           | Icon on the left                 |
+| `rightIcon`        | `ReactNode`                                                             | —           | Icon on the right                |
+| `onRightIconClick` | `() => void`                                                            | —           | Right icon click handler         |
+| `className`        | `string`                                                                | —           | Additional CSS classes           |
+
+The component also accepts all native `<input>` HTML attributes.
+
+## Accessibility
+
+- Uses semantic `<input>` element
+- Labels are properly associated via `htmlFor`
+- Helper text linked via `aria-describedby`
+- Error states announced via `aria-invalid`

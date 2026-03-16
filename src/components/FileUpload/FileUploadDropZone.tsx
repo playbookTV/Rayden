@@ -5,15 +5,9 @@ import { ProgressBar } from "../ProgressBar";
 import { FileTypeIcon, UploadStateIcon, getFileType } from "./FileUploadIcons";
 
 // ─── Types ───────────────────────────────────────────────────────
-export type DropZoneState =
-  | "default"
-  | "dragging"
-  | "uploading"
-  | "success"
-  | "error";
+export type DropZoneState = "default" | "dragging" | "uploading" | "success" | "error";
 
-export interface FileUploadDropZoneProps
-  extends HTMLAttributes<HTMLDivElement> {
+export interface FileUploadDropZoneProps extends HTMLAttributes<HTMLDivElement> {
   /** Current visual state */
   state?: DropZoneState;
   /** Description text, e.g. "SVG, PNG, JPG or GIF (max 800x400px)" */
@@ -35,10 +29,7 @@ export interface FileUploadDropZoneProps
 }
 
 // ─── Component ───────────────────────────────────────────────────
-export const FileUploadDropZone = forwardRef<
-  HTMLDivElement,
-  FileUploadDropZoneProps
->(
+export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneProps>(
   (
     {
       state: controlledState,
@@ -63,7 +54,7 @@ export const FileUploadDropZone = forwardRef<
     const state =
       isDragging && (controlledState === "default" || !controlledState)
         ? "dragging"
-        : controlledState ?? "default";
+        : (controlledState ?? "default");
 
     const handleBrowse = () => inputRef.current?.click();
 
@@ -112,8 +103,8 @@ export const FileUploadDropZone = forwardRef<
           state === "dragging"
             ? "border-2 border-dashed border-primary-400 bg-primary-50/10"
             : state === "uploading" || state === "success" || state === "error"
-              ? "border border-grey-200 bg-white"
-              : "border-2 border-dashed border-grey-300 bg-white",
+              ? "border border-grey-200 bg-white dark:bg-grey-50"
+              : "border-2 border-dashed border-grey-300 bg-white dark:bg-grey-50",
           className
         )}
         onDragEnter={handleDragEnter}
@@ -139,18 +130,11 @@ export const FileUploadDropZone = forwardRef<
             <UploadStateIcon state="default" size={56} />
             <div className="flex flex-col items-center gap-1">
               <p className="text-body-sm font-medium text-grey-600">
-                Click to upload{" "}
-                <span className="text-grey-400">or drag and drop</span>
+                Click to upload <span className="text-grey-400">or drag and drop</span>
               </p>
-              {description && (
-                <p className="text-body-xs text-grey-400">{description}</p>
-              )}
+              {description && <p className="text-body-xs text-grey-400">{description}</p>}
             </div>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={handleBrowse}
-            >
+            <Button variant="primary" size="sm" onClick={handleBrowse}>
               Browse Files
             </Button>
           </div>
@@ -169,11 +153,7 @@ export const FileUploadDropZone = forwardRef<
                   {Math.round(uploadingFile.progress)}%
                 </span>
               </div>
-              <ProgressBar
-                value={uploadingFile.progress}
-                size="sm"
-                showPercentage={false}
-              />
+              <ProgressBar value={uploadingFile.progress} size="sm" showPercentage={false} />
             </div>
           </div>
         )}
@@ -202,12 +182,8 @@ export const FileUploadDropZone = forwardRef<
           <div className="flex flex-col items-center gap-4">
             <UploadStateIcon state="error" size={56} />
             <div className="flex flex-col items-center gap-1">
-              <p className="text-body-sm font-semibold text-grey-800">
-                Failed to Upload
-              </p>
-              {errorMessage && (
-                <p className="text-body-xs text-grey-400">{errorMessage}</p>
-              )}
+              <p className="text-body-sm font-semibold text-grey-800">Failed to Upload</p>
+              {errorMessage && <p className="text-body-xs text-grey-400">{errorMessage}</p>}
             </div>
             <button
               type="button"

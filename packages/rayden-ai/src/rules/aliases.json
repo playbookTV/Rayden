@@ -238,7 +238,10 @@
     {
       "component": "Table",
       "mistakes": [
-        { "wrong": "<Table data={...} columns={...}>", "correct": "Map data to TableRow components" },
+        {
+          "wrong": "<Table data={...} columns={...}>",
+          "correct": "Map data to TableRow components"
+        },
         { "wrong": "<th>", "correct": "<TableHead>" },
         { "wrong": "<td>", "correct": "<TableCell>" },
         { "wrong": "<thead>", "correct": "<TableHeader>" },
@@ -248,15 +251,18 @@
     {
       "component": "Select",
       "mistakes": [
-        { "wrong": "options={[...]}",  "correct": "Use SelectOption children" },
+        { "wrong": "options={[...]}", "correct": "Use SelectOption children" },
         { "wrong": "onChange={fn}", "correct": "onValueChange={fn}" }
       ]
     },
     {
       "component": "DropdownMenu",
       "mistakes": [
-        { "wrong": "items={[...]}",  "correct": "Use DropdownMenuItem children" },
-        { "wrong": "trigger={<Button />}", "correct": "Use <DropdownMenuTrigger><Button /></DropdownMenuTrigger>" }
+        { "wrong": "items={[...]}", "correct": "Use DropdownMenuItem children" },
+        {
+          "wrong": "trigger={<Button />}",
+          "correct": "Use <DropdownMenuTrigger><Button /></DropdownMenuTrigger>"
+        }
       ]
     }
   ],

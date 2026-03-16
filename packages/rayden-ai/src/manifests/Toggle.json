@@ -39,9 +39,7 @@
   },
   "accessibility": {
     "role": "switch",
-    "keyboardNav": [
-      { "key": "Space", "action": "Toggle state" }
-    ],
+    "keyboardNav": [{ "key": "Space", "action": "Toggle state" }],
     "screenReaderNotes": "Uses role='switch'. Provide label for context."
   },
   "antiHallucination": {

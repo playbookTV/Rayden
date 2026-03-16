@@ -1,0 +1,123 @@
+---
+title: Divider
+description: Content separator with optional label, icon, or button
+---
+
+# Divider
+
+Dividers separate content into clear groups with optional labels, icons, or buttons.
+
+## Import
+
+```tsx
+import { Divider } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Divider />
+```
+
+### With Label
+
+```tsx
+<Divider label="Or continue with" />
+```
+
+### With Title
+
+```tsx
+<Divider variant="with-title" title="Section Title" />
+```
+
+### With Icon
+
+```tsx
+import { SparklesIcon } from "@heroicons/react/20/solid";
+
+<Divider variant="with-icon" icon={<SparklesIcon />} />
+```
+
+### With Button
+
+```tsx
+<Divider
+  variant="with-button"
+  buttonText="Load More"
+  onButtonClick={() => loadMore()}
+/>
+```
+
+### Orientation
+
+```tsx
+// Horizontal (default)
+<Divider orientation="horizontal" />
+
+// Vertical
+<div className="flex items-center h-8 gap-4">
+  <span>Item 1</span>
+  <Divider orientation="vertical" />
+  <span>Item 2</span>
+  <Divider orientation="vertical" />
+  <span>Item 3</span>
+</div>
+```
+
+### In Context
+
+```tsx
+// Login form divider
+<form className="space-y-4">
+  <Input label="Email" />
+  <Input label="Password" type="password" />
+  <Button variant="primary" className="w-full">Sign In</Button>
+
+  <Divider label="Or continue with" />
+
+  <div className="flex gap-3">
+    <Button variant="grey" appearance="outlined" className="flex-1">
+      Google
+    </Button>
+    <Button variant="grey" appearance="outlined" className="flex-1">
+      GitHub
+    </Button>
+  </div>
+</form>
+
+// Section divider
+<div className="space-y-6">
+  <section>
+    <h2>Account Settings</h2>
+    {/* content */}
+  </section>
+
+  <Divider variant="with-title" title="Danger Zone" />
+
+  <section>
+    <Button variant="destructive">Delete Account</Button>
+  </section>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "with-label" \| "with-icon" \| "with-title" \| "with-button"` | `"default"` | Divider variant |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Orientation |
+| `label` | `string` | — | Label text (with-label variant) |
+| `title` | `string` | — | Title text (with-title variant) |
+| `icon` | `ReactNode` | — | Icon (with-icon variant) |
+| `buttonText` | `string` | — | Button text (with-button variant) |
+| `onButtonClick` | `() => void` | — | Button click handler |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `role="separator"` for semantic meaning
+- Orientation communicated via `aria-orientation`
+- Button variant is keyboard accessible

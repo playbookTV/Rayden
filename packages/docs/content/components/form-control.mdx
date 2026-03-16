@@ -1,0 +1,142 @@
+---
+title: FormControl
+description: Checkbox, Radio, and Toggle form control components
+---
+
+# FormControl
+
+FormControl provides Checkbox, Radio, and Toggle components for boolean and selection inputs.
+
+## Import
+
+```tsx
+import { Checkbox, Radio, Toggle } from "@raydenui/ui";
+```
+
+## Checkbox
+
+### Basic
+
+```tsx
+<Checkbox label="I agree to the terms" />
+```
+
+### With Description
+
+```tsx
+<Checkbox label="Email notifications" description="Receive email updates about your account" />
+```
+
+### Controlled
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<Checkbox label="Subscribe to newsletter" checked={checked} onChange={setChecked} />;
+```
+
+### Checkbox Props
+
+| Prop          | Type                         | Default | Description                 |
+| ------------- | ---------------------------- | ------- | --------------------------- |
+| `label`       | `string`                     | —       | Checkbox label              |
+| `description` | `string`                     | —       | Additional description text |
+| `checked`     | `boolean`                    | `false` | Controlled checked state    |
+| `onChange`    | `(checked: boolean) => void` | —       | Change handler              |
+| `disabled`    | `boolean`                    | `false` | Disables the checkbox       |
+
+## Radio
+
+### Basic Group
+
+```tsx
+const [value, setValue] = useState("option1");
+
+<div className="space-y-2">
+  <Radio
+    name="options"
+    value="option1"
+    label="Option 1"
+    checked={value === "option1"}
+    onChange={() => setValue("option1")}
+  />
+  <Radio
+    name="options"
+    value="option2"
+    label="Option 2"
+    checked={value === "option2"}
+    onChange={() => setValue("option2")}
+  />
+  <Radio
+    name="options"
+    value="option3"
+    label="Option 3"
+    checked={value === "option3"}
+    onChange={() => setValue("option3")}
+  />
+</div>;
+```
+
+### With Description
+
+```tsx
+<Radio
+  name="plan"
+  value="pro"
+  label="Pro Plan"
+  description="$29/month, unlimited features"
+  checked={plan === "pro"}
+  onChange={() => setPlan("pro")}
+/>
+```
+
+### Radio Props
+
+| Prop          | Type         | Default | Description                 |
+| ------------- | ------------ | ------- | --------------------------- |
+| `name`        | `string`     | —       | Radio group name (required) |
+| `value`       | `string`     | —       | Radio value (required)      |
+| `label`       | `string`     | —       | Radio label                 |
+| `description` | `string`     | —       | Additional description text |
+| `checked`     | `boolean`    | `false` | Controlled checked state    |
+| `onChange`    | `() => void` | —       | Change handler              |
+| `disabled`    | `boolean`    | `false` | Disables the radio          |
+
+## Toggle
+
+### Basic
+
+```tsx
+<Toggle label="Dark mode" />
+```
+
+### With Description
+
+```tsx
+<Toggle label="Auto-save" description="Automatically save changes every 5 minutes" />
+```
+
+### Controlled
+
+```tsx
+const [enabled, setEnabled] = useState(false);
+
+<Toggle label="Notifications" checked={enabled} onChange={setEnabled} />;
+```
+
+### Toggle Props
+
+| Prop          | Type                         | Default | Description                 |
+| ------------- | ---------------------------- | ------- | --------------------------- |
+| `label`       | `string`                     | —       | Toggle label                |
+| `description` | `string`                     | —       | Additional description text |
+| `checked`     | `boolean`                    | `false` | Controlled checked state    |
+| `onChange`    | `(checked: boolean) => void` | —       | Change handler              |
+| `disabled`    | `boolean`                    | `false` | Disables the toggle         |
+
+## Accessibility
+
+- All components use semantic HTML inputs
+- Labels properly associated with inputs
+- Focus visible styles for keyboard navigation
+- ARIA attributes for screen readers

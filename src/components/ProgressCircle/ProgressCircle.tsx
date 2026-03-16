@@ -45,11 +45,7 @@ export function ProgressCircle({
       aria-valuemax={100}
       {...rest}
     >
-      <svg
-        width={config.dimension}
-        height={config.dimension}
-        className="-rotate-90"
-      >
+      <svg width={config.dimension} height={config.dimension} className="-rotate-90">
         <circle
           cx={config.dimension / 2}
           cy={config.dimension / 2}
@@ -72,10 +68,7 @@ export function ProgressCircle({
         />
       </svg>
       {showText && (
-        <span
-          className="absolute font-semibold text-black"
-          style={{ fontSize: config.fontSize }}
-        >
+        <span className="absolute font-semibold text-black" style={{ fontSize: config.fontSize }}>
           {Math.round(clamped)}%
         </span>
       )}

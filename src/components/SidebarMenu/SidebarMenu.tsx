@@ -99,10 +99,7 @@ const SidebarMenuContext = createContext<SidebarMenuContextValue | null>(null);
 
 export function useSidebarMenuContext() {
   const ctx = useContext(SidebarMenuContext);
-  if (!ctx)
-    throw new Error(
-      "SidebarMenuItem / SidebarMenuSection must be used within SidebarMenu"
-    );
+  if (!ctx) throw new Error("SidebarMenuItem / SidebarMenuSection must be used within SidebarMenu");
   return ctx;
 }
 
@@ -150,9 +147,7 @@ export const SidebarMenu = forwardRef<HTMLElement, SidebarMenuProps>(
     const ts = sidebarThemeStyles[theme];
 
     return (
-      <SidebarMenuContext.Provider
-        value={{ activeValue, onSelect, collapsed, theme }}
-      >
+      <SidebarMenuContext.Provider value={{ activeValue, onSelect, collapsed, theme }}>
         <nav
           ref={ref}
           role="navigation"

@@ -88,9 +88,7 @@
     "relatedComponents": ["Button", "Icon", "ProgressBar"]
   },
   "accessibility": {
-    "keyboardNav": [
-      { "key": "Enter/Space", "action": "Open file dialog (on drop zone)" }
-    ],
+    "keyboardNav": [{ "key": "Enter/Space", "action": "Open file dialog (on drop zone)" }],
     "screenReaderNotes": "Drop zone announces accepted file types. File items announce name and status."
   },
   "antiHallucination": {
@@ -104,8 +102,11 @@
       "maxFiles (validate in handler)"
     ],
     "commonMistakes": [
-      { "mistake": "<FileUpload onChange={...}>", "correction": "Use FileUploadDropZone with onDrop" },
-      { "mistake": "files={[...]}",  "correction": "Map files to FileUploadItem components" }
+      {
+        "mistake": "<FileUpload onChange={...}>",
+        "correction": "Use FileUploadDropZone with onDrop"
+      },
+      { "mistake": "files={[...]}", "correction": "Map files to FileUploadItem components" }
     ]
   },
   "examples": [

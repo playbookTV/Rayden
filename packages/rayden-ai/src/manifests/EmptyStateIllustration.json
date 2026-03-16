@@ -9,7 +9,16 @@
   "props": {
     "name": {
       "type": "enum",
-      "values": ["no-data", "no-results", "no-connection", "error", "success", "empty-inbox", "empty-folder", "no-notifications"],
+      "values": [
+        "no-data",
+        "no-results",
+        "no-connection",
+        "error",
+        "success",
+        "empty-inbox",
+        "empty-folder",
+        "no-notifications"
+      ],
       "required": true,
       "description": "Illustration name from predefined set"
     },
@@ -39,7 +48,10 @@
       "src (uses predefined illustrations)"
     ],
     "commonMistakes": [
-      { "mistake": "<EmptyState>", "correction": "<EmptyStateIllustration name='...' /> (then add text/buttons separately)" },
+      {
+        "mistake": "<EmptyState>",
+        "correction": "<EmptyStateIllustration name='...' /> (then add text/buttons separately)"
+      },
       { "mistake": "src='...'", "correction": "Use name prop with predefined illustration name" }
     ]
   },

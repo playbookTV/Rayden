@@ -23,13 +23,7 @@ export const Default: Story = {
             id: "1",
             name: "Ariana Bush",
             handle: "ariana007",
-            avatar: (
-              <Avatar
-                type="image"
-                src="https://i.pravatar.cc/150?img=47"
-                size="lg"
-              />
-            ),
+            avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=47" size="lg" />,
           },
           {
             id: "2",
@@ -47,13 +41,7 @@ export const Default: Story = {
             id: "4",
             name: "Zain Curtis",
             handle: "zain_c",
-            avatar: (
-              <Avatar
-                type="image"
-                src="https://i.pravatar.cc/150?img=26"
-                size="lg"
-              />
-            ),
+            avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=26" size="lg" />,
           },
           {
             id: "5",

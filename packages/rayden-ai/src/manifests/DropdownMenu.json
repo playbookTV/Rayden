@@ -59,7 +59,12 @@
       },
       "children": {
         "type": "specific",
-        "accepts": ["DropdownMenuGroup", "DropdownMenuLabel", "DropdownMenuItem", "DropdownMenuSeparator"]
+        "accepts": [
+          "DropdownMenuGroup",
+          "DropdownMenuLabel",
+          "DropdownMenuItem",
+          "DropdownMenuSeparator"
+        ]
       }
     },
     "DropdownMenuGroup": {
@@ -141,9 +146,18 @@
       "placement (use align and side on Content)"
     ],
     "commonMistakes": [
-      { "mistake": "items={[...]}",  "correction": "Use DropdownMenuItem components inside DropdownMenuContent" },
-      { "mistake": "trigger={<Button />}", "correction": "Use <DropdownMenuTrigger><Button /></DropdownMenuTrigger>" },
-      { "mistake": "<DropdownMenu><Button /></DropdownMenu>", "correction": "Wrap Button in DropdownMenuTrigger and add DropdownMenuContent" }
+      {
+        "mistake": "items={[...]}",
+        "correction": "Use DropdownMenuItem components inside DropdownMenuContent"
+      },
+      {
+        "mistake": "trigger={<Button />}",
+        "correction": "Use <DropdownMenuTrigger><Button /></DropdownMenuTrigger>"
+      },
+      {
+        "mistake": "<DropdownMenu><Button /></DropdownMenu>",
+        "correction": "Wrap Button in DropdownMenuTrigger and add DropdownMenuContent"
+      }
     ]
   },
   "examples": [

@@ -1,0 +1,127 @@
+---
+title: EmptyStateIllustration
+description: 19 empty state illustrations with custom palette support
+---
+
+# EmptyStateIllustration
+
+Display contextual illustrations for empty states with 19 pre-built variants and custom color support.
+
+## Import
+
+```tsx
+import { EmptyStateIllustration } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<EmptyStateIllustration variant="no-data" />
+```
+
+### All Variants
+
+```tsx
+// Data states
+<EmptyStateIllustration variant="no-data" />
+<EmptyStateIllustration variant="no-results" />
+<EmptyStateIllustration variant="empty-folder" />
+<EmptyStateIllustration variant="empty-inbox" />
+
+// Status states
+<EmptyStateIllustration variant="success" />
+<EmptyStateIllustration variant="error" />
+<EmptyStateIllustration variant="warning" />
+
+// Network states
+<EmptyStateIllustration variant="no-connection" />
+<EmptyStateIllustration variant="offline" />
+
+// Content states
+<EmptyStateIllustration variant="no-notifications" />
+<EmptyStateIllustration variant="no-messages" />
+<EmptyStateIllustration variant="no-tasks" />
+<EmptyStateIllustration variant="no-projects" />
+
+// User states
+<EmptyStateIllustration variant="no-users" />
+<EmptyStateIllustration variant="no-teams" />
+
+// Commerce states
+<EmptyStateIllustration variant="empty-cart" />
+<EmptyStateIllustration variant="no-orders" />
+
+// Other states
+<EmptyStateIllustration variant="maintenance" />
+<EmptyStateIllustration variant="coming-soon" />
+```
+
+### Custom Colors
+
+```tsx
+<EmptyStateIllustration
+  variant="no-data"
+  primaryColor="#F56630"
+  secondaryColor="#FCB59A"
+/>
+```
+
+### Sizes
+
+```tsx
+<EmptyStateIllustration variant="no-data" size="sm" /> {/* 120px */}
+<EmptyStateIllustration variant="no-data" size="md" /> {/* 200px */}
+<EmptyStateIllustration variant="no-data" size="lg" /> {/* 280px */}
+```
+
+### With Content
+
+```tsx
+<div className="flex flex-col items-center gap-4 p-8">
+  <EmptyStateIllustration variant="no-data" size="lg" />
+  <h3 className="text-lg font-semibold text-grey-800">No data yet</h3>
+  <p className="text-grey-500">Get started by adding your first item</p>
+  <Button variant="primary">Add Item</Button>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `EmptyStateVariant` | `"no-data"` | Illustration variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Illustration size |
+| `primaryColor` | `string` | `"#F56630"` | Primary color |
+| `secondaryColor` | `string` | `"#FCB59A"` | Secondary color |
+| `className` | `string` | — | Additional CSS classes |
+
+## Variants
+
+| Variant | Use Case |
+|---------|----------|
+| `no-data` | Empty tables, lists |
+| `no-results` | Search with no matches |
+| `empty-folder` | Empty directories |
+| `empty-inbox` | Empty email inbox |
+| `success` | Completed actions |
+| `error` | Failed operations |
+| `warning` | Warning states |
+| `no-connection` | Network errors |
+| `offline` | Offline mode |
+| `no-notifications` | Empty notification list |
+| `no-messages` | Empty chat/messages |
+| `no-tasks` | Empty task list |
+| `no-projects` | Empty project list |
+| `no-users` | No team members |
+| `no-teams` | No teams |
+| `empty-cart` | Empty shopping cart |
+| `no-orders` | No order history |
+| `maintenance` | Site maintenance |
+| `coming-soon` | Upcoming features |
+
+## Accessibility
+
+- Illustrations are decorative (`role="img"`)
+- Use with text content for context

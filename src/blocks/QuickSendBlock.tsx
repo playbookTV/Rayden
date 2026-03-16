@@ -74,9 +74,7 @@ export function QuickSendBlock({
                 <span className="text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate">
                   {b.name}
                 </span>
-                <span className="text-xs text-grey-400 whitespace-nowrap">
-                  @{b.handle}
-                </span>
+                <span className="text-xs text-grey-400 whitespace-nowrap">@{b.handle}</span>
               </div>
             </button>
           ))}

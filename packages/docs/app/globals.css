@@ -1,0 +1,59 @@
+@import "nextra-theme-docs/style.css";
+
+:root {
+  /* Override Nextra primary color with Rayden orange */
+  /* Primary color #F56630 → HSL(17, 91%, 58%) */
+  --nextra-primary-hue: 17deg;
+  --nextra-primary-saturation: 91%;
+
+  /* Rayden UI color tokens */
+  --rayden-primary-50: #ffece5;
+  --rayden-primary-100: #fcb59a;
+  --rayden-primary-200: #fa9874;
+  --rayden-primary-300: #f77a4a;
+  --rayden-primary-400: #f56630;
+  --rayden-primary-500: #eb5017;
+  --rayden-primary-600: #cc400c;
+  --rayden-primary-700: #ad3307;
+  --rayden-primary-800: #8f2802;
+  --rayden-primary-900: #711e00;
+
+  --rayden-grey-50: #f9fafb;
+  --rayden-grey-100: #f0f2f5;
+  --rayden-grey-200: #e4e7ec;
+  --rayden-grey-300: #d0d5dd;
+  --rayden-grey-400: #98a2b3;
+  --rayden-grey-500: #667185;
+  --rayden-grey-600: #475367;
+  --rayden-grey-700: #344054;
+  --rayden-grey-800: #1d2739;
+  --rayden-grey-900: #101928;
+}
+
+.dark {
+  /* Slightly lighter primary for dark mode readability */
+  --nextra-primary-hue: 17deg;
+  --nextra-primary-saturation: 91%;
+}
+
+/* Custom accent for code blocks */
+[data-rehype-pretty-code-figure] pre {
+  border-left: 3px solid var(--rayden-primary-500);
+}
+
+/* Inline code styling */
+:not(pre) > code {
+  background-color: var(--rayden-grey-100);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.dark :not(pre) > code {
+  background-color: var(--rayden-grey-800);
+}
+
+/* Sidebar active link */
+.nextra-sidebar-container a[data-active="true"] {
+  color: var(--rayden-primary-500);
+}

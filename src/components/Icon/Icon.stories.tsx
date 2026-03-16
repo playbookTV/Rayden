@@ -80,16 +80,9 @@ export const Gallery: Story = {
         >
           <div className="flex gap-2">
             <Icon name={name} size="md" variant="outline" />
-            <Icon
-              name={name}
-              size="md"
-              variant="solid"
-              className="text-grey-400"
-            />
+            <Icon name={name} size="md" variant="solid" className="text-grey-400" />
           </div>
-          <span className="text-center text-caption-xs text-grey-500 break-all">
-            {name}
-          </span>
+          <span className="text-center text-caption-xs text-grey-500 break-all">{name}</span>
         </div>
       ))}
     </div>

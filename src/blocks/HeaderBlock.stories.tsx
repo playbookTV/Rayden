@@ -12,11 +12,7 @@ type Story = StoryObj<typeof HeaderBlock>;
 
 /* ─── Shared Logo ─────────────────────────────────────────────────── */
 const Logo = ({ light = false }: { light?: boolean }) => (
-  <span
-    className={`text-xl font-bold whitespace-nowrap ${
-      light ? "text-white" : "text-grey-900"
-    }`}
-  >
+  <span className={`text-xl font-bold whitespace-nowrap ${light ? "text-white" : "text-grey-900"}`}>
     <span className="text-primary-400">R</span> rayna UI
   </span>
 );
@@ -145,14 +141,8 @@ export const CenteredLogo: Story = {
     <HeaderBlock
       variant={7}
       logo={<Logo />}
-      links={[
-        { label: "Solutions" },
-        { label: "Investments" },
-      ]}
-      rightLinks={[
-        { label: "Meet Rayna" },
-        { label: "Resources" },
-      ]}
+      links={[{ label: "Solutions" }, { label: "Investments" }]}
+      rightLinks={[{ label: "Meet Rayna" }, { label: "Resources" }]}
       actions={[
         { label: "Log in", variant: "text" },
         { label: "Get Started", variant: "primary" },
@@ -174,10 +164,7 @@ export const DarkBackground: Story = {
         { label: "Learn Design" },
         { label: "Go Pro" },
       ]}
-      rightLinks={[
-        { label: "Meet Rayna" },
-        { label: "Resources" },
-      ]}
+      rightLinks={[{ label: "Meet Rayna" }, { label: "Resources" }]}
       actions={[
         { label: "Sign up", variant: "secondary" },
         { label: "Post a job", variant: "primary" },
@@ -194,10 +181,7 @@ export const WithSearch: Story = {
       logo={<Logo />}
       searchPlaceholder="Search for components..."
       onSearch={(q) => console.log("Search:", q)}
-      rightLinks={[
-        { label: "About" },
-        { label: "Partners" },
-      ]}
+      rightLinks={[{ label: "About" }, { label: "Partners" }]}
       actions={[
         { label: "Sign in", variant: "text" },
         { label: "Post a job", variant: "primary" },
@@ -240,16 +224,8 @@ export const DoubleRow: Story = {
         tabs: ["Personal", "Business"],
         activeIndex: 0,
       }}
-      secondaryLinks={[
-        { label: "Privacy Policy" },
-        { label: "Terms of Use" },
-      ]}
-      links={[
-        { label: "Money" },
-        { label: "Wealth" },
-        { label: "Plans" },
-        { label: "More" },
-      ]}
+      secondaryLinks={[{ label: "Privacy Policy" }, { label: "Terms of Use" }]}
+      links={[{ label: "Money" }, { label: "Wealth" }, { label: "Plans" }, { label: "More" }]}
       actions={[
         { label: "Login", variant: "secondary" },
         { label: "Sign up", variant: "primary" },

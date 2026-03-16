@@ -1,0 +1,82 @@
+---
+title: ButtonGroup
+description: Horizontal grouping of related buttons
+---
+
+# ButtonGroup
+
+ButtonGroup combines multiple related buttons into a single horizontal group with connected styling.
+
+## Import
+
+```tsx
+import { ButtonGroup, ButtonGroupItem } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<ButtonGroup>
+  <ButtonGroupItem>Left</ButtonGroupItem>
+  <ButtonGroupItem>Center</ButtonGroupItem>
+  <ButtonGroupItem>Right</ButtonGroupItem>
+</ButtonGroup>
+```
+
+### With Active State
+
+```tsx
+const [active, setActive] = useState("center");
+
+<ButtonGroup>
+  <ButtonGroupItem active={active === "left"} onClick={() => setActive("left")}>
+    Left
+  </ButtonGroupItem>
+  <ButtonGroupItem active={active === "center"} onClick={() => setActive("center")}>
+    Center
+  </ButtonGroupItem>
+  <ButtonGroupItem active={active === "right"} onClick={() => setActive("right")}>
+    Right
+  </ButtonGroupItem>
+</ButtonGroup>;
+```
+
+### With Icons
+
+```tsx
+import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/20/solid";
+
+<ButtonGroup>
+  <ButtonGroupItem icon={<ListBulletIcon />} active>
+    List
+  </ButtonGroupItem>
+  <ButtonGroupItem icon={<Squares2X2Icon />}>Grid</ButtonGroupItem>
+</ButtonGroup>;
+```
+
+## Props
+
+### ButtonGroup
+
+| Prop        | Type        | Default | Description              |
+| ----------- | ----------- | ------- | ------------------------ |
+| `children`  | `ReactNode` | —       | ButtonGroupItem children |
+| `className` | `string`    | —       | Additional CSS classes   |
+
+### ButtonGroupItem
+
+| Prop        | Type         | Default | Description            |
+| ----------- | ------------ | ------- | ---------------------- |
+| `active`    | `boolean`    | `false` | Active/selected state  |
+| `icon`      | `ReactNode`  | —       | Optional icon          |
+| `disabled`  | `boolean`    | `false` | Disables the button    |
+| `onClick`   | `() => void` | —       | Click handler          |
+| `className` | `string`     | —       | Additional CSS classes |
+
+## Accessibility
+
+- Uses `role="group"` for proper grouping
+- Individual buttons maintain focus management
+- Active state communicated via `aria-pressed`

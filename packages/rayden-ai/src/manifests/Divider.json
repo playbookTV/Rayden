@@ -9,7 +9,14 @@
   "props": {
     "variant": {
       "type": "enum",
-      "values": ["default", "with-icon", "with-label", "with-title", "with-button", "with-title-and-button"],
+      "values": [
+        "default",
+        "with-icon",
+        "with-label",
+        "with-title",
+        "with-button",
+        "with-title-and-button"
+      ],
       "default": "default",
       "description": "Divider variant"
     },

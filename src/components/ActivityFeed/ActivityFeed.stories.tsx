@@ -20,8 +20,7 @@ export const SingleItem: Story = {
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">David</span> left a
-            comment on{" "}
+            <span className="font-medium text-grey-700">David</span> left a comment on{" "}
             <span className="font-medium text-primary-400">Site redesign</span>
           </>
         }
@@ -40,8 +39,7 @@ export const WithFileContent: Story = {
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">David</span> uploaded a
-            file to{" "}
+            <span className="font-medium text-grey-700">David</span> uploaded a file to{" "}
             <span className="font-medium text-primary-400">Site redesign</span>
           </>
         }
@@ -69,8 +67,7 @@ export const WithCommentContent: Story = {
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">David</span> left a
-            comment on{" "}
+            <span className="font-medium text-grey-700">David</span> left a comment on{" "}
             <span className="font-medium text-primary-400">Site redesign</span>
           </>
         }
@@ -105,8 +102,7 @@ export const WithCTAContent: Story = {
         avatar={<Avatar type="initials" initials="SA" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">Sarah</span> invited
-            you to join{" "}
+            <span className="font-medium text-grey-700">Sarah</span> invited you to join{" "}
             <span className="font-medium text-primary-400">Marketing Team</span>
           </>
         }
@@ -131,8 +127,7 @@ export const UnreadState: Story = {
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">David</span> left a
-            comment on{" "}
+            <span className="font-medium text-grey-700">David</span> left a comment on{" "}
             <span className="font-medium text-primary-400">Site redesign</span>
           </>
         }
@@ -173,8 +168,7 @@ export const Timeline: Story = {
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">David</span> uploaded a
-            file to{" "}
+            <span className="font-medium text-grey-700">David</span> uploaded a file to{" "}
             <span className="font-medium text-primary-400">Site redesign</span>
           </>
         }
@@ -197,8 +191,7 @@ export const Timeline: Story = {
         avatar={<Avatar type="initials" initials="SA" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">Sarah</span> left a
-            comment on{" "}
+            <span className="font-medium text-grey-700">Sarah</span> left a comment on{" "}
             <span className="font-medium text-primary-400">Brand update</span>
           </>
         }
@@ -222,8 +215,7 @@ export const Timeline: Story = {
         avatar={<Avatar type="initials" initials="MJ" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">Michael</span> invited
-            you to join{" "}
+            <span className="font-medium text-grey-700">Michael</span> invited you to join{" "}
             <span className="font-medium text-primary-400">Design Team</span>
           </>
         }
@@ -242,8 +234,7 @@ export const Timeline: Story = {
         avatar={<Avatar type="initials" initials="JK" size="sm" />}
         text={
           <>
-            <span className="font-medium text-grey-700">Jessica</span> shared a
-            document in{" "}
+            <span className="font-medium text-grey-700">Jessica</span> shared a document in{" "}
             <span className="font-medium text-primary-400">Research</span>
           </>
         }

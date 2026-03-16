@@ -30,14 +30,26 @@ export default meta;
 type Story = StoryObj<typeof Divider>;
 
 export const Default: Story = {
-  decorators: [(Story) => <div className="w-[640px]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="w-[640px]">
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     variant: "default",
   },
 };
 
 export const WithIcon: Story = {
-  decorators: [(Story) => <div className="w-[640px]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="w-[640px]">
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     variant: "with-icon",
     icon: <PlusIcon />,
@@ -45,7 +57,13 @@ export const WithIcon: Story = {
 };
 
 export const WithLabel: Story = {
-  decorators: [(Story) => <div className="w-[640px]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="w-[640px]">
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     variant: "with-label",
     label: "Continue",
@@ -53,7 +71,13 @@ export const WithLabel: Story = {
 };
 
 export const WithTitle: Story = {
-  decorators: [(Story) => <div className="w-[640px]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="w-[640px]">
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     variant: "with-title",
     label: "Continue",
@@ -61,7 +85,13 @@ export const WithTitle: Story = {
 };
 
 export const WithButton: Story = {
-  decorators: [(Story) => <div className="w-[640px]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="w-[640px]">
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     variant: "with-button",
     buttonLabel: "Label",
@@ -71,7 +101,13 @@ export const WithButton: Story = {
 };
 
 export const WithTitleAndButton: Story = {
-  decorators: [(Story) => <div className="w-[640px]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="w-[640px]">
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     variant: "with-title-and-button",
     label: "Continue",

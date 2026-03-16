@@ -20,20 +20,11 @@ export const Default: Story = {
         items={[
           {
             id: "1",
-            avatar: (
-              <Avatar
-                type="image"
-                src="https://i.pravatar.cc/150?img=11"
-                size="sm"
-              />
-            ),
+            avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=11" size="sm" />,
             text: (
               <>
-                <span className="font-medium text-grey-700">David</span> left a
-                comment on{" "}
-                <span className="font-medium text-primary-400">
-                  Site redesign
-                </span>
+                <span className="font-medium text-grey-700">David</span> left a comment on{" "}
+                <span className="font-medium text-primary-400">Site redesign</span>
               </>
             ),
             date: "Thurs 21, 2023",
@@ -42,20 +33,11 @@ export const Default: Story = {
           },
           {
             id: "2",
-            avatar: (
-              <Avatar
-                type="image"
-                src="https://i.pravatar.cc/150?img=11"
-                size="sm"
-              />
-            ),
+            avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=11" size="sm" />,
             text: (
               <>
-                <span className="font-medium text-grey-700">David</span> left a
-                comment on{" "}
-                <span className="font-medium text-primary-400">
-                  Site redesign
-                </span>
+                <span className="font-medium text-grey-700">David</span> left a comment on{" "}
+                <span className="font-medium text-primary-400">Site redesign</span>
               </>
             ),
             date: "Thurs 21, 2023",
@@ -72,20 +54,11 @@ export const Default: Story = {
           },
           {
             id: "3",
-            avatar: (
-              <Avatar
-                type="image"
-                src="https://i.pravatar.cc/150?img=11"
-                size="sm"
-              />
-            ),
+            avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=11" size="sm" />,
             text: (
               <>
-                <span className="font-medium text-grey-700">David</span> left a
-                comment on{" "}
-                <span className="font-medium text-primary-400">
-                  Site redesign
-                </span>
+                <span className="font-medium text-grey-700">David</span> left a comment on{" "}
+                <span className="font-medium text-primary-400">Site redesign</span>
               </>
             ),
             date: "Thurs 21, 2023",
@@ -101,20 +74,11 @@ export const Default: Story = {
           },
           {
             id: "4",
-            avatar: (
-              <Avatar
-                type="image"
-                src="https://i.pravatar.cc/150?img=11"
-                size="sm"
-              />
-            ),
+            avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=11" size="sm" />,
             text: (
               <>
-                <span className="font-medium text-grey-700">David</span> left a
-                comment on{" "}
-                <span className="font-medium text-primary-400">
-                  Site redesign
-                </span>
+                <span className="font-medium text-grey-700">David</span> left a comment on{" "}
+                <span className="font-medium text-primary-400">Site redesign</span>
               </>
             ),
             date: "Thurs 21, 2023",
@@ -128,20 +92,11 @@ export const Default: Story = {
           },
           {
             id: "5",
-            avatar: (
-              <Avatar
-                type="image"
-                src="https://i.pravatar.cc/150?img=11"
-                size="sm"
-              />
-            ),
+            avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=11" size="sm" />,
             text: (
               <>
-                <span className="font-medium text-grey-700">David</span> left a
-                comment on{" "}
-                <span className="font-medium text-primary-400">
-                  Site redesign
-                </span>
+                <span className="font-medium text-grey-700">David</span> left a comment on{" "}
+                <span className="font-medium text-primary-400">Site redesign</span>
               </>
             ),
             date: "Thurs 21, 2023",
@@ -149,13 +104,7 @@ export const Default: Story = {
             link: { label: "Marketing Design", href: "#" },
             content: {
               type: "comment",
-              avatar: (
-                <Avatar
-                  type="image"
-                  src="https://i.pravatar.cc/150?img=11"
-                  size="xs"
-                />
-              ),
+              avatar: <Avatar type="image" src="https://i.pravatar.cc/150?img=11" size="xs" />,
               author: "David",
               timestamp: "2 hours ago",
               comment:

@@ -1,0 +1,130 @@
+---
+title: ActivityFeed
+description: Activity timelines and notification feeds
+---
+
+# ActivityFeed
+
+Display activity timelines and notification feeds with customizable content.
+
+## Import
+
+```tsx
+import { ActivityFeed, ActivityItem, ActivityContent } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<ActivityFeed>
+  <ActivityItem
+    avatar={<Avatar type="image" src="/user1.jpg" />}
+    timestamp="5 mins ago"
+  >
+    <ActivityContent>
+      <strong>John Doe</strong> commented on your post
+    </ActivityContent>
+  </ActivityItem>
+  <ActivityItem
+    avatar={<Avatar type="initials" initials="AS" />}
+    timestamp="1 hour ago"
+  >
+    <ActivityContent>
+      <strong>Alice Smith</strong> shared a document with you
+    </ActivityContent>
+  </ActivityItem>
+</ActivityFeed>
+```
+
+### With Icons
+
+```tsx
+<ActivityFeed>
+  <ActivityItem
+    icon={<CheckCircleIcon className="text-success-400" />}
+    timestamp="2 hours ago"
+  >
+    <ActivityContent>
+      Project <strong>"Dashboard"</strong> was completed
+    </ActivityContent>
+  </ActivityItem>
+  <ActivityItem
+    icon={<ExclamationCircleIcon className="text-warning-400" />}
+    timestamp="3 hours ago"
+  >
+    <ActivityContent>
+      Build failed for <strong>main</strong> branch
+    </ActivityContent>
+  </ActivityItem>
+</ActivityFeed>
+```
+
+### With Actions
+
+```tsx
+<ActivityFeed>
+  <ActivityItem
+    avatar={<Avatar type="image" src="/user.jpg" />}
+    timestamp="10 mins ago"
+    actions={
+      <div className="flex gap-2">
+        <Button size="sm" variant="primary">Accept</Button>
+        <Button size="sm" variant="grey">Decline</Button>
+      </div>
+    }
+  >
+    <ActivityContent>
+      <strong>Bob Wilson</strong> wants to join your team
+    </ActivityContent>
+  </ActivityItem>
+</ActivityFeed>
+```
+
+### Compact Variant
+
+```tsx
+<ActivityFeed variant="compact">
+  <ActivityItem timestamp="Just now">
+    File uploaded successfully
+  </ActivityItem>
+  <ActivityItem timestamp="2 mins ago">
+    Settings updated
+  </ActivityItem>
+  <ActivityItem timestamp="5 mins ago">
+    New comment received
+  </ActivityItem>
+</ActivityFeed>
+```
+
+## Props
+
+### ActivityFeed
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "compact"` | `"default"` | Feed variant |
+| `className` | `string` | — | Additional CSS classes |
+
+### ActivityItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `avatar` | `ReactNode` | — | Avatar element |
+| `icon` | `ReactNode` | — | Icon element (alternative to avatar) |
+| `timestamp` | `string` | — | Timestamp text |
+| `actions` | `ReactNode` | — | Action buttons |
+| `className` | `string` | — | Additional CSS classes |
+
+### ActivityContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses semantic list structure
+- Timestamps properly formatted
+- Action buttons are keyboard accessible

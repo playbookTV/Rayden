@@ -79,9 +79,7 @@ export function RecentTransactionsBlock({
                   <Icon
                     name={isOutgoing ? "arrow-up" : "arrow-down"}
                     size="sm"
-                    className={
-                      isOutgoing ? "text-error-400" : "text-success-400"
-                    }
+                    className={isOutgoing ? "text-error-400" : "text-success-400"}
                   />
                 </div>
 
@@ -89,14 +87,10 @@ export function RecentTransactionsBlock({
                 <div className="flex flex-1 items-center justify-between min-w-0">
                   <div className="flex flex-col min-w-0">
                     <span className="text-sm text-grey-900 truncate">
-                      <span className="font-normal">
-                        {isOutgoing ? "to" : "from"}
-                      </span>{" "}
+                      <span className="font-normal">{isOutgoing ? "to" : "from"}</span>{" "}
                       <span className="font-semibold">{tx.name}</span>
                     </span>
-                    <span className="text-xs font-medium text-grey-400">
-                      {tx.category}
-                    </span>
+                    <span className="text-xs font-medium text-grey-400">{tx.category}</span>
                   </div>
 
                   {/* Amount */}

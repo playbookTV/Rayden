@@ -5,8 +5,8 @@
  * for correct Rayden UI usage.
  */
 
-import compositionRules from './composition.json';
-import aliasMappings from './aliases.json';
+import compositionRules from "./composition.json";
+import aliasMappings from "./aliases.json";
 
 // Export raw data
 export const composition = compositionRules;
@@ -27,7 +27,8 @@ export function getRelatedPair(pair: string) {
 
 // Resolve a component alias to the real component name
 export function resolveComponentAlias(alias: string): string | null {
-  const mapping = aliasMappings.componentAliases[alias as keyof typeof aliasMappings.componentAliases];
+  const mapping =
+    aliasMappings.componentAliases[alias as keyof typeof aliasMappings.componentAliases];
   if (mapping === undefined) return null;
   return mapping;
 }
@@ -46,9 +47,7 @@ export function resolvePropAlias(propName: string): string | null {
 
 // Get common mistakes for a component
 export function getCommonMistakes(componentName: string) {
-  const mistakes = aliasMappings.commonMistakes.find(
-    (m) => m.component === componentName
-  );
+  const mistakes = aliasMappings.commonMistakes.find((m) => m.component === componentName);
   return mistakes?.mistakes ?? [];
 }
 
@@ -64,7 +63,9 @@ export function validateNesting(
 ): { valid: boolean; message?: string } {
   // Check all compound component rules
   for (const [, rules] of Object.entries(compositionRules.compounds)) {
-    const structure = (rules as { structure?: Record<string, { parent?: string | string[]; children?: string[] }> }).structure;
+    const structure = (
+      rules as { structure?: Record<string, { parent?: string | string[]; children?: string[] }> }
+    ).structure;
     if (!structure) continue;
 
     const childRule = structure[childComponent];
@@ -84,7 +85,7 @@ export function validateNesting(
     if (!parentList.includes(parentComponent)) {
       return {
         valid: false,
-        message: `${childComponent} must be a child of ${parentList.join(' or ')}, not ${parentComponent}`,
+        message: `${childComponent} must be a child of ${parentList.join(" or ")}, not ${parentComponent}`,
       };
     }
 

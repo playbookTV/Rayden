@@ -4,8 +4,8 @@
  * Pre-built layout patterns using Rayden UI components.
  */
 
-import recipesData from './recipes.json';
-import schemaDefinition from './schema.json';
+import recipesData from "./recipes.json";
+import schemaDefinition from "./schema.json";
 
 // Export schema
 export const recipeSchema = schemaDefinition;
@@ -18,7 +18,7 @@ export interface Recipe {
   id: string;
   name: string;
   description: string;
-  category: 'marketing' | 'dashboard' | 'forms' | 'content';
+  category: "marketing" | "dashboard" | "forms" | "content";
   tags: string[];
   components: string[];
   code: string;
@@ -68,7 +68,7 @@ export function getAllTags(): string[] {
 
 // Get recipe categories
 export function getCategories(): string[] {
-  return ['marketing', 'dashboard', 'forms', 'content'];
+  return ["marketing", "dashboard", "forms", "content"];
 }
 
 // Search recipes by query

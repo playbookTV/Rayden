@@ -82,10 +82,7 @@ export function Alert({
 
   return (
     <div
-      className={cn(
-        "flex items-start overflow-hidden rounded bg-white",
-        className
-      )}
+      className={cn("flex items-start overflow-hidden rounded bg-white dark:bg-grey-50", className)}
       role="alert"
       {...rest}
     >
@@ -117,14 +114,8 @@ export function Alert({
         {isBanner ? (
           <div className="flex flex-1 flex-col gap-4 justify-center">
             <div className="flex flex-col gap-1">
-              {title && (
-                <p className="text-base font-semibold text-grey-900">
-                  {title}
-                </p>
-              )}
-              {description && (
-                <p className="text-sm text-grey-600">{description}</p>
-              )}
+              {title && <p className="text-base font-semibold text-grey-900">{title}</p>}
+              {description && <p className="text-sm text-grey-600">{description}</p>}
             </div>
             {(primaryAction || secondaryAction) && (
               <div className="flex flex-wrap items-center gap-2">
@@ -145,7 +136,7 @@ export function Alert({
                   <button
                     type="button"
                     onClick={secondaryAction.onClick}
-                    className="inline-flex items-center justify-center rounded-lg border border-grey-300 bg-white px-4 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50"
+                    className="inline-flex items-center justify-center rounded-lg border border-grey-300 bg-white dark:bg-grey-50 px-4 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50"
                   >
                     {secondaryAction.label}
                   </button>
@@ -155,22 +146,15 @@ export function Alert({
           </div>
         ) : (
           <div className="flex flex-1 flex-col gap-0.5 self-stretch text-sm">
-            {title && (
-              <p className="font-semibold text-grey-900">{title}</p>
-            )}
-            {description && (
-              <p className="text-grey-600">{description}</p>
-            )}
+            {title && <p className="font-semibold text-grey-900">{title}</p>}
+            {description && <p className="text-grey-600">{description}</p>}
           </div>
         )}
 
         {/* Close button with divider */}
         {onClose && (
           <div
-            className={cn(
-              "flex items-center self-stretch shrink-0",
-              isBanner ? "gap-4" : "gap-3"
-            )}
+            className={cn("flex items-center self-stretch shrink-0", isBanner ? "gap-4" : "gap-3")}
           >
             <div className="w-px self-stretch bg-grey-100" />
             <button

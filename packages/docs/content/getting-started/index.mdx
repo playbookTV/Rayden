@@ -1,0 +1,82 @@
+---
+title: Installation
+description: Get started with Rayden UI in your React project
+---
+
+# Installation
+
+Get Rayden UI up and running in your React project.
+
+## Install the package
+
+```bash
+# npm
+npm install @raydenui/ui
+
+# pnpm
+pnpm add @raydenui/ui
+
+# yarn
+yarn add @raydenui/ui
+```
+
+### Peer Dependencies
+
+Rayden UI requires React 18 or higher:
+
+```bash
+npm install react react-dom
+```
+
+## Import the Styles
+
+Add the Rayden UI stylesheet to your app's entry point:
+
+```tsx
+// App.tsx or main.tsx
+import "@raydenui/ui/styles.css";
+```
+
+Or in CSS:
+
+```css
+/* globals.css */
+@import "@raydenui/ui/styles.css";
+```
+
+## Use Components
+
+```tsx
+import { Button, Input, Badge } from "@raydenui/ui";
+
+function App() {
+  return (
+    <div className="flex flex-col gap-4 p-8">
+      <Input
+        label="Email"
+        placeholder="you@example.com"
+        helperText="We'll never share your email"
+      />
+      <Button variant="primary" size="lg">
+        Subscribe
+      </Button>
+      <Badge color="success">Active</Badge>
+    </div>
+  );
+}
+```
+
+## TypeScript
+
+All components are fully typed. Import types alongside components:
+
+```tsx
+import { Button } from "@raydenui/ui";
+import type { ButtonProps, ButtonVariant, ButtonSize } from "@raydenui/ui";
+```
+
+## Next Steps
+
+- [Tailwind Setup](/getting-started/tailwind) — Use Rayden tokens in your Tailwind classes
+- [Components](/components) — Browse all available components
+- [Design Tokens](/design-tokens) — Learn about the color and spacing system

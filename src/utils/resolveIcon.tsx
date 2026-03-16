@@ -13,7 +13,7 @@ function isIconName(value: unknown): value is IconName {
  */
 export function resolveIcon(
   icon: ReactNode | IconName | undefined,
-  size: IconSize = "md",
+  size: IconSize = "md"
 ): ReactNode | undefined {
   if (icon == null) return undefined;
   if (isIconName(icon)) return <Icon name={icon} size={size} />;

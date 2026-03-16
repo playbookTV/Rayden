@@ -1,0 +1,114 @@
+---
+title: Tabs
+description: Tabbed navigation with line and pill variants
+---
+
+# Tabs
+
+Tabs organize content into separate views with line and pill style variants.
+
+## Import
+
+```tsx
+import { Tabs, Tab } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Tabs>
+  <Tab label="Overview">
+    Overview content
+  </Tab>
+  <Tab label="Settings">
+    Settings content
+  </Tab>
+  <Tab label="Billing">
+    Billing content
+  </Tab>
+</Tabs>
+```
+
+### Variants
+
+```tsx
+// Line variant (default)
+<Tabs variant="line">
+  <Tab label="Tab 1">Content 1</Tab>
+  <Tab label="Tab 2">Content 2</Tab>
+</Tabs>
+
+// Pill variant
+<Tabs variant="pill">
+  <Tab label="Tab 1">Content 1</Tab>
+  <Tab label="Tab 2">Content 2</Tab>
+</Tabs>
+```
+
+### With Badges
+
+```tsx
+<Tabs>
+  <Tab label="Inbox" badge={12}>
+    Inbox content
+  </Tab>
+  <Tab label="Drafts" badge={3}>
+    Drafts content
+  </Tab>
+  <Tab label="Sent">
+    Sent content
+  </Tab>
+</Tabs>
+```
+
+### Controlled
+
+```tsx
+const [activeTab, setActiveTab] = useState(0);
+
+<Tabs activeTab={activeTab} onTabChange={setActiveTab}>
+  <Tab label="First">First tab content</Tab>
+  <Tab label="Second">Second tab content</Tab>
+  <Tab label="Third">Third tab content</Tab>
+</Tabs>
+```
+
+### Disabled Tab
+
+```tsx
+<Tabs>
+  <Tab label="Active">Active content</Tab>
+  <Tab label="Disabled" disabled>
+    Disabled content
+  </Tab>
+  <Tab label="Another">Another content</Tab>
+</Tabs>
+```
+
+## Props
+
+### Tabs
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"line" \| "pill"` | `"line"` | Visual style |
+| `activeTab` | `number` | `0` | Controlled active tab index |
+| `onTabChange` | `(index: number) => void` | — | Tab change handler |
+| `className` | `string` | — | Additional CSS classes |
+
+### Tab
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Tab label (required) |
+| `badge` | `number \| string` | — | Badge content |
+| `disabled` | `boolean` | `false` | Disables the tab |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses proper ARIA tabs pattern
+- Keyboard navigation with arrow keys
+- Focus management between tabs

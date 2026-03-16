@@ -1,0 +1,100 @@
+---
+title: Icon
+description: 200+ icons with outline and solid variants
+---
+
+# Icon
+
+Rayden UI includes 200+ icons with outline and solid variants in multiple sizes.
+
+## Import
+
+```tsx
+import { Icon } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Icon name="home" />
+```
+
+### Variants
+
+```tsx
+// Outline (default)
+<Icon name="home" variant="outline" />
+
+// Solid
+<Icon name="home" variant="solid" />
+```
+
+### Sizes
+
+```tsx
+<Icon name="home" size="xs" /> {/* 12px */}
+<Icon name="home" size="sm" /> {/* 16px */}
+<Icon name="home" size="md" /> {/* 20px */}
+<Icon name="home" size="lg" /> {/* 24px */}
+<Icon name="home" size="xl" /> {/* 32px */}
+```
+
+### Custom Color
+
+```tsx
+<Icon name="heart" className="text-primary-500" />
+<Icon name="check-circle" className="text-success-400" />
+<Icon name="x-circle" className="text-error-400" />
+```
+
+## Available Icons
+
+### Navigation
+
+- `home`, `menu`, `x`, `chevron-left`, `chevron-right`, `chevron-up`, `chevron-down`
+- `arrow-left`, `arrow-right`, `arrow-up`, `arrow-down`
+- `external-link`, `link`, `refresh`, `logout`
+
+### Actions
+
+- `plus`, `minus`, `edit`, `trash`, `copy`, `download`, `upload`
+- `search`, `filter`, `sort`, `settings`, `share`
+
+### Status
+
+- `check`, `check-circle`, `x-circle`, `exclamation-circle`, `information-circle`
+- `bell`, `bell-alert`, `star`, `heart`, `bookmark`
+
+### Content
+
+- `document`, `folder`, `image`, `video`, `music`, `file`
+- `calendar`, `clock`, `map-pin`, `globe`, `mail`, `phone`
+
+### Users
+
+- `user`, `users`, `user-plus`, `user-minus`, `user-circle`
+
+### Commerce
+
+- `shopping-cart`, `credit-card`, `currency-dollar`, `receipt`, `tag`
+
+### Data
+
+- `chart-bar`, `chart-pie`, `trending-up`, `trending-down`
+- `database`, `server`, `cloud`, `code`
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | — | Icon name (required) |
+| `variant` | `"outline" \| "solid"` | `"outline"` | Icon variant |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Icon size |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Icons are decorative by default (`aria-hidden="true"`)
+- Add `aria-label` for standalone icons with meaning

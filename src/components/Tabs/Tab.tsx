@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
 import type { IconName } from "../Icon";
@@ -13,22 +13,23 @@ export interface TabProps {
   className?: string;
 }
 
-export function Tab({
-  value,
-  icon,
-  badge,
-  disabled = false,
-  children,
-  className,
-}: TabProps) {
-  const { activeValue, onSelect, variant } = useTabsContext();
+export function Tab({ value, icon, badge, disabled = false, children, className }: TabProps) {
+  const { activeValue, onSelect, variant, registerTab } = useTabsContext();
   const isActive = activeValue === value;
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    registerTab(value, buttonRef.current);
+    return () => registerTab(value, null);
+  }, [value, registerTab]);
 
   if (variant === "pill") {
     return (
       <button
+        ref={buttonRef}
         role="tab"
         aria-selected={isActive}
+        tabIndex={isActive ? 0 : -1}
         disabled={disabled}
         onClick={() => !disabled && onSelect(value)}
         className={cn(
@@ -64,8 +65,10 @@ export function Tab({
   // Line variant
   return (
     <button
+      ref={buttonRef}
       role="tab"
       aria-selected={isActive}
+      tabIndex={isActive ? 0 : -1}
       disabled={disabled}
       onClick={() => !disabled && onSelect(value)}
       className={cn(

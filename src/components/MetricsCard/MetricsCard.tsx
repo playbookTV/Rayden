@@ -67,10 +67,7 @@ function TrendBadge({ badge }: { badge: MetricsCardTrendBadge }) {
         trendStyles[trend]
       )}
     >
-      <Icon
-        name={trend === "down" ? "arrow-down" : "arrow-up"}
-        size="xs"
-      />
+      <Icon name={trend === "down" ? "arrow-down" : "arrow-up"} size="xs" />
       {badge.label}
     </span>
   );
@@ -92,7 +89,7 @@ function StatusBadge({ badge }: { badge: MetricsCardStatusBadge }) {
 /** Small bordered icon container (32×32) used in v2, v3, v6 */
 function SmallIcon({ icon }: { icon: ReactNode | IconName }) {
   return (
-    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-white">
+    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-white dark:bg-grey-50">
       <span className="size-4">{resolveIcon(icon, "sm")}</span>
     </div>
   );
@@ -108,13 +105,7 @@ function LargeIcon({ icon }: { icon: ReactNode | IconName }) {
 }
 
 /** CTA footer bar — grey bg strip at bottom with link text */
-function CtaFooter({
-  cta,
-  centered = false,
-}: {
-  cta: MetricsCardCta;
-  centered?: boolean;
-}) {
+function CtaFooter({ cta, centered = false }: { cta: MetricsCardCta; centered?: boolean }) {
   return (
     <div
       className={cn(
@@ -128,9 +119,7 @@ function CtaFooter({
         className="inline-flex items-center gap-1 text-body-xs font-medium text-primary-600 cursor-pointer hover:text-primary-400"
       >
         {cta.label}
-        {cta.icon && (
-          <span className="size-5">{resolveIcon(cta.icon, "md")}</span>
-        )}
+        {cta.icon && <span className="size-5">{resolveIcon(cta.icon, "md")}</span>}
       </button>
     </div>
   );
@@ -154,13 +143,7 @@ function CtaInline({ cta }: { cta: MetricsCardCta }) {
 /**
  * Variation 1: Horizontal — label+value+CTA left, date+status right
  */
-function Variation1({
-  label,
-  value,
-  secondaryText,
-  statusBadge,
-  cta,
-}: MetricsCardProps) {
+function Variation1({ label, value, secondaryText, statusBadge, cta }: MetricsCardProps) {
   return (
     <div className="flex w-full items-start justify-between p-4">
       {/* Left column */}
@@ -179,9 +162,7 @@ function Variation1({
       {/* Right column */}
       <div className="flex flex-col items-end justify-between self-stretch">
         {secondaryText && (
-          <span className="text-body-sm font-medium text-grey-500">
-            {secondaryText}
-          </span>
+          <span className="text-body-sm font-medium text-grey-500">{secondaryText}</span>
         )}
         {statusBadge && <StatusBadge badge={statusBadge} />}
       </div>
@@ -192,14 +173,7 @@ function Variation1({
 /**
  * Variation 2: Vertical — icon+label → value → badge+desc → CTA footer
  */
-function Variation2({
-  label,
-  value,
-  icon,
-  trendBadge,
-  description,
-  cta,
-}: MetricsCardProps) {
+function Variation2({ label, value, icon, trendBadge, description, cta }: MetricsCardProps) {
   return (
     <>
       <div className="flex w-full flex-col items-start p-4">
@@ -207,9 +181,7 @@ function Variation2({
           {/* Header: icon + label */}
           <div className="flex items-center gap-3">
             {icon && <SmallIcon icon={icon} />}
-            <span className="text-body-sm font-medium text-grey-500">
-              {label}
-            </span>
+            <span className="text-body-sm font-medium text-grey-500">{label}</span>
           </div>
           {/* Metrics */}
           <div className="flex flex-col items-start gap-3">
@@ -246,14 +218,7 @@ function Variation2({
 /**
  * Variation 3: Vertical reversed — icon+label → badge+desc → value → CTA footer
  */
-function Variation3({
-  label,
-  value,
-  icon,
-  trendBadge,
-  description,
-  cta,
-}: MetricsCardProps) {
+function Variation3({ label, value, icon, trendBadge, description, cta }: MetricsCardProps) {
   return (
     <>
       <div className="flex w-full flex-col items-start p-4">
@@ -261,9 +226,7 @@ function Variation3({
           {/* Header: icon + label */}
           <div className="flex items-center gap-3">
             {icon && <SmallIcon icon={icon} />}
-            <span className="text-body-sm font-medium text-grey-500">
-              {label}
-            </span>
+            <span className="text-body-sm font-medium text-grey-500">{label}</span>
           </div>
           {/* Subtext BEFORE value */}
           {(trendBadge || description) && (
@@ -298,14 +261,7 @@ function Variation3({
 /**
  * Variation 4: Horizontal body with large icon on right — label+value+badge left, big icon right → CTA footer
  */
-function Variation4({
-  label,
-  value,
-  icon,
-  trendBadge,
-  description,
-  cta,
-}: MetricsCardProps) {
+function Variation4({ label, value, icon, trendBadge, description, cta }: MetricsCardProps) {
   return (
     <>
       <div className="flex w-full items-start justify-between p-4">
@@ -352,13 +308,7 @@ function Variation4({
 /**
  * Variation 5: Compact horizontal — label+value+desc left, badge+CTA right
  */
-function Variation5({
-  label,
-  value,
-  trendBadge,
-  description,
-  cta,
-}: MetricsCardProps) {
+function Variation5({ label, value, trendBadge, description, cta }: MetricsCardProps) {
   return (
     <div className="flex w-full items-start justify-between p-4">
       {/* Left column */}
@@ -398,14 +348,7 @@ function Variation5({
 /**
  * Variation 6: Centered vertical — icon → label → value(28px) → badge+desc → CTA footer
  */
-function Variation6({
-  label,
-  value,
-  icon,
-  trendBadge,
-  description,
-  cta,
-}: MetricsCardProps) {
+function Variation6({ label, value, icon, trendBadge, description, cta }: MetricsCardProps) {
   return (
     <>
       <div className="flex w-full flex-col items-center justify-center gap-4 p-4">
@@ -451,15 +394,11 @@ function Variation6({
 
 // ─── Main Component ──────────────────────────────────────────────
 
-export function MetricsCard({
-  variation = "2",
-  className,
-  ...props
-}: MetricsCardProps) {
+export function MetricsCard({ variation = "2", className, ...props }: MetricsCardProps) {
   return (
     <div
       className={cn(
-        "flex flex-col overflow-clip rounded-xl border border-grey-200 bg-white shadow-soft-xxs",
+        "flex flex-col overflow-clip rounded-xl border border-grey-200 bg-white dark:bg-grey-50 shadow-soft-xxs",
         className
       )}
       {...(props as HTMLAttributes<HTMLDivElement>)}

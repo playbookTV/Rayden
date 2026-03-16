@@ -1,0 +1,90 @@
+---
+title: Breadcrumb
+description: Hierarchical page navigation
+---
+
+# Breadcrumb
+
+Breadcrumbs show the user's current location within a hierarchical structure and allow navigation to parent pages.
+
+## Import
+
+```tsx
+import { Breadcrumb, BreadcrumbItem } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbItem href="/">Home</BreadcrumbItem>
+  <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+  <BreadcrumbItem>Electronics</BreadcrumbItem>
+</Breadcrumb>
+```
+
+### With Icons
+
+```tsx
+import { HomeIcon } from "@heroicons/react/20/solid";
+
+<Breadcrumb>
+  <BreadcrumbItem href="/" icon={<HomeIcon />}>
+    Home
+  </BreadcrumbItem>
+  <BreadcrumbItem href="/dashboard">Dashboard</BreadcrumbItem>
+  <BreadcrumbItem>Settings</BreadcrumbItem>
+</Breadcrumb>
+```
+
+### Custom Separator
+
+```tsx
+<Breadcrumb separator="/">
+  <BreadcrumbItem href="/">Home</BreadcrumbItem>
+  <BreadcrumbItem href="/docs">Docs</BreadcrumbItem>
+  <BreadcrumbItem>Components</BreadcrumbItem>
+</Breadcrumb>
+```
+
+### With Custom Link Component
+
+```tsx
+import Link from "next/link";
+
+<Breadcrumb>
+  <BreadcrumbItem as={Link} href="/">
+    Home
+  </BreadcrumbItem>
+  <BreadcrumbItem as={Link} href="/products">
+    Products
+  </BreadcrumbItem>
+  <BreadcrumbItem>Current Page</BreadcrumbItem>
+</Breadcrumb>
+```
+
+## Props
+
+### Breadcrumb
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `separator` | `ReactNode` | `"›"` | Separator between items |
+| `className` | `string` | — | Additional CSS classes |
+
+### BreadcrumbItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | — | Link URL (makes item a link) |
+| `icon` | `ReactNode` | — | Leading icon |
+| `as` | `ElementType` | `"a"` | Custom link component |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `<nav>` with `aria-label="Breadcrumb"`
+- Current page marked with `aria-current="page"`
+- Semantic list structure with `<ol>`

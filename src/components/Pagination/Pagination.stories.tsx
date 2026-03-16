@@ -11,7 +11,13 @@ const meta: Meta<typeof Pagination> = {
 export default meta;
 type Story = StoryObj<typeof Pagination>;
 
-const InteractivePagination = ({ totalPages = 30, showPrevNext = true }: { totalPages?: number; showPrevNext?: boolean }) => {
+const InteractivePagination = ({
+  totalPages = 30,
+  showPrevNext = true,
+}: {
+  totalPages?: number;
+  showPrevNext?: boolean;
+}) => {
   const [page, setPage] = useState(3);
   return (
     <Pagination

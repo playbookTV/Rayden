@@ -103,10 +103,13 @@
       "centered"
     ],
     "commonMistakes": [
-      { "mistake": "items={[...]}",  "correction": "Use Tab children" },
+      { "mistake": "items={[...]}", "correction": "Use Tab children" },
       { "mistake": "onChange={fn}", "correction": "onValueChange={fn}" },
       { "mistake": "activeKey='...'", "correction": "value='...'" },
-      { "mistake": "<TabPanel>", "correction": "Manage tab content externally based on active value" }
+      {
+        "mistake": "<TabPanel>",
+        "correction": "Manage tab content externally based on active value"
+      }
     ]
   },
   "examples": [

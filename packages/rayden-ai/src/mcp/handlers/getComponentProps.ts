@@ -2,9 +2,9 @@
  * Handler for get_component_props tool
  */
 
-import { manifests, resolveAlias, componentExists } from '../../manifests/index.js';
-import { resolveComponentAlias, componentDoesNotExist } from '../../rules/index.js';
-import type { GetComponentPropsInput } from '../types.js';
+import { manifests, resolveAlias, componentExists } from "../../manifests/index.js";
+import { resolveComponentAlias, componentDoesNotExist } from "../../rules/index.js";
+import type { GetComponentPropsInput } from "../types.js";
 
 export function handleGetComponentProps(input: GetComponentPropsInput) {
   const { component } = input;
@@ -14,11 +14,11 @@ export function handleGetComponentProps(input: GetComponentPropsInput) {
     return {
       content: [
         {
-          type: 'text' as const,
+          type: "text" as const,
           text: JSON.stringify(
             {
               error: `Component "${component}" does not exist in Rayden UI`,
-              suggestion: 'Use get_components to see available components',
+              suggestion: "Use get_components to see available components",
               alternatives: resolveComponentAlias(component)
                 ? [`Consider using "${resolveComponentAlias(component)}" instead`]
                 : [],
@@ -37,11 +37,11 @@ export function handleGetComponentProps(input: GetComponentPropsInput) {
     return {
       content: [
         {
-          type: 'text' as const,
+          type: "text" as const,
           text: JSON.stringify(
             {
               error: `Component "${component}" not found`,
-              suggestion: 'Use get_components to see available components',
+              suggestion: "Use get_components to see available components",
             },
             null,
             2
@@ -57,7 +57,7 @@ export function handleGetComponentProps(input: GetComponentPropsInput) {
     return {
       content: [
         {
-          type: 'text' as const,
+          type: "text" as const,
           text: JSON.stringify(
             {
               error: `Manifest for "${resolvedName}" not found`,
@@ -112,7 +112,7 @@ export function handleGetComponentProps(input: GetComponentPropsInput) {
   return {
     content: [
       {
-        type: 'text' as const,
+        type: "text" as const,
         text: JSON.stringify(response, null, 2),
       },
     ],

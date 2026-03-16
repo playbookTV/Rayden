@@ -25,11 +25,7 @@ export const Default: Story = {
 
       return (
         <div className="h-[800px] bg-grey-50 p-6">
-          <SidebarMenu
-            value={active}
-            onValueChange={setActive}
-            className="h-full shadow-soft-xs"
-          >
+          <SidebarMenu value={active} onValueChange={setActive} className="h-full shadow-soft-xs">
             {/* Search */}
             <div className="mb-3 px-2">
               <Input size="sm" placeholder="Search" icon="search" />
@@ -69,19 +65,10 @@ export const Default: Story = {
 
             {/* Footer user card */}
             <div className="flex items-center gap-3 border-t border-grey-100 px-4 pt-4">
-              <Avatar
-                type="initials"
-                initials="JD"
-                size="md"
-                status="online"
-              />
+              <Avatar type="initials" initials="JD" size="md" status="online" />
               <div className="flex flex-1 flex-col">
-                <span className="text-body-sm font-semibold text-grey-900">
-                  John Doe
-                </span>
-                <span className="text-body-xs text-grey-600">
-                  john@example.com
-                </span>
+                <span className="text-body-sm font-semibold text-grey-900">John Doe</span>
+                <span className="text-body-xs text-grey-600">john@example.com</span>
               </div>
               <button
                 type="button"
@@ -106,11 +93,7 @@ export const WithSubItems: Story = {
 
       return (
         <div className="h-[700px] bg-grey-50 p-6">
-          <SidebarMenu
-            value={active}
-            onValueChange={setActive}
-            className="h-full shadow-soft-xs"
-          >
+          <SidebarMenu value={active} onValueChange={setActive} className="h-full shadow-soft-xs">
             <SidebarMenuSection title="Main Menu">
               <SidebarMenuItem value="dashboard" icon="grid">
                 Dashboard
@@ -118,26 +101,16 @@ export const WithSubItems: Story = {
               <SidebarMenuItem value="projects" icon="folder">
                 Projects
                 <SidebarMenuSub>
-                  <SidebarMenuSubItem value="all-projects">
-                    All Projects
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem value="active-projects">
-                    Active
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem value="archived-projects">
-                    Archived
-                  </SidebarMenuSubItem>
+                  <SidebarMenuSubItem value="all-projects">All Projects</SidebarMenuSubItem>
+                  <SidebarMenuSubItem value="active-projects">Active</SidebarMenuSubItem>
+                  <SidebarMenuSubItem value="archived-projects">Archived</SidebarMenuSubItem>
                 </SidebarMenuSub>
               </SidebarMenuItem>
               <SidebarMenuItem value="team" icon="users">
                 Team
                 <SidebarMenuSub>
-                  <SidebarMenuSubItem value="members">
-                    Members
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem value="roles">
-                    Roles
-                  </SidebarMenuSubItem>
+                  <SidebarMenuSubItem value="members">Members</SidebarMenuSubItem>
+                  <SidebarMenuSubItem value="roles">Roles</SidebarMenuSubItem>
                 </SidebarMenuSub>
               </SidebarMenuItem>
               <SidebarMenuItem value="reports" icon="chart" badge={5}>
@@ -248,9 +221,7 @@ const ThemeSidebar = ({ theme }: { theme: SidebarMenuTheme }) => {
           </span>
           <span
             className={
-              theme === "light"
-                ? "text-body-xs text-grey-600"
-                : "text-body-xs text-[#E3EFFC]"
+              theme === "light" ? "text-body-xs text-grey-600" : "text-body-xs text-[#E3EFFC]"
             }
           >
             alison.e@rayna.ui
@@ -315,10 +286,7 @@ export const CollapsibleToggle: Story = {
               onClick={() => setCollapsed((c) => !c)}
               className="mb-2 flex cursor-pointer items-center justify-center self-end rounded-md p-2 text-grey-400 hover:bg-grey-100"
             >
-              <Icon
-                name={collapsed ? "chevron-right" : "chevron-left"}
-                size="md"
-              />
+              <Icon name={collapsed ? "chevron-right" : "chevron-left"} size="md" />
             </button>
 
             <SidebarMenuSection title="Main Menu">

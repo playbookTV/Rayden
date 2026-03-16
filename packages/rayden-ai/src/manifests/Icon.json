@@ -46,7 +46,10 @@
     "commonMistakes": [
       { "mistake": "icon='settings'", "correction": "name='settings'" },
       { "mistake": "color='primary'", "correction": "className='text-primary-500'" },
-      { "mistake": "<Icon onClick={...}>", "correction": "Wrap in Button with iconPosition='icon-only' for interactive icons" }
+      {
+        "mistake": "<Icon onClick={...}>",
+        "correction": "Wrap in Button with iconPosition='icon-only' for interactive icons"
+      }
     ]
   },
   "examples": [

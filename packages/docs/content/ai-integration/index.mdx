@@ -1,0 +1,333 @@
+---
+title: AI Integration
+description: AI compatibility layer for reliable LLM code generation with Rayden UI
+---
+
+# @raydenui/ai
+
+AI compatibility layer for Rayden UI — enables LLMs to reliably generate UI code without hallucinating components, props, or patterns that don't exist.
+
+## Overview
+
+`@raydenui/ai` provides:
+
+- **Component Manifests** — Machine-readable JSON schemas for every Rayden UI component
+- **Design Tokens** — Color, typography, spacing, and shadow tokens in JSON format
+- **Composition Rules** — Rules for correctly nesting compound components
+- **Layout Recipes** — Pre-defined patterns for common UI layouts
+- **MCP Server** — Model Context Protocol server for AI tool integration
+
+## Installation
+
+```bash
+pnpm add @raydenui/ai
+```
+
+## Quick Start
+
+### Using RAYDEN_RULES.md
+
+The simplest way to integrate with AI is to include the rules file in your context:
+
+```tsx
+import rules from "@raydenui/ai/RAYDEN_RULES.md";
+
+// Include in AI system prompt
+const systemPrompt = `You are a UI generator using Rayden UI.\n\n${rules}`;
+```
+
+### Programmatic Access
+
+```tsx
+import { manifests, tokens, recipes, rules } from "@raydenui/ai";
+
+// Get all component manifests
+const allComponents = manifests.getAll();
+
+// Get specific component props
+const buttonProps = manifests.getComponent("Button");
+
+// Get design tokens
+const colorTokens = tokens.colors;
+const shadowTokens = tokens.shadows;
+
+// Get layout recipes
+const formRecipe = recipes.get("form-layout");
+```
+
+## MCP Server
+
+The package includes an MCP (Model Context Protocol) server for AI tool integration:
+
+### Starting the Server
+
+```bash
+npx rayden-ai-mcp
+```
+
+### Available Tools
+
+| Tool                | Description                                     |
+| ------------------- | ----------------------------------------------- |
+| `getComponents`     | List all available components with descriptions |
+| `getComponentProps` | Get detailed props for a specific component     |
+| `getTokens`         | Get design tokens (colors, typography, etc.)    |
+| `getLayoutRecipes`  | Get pre-defined layout patterns                 |
+
+### Claude Desktop Integration
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "rayden-ai": {
+      "command": "npx",
+      "args": ["@raydenui/ai"]
+    }
+  }
+}
+```
+
+### Claude Code Integration
+
+Add to your project's `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "rayden-ai": {
+      "command": "npx",
+      "args": ["@raydenui/ai"]
+    }
+  }
+}
+```
+
+## Component Manifests
+
+Each component has a JSON manifest with:
+
+```json
+{
+  "name": "Button",
+  "description": "Primary action trigger with variants, appearances, sizes, icons",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": ["primary", "secondary", "grey", "destructive", "text", "success", "warning", "info"],
+      "default": "primary",
+      "description": "Visual variant of the button"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "lg"],
+      "default": "sm",
+      "description": "Button size (no 'md' - only sm and lg)"
+    },
+    "icon": {
+      "type": "ReactNode | IconName",
+      "description": "Icon to display"
+    },
+    "iconPosition": {
+      "type": "string",
+      "enum": ["leading", "trailing", "icon-only", "none"],
+      "default": "none",
+      "description": "Position of the icon"
+    }
+  },
+  "examples": [
+    "<Button variant=\"primary\">Click me</Button>",
+    "<Button icon=\"plus\" iconPosition=\"leading\">Add Item</Button>"
+  ],
+  "commonMistakes": [
+    { "wrong": "color=\"primary\"", "correct": "variant=\"primary\"" },
+    { "wrong": "size=\"md\"", "correct": "size=\"sm\" (only sm and lg exist)" }
+  ]
+}
+```
+
+## Design Tokens
+
+Tokens are exported in JSON format:
+
+```json
+{
+  "colors": {
+    "primary": {
+      "50": "#FFECE5",
+      "100": "#FCB59A",
+      "400": "#F56630",
+      "500": "#EB5017",
+      "600": "#CC400C",
+      "700": "#AD3307"
+    },
+    "grey": {
+      "50": "#F9FAFB",
+      "100": "#F0F2F5",
+      "200": "#E4E7EC",
+      "300": "#D0D5DD",
+      "400": "#98A2B3",
+      "500": "#667185",
+      "600": "#475367",
+      "700": "#344054",
+      "800": "#1D2739",
+      "900": "#101928"
+    }
+  },
+  "shadows": {
+    "soft": {
+      "xxs": "0px 1px 2px 0px rgba(16, 25, 40, 0.06)",
+      "xs": "0px 2px 4px -2px rgba(16, 25, 40, 0.06)",
+      "sm": "0px 4px 6px -2px rgba(16, 25, 40, 0.05)",
+      "md": "0px 6px 8px -2px rgba(16, 25, 40, 0.05)",
+      "lg": "0px 8px 10px -2px rgba(16, 25, 40, 0.05)"
+    }
+  },
+  "typography": {
+    "display-lg": { "fontSize": "56px", "lineHeight": "1.2" },
+    "h1": { "fontSize": "40px", "lineHeight": "1.2" },
+    "body-md": { "fontSize": "16px", "lineHeight": "1.5" }
+  }
+}
+```
+
+## Composition Rules
+
+Rules for correctly nesting compound components:
+
+```json
+{
+  "Table": {
+    "structure": "Table > TableHeader/TableBody > TableRow > TableHead/TableCell",
+    "rules": [
+      "TableHeader must be direct child of Table",
+      "TableRow must be inside TableHeader or TableBody",
+      "TableHead goes in TableHeader rows, TableCell in TableBody rows"
+    ]
+  },
+  "DropdownMenu": {
+    "structure": "DropdownMenu > DropdownMenuTrigger + DropdownMenuContent > DropdownMenuItem",
+    "rules": [
+      "DropdownMenuTrigger wraps the trigger element",
+      "DropdownMenuContent contains menu items",
+      "Use DropdownMenuSeparator between groups"
+    ]
+  }
+}
+```
+
+## Layout Recipes
+
+Pre-defined patterns for common layouts:
+
+```tsx
+import { recipes } from "@raydenui/ai";
+
+const formRecipe = recipes.get("form-layout");
+// Returns:
+// {
+//   name: "form-layout",
+//   description: "Standard form with labeled inputs",
+//   template: `
+//     <form className="space-y-4 max-w-md">
+//       <Input label="..." />
+//       <Input label="..." />
+//       <Button variant="primary" className="w-full">Submit</Button>
+//     </form>
+//   `
+// }
+```
+
+## Exports
+
+```tsx
+// Main export
+import { manifests, tokens, recipes, rules } from "@raydenui/ai";
+
+// Individual exports
+import { getComponent, getAllComponents } from "@raydenui/ai/manifests";
+import { colors, shadows, typography } from "@raydenui/ai/tokens";
+import { getRecipe, getAllRecipes } from "@raydenui/ai/recipes";
+import { compositionRules, aliases } from "@raydenui/ai/rules";
+import { createServer } from "@raydenui/ai/mcp";
+```
+
+## Use Cases
+
+### AI Code Generation
+
+```tsx
+// In your AI prompt engineering
+const context = `
+You are generating React code using Rayden UI.
+
+Available components:
+${JSON.stringify(manifests.getAll())}
+
+Design tokens:
+${JSON.stringify(tokens)}
+
+Rules:
+${rules.compositionRules}
+`;
+```
+
+### IDE Extensions
+
+```tsx
+// Provide autocomplete suggestions
+import { manifests } from "@raydenui/ai";
+
+function getPropsForComponent(componentName: string) {
+  return manifests.getComponent(componentName)?.props;
+}
+```
+
+### Documentation Generation
+
+```tsx
+// Generate docs from manifests
+import { manifests } from "@raydenui/ai";
+
+for (const component of manifests.getAll()) {
+  console.log(`## ${component.name}`);
+  console.log(component.description);
+  console.log("### Props");
+  for (const [name, prop] of Object.entries(component.props)) {
+    console.log(`- \`${name}\`: ${prop.type}`);
+  }
+}
+```
+
+## Package Structure
+
+```
+@raydenui/ai/
+├── dist/
+│   ├── index.js          # Main exports
+│   ├── manifests/        # Component manifests
+│   ├── tokens/           # Design tokens
+│   ├── recipes/          # Layout recipes
+│   └── mcp/              # MCP server
+├── RAYDEN_RULES.md       # Human-readable rules file
+└── package.json
+```
+
+## Configuration
+
+The package exposes an `ai` field in package.json for discovery:
+
+```json
+{
+  "ai": {
+    "type": "design-system",
+    "rulesFile": "RAYDEN_RULES.md",
+    "manifestsDir": "dist/manifests",
+    "tokensFile": "dist/tokens/tokens.json",
+    "mcpServer": "dist/mcp/server.js"
+  }
+}
+```
+
+This allows AI tools to automatically discover and use Rayden UI's capabilities.

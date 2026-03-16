@@ -1,0 +1,103 @@
+---
+title: FileUpload
+description: Drag-and-drop file upload with progress tracking
+---
+
+# FileUpload
+
+A drag-and-drop file upload component with progress indicators and file type restrictions.
+
+## Import
+
+```tsx
+import { FileUpload } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<FileUpload onUpload={(files) => handleUpload(files)} />
+```
+
+### With File Type Restrictions
+
+```tsx
+<FileUpload
+  accept=".pdf,.doc,.docx"
+  onUpload={(files) => handleUpload(files)}
+/>
+```
+
+### With Max File Size
+
+```tsx
+<FileUpload
+  maxSize={5 * 1024 * 1024} // 5MB
+  onUpload={(files) => handleUpload(files)}
+  onError={(error) => showError(error)}
+/>
+```
+
+### Multiple Files
+
+```tsx
+<FileUpload
+  multiple
+  maxFiles={5}
+  onUpload={(files) => handleUpload(files)}
+/>
+```
+
+### With Progress
+
+```tsx
+const [progress, setProgress] = useState(0);
+
+<FileUpload
+  progress={progress}
+  uploading={progress > 0 && progress < 100}
+  onUpload={async (files) => {
+    for (let i = 0; i <= 100; i += 10) {
+      setProgress(i);
+      await delay(100);
+    }
+  }}
+/>
+```
+
+### Custom Styling
+
+```tsx
+<FileUpload
+  title="Upload Images"
+  description="PNG, JPG up to 10MB"
+  icon={<PhotoIcon />}
+  onUpload={(files) => handleUpload(files)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `onUpload` | `(files: File[]) => void` | — | Upload handler (required) |
+| `onError` | `(error: string) => void` | — | Error handler |
+| `accept` | `string` | — | Accepted file types |
+| `maxSize` | `number` | — | Max file size in bytes |
+| `multiple` | `boolean` | `false` | Allow multiple files |
+| `maxFiles` | `number` | — | Max number of files |
+| `progress` | `number` | — | Upload progress (0-100) |
+| `uploading` | `boolean` | `false` | Upload in progress state |
+| `title` | `string` | `"Upload file"` | Title text |
+| `description` | `string` | — | Description text |
+| `icon` | `ReactNode` | — | Custom icon |
+| `disabled` | `boolean` | `false` | Disables the upload |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Keyboard accessible file selection
+- Drag and drop with visual feedback
+- Progress announced to screen readers

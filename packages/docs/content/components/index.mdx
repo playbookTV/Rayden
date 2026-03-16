@@ -1,0 +1,110 @@
+---
+title: Components Overview
+description: Browse all 24+ Rayden UI components organized by category
+---
+
+# Components
+
+Rayden UI provides 24+ production-ready React components built with Tailwind CSS v4. All components are fully typed, accessible, and tree-shakeable.
+
+## Import
+
+```tsx
+import { Button, Input, Badge, Table, Avatar } from "@raydenui/ui";
+```
+
+## Forms & Inputs
+
+Components for user input and form controls.
+
+| Component                               | Description                                                        |
+| --------------------------------------- | ------------------------------------------------------------------ |
+| [Button](/components/button)            | Action buttons with variants, appearances, sizes, and icon support |
+| [ButtonGroup](/components/button-group) | Horizontal grouping of related buttons                             |
+| [Input](/components/input)              | Text input with label, helper text, and validation states          |
+| [Select](/components/select)            | Dropdown select with icons, avatars, and status indicators         |
+| [FormControl](/components/form-control) | Checkbox, Radio, and Toggle components                             |
+| [Chip](/components/chip)                | Compact input tags with close/filter actions                       |
+| [FileUpload](/components/file-upload)   | Drag-and-drop file upload with progress tracking                   |
+
+## Navigation
+
+Components for navigating between pages and sections.
+
+| Component                                 | Description                                             |
+| ----------------------------------------- | ------------------------------------------------------- |
+| [Tabs](/components/tabs)                  | Tabbed navigation with line and pill variants           |
+| [Breadcrumb](/components/breadcrumb)      | Hierarchical page navigation                            |
+| [Pagination](/components/pagination)      | Page navigation with prev/next controls                 |
+| [SidebarMenu](/components/sidebar-menu)   | Collapsible sidebar navigation with sections and themes |
+| [DropdownMenu](/components/dropdown-menu) | Accessible dropdown menu with keyboard navigation       |
+
+## Data Display
+
+Components for presenting data and content.
+
+| Component                                                      | Description                                                  |
+| -------------------------------------------------------------- | ------------------------------------------------------------ |
+| [Table](/components/table)                                     | Data table with sorting, selection, and customizable cells   |
+| [Avatar](/components/avatar)                                   | User avatar with image, initials, icon, and status indicator |
+| [ActivityFeed](/components/activity-feed)                      | Activity timelines and notification feeds                    |
+| [MetricsCard](/components/metrics-card)                        | Dashboard metric cards with 6 layout variations              |
+| [Icon](/components/icon)                                       | 200+ icons with outline and solid variants                   |
+| [EmptyStateIllustration](/components/empty-state-illustration) | 19 empty state illustrations with custom palettes            |
+
+## Feedback
+
+Components for communicating status and messages.
+
+| Component                                     | Description                                 |
+| --------------------------------------------- | ------------------------------------------- |
+| [Alert](/components/alert)                    | Toast and banner notifications with actions |
+| [Badge](/components/badge)                    | Status indicators and labels                |
+| [ProgressBar](/components/progress-bar)       | Linear progress indicator                   |
+| [ProgressCircle](/components/progress-circle) | Circular progress indicator                 |
+| [Tooltip](/components/tooltip)                | Contextual information popover              |
+
+## Layout
+
+Components for organizing and structuring content.
+
+| Component                      | Description                                            |
+| ------------------------------ | ------------------------------------------------------ |
+| [Divider](/components/divider) | Content separator with optional label, icon, or button |
+
+## Common Patterns
+
+### Component Structure
+
+All components follow consistent patterns:
+
+```tsx
+import { Button } from "@raydenui/ui";
+import type { ButtonProps } from "@raydenui/ui";
+
+// Components use forwardRef for ref forwarding
+const MyComponent = () => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return <Button ref={buttonRef}>Click me</Button>;
+};
+```
+
+### Styling with `className`
+
+All components accept a `className` prop for custom styling:
+
+```tsx
+<Button className="w-full shadow-soft-lg">Full Width Button</Button>
+```
+
+### TypeScript Support
+
+All props are fully typed:
+
+```tsx
+import type { ButtonVariant, ButtonAppearance, ButtonSize, InputState } from "@raydenui/ui";
+
+const variant: ButtonVariant = "primary";
+const appearance: ButtonAppearance = "solid";
+```

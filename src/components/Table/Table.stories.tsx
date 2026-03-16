@@ -25,11 +25,41 @@ type Story = StoryObj<typeof Table>;
 
 // ─── Sample data ───────────────────────────────────────────────────
 const users = [
-  { id: "1", name: "John Doe", email: "john@example.com", role: "Admin", status: "Active" as const },
-  { id: "2", name: "Jane Smith", email: "jane@example.com", role: "Editor", status: "Active" as const },
-  { id: "3", name: "Bob Wilson", email: "bob@example.com", role: "Viewer", status: "Inactive" as const },
-  { id: "4", name: "Alice Brown", email: "alice@example.com", role: "Editor", status: "Active" as const },
-  { id: "5", name: "Charlie Lee", email: "charlie@example.com", role: "Viewer", status: "Inactive" as const },
+  {
+    id: "1",
+    name: "John Doe",
+    email: "john@example.com",
+    role: "Admin",
+    status: "Active" as const,
+  },
+  {
+    id: "2",
+    name: "Jane Smith",
+    email: "jane@example.com",
+    role: "Editor",
+    status: "Active" as const,
+  },
+  {
+    id: "3",
+    name: "Bob Wilson",
+    email: "bob@example.com",
+    role: "Viewer",
+    status: "Inactive" as const,
+  },
+  {
+    id: "4",
+    name: "Alice Brown",
+    email: "alice@example.com",
+    role: "Editor",
+    status: "Active" as const,
+  },
+  {
+    id: "5",
+    name: "Charlie Lee",
+    email: "charlie@example.com",
+    role: "Viewer",
+    status: "Inactive" as const,
+  },
 ];
 
 /* ─── Basic table ─────────────────────────────────────────────────── */
@@ -114,10 +144,7 @@ export const WithSelection: Story = {
               {users.map((user) => (
                 <TableRow key={user.id} selected={selected.has(user.id)}>
                   <TableCell className="w-12">
-                    <Checkbox
-                      checked={selected.has(user.id)}
-                      onChange={() => toggleRow(user.id)}
-                    />
+                    <Checkbox checked={selected.has(user.id)} onChange={() => toggleRow(user.id)} />
                   </TableCell>
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell className="text-grey-600">{user.email}</TableCell>
@@ -163,9 +190,7 @@ export const WithSorting: Story = {
         if (!sortCol || !sortDir) return 0;
         const aVal = a[sortCol as keyof typeof a];
         const bVal = b[sortCol as keyof typeof b];
-        return sortDir === "asc"
-          ? aVal.localeCompare(bVal)
-          : bVal.localeCompare(aVal);
+        return sortDir === "asc" ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
       });
 
       return (
@@ -250,12 +275,8 @@ export const WithLeadingAvatar: Story = {
                     size="md"
                   />
                   <div className="flex flex-col">
-                    <span className="text-body-sm font-medium text-grey-900">
-                      {user.name}
-                    </span>
-                    <span className="text-body-sm text-grey-600">
-                      {user.email}
-                    </span>
+                    <span className="text-body-sm font-medium text-grey-900">{user.name}</span>
+                    <span className="text-body-sm text-grey-600">{user.email}</span>
                   </div>
                 </div>
               </TableCell>
@@ -271,16 +292,10 @@ export const WithLeadingAvatar: Story = {
               </TableCell>
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    className="text-body-sm font-semibold text-primary-400"
-                  >
+                  <button type="button" className="text-body-sm font-semibold text-primary-400">
                     Edit
                   </button>
-                  <button
-                    type="button"
-                    className="text-body-sm font-semibold text-grey-400"
-                  >
+                  <button type="button" className="text-body-sm font-semibold text-grey-400">
                     Delete
                   </button>
                 </div>
@@ -330,9 +345,7 @@ export const FullFeatured: Story = {
         if (!sortCol || !sortDir) return 0;
         const aVal = a[sortCol as keyof typeof a];
         const bVal = b[sortCol as keyof typeof b];
-        return sortDir === "asc"
-          ? aVal.localeCompare(bVal)
-          : bVal.localeCompare(aVal);
+        return sortDir === "asc" ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
       });
 
       return (
@@ -373,10 +386,7 @@ export const FullFeatured: Story = {
                 return (
                   <TableRow key={user.id} selected={isSelected}>
                     <TableCell className="w-12">
-                      <Checkbox
-                        checked={isSelected}
-                        onChange={() => toggleRow(user.id)}
-                      />
+                      <Checkbox checked={isSelected} onChange={() => toggleRow(user.id)} />
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-3">
@@ -393,9 +403,7 @@ export const FullFeatured: Story = {
                           <span className="text-body-sm font-medium text-grey-900">
                             {user.name}
                           </span>
-                          <span className="text-body-sm text-grey-600">
-                            {user.email}
-                          </span>
+                          <span className="text-body-sm text-grey-600">{user.email}</span>
                         </div>
                       </div>
                     </TableCell>

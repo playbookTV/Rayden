@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useId,
   useRef,
   useState,
   forwardRef,
@@ -29,8 +30,7 @@ const SelectContext = createContext<SelectContextValue | null>(null);
 
 export function useSelectContext() {
   const ctx = useContext(SelectContext);
-  if (!ctx)
-    throw new Error("SelectOption must be used within <Select>");
+  if (!ctx) throw new Error("SelectOption must be used within <Select>");
   return ctx;
 }
 
@@ -43,10 +43,7 @@ interface SelectedOptionInfo {
   description?: string;
 }
 
-function findSelectedOption(
-  children: ReactNode,
-  value: string
-): SelectedOptionInfo | null {
+function findSelectedOption(children: ReactNode, value: string): SelectedOptionInfo | null {
   let found: SelectedOptionInfo | null = null;
   Children.forEach(children, (child) => {
     if (found) return;
@@ -105,6 +102,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
     const [open, setOpen] = useState(false);
     const value = controlledValue ?? internalValue;
 
+    const listboxId = useId();
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
@@ -163,15 +161,12 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
     // Keyboard navigation in the listbox
     const handleListKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
       const items = Array.from(
-        listRef.current?.querySelectorAll<HTMLButtonElement>(
-          '[role="option"]:not([disabled])'
-        ) ?? []
+        listRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]:not([disabled])') ??
+          []
       );
       if (!items.length) return;
 
-      const currentIndex = items.findIndex(
-        (item) => item === document.activeElement
-      );
+      const currentIndex = items.findIndex((item) => item === document.activeElement);
 
       switch (e.key) {
         case "ArrowDown": {
@@ -203,24 +198,18 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
     const selectedOption = value ? findSelectedOption(children, value) : null;
 
     // Resolve leading element for trigger
-    const triggerLeading = selectedOption
-      ? selectedOption.avatar
-        ? selectedOption.avatar
-        : selectedOption.statusColor
-          ? (
-              <span
-                className="shrink-0 size-2 rounded-full border-[1.5px] border-white"
-                style={{ backgroundColor: selectedOption.statusColor }}
-              />
-            )
-          : selectedOption.icon
-            ? (
-                <span className="shrink-0 size-5">
-                  {resolveIcon(selectedOption.icon, "md")}
-                </span>
-              )
-            : null
-      : null;
+    const triggerLeading = selectedOption ? (
+      selectedOption.avatar ? (
+        selectedOption.avatar
+      ) : selectedOption.statusColor ? (
+        <span
+          className="shrink-0 size-2 rounded-full border-[1.5px] border-white"
+          style={{ backgroundColor: selectedOption.statusColor }}
+        />
+      ) : selectedOption.icon ? (
+        <span className="shrink-0 size-5">{resolveIcon(selectedOption.icon, "md")}</span>
+      ) : null
+    ) : null;
 
     return (
       <div
@@ -234,9 +223,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
       >
         {/* Label */}
         {label && (
-          <label className="text-sm font-medium text-grey-900 leading-[1.45]">
-            {label}
-          </label>
+          <label className="text-sm font-medium text-grey-900 leading-[1.45]">{label}</label>
         )}
 
         {/* Trigger */}
@@ -246,6 +233,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           role="combobox"
           aria-expanded={open}
           aria-haspopup="listbox"
+          aria-controls={listboxId}
           disabled={disabled}
           onClick={() => !disabled && setOpen(!open)}
           className={cn(
@@ -253,8 +241,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             disabled
               ? "bg-grey-100 border-grey-300 cursor-not-allowed"
               : open
-                ? "bg-white border-[#1671D9]"
-                : "bg-white border-grey-300 hover:border-[#B6D8FF]",
+                ? "bg-white dark:bg-grey-50 border-[#1671D9]"
+                : "bg-white dark:bg-grey-50 border-grey-300 hover:border-[#B6D8FF]",
             className
           )}
         >
@@ -266,9 +254,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
                 selectedOption ? "text-grey-900" : "text-grey-400"
               )}
             >
-              {selectedOption
-                ? selectedOption.label
-                : placeholder}
+              {selectedOption ? selectedOption.label : placeholder}
             </span>
           </div>
           <Icon
@@ -283,18 +269,17 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
         </button>
 
         {/* Helper text */}
-        {helperText && (
-          <p className="text-sm text-grey-500 leading-[1.45]">{helperText}</p>
-        )}
+        {helperText && <p className="text-sm text-grey-500 leading-[1.45]">{helperText}</p>}
 
         {/* Options panel */}
         {open && (
           <SelectContext.Provider value={{ value, onSelect, open }}>
             <div
               ref={listRef}
+              id={listboxId}
               role="listbox"
               onKeyDown={handleListKeyDown}
-              className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[320px] overflow-y-auto rounded-lg border border-grey-200 bg-white py-1 shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)]"
+              className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[320px] overflow-y-auto rounded-lg border border-grey-200 bg-white dark:bg-grey-50 py-1 shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)]"
             >
               {children}
             </div>

@@ -1,0 +1,159 @@
+---
+title: SidebarMenu
+description: Collapsible sidebar navigation with sections and themes
+---
+
+# SidebarMenu
+
+A collapsible sidebar navigation component with support for sections, submenus, icons, and light/dark themes.
+
+## Import
+
+```tsx
+import { SidebarMenu, SidebarSection, SidebarItem, SidebarSubmenu } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<SidebarMenu>
+  <SidebarItem icon={<HomeIcon />} href="/">
+    Dashboard
+  </SidebarItem>
+  <SidebarItem icon={<UsersIcon />} href="/users">
+    Users
+  </SidebarItem>
+  <SidebarItem icon={<CogIcon />} href="/settings">
+    Settings
+  </SidebarItem>
+</SidebarMenu>
+```
+
+### With Sections
+
+```tsx
+<SidebarMenu>
+  <SidebarSection title="Main">
+    <SidebarItem icon={<HomeIcon />} href="/">
+      Dashboard
+    </SidebarItem>
+    <SidebarItem icon={<ChartBarIcon />} href="/analytics">
+      Analytics
+    </SidebarItem>
+  </SidebarSection>
+
+  <SidebarSection title="Management">
+    <SidebarItem icon={<UsersIcon />} href="/users">
+      Users
+    </SidebarItem>
+    <SidebarItem icon={<FolderIcon />} href="/projects">
+      Projects
+    </SidebarItem>
+  </SidebarSection>
+</SidebarMenu>
+```
+
+### With Submenus
+
+```tsx
+<SidebarMenu>
+  <SidebarItem icon={<HomeIcon />} href="/">
+    Dashboard
+  </SidebarItem>
+  <SidebarSubmenu icon={<CogIcon />} label="Settings">
+    <SidebarItem href="/settings/profile">Profile</SidebarItem>
+    <SidebarItem href="/settings/security">Security</SidebarItem>
+    <SidebarItem href="/settings/notifications">Notifications</SidebarItem>
+  </SidebarSubmenu>
+</SidebarMenu>
+```
+
+### With Badges
+
+```tsx
+<SidebarMenu>
+  <SidebarItem icon={<InboxIcon />} badge={5} href="/inbox">
+    Inbox
+  </SidebarItem>
+  <SidebarItem icon={<BellIcon />} badge="New" href="/notifications">
+    Notifications
+  </SidebarItem>
+</SidebarMenu>
+```
+
+### Collapsible
+
+```tsx
+const [collapsed, setCollapsed] = useState(false);
+
+<SidebarMenu collapsed={collapsed}>
+  <SidebarItem icon={<HomeIcon />} href="/">
+    Dashboard
+  </SidebarItem>
+  {/* Icons only shown when collapsed */}
+</SidebarMenu>
+
+<button onClick={() => setCollapsed(!collapsed)}>
+  Toggle Sidebar
+</button>
+```
+
+### Themes
+
+```tsx
+// Light theme (default)
+<SidebarMenu theme="light">
+  {/* ... */}
+</SidebarMenu>
+
+// Dark theme
+<SidebarMenu theme="dark">
+  {/* ... */}
+</SidebarMenu>
+```
+
+## Props
+
+### SidebarMenu
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `collapsed` | `boolean` | `false` | Collapsed state |
+| `theme` | `"light" \| "dark"` | `"light"` | Color theme |
+| `className` | `string` | — | Additional CSS classes |
+
+### SidebarSection
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | — | Section title |
+| `className` | `string` | — | Additional CSS classes |
+
+### SidebarItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `ReactNode` | — | Leading icon |
+| `href` | `string` | — | Link URL |
+| `active` | `boolean` | `false` | Active state |
+| `badge` | `number \| string` | — | Badge content |
+| `onClick` | `() => void` | — | Click handler |
+| `className` | `string` | — | Additional CSS classes |
+
+### SidebarSubmenu
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `ReactNode` | — | Leading icon |
+| `label` | `string` | — | Submenu label (required) |
+| `defaultOpen` | `boolean` | `false` | Initially expanded |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses semantic `<nav>` element
+- Keyboard navigation support
+- Expandable sections with proper ARIA
+- Active items properly indicated

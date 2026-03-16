@@ -26,10 +26,7 @@ const DropdownMenuContext = createContext<DropdownMenuContextValue | null>(null)
 
 function useDropdownMenuContext() {
   const ctx = useContext(DropdownMenuContext);
-  if (!ctx)
-    throw new Error(
-      "DropdownMenu compound components must be used within <DropdownMenu>"
-    );
+  if (!ctx) throw new Error("DropdownMenu compound components must be used within <DropdownMenu>");
   return ctx;
 }
 
@@ -108,55 +105,46 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
 DropdownMenu.displayName = "DropdownMenu";
 
 // ─── DropdownMenuTrigger ──────────────────────────────────────────
-export interface DropdownMenuTriggerProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface DropdownMenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-export const DropdownMenuTrigger = forwardRef<
-  HTMLButtonElement,
-  DropdownMenuTriggerProps
->(({ onClick, children, className, ...rest }, ref) => {
-  const { open, setOpen, triggerRef } = useDropdownMenuContext();
+export const DropdownMenuTrigger = forwardRef<HTMLButtonElement, DropdownMenuTriggerProps>(
+  ({ onClick, children, className, ...rest }, ref) => {
+    const { open, setOpen, triggerRef } = useDropdownMenuContext();
 
-  return (
-    <button
-      ref={(node) => {
-        (triggerRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-        if (typeof ref === "function") ref(node);
-        else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-      }}
-      type="button"
-      aria-expanded={open}
-      aria-haspopup="menu"
-      onClick={(e) => {
-        setOpen(!open);
-        onClick?.(e);
-      }}
-      className={className}
-      {...rest}
-    >
-      {children}
-    </button>
-  );
-});
+    return (
+      <button
+        ref={(node) => {
+          (triggerRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+          if (typeof ref === "function") ref(node);
+          else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+        }}
+        type="button"
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={(e) => {
+          setOpen(!open);
+          onClick?.(e);
+        }}
+        className={className}
+        {...rest}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 DropdownMenuTrigger.displayName = "DropdownMenuTrigger";
 
 // ─── DropdownMenuContent ──────────────────────────────────────────
-export interface DropdownMenuContentProps
-  extends HTMLAttributes<HTMLDivElement> {
+export interface DropdownMenuContentProps extends HTMLAttributes<HTMLDivElement> {
   /** Alignment relative to trigger */
   align?: "start" | "end";
   /** Gap from trigger in px */
   sideOffset?: number;
 }
 
-export const DropdownMenuContent = forwardRef<
-  HTMLDivElement,
-  DropdownMenuContentProps
->(
-  (
-    { align = "end", sideOffset = 4, children, className, onKeyDown, ...rest },
-    ref
-  ) => {
+export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
+  ({ align = "end", sideOffset = 4, children, className, onKeyDown, ...rest }, ref) => {
     const { open, setOpen, triggerRef } = useDropdownMenuContext();
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -182,9 +170,7 @@ export const DropdownMenuContent = forwardRef<
       );
       if (!items.length) return;
 
-      const currentIndex = items.findIndex(
-        (item) => item === document.activeElement
-      );
+      const currentIndex = items.findIndex((item) => item === document.activeElement);
 
       switch (e.key) {
         case "ArrowDown": {
@@ -225,7 +211,7 @@ export const DropdownMenuContent = forwardRef<
         aria-orientation="vertical"
         onKeyDown={handleKeyDown}
         className={cn(
-          "absolute top-full z-50 min-w-[200px] overflow-hidden rounded-lg bg-white py-1",
+          "absolute top-full z-50 min-w-[200px] overflow-hidden rounded-lg bg-white dark:bg-grey-50 py-1",
           "shadow-lg ring-1 ring-black/5",
           "animate-in fade-in-0 zoom-in-95",
           align === "end" ? "right-0" : "left-0",
@@ -242,49 +228,36 @@ export const DropdownMenuContent = forwardRef<
 DropdownMenuContent.displayName = "DropdownMenuContent";
 
 // ─── DropdownMenuGroup ────────────────────────────────────────────
-export interface DropdownMenuGroupProps
-  extends HTMLAttributes<HTMLDivElement> {}
+export interface DropdownMenuGroupProps extends HTMLAttributes<HTMLDivElement> {}
 
-export const DropdownMenuGroup = forwardRef<
-  HTMLDivElement,
-  DropdownMenuGroupProps
->(({ className, ...rest }, ref) => (
-  <div
-    ref={ref}
-    role="group"
-    className={cn("py-1", className)}
-    {...rest}
-  />
-));
+export const DropdownMenuGroup = forwardRef<HTMLDivElement, DropdownMenuGroupProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} role="group" className={cn("py-1", className)} {...rest} />
+  )
+);
 DropdownMenuGroup.displayName = "DropdownMenuGroup";
 
 // ─── DropdownMenuLabel ────────────────────────────────────────────
-export interface DropdownMenuLabelProps
-  extends HTMLAttributes<HTMLDivElement> {
+export interface DropdownMenuLabelProps extends HTMLAttributes<HTMLDivElement> {
   /** Optional description below the title */
   description?: string;
 }
 
-export const DropdownMenuLabel = forwardRef<
-  HTMLDivElement,
-  DropdownMenuLabelProps
->(({ description, children, className, ...rest }, ref) => (
-  <div
-    ref={ref}
-    className={cn("px-4 py-2", className)}
-    {...rest}
-  >
-    <p className="text-body-sm font-semibold text-grey-900">{children}</p>
-    {description && (
-      <p className="text-body-sm text-grey-500">{description}</p>
-    )}
-  </div>
-));
+export const DropdownMenuLabel = forwardRef<HTMLDivElement, DropdownMenuLabelProps>(
+  ({ description, children, className, ...rest }, ref) => (
+    <div ref={ref} className={cn("px-4 py-2", className)} {...rest}>
+      <p className="text-body-sm font-semibold text-grey-900">{children}</p>
+      {description && <p className="text-body-sm text-grey-500">{description}</p>}
+    </div>
+  )
+);
 DropdownMenuLabel.displayName = "DropdownMenuLabel";
 
 // ─── DropdownMenuItem ─────────────────────────────────────────────
-export interface DropdownMenuItemProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onSelect"> {
+export interface DropdownMenuItemProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  "onSelect"
+> {
   /** Leading icon — accepts a ReactNode or an IconName string */
   icon?: ReactNode | IconName;
   /** Keyboard shortcut label (e.g. "⌘C") */
@@ -297,10 +270,7 @@ export interface DropdownMenuItemProps
   onSelect?: () => void;
 }
 
-export const DropdownMenuItem = forwardRef<
-  HTMLButtonElement,
-  DropdownMenuItemProps
->(
+export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemProps>(
   (
     {
       icon,
@@ -347,9 +317,7 @@ export const DropdownMenuItem = forwardRef<
       >
         <div className="flex flex-1 items-center gap-3">
           {resolvedIcon && (
-            <span className={cn("shrink-0 size-5", disabled && "opacity-50")}>
-              {resolvedIcon}
-            </span>
+            <span className={cn("shrink-0 size-5", disabled && "opacity-50")}>{resolvedIcon}</span>
           )}
           <span className="flex-1">{children}</span>
         </div>
@@ -362,13 +330,7 @@ export const DropdownMenuItem = forwardRef<
 
         {selected && (
           <span className="ml-2 shrink-0">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className="text-[#1671D9]"
-            >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-[#1671D9]">
               <circle cx="8" cy="8" r="8" fill="currentColor" />
               <path
                 d="M11.5 5.5L6.5 10.5L4.5 8.5"
@@ -387,18 +349,11 @@ export const DropdownMenuItem = forwardRef<
 DropdownMenuItem.displayName = "DropdownMenuItem";
 
 // ─── DropdownMenuSeparator ────────────────────────────────────────
-export interface DropdownMenuSeparatorProps
-  extends HTMLAttributes<HTMLDivElement> {}
+export interface DropdownMenuSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
 
-export const DropdownMenuSeparator = forwardRef<
-  HTMLDivElement,
-  DropdownMenuSeparatorProps
->(({ className, ...rest }, ref) => (
-  <div
-    ref={ref}
-    role="separator"
-    className={cn("my-1 h-px bg-grey-100", className)}
-    {...rest}
-  />
-));
+export const DropdownMenuSeparator = forwardRef<HTMLDivElement, DropdownMenuSeparatorProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} role="separator" className={cn("my-1 h-px bg-grey-100", className)} {...rest} />
+  )
+);
 DropdownMenuSeparator.displayName = "DropdownMenuSeparator";

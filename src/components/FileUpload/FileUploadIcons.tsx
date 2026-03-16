@@ -1,14 +1,7 @@
 import { cn } from "../../utils/cn";
 
 // ─── File Type Names ─────────────────────────────────────────────
-export type FileTypeName =
-  | "png"
-  | "jpg"
-  | "gif"
-  | "xls"
-  | "mp3"
-  | "pdf"
-  | "generic";
+export type FileTypeName = "png" | "jpg" | "gif" | "xls" | "mp3" | "pdf" | "generic";
 
 // ─── Upload State Names ──────────────────────────────────────────
 export type UploadStateName = "default" | "success" | "warning" | "error";
@@ -44,13 +37,7 @@ const uploadStateSvgs: Record<UploadStateName, string> = {
 };
 
 // ─── File Type Icon (24×24) ──────────────────────────────────────
-export function FileTypeIcon({
-  type,
-  className,
-}: {
-  type: FileTypeName;
-  className?: string;
-}) {
+export function FileTypeIcon({ type, className }: { type: FileTypeName; className?: string }) {
   return (
     <svg
       width="24"

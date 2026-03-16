@@ -33,7 +33,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
           "inline-flex items-center gap-1 rounded-md border px-2 py-1 text-sm font-medium transition-colors",
           disabled
             ? "border-grey-200 bg-grey-100 text-grey-300 cursor-not-allowed"
-            : "border-grey-300 bg-white text-grey-700 cursor-default focus-within:bg-[#FBF1F1] focus-within:border-primary-600",
+            : "border-grey-300 bg-white dark:bg-grey-50 text-grey-700 cursor-default focus-within:bg-[#FBF1F1] focus-within:border-primary-600",
           className
         )}
         {...rest}

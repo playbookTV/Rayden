@@ -62,7 +62,10 @@
     "commonMistakes": [
       { "mistake": "title='...'", "correction": "content='...'" },
       { "mistake": "placement='top'", "correction": "position='top'" },
-      { "mistake": "trigger={<Button />}", "correction": "Use children: <Tooltip content='...'><Button /></Tooltip>" }
+      {
+        "mistake": "trigger={<Button />}",
+        "correction": "Use children: <Tooltip content='...'><Button /></Tooltip>"
+      }
     ]
   },
   "examples": [

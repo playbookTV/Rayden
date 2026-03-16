@@ -1,10 +1,6 @@
 import { forwardRef, useMemo, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
-import {
-  coloredIllustrations,
-  greyIllustrations,
-  type IllustrationName,
-} from "./illustrations";
+import { coloredIllustrations, greyIllustrations, type IllustrationName } from "./illustrations";
 
 // ─── Default primary palette used in colored SVGs ──────────────────
 const DEFAULT_PALETTE = [
@@ -24,8 +20,10 @@ const DEFAULT_PALETTE = [
 // ─── Types ─────────────────────────────────────────────────────────
 export type { IllustrationName };
 
-export interface EmptyStateIllustrationProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface EmptyStateIllustrationProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "children"
+> {
   /** Which illustration to display */
   name: IllustrationName;
   /** Show the colored or grey/monochrome variant (default: true) */
@@ -41,46 +39,43 @@ export interface EmptyStateIllustrationProps
 }
 
 // ─── Component ─────────────────────────────────────────────────────
-export const EmptyStateIllustration = forwardRef<
-  HTMLDivElement,
-  EmptyStateIllustrationProps
->(({ name, colored = true, palette, size = 150, className, ...rest }, ref) => {
-  const rawSvg = colored
-    ? coloredIllustrations[name]
-    : greyIllustrations[name];
+export const EmptyStateIllustration = forwardRef<HTMLDivElement, EmptyStateIllustrationProps>(
+  ({ name, colored = true, palette, size = 150, className, ...rest }, ref) => {
+    const rawSvg = colored ? coloredIllustrations[name] : greyIllustrations[name];
 
-  // Apply custom palette via string replacement
-  const svgContent = useMemo(() => {
-    if (!colored || !palette || palette.length === 0) return rawSvg;
+    // Apply custom palette via string replacement
+    const svgContent = useMemo(() => {
+      if (!colored || !palette || palette.length === 0) return rawSvg;
 
-    let result = rawSvg;
-    const len = Math.min(palette.length, DEFAULT_PALETTE.length);
-    for (let i = 0; i < len; i++) {
-      const from = DEFAULT_PALETTE[i];
-      const to = palette[i];
-      if (from !== to) {
-        result = result.split(from).join(to.toUpperCase());
+      let result = rawSvg;
+      const len = Math.min(palette.length, DEFAULT_PALETTE.length);
+      for (let i = 0; i < len; i++) {
+        const from = DEFAULT_PALETTE[i];
+        const to = palette[i];
+        if (from !== to) {
+          result = result.split(from).join(to.toUpperCase());
+        }
       }
-    }
-    return result;
-  }, [rawSvg, colored, palette]);
+      return result;
+    }, [rawSvg, colored, palette]);
 
-  return (
-    <div
-      ref={ref}
-      className={cn("inline-flex shrink-0 items-center justify-center", className)}
-      {...rest}
-    >
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 150 150"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        dangerouslySetInnerHTML={{ __html: svgContent }}
-      />
-    </div>
-  );
-});
+    return (
+      <div
+        ref={ref}
+        className={cn("inline-flex shrink-0 items-center justify-center", className)}
+        {...rest}
+      >
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 150 150"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          dangerouslySetInnerHTML={{ __html: svgContent }}
+        />
+      </div>
+    );
+  }
+);
 
 EmptyStateIllustration.displayName = "EmptyStateIllustration";

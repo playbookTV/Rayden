@@ -43,9 +43,7 @@
   },
   "accessibility": {
     "role": "checkbox",
-    "keyboardNav": [
-      { "key": "Space", "action": "Toggle checked state" }
-    ],
+    "keyboardNav": [{ "key": "Space", "action": "Toggle checked state" }],
     "screenReaderNotes": "Always provide label prop or aria-label for accessibility"
   },
   "antiHallucination": {

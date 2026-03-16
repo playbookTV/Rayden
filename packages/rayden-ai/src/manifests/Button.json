@@ -9,7 +9,16 @@
   "props": {
     "variant": {
       "type": "enum",
-      "values": ["primary", "secondary", "grey", "destructive", "text", "success", "warning", "info"],
+      "values": [
+        "primary",
+        "secondary",
+        "grey",
+        "destructive",
+        "text",
+        "success",
+        "warning",
+        "info"
+      ],
       "default": "primary",
       "description": "Visual style variant determining colors and styling"
     },
@@ -80,7 +89,15 @@
     "screenReaderNotes": "Icon-only buttons MUST have aria-label for accessible name. Ensure button has accessible name via children text or aria-label."
   },
   "antiHallucination": {
-    "aliases": ["Btn", "CTA", "Action", "Submit", "ActionButton", "PrimaryButton", "SecondaryButton"],
+    "aliases": [
+      "Btn",
+      "CTA",
+      "Action",
+      "Submit",
+      "ActionButton",
+      "PrimaryButton",
+      "SecondaryButton"
+    ],
     "notTheSameAs": ["ButtonGroup", "ButtonGroupItem", "IconButton", "Link", "Anchor"],
     "doesNotExist": [
       "loading",
@@ -113,11 +130,20 @@
       { "mistake": "size='medium'", "correction": "size='sm' or size='lg' (only two sizes)" },
       { "mistake": "size='md'", "correction": "size='sm' (no md size exists)" },
       { "mistake": "leftIcon={<Icon />}", "correction": "icon={<Icon />} iconPosition='leading'" },
-      { "mistake": "rightIcon={<Icon />}", "correction": "icon={<Icon />} iconPosition='trailing'" },
-      { "mistake": "loading={true}", "correction": "Not supported. Disable button and show spinner in children." },
+      {
+        "mistake": "rightIcon={<Icon />}",
+        "correction": "icon={<Icon />} iconPosition='trailing'"
+      },
+      {
+        "mistake": "loading={true}",
+        "correction": "Not supported. Disable button and show spinner in children."
+      },
       { "mistake": "fullWidth", "correction": "className='w-full'" },
       { "mistake": "block", "correction": "className='w-full'" },
-      { "mistake": "as='a' href='...'", "correction": "Button is not a link. Use <a> element styled with button classes." }
+      {
+        "mistake": "as='a' href='...'",
+        "correction": "Button is not a link. Use <a> element styled with button classes."
+      }
     ]
   },
   "examples": [

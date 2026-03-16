@@ -1,0 +1,186 @@
+---
+title: Table
+description: Data table with sorting, selection, and customizable cells
+---
+
+# Table
+
+A composable data table with support for sorting, row selection, and customizable cells.
+
+## Import
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Email</TableHead>
+      <TableHead>Role</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>John Doe</TableCell>
+      <TableCell>john@example.com</TableCell>
+      <TableCell>Admin</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Jane Smith</TableCell>
+      <TableCell>jane@example.com</TableCell>
+      <TableCell>User</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### With Sorting
+
+```tsx
+const [sortKey, setSortKey] = useState("name");
+const [sortDirection, setSortDirection] = useState("asc");
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead
+        sortable
+        sortDirection={sortKey === "name" ? sortDirection : undefined}
+        onSort={() => handleSort("name")}
+      >
+        Name
+      </TableHead>
+      <TableHead
+        sortable
+        sortDirection={sortKey === "email" ? sortDirection : undefined}
+        onSort={() => handleSort("email")}
+      >
+        Email
+      </TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {sortedData.map((row) => (
+      <TableRow key={row.id}>
+        <TableCell>{row.name}</TableCell>
+        <TableCell>{row.email}</TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+```
+
+### With Row Selection
+
+```tsx
+const [selectedRows, setSelectedRows] = useState<string[]>([]);
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>
+        <Checkbox
+          checked={selectedRows.length === data.length}
+          onChange={() => toggleAll()}
+        />
+      </TableHead>
+      <TableHead>Name</TableHead>
+      <TableHead>Email</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {data.map((row) => (
+      <TableRow key={row.id} selected={selectedRows.includes(row.id)}>
+        <TableCell>
+          <Checkbox
+            checked={selectedRows.includes(row.id)}
+            onChange={() => toggleRow(row.id)}
+          />
+        </TableCell>
+        <TableCell>{row.name}</TableCell>
+        <TableCell>{row.email}</TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+```
+
+### With Avatars
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>User</TableHead>
+      <TableHead>Status</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>
+        <div className="flex items-center gap-3">
+          <Avatar type="image" src="/avatar.jpg" size="sm" />
+          <div>
+            <p className="font-medium">John Doe</p>
+            <p className="text-sm text-grey-500">john@example.com</p>
+          </div>
+        </div>
+      </TableCell>
+      <TableCell>
+        <Badge color="success">Active</Badge>
+      </TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Props
+
+### Table
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+### TableHead
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sortable` | `boolean` | `false` | Enable sorting |
+| `sortDirection` | `"asc" \| "desc"` | — | Current sort direction |
+| `onSort` | `() => void` | — | Sort handler |
+| `className` | `string` | — | Additional CSS classes |
+
+### TableRow
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `selected` | `boolean` | `false` | Selected state |
+| `onClick` | `() => void` | — | Click handler |
+| `className` | `string` | — | Additional CSS classes |
+
+### TableCell
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses semantic `<table>` elements
+- Sortable headers have proper ARIA attributes
+- Selection state announced to screen readers

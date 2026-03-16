@@ -32,7 +32,10 @@
       "itemsBeforeCollapse"
     ],
     "commonMistakes": [
-      { "mistake": "<Breadcrumb><BreadcrumbItem>...", "correction": "Use items prop: <Breadcrumb items={[...]} />" },
+      {
+        "mistake": "<Breadcrumb><BreadcrumbItem>...",
+        "correction": "Use items prop: <Breadcrumb items={[...]} />"
+      },
       { "mistake": "separator='/'", "correction": "Separator is built-in, not customizable" }
     ]
   },

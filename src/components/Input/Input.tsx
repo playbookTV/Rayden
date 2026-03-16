@@ -1,12 +1,11 @@
-import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
+import { forwardRef, useId, type InputHTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
 import type { IconName } from "../Icon";
 
 export type InputSize = "sm" | "lg";
 
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /** Input size variant */
   size?: InputSize;
   /** Label text above the input */
@@ -43,11 +42,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       wrapperClassName,
       id,
+      required,
       ...rest
     },
     ref
   ) => {
-    const inputId = id || (label ? `input-${label.toLowerCase().replace(/\s+/g, "-")}` : undefined);
+    const generatedId = useId();
+    const inputId = id || generatedId;
 
     const hasError = !!error;
     const hasSuccess = !!success;
@@ -62,6 +63,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           : undefined
         : helperText;
 
+    const descriptionId = bottomText ? `${inputId}-description` : undefined;
+
     const borderColor = hasError
       ? "border-error-200 focus-within:border-error-200"
       : hasSuccess
@@ -71,10 +74,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn("flex flex-col gap-2 w-full", wrapperClassName)}>
         {label && (
-          <label
-            htmlFor={inputId}
-            className="text-sm font-medium text-grey-900 leading-[1.45]"
-          >
+          <label htmlFor={inputId} className="text-sm font-medium text-grey-900 leading-[1.45]">
             {label}
           </label>
         )}
@@ -86,43 +86,38 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               ? "bg-grey-100 border-grey-300"
               : disabled
                 ? "bg-grey-50 border-grey-200 cursor-not-allowed"
-                : cn("bg-white", borderColor)
+                : cn("bg-white dark:bg-grey-50", borderColor)
           )}
         >
           {leadingIcon && (
-            <span className="shrink-0 size-5 text-grey-400">
-              {resolveIcon(leadingIcon, "md")}
-            </span>
+            <span className="shrink-0 size-5 text-grey-400">{resolveIcon(leadingIcon, "md")}</span>
           )}
           <input
             ref={ref}
             id={inputId}
             readOnly={readOnly}
             disabled={disabled}
+            required={required}
+            aria-invalid={hasError || undefined}
+            aria-required={required || undefined}
+            aria-describedby={descriptionId}
             className={cn(
               "flex-1 min-w-0 bg-transparent text-sm text-grey-900 placeholder:text-grey-400 outline-none disabled:cursor-not-allowed",
               className
             )}
             {...rest}
           />
-          {addonRight && (
-            <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>
-          )}
+          {addonRight && <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>}
           {trailingIcon && (
-            <span className="shrink-0 size-5 text-grey-400">
-              {resolveIcon(trailingIcon, "md")}
-            </span>
+            <span className="shrink-0 size-5 text-grey-400">{resolveIcon(trailingIcon, "md")}</span>
           )}
         </div>
         {bottomText && (
           <p
+            id={descriptionId}
             className={cn(
               "text-sm leading-[1.45]",
-              hasError
-                ? "text-error-500"
-                : hasSuccess
-                  ? "text-success-600"
-                  : "text-grey-500"
+              hasError ? "text-error-500" : hasSuccess ? "text-success-600" : "text-grey-500"
             )}
           >
             {bottomText}

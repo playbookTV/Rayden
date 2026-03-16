@@ -1,0 +1,108 @@
+---
+title: Avatar
+description: User avatar with image, initials, icon, and status indicator
+---
+
+# Avatar
+
+Display user avatars with support for images, initials, icons, and status indicators.
+
+## Import
+
+```tsx
+import { Avatar, AvatarGroup } from "@raydenui/ui";
+```
+
+## Usage
+
+### Image Avatar
+
+```tsx
+<Avatar type="image" src="/avatar.jpg" alt="John Doe" />
+```
+
+### Initials Avatar
+
+```tsx
+<Avatar type="initials" initials="JD" />
+```
+
+### Icon Avatar
+
+```tsx
+import { UserIcon } from "@heroicons/react/20/solid";
+
+<Avatar type="icon" icon={<UserIcon />} />
+```
+
+### Sizes
+
+```tsx
+<Avatar type="initials" initials="XS" size="xs" />
+<Avatar type="initials" initials="SM" size="sm" />
+<Avatar type="initials" initials="MD" size="md" />
+<Avatar type="initials" initials="LG" size="lg" />
+<Avatar type="initials" initials="XL" size="xl" />
+```
+
+### With Status Indicator
+
+```tsx
+<Avatar type="image" src="/avatar.jpg" status="online" />
+<Avatar type="image" src="/avatar.jpg" status="offline" />
+<Avatar type="image" src="/avatar.jpg" status="busy" />
+<Avatar type="image" src="/avatar.jpg" status="away" />
+```
+
+### Avatar Group
+
+```tsx
+<AvatarGroup>
+  <Avatar type="image" src="/user1.jpg" />
+  <Avatar type="image" src="/user2.jpg" />
+  <Avatar type="image" src="/user3.jpg" />
+  <Avatar type="initials" initials="+5" />
+</AvatarGroup>
+```
+
+### Avatar Group with Max
+
+```tsx
+<AvatarGroup max={3}>
+  <Avatar type="image" src="/user1.jpg" />
+  <Avatar type="image" src="/user2.jpg" />
+  <Avatar type="image" src="/user3.jpg" />
+  <Avatar type="image" src="/user4.jpg" />
+  <Avatar type="image" src="/user5.jpg" />
+  {/* Shows +2 overflow */}
+</AvatarGroup>
+```
+
+## Props
+
+### Avatar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"image" \| "initials" \| "icon"` | `"initials"` | Avatar type |
+| `src` | `string` | — | Image source URL (image type) |
+| `alt` | `string` | — | Image alt text |
+| `initials` | `string` | — | Initials text (initials type) |
+| `icon` | `ReactNode` | — | Icon element (icon type) |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Avatar size |
+| `status` | `"online" \| "offline" \| "busy" \| "away"` | — | Status indicator |
+| `className` | `string` | — | Additional CSS classes |
+
+### AvatarGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `max` | `number` | — | Max avatars before overflow |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size for all avatars |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Images have proper alt text
+- Status indicators have screen reader labels
+- Uses semantic elements

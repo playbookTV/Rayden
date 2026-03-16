@@ -1,0 +1,124 @@
+---
+title: Select
+description: Dropdown select with icons, avatars, and status indicators
+---
+
+# Select
+
+A customizable dropdown select component with support for icons, avatars, status indicators, and search.
+
+## Import
+
+```tsx
+import { Select, SelectOption } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Select placeholder="Select an option">
+  <SelectOption value="option1">Option 1</SelectOption>
+  <SelectOption value="option2">Option 2</SelectOption>
+  <SelectOption value="option3">Option 3</SelectOption>
+</Select>
+```
+
+### With Label
+
+```tsx
+<Select label="Country" placeholder="Select a country">
+  <SelectOption value="us">United States</SelectOption>
+  <SelectOption value="uk">United Kingdom</SelectOption>
+  <SelectOption value="ca">Canada</SelectOption>
+</Select>
+```
+
+### With Icons
+
+```tsx
+<Select label="Payment Method" placeholder="Select payment">
+  <SelectOption value="card" icon={<CreditCardIcon />}>
+    Credit Card
+  </SelectOption>
+  <SelectOption value="bank" icon={<BuildingLibraryIcon />}>
+    Bank Transfer
+  </SelectOption>
+  <SelectOption value="paypal" icon={<PayPalIcon />}>
+    PayPal
+  </SelectOption>
+</Select>
+```
+
+### With Avatars
+
+```tsx
+<Select label="Assignee" placeholder="Select team member">
+  <SelectOption value="john" avatar="/avatars/john.jpg">
+    John Doe
+  </SelectOption>
+  <SelectOption value="jane" avatar="/avatars/jane.jpg">
+    Jane Smith
+  </SelectOption>
+</Select>
+```
+
+### With Status Indicators
+
+```tsx
+<Select label="Status" placeholder="Select status">
+  <SelectOption value="active" status="success">
+    Active
+  </SelectOption>
+  <SelectOption value="pending" status="warning">
+    Pending
+  </SelectOption>
+  <SelectOption value="inactive" status="error">
+    Inactive
+  </SelectOption>
+</Select>
+```
+
+### Controlled
+
+```tsx
+const [value, setValue] = useState("");
+
+<Select label="Category" value={value} onChange={setValue}>
+  <SelectOption value="tech">Technology</SelectOption>
+  <SelectOption value="design">Design</SelectOption>
+  <SelectOption value="business">Business</SelectOption>
+</Select>;
+```
+
+## Props
+
+### Select
+
+| Prop          | Type                      | Default | Description             |
+| ------------- | ------------------------- | ------- | ----------------------- |
+| `label`       | `string`                  | —       | Select label            |
+| `placeholder` | `string`                  | —       | Placeholder text        |
+| `value`       | `string`                  | —       | Controlled value        |
+| `onChange`    | `(value: string) => void` | —       | Change handler          |
+| `disabled`    | `boolean`                 | `false` | Disables the select     |
+| `searchable`  | `boolean`                 | `false` | Enable search filtering |
+| `className`   | `string`                  | —       | Additional CSS classes  |
+
+### SelectOption
+
+| Prop       | Type                                | Default | Description             |
+| ---------- | ----------------------------------- | ------- | ----------------------- |
+| `value`    | `string`                            | —       | Option value (required) |
+| `icon`     | `ReactNode`                         | —       | Leading icon            |
+| `avatar`   | `string`                            | —       | Avatar image URL        |
+| `status`   | `"success" \| "warning" \| "error"` | —       | Status indicator color  |
+| `disabled` | `boolean`                           | `false` | Disables the option     |
+
+## Accessibility
+
+- Uses proper ARIA attributes for combobox pattern
+- Keyboard navigation with arrow keys
+- Enter to select, Escape to close
+- Search filtering with typeahead

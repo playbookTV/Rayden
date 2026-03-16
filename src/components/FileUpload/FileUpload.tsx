@@ -84,20 +84,14 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         : undefined;
 
     const errorMessage =
-      !multiple && files.length > 0 && files[0]?.status === "error"
-        ? files[0].error
-        : undefined;
+      !multiple && files.length > 0 && files[0]?.status === "error" ? files[0].error : undefined;
 
     const handleFilesSelected = useCallback(
       (fileList: FileList) => {
-        const filesToProcess = multiple
-          ? Array.from(fileList)
-          : [fileList[0]!];
+        const filesToProcess = multiple ? Array.from(fileList) : [fileList[0]!];
 
         // Apply maxFiles limit
-        const limit = maxFiles
-          ? Math.max(0, maxFiles - files.length)
-          : filesToProcess.length;
+        const limit = maxFiles ? Math.max(0, maxFiles - files.length) : filesToProcess.length;
         const accepted = filesToProcess.slice(0, limit);
 
         for (const file of accepted) {
@@ -123,21 +117,17 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 
     // In multiple mode, separate completed/in-progress files for display
     const completedFiles = multiple
-      ? files.filter(
-          (f) => f.status === "complete" || f.status === "error"
-        )
+      ? files.filter((f) => f.status === "complete" || f.status === "error")
       : [];
     const activeFiles = multiple
-      ? files.filter(
-          (f) => f.status === "uploading" || f.status === "pending"
-        )
+      ? files.filter((f) => f.status === "uploading" || f.status === "pending")
       : [];
 
     return (
       <div
         ref={ref}
         className={cn(
-          "flex flex-col gap-7 rounded-[10px] bg-white p-8 shadow-soft-xs",
+          "flex flex-col gap-7 rounded-[10px] bg-white dark:bg-grey-50 p-8 shadow-soft-xs",
           className
         )}
         {...rest}
@@ -145,9 +135,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         {/* Header */}
         {showHeader && (
           <div className="flex items-center justify-between">
-            <h3 className="text-body-lg font-semibold text-grey-800">
-              {title}
-            </h3>
+            <h3 className="text-body-lg font-semibold text-grey-800">{title}</h3>
             {onClose && (
               <button
                 type="button"
@@ -193,9 +181,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         {multiple && completedFiles.length > 0 && (
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-body-md font-medium text-grey-800">
-                Uploaded Files
-              </span>
+              <span className="text-body-md font-medium text-grey-800">Uploaded Files</span>
               <Badge color="orange" type="filled" size="sm">
                 {completedFiles.length}
               </Badge>

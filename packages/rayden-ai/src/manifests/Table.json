@@ -136,14 +136,23 @@
       "emptyText (use EmptyStateIllustration)"
     ],
     "commonMistakes": [
-      { "mistake": "<Table data={rows} columns={cols} />", "correction": "Map data to TableRow components manually" },
-      { "mistake": "<Table columns={[...]} />", "correction": "Define columns by rendering TableHead cells in TableHeader" },
+      {
+        "mistake": "<Table data={rows} columns={cols} />",
+        "correction": "Map data to TableRow components manually"
+      },
+      {
+        "mistake": "<Table columns={[...]} />",
+        "correction": "Define columns by rendering TableHead cells in TableHeader"
+      },
       { "mistake": "Using <th>", "correction": "Use <TableHead> component" },
       { "mistake": "Using <td>", "correction": "Use <TableCell> component" },
       { "mistake": "Using <thead>", "correction": "Use <TableHeader> component" },
       { "mistake": "Using <tbody>", "correction": "Use <TableBody> component" },
       { "mistake": "Using <tr>", "correction": "Use <TableRow> component" },
-      { "mistake": "pagination prop", "correction": "Use separate <Pagination /> component below the table" }
+      {
+        "mistake": "pagination prop",
+        "correction": "Use separate <Pagination /> component below the table"
+      }
     ]
   },
   "examples": [

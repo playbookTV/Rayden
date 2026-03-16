@@ -76,21 +76,13 @@ function NavLink({
       className={cn(
         "flex items-center gap-2 font-semibold whitespace-nowrap transition-colors",
         large ? "text-base" : "text-sm",
-        dark
-          ? "text-grey-400 hover:text-grey-50"
-          : "text-grey-900 hover:text-grey-700"
+        dark ? "text-grey-400 hover:text-grey-50" : "text-grey-900 hover:text-grey-700"
       )}
     >
       {link.label}
-      {link.dot && (
-        <span className="size-2 rounded-full bg-primary-400 shrink-0" />
-      )}
+      {link.dot && <span className="size-2 rounded-full bg-primary-400 shrink-0" />}
       {link.hasDropdown && (
-        <Icon
-          name="chevron-down"
-          size="xs"
-          className={dark ? "text-grey-400" : "text-grey-900"}
-        />
+        <Icon name="chevron-down" size="xs" className={dark ? "text-grey-400" : "text-grey-900"} />
       )}
     </button>
   );
@@ -261,9 +253,7 @@ export function HeaderBlock({
               }}
               className={cn(
                 "px-4 py-2 text-sm font-semibold rounded-lg whitespace-nowrap",
-                i === activeTab
-                  ? "bg-primary-50 text-primary-400"
-                  : "text-grey-400"
+                i === activeTab ? "bg-primary-50 text-primary-400" : "text-grey-400"
               )}
             >
               {tab}
@@ -360,13 +350,7 @@ export function HeaderBlock({
   // ═══════════════════════════════════════════════════════════════
   if (variant === 7 || variant === 8) {
     return (
-      <div
-        className={cn(
-          "flex flex-col w-full",
-          isDark ? "bg-grey-900" : "bg-white",
-          className
-        )}
-      >
+      <div className={cn("flex flex-col w-full", isDark ? "bg-grey-900" : "bg-white", className)}>
         <div className="flex items-center justify-between px-[72px] py-6 w-full">
           {/* Left: nav links */}
           <NavLinks links={links} dark={isDark} />
@@ -389,13 +373,7 @@ export function HeaderBlock({
   // Logo (left) | Links (center) | Actions (right)
   // ═══════════════════════════════════════════════════════════════
   return (
-    <div
-      className={cn(
-        "flex flex-col w-full",
-        isDark ? "bg-grey-900" : "bg-white",
-        className
-      )}
-    >
+    <div className={cn("flex flex-col w-full", isDark ? "bg-grey-900" : "bg-white", className)}>
       {/* Announcement banner (v1 only) */}
       {variant === 1 && announcement && (
         <div className="flex items-center justify-center gap-2 bg-[#290b00] px-4 py-4 w-full">
@@ -441,10 +419,11 @@ export function HeaderBlock({
         </div>
 
         {/* Center: links (pill or regular) */}
-        {variant === 3 || variant === 4
-          ? renderPillNav()
-          : <NavLinks links={links} dark={isDark} large={isLargeLinks} />
-        }
+        {variant === 3 || variant === 4 ? (
+          renderPillNav()
+        ) : (
+          <NavLinks links={links} dark={isDark} large={isLargeLinks} />
+        )}
 
         {/* Right: optional rightLinks + actions */}
         <div className="flex items-center gap-6 shrink-0">

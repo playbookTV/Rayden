@@ -30,7 +30,12 @@ export { Divider } from "./components/Divider";
 export type { DividerProps, DividerVariant } from "./components/Divider";
 
 export { Tooltip } from "./components/Tooltip";
-export type { TooltipProps, TooltipPosition, TooltipTheme, TooltipAction } from "./components/Tooltip";
+export type {
+  TooltipProps,
+  TooltipPosition,
+  TooltipTheme,
+  TooltipAction,
+} from "./components/Tooltip";
 
 export { Pagination } from "./components/Pagination";
 export type { PaginationProps } from "./components/Pagination";
@@ -45,32 +50,124 @@ export { Icon } from "./components/Icon";
 export type { IconProps, IconName, IconSize, IconVariant } from "./components/Icon";
 
 export { Avatar, AvatarGroup } from "./components/Avatar";
-export type { AvatarProps, AvatarType, AvatarSize, AvatarStatus, AvatarGroupProps, AvatarGroupSize } from "./components/Avatar";
+export type {
+  AvatarProps,
+  AvatarType,
+  AvatarSize,
+  AvatarStatus,
+  AvatarGroupProps,
+  AvatarGroupSize,
+} from "./components/Avatar";
 
 // Elements
 export { MetricsCard } from "./components/MetricsCard";
-export type { MetricsCardProps, MetricsCardVariation, MetricsCardTrend, MetricsCardTrendBadge, MetricsCardStatusBadge, MetricsCardCta } from "./components/MetricsCard";
+export type {
+  MetricsCardProps,
+  MetricsCardVariation,
+  MetricsCardTrend,
+  MetricsCardTrendBadge,
+  MetricsCardStatusBadge,
+  MetricsCardCta,
+} from "./components/MetricsCard";
 
 export { FileUpload, FileUploadDropZone, FileUploadItem } from "./components/FileUpload";
-export type { FileUploadProps, FileUploadDropZoneProps, DropZoneState, FileUploadItemProps, FileUploadFileData, FileUploadItemStatus } from "./components/FileUpload";
+export type {
+  FileUploadProps,
+  FileUploadDropZoneProps,
+  DropZoneState,
+  FileUploadItemProps,
+  FileUploadFileData,
+  FileUploadItemStatus,
+} from "./components/FileUpload";
 
-export { SidebarMenu, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubItem, SidebarMenuSection } from "./components/SidebarMenu";
-export type { SidebarMenuProps, SidebarMenuContextValue, SidebarMenuTheme, SidebarMenuItemProps, SidebarMenuSubProps, SidebarMenuSubItemProps, SidebarMenuSectionProps } from "./components/SidebarMenu";
+export {
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSection,
+} from "./components/SidebarMenu";
+export type {
+  SidebarMenuProps,
+  SidebarMenuContextValue,
+  SidebarMenuTheme,
+  SidebarMenuItemProps,
+  SidebarMenuSubProps,
+  SidebarMenuSubItemProps,
+  SidebarMenuSectionProps,
+} from "./components/SidebarMenu";
 
 export { EmptyStateIllustration, illustrationNames } from "./components/EmptyStateIllustration";
-export type { EmptyStateIllustrationProps, IllustrationName } from "./components/EmptyStateIllustration";
+export type {
+  EmptyStateIllustrationProps,
+  IllustrationName,
+} from "./components/EmptyStateIllustration";
 
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "./components/Table";
-export type { TableProps, TableHeaderProps, TableBodyProps, TableRowProps, TableHeadProps, TableCellProps, SortDirection } from "./components/Table";
+export type {
+  TableProps,
+  TableHeaderProps,
+  TableBodyProps,
+  TableRowProps,
+  TableHeadProps,
+  TableCellProps,
+  SortDirection,
+} from "./components/Table";
 
-export { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from "./components/DropdownMenu";
-export type { DropdownMenuProps, DropdownMenuTriggerProps, DropdownMenuContentProps, DropdownMenuGroupProps, DropdownMenuLabelProps, DropdownMenuItemProps, DropdownMenuSeparatorProps } from "./components/DropdownMenu";
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "./components/DropdownMenu";
+export type {
+  DropdownMenuProps,
+  DropdownMenuTriggerProps,
+  DropdownMenuContentProps,
+  DropdownMenuGroupProps,
+  DropdownMenuLabelProps,
+  DropdownMenuItemProps,
+  DropdownMenuSeparatorProps,
+} from "./components/DropdownMenu";
 
 export { Select, SelectOption } from "./components/Select";
 export type { SelectProps, SelectOptionProps } from "./components/Select";
 
 export { ActivityItem, ActivityContent } from "./components/ActivityFeed";
-export type { ActivityItemProps, ActivityItemLink, ActivityContentProps, ActivityContentVariant, ActivityContentStyle, ActivityContentAttachment, ActivityContentAction } from "./components/ActivityFeed";
+export type {
+  ActivityItemProps,
+  ActivityItemLink,
+  ActivityContentProps,
+  ActivityContentVariant,
+  ActivityContentStyle,
+  ActivityContentAttachment,
+  ActivityContentAction,
+} from "./components/ActivityFeed";
 
 // Utilities
 export { cn } from "./utils/cn";
+
+// Theme
+export { ThemeProvider, useTheme, useResolvedTheme } from "./context/ThemeContext";
+export type { Theme, ResolvedTheme, ThemeProviderProps } from "./context/ThemeContext";
+
+// Form Hooks (for react-hook-form integration)
+export {
+  useRaydenInput,
+  useRaydenSelect,
+  useRaydenCheckbox,
+  useRaydenToggle,
+  useRaydenRadio,
+} from "./hooks";
+export type {
+  UseRaydenInputOptions,
+  UseRaydenInputReturn,
+  UseRaydenSelectOptions,
+  UseRaydenSelectReturn,
+  UseRaydenFormControlOptions,
+  UseRaydenCheckboxReturn,
+  UseRaydenRadioReturn,
+} from "./hooks";

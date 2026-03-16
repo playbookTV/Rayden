@@ -1,0 +1,103 @@
+---
+title: ProgressCircle
+description: Circular progress indicator
+---
+
+# ProgressCircle
+
+Display circular progress indicators for loading states and completion metrics.
+
+## Import
+
+```tsx
+import { ProgressCircle } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<ProgressCircle value={65} />
+```
+
+### Sizes
+
+```tsx
+<ProgressCircle size="xs" value={50} />
+<ProgressCircle size="sm" value={50} />
+<ProgressCircle size="md" value={50} />
+<ProgressCircle size="lg" value={50} />
+<ProgressCircle size="xl" value={50} />
+```
+
+### With Label
+
+```tsx
+<ProgressCircle value={75} showLabel />
+```
+
+### With Center Content
+
+```tsx
+<ProgressCircle value={85} size="xl">
+  <div className="text-center">
+    <p className="text-2xl font-bold">85</p>
+    <p className="text-xs text-grey-500">Score</p>
+  </div>
+</ProgressCircle>
+```
+
+### Colors
+
+```tsx
+<ProgressCircle value={50} color="primary" />
+<ProgressCircle value={50} color="success" />
+<ProgressCircle value={50} color="warning" />
+<ProgressCircle value={50} color="error" />
+```
+
+### Thickness
+
+```tsx
+<ProgressCircle value={60} thickness={2} />
+<ProgressCircle value={60} thickness={4} />
+<ProgressCircle value={60} thickness={8} />
+```
+
+### In Context
+
+```tsx
+// Dashboard stat
+<div className="flex items-center gap-4">
+  <ProgressCircle value={78} size="lg" color="success" showLabel />
+  <div>
+    <p className="font-medium">Conversion Rate</p>
+    <p className="text-sm text-grey-500">+5.2% from last month</p>
+  </div>
+</div>
+
+// Skill indicator
+<div className="flex items-center gap-3">
+  <ProgressCircle value={90} size="sm" />
+  <span>React</span>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Progress value (0-100) |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Circle size |
+| `color` | `"primary" \| "success" \| "warning" \| "error"` | `"primary"` | Progress color |
+| `thickness` | `number` | `4` | Stroke width |
+| `showLabel` | `boolean` | `false` | Show percentage in center |
+| `children` | `ReactNode` | — | Custom center content |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses SVG with proper ARIA attributes
+- `role="progressbar"` with value information
+- Center content is accessible

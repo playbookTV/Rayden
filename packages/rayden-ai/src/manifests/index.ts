@@ -5,35 +5,35 @@
  * including props, variants, composition rules, and anti-hallucination data.
  */
 
-import componentsRegistry from './components.json';
-import schemaDefinition from './schema.json';
+import componentsRegistry from "./components.json";
+import schemaDefinition from "./schema.json";
 
 // Individual component manifests
-import alertManifest from './Alert.json';
-import avatarManifest from './Avatar.json';
-import badgeManifest from './Badge.json';
-import breadcrumbManifest from './Breadcrumb.json';
-import buttonManifest from './Button.json';
-import buttonGroupManifest from './ButtonGroup.json';
-import checkboxManifest from './Checkbox.json';
-import chipManifest from './Chip.json';
-import dividerManifest from './Divider.json';
-import dropdownMenuManifest from './DropdownMenu.json';
-import emptyStateIllustrationManifest from './EmptyStateIllustration.json';
-import fileUploadManifest from './FileUpload.json';
-import iconManifest from './Icon.json';
-import inputManifest from './Input.json';
-import metricsCardManifest from './MetricsCard.json';
-import paginationManifest from './Pagination.json';
-import progressBarManifest from './ProgressBar.json';
-import progressCircleManifest from './ProgressCircle.json';
-import radioManifest from './Radio.json';
-import selectManifest from './Select.json';
-import sidebarMenuManifest from './SidebarMenu.json';
-import tableManifest from './Table.json';
-import tabsManifest from './Tabs.json';
-import toggleManifest from './Toggle.json';
-import tooltipManifest from './Tooltip.json';
+import alertManifest from "./Alert.json";
+import avatarManifest from "./Avatar.json";
+import badgeManifest from "./Badge.json";
+import breadcrumbManifest from "./Breadcrumb.json";
+import buttonManifest from "./Button.json";
+import buttonGroupManifest from "./ButtonGroup.json";
+import checkboxManifest from "./Checkbox.json";
+import chipManifest from "./Chip.json";
+import dividerManifest from "./Divider.json";
+import dropdownMenuManifest from "./DropdownMenu.json";
+import emptyStateIllustrationManifest from "./EmptyStateIllustration.json";
+import fileUploadManifest from "./FileUpload.json";
+import iconManifest from "./Icon.json";
+import inputManifest from "./Input.json";
+import metricsCardManifest from "./MetricsCard.json";
+import paginationManifest from "./Pagination.json";
+import progressBarManifest from "./ProgressBar.json";
+import progressCircleManifest from "./ProgressCircle.json";
+import radioManifest from "./Radio.json";
+import selectManifest from "./Select.json";
+import sidebarMenuManifest from "./SidebarMenu.json";
+import tableManifest from "./Table.json";
+import tabsManifest from "./Tabs.json";
+import toggleManifest from "./Toggle.json";
+import tooltipManifest from "./Tooltip.json";
 
 // Export schema
 export const schema = schemaDefinition;
@@ -85,9 +85,7 @@ export function getComponentNames(): string[] {
 
 // Helper to get components by category
 export function getComponentsByCategory(category: string) {
-  return Object.values(manifests).filter(
-    (m) => (m as { category?: string }).category === category
-  );
+  return Object.values(manifests).filter((m) => (m as { category?: string }).category === category);
 }
 
 // Check if a component exists

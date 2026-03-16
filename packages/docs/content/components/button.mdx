@@ -1,0 +1,116 @@
+---
+title: Button
+description: Action buttons with multiple variants, appearances, and sizes
+---
+
+# Button
+
+Buttons trigger actions and events. Rayden UI provides a flexible Button component with multiple variants, appearances, and sizes.
+
+## Import
+
+```tsx
+import { Button } from "@raydenui/ui";
+import type { ButtonProps, ButtonVariant, ButtonAppearance, ButtonSize } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Button>Click me</Button>
+```
+
+### Variants
+
+The `variant` prop controls the button's color scheme:
+
+```tsx
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="grey">Grey</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="text">Text</Button>
+<Button variant="success">Success</Button>
+<Button variant="warning">Warning</Button>
+<Button variant="info">Info</Button>
+```
+
+### Appearances
+
+The `appearance` prop controls whether the button is solid or outlined:
+
+```tsx
+<Button appearance="solid">Solid</Button>
+<Button appearance="outlined">Outlined</Button>
+```
+
+### Sizes
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="lg">Large</Button>
+```
+
+### With Icons
+
+```tsx
+import { PlusIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
+
+// Leading icon
+<Button icon={<PlusIcon />} iconPosition="leading">
+  Add Item
+</Button>
+
+// Trailing icon
+<Button icon={<ArrowRightIcon />} iconPosition="trailing">
+  Continue
+</Button>
+
+// Icon only
+<Button icon={<PlusIcon />} iconPosition="icon-only" aria-label="Add" />
+```
+
+### States
+
+```tsx
+<Button disabled>Disabled</Button>
+```
+
+## Props
+
+| Prop           | Type                                                                                                | Default     | Description            |
+| -------------- | --------------------------------------------------------------------------------------------------- | ----------- | ---------------------- |
+| `variant`      | `"primary" \| "secondary" \| "grey" \| "destructive" \| "text" \| "success" \| "warning" \| "info"` | `"primary"` | Color variant          |
+| `appearance`   | `"solid" \| "outlined"`                                                                             | `"solid"`   | Visual style           |
+| `size`         | `"sm" \| "lg"`                                                                                      | `"sm"`      | Button size            |
+| `icon`         | `ReactNode`                                                                                         | —           | Icon element           |
+| `iconPosition` | `"none" \| "leading" \| "trailing" \| "icon-only"`                                                  | `"none"`    | Icon placement         |
+| `disabled`     | `boolean`                                                                                           | `false`     | Disables the button    |
+| `className`    | `string`                                                                                            | —           | Additional CSS classes |
+
+The component also accepts all native `<button>` HTML attributes.
+
+## Accessibility
+
+- Uses semantic `<button>` element
+- Includes `disabled` attribute support
+- Focus visible styles for keyboard navigation
+- When using `iconPosition="icon-only"`, provide an `aria-label`
+
+## Design Guidelines
+
+### When to use
+
+- **Primary**: Main call-to-action, one per screen section
+- **Secondary**: Alternative actions alongside primary
+- **Grey**: Neutral actions, less emphasis
+- **Destructive**: Delete, remove, or dangerous actions
+- **Text**: Inline or tertiary actions
+- **Success/Warning/Info**: Contextual feedback actions
+
+### Sizing
+
+- **Small (`sm`)**: Default, for most use cases
+- **Large (`lg`)**: Hero sections, prominent CTAs

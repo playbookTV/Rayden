@@ -129,7 +129,10 @@
       { "mistake": "rightIcon", "correction": "trailingIcon" },
       { "mistake": "errorMessage='...'", "correction": "error='...'" },
       { "mistake": "isInvalid={true}", "correction": "error={true} or error='message'" },
-      { "mistake": "variant='outlined'", "correction": "No variant prop - input is always outlined style" },
+      {
+        "mistake": "variant='outlined'",
+        "correction": "No variant prop - input is always outlined style"
+      },
       { "mistake": "size='medium'", "correction": "size='sm' or size='lg'" }
     ]
   },

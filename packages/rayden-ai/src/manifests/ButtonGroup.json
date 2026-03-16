@@ -78,8 +78,11 @@
       "variant"
     ],
     "commonMistakes": [
-      { "mistake": "items={[...]}",  "correction": "Use ButtonGroupItem children" },
-      { "mistake": "<Button> inside ButtonGroup",  "correction": "Use <ButtonGroupItem> not <Button>" }
+      { "mistake": "items={[...]}", "correction": "Use ButtonGroupItem children" },
+      {
+        "mistake": "<Button> inside ButtonGroup",
+        "correction": "Use <ButtonGroupItem> not <Button>"
+      }
     ]
   },
   "examples": [

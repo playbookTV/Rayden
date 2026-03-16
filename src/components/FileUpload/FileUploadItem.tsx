@@ -5,11 +5,7 @@ import { ProgressCircle } from "../ProgressCircle";
 import { FileTypeIcon, getFileType } from "./FileUploadIcons";
 
 // ─── Types ───────────────────────────────────────────────────────
-export type FileUploadItemStatus =
-  | "pending"
-  | "uploading"
-  | "complete"
-  | "error";
+export type FileUploadItemStatus = "pending" | "uploading" | "complete" | "error";
 
 export interface FileUploadFileData {
   id: string;
@@ -62,15 +58,13 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
         {...rest}
       >
         {/* File icon */}
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-white">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-white dark:bg-grey-50">
           <FileTypeIcon type={fileType} />
         </div>
 
         {/* File info — center section */}
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-          <span className="truncate text-body-sm font-semibold text-grey-800">
-            {file.name}
-          </span>
+          <span className="truncate text-body-sm font-semibold text-grey-800">{file.name}</span>
           {file.status === "error" ? (
             <span className="text-body-xs font-medium text-error-400">
               {file.error ?? "Failed to upload"}
@@ -98,11 +92,7 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
 
           {file.status === "uploading" && (
             <>
-              <ProgressCircle
-                value={file.progress ?? 0}
-                size="xs"
-                showText
-              />
+              <ProgressCircle value={file.progress ?? 0} size="xs" showText />
               <button
                 type="button"
                 onClick={() => onRemove?.(file.id)}

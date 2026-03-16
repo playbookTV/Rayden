@@ -1,0 +1,93 @@
+---
+title: Tailwind Setup
+description: Integrate Rayden UI design tokens with your Tailwind CSS configuration
+---
+
+# Tailwind Integration
+
+Rayden UI ships pre-compiled CSS, so components work out of the box. However, if you want to use Rayden's design tokens in your own Tailwind classes (e.g., `bg-primary-400`, `text-grey-700`), you need additional configuration.
+
+## Using Rayden Tokens in Your Code
+
+### Tailwind v3
+
+Extend your Tailwind config with Rayden's color palette:
+
+```js
+// tailwind.config.js
+import { colors } from "@raydenui/ui/preset";
+
+export default {
+  theme: {
+    extend: {
+      colors,
+    },
+  },
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    // Include Rayden UI components so Tailwind scans them
+    "node_modules/@raydenui/ui/dist/**/*.js",
+  ],
+};
+```
+
+### Tailwind v4 (CSS-based config)
+
+```css
+/* app.css */
+@import "tailwindcss";
+@import "@raydenui/ui/styles.css";
+
+@source "node_modules/@raydenui/ui/dist/**/*.js";
+```
+
+Or extend the theme in CSS:
+
+```css
+@import "tailwindcss";
+@import "@raydenui/ui/styles.css";
+
+@theme {
+  --color-primary-400: #f56630;
+  --color-primary-500: #eb5017;
+  /* ... other tokens from @raydenui/ui/preset */
+}
+```
+
+## Available Token Exports
+
+```tsx
+import {
+  colors, // Color palette (primary, grey, success, error, warning, info)
+  shadows, // Box shadows (soft, hard variants)
+  spacing, // Spacing scale (4px base)
+  typography, // Font sizes, line heights, letter spacing
+  grid, // Breakpoints and layout tokens
+} from "@raydenui/ui/preset";
+```
+
+## Using Tokens
+
+Once configured, you can use Rayden tokens in your own components:
+
+```tsx
+// Use token colors directly in Tailwind classes
+<div className="bg-primary-400 text-grey-900">
+  Primary background with grey text
+</div>
+
+// Custom shadows
+<div className="shadow-soft-lg">
+  Soft shadow effect
+</div>
+```
+
+## Programmatic Access
+
+```tsx
+import { colors, shadows, spacing, typography } from "@raydenui/ui/preset";
+
+// Access tokens in JavaScript
+console.log(colors.primary[400]); // "#F56630"
+console.log(shadows.soft.lg); // "0px 4px 6px..."
+```

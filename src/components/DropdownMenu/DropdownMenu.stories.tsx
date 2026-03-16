@@ -88,9 +88,7 @@ export const WithSectionHeaders: Story = {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuLabel description="Manage your account">
-              Account
-            </DropdownMenuLabel>
+            <DropdownMenuLabel description="Manage your account">Account</DropdownMenuLabel>
             <DropdownMenuItem icon="settings" shortcut="⌘S">
               Account Settings
             </DropdownMenuItem>
@@ -140,9 +138,7 @@ export const AvatarTrigger: Story = {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <DropdownMenuLabel description="john@example.com">
-              John Doe
-            </DropdownMenuLabel>
+            <DropdownMenuLabel description="john@example.com">John Doe</DropdownMenuLabel>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>

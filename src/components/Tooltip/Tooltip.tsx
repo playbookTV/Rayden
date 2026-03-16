@@ -33,13 +33,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   secondaryAction?: TooltipAction;
 }
 
-function Arrow({
-  position,
-  theme,
-}: {
-  position: TooltipPosition;
-  theme: TooltipTheme;
-}) {
+function Arrow({ position, theme }: { position: TooltipPosition; theme: TooltipTheme }) {
   const fill = theme === "dark" ? "#101928" : "#FFFFFF";
   const stroke = theme === "light" ? "#F0F2F5" : "none";
 
@@ -107,23 +101,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     ref
   ) => {
     const isDark = theme === "dark";
-    const isHorizontal =
-      position.startsWith("left") || position.startsWith("right");
-    const showArrowBefore =
-      position.startsWith("top") ||
-      position.startsWith("left");
-    const showArrowAfter =
-      position.startsWith("bottom") ||
-      position.startsWith("right");
+    const isHorizontal = position.startsWith("left") || position.startsWith("right");
+    const showArrowBefore = position.startsWith("top") || position.startsWith("left");
+    const showArrowAfter = position.startsWith("bottom") || position.startsWith("right");
 
     return (
       <div
         ref={ref}
-        className={cn(
-          "inline-flex isolate",
-          isHorizontal ? "flex-row" : "flex-col",
-          className
-        )}
+        className={cn("inline-flex isolate", isHorizontal ? "flex-row" : "flex-col", className)}
         {...rest}
       >
         {showArrowBefore && (
@@ -133,28 +118,20 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         )}
 
         <div
+          role="tooltip"
           className={cn(
             "flex flex-col gap-4 rounded-lg p-4 relative z-[1]",
-            isDark
-              ? "bg-grey-900"
-              : "bg-white border border-grey-100"
+            isDark ? "bg-grey-900" : "bg-white dark:bg-grey-50 border border-grey-100"
           )}
         >
           <div className="flex gap-2 items-start">
             <div className="flex-1 flex flex-col gap-1 text-sm">
               {title && (
-                <p
-                  className={cn(
-                    "font-semibold",
-                    isDark ? "text-white" : "text-grey-800"
-                  )}
-                >
+                <p className={cn("font-semibold", isDark ? "text-white" : "text-grey-800")}>
                   {title}
                 </p>
               )}
-              <p className={isDark ? "text-grey-300" : "text-grey-500"}>
-                {content}
-              </p>
+              <p className={isDark ? "text-grey-300" : "text-grey-500"}>{content}</p>
             </div>
             {onClose && (
               <button
@@ -162,9 +139,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 onClick={onClose}
                 className={cn(
                   "shrink-0 cursor-pointer",
-                  isDark
-                    ? "text-grey-300 hover:text-white"
-                    : "text-grey-500 hover:text-grey-700"
+                  isDark ? "text-grey-300 hover:text-white" : "text-grey-500 hover:text-grey-700"
                 )}
                 aria-label="Close"
               >

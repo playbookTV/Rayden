@@ -1,8 +1,10 @@
-import { forwardRef, type InputHTMLAttributes } from "react";
+import { forwardRef, useId, type InputHTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 
-export interface CheckboxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
+export interface CheckboxProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "size"
+> {
   label?: string;
   description?: string;
   position?: "left" | "right";
@@ -10,13 +12,15 @@ export interface CheckboxProps
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, description, position = "left", className, ...rest }, ref) => {
+    const descriptionId = useId();
     const control = (
       <div className="relative shrink-0 size-5">
         <input
           ref={ref}
           type="checkbox"
+          aria-describedby={description ? descriptionId : undefined}
           className={cn(
-            "peer size-5 appearance-none rounded border-[1.5px] border-grey-300 bg-white cursor-pointer",
+            "peer size-5 appearance-none rounded border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 cursor-pointer",
             "checked:bg-primary-400 checked:border-primary-400",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200",
             "disabled:cursor-not-allowed disabled:opacity-50"
@@ -44,21 +48,14 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <label
-        className={cn(
-          "inline-flex items-center gap-3 cursor-pointer",
-          className
-        )}
-      >
+      <label className={cn("inline-flex items-center gap-3 cursor-pointer", className)}>
         {position === "left" && control}
         <div className="flex flex-col">
-          {label && (
-            <span className="text-base font-medium text-grey-900">
-              {label}
-            </span>
-          )}
+          {label && <span className="text-base font-medium text-grey-900">{label}</span>}
           {description && (
-            <span className="text-sm text-grey-500">{description}</span>
+            <span id={descriptionId} className="text-sm text-grey-500">
+              {description}
+            </span>
           )}
         </div>
         {position === "right" && control}

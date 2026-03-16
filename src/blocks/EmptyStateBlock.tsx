@@ -77,11 +77,7 @@ export function EmptyStateBlock({
   );
 
   if (variant === "card") {
-    return (
-      <div className={cn("bg-white rounded-2xl p-8 inline-flex", className)}>
-        {content}
-      </div>
-    );
+    return <div className={cn("bg-white rounded-2xl p-8 inline-flex", className)}>{content}</div>;
   }
 
   return <div className={className}>{content}</div>;

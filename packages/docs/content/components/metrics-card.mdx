@@ -1,0 +1,134 @@
+---
+title: MetricsCard
+description: Dashboard metric cards with 6 layout variations
+---
+
+# MetricsCard
+
+Display key metrics and KPIs in dashboard cards with multiple layout options.
+
+## Import
+
+```tsx
+import { MetricsCard } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<MetricsCard
+  title="Total Revenue"
+  value="$45,231.89"
+  change="+20.1%"
+  changeType="positive"
+/>
+```
+
+### Layout Variants
+
+```tsx
+// Default - horizontal layout
+<MetricsCard
+  variant="default"
+  title="Users"
+  value="2,350"
+  change="+12%"
+  changeType="positive"
+/>
+
+// Stacked - vertical layout
+<MetricsCard
+  variant="stacked"
+  title="Orders"
+  value="1,234"
+  change="-5%"
+  changeType="negative"
+/>
+
+// Compact - minimal spacing
+<MetricsCard
+  variant="compact"
+  title="Conversion"
+  value="3.2%"
+/>
+
+// With icon
+<MetricsCard
+  variant="with-icon"
+  title="Revenue"
+  value="$12,345"
+  icon={<CurrencyDollarIcon />}
+/>
+
+// With chart
+<MetricsCard
+  variant="with-chart"
+  title="Traffic"
+  value="45.2K"
+  chart={<SparklineChart data={data} />}
+/>
+
+// With progress
+<MetricsCard
+  variant="with-progress"
+  title="Storage"
+  value="75%"
+  progress={75}
+/>
+```
+
+### With Trend
+
+```tsx
+<MetricsCard
+  title="Active Users"
+  value="12,543"
+  change="+8.2%"
+  changeType="positive"
+  trend="up"
+/>
+
+<MetricsCard
+  title="Bounce Rate"
+  value="32.1%"
+  change="+2.4%"
+  changeType="negative"
+  trend="up"
+/>
+```
+
+### With Subtitle
+
+```tsx
+<MetricsCard
+  title="Total Sales"
+  subtitle="Last 30 days"
+  value="$98,765"
+  change="+15.3%"
+  changeType="positive"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "stacked" \| "compact" \| "with-icon" \| "with-chart" \| "with-progress"` | `"default"` | Layout variant |
+| `title` | `string` | — | Metric title (required) |
+| `subtitle` | `string` | — | Subtitle text |
+| `value` | `string \| number` | — | Metric value (required) |
+| `change` | `string` | — | Change percentage |
+| `changeType` | `"positive" \| "negative" \| "neutral"` | — | Change color |
+| `trend` | `"up" \| "down"` | — | Trend arrow direction |
+| `icon` | `ReactNode` | — | Icon (with-icon variant) |
+| `chart` | `ReactNode` | — | Chart component (with-chart variant) |
+| `progress` | `number` | — | Progress value (with-progress variant) |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses semantic heading for title
+- Change type announced to screen readers
+- Progress has proper ARIA attributes

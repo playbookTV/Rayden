@@ -85,12 +85,7 @@ const verifiedBadgeSize: Record<AvatarSize, string> = {
 
 function VerifiedBadge({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
       <circle cx="10" cy="10" r="10" fill="#1671D9" />
       <path
         d="M6 10l3 3 5-6"
@@ -105,13 +100,7 @@ function VerifiedBadge({ className }: { className?: string }) {
 
 /* ─── Status Indicator ─── */
 
-function StatusIndicator({
-  status,
-  size,
-}: {
-  status: AvatarStatus;
-  size: AvatarSize;
-}) {
+function StatusIndicator({ status, size }: { status: AvatarStatus; size: AvatarSize }) {
   if (status === "none") return null;
 
   if (status === "verified") {
@@ -127,7 +116,7 @@ function StatusIndicator({
       className={cn(
         "absolute bottom-0 right-0 rounded-full border-[1.5px] border-white",
         statusDotSize[size],
-        status === "online" ? "bg-success-600" : "bg-grey-300",
+        status === "online" ? "bg-success-600" : "bg-grey-300"
       )}
     />
   );
@@ -148,7 +137,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       className,
       ...rest
     },
-    ref,
+    ref
   ) => {
     return (
       <div
@@ -160,11 +149,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         {type === "image" ? (
           <div className="absolute inset-0 rounded-full border-[1.5px] border-white overflow-hidden">
             {src ? (
-              <img
-                src={src}
-                alt={alt}
-                className="size-full object-cover rounded-full"
-              />
+              <img src={src} alt={alt} className="size-full object-cover rounded-full" />
             ) : (
               <div className="size-full bg-grey-200 rounded-full" />
             )}
@@ -176,11 +161,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         {/* Icon content */}
         {type === "icon" && (
           <div className="absolute inset-0 flex items-center justify-center text-grey-900">
-            {icon ? (
-              resolveIcon(icon, iconSize[size])
-            ) : (
-              <Icon name="user" size={iconSize[size]} />
-            )}
+            {icon ? resolveIcon(icon, iconSize[size]) : <Icon name="user" size={iconSize[size]} />}
           </div>
         )}
 
@@ -189,7 +170,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           <div
             className={cn(
               "absolute inset-0 flex items-center justify-center font-semibold text-grey-900",
-              initialsFontSize[size],
+              initialsFontSize[size]
             )}
           >
             {initials}
@@ -200,7 +181,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         <StatusIndicator status={status} size={size} />
       </div>
     );
-  },
+  }
 );
 
 Avatar.displayName = "Avatar";
@@ -246,11 +227,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
     const overflowCount = max ? childArray.length - max : 0;
 
     return (
-      <div
-        ref={ref}
-        className={cn("inline-flex items-center", className)}
-        {...rest}
-      >
+      <div ref={ref} className={cn("inline-flex items-center", className)} {...rest}>
         {visible.map((child, i) => (
           <div key={i} className={cn(i > 0 && overlap, "relative")}>
             {isValidElement<AvatarProps>(child)
@@ -265,7 +242,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
         )}
       </div>
     );
-  },
+  }
 );
 
 AvatarGroup.displayName = "AvatarGroup";

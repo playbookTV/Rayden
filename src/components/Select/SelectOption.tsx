@@ -4,8 +4,7 @@ import { resolveIcon } from "../../utils/resolveIcon";
 import type { IconName } from "../Icon";
 import { useSelectContext } from "./Select";
 
-export interface SelectOptionProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
+export interface SelectOptionProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
   /** Unique value for this option */
   value: string;
   /** Leading icon — accepts a ReactNode or IconName string */
@@ -56,9 +55,7 @@ export const SelectOption = forwardRef<HTMLButtonElement, SelectOptionProps>(
         style={{ backgroundColor: statusColor }}
       />
     ) : resolvedIcon ? (
-      <span className={cn("shrink-0 size-5", disabled && "opacity-50")}>
-        {resolvedIcon}
-      </span>
+      <span className={cn("shrink-0 size-5", disabled && "opacity-50")}>{resolvedIcon}</span>
     ) : null;
 
     return (
@@ -83,20 +80,12 @@ export const SelectOption = forwardRef<HTMLButtonElement, SelectOptionProps>(
         <div className={cn("flex flex-1 items-center", statusColor ? "gap-2" : "gap-3")}>
           {leading}
           <span className="shrink-0">{children}</span>
-          {description && (
-            <span className="text-grey-500 truncate">{description}</span>
-          )}
+          {description && <span className="text-grey-500 truncate">{description}</span>}
         </div>
 
         {isSelected && !disabled && (
           <span className="ml-2 shrink-0">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className="text-[#1671D9]"
-            >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-[#1671D9]">
               <circle cx="8" cy="8" r="8" fill="currentColor" />
               <path
                 d="M11.5 5.5L6.5 10.5L4.5 8.5"

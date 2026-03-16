@@ -2,8 +2,8 @@
  * Handler for get_components tool
  */
 
-import { components } from '../../manifests/index.js';
-import type { GetComponentsInput, ComponentSummary } from '../types.js';
+import { components } from "../../manifests/index.js";
+import type { GetComponentsInput, ComponentSummary } from "../types.js";
 
 export function handleGetComponents(input: GetComponentsInput) {
   const { category } = input;
@@ -40,13 +40,13 @@ export function handleGetComponents(input: GetComponentsInput) {
     components: componentList,
     categories: components.categories,
     doesNotExist: doesNotExist,
-    note: 'Use get_component_props to get detailed props for a specific component',
+    note: "Use get_component_props to get detailed props for a specific component",
   };
 
   return {
     content: [
       {
-        type: 'text' as const,
+        type: "text" as const,
         text: JSON.stringify(response, null, 2),
       },
     ],

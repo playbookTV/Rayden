@@ -75,8 +75,14 @@
     "commonMistakes": [
       { "mistake": "type='error'", "correction": "state='error'" },
       { "mistake": "severity='warning'", "correction": "state='warning'" },
-      { "mistake": "closable={true}", "correction": "Provide onClose callback to show close button" },
-      { "mistake": "action={<Button>...</Button>}", "correction": "Use primaryAction={{ label: '...', onClick: fn }}" }
+      {
+        "mistake": "closable={true}",
+        "correction": "Provide onClose callback to show close button"
+      },
+      {
+        "mistake": "action={<Button>...</Button>}",
+        "correction": "Use primaryAction={{ label: '...', onClick: fn }}"
+      }
     ]
   },
   "examples": [

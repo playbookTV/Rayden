@@ -8,7 +8,7 @@ const config: StorybookConfig = {
     "@storybook/addon-vitest",
     "@storybook/addon-docs",
     "@storybook/addon-a11y",
-    "@chromatic-com/storybook"
+    "@chromatic-com/storybook",
   ],
   viteFinal: (config) => {
     config.plugins = config.plugins || [];

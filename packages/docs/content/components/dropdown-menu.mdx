@@ -1,0 +1,149 @@
+---
+title: DropdownMenu
+description: Accessible dropdown menu with keyboard navigation
+---
+
+# DropdownMenu
+
+An accessible dropdown menu component with keyboard navigation, icons, shortcuts, and separators.
+
+## Import
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+} from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button>Options</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem onClick={() => handleEdit()}>Edit</DropdownMenuItem>
+    <DropdownMenuItem onClick={() => handleDuplicate()}>Duplicate</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem onClick={() => handleDelete()}>Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Icons
+
+```tsx
+import { PencilIcon, DocumentDuplicateIcon, TrashIcon } from "@heroicons/react/20/solid";
+
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button>Actions</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem icon={<PencilIcon />}>Edit</DropdownMenuItem>
+    <DropdownMenuItem icon={<DocumentDuplicateIcon />}>Duplicate</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem icon={<TrashIcon />} destructive>
+      Delete
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Shortcuts
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button>Edit</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem shortcut="⌘C">Copy</DropdownMenuItem>
+    <DropdownMenuItem shortcut="⌘V">Paste</DropdownMenuItem>
+    <DropdownMenuItem shortcut="⌘X">Cut</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Labels and Groups
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button>Account</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuLabel>Team</DropdownMenuLabel>
+    <DropdownMenuItem>Invite Members</DropdownMenuItem>
+    <DropdownMenuItem>Team Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Log Out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Disabled Items
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button>Options</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>Available Action</DropdownMenuItem>
+    <DropdownMenuItem disabled>Disabled Action</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Props
+
+### DropdownMenu
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Open state change handler |
+
+### DropdownMenuTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Merge props with child |
+
+### DropdownMenuContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `"start" \| "center" \| "end"` | `"start"` | Horizontal alignment |
+| `side` | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` | Placement side |
+| `className` | `string` | — | Additional CSS classes |
+
+### DropdownMenuItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `ReactNode` | — | Leading icon |
+| `shortcut` | `string` | — | Keyboard shortcut text |
+| `destructive` | `boolean` | `false` | Destructive action styling |
+| `disabled` | `boolean` | `false` | Disables the item |
+| `onClick` | `() => void` | — | Click handler |
+
+## Accessibility
+
+- Full keyboard navigation (Arrow keys, Enter, Escape)
+- Proper ARIA menu roles
+- Focus management
+- Screen reader announcements

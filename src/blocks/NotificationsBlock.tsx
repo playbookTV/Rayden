@@ -66,9 +66,7 @@ export function NotificationsBlock({
     >
       {/* Header */}
       <div className="px-6 py-1.5 flex items-center gap-2">
-        <h3 className="flex-1 text-lg font-semibold text-grey-700">
-          {title}
-        </h3>
+        <h3 className="flex-1 text-lg font-semibold text-grey-700">{title}</h3>
         {unreadCount != null && unreadCount > 0 && (
           <Badge color="success" type="accent" size="sm">
             {unreadCount} unread

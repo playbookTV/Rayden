@@ -4,114 +4,124 @@
 
 @theme {
   /* Primary */
-  --color-primary-50: #FFECE5;
-  --color-primary-75: #FCD2C2;
-  --color-primary-100: #FCB59A;
-  --color-primary-200: #FA9874;
-  --color-primary-300: #F77A4A;
-  --color-primary-400: #F56630;
-  --color-primary-500: #EB5017;
-  --color-primary-600: #CC400C;
-  --color-primary-700: #AD3307;
-  --color-primary-800: #8F2802;
-  --color-primary-900: #711E00;
+  --color-primary-50: #ffece5;
+  --color-primary-75: #fcd2c2;
+  --color-primary-100: #fcb59a;
+  --color-primary-200: #fa9874;
+  --color-primary-300: #f77a4a;
+  --color-primary-400: #f56630;
+  --color-primary-500: #eb5017;
+  --color-primary-600: #cc400c;
+  --color-primary-700: #ad3307;
+  --color-primary-800: #8f2802;
+  --color-primary-900: #711e00;
 
   /* Secondary */
-  --color-secondary-50: #E3EFFC;
-  --color-secondary-75: #C6DDF7;
-  --color-secondary-100: #B6D8FF;
-  --color-secondary-200: #80BBFF;
-  --color-secondary-300: #3D89DF;
-  --color-secondary-400: #1671D9;
-  --color-secondary-500: #0D5EBA;
+  --color-secondary-50: #e3effc;
+  --color-secondary-75: #c6ddf7;
+  --color-secondary-100: #b6d8ff;
+  --color-secondary-200: #80bbff;
+  --color-secondary-300: #3d89df;
+  --color-secondary-400: #1671d9;
+  --color-secondary-500: #0d5eba;
   --color-secondary-600: #034592;
-  --color-secondary-700: #04326B;
+  --color-secondary-700: #04326b;
   --color-secondary-800: #012657;
   --color-secondary-900: #001633;
 
   /* Grey */
-  --color-grey-50: #F9FAFB;
-  --color-grey-75: #F7F9FC;
-  --color-grey-100: #F0F2F5;
-  --color-grey-200: #E4E7EC;
-  --color-grey-300: #D0D5DD;
-  --color-grey-400: #98A2B3;
+  --color-grey-50: #f9fafb;
+  --color-grey-75: #f7f9fc;
+  --color-grey-100: #f0f2f5;
+  --color-grey-200: #e4e7ec;
+  --color-grey-300: #d0d5dd;
+  --color-grey-400: #98a2b3;
   --color-grey-500: #667185;
   --color-grey-600: #475367;
   --color-grey-700: #344054;
-  --color-grey-800: #1D2739;
+  --color-grey-800: #1d2739;
   --color-grey-900: #101928;
 
   /* Success */
-  --color-success-50: #E7F6EC;
-  --color-success-75: #B5E3C4;
-  --color-success-100: #91D6A8;
-  --color-success-200: #5FC381;
-  --color-success-300: #40B869;
-  --color-success-400: #0F973D;
+  --color-success-50: #e7f6ec;
+  --color-success-75: #b5e3c4;
+  --color-success-100: #91d6a8;
+  --color-success-200: #5fc381;
+  --color-success-300: #40b869;
+  --color-success-400: #0f973d;
   --color-success-500: #099137;
-  --color-success-600: #04802E;
-  --color-success-700: #036B26;
-  --color-success-800: #015B20;
+  --color-success-600: #04802e;
+  --color-success-700: #036b26;
+  --color-success-800: #015b20;
   --color-success-900: #004617;
 
   /* Error */
-  --color-error-50: #FBEAE9;
-  --color-error-75: #F2BCBA;
-  --color-error-100: #EB9B98;
-  --color-error-200: #E26E6A;
-  --color-error-300: #DD524D;
-  --color-error-400: #D42620;
-  --color-error-500: #CB1A14;
-  --color-error-600: #BA110B;
-  --color-error-700: #9E0A05;
+  --color-error-50: #fbeae9;
+  --color-error-75: #f2bcba;
+  --color-error-100: #eb9b98;
+  --color-error-200: #e26e6a;
+  --color-error-300: #dd524d;
+  --color-error-400: #d42620;
+  --color-error-500: #cb1a14;
+  --color-error-600: #ba110b;
+  --color-error-700: #9e0a05;
   --color-error-800: #800501;
 
   /* Warning */
-  --color-warning-50: #FEF6E7;
-  --color-warning-75: #FBE2B7;
-  --color-warning-100: #F7D394;
-  --color-warning-200: #F7C164;
-  --color-warning-300: #F5B546;
-  --color-warning-400: #F3A218;
-  --color-warning-500: #DD900D;
-  --color-warning-600: #AD6F07;
+  --color-warning-50: #fef6e7;
+  --color-warning-75: #fbe2b7;
+  --color-warning-100: #f7d394;
+  --color-warning-200: #f7c164;
+  --color-warning-300: #f5b546;
+  --color-warning-400: #f3a218;
+  --color-warning-500: #dd900d;
+  --color-warning-600: #ad6f07;
   --color-warning-700: #865503;
   --color-warning-800: #664101;
 
   /* Info */
-  --color-info-400: #0BA5EC;
-  --color-info-500: #0086C9;
+  --color-info-400: #0ba5ec;
+  --color-info-500: #0086c9;
 
   /* Office Brown */
-  --color-office-brown-100: #E4DBDB;
-  --color-office-brown-200: #CDC4C4;
-  --color-office-brown-300: #B7AFAF;
-  --color-office-brown-400: #A29999;
-  --color-office-brown-500: #8D8484;
+  --color-office-brown-100: #e4dbdb;
+  --color-office-brown-200: #cdc4c4;
+  --color-office-brown-300: #b7afaf;
+  --color-office-brown-400: #a29999;
+  --color-office-brown-500: #8d8484;
   --color-office-brown-600: #787070;
-  --color-office-brown-700: #645D5D;
-  --color-office-brown-800: #514A4A;
-  --color-office-brown-900: #3E3838;
+  --color-office-brown-700: #645d5d;
+  --color-office-brown-800: #514a4a;
+  --color-office-brown-900: #3e3838;
 
   /* Font */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
   /* ── Shadows: Soft ── */
   --shadow-soft-xxs: 0px 1.5px 4px -1px rgba(16, 25, 40, 0.07);
-  --shadow-soft-xs: 0px 2px 4px -1px rgba(16, 25, 40, 0.02), 0px 5px 13px -5px rgba(16, 25, 40, 0.05);
+  --shadow-soft-xs:
+    0px 2px 4px -1px rgba(16, 25, 40, 0.02), 0px 5px 13px -5px rgba(16, 25, 40, 0.05);
   --shadow-soft-sm: 0px 10px 18px -2px rgba(16, 25, 40, 0.07);
-  --shadow-soft-md: 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 14px 22px -9px rgba(16, 25, 40, 0.14);
-  --shadow-soft-lg: 0px 4px 6px -2px rgba(16, 25, 40, 0.03), 0px 16px 24px -4px rgba(16, 25, 40, 0.08);
-  --shadow-soft-xl: 0px 8px 8px -4px rgba(16, 25, 40, 0.03), 0px 24px 32px -4px rgba(16, 25, 40, 0.08);
+  --shadow-soft-md:
+    0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 14px 22px -9px rgba(16, 25, 40, 0.14);
+  --shadow-soft-lg:
+    0px 4px 6px -2px rgba(16, 25, 40, 0.03), 0px 16px 24px -4px rgba(16, 25, 40, 0.08);
+  --shadow-soft-xl:
+    0px 8px 8px -4px rgba(16, 25, 40, 0.03), 0px 24px 32px -4px rgba(16, 25, 40, 0.08);
   --shadow-soft-2xl: 0px 32px 54px -12px rgba(16, 25, 40, 0.18);
   --shadow-soft-3xl: 0px 40px 72px -12px rgba(16, 25, 40, 0.14);
 
   /* ── Shadows: Hard ── */
-  --shadow-hard-xxs: 0px 2px 5px -2px rgba(16, 25, 40, 0.06), 0px 2px 7px 0px rgba(16, 25, 40, 0.05), 0px 0px 0px 1px rgba(16, 25, 40, 0.05);
-  --shadow-hard-xs: 0px 2px 12px -1px rgba(16, 25, 40, 0.1), 0px 2px 2px -1px rgba(16, 25, 40, 0.04), 0px 0px 0px 1px rgba(16, 25, 40, 0.05);
+  --shadow-hard-xxs:
+    0px 2px 5px -2px rgba(16, 25, 40, 0.06), 0px 2px 7px 0px rgba(16, 25, 40, 0.05),
+    0px 0px 0px 1px rgba(16, 25, 40, 0.05);
+  --shadow-hard-xs:
+    0px 2px 12px -1px rgba(16, 25, 40, 0.1), 0px 2px 2px -1px rgba(16, 25, 40, 0.04),
+    0px 0px 0px 1px rgba(16, 25, 40, 0.05);
   --shadow-hard-sm: 0px 6px 16px 0px rgba(16, 25, 40, 0.08), 0px 0px 0px 1px rgba(16, 25, 40, 0.05);
-  --shadow-hard-md: 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 16px 24px -6px rgba(16, 25, 40, 0.08), 0px 0px 0px 1px rgba(16, 25, 40, 0.05);
+  --shadow-hard-md:
+    0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 16px 24px -6px rgba(16, 25, 40, 0.08),
+    0px 0px 0px 1px rgba(16, 25, 40, 0.05);
 
   /* ── Blurs ── */
   --blur-xs: 2px;
@@ -184,4 +194,103 @@
   --text-caption-xs: 10px;
   --text-caption-xs--line-height: 1.2;
   --text-caption-xs--letter-spacing: 0.16em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Dark Mode Overrides
+   Add .dark class to <html> or root element to enable dark mode
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.dark {
+  /* Grey scale inverted for dark mode */
+  --color-grey-50: #101928;
+  --color-grey-75: #1d2739;
+  --color-grey-100: #344054;
+  --color-grey-200: #475367;
+  --color-grey-300: #667185;
+  --color-grey-400: #98a2b3;
+  --color-grey-500: #d0d5dd;
+  --color-grey-600: #e4e7ec;
+  --color-grey-700: #f0f2f5;
+  --color-grey-800: #f7f9fc;
+  --color-grey-900: #f9fafb;
+
+  /* Primary - slightly brighter for dark backgrounds */
+  --color-primary-50: #711e00;
+  --color-primary-100: #8f2802;
+  --color-primary-200: #ad3307;
+  --color-primary-300: #cc400c;
+  --color-primary-400: #f56630;
+  --color-primary-500: #f77a4a;
+  --color-primary-600: #fa9874;
+  --color-primary-700: #fcb59a;
+  --color-primary-800: #fcd2c2;
+  --color-primary-900: #ffece5;
+
+  /* Secondary - adjusted for dark mode */
+  --color-secondary-50: #001633;
+  --color-secondary-100: #012657;
+  --color-secondary-200: #04326b;
+  --color-secondary-300: #034592;
+  --color-secondary-400: #1671d9;
+  --color-secondary-500: #3d89df;
+  --color-secondary-600: #80bbff;
+  --color-secondary-700: #b6d8ff;
+  --color-secondary-800: #c6ddf7;
+  --color-secondary-900: #e3effc;
+
+  /* Success - adjusted for dark mode */
+  --color-success-50: #004617;
+  --color-success-100: #015b20;
+  --color-success-200: #036b26;
+  --color-success-300: #04802e;
+  --color-success-400: #0f973d;
+  --color-success-500: #40b869;
+  --color-success-600: #5fc381;
+  --color-success-700: #91d6a8;
+  --color-success-800: #b5e3c4;
+  --color-success-900: #e7f6ec;
+
+  /* Error - adjusted for dark mode */
+  --color-error-50: #800501;
+  --color-error-100: #9e0a05;
+  --color-error-200: #ba110b;
+  --color-error-300: #cb1a14;
+  --color-error-400: #d42620;
+  --color-error-500: #dd524d;
+  --color-error-600: #e26e6a;
+  --color-error-700: #eb9b98;
+  --color-error-800: #fbeae9;
+
+  /* Warning - adjusted for dark mode */
+  --color-warning-50: #664101;
+  --color-warning-100: #865503;
+  --color-warning-200: #ad6f07;
+  --color-warning-300: #dd900d;
+  --color-warning-400: #f3a218;
+  --color-warning-500: #f5b546;
+  --color-warning-600: #f7c164;
+  --color-warning-700: #f7d394;
+  --color-warning-800: #fef6e7;
+
+  /* Shadows - lighter opacity for dark mode */
+  --shadow-soft-xxs: 0px 1.5px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-soft-xs: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 5px 13px -5px rgba(0, 0, 0, 0.25);
+  --shadow-soft-sm: 0px 10px 18px -2px rgba(0, 0, 0, 0.3);
+  --shadow-soft-md: 0px 0px 3px -1px rgba(0, 0, 0, 0.2), 0px 14px 22px -9px rgba(0, 0, 0, 0.4);
+  --shadow-soft-lg: 0px 4px 6px -2px rgba(0, 0, 0, 0.2), 0px 16px 24px -4px rgba(0, 0, 0, 0.3);
+  --shadow-soft-xl: 0px 8px 8px -4px rgba(0, 0, 0, 0.2), 0px 24px 32px -4px rgba(0, 0, 0, 0.3);
+  --shadow-soft-2xl: 0px 32px 54px -12px rgba(0, 0, 0, 0.5);
+  --shadow-soft-3xl: 0px 40px 72px -12px rgba(0, 0, 0, 0.45);
+
+  --shadow-hard-xxs:
+    0px 2px 5px -2px rgba(0, 0, 0, 0.3), 0px 2px 7px 0px rgba(0, 0, 0, 0.25),
+    0px 0px 0px 1px rgba(255, 255, 255, 0.1);
+  --shadow-hard-xs:
+    0px 2px 12px -1px rgba(0, 0, 0, 0.4), 0px 2px 2px -1px rgba(0, 0, 0, 0.2),
+    0px 0px 0px 1px rgba(255, 255, 255, 0.1);
+  --shadow-hard-sm: 0px 6px 16px 0px rgba(0, 0, 0, 0.35), 0px 0px 0px 1px rgba(255, 255, 255, 0.1);
+  --shadow-hard-md:
+    0px 0px 3px -1px rgba(0, 0, 0, 0.2), 0px 16px 24px -6px rgba(0, 0, 0, 0.35),
+    0px 0px 0px 1px rgba(255, 255, 255, 0.1);
 }

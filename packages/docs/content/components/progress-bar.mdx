@@ -1,0 +1,107 @@
+---
+title: ProgressBar
+description: Linear progress indicator
+---
+
+# ProgressBar
+
+Display linear progress indicators for loading states and task completion.
+
+## Import
+
+```tsx
+import { ProgressBar } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<ProgressBar value={60} />
+```
+
+### Sizes
+
+```tsx
+<ProgressBar size="sm" value={40} />
+<ProgressBar size="lg" value={40} />
+```
+
+### With Label
+
+```tsx
+<ProgressBar value={75} showLabel />
+```
+
+### Custom Label
+
+```tsx
+<ProgressBar value={75} label="75% Complete" />
+```
+
+### With Value Text
+
+```tsx
+<div className="space-y-2">
+  <div className="flex justify-between text-sm">
+    <span>Uploading...</span>
+    <span>75%</span>
+  </div>
+  <ProgressBar value={75} />
+</div>
+```
+
+### Indeterminate
+
+```tsx
+<ProgressBar indeterminate />
+```
+
+### Colors
+
+```tsx
+<ProgressBar value={50} color="primary" />
+<ProgressBar value={50} color="success" />
+<ProgressBar value={50} color="warning" />
+<ProgressBar value={50} color="error" />
+```
+
+### In Context
+
+```tsx
+// File upload progress
+<div className="space-y-2">
+  <div className="flex items-center gap-3">
+    <DocumentIcon className="w-5 h-5" />
+    <span className="flex-1">document.pdf</span>
+    <span className="text-sm text-grey-500">75%</span>
+  </div>
+  <ProgressBar value={75} />
+</div>
+
+// Task completion
+<div className="space-y-1">
+  <p className="text-sm font-medium">Profile Completion</p>
+  <ProgressBar value={80} color="success" />
+  <p className="text-xs text-grey-500">4 of 5 steps complete</p>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Progress value (0-100) |
+| `size` | `"sm" \| "lg"` | `"sm"` | Bar height |
+| `color` | `"primary" \| "success" \| "warning" \| "error"` | `"primary"` | Bar color |
+| `showLabel` | `boolean` | `false` | Show percentage label |
+| `label` | `string` | — | Custom label text |
+| `indeterminate` | `boolean` | `false` | Show indeterminate animation |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `role="progressbar"` with ARIA attributes
+- `aria-valuenow`, `aria-valuemin`, `aria-valuemax` set correctly
+- Indeterminate state announced properly

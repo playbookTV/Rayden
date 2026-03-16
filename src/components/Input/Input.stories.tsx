@@ -100,11 +100,45 @@ export const ReadOnly: Story = {
 export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-6 w-[375px]">
-      <Input label="Default" placeholder="Placeholder" helperText="Helper text" leadingIcon={<SearchIcon />} trailingIcon={<MailIcon />} />
-      <Input label="Filled" placeholder="Placeholder" defaultValue="Input" helperText="Helper text" leadingIcon={<SearchIcon />} trailingIcon={<MailIcon />} />
-      <Input label="Success" placeholder="Placeholder" defaultValue="Input" success="Success text" leadingIcon={<SearchIcon />} trailingIcon={<CheckIcon />} />
-      <Input label="Error" placeholder="Placeholder" defaultValue="Input" error="Error text" leadingIcon={<SearchIcon />} trailingIcon={<ErrorIcon />} />
-      <Input label="Read Only" placeholder="Placeholder" helperText="Helper text" readOnly leadingIcon={<SearchIcon />} trailingIcon={<MailIcon />} />
+      <Input
+        label="Default"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
+      <Input
+        label="Filled"
+        placeholder="Placeholder"
+        defaultValue="Input"
+        helperText="Helper text"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
+      <Input
+        label="Success"
+        placeholder="Placeholder"
+        defaultValue="Input"
+        success="Success text"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<CheckIcon />}
+      />
+      <Input
+        label="Error"
+        placeholder="Placeholder"
+        defaultValue="Input"
+        error="Error text"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<ErrorIcon />}
+      />
+      <Input
+        label="Read Only"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        readOnly
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
     </div>
   ),
 };

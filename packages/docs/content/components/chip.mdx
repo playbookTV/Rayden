@@ -1,0 +1,71 @@
+---
+title: Chip
+description: Compact input tags with close or filter actions
+---
+
+# Chip
+
+Chips are compact elements for tags, filters, and selections with optional close or filter actions.
+
+## Import
+
+```tsx
+import { Chip } from "@raydenui/ui";
+```
+
+## Usage
+
+### Input Chip (with close button)
+
+```tsx
+<Chip variant="input" onClose={() => removeTag()}>
+  React
+</Chip>
+```
+
+### Filter Chip (with chevron)
+
+```tsx
+<Chip variant="filter" onClick={() => openFilter()}>
+  Category
+</Chip>
+```
+
+### States
+
+```tsx
+// Default
+<Chip variant="input">Default</Chip>
+
+// Focused
+<Chip variant="input" focused>Focused</Chip>
+
+// Disabled
+<Chip variant="input" disabled>Disabled</Chip>
+```
+
+### With Avatar
+
+```tsx
+<Chip variant="input" avatar="/avatars/user.jpg" onClose={() => {}}>
+  John Doe
+</Chip>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"input" \| "filter"` | `"input"` | Chip variant |
+| `focused` | `boolean` | `false` | Focused state |
+| `disabled` | `boolean` | `false` | Disables the chip |
+| `avatar` | `string` | — | Avatar image URL |
+| `onClose` | `() => void` | — | Close button handler (input variant) |
+| `onClick` | `() => void` | — | Click handler (filter variant) |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses semantic `<button>` element
+- Close button has proper aria-label
+- Keyboard accessible

@@ -1,18 +1,10 @@
 import { useState } from "react";
 import { cn } from "../utils/cn";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from "../components/Table";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../components/Table";
 import { Checkbox } from "../components/FormControl";
 import { Avatar } from "../components/Avatar";
 import { Badge } from "../components/Badge";
 import { Pagination } from "../components/Pagination";
-
 
 // ─── Types ───────────────────────────────────────────────────────────
 export interface TableBlockRow {
@@ -81,10 +73,7 @@ export function TableBlock({
           <TableRow>
             <TableHead className="w-[287px]">
               <div className="flex items-center gap-3">
-                <Checkbox
-                  checked={allSelected || someSelected}
-                  onChange={toggleAll}
-                />
+                <Checkbox checked={allSelected || someSelected} onChange={toggleAll} />
                 <span>Name</span>
               </div>
             </TableHead>
@@ -100,19 +89,10 @@ export function TableBlock({
             <TableRow key={row.id} selected={selectedIds.has(row.id)}>
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <Checkbox
-                    checked={selectedIds.has(row.id)}
-                    onChange={() => toggleRow(row.id)}
-                  />
-                  <Avatar
-                    type="initials"
-                    initials={row.initials}
-                    size="sm"
-                  />
+                  <Checkbox checked={selectedIds.has(row.id)} onChange={() => toggleRow(row.id)} />
+                  <Avatar type="initials" initials={row.initials} size="sm" />
                   <div className="flex flex-col">
-                    <span className="text-sm font-medium text-grey-900">
-                      {row.name}
-                    </span>
+                    <span className="text-sm font-medium text-grey-900">{row.name}</span>
                     <span className="text-xs text-grey-400 truncate max-w-[150px]">
                       {row.email}
                     </span>
@@ -135,11 +115,7 @@ export function TableBlock({
                 </span>
               </TableCell>
               <TableCell>
-                <Badge
-                  color={row.statusColor ?? "orange"}
-                  type="accent"
-                  size="sm"
-                >
+                <Badge color={row.statusColor ?? "orange"} type="accent" size="sm">
                   {row.status}
                 </Badge>
               </TableCell>

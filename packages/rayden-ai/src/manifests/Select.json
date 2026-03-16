@@ -105,7 +105,10 @@
       "variant"
     ],
     "commonMistakes": [
-      { "mistake": "options={[...]}",  "correction": "Use SelectOption children: <Select><SelectOption value='1'>One</SelectOption></Select>" },
+      {
+        "mistake": "options={[...]}",
+        "correction": "Use SelectOption children: <Select><SelectOption value='1'>One</SelectOption></Select>"
+      },
       { "mistake": "onChange={fn}", "correction": "onValueChange={fn}" },
       { "mistake": "<option>", "correction": "Use <SelectOption> component" }
     ]

@@ -136,11 +136,7 @@ export const WithStatus: Story = {
 export const WithHelperText: Story = {
   render: () => (
     <div className="w-[375px] p-6">
-      <Select
-        label="Label"
-        placeholder="Placeholder"
-        helperText="Helper text"
-      >
+      <Select label="Label" placeholder="Placeholder" helperText="Helper text">
         <SelectOption value="opt1">Option 1</SelectOption>
         <SelectOption value="opt2">Option 2</SelectOption>
         <SelectOption value="opt3">Option 3</SelectOption>
@@ -201,12 +197,7 @@ export const Controlled: Story = {
 
       return (
         <div className="w-[375px] space-y-4 p-6">
-          <Select
-            label="Label"
-            placeholder="Placeholder"
-            value={value}
-            onValueChange={setValue}
-          >
+          <Select label="Label" placeholder="Placeholder" value={value} onValueChange={setValue}>
             <SelectOption value="home" icon="home">
               Home
             </SelectOption>

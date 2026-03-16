@@ -1,0 +1,80 @@
+---
+title: Pagination
+description: Page navigation with prev/next controls
+---
+
+# Pagination
+
+Pagination helps users navigate through multiple pages of content.
+
+## Import
+
+```tsx
+import { Pagination } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Pagination
+  currentPage={1}
+  totalPages={10}
+  onPageChange={(page) => setPage(page)}
+/>
+```
+
+### With Sibling Count
+
+```tsx
+<Pagination
+  currentPage={5}
+  totalPages={20}
+  siblingCount={2}
+  onPageChange={(page) => setPage(page)}
+/>
+```
+
+### Controlled
+
+```tsx
+const [page, setPage] = useState(1);
+
+<Pagination
+  currentPage={page}
+  totalPages={10}
+  onPageChange={setPage}
+/>
+```
+
+### With Boundary Count
+
+```tsx
+<Pagination
+  currentPage={10}
+  totalPages={20}
+  boundaryCount={2}
+  siblingCount={1}
+  onPageChange={(page) => setPage(page)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `currentPage` | `number` | — | Current active page (required) |
+| `totalPages` | `number` | — | Total number of pages (required) |
+| `onPageChange` | `(page: number) => void` | — | Page change handler (required) |
+| `siblingCount` | `number` | `1` | Pages shown on each side of current |
+| `boundaryCount` | `number` | `1` | Pages shown at start/end |
+| `showPrevNext` | `boolean` | `true` | Show prev/next buttons |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `<nav>` with `aria-label="Pagination"`
+- Current page marked with `aria-current="page"`
+- Prev/Next buttons have proper labels
+- Keyboard navigation support
