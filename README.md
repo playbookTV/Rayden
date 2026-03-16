@@ -9,8 +9,11 @@
 A modern, accessible React component library built with Tailwind CSS v4. Rayden UI brings the [Rayna UI](https://www.raynaui.com/) Figma design system to life with pixel-perfect React components.
 
 [![npm version](https://img.shields.io/npm/v/@raydenui/ui.svg)](https://www.npmjs.com/package/@raydenui/ui)
+[![npm downloads](https://img.shields.io/npm/dm/@raydenui/ui.svg)](https://www.npmjs.com/package/@raydenui/ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-rayden--docs.vercel.app-F56630)](https://rayden-docs.vercel.app)
+[![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://main--683f465dfa671db004742598.chromatic.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/playbookTV/Rayden/pulls)
 
 ## Features
 
