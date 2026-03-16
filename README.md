@@ -83,6 +83,67 @@ function App() {
 }
 ```
 
+## Tailwind Integration
+
+Rayden UI ships pre-compiled CSS, so components work out of the box. However, if you want to use Rayden's design tokens in your own Tailwind classes (e.g., `bg-primary-400`, `text-grey-700`), you need additional configuration.
+
+### Using Rayden Tokens in Your Code
+
+Extend your Tailwind config with Rayden's color palette:
+
+```js
+// tailwind.config.js (Tailwind v3)
+import { colors } from "@raydenui/ui/preset";
+
+export default {
+  theme: {
+    extend: {
+      colors,
+    },
+  },
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    // Include Rayden UI components so Tailwind scans them
+    "node_modules/@raydenui/ui/dist/**/*.js",
+  ],
+};
+```
+
+For Tailwind v4 with CSS-based config:
+
+```css
+/* app.css */
+@import "tailwindcss";
+@import "@raydenui/ui/styles.css";
+
+@source "node_modules/@raydenui/ui/dist/**/*.js";
+```
+
+Or extend the theme in CSS:
+
+```css
+@import "tailwindcss";
+@import "@raydenui/ui/styles.css";
+
+@theme {
+  --color-primary-400: #F56630;
+  --color-primary-500: #EB5017;
+  /* ... other tokens from @raydenui/ui/preset */
+}
+```
+
+### Available Token Exports
+
+```tsx
+import {
+  colors,      // Color palette (primary, grey, success, error, warning, info)
+  shadows,     // Box shadows (soft, hard variants)
+  spacing,     // Spacing scale (4px base)
+  typography,  // Font sizes, line heights, letter spacing
+  grid,        // Breakpoints and layout tokens
+} from "@raydenui/ui/preset";
+```
+
 ## Components
 
 ### Forms & Inputs
@@ -346,7 +407,7 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 ## Acknowledgments
 
-- Design system based on [Rayna UI](https://www.figma.com/community/file/1229854793310881425) by Rayna UI Team
+- Design system based on [Rayna UI](https://raynaui.com) by Rayna UI Team
 - Built with [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), and [Storybook](https://storybook.js.org/)
 
 ---
