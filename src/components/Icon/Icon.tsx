@@ -1,8 +1,8 @@
 import { type SVGAttributes, forwardRef } from "react";
 import { cn } from "../../utils/cn";
-import { icons, type IconName, type IconVariant } from "./icons";
+import { icons, type IconName, type IconVariant, type IconRecord } from "./icons";
 
-export type { IconName, IconVariant } from "./icons";
+export type { IconName, IconVariant, IconRecord } from "./icons";
 
 export type IconSize = "xs" | "sm" | "md" | "lg" | "xl";
 
@@ -14,9 +14,7 @@ const sizeMap: Record<IconSize, number> = {
   xl: 32,
 };
 
-export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, "children"> {
-  /** Icon name from the registry. */
-  name: IconName;
+interface BaseIconProps extends Omit<SVGAttributes<SVGSVGElement>, "children"> {
   /** Preset size or pixel value. @default "md" */
   size?: IconSize | number;
   /** SVG color — applied via CSS `color`. @default "currentColor" */
@@ -25,12 +23,34 @@ export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, "children"
   variant?: IconVariant;
 }
 
+interface IconByNameProps extends BaseIconProps {
+  /** Icon name from the registry (dynamic lookup, not tree-shakeable). */
+  name: IconName;
+  icon?: never;
+}
+
+interface IconByDataProps extends BaseIconProps {
+  /** Icon data object (tree-shakeable when imported directly). */
+  icon: IconRecord;
+  name?: never;
+}
+
+export type IconProps = IconByNameProps | IconByDataProps;
+
 export const Icon = forwardRef<SVGSVGElement, IconProps>(
   (
-    { name, size = "md", color = "currentColor", variant = "outline", className, style, ...rest },
+    { size = "md", color = "currentColor", variant = "outline", className, style, ...rest },
     ref
   ) => {
-    const iconData = icons[name]?.[variant];
+    // Remove name/icon from rest props before spreading to SVG
+    const { name, icon, ...svgProps } = rest as {
+      name?: IconName;
+      icon?: IconRecord;
+    } & typeof rest;
+
+    // Support both name-based (dynamic) and icon-based (tree-shakeable) usage
+    const iconRecord = icon ?? (name ? icons[name] : null);
+    const iconData = iconRecord?.[variant];
 
     if (!iconData) {
       return null;
@@ -50,7 +70,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
         style={{ color, ...style }}
         aria-hidden="true"
         dangerouslySetInnerHTML={{ __html: iconData.paths }}
-        {...rest}
+        {...svgProps}
       />
     );
   }

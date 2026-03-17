@@ -21,6 +21,16 @@
       "import": "./dist/preset.js",
       "require": "./dist/preset.cjs"
     },
+    "./icons": {
+      "import": {
+        "types": "./dist/icons.d.ts",
+        "default": "./dist/icons.js"
+      },
+      "require": {
+        "types": "./dist/icons.d.cts",
+        "default": "./dist/icons.cjs"
+      }
+    },
     "./styles.css": "./dist/styles.css"
   },
   "files": [
@@ -64,6 +74,10 @@
   "sideEffects": [
     "*.css"
   ],
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0"
+  },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
     "@eslint/js": "^10.0.1",
@@ -81,7 +95,6 @@
     "@vitest/coverage-v8": "^4.1.0",
     "autoprefixer": "^10.4.27",
     "chromatic": "^15.2.0",
-    "clsx": "^2.1.1",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -95,7 +108,6 @@
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.2",
     "storybook": "^10.2.19",
-    "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
