@@ -12,14 +12,19 @@ import {
   Button, Badge, Icon, Divider, Tooltip,
   // Inputs
   Input, Select, SelectOption, Checkbox, Radio, Toggle, Chip,
+  Counter, NumberCounter, Slider, RangeSlider, DatePicker,
   // Feedback
-  Alert, ProgressBar, ProgressCircle,
+  Alert, Banner, ProgressBar, ProgressCircle, Spinner,
   // Navigation
   Tabs, Tab, Breadcrumb, BreadcrumbItem, Pagination,
   SidebarMenu, SidebarMenuSection, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubItem,
+  Stepper, LinearStepper, SegmentedStepper,
   // Data Display
   Table, TableHeader, TableBody, TableRow, TableHead, TableCell,
   Avatar, AvatarGroup, MetricsCard, EmptyStateIllustration,
+  ActivityFeed, ActivityItem, ActivityContent, RaydenChart,
+  // Layout
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent, Modal,
   // Composite
   ButtonGroup, ButtonGroupItem,
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
@@ -496,7 +501,7 @@ Premium layouts follow predictable, grid-aligned patterns.
 
 ---
 
-## Available Components (23 Total)
+## Available Components (33 Total)
 
 ### Primitives
 | Component | Description |
@@ -516,13 +521,18 @@ Premium layouts follow predictable, grid-aligned patterns.
 | `Radio` | Radio option (use within groups) |
 | `Toggle` | Switch toggle |
 | `Chip` | Removable tag or filter token |
+| `Counter` + `NumberCounter` | Numeric input with increment/decrement |
+| `Slider` + `RangeSlider` | Draggable value/range input |
+| `DatePicker` | Calendar date picker (single, range, year modes) |
 
 ### Feedback
 | Component | Description |
 |-----------|-------------|
 | `Alert` | Toast or banner notification |
+| `Banner` | Full-width notification banner |
 | `ProgressBar` | Linear progress indicator |
-| `ProgressCircle` | Circular progress/spinner |
+| `ProgressCircle` | Circular progress indicator |
+| `Spinner` | Loading indicator with 7 animation types |
 
 ### Navigation
 | Component | Description |
@@ -531,6 +541,7 @@ Premium layouts follow predictable, grid-aligned patterns.
 | `Breadcrumb` + `BreadcrumbItem` | Navigation breadcrumbs |
 | `Pagination` | Page navigation |
 | `SidebarMenu` | Vertical navigation sidebar |
+| `Stepper` + `LinearStepper` + `SegmentedStepper` | Multi-step progress indicator |
 
 ### Data Display
 | Component | Description |
@@ -539,6 +550,14 @@ Premium layouts follow predictable, grid-aligned patterns.
 | `Avatar` + `AvatarGroup` | User profile images |
 | `MetricsCard` | KPI/statistics display |
 | `EmptyStateIllustration` | Empty state artwork |
+| `ActivityFeed` + `ActivityItem` + `ActivityContent` | Timeline and notification feeds |
+| `RaydenChart` | Chart.js wrapper for data visualizations |
+
+### Layout
+| Component | Description |
+|-----------|-------------|
+| `Accordion` | Collapsible content panels (compound component) |
+| `Modal` | Dialog overlay with backdrop and focus management |
 
 ### Composite
 | Component | Description |
@@ -553,11 +572,11 @@ Premium layouts follow predictable, grid-aligned patterns.
 
 **DO NOT use these — they will not work:**
 
-- `Modal`, `Dialog`, `Popup`, `Overlay`, `Lightbox`
-- `Card`, `Panel`, `Box`, `Container`, `Paper`, `Surface`
-- `Accordion`, `Collapse`, `Collapsible`, `Expandable`
-- `Carousel`, `Slider`, `RangeSlider`, `Range`
-- `DatePicker`, `TimePicker`, `DateTimePicker`, `Calendar`
+- `Dialog`, `Popup`, `Overlay`, `Lightbox` (use `Modal`)
+- `Card`, `Panel`, `Box`, `Container`, `Paper`, `Surface` (use `<div>` with Tailwind)
+- `Collapse`, `Collapsible`, `Expandable` (use `Accordion`)
+- `Carousel`
+- `TimePicker`, `DateTimePicker`, `Calendar` (use `DatePicker`)
 - `ColorPicker`
 - `Tree`, `TreeView`, `TreeSelect`
 - `Drawer`, `Sheet`, `BottomSheet`, `SideSheet`
@@ -566,19 +585,19 @@ Premium layouts follow predictable, grid-aligned patterns.
 - `Autocomplete`, `AutoComplete`, `TypeAhead`
 - `Skeleton`, `Shimmer`
 - `AspectRatio`, `ScrollArea`, `ScrollView`
-- `Stepper`, `Steps`, `Wizard`
-- `Timeline`
+- `Steps`, `Wizard` (use `Stepper` or `LinearStepper` or `SegmentedStepper`)
+- `Timeline` (use `ActivityFeed`)
 - `Rating`, `Stars`, `StarRating`
 - `Stack`, `Flex`, `Grid`, `Center`, `Wrap`, `VStack`, `HStack`, `Spacer`
 - `Portal`, `VisuallyHidden`
 - `ResizablePanel`, `Splitter`
+- `Loading`, `Loader` (use `Spinner`)
 
 **How to build what's missing with native HTML + Tailwind:**
 
 | Need | Solution |
 |------|----------|
 | Card / Panel | `<div className="bg-white rounded-xl border border-grey-200 p-6">` |
-| Modal / Dialog | Native `<dialog>` element + Tailwind styling |
 | Sidebar layout | `<div className="flex"><aside className="w-64 shrink-0">` + `<main className="flex-1">` |
 | Grid layout | `<div className="grid grid-cols-1 md:grid-cols-3 gap-6">` |
 | Skeleton loading | `<div className="animate-pulse bg-grey-100 rounded-lg h-4 w-3/4">` |
@@ -1242,6 +1261,605 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 
 ---
 
+## Modal
+
+```tsx
+// Basic confirmation modal
+<Modal
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Confirm Action"
+  description="Are you sure you want to continue?"
+  primaryLabel="Confirm"
+  onPrimaryClick={handleConfirm}
+  secondaryLabel="Cancel"
+/>
+
+// Modal with custom content
+<Modal
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Edit Profile"
+  primaryLabel="Save Changes"
+  onPrimaryClick={handleSave}
+  secondaryLabel="Cancel"
+>
+  <div className="space-y-4">
+    <Input label="Name" value={name} onChange={e => setName(e.target.value)} />
+    <Input label="Email" value={email} onChange={e => setEmail(e.target.value)} />
+  </div>
+</Modal>
+
+// Large modal with vertical buttons
+<Modal
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  size="lg"
+  title="Choose a Plan"
+  description="Select the plan that works best for you."
+  footerOrientation="vertical"
+  primaryLabel="Upgrade to Pro"
+  onPrimaryClick={handleUpgrade}
+  secondaryLabel="Stay on Free"
+/>
+
+// Prevent accidental close
+<Modal
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Important"
+  closeOnOverlay={false}
+  closeOnEscape={false}
+  showClose={false}
+  primaryLabel="I Understand"
+  onPrimaryClick={() => setIsOpen(false)}
+/>
+```
+
+### Modal — Common Mistakes
+
+| Wrong | Correct |
+|-------|---------|
+| `isOpen` | `open` |
+| `onDismiss` | `onClose` |
+| `header={<>...</>}` | Use `title` and `description` props |
+| `footer={<Button />}` | Use `primaryLabel` / `secondaryLabel` props |
+| Modal without `open`/`onClose` | Both are required props |
+
+---
+
+## Accordion (Compound Component)
+
+```tsx
+// Basic accordion
+<Accordion type="default" defaultValue="item-1">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>What is Rayden UI?</AccordionTrigger>
+    <AccordionContent>
+      Rayden UI is a professional React component library built on the Rayna UI design system.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>
+      Yes! All components follow WAI-ARIA guidelines and support keyboard navigation.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+// Multiple items open at once
+<Accordion multiple>
+  <AccordionItem value="faq-1">
+    <AccordionTrigger>FAQ Item 1</AccordionTrigger>
+    <AccordionContent>Content 1</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="faq-2">
+    <AccordionTrigger>FAQ Item 2</AccordionTrigger>
+    <AccordionContent>Content 2</AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+// With leading icons and badges
+<Accordion>
+  <AccordionItem value="settings">
+    <AccordionTrigger leadingIcon="settings" badge={{ label: "New", color: "orange" }}>
+      Settings
+    </AccordionTrigger>
+    <AccordionContent>Settings content here...</AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+// Nested accordion
+<Accordion type="nested">
+  <AccordionItem value="parent">
+    <AccordionTrigger>Parent Section</AccordionTrigger>
+    <AccordionContent>
+      <Accordion type="nested">
+        <AccordionItem value="child">
+          <AccordionTrigger>Child Section</AccordionTrigger>
+          <AccordionContent>Nested content</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Accordion — Common Mistakes
+
+| Wrong | Correct |
+|-------|---------|
+| `<Accordion items={[...]} />` | Use `<AccordionItem>` children |
+| `expanded` / `isOpen` | Use `value` on AccordionItem and `defaultValue` on Accordion |
+| `onToggle` | Use `onValueChange` on Accordion |
+| Missing `value` on AccordionItem | Each AccordionItem requires a unique `value` prop |
+
+---
+
+## Slider
+
+```tsx
+// Basic slider
+<Slider value={volume} onChange={setVolume} />
+
+// With label and metadata
+<Slider
+  value={progress}
+  onChange={setProgress}
+  label="Progress"
+  metadata="Step 2 of 5"
+/>
+
+// Custom range
+<Slider
+  value={price}
+  onChange={setPrice}
+  min={10}
+  max={500}
+  step={10}
+  label="Price"
+/>
+
+// Without percentage display
+<Slider
+  value={brightness}
+  onChange={setBrightness}
+  size="sm"
+  showPercentage={false}
+/>
+
+// Disabled
+<Slider value={50} disabled label="Locked" />
+```
+
+## RangeSlider
+
+```tsx
+// Basic range slider
+<RangeSlider
+  value={priceRange}
+  onChange={setPriceRange}
+  label="Price Range"
+/>
+
+// With custom range
+<RangeSlider
+  value={ageRange}
+  onChange={setAgeRange}
+  min={18}
+  max={65}
+  label="Age Range"
+  showLabels
+/>
+```
+
+### Slider — Common Mistakes
+
+| Wrong | Correct |
+|-------|---------|
+| `marks={[0, 25, 50, 75, 100]}` | Marks/ticks not supported |
+| `orientation="vertical"` | Only horizontal orientation |
+| `tooltip` | Use `showPercentage` for value display |
+| `defaultValue` | Component is controlled-only; use `value` |
+
+---
+
+## DatePicker
+
+```tsx
+// Single date picker
+<DatePicker
+  mode="single"
+  value={selectedDate}
+  onChange={setSelectedDate}
+/>
+
+// Date range picker
+<DatePicker
+  mode="range"
+  rangeValue={dateRange}
+  onRangeChange={setDateRange}
+/>
+
+// Year picker
+<DatePicker
+  mode="year"
+  value={selectedYear}
+  onChange={setSelectedYear}
+/>
+
+// With footer buttons
+<DatePicker
+  mode="single"
+  value={date}
+  onChange={setDate}
+  showFooter
+  onDone={() => setOpen(false)}
+  onClear={() => setDate(null)}
+/>
+
+// With min/max constraints
+<DatePicker
+  mode="single"
+  value={date}
+  onChange={setDate}
+  minDate={new Date()}
+  maxDate={new Date(2025, 11, 31)}
+/>
+```
+
+### DatePicker — Common Mistakes
+
+| Wrong | Correct |
+|-------|---------|
+| `onChange` for range mode | Use `onRangeChange` |
+| `value` for range mode | Use `rangeValue={[start, end]}` |
+| `disabledDates={[...]}` | Use `minDate`/`maxDate` |
+| `format="MM/DD/YYYY"` | DatePicker shows calendar; format dates yourself |
+| `<DatePicker trigger={<Input />} />` | DatePicker is the calendar itself |
+
+---
+
+## Stepper
+
+```tsx
+// Basic stepper with dot indicators
+<Stepper
+  steps={[
+    { label: 'Account', description: 'Create your account' },
+    { label: 'Profile', description: 'Complete your profile' },
+    { label: 'Review', description: 'Review and submit' }
+  ]}
+  activeStep={1}
+/>
+
+// With number indicators
+<Stepper
+  steps={[
+    { label: 'Step 1' },
+    { label: 'Step 2' },
+    { label: 'Step 3' }
+  ]}
+  activeStep={0}
+  indicator="number"
+/>
+
+// With icon indicators
+<Stepper
+  steps={[
+    { label: 'Account', icon: 'user' },
+    { label: 'Payment', icon: 'credit-card' },
+    { label: 'Confirm', icon: 'check' }
+  ]}
+  activeStep={1}
+  indicator="icon"
+/>
+
+// Vertical orientation
+<Stepper
+  steps={steps}
+  activeStep={currentStep}
+  orientation="vertical"
+/>
+```
+
+## LinearStepper
+
+```tsx
+// Simple linear progress
+<LinearStepper currentStep={2} totalSteps={5} />
+
+// With label
+<LinearStepper currentStep={3} totalSteps={4} showLabel />
+```
+
+## SegmentedStepper
+
+```tsx
+// Segmented progress bar
+<SegmentedStepper currentStep={2} totalSteps={5} />
+
+// With label
+<SegmentedStepper currentStep={1} totalSteps={3} showLabel />
+```
+
+### Stepper — Common Mistakes
+
+| Wrong | Correct |
+|-------|---------|
+| `current` / `activeIndex` | `activeStep` |
+| `items={[...]}` | `steps={[...]}` |
+| `direction="vertical"` | `orientation="vertical"` |
+
+---
+
+## Spinner
+
+```tsx
+// Basic spinner
+<Spinner />
+
+// With label
+<Spinner label="Loading..." />
+
+// Different types
+<Spinner type="thin" />
+<Spinner type="bold" />
+<Spinner type="duo-tone" />
+<Spinner type="buffering-thin" />
+<Spinner type="buffering-bold" />
+<Spinner type="dot" />
+<Spinner type="juggling" />
+
+// Sizes: xs, sm, md, lg, xl, 2xl, 3xl
+<Spinner size="lg" />
+<Spinner size="xl" />
+
+// White spinner on dark background
+<div className="bg-grey-900 p-4 rounded-lg">
+  <Spinner colorStyle="white" label="Loading..." />
+</div>
+
+// Label positions
+<Spinner label="Please wait" labelPosition="below" />
+<Spinner label="Loading" labelPosition="before" />
+
+// Inside a button (loading state)
+<Button variant="primary" disabled>
+  <Spinner type="thin" size="sm" colorStyle="white" />
+  <span className="ml-2">Saving...</span>
+</Button>
+```
+
+### Spinner — Common Mistakes
+
+| Wrong | Correct |
+|-------|---------|
+| `variant="circular"` | `type="thin"` or `type="bold"` |
+| `color="primary"` | `colorStyle="brand"` |
+| Spinner with `value`/`progress` | Use `ProgressCircle` for determinate progress |
+| `size="large"` | `size="lg"` |
+
+---
+
+## Counter
+
+```tsx
+// Basic counter
+<Counter value={count} onChange={setCount} />
+
+// With min/max constraints
+<Counter
+  value={quantity}
+  onChange={setQuantity}
+  min={1}
+  max={10}
+/>
+
+// Different sizes
+<Counter value={count} onChange={setCount} size="sm" />
+<Counter value={count} onChange={setCount} size="md" />
+<Counter value={count} onChange={setCount} size="lg" />
+
+// Different shapes
+<Counter value={count} onChange={setCount} shape="rounded" />
+<Counter value={count} onChange={setCount} shape="block" />
+<Counter value={count} onChange={setCount} shape="pill" />
+
+// Disabled
+<Counter value={5} disabled />
+```
+
+## NumberCounter
+
+```tsx
+// Display-only number counter (no interaction)
+<NumberCounter value={42} />
+
+// Different colors
+<NumberCounter value={99} color="orange" />
+<NumberCounter value={12} color="red" />
+<NumberCounter value={5} color="grey" />
+<NumberCounter value={0} color="white" />
+
+// Different sizes
+<NumberCounter value={7} size="sm" />
+<NumberCounter value={7} size="md" />
+<NumberCounter value={7} size="lg" />
+```
+
+---
+
+## Banner
+
+```tsx
+// Information banner
+<Banner
+  status="information"
+  title="System Update"
+  description="A new version will be deployed tonight."
+/>
+
+// Success banner
+<Banner
+  status="success"
+  title="Payment Received"
+  description="Your payment has been processed successfully."
+/>
+
+// Warning banner
+<Banner
+  status="warning"
+  title="Subscription Expiring"
+  description="Your subscription expires in 3 days."
+  buttonLabel="Renew Now"
+  onButtonClick={handleRenew}
+/>
+
+// Error banner
+<Banner
+  status="error"
+  title="Connection Lost"
+  description="Please check your internet connection."
+/>
+
+// Feature/opportunity banners
+<Banner status="feature" title="New Feature" description="Try our new dashboard!" />
+<Banner status="opportunity" title="Special Offer" description="50% off this week!" />
+
+// Subtle emphasis (lighter background)
+<Banner
+  status="information"
+  emphasis="subtle"
+  title="Note"
+  description="This is a subtle informational banner."
+/>
+
+// Dismissible
+<Banner
+  status="success"
+  title="Saved!"
+  dismissible
+  onDismiss={() => setShowBanner(false)}
+/>
+
+// Sizes
+<Banner status="information" size="sm" title="Compact banner" />
+<Banner status="information" size="lg" title="Large banner" description="With description" />
+```
+
+---
+
+## ActivityFeed (Compound Component)
+
+```tsx
+<ActivityFeed>
+  <ActivityItem
+    avatar={<Avatar src="/user1.jpg" alt="John" />}
+    text="John created a new project"
+    date="Today"
+    time="2:30 PM"
+    connector="top"
+  />
+  <ActivityItem
+    avatar={<Avatar src="/user2.jpg" alt="Sarah" />}
+    text="Sarah commented on your post"
+    date="Yesterday"
+    time="4:15 PM"
+    connector="middle"
+    unread
+  />
+  <ActivityItem
+    avatar={<Avatar alt="System" />}
+    text="System backup completed"
+    date="Mar 15"
+    time="12:00 AM"
+    connector="last"
+  />
+</ActivityFeed>
+```
+
+## ActivityContent
+
+```tsx
+// File attachment variant
+<ActivityContent
+  variant="file"
+  contentStyle="card"
+  fileName="report.pdf"
+  fileSize="2.4 MB"
+/>
+
+// Comment variant
+<ActivityContent
+  variant="comment"
+  contentStyle="container"
+  commentText="This looks great! Let's proceed with the implementation."
+  commentAuthor="Sarah"
+/>
+
+// CTA variant
+<ActivityContent
+  variant="cta"
+  ctaTitle="Review Required"
+  ctaDescription="Please review the changes before merging."
+  ctaButtonLabel="Review Now"
+  onCtaClick={handleReview}
+/>
+```
+
+---
+
+## RaydenChart
+
+```tsx
+import { RaydenChart, chartColors, hexToRgba, createGradientFill } from '@raydenui/ui';
+
+// Line chart
+<RaydenChart
+  type="line"
+  data={{
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    datasets: [{
+      label: 'Revenue',
+      data: [12000, 19000, 15000, 25000, 22000],
+      borderColor: chartColors.primary,
+      backgroundColor: hexToRgba(chartColors.primary, 0.1)
+    }]
+  }}
+  height={300}
+/>
+
+// Bar chart
+<RaydenChart
+  type="bar"
+  data={{
+    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+    datasets: [{
+      label: 'Sales',
+      data: [65, 59, 80, 81],
+      backgroundColor: chartColors.primary
+    }]
+  }}
+/>
+
+// Pie/Doughnut chart
+<RaydenChart
+  type="doughnut"
+  data={{
+    labels: ['Desktop', 'Mobile', 'Tablet'],
+    datasets: [{
+      data: [55, 35, 10],
+      backgroundColor: [chartColors.primary, chartColors.secondary, chartColors.success]
+    }]
+  }}
+/>
+
+// Available chart types: line, bar, pie, doughnut, radar, scatter, bubble, polar-area
+```
+
+---
+
 ## Color Tokens
 
 Use Tailwind classes with these tokens — never use raw hex values.
@@ -1674,13 +2292,19 @@ If you see these names, use the correct Rayden UI component:
 | `Menu`, `ContextMenu` | `DropdownMenu` |
 | `Toast`, `Notification`, `Snackbar` | `Alert` |
 | `Tag`, `Label`, `Pill` | `Badge` |
-| `Spinner`, `Loading`, `Loader` | `ProgressCircle` |
+| `Loading`, `Loader`, `LoadingSpinner` | `Spinner` |
 | `Switch` | `Toggle` |
 | `TabList`, `TabGroup` | `Tabs` |
 | `Check` | `Checkbox` |
 | `Separator`, `HR` | `Divider` |
 | `Card`, `Panel`, `Surface` | `<div>` with Tailwind classes |
-| `Modal`, `Dialog` | Native `<dialog>` element |
+| `Dialog`, `Popup`, `Lightbox` | `Modal` |
+| `Collapse`, `Collapsible`, `Expandable` | `Accordion` |
+| `Range`, `RangeInput`, `SliderInput` | `Slider` or `RangeSlider` |
+| `Calendar`, `DateInput`, `DateField` | `DatePicker` |
+| `Steps`, `Wizard`, `ProgressSteps` | `Stepper` or `LinearStepper` |
+| `Timeline` | `ActivityFeed` |
+| `Chart`, `Graph`, `Visualization` | `RaydenChart` |
 | `Skeleton` | `<div className="animate-pulse bg-grey-100">` |
 
 ---

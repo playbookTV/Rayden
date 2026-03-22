@@ -1,0 +1,142 @@
+{
+  "$schema": "./schema.json",
+  "name": "Accordion",
+  "displayName": "Accordion",
+  "description": "Collapsible content panels for organizing information. Supports single/multiple open items with default or nested visual styles.",
+  "category": "layout",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "type": {
+      "type": "enum",
+      "values": ["default", "nested"],
+      "default": "default",
+      "description": "Visual style: default has border-bottom dividers, nested has full borders with rounded corners"
+    },
+    "multiple": {
+      "type": "boolean",
+      "default": false,
+      "description": "Allow multiple items to be open simultaneously"
+    },
+    "value": {
+      "type": "array",
+      "description": "Controlled open item keys (array of strings)"
+    },
+    "defaultValue": {
+      "type": "array",
+      "default": "[]",
+      "description": "Default open item keys for uncontrolled usage"
+    },
+    "onValueChange": {
+      "type": "function",
+      "description": "Callback when open items change: (value: string[]) => void"
+    }
+  },
+  "subComponents": [
+    {
+      "name": "AccordionItem",
+      "description": "Individual accordion panel container",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Unique key for this item"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this item is disabled"
+        }
+      }
+    },
+    {
+      "name": "AccordionTrigger",
+      "description": "Clickable header that toggles the accordion item",
+      "props": {
+        "leadingIcon": {
+          "type": "union",
+          "values": ["ReactNode", "IconName"],
+          "description": "Icon displayed on the left side"
+        },
+        "leadingNumber": {
+          "type": "string",
+          "description": "Number badge displayed on the left (e.g., '01')"
+        },
+        "leadingLogo": {
+          "type": "ReactNode",
+          "description": "Logo element displayed on the left"
+        },
+        "badge": {
+          "type": "union",
+          "values": ["number", "string"],
+          "description": "Badge counter displayed on the right"
+        },
+        "hideChevron": {
+          "type": "boolean",
+          "default": false,
+          "description": "Hide the chevron indicator"
+        }
+      }
+    },
+    {
+      "name": "AccordionContent",
+      "description": "Collapsible content area with smooth animation"
+    }
+  ],
+  "composition": {
+    "requiredStructure": "Accordion > AccordionItem > [AccordionTrigger, AccordionContent]",
+    "relatedComponents": ["Divider", "Tabs"]
+  },
+  "accessibility": {
+    "role": "Trigger uses button role, Content uses region role",
+    "keyboardNav": [{ "key": "Enter/Space", "action": "Toggle accordion item" }],
+    "focusManagement": "Trigger receives focus, aria-expanded indicates state",
+    "screenReaderNotes": "Content region is labeled by its trigger via aria-labelledby"
+  },
+  "antiHallucination": {
+    "aliases": ["Collapse", "Collapsible", "Expandable", "FAQ"],
+    "notTheSameAs": ["Tabs", "Disclosure"],
+    "doesNotExist": [
+      "expanded",
+      "isExpanded",
+      "defaultExpanded",
+      "onToggle",
+      "header",
+      "content",
+      "icon",
+      "allowZeroExpanded",
+      "preExpanded"
+    ],
+    "commonMistakes": [
+      { "mistake": "expanded={true}", "correction": "value={['item-key']}" },
+      { "mistake": "defaultExpanded", "correction": "defaultValue={['item-key']}" },
+      { "mistake": "onChange", "correction": "onValueChange" },
+      {
+        "mistake": "icon='chevron'",
+        "correction": "Chevron is built-in, use hideChevron to remove"
+      },
+      {
+        "mistake": "Accordion items={[...]} render prop",
+        "correction": "Use AccordionItem children with value prop"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Accordion",
+      "code": "<Accordion>\n  <AccordionItem value=\"item-1\">\n    <AccordionTrigger>What is Rayden UI?</AccordionTrigger>\n    <AccordionContent>Rayden UI is a React component library.</AccordionContent>\n  </AccordionItem>\n  <AccordionItem value=\"item-2\">\n    <AccordionTrigger>How do I install it?</AccordionTrigger>\n    <AccordionContent>Run npm install @raydenui/ui</AccordionContent>\n  </AccordionItem>\n</Accordion>"
+    },
+    {
+      "title": "Nested Style with Multiple",
+      "code": "<Accordion type=\"nested\" multiple defaultValue={['faq-1']}>\n  <AccordionItem value=\"faq-1\">\n    <AccordionTrigger leadingIcon=\"help-circle\">Getting Started</AccordionTrigger>\n    <AccordionContent>Start by installing the package...</AccordionContent>\n  </AccordionItem>\n  <AccordionItem value=\"faq-2\">\n    <AccordionTrigger leadingIcon=\"settings\">Configuration</AccordionTrigger>\n    <AccordionContent>Configure your theme in globals.css...</AccordionContent>\n  </AccordionItem>\n</Accordion>"
+    },
+    {
+      "title": "With Leading Number and Badge",
+      "code": "<Accordion>\n  <AccordionItem value=\"step-1\">\n    <AccordionTrigger leadingNumber=\"01\" badge={3}>Account Setup</AccordionTrigger>\n    <AccordionContent>Complete your account setup...</AccordionContent>\n  </AccordionItem>\n</Accordion>"
+    },
+    {
+      "title": "Controlled Accordion",
+      "code": "<Accordion value={openItems} onValueChange={setOpenItems}>\n  <AccordionItem value=\"section-1\">\n    <AccordionTrigger>Section 1</AccordionTrigger>\n    <AccordionContent>Content for section 1</AccordionContent>\n  </AccordionItem>\n</Accordion>"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "$schema": "./schema.json",
+  "name": "Slider",
+  "displayName": "Slider",
+  "description": "Draggable range input for selecting numeric values. Includes single Slider and dual-handle RangeSlider for selecting value ranges.",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "value": {
+      "type": "number",
+      "description": "Current value (0–100 by default)"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Called when value changes: (value: number) => void"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "md", "lg"],
+      "default": "lg",
+      "description": "Track and handle size"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label above the slider"
+    },
+    "metadata": {
+      "type": "union",
+      "values": ["string", "string[]"],
+      "description": "Metadata text(s) below the slider"
+    },
+    "showPercentage": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show percentage text on the right"
+    },
+    "min": {
+      "type": "number",
+      "default": 0,
+      "description": "Minimum value"
+    },
+    "max": {
+      "type": "number",
+      "default": 100,
+      "description": "Maximum value"
+    },
+    "step": {
+      "type": "number",
+      "default": 1,
+      "description": "Step increment"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disabled state"
+    }
+  },
+  "subComponents": [
+    {
+      "name": "RangeSlider",
+      "description": "Dual-handle slider for selecting a value range",
+      "props": {
+        "value": {
+          "type": "array",
+          "description": "Current range [low, high]"
+        },
+        "onChange": {
+          "type": "function",
+          "description": "Called when range changes: (value: [number, number]) => void"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "default": "lg",
+          "description": "Track and handle size"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label above the slider"
+        },
+        "showLabels": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show min/max percentage labels below"
+        },
+        "min": {
+          "type": "number",
+          "default": 0,
+          "description": "Minimum value"
+        },
+        "max": {
+          "type": "number",
+          "default": 100,
+          "description": "Maximum value"
+        },
+        "step": {
+          "type": "number",
+          "default": 1,
+          "description": "Step increment"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disabled state"
+        }
+      }
+    }
+  ],
+  "composition": {
+    "relatedComponents": ["Input", "Counter", "ProgressBar"]
+  },
+  "accessibility": {
+    "role": "slider",
+    "keyboardNav": [{ "key": "Click/Drag", "action": "Set slider value" }],
+    "screenReaderNotes": "Has aria-valuenow, aria-valuemin, aria-valuemax attributes"
+  },
+  "antiHallucination": {
+    "aliases": ["Range", "RangeInput", "SliderInput", "ValueSlider"],
+    "notTheSameAs": ["ProgressBar", "Counter"],
+    "doesNotExist": [
+      "marks",
+      "ticks",
+      "tooltip",
+      "orientation",
+      "vertical",
+      "track",
+      "rail",
+      "thumb",
+      "defaultValue",
+      "onChangeCommitted"
+    ],
+    "commonMistakes": [
+      { "mistake": "marks={[0, 25, 50, 75, 100]}", "correction": "Marks/ticks not supported" },
+      {
+        "mistake": "orientation='vertical'",
+        "correction": "Only horizontal orientation is supported"
+      },
+      { "mistake": "tooltip", "correction": "Use showPercentage for value display" },
+      { "mistake": "defaultValue", "correction": "Component is controlled-only; use value prop" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Slider",
+      "code": "<Slider value={volume} onChange={setVolume} />"
+    },
+    {
+      "title": "With Label and Metadata",
+      "code": "<Slider\n  value={progress}\n  onChange={setProgress}\n  label=\"Progress\"\n  metadata=\"Step 2 of 5\"\n/>"
+    },
+    {
+      "title": "Small Slider without Percentage",
+      "code": "<Slider\n  value={brightness}\n  onChange={setBrightness}\n  size=\"sm\"\n  showPercentage={false}\n/>"
+    },
+    {
+      "title": "Custom Min/Max",
+      "code": "<Slider\n  value={price}\n  onChange={setPrice}\n  min={10}\n  max={500}\n  step={10}\n  label=\"Price\"\n/>"
+    },
+    {
+      "title": "Range Slider",
+      "code": "<RangeSlider\n  value={priceRange}\n  onChange={setPriceRange}\n  label=\"Price Range\"\n/>"
+    },
+    {
+      "title": "Range Slider with Custom Range",
+      "code": "<RangeSlider\n  value={ageRange}\n  onChange={setAgeRange}\n  min={18}\n  max={65}\n  label=\"Age Range\"\n  showLabels\n/>"
+    },
+    {
+      "title": "Disabled Slider",
+      "code": "<Slider value={50} disabled label=\"Locked\" />"
+    }
+  ]
+}

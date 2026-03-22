@@ -1,0 +1,190 @@
+{
+  "$schema": "./schema.json",
+  "name": "ActivityFeed",
+  "displayName": "Activity Feed",
+  "description": "Timeline and notification feed components for displaying user activity, comments, and events. Includes ActivityItem for feed entries and ActivityContent for rich content blocks.",
+  "category": "data-display",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {},
+  "subComponents": [
+    {
+      "name": "ActivityItem",
+      "description": "Individual feed item with avatar, text, metadata, and optional connector for timelines",
+      "props": {
+        "avatar": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Avatar element (e.g., <Avatar />)"
+        },
+        "text": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Primary text content with mixed inline content"
+        },
+        "unread": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show green unread indicator dot"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date label (e.g., 'Thurs 21, 2023')"
+        },
+        "time": {
+          "type": "string",
+          "description": "Time label displayed on the right (e.g., '10 mins')"
+        },
+        "link": {
+          "type": "object",
+          "description": "Optional link button: { label: string, href?: string, onClick?: () => void }"
+        },
+        "badge": {
+          "type": "string",
+          "description": "Badge text (e.g., '#Marketing-Design')"
+        },
+        "connector": {
+          "type": "enum",
+          "values": ["top", "middle", "last"],
+          "description": "Timeline connector line position"
+        },
+        "children": {
+          "type": "ReactNode",
+          "description": "Optional ActivityContent block"
+        }
+      }
+    },
+    {
+      "name": "ActivityContent",
+      "description": "Rich content block for file attachments, comments, or CTAs",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": ["file", "comment", "cta"],
+          "required": true,
+          "description": "Content type"
+        },
+        "contentStyle": {
+          "type": "enum",
+          "values": ["plain", "card", "container"],
+          "default": "card",
+          "description": "Visual wrapper style"
+        },
+        "icon": {
+          "type": "union",
+          "values": ["ReactNode", "IconName"],
+          "description": "File variant: leading icon"
+        },
+        "title": {
+          "type": "string",
+          "description": "File variant: file name"
+        },
+        "size": {
+          "type": "string",
+          "description": "File variant: file size (e.g., '13MB')"
+        },
+        "fileType": {
+          "type": "string",
+          "description": "File variant: type label (e.g., 'PDF File')"
+        },
+        "date": {
+          "type": "string",
+          "description": "File variant: file date"
+        },
+        "avatar": {
+          "type": "ReactNode",
+          "description": "Comment variant: author avatar"
+        },
+        "author": {
+          "type": "string",
+          "description": "Comment variant: author name"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Comment variant: timestamp (e.g., '2 hours ago')"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Comment variant: comment body text"
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Comment variant: array of { name: string, extension: string }"
+        },
+        "reactions": {
+          "type": "number",
+          "description": "Comment variant: reaction count"
+        },
+        "replies": {
+          "type": "number",
+          "description": "Comment variant: reply count"
+        },
+        "onReply": {
+          "type": "function",
+          "description": "Comment variant: reply button callback"
+        },
+        "primaryAction": {
+          "type": "object",
+          "description": "CTA variant: { label: string, onClick?: () => void }"
+        },
+        "secondaryAction": {
+          "type": "object",
+          "description": "CTA variant: { label: string, onClick?: () => void }"
+        }
+      }
+    }
+  ],
+  "composition": {
+    "requiredStructure": "ActivityItem can contain ActivityContent as children",
+    "relatedComponents": ["Avatar", "Badge"]
+  },
+  "accessibility": {
+    "role": "ActivityItem uses article role",
+    "screenReaderNotes": "Unread state announced via sr-only text"
+  },
+  "antiHallucination": {
+    "aliases": ["Timeline", "Feed", "Notifications", "ActivityLog"],
+    "notTheSameAs": ["Table", "Alert"],
+    "doesNotExist": [
+      "ActivityFeed (container)",
+      "items",
+      "data",
+      "renderItem",
+      "onItemClick",
+      "loading"
+    ],
+    "commonMistakes": [
+      {
+        "mistake": "<ActivityFeed items={[...]} />",
+        "correction": "Map items manually with <ActivityItem />"
+      },
+      {
+        "mistake": "icon in ActivityItem",
+        "correction": "Use avatar prop with <Avatar /> component"
+      },
+      { "mistake": "showConnector", "correction": "Use connector='top' | 'middle' | 'last'" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Activity Item",
+      "code": "<ActivityItem\n  avatar={<Avatar src=\"/user.jpg\" alt=\"John\" size=\"sm\" />}\n  text={<><strong>John Doe</strong> uploaded a file</>}\n  time=\"5 mins ago\"\n/>"
+    },
+    {
+      "title": "Timeline with Connectors",
+      "code": "<div className=\"flex flex-col\">\n  <ActivityItem\n    connector=\"top\"\n    avatar={<Avatar alt=\"Alice\" size=\"sm\" />}\n    text={<><strong>Alice</strong> created the project</>}\n    date=\"Jan 15, 2024\"\n  />\n  <ActivityItem\n    connector=\"middle\"\n    avatar={<Avatar alt=\"Bob\" size=\"sm\" />}\n    text={<><strong>Bob</strong> added a comment</>}\n    date=\"Jan 16, 2024\"\n  />\n  <ActivityItem\n    connector=\"last\"\n    avatar={<Avatar alt=\"Carol\" size=\"sm\" />}\n    text={<><strong>Carol</strong> completed the task</>}\n    date=\"Jan 17, 2024\"\n  />\n</div>"
+    },
+    {
+      "title": "With File Content",
+      "code": "<ActivityItem\n  avatar={<Avatar src=\"/user.jpg\" alt=\"User\" size=\"sm\" />}\n  text={<><strong>Jane</strong> shared a document</>}\n  time=\"2 hours ago\"\n>\n  <ActivityContent\n    variant=\"file\"\n    icon=\"file\"\n    title=\"Project Brief.pdf\"\n    size=\"2.4MB\"\n    fileType=\"PDF File\"\n  />\n</ActivityItem>"
+    },
+    {
+      "title": "With Comment Content",
+      "code": "<ActivityItem\n  avatar={<Avatar src=\"/user.jpg\" alt=\"User\" size=\"sm\" />}\n  text={<><strong>Mark</strong> commented on your post</>}\n  time=\"1 hour ago\"\n>\n  <ActivityContent\n    variant=\"comment\"\n    avatar={<Avatar src=\"/user.jpg\" alt=\"Mark\" size=\"xs\" />}\n    author=\"Mark Wilson\"\n    timestamp=\"1 hour ago\"\n    comment=\"Great work on this design! I love the color palette.\"\n    reactions={5}\n    replies={2}\n    onReply={() => console.log('Reply clicked')}\n  />\n</ActivityItem>"
+    },
+    {
+      "title": "With CTA Content",
+      "code": "<ActivityItem\n  avatar={<Avatar alt=\"System\" size=\"sm\" />}\n  text=\"You have a pending invitation\"\n  unread\n>\n  <ActivityContent\n    variant=\"cta\"\n    primaryAction={{ label: 'Accept', onClick: () => accept() }}\n    secondaryAction={{ label: 'Decline', onClick: () => decline() }}\n  />\n</ActivityItem>"
+    }
+  ]
+}

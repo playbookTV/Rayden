@@ -1,0 +1,102 @@
+{
+  "$schema": "./schema.json",
+  "name": "RaydenChart",
+  "displayName": "Chart",
+  "description": "Chart.js wrapper with Rayden UI theme defaults. Supports line, bar, pie, doughnut, radar, scatter, bubble, and polar-area chart types.",
+  "category": "data-display",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "type": {
+      "type": "enum",
+      "values": ["line", "bar", "pie", "doughnut", "radar", "scatter", "bubble", "polar-area"],
+      "required": true,
+      "description": "Chart type"
+    },
+    "data": {
+      "type": "object",
+      "required": true,
+      "description": "Chart.js data object with labels and datasets"
+    },
+    "options": {
+      "type": "object",
+      "description": "Chart.js options (merged with Rayden defaults)"
+    },
+    "height": {
+      "type": "number",
+      "default": 300,
+      "description": "Chart height in pixels"
+    },
+    "width": {
+      "type": "number",
+      "description": "Chart width in pixels (defaults to container width)"
+    }
+  },
+  "utilities": [
+    {
+      "name": "chartColors",
+      "description": "Rayden UI color palette for charts (primary, secondary, grey, success, error, warning)"
+    },
+    {
+      "name": "chartFont",
+      "description": "Default font configuration for chart labels"
+    },
+    {
+      "name": "hexToRgba",
+      "description": "Utility to convert hex color to rgba: hexToRgba('#F56630', 0.5)"
+    },
+    {
+      "name": "createGradientFill",
+      "description": "Create gradient fill for chart areas"
+    }
+  ],
+  "composition": {
+    "relatedComponents": ["MetricsCard"]
+  },
+  "antiHallucination": {
+    "aliases": ["Chart", "Graph", "Visualization", "LineChart", "BarChart", "PieChart"],
+    "notTheSameAs": ["ProgressBar", "ProgressCircle"],
+    "doesNotExist": [
+      "Chart (use RaydenChart)",
+      "series",
+      "xAxis",
+      "yAxis",
+      "legend",
+      "tooltip",
+      "animation",
+      "responsive",
+      "onDataClick"
+    ],
+    "commonMistakes": [
+      { "mistake": "<Chart />", "correction": "<RaydenChart /> (component is named RaydenChart)" },
+      {
+        "mistake": "series={[...]}",
+        "correction": "data={{ labels: [...], datasets: [...] }} (use Chart.js data format)"
+      },
+      { "mistake": "type='area'", "correction": "type='line' with fill: true in dataset" },
+      { "mistake": "type='polarArea'", "correction": "type='polar-area' (hyphenated)" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Line Chart",
+      "code": "<RaydenChart\n  type=\"line\"\n  height={300}\n  data={{\n    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],\n    datasets: [{\n      label: 'Revenue',\n      data: [3000, 4500, 3200, 5100, 4800],\n      borderColor: chartColors.primary[500],\n      backgroundColor: hexToRgba(chartColors.primary[500], 0.1),\n      fill: true,\n    }],\n  }}\n/>"
+    },
+    {
+      "title": "Bar Chart",
+      "code": "<RaydenChart\n  type=\"bar\"\n  height={250}\n  data={{\n    labels: ['Q1', 'Q2', 'Q3', 'Q4'],\n    datasets: [{\n      label: 'Sales',\n      data: [120, 190, 150, 220],\n      backgroundColor: chartColors.primary[400],\n    }],\n  }}\n/>"
+    },
+    {
+      "title": "Doughnut Chart",
+      "code": "<RaydenChart\n  type=\"doughnut\"\n  height={200}\n  data={{\n    labels: ['Desktop', 'Mobile', 'Tablet'],\n    datasets: [{\n      data: [55, 35, 10],\n      backgroundColor: [\n        chartColors.primary[500],\n        chartColors.secondary[500],\n        chartColors.grey[400],\n      ],\n    }],\n  }}\n/>"
+    },
+    {
+      "title": "Radar Chart",
+      "code": "<RaydenChart\n  type=\"radar\"\n  height={300}\n  data={{\n    labels: ['Speed', 'Reliability', 'Comfort', 'Safety', 'Efficiency'],\n    datasets: [{\n      label: 'Product A',\n      data: [80, 90, 70, 85, 75],\n      borderColor: chartColors.primary[500],\n      backgroundColor: hexToRgba(chartColors.primary[500], 0.2),\n    }],\n  }}\n/>"
+    },
+    {
+      "title": "Multiple Datasets",
+      "code": "<RaydenChart\n  type=\"line\"\n  height={300}\n  data={{\n    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],\n    datasets: [\n      {\n        label: 'This Week',\n        data: [100, 120, 115, 134, 168],\n        borderColor: chartColors.primary[500],\n      },\n      {\n        label: 'Last Week',\n        data: [90, 100, 95, 110, 140],\n        borderColor: chartColors.grey[400],\n        borderDash: [5, 5],\n      },\n    ],\n  }}\n/>"
+    }
+  ]
+}

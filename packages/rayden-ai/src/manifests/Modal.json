@@ -1,0 +1,154 @@
+{
+  "$schema": "./schema.json",
+  "name": "Modal",
+  "displayName": "Modal",
+  "description": "Accessible dialog overlay with title, description, icon, and action buttons. Renders via portal with backdrop blur, keyboard dismiss, and focus management.",
+  "category": "layout",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "open": {
+      "type": "boolean",
+      "required": true,
+      "description": "Whether the modal is open"
+    },
+    "onClose": {
+      "type": "function",
+      "required": true,
+      "description": "Called when the modal should close"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "md", "lg"],
+      "default": "sm",
+      "description": "Modal width: sm (400px), md (500px), lg (640px)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title text"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description text below the title"
+    },
+    "icon": {
+      "type": "ReactNode",
+      "description": "Leading icon element (defaults to box icon if title is present)"
+    },
+    "showClose": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show close button in header"
+    },
+    "primaryLabel": {
+      "type": "string",
+      "default": "Save",
+      "description": "Primary action button label"
+    },
+    "onPrimaryClick": {
+      "type": "function",
+      "description": "Called when primary button is clicked"
+    },
+    "secondaryLabel": {
+      "type": "string",
+      "description": "Secondary action button label"
+    },
+    "onSecondaryClick": {
+      "type": "function",
+      "description": "Called when secondary button is clicked (defaults to onClose)"
+    },
+    "footerOrientation": {
+      "type": "enum",
+      "values": ["horizontal", "vertical"],
+      "default": "horizontal",
+      "description": "Footer button layout"
+    },
+    "closeOnOverlay": {
+      "type": "boolean",
+      "default": true,
+      "description": "Close when clicking the backdrop overlay"
+    },
+    "closeOnEscape": {
+      "type": "boolean",
+      "default": true,
+      "description": "Close when pressing Escape key"
+    },
+    "blur": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show backdrop blur effect on overlay"
+    },
+    "children": {
+      "type": "ReactNode",
+      "description": "Modal body content"
+    }
+  },
+  "composition": {
+    "relatedComponents": ["Button", "Alert"]
+  },
+  "accessibility": {
+    "role": "dialog with aria-modal='true'",
+    "keyboardNav": [
+      { "key": "Escape", "action": "Close modal (if closeOnEscape is true)" },
+      { "key": "Tab", "action": "Navigate focusable elements" }
+    ],
+    "focusManagement": "Body scroll is locked when modal is open",
+    "screenReaderNotes": "Title and description linked via aria-labelledby and aria-describedby"
+  },
+  "antiHallucination": {
+    "aliases": ["Dialog", "Popup", "Overlay", "Lightbox", "Sheet"],
+    "notTheSameAs": ["DropdownMenu", "Tooltip", "Alert"],
+    "doesNotExist": [
+      "isOpen",
+      "visible",
+      "show",
+      "hide",
+      "header",
+      "footer",
+      "actions",
+      "centered",
+      "fullScreen",
+      "scrollBehavior",
+      "initialFocus",
+      "finalFocus",
+      "trapFocus",
+      "returnFocus"
+    ],
+    "commonMistakes": [
+      { "mistake": "isOpen", "correction": "open" },
+      { "mistake": "onDismiss", "correction": "onClose" },
+      { "mistake": "header={<>...</>}", "correction": "Use title and description props" },
+      { "mistake": "footer={<Button />}", "correction": "Use primaryLabel/secondaryLabel props" },
+      {
+        "mistake": "actions={[...]}",
+        "correction": "Use primaryLabel + onPrimaryClick, secondaryLabel + onSecondaryClick"
+      },
+      {
+        "mistake": "Modal without open/onClose",
+        "correction": "Both open and onClose are required"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Modal",
+      "code": "<Modal\n  open={isOpen}\n  onClose={() => setIsOpen(false)}\n  title=\"Confirm Action\"\n  description=\"Are you sure you want to continue?\"\n  primaryLabel=\"Confirm\"\n  onPrimaryClick={handleConfirm}\n  secondaryLabel=\"Cancel\"\n/>"
+    },
+    {
+      "title": "Modal with Custom Content",
+      "code": "<Modal\n  open={isOpen}\n  onClose={() => setIsOpen(false)}\n  title=\"Edit Profile\"\n  primaryLabel=\"Save Changes\"\n  onPrimaryClick={handleSave}\n  secondaryLabel=\"Cancel\"\n>\n  <div className=\"space-y-4\">\n    <Input label=\"Name\" value={name} onChange={e => setName(e.target.value)} />\n    <Input label=\"Email\" value={email} onChange={e => setEmail(e.target.value)} />\n  </div>\n</Modal>"
+    },
+    {
+      "title": "Large Modal with Vertical Buttons",
+      "code": "<Modal\n  open={isOpen}\n  onClose={() => setIsOpen(false)}\n  size=\"lg\"\n  title=\"Choose a Plan\"\n  description=\"Select the plan that works best for you.\"\n  footerOrientation=\"vertical\"\n  primaryLabel=\"Upgrade to Pro\"\n  onPrimaryClick={handleUpgrade}\n  secondaryLabel=\"Stay on Free\"\n>\n  {/* Plan comparison content */}\n</Modal>"
+    },
+    {
+      "title": "Modal with Custom Icon",
+      "code": "<Modal\n  open={isOpen}\n  onClose={() => setIsOpen(false)}\n  title=\"Delete Item\"\n  description=\"This action cannot be undone.\"\n  icon={<Icon name=\"trash\" className=\"text-error-500\" />}\n  primaryLabel=\"Delete\"\n  onPrimaryClick={handleDelete}\n  secondaryLabel=\"Cancel\"\n/>"
+    },
+    {
+      "title": "Prevent Overlay Close",
+      "code": "<Modal\n  open={isOpen}\n  onClose={() => setIsOpen(false)}\n  title=\"Important\"\n  closeOnOverlay={false}\n  closeOnEscape={false}\n  showClose={false}\n  primaryLabel=\"I Understand\"\n  onPrimaryClick={() => setIsOpen(false)}\n>\n  <p>Please read this important notice carefully.</p>\n</Modal>"
+    }
+  ]
+}

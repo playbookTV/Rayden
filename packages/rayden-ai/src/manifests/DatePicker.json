@@ -1,0 +1,127 @@
+{
+  "$schema": "./schema.json",
+  "name": "DatePicker",
+  "displayName": "Date Picker",
+  "description": "Calendar date picker supporting single date, date range, and year selection modes. Includes min/max date constraints and optional footer with Clear/Done buttons.",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "mode": {
+      "type": "enum",
+      "values": ["single", "range", "year"],
+      "default": "single",
+      "description": "Picker mode: single date, date range, or year selection"
+    },
+    "value": {
+      "type": "Date",
+      "description": "Selected date (single/year mode)"
+    },
+    "rangeValue": {
+      "type": "array",
+      "description": "Selected range [Date | null, Date | null] (range mode)"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Called when a single date is selected: (date: Date | null) => void"
+    },
+    "onRangeChange": {
+      "type": "function",
+      "description": "Called when a date range is selected: (range: [Date | null, Date | null]) => void"
+    },
+    "showFooter": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show footer with Clear/Done buttons"
+    },
+    "onDone": {
+      "type": "function",
+      "description": "Called when Done button is clicked"
+    },
+    "onClear": {
+      "type": "function",
+      "description": "Called when Clear button is clicked"
+    },
+    "minDate": {
+      "type": "Date",
+      "description": "Disable dates before this date"
+    },
+    "maxDate": {
+      "type": "Date",
+      "description": "Disable dates after this date"
+    }
+  },
+  "composition": {
+    "relatedComponents": ["Input", "Modal"]
+  },
+  "accessibility": {
+    "role": "Calendar grid uses grid role with columnheader for day labels",
+    "keyboardNav": [{ "key": "Enter/Space", "action": "Select focused date" }],
+    "screenReaderNotes": "Each date button has aria-label with full date, aria-current for today, aria-pressed for selected dates"
+  },
+  "antiHallucination": {
+    "aliases": ["Calendar", "DateInput", "DateField", "DateRangePicker"],
+    "notTheSameAs": ["Input type='date'"],
+    "doesNotExist": [
+      "format",
+      "locale",
+      "placeholder",
+      "label",
+      "disabledDates",
+      "highlightedDates",
+      "showWeekNumbers",
+      "firstDayOfWeek",
+      "inline",
+      "portal",
+      "trigger",
+      "open",
+      "onOpen",
+      "onClose"
+    ],
+    "commonMistakes": [
+      { "mistake": "onChange for range", "correction": "Use onRangeChange for range mode" },
+      {
+        "mistake": "value for range",
+        "correction": "Use rangeValue={[start, end]} for range mode"
+      },
+      {
+        "mistake": "disabledDates={[...]}",
+        "correction": "Use minDate/maxDate for date constraints"
+      },
+      {
+        "mistake": "format='MM/DD/YYYY'",
+        "correction": "DatePicker shows calendar UI, format display dates yourself"
+      },
+      {
+        "mistake": "<DatePicker trigger={<Input />} />",
+        "correction": "DatePicker is the calendar itself, not a popover trigger"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Single Date Picker",
+      "code": "<DatePicker\n  mode=\"single\"\n  value={selectedDate}\n  onChange={setSelectedDate}\n/>"
+    },
+    {
+      "title": "Date Range Picker",
+      "code": "<DatePicker\n  mode=\"range\"\n  rangeValue={dateRange}\n  onRangeChange={setDateRange}\n/>"
+    },
+    {
+      "title": "Year Picker",
+      "code": "<DatePicker\n  mode=\"year\"\n  value={selectedYear}\n  onChange={setSelectedYear}\n/>"
+    },
+    {
+      "title": "With Footer",
+      "code": "<DatePicker\n  mode=\"single\"\n  value={date}\n  onChange={setDate}\n  showFooter\n  onDone={() => setOpen(false)}\n  onClear={() => setDate(null)}\n/>"
+    },
+    {
+      "title": "With Min/Max Constraints",
+      "code": "<DatePicker\n  mode=\"single\"\n  value={date}\n  onChange={setDate}\n  minDate={new Date()}\n  maxDate={new Date(2025, 11, 31)}\n/>"
+    },
+    {
+      "title": "Inside a Modal",
+      "code": "<Modal open={showDatePicker} onClose={() => setShowDatePicker(false)} title=\"Select Date\">\n  <DatePicker\n    mode=\"single\"\n    value={date}\n    onChange={setDate}\n    showFooter\n    onDone={() => setShowDatePicker(false)}\n  />\n</Modal>"
+    }
+  ]
+}

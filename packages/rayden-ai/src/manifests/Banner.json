@@ -1,0 +1,115 @@
+{
+  "$schema": "./schema.json",
+  "name": "Banner",
+  "displayName": "Banner",
+  "description": "Full-width notification banner for important announcements. Supports 6 status types, bold/subtle emphasis, and optional action button.",
+  "category": "feedback",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "status": {
+      "type": "enum",
+      "values": ["information", "success", "error", "warning", "feature", "opportunity"],
+      "default": "information",
+      "description": "Status determines the color scheme"
+    },
+    "emphasis": {
+      "type": "enum",
+      "values": ["bold", "subtle"],
+      "default": "subtle",
+      "description": "Bold uses solid background with white text; subtle uses light tinted background"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "lg"],
+      "default": "lg",
+      "description": "Banner height: sm (40px) or lg (48px)"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Headline text"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description text"
+    },
+    "icon": {
+      "type": "union",
+      "values": ["ReactNode", "IconName"],
+      "description": "Optional leading icon (defaults to info icon)"
+    },
+    "buttonLabel": {
+      "type": "string",
+      "description": "Optional action button label"
+    },
+    "onButtonClick": {
+      "type": "function",
+      "description": "Called when the action button is clicked"
+    },
+    "dismissible": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show the close button"
+    },
+    "onDismiss": {
+      "type": "function",
+      "description": "Called when the close button is clicked"
+    }
+  },
+  "composition": {
+    "relatedComponents": ["Alert"]
+  },
+  "accessibility": {
+    "role": "alert",
+    "screenReaderNotes": "Close button has aria-label 'Dismiss banner'"
+  },
+  "antiHallucination": {
+    "aliases": ["Announcement", "TopBar", "NotificationBanner", "InfoBar"],
+    "notTheSameAs": ["Alert", "Toast"],
+    "doesNotExist": [
+      "variant",
+      "type",
+      "color",
+      "closable",
+      "onClose",
+      "action",
+      "actions",
+      "position",
+      "sticky"
+    ],
+    "commonMistakes": [
+      { "mistake": "variant='info'", "correction": "status='information'" },
+      { "mistake": "type='warning'", "correction": "status='warning'" },
+      { "mistake": "closable", "correction": "dismissible" },
+      { "mistake": "onClose", "correction": "onDismiss" },
+      { "mistake": "action={{ label, onClick }}", "correction": "buttonLabel + onButtonClick" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Information Banner",
+      "code": "<Banner\n  status=\"information\"\n  title=\"New feature available\"\n  description=\"Check out our latest update.\"\n  buttonLabel=\"Learn more\"\n  onButtonClick={() => navigate('/features')}\n/>"
+    },
+    {
+      "title": "Bold Success Banner",
+      "code": "<Banner\n  status=\"success\"\n  emphasis=\"bold\"\n  title=\"Payment successful!\"\n  description=\"Your order has been confirmed.\"\n/>"
+    },
+    {
+      "title": "Error Banner with Dismiss",
+      "code": "<Banner\n  status=\"error\"\n  title=\"Connection lost\"\n  description=\"Please check your internet connection.\"\n  dismissible\n  onDismiss={() => setShowBanner(false)}\n/>"
+    },
+    {
+      "title": "Small Warning Banner",
+      "code": "<Banner\n  status=\"warning\"\n  size=\"sm\"\n  title=\"Your subscription expires soon\"\n  buttonLabel=\"Renew\"\n  onButtonClick={handleRenew}\n/>"
+    },
+    {
+      "title": "Feature Announcement",
+      "code": "<Banner\n  status=\"feature\"\n  emphasis=\"bold\"\n  title=\"Introducing Dark Mode\"\n  description=\"Now available in settings.\"\n  icon=\"moon\"\n/>"
+    },
+    {
+      "title": "Opportunity Banner",
+      "code": "<Banner\n  status=\"opportunity\"\n  title=\"Limited time offer\"\n  description=\"Get 50% off annual plans.\"\n  buttonLabel=\"Upgrade now\"\n  onButtonClick={handleUpgrade}\n/>"
+    }
+  ]
+}

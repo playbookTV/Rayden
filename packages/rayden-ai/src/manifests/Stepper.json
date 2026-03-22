@@ -1,0 +1,163 @@
+{
+  "$schema": "./schema.json",
+  "name": "Stepper",
+  "displayName": "Stepper",
+  "description": "Multi-step progress indicator for workflows. Includes Stepper for step-by-step navigation, LinearStepper for progress bars, and SegmentedStepper for segmented progress.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "steps": {
+      "type": "array",
+      "required": true,
+      "description": "Array of step items: { title: string, description?: string, status?: StepStatus, icon?: ReactNode }"
+    },
+    "activeStep": {
+      "type": "number",
+      "description": "Current active step index (0-based). Overrides individual step statuses."
+    },
+    "orientation": {
+      "type": "enum",
+      "values": ["horizontal", "vertical"],
+      "default": "horizontal",
+      "description": "Layout direction"
+    },
+    "indicator": {
+      "type": "enum",
+      "values": ["dot", "number", "icon"],
+      "default": "dot",
+      "description": "Indicator style inside the step circle"
+    }
+  },
+  "subComponents": [
+    {
+      "name": "LinearStepper",
+      "description": "Simple linear progress bar showing step completion",
+      "props": {
+        "currentStep": {
+          "type": "number",
+          "required": true,
+          "description": "Current step (1-based)"
+        },
+        "totalSteps": {
+          "type": "number",
+          "required": true,
+          "description": "Total number of steps"
+        },
+        "showLabel": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the step counter label (e.g., '2 / 5 complete')"
+        }
+      }
+    },
+    {
+      "name": "SegmentedStepper",
+      "description": "Segmented progress bar with individual step segments",
+      "props": {
+        "currentStep": {
+          "type": "number",
+          "required": true,
+          "description": "Current step (1-based)"
+        },
+        "totalSteps": {
+          "type": "number",
+          "required": true,
+          "description": "Total number of steps"
+        },
+        "showLabel": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the step counter label"
+        }
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "StepStatus",
+      "values": ["completed", "active", "incomplete", "disabled"]
+    },
+    {
+      "name": "StepItem",
+      "properties": {
+        "title": { "type": "string", "required": true },
+        "description": { "type": "string" },
+        "status": { "type": "StepStatus" },
+        "icon": { "type": "ReactNode" }
+      }
+    }
+  ],
+  "composition": {
+    "relatedComponents": ["ProgressBar", "Tabs"]
+  },
+  "accessibility": {
+    "screenReaderNotes": "Step indicators visually communicate progress through color and icons"
+  },
+  "antiHallucination": {
+    "aliases": ["Steps", "Wizard", "Progress", "MultiStep", "StepIndicator"],
+    "notTheSameAs": ["Tabs", "ProgressBar", "Counter"],
+    "doesNotExist": [
+      "current",
+      "onChange",
+      "onStepClick",
+      "clickable",
+      "nonLinear",
+      "alternativeLabel",
+      "connector",
+      "StepLabel",
+      "StepContent",
+      "StepIcon"
+    ],
+    "commonMistakes": [
+      { "mistake": "current={2}", "correction": "activeStep={2}" },
+      {
+        "mistake": "onChange",
+        "correction": "Stepper is display-only; manage step state yourself"
+      },
+      {
+        "mistake": "clickable steps",
+        "correction": "Stepper doesn't support click navigation; use Tabs or custom buttons"
+      },
+      {
+        "mistake": "<Step><StepLabel>",
+        "correction": "Use steps array prop with { title, description }"
+      },
+      { "mistake": "LinearStepper step={2} of={5}", "correction": "currentStep={2} totalSteps={5}" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Horizontal Stepper",
+      "code": "<Stepper\n  steps={[\n    { title: 'Account' },\n    { title: 'Profile' },\n    { title: 'Review' },\n    { title: 'Complete' },\n  ]}\n  activeStep={1}\n/>"
+    },
+    {
+      "title": "Vertical Stepper with Descriptions",
+      "code": "<Stepper\n  orientation=\"vertical\"\n  steps={[\n    { title: 'Create Account', description: 'Set up your credentials' },\n    { title: 'Add Profile', description: 'Tell us about yourself' },\n    { title: 'Verify Email', description: 'Confirm your email address' },\n  ]}\n  activeStep={1}\n/>"
+    },
+    {
+      "title": "Number Indicator",
+      "code": "<Stepper\n  steps={[\n    { title: 'Step 1' },\n    { title: 'Step 2' },\n    { title: 'Step 3' },\n  ]}\n  activeStep={0}\n  indicator=\"number\"\n/>"
+    },
+    {
+      "title": "Manual Step Status",
+      "code": "<Stepper\n  steps={[\n    { title: 'Cart', status: 'completed' },\n    { title: 'Shipping', status: 'active' },\n    { title: 'Payment', status: 'incomplete' },\n    { title: 'Confirm', status: 'disabled' },\n  ]}\n/>"
+    },
+    {
+      "title": "Linear Stepper",
+      "code": "<LinearStepper currentStep={3} totalSteps={5} />"
+    },
+    {
+      "title": "Linear Stepper without Label",
+      "code": "<LinearStepper currentStep={2} totalSteps={4} showLabel={false} />"
+    },
+    {
+      "title": "Segmented Stepper",
+      "code": "<SegmentedStepper currentStep={2} totalSteps={5} />"
+    },
+    {
+      "title": "With Custom Icons",
+      "code": "<Stepper\n  indicator=\"icon\"\n  steps={[\n    { title: 'Upload', icon: <Icon name=\"upload\" size=\"xs\" /> },\n    { title: 'Process', icon: <Icon name=\"settings\" size=\"xs\" /> },\n    { title: 'Complete', icon: <Icon name=\"check\" size=\"xs\" /> },\n  ]}\n  activeStep={1}\n/>"
+    }
+  ]
+}

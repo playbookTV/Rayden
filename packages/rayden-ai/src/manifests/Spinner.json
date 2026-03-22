@@ -1,0 +1,106 @@
+{
+  "$schema": "./schema.json",
+  "name": "Spinner",
+  "displayName": "Spinner",
+  "description": "Loading indicator with 7 animation types and optional label. Supports brand and white color styles for different backgrounds.",
+  "category": "feedback",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "type": {
+      "type": "enum",
+      "values": ["thin", "bold", "duo-tone", "buffering-thin", "buffering-bold", "dot", "juggling"],
+      "default": "thin",
+      "description": "Spinner animation type"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"],
+      "default": "md",
+      "description": "Spinner size: xs (20px), sm (24px), md (32px), lg (40px), xl (48px), 2xl (56px), 3xl (64px)"
+    },
+    "colorStyle": {
+      "type": "enum",
+      "values": ["brand", "white"],
+      "default": "brand",
+      "description": "Color style: brand (primary-400) or white"
+    },
+    "label": {
+      "type": "string",
+      "description": "Loading text label"
+    },
+    "labelPosition": {
+      "type": "enum",
+      "values": ["after", "before", "above", "below"],
+      "default": "after",
+      "description": "Label position relative to spinner"
+    }
+  },
+  "composition": {
+    "relatedComponents": ["ProgressCircle", "Button"]
+  },
+  "accessibility": {
+    "role": "status",
+    "screenReaderNotes": "Has aria-label defaulting to label or 'Loading'"
+  },
+  "antiHallucination": {
+    "aliases": ["Loading", "Loader", "LoadingSpinner", "LoadingIndicator"],
+    "notTheSameAs": ["ProgressCircle"],
+    "doesNotExist": [
+      "variant",
+      "color",
+      "speed",
+      "thickness",
+      "indeterminate",
+      "value",
+      "progress"
+    ],
+    "commonMistakes": [
+      { "mistake": "variant='circular'", "correction": "Use type='thin' or type='bold'" },
+      { "mistake": "color='primary'", "correction": "Use colorStyle='brand'" },
+      {
+        "mistake": "Spinner with value/progress",
+        "correction": "Use ProgressCircle for determinate progress"
+      },
+      { "mistake": "size='large'", "correction": "size='lg'" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Spinner",
+      "code": "<Spinner />"
+    },
+    {
+      "title": "With Label",
+      "code": "<Spinner label=\"Loading...\" />"
+    },
+    {
+      "title": "Bold Large Spinner",
+      "code": "<Spinner type=\"bold\" size=\"lg\" />"
+    },
+    {
+      "title": "Dot Spinner",
+      "code": "<Spinner type=\"dot\" size=\"md\" />"
+    },
+    {
+      "title": "Juggling Animation",
+      "code": "<Spinner type=\"juggling\" label=\"Processing\" />"
+    },
+    {
+      "title": "White Spinner on Dark Background",
+      "code": "<div className=\"bg-grey-900 p-4 rounded-lg\">\n  <Spinner colorStyle=\"white\" label=\"Loading...\" />\n</div>"
+    },
+    {
+      "title": "Label Below",
+      "code": "<Spinner\n  type=\"duo-tone\"\n  size=\"xl\"\n  label=\"Please wait\"\n  labelPosition=\"below\"\n/>"
+    },
+    {
+      "title": "Buffering Spinner",
+      "code": "<Spinner type=\"buffering-bold\" size=\"lg\" />"
+    },
+    {
+      "title": "Inside a Button (Loading State)",
+      "code": "<Button variant=\"primary\" disabled>\n  <Spinner type=\"thin\" size=\"sm\" colorStyle=\"white\" />\n  <span className=\"ml-2\">Saving...</span>\n</Button>"
+    }
+  ]
+}

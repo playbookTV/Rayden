@@ -1,0 +1,139 @@
+{
+  "$schema": "./schema.json",
+  "name": "Counter",
+  "displayName": "Counter",
+  "description": "Numeric input with increment/decrement buttons. Includes Counter for interactive input and NumberCounter for display-only badges.",
+  "category": "inputs",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "value": {
+      "type": "number",
+      "description": "Current value (controlled)"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Called when value changes: (value: number) => void"
+    },
+    "defaultValue": {
+      "type": "number",
+      "default": 0,
+      "description": "Default value for uncontrolled usage"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "md", "lg"],
+      "default": "sm",
+      "description": "Button and text size"
+    },
+    "shape": {
+      "type": "enum",
+      "values": ["rounded", "block", "pill"],
+      "default": "rounded",
+      "description": "Container shape"
+    },
+    "min": {
+      "type": "number",
+      "default": 0,
+      "description": "Minimum allowed value"
+    },
+    "max": {
+      "type": "number",
+      "default": "Infinity",
+      "description": "Maximum allowed value"
+    },
+    "step": {
+      "type": "number",
+      "default": 1,
+      "description": "Step increment"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disabled state"
+    }
+  },
+  "subComponents": [
+    {
+      "name": "NumberCounter",
+      "description": "Display-only numeric badge (not interactive)",
+      "props": {
+        "value": {
+          "type": "union",
+          "values": ["number", "string"],
+          "required": true,
+          "description": "Display value"
+        },
+        "size": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"],
+          "default": "sm",
+          "description": "Badge size"
+        },
+        "color": {
+          "type": "enum",
+          "values": ["orange", "red", "grey", "white"],
+          "default": "orange",
+          "description": "Background color"
+        }
+      }
+    }
+  ],
+  "composition": {
+    "relatedComponents": ["Input", "Slider"]
+  },
+  "accessibility": {
+    "keyboardNav": [{ "key": "Click +/-", "action": "Increment/decrement value" }],
+    "screenReaderNotes": "Buttons have aria-label 'Increase' and 'Decrease'"
+  },
+  "antiHallucination": {
+    "aliases": ["Stepper", "NumberInput", "Quantity", "QuantitySelector"],
+    "notTheSameAs": ["Stepper (workflow steps)", "Input", "Slider"],
+    "doesNotExist": [
+      "onIncrement",
+      "onDecrement",
+      "prefix",
+      "suffix",
+      "format",
+      "precision",
+      "variant"
+    ],
+    "commonMistakes": [
+      {
+        "mistake": "onIncrement/onDecrement",
+        "correction": "Use onChange which fires with the new value"
+      },
+      { "mistake": "variant='outline'", "correction": "No variant prop — styling is fixed" },
+      {
+        "mistake": "NumberCounter onChange",
+        "correction": "NumberCounter is display-only, use Counter for input"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Counter",
+      "code": "<Counter value={quantity} onChange={setQuantity} />"
+    },
+    {
+      "title": "With Min/Max",
+      "code": "<Counter\n  value={count}\n  onChange={setCount}\n  min={1}\n  max={10}\n/>"
+    },
+    {
+      "title": "Large Pill Shape",
+      "code": "<Counter\n  value={amount}\n  onChange={setAmount}\n  size=\"lg\"\n  shape=\"pill\"\n/>"
+    },
+    {
+      "title": "Disabled Counter",
+      "code": "<Counter value={5} disabled />"
+    },
+    {
+      "title": "NumberCounter Badge",
+      "code": "<NumberCounter value={42} color=\"orange\" size=\"md\" />"
+    },
+    {
+      "title": "NumberCounter Variants",
+      "code": "<div className=\"flex gap-2\">\n  <NumberCounter value={3} color=\"orange\" />\n  <NumberCounter value={7} color=\"red\" />\n  <NumberCounter value={12} color=\"grey\" />\n</div>"
+    }
+  ]
+}

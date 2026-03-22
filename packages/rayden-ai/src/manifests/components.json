@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.json",
-  "version": "0.2.1",
+  "version": "0.9.3",
   "name": "Rayden UI Components",
   "description": "Complete registry of all Rayden UI components",
   "importPath": "@raydenui/ui",
@@ -12,19 +12,40 @@
     },
     "inputs": {
       "description": "Form input components",
-      "components": ["Input", "Select", "Checkbox", "Radio", "Toggle", "Chip"]
+      "components": [
+        "Input",
+        "Select",
+        "Checkbox",
+        "Radio",
+        "Toggle",
+        "Chip",
+        "Counter",
+        "Slider",
+        "DatePicker"
+      ]
     },
     "feedback": {
       "description": "User feedback components",
-      "components": ["Alert", "ProgressBar", "ProgressCircle"]
+      "components": ["Alert", "Banner", "ProgressBar", "ProgressCircle", "Spinner"]
     },
     "navigation": {
       "description": "Navigation components",
-      "components": ["Tabs", "Breadcrumb", "Pagination", "SidebarMenu"]
+      "components": ["Tabs", "Breadcrumb", "Pagination", "SidebarMenu", "Stepper"]
     },
     "data-display": {
       "description": "Data presentation components",
-      "components": ["Table", "Avatar", "MetricsCard", "EmptyStateIllustration"]
+      "components": [
+        "Table",
+        "Avatar",
+        "MetricsCard",
+        "EmptyStateIllustration",
+        "ActivityFeed",
+        "RaydenChart"
+      ]
+    },
+    "layout": {
+      "description": "Layout and container components",
+      "components": ["Accordion", "Modal"]
     },
     "composite": {
       "description": "Complex compound components",
@@ -122,12 +143,46 @@
       "manifestFile": "Chip.json"
     },
     {
+      "name": "Counter",
+      "displayName": "Counter",
+      "category": "inputs",
+      "description": "Numeric input with increment/decrement buttons",
+      "hasSubComponents": true,
+      "subComponents": ["NumberCounter"],
+      "manifestFile": "Counter.json"
+    },
+    {
+      "name": "Slider",
+      "displayName": "Slider",
+      "category": "inputs",
+      "description": "Draggable range input for selecting values",
+      "hasSubComponents": true,
+      "subComponents": ["RangeSlider"],
+      "manifestFile": "Slider.json"
+    },
+    {
+      "name": "DatePicker",
+      "displayName": "Date Picker",
+      "category": "inputs",
+      "description": "Calendar date picker with single, range, and year modes",
+      "hasSubComponents": false,
+      "manifestFile": "DatePicker.json"
+    },
+    {
       "name": "Alert",
       "displayName": "Alert",
       "category": "feedback",
       "description": "Notification component for messages and alerts",
       "hasSubComponents": false,
       "manifestFile": "Alert.json"
+    },
+    {
+      "name": "Banner",
+      "displayName": "Banner",
+      "category": "feedback",
+      "description": "Full-width notification banner for announcements",
+      "hasSubComponents": false,
+      "manifestFile": "Banner.json"
     },
     {
       "name": "ProgressBar",
@@ -144,6 +199,14 @@
       "description": "Circular progress indicator",
       "hasSubComponents": false,
       "manifestFile": "ProgressCircle.json"
+    },
+    {
+      "name": "Spinner",
+      "displayName": "Spinner",
+      "category": "feedback",
+      "description": "Loading indicator with multiple animation types",
+      "hasSubComponents": false,
+      "manifestFile": "Spinner.json"
     },
     {
       "name": "Tabs",
@@ -185,6 +248,15 @@
       "manifestFile": "SidebarMenu.json"
     },
     {
+      "name": "Stepper",
+      "displayName": "Stepper",
+      "category": "navigation",
+      "description": "Multi-step progress indicator for workflows",
+      "hasSubComponents": true,
+      "subComponents": ["LinearStepper", "SegmentedStepper"],
+      "manifestFile": "Stepper.json"
+    },
+    {
       "name": "Table",
       "displayName": "Table",
       "category": "data-display",
@@ -217,6 +289,40 @@
       "description": "Illustration for empty states",
       "hasSubComponents": false,
       "manifestFile": "EmptyStateIllustration.json"
+    },
+    {
+      "name": "ActivityFeed",
+      "displayName": "Activity Feed",
+      "category": "data-display",
+      "description": "Timeline and notification feed for user activity",
+      "hasSubComponents": true,
+      "subComponents": ["ActivityItem", "ActivityContent"],
+      "manifestFile": "ActivityFeed.json"
+    },
+    {
+      "name": "RaydenChart",
+      "displayName": "Chart",
+      "category": "data-display",
+      "description": "Chart.js wrapper with Rayden UI theme",
+      "hasSubComponents": false,
+      "manifestFile": "Chart.json"
+    },
+    {
+      "name": "Accordion",
+      "displayName": "Accordion",
+      "category": "layout",
+      "description": "Collapsible content panels",
+      "hasSubComponents": true,
+      "subComponents": ["AccordionItem", "AccordionTrigger", "AccordionContent"],
+      "manifestFile": "Accordion.json"
+    },
+    {
+      "name": "Modal",
+      "displayName": "Modal",
+      "category": "layout",
+      "description": "Dialog overlay with backdrop and focus management",
+      "hasSubComponents": false,
+      "manifestFile": "Modal.json"
     },
     {
       "name": "ButtonGroup",
@@ -254,7 +360,6 @@
     }
   ],
   "doesNotExist": [
-    "Modal",
     "Dialog",
     "Popup",
     "Overlay",
@@ -262,13 +367,9 @@
     "Panel",
     "Box",
     "Container",
-    "Accordion",
     "Collapse",
     "Expandable",
     "Carousel",
-    "Slider",
-    "RangeSlider",
-    "DatePicker",
     "TimePicker",
     "Calendar",
     "ColorPicker",
@@ -287,12 +388,10 @@
     "AspectRatio",
     "ScrollArea",
     "Separator",
-    "Stepper",
     "Steps",
     "Timeline",
     "Rating",
     "Stars",
-    "Spinner",
     "Loading",
     "Loader"
   ]
