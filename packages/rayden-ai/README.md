@@ -1,8 +1,18 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../../public/MacBook Air - 18.png">
-  <source media="(prefers-color-scheme: light)" srcset="../../public/MacBook Air - 18.png">
-  <img alt="Rayden AI - AI compatibility layer for Rayden UI. Supercharge your LLMs to reliably generate UI components without hallucination." src="../../public/MacBook Air - 18.png" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://i.postimg.cc/L8Cf5Hbj/Mac-Book-Air-18.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://i.postimg.cc/L8Cf5Hbj/Mac-Book-Air-18.png">
+  <img alt="Rayden AI - AI compatibility layer for Rayden UI. Supercharge your LLMs to reliably generate UI components without hallucination." src="https://i.postimg.cc/L8Cf5Hbj/Mac-Book-Air-18.png" width="100%">
 </picture>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/@raydenui/ai"><img src="https://img.shields.io/npm/v/@raydenui/ai?style=flat-square&color=F56630&label=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/@raydenui/ai"><img src="https://img.shields.io/npm/dm/@raydenui/ai?style=flat-square&color=667185&label=downloads" alt="npm downloads"></a>
+  <a href="https://github.com/raydenui/rayden"><img src="https://img.shields.io/github/stars/raydenui/rayden?style=flat-square&color=F56630" alt="GitHub stars"></a>
+  <a href="https://github.com/raydenui/rayden/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@raydenui/ai?style=flat-square&color=099137" alt="license"></a>
+  <img src="https://img.shields.io/badge/MCP-compatible-8B5CF6?style=flat-square" alt="MCP compatible">
+  <img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node.js">
+</p>
 
 # @raydenui/ai
 
@@ -22,7 +32,7 @@ npm install -g @raydenui/ai
 
 This package provides an MCP (Model Context Protocol) server that gives AI assistants structured access to:
 
-- **Component definitions** — Props, variants, and usage examples for all 24+ Rayden UI components
+- **Component definitions** — Props, variants, and usage examples for all 33 Rayden UI components
 - **Design tokens** — Colors, spacing, typography, shadows, and border radius values
 - **Layout recipes** — Pre-built patterns for common UI scenarios (dashboards, forms, marketing pages)
 - **Anti-hallucination rules** — Constraints that prevent AI from inventing non-existent props or patterns
