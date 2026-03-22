@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { ActivityItem } from "../components/ActivityFeed/ActivityItem";
 import { ActivityContent } from "../components/ActivityFeed/ActivityContent";
@@ -57,8 +57,11 @@ export function NotificationsBlock({
   items,
   className,
 }: NotificationsBlockProps) {
+  const headingId = useId();
+
   return (
-    <div
+    <section
+      aria-labelledby={headingId}
       className={cn(
         "bg-white rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8 overflow-clip",
         className
@@ -66,7 +69,9 @@ export function NotificationsBlock({
     >
       {/* Header */}
       <div className="px-6 py-1.5 flex items-center gap-2">
-        <h3 className="flex-1 text-lg font-semibold text-grey-700">{title}</h3>
+        <h3 id={headingId} className="flex-1 text-lg font-semibold text-grey-700">
+          {title}
+        </h3>
         {unreadCount != null && unreadCount > 0 && (
           <Badge color="success" type="accent" size="sm">
             {unreadCount} unread
@@ -75,7 +80,7 @@ export function NotificationsBlock({
       </div>
 
       {/* Items */}
-      <div className="flex flex-col gap-4 px-6 mt-6">
+      <div className="flex flex-col gap-4 px-6 mt-6" role="feed" aria-label="Notifications list">
         {items.map((item, index) => {
           const isFirst = index === 0;
           const isLast = index === items.length - 1;
@@ -134,6 +139,6 @@ export function NotificationsBlock({
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

@@ -95,6 +95,7 @@ function ChevronLeft({ className }: { className?: string }) {
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M9 3L5 7l4 4" />
     </svg>
@@ -111,6 +112,7 @@ function ChevronRight({ className }: { className?: string }) {
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M5 3l4 4-4 4" />
     </svg>
@@ -127,6 +129,7 @@ function ChevronDown({ className }: { className?: string }) {
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M6 9l6 6 6-6" />
     </svg>
@@ -147,10 +150,11 @@ type DayCellState =
 interface DayCellProps {
   day: number;
   state: DayCellState;
+  fullDate: Date;
   onClick?: () => void;
 }
 
-function DayCell({ day, state, onClick }: DayCellProps) {
+function DayCell({ day, state, fullDate, onClick }: DayCellProps) {
   const isInteractive = state !== "disabled";
 
   const cellClasses = cn(
@@ -165,6 +169,26 @@ function DayCell({ day, state, onClick }: DayCellProps) {
     isInteractive && "cursor-pointer"
   );
 
+  // Build accessible label with full date and state context
+  const dateLabel = fullDate.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const stateLabel =
+    state === "today"
+      ? "Today, "
+      : state === "selected"
+        ? "Selected, "
+        : state === "start-range"
+          ? "Start of range, "
+          : state === "end-range"
+            ? "End of range, "
+            : state === "mid-range"
+              ? "In selected range, "
+              : "";
+
   return (
     <button
       type="button"
@@ -172,10 +196,18 @@ function DayCell({ day, state, onClick }: DayCellProps) {
       onClick={isInteractive ? onClick : undefined}
       disabled={!isInteractive}
       tabIndex={isInteractive ? 0 : -1}
+      aria-label={`${stateLabel}${dateLabel}`}
+      aria-current={state === "today" ? "date" : undefined}
+      aria-pressed={
+        state === "selected" || state === "start-range" || state === "end-range" ? true : undefined
+      }
     >
       {day}
       {state === "today" && (
-        <span className="absolute bottom-[5px] left-1/2 -translate-x-1/2 size-1 rounded-full bg-primary-400" />
+        <span
+          className="absolute bottom-[5px] left-1/2 -translate-x-1/2 size-1 rounded-full bg-primary-400"
+          aria-hidden="true"
+        />
       )}
     </button>
   );
@@ -260,13 +292,25 @@ function MonthGrid({
     rows.pop();
   }
 
+  const fullDayNames = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" role="grid" aria-label="Calendar">
       {/* Day headers */}
-      <div className="flex h-10 items-center">
+      <div className="flex h-10 items-center" role="row">
         {DAY_LABELS.map((label, i) => (
           <div
             key={i}
+            role="columnheader"
+            aria-label={fullDayNames[i]}
             className="flex items-center justify-center w-10 h-10 text-sm font-medium text-grey-400"
           >
             {label}
@@ -275,12 +319,13 @@ function MonthGrid({
       </div>
       {/* Weeks */}
       {rows.map((row, ri) => (
-        <div key={ri} className="flex h-10 items-center">
+        <div key={ri} className="flex h-10 items-center" role="row">
           {row.map((cell, ci) => (
             <DayCell
               key={ci}
               day={cell.day}
               state={cell.state}
+              fullDate={cell.date}
               onClick={() => onDayClick(cell.date)}
             />
           ))}
@@ -310,13 +355,15 @@ function YearGrid({ baseYear, selectedYear, onYearClick }: YearGridProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 w-full" role="grid" aria-label="Year selection">
       {rows.map((row, ri) => (
-        <div key={ri} className="flex gap-4 h-10 items-center w-full">
+        <div key={ri} className="flex gap-4 h-10 items-center w-full" role="row">
           {row.map((year) => (
             <button
               key={year}
               type="button"
+              aria-label={year === selectedYear ? `${year}, selected` : String(year)}
+              aria-pressed={year === selectedYear || undefined}
               className={cn(
                 "flex-1 flex items-center justify-center py-2.5 px-4 rounded-[10px] text-sm font-medium cursor-pointer select-none",
                 year === selectedYear
@@ -349,6 +396,9 @@ function NavButton({
     <button
       type="button"
       onClick={onClick}
+      aria-label={direction === "left" ? "Previous month" : "Next month"}
+      aria-hidden={hidden || undefined}
+      tabIndex={hidden ? -1 : undefined}
       className={cn(
         "flex items-center justify-center p-2 rounded-lg bg-grey-75 hover:bg-grey-200 transition-colors cursor-pointer",
         hidden && "opacity-0 pointer-events-none"

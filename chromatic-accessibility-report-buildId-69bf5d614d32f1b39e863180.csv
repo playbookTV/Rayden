@@ -1,0 +1,255 @@
+Component,Story,Mode,Violation count,Last updated,Impact
+DatePicker,Date Range,1200px,22,2026-03-22 03:13:30,3-critical
+DatePicker,Interactive Range,1200px,6,2026-03-22 03:13:30,3-critical
+DatePicker,Year Picker,1200px,5,2026-03-22 03:13:30,3-critical
+DatePicker,With Min Max,1200px,5,2026-03-22 03:13:30,3-critical
+DatePicker,With Footer,1200px,4,2026-03-22 03:13:30,3-critical
+DatePicker,Interactive,1200px,4,2026-03-22 03:13:30,3-critical
+DatePicker,Default,1200px,2,2026-03-22 03:13:30,3-critical
+SearchableTable,With Search,1200px,22,2026-03-22 03:13:30,3-critical
+SearchableTable,With Title,1200px,12,2026-03-22 03:13:30,3-critical
+Table,Default,1200px,32,2026-03-22 03:13:30,3-critical
+Table,Full Featured,1200px,13,2026-03-22 03:13:30,3-critical
+Table,With Selection,1200px,7,2026-03-22 03:13:30,3-critical
+Table,With Leading Avatar,1200px,10,2026-03-22 03:13:30,2-serious
+Table,Default,1200px,0,2026-03-22 03:13:30,
+Table,With Sorting,1200px,0,2026-03-22 03:13:30,
+DropZone,Multiple File Upload,1200px,7,2026-03-22 03:13:30,3-critical
+DropZone,Single File Upload,1200px,4,2026-03-22 03:13:30,3-critical
+DropZone,Default,1200px,4,2026-03-22 03:13:30,3-critical
+DropZone,Error,1200px,3,2026-03-22 03:13:30,3-critical
+DropZone,Uploading,1200px,2,2026-03-22 03:13:30,3-critical
+DropZone,Success,1200px,2,2026-03-22 03:13:30,3-critical
+DropZone,File Item States,1200px,5,2026-03-22 03:13:30,2-serious
+SidebarMenu,All Themes,1200px,10,2026-03-22 03:13:30,3-critical
+SidebarMenu,Default,1200px,4,2026-03-22 03:13:30,3-critical
+SidebarMenu,Collapsible Toggle,1200px,3,2026-03-22 03:13:30,3-critical
+SidebarMenu,With Sub Items,1200px,2,2026-03-22 03:13:30,2-serious
+SidebarMenu,Collapsed,1200px,0,2026-03-22 03:13:30,
+Select,With Helper Text,1200px,2,2026-03-22 03:13:30,3-critical
+Select,With Disabled Options,1200px,2,2026-03-22 03:13:30,3-critical
+Select,Default,1200px,2,2026-03-22 03:13:30,3-critical
+Select,With Status,1200px,2,2026-03-22 03:13:30,3-critical
+Select,With Descriptions,1200px,2,2026-03-22 03:13:30,3-critical
+Select,With Icons,1200px,2,2026-03-22 03:13:30,3-critical
+Select,With Avatars,1200px,2,2026-03-22 03:13:30,3-critical
+Select,Controlled,1200px,1,2026-03-22 03:13:30,3-critical
+Select,Filled,1200px,1,2026-03-22 03:13:30,3-critical
+Select,Disabled,1200px,1,2026-03-22 03:13:30,3-critical
+Button,All Variants,1200px,8,2026-03-22 03:13:30,3-critical
+Button,Icon Only,1200px,1,2026-03-22 03:13:30,3-critical
+Button,With Trailing Icon,1200px,1,2026-03-22 03:13:30,2-serious
+Button,With Leading Icon,1200px,1,2026-03-22 03:13:30,2-serious
+Button,Primary,1200px,1,2026-03-22 03:13:30,2-serious
+Button,Large,1200px,1,2026-03-22 03:13:30,2-serious
+Button,Text,1200px,0,2026-03-22 03:13:30,
+Button,Destructive,1200px,0,2026-03-22 03:13:30,
+Button,Destructive Outlined,1200px,0,2026-03-22 03:13:30,
+Button,Grey Outlined,1200px,0,2026-03-22 03:13:30,
+Button,Grey,1200px,0,2026-03-22 03:13:30,
+Button,Secondary,1200px,0,2026-03-22 03:13:30,
+Button,Disabled,1200px,0,2026-03-22 03:13:30,
+Login,Card,1200px,3,2026-03-22 03:13:30,3-critical
+Login,Standard,1200px,3,2026-03-22 03:13:30,3-critical
+Login,Work Email,1200px,2,2026-03-22 03:13:30,3-critical
+DropdownMenu,Icon Only Trigger,1200px,1,2026-03-22 03:13:30,3-critical
+DropdownMenu,With Selection,1200px,0,2026-03-22 03:13:30,
+DropdownMenu,Avatar Trigger,1200px,0,2026-03-22 03:13:30,
+DropdownMenu,Disabled,1200px,0,2026-03-22 03:13:30,
+DropdownMenu,Align Start,1200px,0,2026-03-22 03:13:30,
+DropdownMenu,With Section Headers,1200px,0,2026-03-22 03:13:30,
+DropdownMenu,Default,1200px,0,2026-03-22 03:13:30,
+ActivityFeed,Timeline,1200px,21,2026-03-22 03:13:30,2-serious
+ActivityFeed,Content Styles,1200px,10,2026-03-22 03:13:30,2-serious
+ActivityFeed,With File Content,1200px,7,2026-03-22 03:13:30,2-serious
+ActivityFeed,With Badge,1200px,5,2026-03-22 03:13:30,2-serious
+ActivityFeed,With Comment Content,1200px,4,2026-03-22 03:13:30,2-serious
+ActivityFeed,With CTA Content,1200px,4,2026-03-22 03:13:30,2-serious
+ActivityFeed,Single Item,1200px,3,2026-03-22 03:13:30,2-serious
+ActivityFeed,Unread State,1200px,3,2026-03-22 03:13:30,2-serious
+Notifications,Default,1200px,26,2026-03-22 03:13:30,2-serious
+Header,Double Row,1200px,5,2026-03-22 03:13:30,2-serious
+Header,With Switcher,1200px,4,2026-03-22 03:13:30,2-serious
+Header,Standard,1200px,2,2026-03-22 03:13:30,2-serious
+Header,With Search,1200px,2,2026-03-22 03:13:30,2-serious
+Header,Centered Logo,1200px,2,2026-03-22 03:13:30,2-serious
+Header,Rounded Buttons,1200px,2,2026-03-22 03:13:30,2-serious
+Header,With Language,1200px,2,2026-03-22 03:13:30,2-serious
+Header,With Announcement,1200px,1,2026-03-22 03:13:30,2-serious
+Header,Dark Background,1200px,1,2026-03-22 03:13:30,2-serious
+Header,Dark Pill Nav,1200px,1,2026-03-22 03:13:30,2-serious
+Header,Pill Nav,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressCircle,All Sizes,1200px,5,2026-03-22 03:13:30,2-serious
+ProgressCircle,Segmented Steps,1200px,5,2026-03-22 03:13:30,2-serious
+ProgressCircle,Segmented All Sizes,1200px,5,2026-03-22 03:13:30,2-serious
+ProgressCircle,Progress Steps,1200px,5,2026-03-22 03:13:30,2-serious
+ProgressCircle,Default,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressCircle,No Text,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressCircle,Segmented,1200px,1,2026-03-22 03:13:30,2-serious
+Slider,All Stages,1200px,11,2026-03-22 03:13:30,2-serious
+Slider,All Sizes,1200px,3,2026-03-22 03:13:30,2-serious
+Slider,Range,1200px,3,2026-03-22 03:13:30,2-serious
+Slider,Interactive Range,1200px,1,2026-03-22 03:13:30,2-serious
+Slider,Medium,1200px,1,2026-03-22 03:13:30,2-serious
+Slider,Interactive,1200px,1,2026-03-22 03:13:30,2-serious
+Slider,Default,1200px,1,2026-03-22 03:13:30,2-serious
+Slider,Small,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressBar,All Stages,1200px,5,2026-03-22 03:13:30,2-serious
+ProgressBar,Segmented Stages,1200px,5,2026-03-22 03:13:30,2-serious
+ProgressBar,All Sizes,1200px,3,2026-03-22 03:13:30,2-serious
+ProgressBar,All Types,1200px,2,2026-03-22 03:13:30,2-serious
+ProgressBar,Segmented,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressBar,Percentage On Top,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressBar,With Metadata,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressBar,Medium,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressBar,Small,1200px,1,2026-03-22 03:13:30,2-serious
+ProgressBar,Default,1200px,1,2026-03-22 03:13:30,2-serious
+MetricsCard,All Variations,1200px,9,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 4 Data Cta,1200px,2,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 4 Data Only,1200px,2,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 2 Data Cta,1200px,1,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 6 Data Cta,1200px,1,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 3 Data Only,1200px,1,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 3 Data Cta,1200px,1,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 2 Data Only,1200px,1,2026-03-22 03:13:30,2-serious
+MetricsCard,Variation 6 Data Only,1200px,0,2026-03-22 03:13:30,
+MetricsCard,Variation 1 Data Cta,1200px,0,2026-03-22 03:13:30,
+MetricsCard,Variation 1 Data Only,1200px,0,2026-03-22 03:13:30,
+MetricsCard,Variation 5 Data Cta,1200px,0,2026-03-22 03:13:30,
+MetricsCard,Variation 5 Data Only,1200px,0,2026-03-22 03:13:30,
+Breadcrumb,All Separators,1200px,7,2026-03-22 03:13:30,2-serious
+Breadcrumb,With Disabled,1200px,2,2026-03-22 03:13:30,2-serious
+Breadcrumb,Slash,1200px,1,2026-03-22 03:13:30,2-serious
+Breadcrumb,Double Chevron,1200px,1,2026-03-22 03:13:30,2-serious
+Breadcrumb,With Icons,1200px,1,2026-03-22 03:13:30,2-serious
+Breadcrumb,Default,1200px,1,2026-03-22 03:13:30,2-serious
+Breadcrumb,With Borders,1200px,1,2026-03-22 03:13:30,2-serious
+Breadcrumb,With Truncation,1200px,1,2026-03-22 03:13:30,2-serious
+Banner,All Bold,1200px,9,2026-03-22 03:13:30,2-serious
+Banner,Bold,1200px,3,2026-03-22 03:13:30,2-serious
+Banner,Small Variants,1200px,3,2026-03-22 03:13:30,2-serious
+Banner,Default,1200px,0,2026-03-22 03:13:30,
+Banner,Small,1200px,0,2026-03-22 03:13:30,
+Banner,All Subtle,1200px,0,2026-03-22 03:13:30,
+Banner,No Dismiss,1200px,0,2026-03-22 03:13:30,
+Badge,Filled Colors,1200px,3,2026-03-22 03:13:30,2-serious
+Badge,Sizes,1200px,3,2026-03-22 03:13:30,2-serious
+Badge,Accent Colors,1200px,2,2026-03-22 03:13:30,2-serious
+Badge,Outline Colors,1200px,2,2026-03-22 03:13:30,2-serious
+Badge,With Icons,1200px,1,2026-03-22 03:13:30,2-serious
+Badge,Default,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Horizontal Bar,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Line Chart,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Bar Chart,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Pie Chart,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Doughnut Chart,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Radar Chart,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Scatter Chart,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Polar Area Chart,1200px,1,2026-03-22 03:13:30,2-serious
+Chart,Stacked Bar,1200px,1,2026-03-22 03:13:30,2-serious
+Stepper,Linear,1200px,4,2026-03-22 03:13:30,2-serious
+Stepper,Segmented,1200px,4,2026-03-22 03:13:30,2-serious
+Stepper,With Disabled,1200px,1,2026-03-22 03:13:30,2-serious
+Stepper,Vertical,1200px,0,2026-03-22 03:13:30,
+Stepper,Horizontal,1200px,0,2026-03-22 03:13:30,
+Stepper,Horizontal With Numbers,1200px,0,2026-03-22 03:13:30,
+Stepper,All Steps,1200px,0,2026-03-22 03:13:30,
+Stepper,Vertical With Numbers,1200px,0,2026-03-22 03:13:30,
+Tabs,All Variants,1200px,4,2026-03-22 03:13:30,2-serious
+Tabs,All Sizes,1200px,3,2026-03-22 03:13:30,2-serious
+Tabs,Pill Tabs,1200px,1,2026-03-22 03:13:30,2-serious
+Tabs,Line Tabs,1200px,0,2026-03-22 03:13:30,
+Tabs,Segmented Tabs,1200px,0,2026-03-22 03:13:30,
+Tabs,Vertical Line,1200px,0,2026-03-22 03:13:30,
+Tabs,Vertical Segmented,1200px,0,2026-03-22 03:13:30,
+Tabs,With Disabled,1200px,0,2026-03-22 03:13:30,
+Tabs,Text Only,1200px,0,2026-03-22 03:13:30,
+RecentTransactions,Default,1200px,7,2026-03-22 03:13:30,2-serious
+QuickSend,Default,1200px,7,2026-03-22 03:13:30,2-serious
+Modal,Custom Icon,1200px,1,2026-03-22 03:13:30,2-serious
+Modal,No Blur,1200px,1,2026-03-22 03:13:30,2-serious
+Modal,Primary Only,1200px,1,2026-03-22 03:13:30,2-serious
+Modal,Large Modal,1200px,1,2026-03-22 03:13:30,2-serious
+Modal,Vertical Footer,1200px,1,2026-03-22 03:13:30,2-serious
+Modal,Default,1200px,1,2026-03-22 03:13:30,2-serious
+Counter,Number Counters,1200px,6,2026-03-22 03:13:30,2-serious
+Counter,Default,1200px,0,2026-03-22 03:13:30,
+Counter,All Sizes,1200px,0,2026-03-22 03:13:30,
+Counter,All Shapes,1200px,0,2026-03-22 03:13:30,
+Counter,Interactive,1200px,0,2026-03-22 03:13:30,
+Counter,With Min Max,1200px,0,2026-03-22 03:13:30,
+Input,All States,1200px,1,2026-03-22 03:13:30,2-serious
+Input,With Trailing Addon,1200px,1,2026-03-22 03:13:30,2-serious
+Input,With Success,1200px,1,2026-03-22 03:13:30,2-serious
+Input,All Sizes,1200px,0,2026-03-22 03:13:30,
+Input,Default,1200px,0,2026-03-22 03:13:30,
+Input,Extra Small,1200px,0,2026-03-22 03:13:30,
+Input,Medium,1200px,0,2026-03-22 03:13:30,
+Input,Large,1200px,0,2026-03-22 03:13:30,
+Input,With Error,1200px,0,2026-03-22 03:13:30,
+Input,Read Only,1200px,0,2026-03-22 03:13:30,
+Input,With Leading Addon,1200px,0,2026-03-22 03:13:30,
+Input,With Both Addons,1200px,0,2026-03-22 03:13:30,
+EmptyState,Upload Photos,1200px,1,2026-03-22 03:13:30,2-serious
+EmptyState,No Tasks,1200px,1,2026-03-22 03:13:30,2-serious
+EmptyState,No Results,1200px,0,2026-03-22 03:13:30,
+Pagination,Default,1200px,1,2026-03-22 03:13:30,2-serious
+Pagination,No Prev Next,1200px,1,2026-03-22 03:13:30,2-serious
+Pagination,Few Pages,1200px,0,2026-03-22 03:13:30,
+ButtonGroup,Four Items,1200px,1,2026-03-22 03:13:30,2-serious
+ButtonGroup,With Active Item,1200px,1,2026-03-22 03:13:30,2-serious
+ButtonGroup,With Icons,1200px,0,2026-03-22 03:13:30,
+ButtonGroup,With Disabled Items,1200px,0,2026-03-22 03:13:30,
+ButtonGroup,Default,1200px,0,2026-03-22 03:13:30,
+Chip,Disabled,1200px,2,2026-03-22 03:13:30,2-serious
+Chip,Input Chip,1200px,0,2026-03-22 03:13:30,
+Chip,Filter Chip,1200px,0,2026-03-22 03:13:30,
+Divider,With Label,1200px,1,2026-03-22 03:13:30,2-serious
+Divider,All Variants,1200px,1,2026-03-22 03:13:30,2-serious
+Divider,Default,1200px,0,2026-03-22 03:13:30,
+Divider,With Icon,1200px,0,2026-03-22 03:13:30,
+Divider,With Title,1200px,0,2026-03-22 03:13:30,
+Divider,With Button,1200px,0,2026-03-22 03:13:30,
+Divider,With Title And Button,1200px,0,2026-03-22 03:13:30,
+Tooltip,Light,1200px,1,2026-03-22 03:13:30,2-serious
+Tooltip,Dark,1200px,0,2026-03-22 03:13:30,
+Tooltip,Positions,1200px,0,2026-03-22 03:13:30,
+Tooltip,No Title,1200px,0,2026-03-22 03:13:30,
+Accordion,Default,1200px,1,2026-03-22 03:13:30,1-moderate
+Accordion,Nested With Icons,1200px,1,2026-03-22 03:13:30,1-moderate
+Accordion,With Logo,1200px,1,2026-03-22 03:13:30,1-moderate
+Accordion,With Icons,1200px,1,2026-03-22 03:13:30,1-moderate
+Accordion,Nested,1200px,1,2026-03-22 03:13:30,1-moderate
+Accordion,With Numbers,1200px,0,2026-03-22 03:13:30,
+Accordion,With Badge,1200px,0,2026-03-22 03:13:30,
+Accordion,Multiple,1200px,0,2026-03-22 03:13:30,
+Spinner,All Types Large,1200px,0,2026-03-22 03:13:30,
+Spinner,Label Positions,1200px,0,2026-03-22 03:13:30,
+Spinner,No Label,1200px,0,2026-03-22 03:13:30,
+Spinner,White Style,1200px,0,2026-03-22 03:13:30,
+Spinner,All Sizes,1200px,0,2026-03-22 03:13:30,
+Spinner,All Types,1200px,0,2026-03-22 03:13:30,
+Spinner,Default,1200px,0,2026-03-22 03:13:30,
+Icon,Gallery,1200px,0,2026-03-22 03:13:30,
+Icon,Sizes,1200px,0,2026-03-22 03:13:30,
+Icon,Default,1200px,0,2026-03-22 03:13:30,
+Icon,Variants,1200px,0,2026-03-22 03:13:30,
+Icon,Colors,1200px,0,2026-03-22 03:13:30,
+FormControl,Checkboxes,1200px,0,2026-03-22 03:13:30,
+FormControl,Radios,1200px,0,2026-03-22 03:13:30,
+FormControl,Toggles,1200px,0,2026-03-22 03:13:30,
+Avatar,Default,1200px,0,2026-03-22 03:13:30,
+Avatar,Image Sizes,1200px,0,2026-03-22 03:13:30,
+Avatar,Icon Sizes,1200px,0,2026-03-22 03:13:30,
+Avatar,Initials Sizes,1200px,0,2026-03-22 03:13:30,
+Avatar,Status Indicators,1200px,0,2026-03-22 03:13:30,
+Avatar,Custom Icon,1200px,0,2026-03-22 03:13:30,
+Avatar,Group,1200px,0,2026-03-22 03:13:30,
+Alert,Toast Information,1200px,0,2026-03-22 03:13:30,
+Alert,All Toasts,1200px,0,2026-03-22 03:13:30,
+Alert,All Banners,1200px,0,2026-03-22 03:13:30,
+EmptyStateIllustration,All Colored,1200px,0,2026-03-22 03:13:30,
+EmptyStateIllustration,All Grey,1200px,0,2026-03-22 03:13:30,
+EmptyStateIllustration,Colored Vs Grey,1200px,0,2026-03-22 03:13:30,
+EmptyStateIllustration,Custom Palette,1200px,0,2026-03-22 03:13:30,
+EmptyStateIllustration,Sizes,1200px,0,2026-03-22 03:13:30,

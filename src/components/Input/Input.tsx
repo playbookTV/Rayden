@@ -131,7 +131,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               )}
             >
               {leadingIcon && (
-                <span className="shrink-0 size-6 text-grey-400">
+                <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
                   {resolveIcon(leadingIcon, "md")}
                 </span>
               )}
@@ -152,7 +152,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               />
               {addonRight && <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>}
               {trailingIcon && (
-                <span className="shrink-0 size-6 text-grey-400">
+                <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
                   {resolveIcon(trailingIcon, "md")}
                 </span>
               )}
@@ -206,7 +206,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         >
           {leadingIcon && (
-            <span className="shrink-0 size-6 text-grey-400">{resolveIcon(leadingIcon, "md")}</span>
+            <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+              {resolveIcon(leadingIcon, "md")}
+            </span>
           )}
           <input
             ref={ref}
@@ -225,7 +227,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
           {addonRight && <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>}
           {trailingIcon && (
-            <span className="shrink-0 size-6 text-grey-400">{resolveIcon(trailingIcon, "md")}</span>
+            <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+              {resolveIcon(trailingIcon, "md")}
+            </span>
           )}
         </div>
         {bottomText && (

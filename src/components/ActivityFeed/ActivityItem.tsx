@@ -49,7 +49,7 @@ export const ActivityItem = forwardRef<HTMLDivElement, ActivityItemProps>(
     const hasConnectorBelow = connector === "top" || connector === "middle";
 
     return (
-      <div ref={ref} className={cn("flex gap-3 items-start", className)} {...rest}>
+      <article ref={ref} className={cn("flex gap-3 items-start", className)} {...rest}>
         {/* ─── Side Container (avatar + connectors) ─────────── */}
         <div
           className={cn(
@@ -58,13 +58,13 @@ export const ActivityItem = forwardRef<HTMLDivElement, ActivityItemProps>(
           )}
         >
           {/* Connector line above avatar */}
-          {hasConnectorAbove && <div className="h-2 w-px bg-grey-100" />}
+          {hasConnectorAbove && <div className="h-2 w-px bg-grey-100" aria-hidden="true" />}
 
           {/* Avatar */}
           <div className="shrink-0 size-8">{avatar}</div>
 
           {/* Connector line below avatar */}
-          {hasConnectorBelow && <div className="flex-1 w-px bg-grey-100" />}
+          {hasConnectorBelow && <div className="flex-1 w-px bg-grey-100" aria-hidden="true" />}
         </div>
 
         {/* ─── Content ──────────────────────────────────────── */}
@@ -84,8 +84,12 @@ export const ActivityItem = forwardRef<HTMLDivElement, ActivityItemProps>(
                 <span className="text-body-sm leading-5 text-grey-600">{text}</span>
               </div>
               {unread && (
-                <span className="shrink-0 size-2 rounded-full bg-[#04802E] border-[1.5px] border-white" />
+                <span
+                  className="shrink-0 size-2 rounded-full bg-[#04802E] border-[1.5px] border-white"
+                  aria-hidden="true"
+                />
               )}
+              {unread && <span className="sr-only">Unread</span>}
             </div>
 
             {/* Meta row */}
@@ -134,7 +138,7 @@ export const ActivityItem = forwardRef<HTMLDivElement, ActivityItemProps>(
           {/* Optional content block */}
           {children}
         </div>
-      </div>
+      </article>
     );
   }
 );

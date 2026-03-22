@@ -98,6 +98,8 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
     return (
       <div
         ref={ref}
+        role="region"
+        aria-label="File upload dropzone"
         className={cn(
           "flex flex-col items-center justify-center rounded-xl p-8 transition-colors",
           state === "dragging"
@@ -122,12 +124,13 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
           onChange={handleFileChange}
           className="sr-only"
           tabIndex={-1}
+          aria-label={multiple ? "Choose files to upload" : "Choose file to upload"}
         />
 
         {/* ─── Default / Dragging State ─── */}
         {(state === "default" || state === "dragging") && (
           <div className="flex flex-col items-center gap-4">
-            <UploadStateIcon state="default" size={56} />
+            <UploadStateIcon state="default" size={56} aria-hidden="true" />
             <div className="flex flex-col items-center gap-1">
               <p className="text-body-sm font-medium text-grey-600">
                 Click to upload <span className="text-grey-400">or drag and drop</span>
@@ -142,14 +145,21 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
 
         {/* ─── Uploading State ─── */}
         {state === "uploading" && uploadingFile && (
-          <div className="flex w-full flex-col items-center gap-4">
-            <FileTypeIcon type={getFileType(uploadingFile.name)} />
+          <div
+            className="flex w-full flex-col items-center gap-4"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <FileTypeIcon type={getFileType(uploadingFile.name)} aria-hidden="true" />
             <div className="flex w-full max-w-xs flex-col gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-body-sm font-medium text-grey-700 truncate">
                   {uploadingFile.name}
                 </span>
-                <span className="text-body-xs font-medium text-grey-500 ml-2 shrink-0">
+                <span
+                  className="text-body-xs font-medium text-grey-500 ml-2 shrink-0"
+                  aria-label={`Upload progress: ${Math.round(uploadingFile.progress)} percent`}
+                >
                   {Math.round(uploadingFile.progress)}%
                 </span>
               </div>
@@ -160,8 +170,8 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
 
         {/* ─── Success State ─── */}
         {state === "success" && (
-          <div className="flex flex-col items-center gap-4">
-            <UploadStateIcon state="success" size={56} />
+          <div className="flex flex-col items-center gap-4" role="status">
+            <UploadStateIcon state="success" size={56} aria-hidden="true" />
             <div className="flex flex-col items-center gap-1">
               <p className="text-body-sm font-semibold text-grey-800">
                 Document Uploaded Successfully
@@ -179,8 +189,8 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
 
         {/* ─── Error State ─── */}
         {state === "error" && (
-          <div className="flex flex-col items-center gap-4">
-            <UploadStateIcon state="error" size={56} />
+          <div className="flex flex-col items-center gap-4" role="alert">
+            <UploadStateIcon state="error" size={56} aria-hidden="true" />
             <div className="flex flex-col items-center gap-1">
               <p className="text-body-sm font-semibold text-grey-800">Failed to Upload</p>
               {errorMessage && <p className="text-body-xs text-grey-400">{errorMessage}</p>}

@@ -84,6 +84,7 @@ export const IconOnly: Story = {
     variant: "primary",
     icon: "plus",
     iconPosition: "icon-only",
+    "aria-label": "Add item",
   },
 };
 
@@ -125,7 +126,7 @@ export const AllVariants: Story = {
         <Button variant="primary" icon="plus" iconPosition="trailing">
           Trailing
         </Button>
-        <Button variant="primary" icon="plus" iconPosition="icon-only" />
+        <Button variant="primary" icon="plus" iconPosition="icon-only" aria-label="Add item" />
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <Button variant="success">Success</Button>

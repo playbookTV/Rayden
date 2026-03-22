@@ -88,6 +88,7 @@ export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
           <Icon
             name={sortDirection === "asc" ? "chevron-up" : "chevron-down"}
             size="sm"
+            aria-hidden="true"
             className={cn("shrink-0", sortDirection ? "text-grey-700" : "text-grey-400")}
           />
         )}

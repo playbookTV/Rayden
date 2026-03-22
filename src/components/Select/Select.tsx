@@ -103,6 +103,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
     const value = controlledValue ?? internalValue;
 
     const listboxId = useId();
+    const labelId = useId();
+    const helperId = useId();
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
@@ -223,7 +225,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
       >
         {/* Label */}
         {label && (
-          <label className="text-sm font-medium text-grey-900 leading-[1.45]">{label}</label>
+          <label id={labelId} className="text-sm font-medium text-grey-900 leading-[1.45]">
+            {label}
+          </label>
         )}
 
         {/* Trigger */}
@@ -234,6 +238,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           aria-expanded={open}
           aria-haspopup="listbox"
           aria-controls={listboxId}
+          aria-labelledby={label ? labelId : undefined}
+          aria-describedby={helperText ? helperId : undefined}
           disabled={disabled}
           onClick={() => !disabled && setOpen(!open)}
           className={cn(
@@ -260,6 +266,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           <Icon
             name="chevron-down"
             size="md"
+            aria-hidden="true"
             className={cn(
               "shrink-0 transition-transform",
               open && "rotate-180",
@@ -269,7 +276,11 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
         </button>
 
         {/* Helper text */}
-        {helperText && <p className="text-sm text-grey-500 leading-[1.45]">{helperText}</p>}
+        {helperText && (
+          <p id={helperId} className="text-sm text-grey-500 leading-[1.45]">
+            {helperText}
+          </p>
+        )}
 
         {/* Options panel */}
         {open && (

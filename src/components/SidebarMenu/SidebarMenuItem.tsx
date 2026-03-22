@@ -132,7 +132,7 @@ export const SidebarMenuItem = forwardRef<HTMLButtonElement, SidebarMenuItemProp
           onClick={() => {
             if (!disabled && !isExpandable) onSelect(value);
           }}
-          title={typeof labelContent === "string" ? labelContent : undefined}
+          aria-label={typeof labelContent === "string" ? labelContent : undefined}
           className={cn(
             "flex size-11 cursor-pointer items-center justify-center rounded transition-colors",
             highlighted ? cn(ts.selectedBg, ts.selectedIcon) : cn(ts.defaultIcon, ts.hoverBg),
@@ -152,6 +152,8 @@ export const SidebarMenuItem = forwardRef<HTMLButtonElement, SidebarMenuItemProp
           ref={ref}
           type="button"
           role="menuitem"
+          aria-expanded={isExpandable ? open : undefined}
+          aria-haspopup={isExpandable ? "menu" : undefined}
           disabled={disabled}
           onClick={handleClick}
           className={cn(
@@ -191,6 +193,7 @@ export const SidebarMenuItem = forwardRef<HTMLButtonElement, SidebarMenuItemProp
             <Icon
               name={open ? "chevron-up" : "chevron-down"}
               size="sm"
+              aria-hidden="true"
               className={cn(
                 "ml-1 shrink-0 transition-transform",
                 highlighted ? ts.selectedIcon : ts.defaultIcon

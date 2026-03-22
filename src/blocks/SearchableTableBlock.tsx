@@ -60,14 +60,15 @@ export interface SearchableTableBlockProps {
 }
 
 // ─── Kebab Button ────────────────────────────────────────────────────
-function KebabButton({ onClick }: { onClick?: () => void }) {
+function KebabButton({ onClick, rowLabel }: { onClick?: () => void; rowLabel?: string }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      aria-label={rowLabel ? `More actions for ${rowLabel}` : "More actions"}
       className="flex items-center justify-center size-8 rounded-md hover:bg-grey-50 text-grey-400"
     >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <circle cx="8" cy="3" r="1.5" fill="currentColor" />
         <circle cx="8" cy="8" r="1.5" fill="currentColor" />
         <circle cx="8" cy="13" r="1.5" fill="currentColor" />
@@ -213,12 +214,16 @@ export function SearchableTableBlock({
     <div className={cn("flex flex-col", className)}>
       {toolbar}
 
-      <Table>
+      <Table aria-label={title || "Data table"}>
         <TableHeader>
           <TableRow>
             {selectable && (
               <TableHead className="w-[52px]">
-                <Checkbox checked={allSelected || selectedIds.size > 0} onChange={toggleAll} />
+                <Checkbox
+                  checked={allSelected || selectedIds.size > 0}
+                  onChange={toggleAll}
+                  aria-label="Select all rows"
+                />
               </TableHead>
             )}
             {columns.map((col) => (
@@ -236,25 +241,32 @@ export function SearchableTableBlock({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id} selected={selectedIds.has(row.id)}>
-              {selectable && (
-                <TableCell>
-                  <Checkbox checked={selectedIds.has(row.id)} onChange={() => toggleRow(row.id)} />
-                </TableCell>
-              )}
-              {columns.map((col) => (
-                <TableCell key={col.key}>
-                  {col.render ? col.render(row[col.key], row) : String(row[col.key] ?? "")}
-                </TableCell>
-              ))}
-              {onRowAction && (
-                <TableCell>
-                  <KebabButton onClick={() => onRowAction(row.id)} />
-                </TableCell>
-              )}
-            </TableRow>
-          ))}
+          {rows.map((row) => {
+            const rowLabel = columns[0] ? String(row[columns[0].key] ?? row.id) : row.id;
+            return (
+              <TableRow key={row.id} selected={selectedIds.has(row.id)}>
+                {selectable && (
+                  <TableCell>
+                    <Checkbox
+                      checked={selectedIds.has(row.id)}
+                      onChange={() => toggleRow(row.id)}
+                      aria-label={`Select ${rowLabel}`}
+                    />
+                  </TableCell>
+                )}
+                {columns.map((col) => (
+                  <TableCell key={col.key}>
+                    {col.render ? col.render(row[col.key], row) : String(row[col.key] ?? "")}
+                  </TableCell>
+                ))}
+                {onRowAction && (
+                  <TableCell>
+                    <KebabButton onClick={() => onRowAction(row.id)} rowLabel={rowLabel} />
+                  </TableCell>
+                )}
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
 

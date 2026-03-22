@@ -66,7 +66,7 @@ const users = [
 export const Default: Story = {
   render: () => (
     <div className="p-6">
-      <Table>
+      <Table aria-label="User data table">
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -122,13 +122,14 @@ export const WithSelection: Story = {
 
       return (
         <div className="p-6">
-          <Table>
+          <Table aria-label="User data table with selection">
             <TableHeader>
               <TableRow selected={allSelected || someSelected}>
                 <TableHead className="w-12">
                   <Checkbox
                     checked={allSelected}
                     onChange={toggleAll}
+                    aria-label="Select all rows"
                     ref={(el) => {
                       if (el) el.indeterminate = someSelected;
                     }}
@@ -144,7 +145,11 @@ export const WithSelection: Story = {
               {users.map((user) => (
                 <TableRow key={user.id} selected={selected.has(user.id)}>
                   <TableCell className="w-12">
-                    <Checkbox checked={selected.has(user.id)} onChange={() => toggleRow(user.id)} />
+                    <Checkbox
+                      checked={selected.has(user.id)}
+                      onChange={() => toggleRow(user.id)}
+                      aria-label={`Select ${user.name}`}
+                    />
                   </TableCell>
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell className="text-grey-600">{user.email}</TableCell>
@@ -195,7 +200,7 @@ export const WithSorting: Story = {
 
       return (
         <div className="p-6">
-          <Table>
+          <Table aria-label="User data table with sorting">
             <TableHeader>
               <TableRow>
                 <TableHead
@@ -252,7 +257,7 @@ export const WithSorting: Story = {
 export const WithLeadingAvatar: Story = {
   render: () => (
     <div className="p-6">
-      <Table>
+      <Table aria-label="Team members table">
         <TableHeader>
           <TableRow>
             <TableHead>Member</TableHead>
@@ -292,10 +297,18 @@ export const WithLeadingAvatar: Story = {
               </TableCell>
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="text-body-sm font-semibold text-primary-400">
+                  <button
+                    type="button"
+                    className="text-body-sm font-semibold text-primary-400"
+                    aria-label={`Edit ${user.name}`}
+                  >
                     Edit
                   </button>
-                  <button type="button" className="text-body-sm font-semibold text-grey-400">
+                  <button
+                    type="button"
+                    className="text-body-sm font-semibold text-grey-400"
+                    aria-label={`Delete ${user.name}`}
+                  >
                     Delete
                   </button>
                 </div>
@@ -350,13 +363,14 @@ export const FullFeatured: Story = {
 
       return (
         <div className="rounded-xl border border-grey-200 p-6">
-          <Table>
+          <Table aria-label="Team members table with selection and sorting">
             <TableHeader>
               <TableRow selected={allSelected || someSelected}>
                 <TableHead className="w-12">
                   <Checkbox
                     checked={allSelected}
                     onChange={toggleAll}
+                    aria-label="Select all rows"
                     ref={(el) => {
                       if (el) el.indeterminate = someSelected;
                     }}
@@ -386,7 +400,11 @@ export const FullFeatured: Story = {
                 return (
                   <TableRow key={user.id} selected={isSelected}>
                     <TableCell className="w-12">
-                      <Checkbox checked={isSelected} onChange={() => toggleRow(user.id)} />
+                      <Checkbox
+                        checked={isSelected}
+                        onChange={() => toggleRow(user.id)}
+                        aria-label={`Select ${user.name}`}
+                      />
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-3">
@@ -421,8 +439,9 @@ export const FullFeatured: Story = {
                       <button
                         type="button"
                         className="flex size-8 items-center justify-center rounded-lg border border-grey-200 bg-white text-grey-500 hover:bg-grey-50"
+                        aria-label={`More actions for ${user.name}`}
                       >
-                        <Icon name="more-vertical" size="sm" />
+                        <Icon name="more-vertical" size="sm" aria-hidden="true" />
                       </button>
                     </TableCell>
                   </TableRow>

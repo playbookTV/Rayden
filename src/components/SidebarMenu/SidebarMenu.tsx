@@ -150,7 +150,7 @@ export const SidebarMenu = forwardRef<HTMLElement, SidebarMenuProps>(
       <SidebarMenuContext.Provider value={{ activeValue, onSelect, collapsed, theme }}>
         <nav
           ref={ref}
-          role="navigation"
+          aria-label="Main navigation"
           className={cn(
             "flex flex-col gap-3 overflow-y-auto rounded-xl py-6",
             ts.container,
