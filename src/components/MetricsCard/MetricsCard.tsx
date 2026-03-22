@@ -394,21 +394,45 @@ function Variation6({ label, value, icon, trendBadge, description, cta }: Metric
 
 // ─── Main Component ──────────────────────────────────────────────
 
-export function MetricsCard({ variation = "2", className, ...props }: MetricsCardProps) {
+export function MetricsCard({
+  variation = "2",
+  className,
+  // Destructure component-specific props to prevent them from being spread to DOM
+  label,
+  value,
+  icon,
+  trendBadge,
+  statusBadge,
+  description,
+  secondaryText,
+  cta,
+  ...rest
+}: MetricsCardProps) {
+  const componentProps = {
+    label,
+    value,
+    icon,
+    trendBadge,
+    statusBadge,
+    description,
+    secondaryText,
+    cta,
+  };
+
   return (
     <div
       className={cn(
         "flex flex-col overflow-clip rounded-xl border border-grey-200 bg-white dark:bg-grey-50 shadow-soft-xxs",
         className
       )}
-      {...(props as HTMLAttributes<HTMLDivElement>)}
+      {...rest}
     >
-      {variation === "1" && <Variation1 {...props} />}
-      {variation === "2" && <Variation2 {...props} />}
-      {variation === "3" && <Variation3 {...props} />}
-      {variation === "4" && <Variation4 {...props} />}
-      {variation === "5" && <Variation5 {...props} />}
-      {variation === "6" && <Variation6 {...props} />}
+      {variation === "1" && <Variation1 {...componentProps} />}
+      {variation === "2" && <Variation2 {...componentProps} />}
+      {variation === "3" && <Variation3 {...componentProps} />}
+      {variation === "4" && <Variation4 {...componentProps} />}
+      {variation === "5" && <Variation5 {...componentProps} />}
+      {variation === "6" && <Variation6 {...componentProps} />}
     </div>
   );
 }
