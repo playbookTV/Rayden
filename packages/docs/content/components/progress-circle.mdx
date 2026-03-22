@@ -1,6 +1,6 @@
 ---
 title: ProgressCircle
-description: Circular progress indicator
+description: Circular progress indicator with default and segmented variants
 ---
 
 # ProgressCircle
@@ -24,45 +24,44 @@ import { ProgressCircle } from "@raydenui/ui";
 ### Sizes
 
 ```tsx
-<ProgressCircle size="xs" value={50} />
-<ProgressCircle size="sm" value={50} />
-<ProgressCircle size="md" value={50} />
-<ProgressCircle size="lg" value={50} />
-<ProgressCircle size="xl" value={50} />
+<ProgressCircle size="xs" value={50} />  {/* 48px */}
+<ProgressCircle size="sm" value={50} />  {/* 56px */}
+<ProgressCircle size="md" value={50} />  {/* 72px */}
+<ProgressCircle size="lg" value={50} />  {/* 90px */}
+<ProgressCircle size="xl" value={50} />  {/* 120px */}
 ```
 
-### With Label
+### Segmented Variant
+
+Display progress as 10 discrete segments with gaps.
 
 ```tsx
-<ProgressCircle value={75} showLabel />
+<ProgressCircle variant="segmented" value={70} />
 ```
 
-### With Center Content
+### Show/Hide Text
 
 ```tsx
-<ProgressCircle value={85} size="xl">
+// With percentage (default)
+<ProgressCircle value={75} showText />
+
+// Without percentage
+<ProgressCircle value={75} showText={false} />
+```
+
+### Variants Comparison
+
+```tsx
+<div className="flex gap-8">
   <div className="text-center">
-    <p className="text-2xl font-bold">85</p>
-    <p className="text-xs text-grey-500">Score</p>
+    <ProgressCircle variant="default" value={60} />
+    <p className="mt-2 text-sm">Default</p>
   </div>
-</ProgressCircle>
-```
-
-### Colors
-
-```tsx
-<ProgressCircle value={50} color="primary" />
-<ProgressCircle value={50} color="success" />
-<ProgressCircle value={50} color="warning" />
-<ProgressCircle value={50} color="error" />
-```
-
-### Thickness
-
-```tsx
-<ProgressCircle value={60} thickness={2} />
-<ProgressCircle value={60} thickness={4} />
-<ProgressCircle value={60} thickness={8} />
+  <div className="text-center">
+    <ProgressCircle variant="segmented" value={60} />
+    <p className="mt-2 text-sm">Segmented</p>
+  </div>
+</div>
 ```
 
 ### In Context
@@ -70,7 +69,7 @@ import { ProgressCircle } from "@raydenui/ui";
 ```tsx
 // Dashboard stat
 <div className="flex items-center gap-4">
-  <ProgressCircle value={78} size="lg" color="success" showLabel />
+  <ProgressCircle value={78} size="lg" />
   <div>
     <p className="font-medium">Conversion Rate</p>
     <p className="text-sm text-grey-500">+5.2% from last month</p>
@@ -82,6 +81,12 @@ import { ProgressCircle } from "@raydenui/ui";
   <ProgressCircle value={90} size="sm" />
   <span>React</span>
 </div>
+
+// Loading indicator
+<div className="flex flex-col items-center gap-2">
+  <ProgressCircle variant="segmented" value={45} size="lg" />
+  <span className="text-sm text-grey-500">Processing...</span>
+</div>
 ```
 
 ## Props
@@ -90,14 +95,22 @@ import { ProgressCircle } from "@raydenui/ui";
 |------|------|---------|-------------|
 | `value` | `number` | `0` | Progress value (0-100) |
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Circle size |
-| `color` | `"primary" \| "success" \| "warning" \| "error"` | `"primary"` | Progress color |
-| `thickness` | `number` | `4` | Stroke width |
-| `showLabel` | `boolean` | `false` | Show percentage in center |
-| `children` | `ReactNode` | — | Custom center content |
+| `variant` | `"default" \| "segmented"` | `"default"` | Continuous or segmented style |
+| `showText` | `boolean` | `true` | Show percentage in center |
 | `className` | `string` | — | Additional CSS classes |
+
+## Size Reference
+
+| Size | Dimension | Stroke Width | Font Size |
+|------|-----------|--------------|-----------|
+| `xs` | 48px | 4px | 12px |
+| `sm` | 56px | 5px | 12px |
+| `md` | 72px | 6px | 14px |
+| `lg` | 90px | 7px | 16px |
+| `xl` | 120px | 8px | 18px |
 
 ## Accessibility
 
-- Uses SVG with proper ARIA attributes
-- `role="progressbar"` with value information
-- Center content is accessible
+- Uses SVG with `role="progressbar"`
+- `aria-valuenow`, `aria-valuemin`, `aria-valuemax` set correctly
+- Center percentage is visible and accessible

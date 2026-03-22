@@ -1,0 +1,151 @@
+---
+title: Spinner
+description: Loading indicators and spinners
+---
+
+# Spinner
+
+Display loading states with various animated spinners.
+
+## Import
+
+```tsx
+import { Spinner } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Spinner />
+```
+
+### Types
+
+```tsx
+<Spinner type="thin" />
+<Spinner type="bold" />
+<Spinner type="duo-tone" />
+<Spinner type="buffering-thin" />
+<Spinner type="buffering-bold" />
+<Spinner type="dot" />
+<Spinner type="juggling" />
+```
+
+### Sizes
+
+```tsx
+<Spinner size="xs" />  {/* 20px */}
+<Spinner size="sm" />  {/* 24px */}
+<Spinner size="md" />  {/* 32px */}
+<Spinner size="lg" />  {/* 40px */}
+<Spinner size="xl" />  {/* 48px */}
+<Spinner size="2xl" /> {/* 56px */}
+<Spinner size="3xl" /> {/* 64px */}
+```
+
+### With Label
+
+```tsx
+<Spinner label="Loading..." />
+```
+
+### Label Positions
+
+```tsx
+<Spinner label="Loading" labelPosition="after" />
+<Spinner label="Loading" labelPosition="before" />
+<Spinner label="Loading" labelPosition="above" />
+<Spinner label="Loading" labelPosition="below" />
+```
+
+### White Style
+
+For dark backgrounds:
+
+```tsx
+<div className="bg-grey-900 p-4 rounded-lg">
+  <Spinner colorStyle="white" label="Loading..." />
+</div>
+```
+
+### No Label
+
+```tsx
+<Spinner />
+```
+
+### In Context
+
+```tsx
+// Button loading state
+<Button disabled>
+  <Spinner size="sm" colorStyle="white" />
+  <span>Saving...</span>
+</Button>
+
+// Page loading
+<div className="flex items-center justify-center h-screen">
+  <Spinner size="xl" label="Loading content..." labelPosition="below" />
+</div>
+
+// Inline loading
+<p>
+  Processing your request <Spinner size="xs" />
+</p>
+```
+
+### All Types Grid
+
+```tsx
+<div className="grid grid-cols-4 gap-4">
+  {["thin", "bold", "duo-tone", "buffering-thin", "buffering-bold", "dot", "juggling"].map((type) => (
+    <div key={type} className="flex flex-col items-center gap-2">
+      <Spinner type={type} size="lg" />
+      <span className="text-xs">{type}</span>
+    </div>
+  ))}
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"thin" \| "bold" \| "duo-tone" \| "buffering-thin" \| "buffering-bold" \| "dot" \| "juggling"` | `"thin"` | Animation type |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl"` | `"md"` | Spinner size |
+| `colorStyle` | `"brand" \| "white"` | `"brand"` | Color scheme |
+| `label` | `string` | — | Loading text |
+| `labelPosition` | `"after" \| "before" \| "above" \| "below"` | `"after"` | Label placement |
+| `className` | `string` | — | Additional CSS classes |
+
+## Spinner Types
+
+| Type | Description |
+|------|-------------|
+| `thin` | Thin rotating circle with partial stroke |
+| `bold` | Thicker rotating circle |
+| `duo-tone` | Two-tone rotating circle |
+| `buffering-thin` | Thin buffering animation (dash grows/shrinks) |
+| `buffering-bold` | Bold buffering animation |
+| `dot` | 8 circular dots with varying opacity |
+| `juggling` | 3 bouncing dots with staggered animation |
+
+## Size Reference
+
+| Size | Pixels |
+|------|--------|
+| `xs` | 20px |
+| `sm` | 24px |
+| `md` | 32px |
+| `lg` | 40px |
+| `xl` | 48px |
+| `2xl` | 56px |
+| `3xl` | 64px |
+
+## Accessibility
+
+- Uses `role="status"` for screen readers
+- `aria-label` set to label text or "Loading"
+- Animations respect reduced motion preferences

@@ -1,0 +1,165 @@
+---
+title: DatePicker
+description: Calendar picker for date and range selection
+---
+
+# DatePicker
+
+A calendar component for selecting single dates, date ranges, or years.
+
+## Import
+
+```tsx
+import { DatePicker } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic (Single Date)
+
+```tsx
+const [date, setDate] = useState<Date | null>(null);
+
+<DatePicker value={date} onChange={setDate} />
+```
+
+### With Footer
+
+```tsx
+<DatePicker
+  value={date}
+  onChange={setDate}
+  showFooter
+  onDone={() => closeModal()}
+  onClear={() => setDate(null)}
+/>
+```
+
+### Date Range
+
+```tsx
+const [range, setRange] = useState<[Date | null, Date | null]>([null, null]);
+
+<DatePicker
+  mode="range"
+  rangeValue={range}
+  onRangeChange={setRange}
+/>
+```
+
+### Year Picker
+
+```tsx
+const [date, setDate] = useState<Date | null>(new Date());
+
+<DatePicker mode="year" value={date} onChange={setDate} />
+```
+
+### With Min/Max Dates
+
+```tsx
+const minDate = new Date(2024, 0, 1);  // Jan 1, 2024
+const maxDate = new Date(2024, 11, 31); // Dec 31, 2024
+
+<DatePicker
+  value={date}
+  onChange={setDate}
+  minDate={minDate}
+  maxDate={maxDate}
+/>
+```
+
+### In a Form
+
+```tsx
+const [checkIn, setCheckIn] = useState<Date | null>(null);
+const [checkOut, setCheckOut] = useState<Date | null>(null);
+
+<div className="space-y-4">
+  <div>
+    <label>Check-in Date</label>
+    <DatePicker value={checkIn} onChange={setCheckIn} />
+  </div>
+  <div>
+    <label>Check-out Date</label>
+    <DatePicker
+      value={checkOut}
+      onChange={setCheckOut}
+      minDate={checkIn ?? undefined}
+    />
+  </div>
+</div>
+```
+
+### Interactive Range with Footer
+
+```tsx
+const [range, setRange] = useState<[Date | null, Date | null]>([null, null]);
+const [isOpen, setIsOpen] = useState(false);
+
+<DatePicker
+  mode="range"
+  rangeValue={range}
+  onRangeChange={setRange}
+  showFooter
+  onDone={() => setIsOpen(false)}
+  onClear={() => setRange([null, null])}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"single" \| "range" \| "year"` | `"single"` | Picker mode |
+| `value` | `Date \| null` | — | Selected date (single/year mode) |
+| `rangeValue` | `[Date \| null, Date \| null]` | — | Selected range (range mode) |
+| `onChange` | `(date: Date \| null) => void` | — | Single date callback |
+| `onRangeChange` | `(range: [Date \| null, Date \| null]) => void` | — | Range change callback |
+| `showFooter` | `boolean` | `false` | Show Clear/Done buttons |
+| `onDone` | `() => void` | — | Done button callback |
+| `onClear` | `() => void` | — | Clear button callback |
+| `minDate` | `Date` | — | Earliest selectable date |
+| `maxDate` | `Date` | — | Latest selectable date |
+| `className` | `string` | — | Additional CSS classes |
+
+## Modes
+
+### Single Mode
+
+- Standard calendar with month/year navigation
+- Click a day to select it
+- Selected date shows with primary color background
+- Today indicator (small dot)
+
+### Range Mode
+
+- Dual calendar view (side-by-side months)
+- Click to set start date, click again to set end date
+- Range visualized with colored start/end and highlighted middle dates
+- Automatically handles reversed selections
+
+### Year Mode
+
+- 20-year grid (4 columns x 5 rows)
+- Navigate between 20-year ranges
+- Click to select a year
+
+## Day States
+
+| State | Appearance |
+|-------|------------|
+| Default | Normal text color |
+| Selected | Primary background, white text |
+| Today | Normal with dot indicator |
+| Disabled | Grey text, not clickable |
+| Start Range | Primary background, left-rounded |
+| End Range | Primary background, right-rounded |
+| Mid Range | Light primary background |
+
+## Accessibility
+
+- Full keyboard navigation with arrow keys
+- Days outside min/max range are disabled
+- Clear visual indicators for selected states
+- Buttons have proper focus states

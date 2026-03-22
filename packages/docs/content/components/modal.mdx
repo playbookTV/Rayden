@@ -1,0 +1,177 @@
+---
+title: Modal
+description: Dialog overlay for focused user interactions
+---
+
+# Modal
+
+Display modal dialogs for important interactions that require user attention.
+
+## Import
+
+```tsx
+import { Modal } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
+
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Confirm Action"
+  description="Are you sure you want to proceed?"
+  primaryLabel="Confirm"
+  onPrimaryClick={() => {
+    // handle confirm
+    setOpen(false);
+  }}
+  secondaryLabel="Cancel"
+/>
+```
+
+### Sizes
+
+```tsx
+<Modal size="sm" title="Small Modal" open={open} onClose={onClose}>
+  Small modal content (400px width)
+</Modal>
+
+<Modal size="md" title="Medium Modal" open={open} onClose={onClose}>
+  Medium modal content (500px width)
+</Modal>
+
+<Modal size="lg" title="Large Modal" open={open} onClose={onClose}>
+  Large modal content (640px width)
+</Modal>
+```
+
+### With Custom Content
+
+```tsx
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Edit Profile"
+  primaryLabel="Save Changes"
+  secondaryLabel="Cancel"
+>
+  <div className="space-y-4">
+    <Input label="Name" placeholder="Enter your name" />
+    <Input label="Email" placeholder="Enter your email" />
+  </div>
+</Modal>
+```
+
+### Vertical Footer
+
+```tsx
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Delete Item"
+  description="This action cannot be undone."
+  footerOrientation="vertical"
+  primaryLabel="Delete"
+  secondaryLabel="Keep Item"
+/>
+```
+
+### Custom Icon
+
+```tsx
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Warning"
+  description="This will permanently delete your data."
+  icon={<AlertTriangleIcon className="text-warning-400" />}
+  primaryLabel="Delete Anyway"
+/>
+```
+
+### Primary Only
+
+```tsx
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Welcome!"
+  description="Thanks for signing up."
+  primaryLabel="Get Started"
+  onPrimaryClick={() => setOpen(false)}
+/>
+```
+
+### No Blur
+
+```tsx
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Settings"
+  blur={false}
+>
+  Modal without backdrop blur effect.
+</Modal>
+```
+
+### Prevent Close on Overlay
+
+```tsx
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Important Form"
+  closeOnOverlay={false}
+  closeOnEscape={false}
+  showClose={false}
+>
+  User must complete this form to close.
+</Modal>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Whether the modal is open (required) |
+| `onClose` | `() => void` | — | Called when modal should close (required) |
+| `size` | `"sm" \| "md" \| "lg"` | `"sm"` | Modal width: sm (400px), md (500px), lg (640px) |
+| `title` | `string` | — | Title text |
+| `description` | `string` | — | Description text below the title |
+| `icon` | `ReactNode` | — | Leading icon element |
+| `showClose` | `boolean` | `true` | Show close button in header |
+| `primaryLabel` | `string` | `"Save"` | Primary action button label |
+| `onPrimaryClick` | `() => void` | — | Primary button callback |
+| `secondaryLabel` | `string` | — | Secondary action button label |
+| `onSecondaryClick` | `() => void` | — | Secondary button callback |
+| `footerOrientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Footer button layout |
+| `closeOnOverlay` | `boolean` | `true` | Close on backdrop click |
+| `closeOnEscape` | `boolean` | `true` | Close on Escape key |
+| `blur` | `boolean` | `true` | Show backdrop blur effect |
+| `children` | `ReactNode` | — | Modal body content |
+| `className` | `string` | — | Additional CSS classes |
+
+## Features
+
+- **Portal rendering**: Modal renders to `document.body` for proper stacking
+- **Body scroll lock**: Prevents background scrolling when open
+- **Keyboard support**: Escape key closes modal (configurable)
+- **Overlay click**: Click outside to close (configurable)
+- **Focus management**: Proper focus trapping within modal
+- **Dark mode support**: Automatic dark mode styling
+
+## Accessibility
+
+- Uses `role="dialog"` and `aria-modal="true"`
+- Title linked via `aria-labelledby`
+- Description linked via `aria-describedby`
+- Close button has `aria-label="Close modal"`
+- Focus is trapped within the modal while open

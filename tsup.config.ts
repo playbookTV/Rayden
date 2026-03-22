@@ -10,7 +10,15 @@ export default defineConfig({
   dts: true,
   sourcemap: false,
   clean: true,
-  external: ["react", "react-dom", "clsx", "tailwind-merge"],
+  external: [
+    "react",
+    "react-dom",
+    "clsx",
+    "tailwind-merge",
+    "chart.js",
+    "react-chartjs-2",
+    "chart.js/auto",
+  ],
   treeshake: true,
   splitting: false,
 });

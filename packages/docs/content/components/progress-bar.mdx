@@ -1,6 +1,6 @@
 ---
 title: ProgressBar
-description: Linear progress indicator
+description: Linear progress indicator with basic and segmented types
 ---
 
 # ProgressBar
@@ -24,47 +24,67 @@ import { ProgressBar } from "@raydenui/ui";
 ### Sizes
 
 ```tsx
-<ProgressBar size="sm" value={40} />
-<ProgressBar size="lg" value={40} />
+<ProgressBar size="sm" value={40} />  {/* 4px height */}
+<ProgressBar size="md" value={40} />  {/* 8px height */}
+<ProgressBar size="lg" value={40} />  {/* 12px height */}
+```
+
+### Segmented Type
+
+Display progress as 10 discrete segments instead of a continuous bar.
+
+```tsx
+<ProgressBar type="segmented" value={70} />
 ```
 
 ### With Label
 
 ```tsx
-<ProgressBar value={75} showLabel />
+<ProgressBar value={75} label="Uploading files..." />
 ```
 
-### Custom Label
+### With Metadata
+
+Single metadata item:
 
 ```tsx
-<ProgressBar value={75} label="75% Complete" />
+<ProgressBar value={60} metadata="Estimated time: 2 min" />
 ```
 
-### With Value Text
+Multiple metadata items (dot-separated):
 
 ```tsx
-<div className="space-y-2">
-  <div className="flex justify-between text-sm">
-    <span>Uploading...</span>
-    <span>75%</span>
-  </div>
-  <ProgressBar value={75} />
-</div>
+<ProgressBar
+  value={45}
+  metadata={["25 MB / 50 MB", "2:30 remaining", "Fast"]}
+/>
 ```
 
-### Indeterminate
+### Percentage Position
 
 ```tsx
-<ProgressBar indeterminate />
+// Bottom (default)
+<ProgressBar value={75} percentagePosition="bottom" />
+
+// Top
+<ProgressBar value={75} percentagePosition="top" />
+
+// Hidden
+<ProgressBar value={75} showPercentage={false} />
 ```
 
-### Colors
+### Complete Example
 
 ```tsx
-<ProgressBar value={50} color="primary" />
-<ProgressBar value={50} color="success" />
-<ProgressBar value={50} color="warning" />
-<ProgressBar value={50} color="error" />
+<ProgressBar
+  value={65}
+  size="lg"
+  type="basic"
+  label="Downloading update..."
+  metadata={["128 MB / 200 MB", "5 min left"]}
+  showPercentage
+  percentagePosition="top"
+/>
 ```
 
 ### In Context
@@ -75,16 +95,15 @@ import { ProgressBar } from "@raydenui/ui";
   <div className="flex items-center gap-3">
     <DocumentIcon className="w-5 h-5" />
     <span className="flex-1">document.pdf</span>
-    <span className="text-sm text-grey-500">75%</span>
   </div>
-  <ProgressBar value={75} />
+  <ProgressBar value={75} metadata="75 KB / 100 KB" />
 </div>
 
-// Task completion
+// Task completion with segmented bar
 <div className="space-y-1">
   <p className="text-sm font-medium">Profile Completion</p>
-  <ProgressBar value={80} color="success" />
-  <p className="text-xs text-grey-500">4 of 5 steps complete</p>
+  <ProgressBar type="segmented" value={80} />
+  <p className="text-xs text-grey-500">8 of 10 steps complete</p>
 </div>
 ```
 
@@ -93,15 +112,16 @@ import { ProgressBar } from "@raydenui/ui";
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `value` | `number` | `0` | Progress value (0-100) |
-| `size` | `"sm" \| "lg"` | `"sm"` | Bar height |
-| `color` | `"primary" \| "success" \| "warning" \| "error"` | `"primary"` | Bar color |
-| `showLabel` | `boolean` | `false` | Show percentage label |
-| `label` | `string` | — | Custom label text |
-| `indeterminate` | `boolean` | `false` | Show indeterminate animation |
+| `size` | `"sm" \| "md" \| "lg"` | `"lg"` | Bar height: sm (4px), md (8px), lg (12px) |
+| `type` | `"basic" \| "segmented"` | `"basic"` | Continuous or segmented bar |
+| `label` | `string` | — | Label text above the bar |
+| `metadata` | `string \| string[]` | — | Metadata text(s) below the bar |
+| `showPercentage` | `boolean` | `true` | Show percentage text |
+| `percentagePosition` | `"top" \| "bottom"` | `"bottom"` | Position of percentage text |
 | `className` | `string` | — | Additional CSS classes |
 
 ## Accessibility
 
 - Uses `role="progressbar"` with ARIA attributes
 - `aria-valuenow`, `aria-valuemin`, `aria-valuemax` set correctly
-- Indeterminate state announced properly
+- Works with screen readers

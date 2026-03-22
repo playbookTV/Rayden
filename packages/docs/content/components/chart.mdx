@@ -1,0 +1,226 @@
+---
+title: Chart
+description: Data visualization with Chart.js
+---
+
+# Chart
+
+Display various types of charts and graphs using Chart.js with Rayden UI styling.
+
+## Import
+
+```tsx
+import { RaydenChart, chartColors, hexToRgba, createGradientFill } from "@raydenui/ui";
+```
+
+## Usage
+
+### Line Chart
+
+```tsx
+const data = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  datasets: [{
+    label: "Revenue",
+    data: [30, 45, 60, 50, 70, 85],
+    borderColor: chartColors.primary[400],
+    backgroundColor: hexToRgba(chartColors.primary[400], 0.1),
+    fill: true,
+  }],
+};
+
+<RaydenChart type="line" data={data} height={300} />
+```
+
+### Bar Chart
+
+```tsx
+const data = {
+  labels: ["Q1", "Q2", "Q3", "Q4"],
+  datasets: [{
+    label: "Sales",
+    data: [120, 190, 150, 220],
+    backgroundColor: chartColors.primary[400],
+  }],
+};
+
+<RaydenChart type="bar" data={data} height={300} />
+```
+
+### Stacked Bar Chart
+
+```tsx
+const data = {
+  labels: ["Jan", "Feb", "Mar"],
+  datasets: [
+    { label: "Product A", data: [30, 40, 35], backgroundColor: chartColors.primary[400] },
+    { label: "Product B", data: [20, 25, 30], backgroundColor: chartColors.semantic.success },
+    { label: "Product C", data: [15, 20, 18], backgroundColor: chartColors.semantic.warning },
+  ],
+};
+
+<RaydenChart
+  type="bar"
+  data={data}
+  options={{ scales: { x: { stacked: true }, y: { stacked: true } } }}
+/>
+```
+
+### Pie Chart
+
+```tsx
+const data = {
+  labels: ["Desktop", "Mobile", "Tablet"],
+  datasets: [{
+    data: [55, 35, 10],
+    backgroundColor: [
+      chartColors.primary[400],
+      chartColors.semantic.success,
+      chartColors.semantic.warning,
+    ],
+  }],
+};
+
+<RaydenChart type="pie" data={data} height={300} />
+```
+
+### Doughnut Chart
+
+```tsx
+const data = {
+  labels: ["Completed", "In Progress", "Pending"],
+  datasets: [{
+    data: [65, 25, 10],
+    backgroundColor: [
+      chartColors.semantic.success,
+      chartColors.semantic.info,
+      chartColors.grey[300],
+    ],
+  }],
+};
+
+<RaydenChart type="doughnut" data={data} height={300} />
+```
+
+### Radar Chart
+
+```tsx
+const data = {
+  labels: ["Speed", "Reliability", "Comfort", "Safety", "Efficiency"],
+  datasets: [{
+    label: "Model A",
+    data: [80, 90, 70, 85, 75],
+    backgroundColor: hexToRgba(chartColors.primary[400], 0.2),
+    borderColor: chartColors.primary[400],
+  }],
+};
+
+<RaydenChart type="radar" data={data} height={300} />
+```
+
+### Scatter Chart
+
+```tsx
+const data = {
+  datasets: [{
+    label: "Data Points",
+    data: [
+      { x: 10, y: 20 },
+      { x: 15, y: 30 },
+      { x: 25, y: 15 },
+      { x: 30, y: 40 },
+    ],
+    backgroundColor: chartColors.primary[400],
+  }],
+};
+
+<RaydenChart type="scatter" data={data} height={300} />
+```
+
+### Polar Area Chart
+
+```tsx
+const data = {
+  labels: ["Red", "Green", "Yellow", "Grey", "Blue"],
+  datasets: [{
+    data: [11, 16, 7, 3, 14],
+    backgroundColor: [
+      chartColors.semantic.error,
+      chartColors.semantic.success,
+      chartColors.semantic.warning,
+      chartColors.grey[400],
+      chartColors.semantic.info,
+    ],
+  }],
+};
+
+<RaydenChart type="polar-area" data={data} height={300} />
+```
+
+### Custom Options
+
+```tsx
+<RaydenChart
+  type="line"
+  data={data}
+  height={400}
+  options={{
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: "Monthly Revenue" },
+    },
+    scales: {
+      y: { beginAtZero: true },
+    },
+  }}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"line" \| "bar" \| "pie" \| "doughnut" \| "radar" \| "scatter" \| "bubble" \| "polar-area"` | — | Chart type (required) |
+| `data` | `ChartData<any>` | — | Chart.js data object (required) |
+| `options` | `ChartOptions<any>` | — | Chart.js options (merged with defaults) |
+| `height` | `number` | `300` | Chart height in pixels |
+| `width` | `number` | — | Chart width in pixels |
+| `className` | `string` | — | Additional CSS classes |
+
+## Theme Utilities
+
+### chartColors
+
+Pre-defined color palette for consistent styling:
+
+```tsx
+chartColors.primary[50-900]  // Primary palette shades
+chartColors.semantic.success // Semantic colors
+chartColors.semantic.error
+chartColors.semantic.warning
+chartColors.semantic.info
+chartColors.grey[50-900]     // Grey scale
+chartColors.extended[0-9]    // Extended palette
+```
+
+### hexToRgba
+
+Convert hex colors to rgba with transparency:
+
+```tsx
+hexToRgba("#F56630", 0.5)  // "rgba(245, 102, 48, 0.5)"
+```
+
+### createGradientFill
+
+Create gradient fills for area charts:
+
+```tsx
+const gradient = createGradientFill(ctx, chartColors.primary[400], 0.4, 0);
+```
+
+## Accessibility
+
+- Charts include proper ARIA labels
+- Tooltips provide detailed information on hover
+- Legend is keyboard accessible

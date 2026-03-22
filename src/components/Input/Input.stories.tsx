@@ -34,7 +34,7 @@ const meta: Meta<typeof Input> = {
   component: Input,
   tags: ["autodocs"],
   argTypes: {
-    size: { control: "select", options: ["sm", "lg"] },
+    size: { control: "select", options: ["xs", "sm", "md", "lg"] },
     disabled: { control: "boolean" },
     readOnly: { control: "boolean" },
   },
@@ -48,6 +48,28 @@ export const Default: Story = {
     label: "Label",
     placeholder: "Placeholder",
     helperText: "Helper text",
+    leadingIcon: <SearchIcon />,
+    trailingIcon: <MailIcon />,
+  },
+};
+
+export const ExtraSmall: Story = {
+  args: {
+    label: "Label",
+    placeholder: "Placeholder",
+    helperText: "Helper text",
+    size: "xs",
+    leadingIcon: <SearchIcon />,
+    trailingIcon: <MailIcon />,
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    label: "Label",
+    placeholder: "Placeholder",
+    helperText: "Helper text",
+    size: "md",
     leadingIcon: <SearchIcon />,
     trailingIcon: <MailIcon />,
   },
@@ -97,6 +119,45 @@ export const ReadOnly: Story = {
   },
 };
 
+export const AllSizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6 w-[375px]">
+      <Input
+        label="Extra Small (xs)"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="xs"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
+      <Input
+        label="Small (sm)"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="sm"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
+      <Input
+        label="Medium (md)"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="md"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
+      <Input
+        label="Large (lg)"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="lg"
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
+    </div>
+  ),
+};
+
 export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-6 w-[375px]">
@@ -139,6 +200,99 @@ export const AllStates: Story = {
         leadingIcon={<SearchIcon />}
         trailingIcon={<MailIcon />}
       />
+      <Input
+        label="Disabled"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        disabled
+        leadingIcon={<SearchIcon />}
+        trailingIcon={<MailIcon />}
+      />
     </div>
+  ),
+};
+
+const ChevronDown = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-5">
+    <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const PlusCircle = () => (
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-5">
+    <circle cx="10" cy="10" r="8" />
+    <path d="M10 6v8M6 10h8" strokeLinecap="round" />
+  </svg>
+);
+
+const DropdownAddon = ({ label = "Label" }: { label?: string }) => (
+  <>
+    <PlusCircle />
+    <span className="px-1">{label}</span>
+    <ChevronDown />
+  </>
+);
+
+const ButtonAddon = () => (
+  <button className="text-sm font-semibold text-primary-400 whitespace-nowrap cursor-pointer">
+    Button
+  </button>
+);
+
+export const WithLeadingAddon: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6 w-[375px]">
+      <Input
+        label="Leading dropdown (separated)"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="md"
+        leadingAddon={<DropdownAddon />}
+        trailingIcon={<MailIcon />}
+      />
+      <Input
+        label="Leading dropdown (sm)"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="sm"
+        leadingAddon={<DropdownAddon label="USD" />}
+      />
+    </div>
+  ),
+};
+
+export const WithTrailingAddon: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6 w-[375px]">
+      <Input
+        label="Trailing button"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="md"
+        leadingIcon={<SearchIcon />}
+        trailingAddon={<ButtonAddon />}
+      />
+      <Input
+        label="Trailing dropdown"
+        placeholder="Placeholder"
+        helperText="Helper text"
+        size="md"
+        trailingAddon={<DropdownAddon label=".com" />}
+      />
+    </div>
+  ),
+};
+
+export const WithBothAddons: Story = {
+  render: () => (
+    <Input
+      label="Both addons"
+      placeholder="Placeholder"
+      helperText="Helper text"
+      size="md"
+      leadingAddon={<DropdownAddon label="https://" />}
+      trailingAddon={<DropdownAddon label=".com" />}
+      className="w-[500px]"
+    />
   ),
 };

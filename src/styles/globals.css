@@ -123,6 +123,41 @@
     0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 16px 24px -6px rgba(16, 25, 40, 0.08),
     0px 0px 0px 1px rgba(16, 25, 40, 0.05);
 
+  /* ── Spacing (17-step scale) ── */
+  --spacing-0_5: 2px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-40: 160px;
+  --spacing-48: 192px;
+  --spacing-64: 256px;
+
+  /* ── Corner Radius ── */
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-14: 14px;
+  --radius-16: 16px;
+  --radius-18: 18px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-28: 28px;
+  --radius-32: 32px;
+  --radius-full: 999999px;
+
   /* ── Blurs ── */
   --blur-xs: 2px;
   --blur-sm: 4px;
@@ -293,4 +328,36 @@
   --shadow-hard-md:
     0px 0px 3px -1px rgba(0, 0, 0, 0.2), 0px 16px 24px -6px rgba(0, 0, 0, 0.35),
     0px 0px 0px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Spinner Animations
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes spinner-dash {
+  0% {
+    stroke-dashoffset: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    stroke-dashoffset: 75%;
+    transform: rotate(180deg);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes juggle {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

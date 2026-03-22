@@ -10,12 +10,16 @@ import {
 } from "react";
 import { cn } from "../../utils/cn";
 
-export type TabsVariant = "line" | "pill";
+export type TabsVariant = "line" | "pill" | "segmented";
+export type TabsSize = "sm" | "md" | "lg";
+export type TabsOrientation = "horizontal" | "vertical";
 
 interface TabsContextValue {
   activeValue: string;
   onSelect: (value: string) => void;
   variant: TabsVariant;
+  size: TabsSize;
+  orientation: TabsOrientation;
   registerTab: (value: string, element: HTMLButtonElement | null) => void;
 }
 
@@ -29,6 +33,8 @@ export function useTabsContext() {
 
 export interface TabsProps {
   variant?: TabsVariant;
+  size?: TabsSize;
+  orientation?: TabsOrientation;
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
@@ -38,6 +44,8 @@ export interface TabsProps {
 
 export function Tabs({
   variant = "line",
+  size = "sm",
+  orientation = "horizontal",
   value,
   defaultValue = "",
   onValueChange,
@@ -64,6 +72,10 @@ export function Tabs({
     }
   }, []);
 
+  const isVertical = orientation === "vertical";
+  const arrowNext = isVertical ? "ArrowDown" : "ArrowRight";
+  const arrowPrev = isVertical ? "ArrowUp" : "ArrowLeft";
+
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     const tabs = Array.from(tabsRef.current.entries())
       .filter(([, el]) => !el.disabled)
@@ -75,11 +87,11 @@ export function Tabs({
     let nextIndex: number;
 
     switch (e.key) {
-      case "ArrowRight":
+      case arrowNext:
         e.preventDefault();
         nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
         break;
-      case "ArrowLeft":
+      case arrowPrev:
         e.preventDefault();
         nextIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
         break;
@@ -103,8 +115,8 @@ export function Tabs({
   };
 
   const contextValue = useMemo(
-    () => ({ activeValue, onSelect, variant, registerTab }),
-    [activeValue, onSelect, variant, registerTab]
+    () => ({ activeValue, onSelect, variant, size, orientation, registerTab }),
+    [activeValue, onSelect, variant, size, orientation, registerTab]
   );
 
   return (
@@ -112,10 +124,16 @@ export function Tabs({
       <div
         className={cn(
           "inline-flex",
-          variant === "line" ? "border-b border-grey-200" : "gap-1",
+          isVertical ? "flex-col" : "",
+          variant === "line" && !isVertical && "border-b border-grey-200",
+          variant === "line" && isVertical && "border-r border-grey-200",
+          variant === "pill" && (isVertical ? "gap-1" : "gap-1"),
+          variant === "segmented" &&
+            "border border-grey-100 rounded-lg p-0.5 gap-0.5 overflow-hidden",
           className
         )}
         role="tablist"
+        aria-orientation={orientation}
         onKeyDown={handleKeyDown}
       >
         {children}

@@ -1,0 +1,189 @@
+---
+title: Stepper
+description: Step indicators for multi-step processes
+---
+
+# Stepper
+
+Display progress through a multi-step process with visual step indicators.
+
+## Import
+
+```tsx
+import { Stepper, LinearStepper, SegmentedStepper } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic Stepper
+
+```tsx
+const steps = [
+  { title: "Account" },
+  { title: "Profile" },
+  { title: "Review" },
+];
+
+<Stepper steps={steps} activeStep={1} />
+```
+
+### With Descriptions
+
+```tsx
+const steps = [
+  { title: "Account", description: "Create your account" },
+  { title: "Profile", description: "Complete your profile" },
+  { title: "Review", description: "Review and submit" },
+];
+
+<Stepper steps={steps} activeStep={0} />
+```
+
+### Vertical Orientation
+
+```tsx
+<Stepper steps={steps} activeStep={1} orientation="vertical" />
+```
+
+### Number Indicators
+
+```tsx
+<Stepper steps={steps} activeStep={2} indicator="number" />
+```
+
+### Icon Indicators
+
+```tsx
+const steps = [
+  { title: "Account", icon: <UserIcon /> },
+  { title: "Settings", icon: <SettingsIcon /> },
+  { title: "Done", icon: <CheckIcon /> },
+];
+
+<Stepper steps={steps} activeStep={1} indicator="icon" />
+```
+
+### With Status Control
+
+```tsx
+const steps = [
+  { title: "Completed", status: "completed" },
+  { title: "In Progress", status: "active" },
+  { title: "Pending", status: "incomplete" },
+  { title: "Disabled", status: "disabled" },
+];
+
+<Stepper steps={steps} />
+```
+
+## LinearStepper
+
+A simple progress bar showing step completion.
+
+```tsx
+<LinearStepper currentStep={3} totalSteps={5} />
+```
+
+### Without Label
+
+```tsx
+<LinearStepper currentStep={2} totalSteps={4} showLabel={false} />
+```
+
+## SegmentedStepper
+
+A segmented progress bar with individual step segments.
+
+```tsx
+<SegmentedStepper currentStep={2} totalSteps={5} />
+```
+
+### Without Label
+
+```tsx
+<SegmentedStepper currentStep={3} totalSteps={6} showLabel={false} />
+```
+
+### In Context
+
+```tsx
+// Checkout flow
+<div className="space-y-8">
+  <Stepper
+    steps={[
+      { title: "Cart" },
+      { title: "Shipping" },
+      { title: "Payment" },
+      { title: "Confirm" },
+    ]}
+    activeStep={currentStep}
+  />
+
+  {/* Step content */}
+  {currentStep === 0 && <CartStep />}
+  {currentStep === 1 && <ShippingStep />}
+  {currentStep === 2 && <PaymentStep />}
+  {currentStep === 3 && <ConfirmStep />}
+</div>
+
+// File upload progress
+<LinearStepper currentStep={uploadedFiles} totalSteps={totalFiles} />
+
+// Onboarding progress
+<SegmentedStepper currentStep={completedSteps} totalSteps={5} />
+```
+
+## Props
+
+### Stepper
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `steps` | `StepItem[]` | — | Array of step items (required) |
+| `activeStep` | `number` | — | Current active step index (0-based) |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
+| `indicator` | `"dot" \| "number" \| "icon"` | `"dot"` | Indicator style |
+| `className` | `string` | — | Additional CSS classes |
+
+### StepItem
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `title` | `string` | Step title (required) |
+| `description` | `string` | Optional description |
+| `status` | `"completed" \| "active" \| "incomplete" \| "disabled"` | Step status |
+| `icon` | `ReactNode` | Custom icon for completed/active state |
+
+### LinearStepper
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `currentStep` | `number` | — | Current step (1-based, required) |
+| `totalSteps` | `number` | — | Total number of steps (required) |
+| `showLabel` | `boolean` | `true` | Show "X / Y complete" label |
+| `className` | `string` | — | Additional CSS classes |
+
+### SegmentedStepper
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `currentStep` | `number` | — | Current step (1-based, required) |
+| `totalSteps` | `number` | — | Total number of steps (required) |
+| `showLabel` | `boolean` | `true` | Show "X / Y complete" label |
+| `className` | `string` | — | Additional CSS classes |
+
+## Step Status
+
+| Status | Circle Style | Text Style |
+|--------|--------------|------------|
+| `completed` | Primary background, white check | Grey text |
+| `active` | Primary border, dot/number | Dark text |
+| `incomplete` | Grey border | Grey text |
+| `disabled` | Grey background | Light grey text |
+
+## Accessibility
+
+- Step indicators use semantic HTML
+- Active step is visually distinguished
+- Connector lines show progress relationships
+- Supports keyboard navigation

@@ -1,17 +1,17 @@
 ---
 title: Input
-description: Text input with label, helper text, and validation states
+description: Text input with label, helper text, icons, and addons
 ---
 
 # Input
 
-A flexible text input component with support for labels, helper text, icons, and validation states.
+A flexible text input component with support for labels, helper text, icons, addons, and validation states.
 
 ## Import
 
 ```tsx
 import { Input } from "@raydenui/ui";
-import type { InputProps, InputSize, InputState } from "@raydenui/ui";
+import type { InputProps, InputSize } from "@raydenui/ui";
 ```
 
 ## Usage
@@ -37,52 +37,138 @@ import type { InputProps, InputSize, InputState } from "@raydenui/ui";
 ### Sizes
 
 ```tsx
-<Input size="sm" placeholder="Small input" />
-<Input size="lg" placeholder="Large input" />
+<Input size="xs" placeholder="Extra small" />
+<Input size="sm" placeholder="Small (default)" />
+<Input size="md" placeholder="Medium" />
+<Input size="lg" placeholder="Large" />
 ```
 
-### States
+### Validation States
 
 ```tsx
 // Success
-<Input state="success" label="Email" helperText="Email is available" />
+<Input
+  label="Email"
+  success="Email is available"
+  defaultValue="user@example.com"
+/>
+
+// Success (boolean)
+<Input
+  label="Username"
+  success
+  defaultValue="john_doe"
+/>
 
 // Error
-<Input state="error" label="Email" helperText="Please enter a valid email" />
+<Input
+  label="Email"
+  error="Please enter a valid email"
+  defaultValue="invalid-email"
+/>
 
-// Readonly
-<Input state="readonly" label="ID" value="USR-12345" />
+// Error (boolean)
+<Input
+  label="Password"
+  error
+  defaultValue="123"
+/>
 ```
 
 ### With Icons
 
 ```tsx
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
-
+// Leading icon
 <Input
-  leftIcon={<MagnifyingGlassIcon />}
+  leadingIcon="search-md"
   placeholder="Search..."
 />
 
+// Trailing icon
 <Input
-  rightIcon={<XMarkIcon />}
-  onRightIconClick={() => clearInput()}
+  trailingIcon="x-close"
   placeholder="Clearable input"
+/>
+
+// Both icons
+<Input
+  leadingIcon="mail-01"
+  trailingIcon="check"
+  placeholder="Email"
+/>
+```
+
+### With Text Addon
+
+```tsx
+<Input addonRight=".com" placeholder="domain" />
+```
+
+### With Leading/Trailing Addons
+
+Leading and trailing addons render as separate bordered sections.
+
+```tsx
+// Leading addon (e.g., dropdown)
+<Input
+  leadingAddon={<span>https://</span>}
+  placeholder="example.com"
+/>
+
+// Trailing addon (e.g., button)
+<Input
+  trailingAddon={<Button size="sm">Search</Button>}
+  placeholder="Search..."
+/>
+
+// Both addons
+<Input
+  leadingAddon={<span>$</span>}
+  trailingAddon={<span>USD</span>}
+  placeholder="0.00"
+/>
+```
+
+### Read-only and Disabled
+
+```tsx
+// Read-only
+<Input label="ID" value="USR-12345" readOnly />
+
+// Disabled
+<Input label="Email" placeholder="Enter email" disabled />
+```
+
+### Complete Example
+
+```tsx
+<Input
+  label="Website URL"
+  leadingAddon={<span>https://</span>}
+  leadingIcon="globe-02"
+  placeholder="example.com"
+  trailingIcon="check"
+  helperText="Enter your website URL"
+  size="md"
 />
 ```
 
 ## Props
 
-| Prop               | Type                                                                    | Default     | Description                      |
-| ------------------ | ----------------------------------------------------------------------- | ----------- | -------------------------------- |
-| `label`            | `string`                                                                | —           | Input label                      |
-| `helperText`       | `string`                                                                | —           | Helper or error text below input |
-| `size`             | `"sm" \| "lg"`                                                          | `"sm"`      | Input size                       |
-| `state`            | `"default" \| "hover" \| "focus" \| "success" \| "error" \| "readonly"` | `"default"` | Visual state                     |
-| `leftIcon`         | `ReactNode`                                                             | —           | Icon on the left                 |
-| `rightIcon`        | `ReactNode`                                                             | —           | Icon on the right                |
-| `onRightIconClick` | `() => void`                                                            | —           | Right icon click handler         |
-| `className`        | `string`                                                                | —           | Additional CSS classes           |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"sm"` | Input size variant |
+| `label` | `string` | — | Label text above the input |
+| `helperText` | `string` | — | Helper text below the input |
+| `error` | `string \| boolean` | — | Error message or boolean |
+| `success` | `string \| boolean` | — | Success message or boolean |
+| `leadingIcon` | `ReactNode \| IconName` | — | Icon on the left |
+| `trailingIcon` | `ReactNode \| IconName` | — | Icon on the right |
+| `addonRight` | `string` | — | Text addon on the right |
+| `leadingAddon` | `ReactNode` | — | Separated section before input |
+| `trailingAddon` | `ReactNode` | — | Separated section after input |
+| `wrapperClassName` | `string` | — | Class for the wrapper div |
+| `className` | `string` | — | Class for the input element |
 
 The component also accepts all native `<input>` HTML attributes.
 
@@ -92,3 +178,4 @@ The component also accepts all native `<input>` HTML attributes.
 - Labels are properly associated via `htmlFor`
 - Helper text linked via `aria-describedby`
 - Error states announced via `aria-invalid`
+- Required state indicated via `aria-required`

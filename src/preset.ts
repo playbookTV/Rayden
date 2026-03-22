@@ -132,10 +132,11 @@ export const blurs = {
 } as const;
 
 /**
- * Spacing scale (4px base).
- * Keys are the multiplier; values are px.
+ * Spacing scale (17-step).
+ * Based on a 4pt system with micro (2–12px), base (16–32px), and macro (40–256px) ranges.
  */
 export const spacing = {
+  0.5: "2px",
   1: "4px",
   2: "8px",
   3: "12px",
@@ -149,9 +150,31 @@ export const spacing = {
   16: "64px",
   20: "80px",
   24: "96px",
-  32: "128px",
   40: "160px",
   48: "192px",
+  64: "256px",
+} as const;
+
+/**
+ * Corner radius tokens.
+ * Sharp (2–6px) for functional elements, Soft (8–16px) for interactive components,
+ * Bold (20–32px) for brand accents, Full for circular elements.
+ */
+export const radius = {
+  2: "2px",
+  4: "4px",
+  6: "6px",
+  8: "8px",
+  10: "10px",
+  12: "12px",
+  14: "14px",
+  16: "16px",
+  18: "18px",
+  20: "20px",
+  24: "24px",
+  28: "28px",
+  32: "32px",
+  full: "999999px",
 } as const;
 
 /**

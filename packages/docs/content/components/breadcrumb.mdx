@@ -1,6 +1,6 @@
 ---
 title: Breadcrumb
-description: Hierarchical page navigation
+description: Hierarchical page navigation with custom separators
 ---
 
 # Breadcrumb
@@ -10,7 +10,7 @@ Breadcrumbs show the user's current location within a hierarchical structure and
 ## Import
 
 ```tsx
-import { Breadcrumb, BreadcrumbItem } from "@raydenui/ui";
+import { Breadcrumb } from "@raydenui/ui";
 ```
 
 ## Usage
@@ -18,51 +18,97 @@ import { Breadcrumb, BreadcrumbItem } from "@raydenui/ui";
 ### Basic
 
 ```tsx
-<Breadcrumb>
-  <BreadcrumbItem href="/">Home</BreadcrumbItem>
-  <BreadcrumbItem href="/products">Products</BreadcrumbItem>
-  <BreadcrumbItem>Electronics</BreadcrumbItem>
-</Breadcrumb>
+<Breadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Products", href: "/products" },
+    { label: "Electronics", active: true },
+  ]}
+/>
 ```
 
 ### With Icons
 
 ```tsx
-import { HomeIcon } from "@heroicons/react/20/solid";
-
-<Breadcrumb>
-  <BreadcrumbItem href="/" icon={<HomeIcon />}>
-    Home
-  </BreadcrumbItem>
-  <BreadcrumbItem href="/dashboard">Dashboard</BreadcrumbItem>
-  <BreadcrumbItem>Settings</BreadcrumbItem>
-</Breadcrumb>
+<Breadcrumb
+  items={[
+    { label: "Home", href: "/", icon: "home-03" },
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Settings", active: true },
+  ]}
+/>
 ```
 
-### Custom Separator
+### Separator Styles
 
 ```tsx
-<Breadcrumb separator="/">
-  <BreadcrumbItem href="/">Home</BreadcrumbItem>
-  <BreadcrumbItem href="/docs">Docs</BreadcrumbItem>
-  <BreadcrumbItem>Components</BreadcrumbItem>
-</Breadcrumb>
+// Chevron (default)
+<Breadcrumb
+  separator="chevron"
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Docs", href: "/docs" },
+    { label: "Components", active: true },
+  ]}
+/>
+
+// Double chevron
+<Breadcrumb
+  separator="double-chevron"
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Docs", href: "/docs" },
+    { label: "Components", active: true },
+  ]}
+/>
+
+// Slash
+<Breadcrumb
+  separator="slash"
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Docs", href: "/docs" },
+    { label: "Components", active: true },
+  ]}
+/>
 ```
 
-### With Custom Link Component
+### With Borders
 
 ```tsx
-import Link from "next/link";
+<Breadcrumb
+  hasBorders
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Products", href: "/products" },
+    { label: "Electronics", active: true },
+  ]}
+/>
+```
 
-<Breadcrumb>
-  <BreadcrumbItem as={Link} href="/">
-    Home
-  </BreadcrumbItem>
-  <BreadcrumbItem as={Link} href="/products">
-    Products
-  </BreadcrumbItem>
-  <BreadcrumbItem>Current Page</BreadcrumbItem>
-</Breadcrumb>
+### With Disabled Items
+
+```tsx
+<Breadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Archive", disabled: true },
+    { label: "Current Page", active: true },
+  ]}
+/>
+```
+
+### Truncated Items
+
+```tsx
+<Breadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "...", disabled: true },
+    { label: "Components", href: "/components" },
+    { label: "Breadcrumb", active: true },
+  ]}
+/>
 ```
 
 ## Props
@@ -71,20 +117,24 @@ import Link from "next/link";
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `separator` | `ReactNode` | `"›"` | Separator between items |
+| `items` | `BreadcrumbItem[]` | — | Array of breadcrumb items (required) |
+| `separator` | `"chevron" \| "double-chevron" \| "slash"` | `"chevron"` | Separator style between items |
+| `hasBorders` | `boolean` | `false` | Show top and bottom borders |
 | `className` | `string` | — | Additional CSS classes |
 
 ### BreadcrumbItem
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `href` | `string` | — | Link URL (makes item a link) |
-| `icon` | `ReactNode` | — | Leading icon |
-| `as` | `ElementType` | `"a"` | Custom link component |
-| `className` | `string` | — | Additional CSS classes |
+| Prop | Type | Description |
+|------|------|-------------|
+| `label` | `string` | Display text (required) |
+| `href` | `string` | Link URL (makes item a link) |
+| `icon` | `ReactNode \| IconName` | Leading icon |
+| `disabled` | `boolean` | Disabled state (grey text, not clickable) |
+| `active` | `boolean` | Active/current page state (primary color) |
 
 ## Accessibility
 
 - Uses `<nav>` with `aria-label="Breadcrumb"`
 - Current page marked with `aria-current="page"`
 - Semantic list structure with `<ol>`
+- Separators marked with `aria-hidden`

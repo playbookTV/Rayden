@@ -1,11 +1,11 @@
 ---
 title: Tabs
-description: Tabbed navigation with line and pill variants
+description: Tabbed navigation with line, pill, and segmented variants
 ---
 
 # Tabs
 
-Tabs organize content into separate views with line and pill style variants.
+Tabs organize content into separate views with multiple style variants and orientations.
 
 ## Import
 
@@ -18,16 +18,10 @@ import { Tabs, Tab } from "@raydenui/ui";
 ### Basic
 
 ```tsx
-<Tabs>
-  <Tab label="Overview">
-    Overview content
-  </Tab>
-  <Tab label="Settings">
-    Settings content
-  </Tab>
-  <Tab label="Billing">
-    Billing content
-  </Tab>
+<Tabs defaultValue="overview">
+  <Tab value="overview" label="Overview" />
+  <Tab value="settings" label="Settings" />
+  <Tab value="billing" label="Billing" />
 </Tabs>
 ```
 
@@ -35,55 +29,81 @@ import { Tabs, Tab } from "@raydenui/ui";
 
 ```tsx
 // Line variant (default)
-<Tabs variant="line">
-  <Tab label="Tab 1">Content 1</Tab>
-  <Tab label="Tab 2">Content 2</Tab>
+<Tabs variant="line" defaultValue="tab1">
+  <Tab value="tab1" label="Tab 1" />
+  <Tab value="tab2" label="Tab 2" />
 </Tabs>
 
 // Pill variant
-<Tabs variant="pill">
-  <Tab label="Tab 1">Content 1</Tab>
-  <Tab label="Tab 2">Content 2</Tab>
+<Tabs variant="pill" defaultValue="tab1">
+  <Tab value="tab1" label="Tab 1" />
+  <Tab value="tab2" label="Tab 2" />
+</Tabs>
+
+// Segmented variant
+<Tabs variant="segmented" defaultValue="tab1">
+  <Tab value="tab1" label="Tab 1" />
+  <Tab value="tab2" label="Tab 2" />
+</Tabs>
+```
+
+### Sizes
+
+```tsx
+<Tabs size="sm" defaultValue="tab1">...</Tabs>
+<Tabs size="md" defaultValue="tab1">...</Tabs>
+<Tabs size="lg" defaultValue="tab1">...</Tabs>
+```
+
+### Vertical Orientation
+
+```tsx
+<Tabs orientation="vertical" defaultValue="account">
+  <Tab value="account" label="Account" />
+  <Tab value="security" label="Security" />
+  <Tab value="notifications" label="Notifications" />
+</Tabs>
+```
+
+### With Icons
+
+```tsx
+<Tabs defaultValue="home">
+  <Tab value="home" label="Home" icon="home-03" />
+  <Tab value="settings" label="Settings" icon="settings-02" />
+  <Tab value="users" label="Users" icon="users-01" />
 </Tabs>
 ```
 
 ### With Badges
 
 ```tsx
-<Tabs>
-  <Tab label="Inbox" badge={12}>
-    Inbox content
-  </Tab>
-  <Tab label="Drafts" badge={3}>
-    Drafts content
-  </Tab>
-  <Tab label="Sent">
-    Sent content
-  </Tab>
+<Tabs defaultValue="inbox">
+  <Tab value="inbox" label="Inbox" badge={12} />
+  <Tab value="drafts" label="Drafts" badge={3} />
+  <Tab value="sent" label="Sent" />
 </Tabs>
 ```
 
 ### Controlled
 
 ```tsx
-const [activeTab, setActiveTab] = useState(0);
+const [activeTab, setActiveTab] = useState("first");
 
-<Tabs activeTab={activeTab} onTabChange={setActiveTab}>
-  <Tab label="First">First tab content</Tab>
-  <Tab label="Second">Second tab content</Tab>
-  <Tab label="Third">Third tab content</Tab>
+<Tabs value={activeTab} onValueChange={setActiveTab}>
+  <Tab value="first" label="First" />
+  <Tab value="second" label="Second" />
+  <Tab value="third" label="Third" />
 </Tabs>
 ```
 
 ### Disabled Tab
 
 ```tsx
-<Tabs>
-  <Tab label="Active">Active content</Tab>
-  <Tab label="Disabled" disabled>
-    Disabled content
-  </Tab>
-  <Tab label="Another">Another content</Tab>
+<Tabs defaultValue="active">
+  <Tab value="active" label="Active" />
+  <Tab value="disabled" label="Disabled" disabled />
+  <Tab value="another" label="Another" />
 </Tabs>
 ```
 
@@ -93,22 +113,36 @@ const [activeTab, setActiveTab] = useState(0);
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"line" \| "pill"` | `"line"` | Visual style |
-| `activeTab` | `number` | `0` | Controlled active tab index |
-| `onTabChange` | `(index: number) => void` | — | Tab change handler |
+| `variant` | `"line" \| "pill" \| "segmented"` | `"line"` | Visual style |
+| `size` | `"sm" \| "md" \| "lg"` | `"sm"` | Tab size |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
+| `value` | `string` | — | Controlled active tab value |
+| `defaultValue` | `string` | `""` | Default active tab (uncontrolled) |
+| `onValueChange` | `(value: string) => void` | — | Tab change handler |
 | `className` | `string` | — | Additional CSS classes |
 
 ### Tab
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
+| `value` | `string` | — | Unique tab identifier (required) |
 | `label` | `string` | — | Tab label (required) |
+| `icon` | `ReactNode \| IconName` | — | Leading icon |
 | `badge` | `number \| string` | — | Badge content |
 | `disabled` | `boolean` | `false` | Disables the tab |
 | `className` | `string` | — | Additional CSS classes |
 
+## Keyboard Navigation
+
+- **Arrow Right/Down**: Move to next tab
+- **Arrow Left/Up**: Move to previous tab
+- **Home**: Move to first tab
+- **End**: Move to last tab
+
 ## Accessibility
 
-- Uses proper ARIA tabs pattern
+- Uses proper ARIA tabs pattern (`role="tablist"`)
 - Keyboard navigation with arrow keys
 - Focus management between tabs
+- Disabled tabs are skipped in navigation
+- `aria-orientation` set based on orientation prop

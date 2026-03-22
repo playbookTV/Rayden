@@ -1,0 +1,139 @@
+---
+title: Banner
+description: Alert banners for notifications and announcements
+---
+
+# Banner
+
+Display prominent notification banners for alerts, announcements, and status messages.
+
+## Import
+
+```tsx
+import { Banner } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Banner title="New feature available" />
+```
+
+### With Description
+
+```tsx
+<Banner
+  title="Update available"
+  description="A new version of the app is ready to install."
+/>
+```
+
+### Status Variants
+
+```tsx
+<Banner status="information" title="Information" description="This is an informational message." />
+<Banner status="success" title="Success" description="Your changes have been saved." />
+<Banner status="warning" title="Warning" description="This action cannot be undone." />
+<Banner status="error" title="Error" description="Something went wrong." />
+<Banner status="feature" title="New Feature" description="Check out our latest update." />
+<Banner status="opportunity" title="Opportunity" description="Limited time offer available." />
+```
+
+### Bold Emphasis
+
+Bold banners have a solid background with white text.
+
+```tsx
+<Banner
+  status="success"
+  emphasis="bold"
+  title="Payment successful"
+  description="Your order has been confirmed."
+/>
+```
+
+### Sizes
+
+```tsx
+<Banner size="sm" title="Small banner" />
+<Banner size="lg" title="Large banner" />
+```
+
+### With Action Button
+
+```tsx
+<Banner
+  title="New update available"
+  buttonLabel="Update now"
+  onButtonClick={() => console.log("Update clicked")}
+/>
+```
+
+### With Custom Icon
+
+```tsx
+<Banner
+  title="Custom notification"
+  icon="bell-01"
+/>
+```
+
+### Non-dismissible
+
+```tsx
+<Banner
+  title="Important notice"
+  dismissible={false}
+/>
+```
+
+### Complete Example
+
+```tsx
+<Banner
+  status="warning"
+  emphasis="bold"
+  size="lg"
+  title="Maintenance scheduled"
+  description="The system will be down for maintenance on Sunday."
+  icon="alert-triangle"
+  buttonLabel="Learn more"
+  onButtonClick={() => openModal()}
+  onDismiss={() => hideBanner()}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `status` | `"information" \| "success" \| "error" \| "warning" \| "feature" \| "opportunity"` | `"information"` | Color scheme |
+| `emphasis` | `"bold" \| "subtle"` | `"subtle"` | Bold uses solid background; subtle uses light tinted background |
+| `size` | `"sm" \| "lg"` | `"lg"` | Banner height: sm (40px), lg (48px) |
+| `title` | `string` | — | Headline text (required) |
+| `description` | `string` | — | Optional description text |
+| `icon` | `ReactNode \| IconName` | — | Optional leading icon |
+| `buttonLabel` | `string` | — | Action button label |
+| `onButtonClick` | `() => void` | — | Action button callback |
+| `dismissible` | `boolean` | `true` | Show close button |
+| `onDismiss` | `() => void` | — | Close button callback |
+| `className` | `string` | — | Additional CSS classes |
+
+## Status Colors
+
+| Status | Bold Background | Subtle Background |
+|--------|-----------------|-------------------|
+| `information` | Blue (#4a9fed) | Light blue (#f0f7ff) |
+| `success` | success-400 | success-50 |
+| `error` | error-400 | error-50 |
+| `warning` | warning-400 | warning-50 |
+| `feature` | grey-900 | grey-50 |
+| `opportunity` | Indigo (#475ccc) | Light indigo (#f7f8fd) |
+
+## Accessibility
+
+- Uses `role="alert"` for screen reader announcements
+- Close button has `aria-label="Dismiss banner"`
+- High contrast between text and background colors

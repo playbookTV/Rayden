@@ -1,0 +1,192 @@
+---
+title: Slider
+description: Drag sliders for numeric value selection
+---
+
+# Slider
+
+Interactive sliders for selecting numeric values or ranges by dragging.
+
+## Import
+
+```tsx
+import { Slider, RangeSlider } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic Slider
+
+```tsx
+<Slider />
+```
+
+### Controlled Slider
+
+```tsx
+const [value, setValue] = useState(50);
+
+<Slider value={value} onChange={setValue} />
+```
+
+### Sizes
+
+```tsx
+<Slider size="sm" />
+<Slider size="md" />
+<Slider size="lg" />
+```
+
+### With Label
+
+```tsx
+<Slider label="Volume" />
+```
+
+### With Metadata
+
+```tsx
+<Slider
+  label="Download Speed"
+  metadata="50 MB/s"
+/>
+
+<Slider
+  label="Connection"
+  metadata={["5G", "Low latency", "Stable"]}
+/>
+```
+
+### Hide Percentage
+
+```tsx
+<Slider showPercentage={false} />
+```
+
+### Custom Range
+
+```tsx
+<Slider min={0} max={1000} step={10} />
+```
+
+### Disabled
+
+```tsx
+<Slider disabled value={30} />
+```
+
+## RangeSlider
+
+A dual-handle slider for selecting a range of values.
+
+### Basic Range
+
+```tsx
+<RangeSlider />
+```
+
+### Controlled Range
+
+```tsx
+const [range, setRange] = useState<[number, number]>([25, 75]);
+
+<RangeSlider value={range} onChange={setRange} />
+```
+
+### With Label
+
+```tsx
+<RangeSlider label="Price Range" />
+```
+
+### Hide Labels
+
+```tsx
+<RangeSlider showLabels={false} />
+```
+
+### Custom Range
+
+```tsx
+<RangeSlider
+  min={0}
+  max={1000}
+  step={50}
+  label="Budget ($)"
+/>
+```
+
+### In Context
+
+```tsx
+// Price filter
+<div className="space-y-4">
+  <h3>Filter by Price</h3>
+  <RangeSlider
+    value={priceRange}
+    onChange={setPriceRange}
+    min={0}
+    max={500}
+    label="Price Range"
+  />
+  <p className="text-sm text-grey-500">
+    ${priceRange[0]} - ${priceRange[1]}
+  </p>
+</div>
+
+// Audio equalizer
+<div className="space-y-2">
+  <Slider label="Bass" value={bass} onChange={setBass} />
+  <Slider label="Mid" value={mid} onChange={setMid} />
+  <Slider label="Treble" value={treble} onChange={setTreble} />
+</div>
+```
+
+## Props
+
+### Slider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Current value (0-100) |
+| `onChange` | `(value: number) => void` | — | Change callback |
+| `size` | `"sm" \| "md" \| "lg"` | `"lg"` | Track/handle size |
+| `label` | `string` | — | Label above the slider |
+| `metadata` | `string \| string[]` | — | Text(s) below the slider |
+| `showPercentage` | `boolean` | `true` | Show percentage text |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step increment |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `className` | `string` | — | Additional CSS classes |
+
+### RangeSlider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `[number, number]` | — | Current range [low, high] |
+| `onChange` | `(value: [number, number]) => void` | — | Change callback |
+| `size` | `"sm" \| "md" \| "lg"` | `"lg"` | Track/handle size |
+| `label` | `string` | — | Label above the slider |
+| `showLabels` | `boolean` | `true` | Show min/max percentage labels |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step increment |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `className` | `string` | — | Additional CSS classes |
+
+## Size Reference
+
+| Size | Track Height | Handle Size | Border Width |
+|------|--------------|-------------|--------------|
+| `sm` | 4px | 14px | 2.33px |
+| `md` | 8px | 16px | 2.67px |
+| `lg` | 12px | 20px | 3.33px |
+
+## Accessibility
+
+- Uses `role="slider"` for screen readers
+- `aria-valuenow`, `aria-valuemin`, `aria-valuemax` set correctly
+- Keyboard accessible (Tab to focus)
+- Supports touch, mouse, and pen input
+- Disabled state reduces opacity and prevents interaction
