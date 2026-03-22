@@ -47,7 +47,7 @@
     "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_22e6810e48a2640",
+    "chromatic": "npx chromatic",
     "prepare": "husky",
     "docs": "pnpm --filter @raydenui/docs dev",
     "docs:build": "pnpm --filter @raydenui/docs build",
