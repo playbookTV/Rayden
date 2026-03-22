@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./public/MacBook Air - 17.png">
-  <source media="(prefers-color-scheme: light)" srcset="./public/MacBook Air - 17.png">
-  <img alt="Rayden UI - Build UI faster. A React UI system designed for humans and AI." src="./public/MacBook Air - 17.png" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://i.postimg.cc/6QsxLKk8/Mac-Book-Air-17.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://i.postimg.cc/6QsxLKk8/Mac-Book-Air-17.png">
+  <img alt="Rayden UI - Build UI faster. A React UI system designed for humans and AI." src="https://i.postimg.cc/6QsxLKk8/Mac-Book-Air-17.png" width="100%">
 </picture>
 
 # Rayden UI
@@ -13,7 +13,7 @@ Pixel-perfect components from the [Rayna UI](https://www.raynaui.com/) design sy
 [![npm downloads](https://img.shields.io/npm/dm/@raydenui/ui.svg)](https://www.npmjs.com/package/@raydenui/ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-rayden--docs.vercel.app-F56630)](https://rayden-docs.vercel.app)
-[![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://main--69b6d5d8527b4eddb882e0a7.chromatic.com)
+[![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://69b6d5e6cb6bbc778afec0ee-tcxvxzrkrt.chromatic.com/)
 
 ## Installation
 
