@@ -1,0 +1,199 @@
+{
+  "$schema": "../schema.json",
+  "name": "Tabs",
+  "figmaName": "Tabs",
+  "description": "Tab navigation component with line, pill, and segmented variants.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "children": ["tab-list"]
+    },
+    "tab-list": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": "{spacing.1}",
+      "children": ["tab"]
+    },
+    "tab": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "children": ["tab-icon", "tab-label", "tab-badge"]
+    },
+    "tab-icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Tab Icon",
+      "size": 16,
+      "fill": "{color.grey.500}"
+    },
+    "tab-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.500}"
+    },
+    "tab-badge": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Tab Badge"
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "tab.paddingHorizontal": "{spacing.2}",
+      "tab.paddingVertical": "{spacing.1}",
+      "tab-label.fontSize": "{typography.fontSize.xs}",
+      "tab-icon.size": 14
+    },
+    "MD": {
+      "tab.paddingHorizontal": "{spacing.3}",
+      "tab.paddingVertical": "{spacing.2}",
+      "tab-label.fontSize": "{typography.fontSize.sm}",
+      "tab-icon.size": 16
+    },
+    "LG": {
+      "tab.paddingHorizontal": "{spacing.4}",
+      "tab.paddingVertical": "{spacing.3}",
+      "tab-label.fontSize": "{typography.fontSize.base}",
+      "tab-icon.size": 20
+    }
+  },
+
+  "variants": {
+    "Line": {
+      "Inactive": {
+        "tab.fill": "transparent",
+        "tab-label.fill": "{color.grey.500}",
+        "tab-icon.fill": "{color.grey.400}"
+      },
+      "Active": {
+        "tab.fill": "transparent",
+        "tab.borderBottom": "2px solid {color.primary.500}",
+        "tab-label.fill": "{color.primary.600}",
+        "tab-icon.fill": "{color.primary.500}"
+      },
+      "Hover": {
+        "tab.fill": "{color.grey.50}",
+        "tab-label.fill": "{color.grey.700}",
+        "tab-icon.fill": "{color.grey.500}"
+      },
+      "Disabled": {
+        "tab.fill": "transparent",
+        "tab-label.fill": "{color.grey.300}",
+        "tab-icon.fill": "{color.grey.300}"
+      }
+    },
+    "Pill": {
+      "Inactive": {
+        "tab.fill": "transparent",
+        "tab.cornerRadius": "{radius.md}",
+        "tab-label.fill": "{color.grey.500}",
+        "tab-icon.fill": "{color.grey.400}"
+      },
+      "Active": {
+        "tab.fill": "{color.primary.50}",
+        "tab.cornerRadius": "{radius.md}",
+        "tab-label.fill": "{color.primary.600}",
+        "tab-icon.fill": "{color.primary.500}"
+      },
+      "Hover": {
+        "tab.fill": "{color.grey.100}",
+        "tab.cornerRadius": "{radius.md}",
+        "tab-label.fill": "{color.grey.700}",
+        "tab-icon.fill": "{color.grey.500}"
+      },
+      "Disabled": {
+        "tab.fill": "transparent",
+        "tab.cornerRadius": "{radius.md}",
+        "tab-label.fill": "{color.grey.300}",
+        "tab-icon.fill": "{color.grey.300}"
+      }
+    },
+    "Segmented": {
+      "Inactive": {
+        "tab.fill": "transparent",
+        "tab.cornerRadius": "{radius.md}",
+        "tab-label.fill": "{color.grey.500}",
+        "tab-icon.fill": "{color.grey.400}"
+      },
+      "Active": {
+        "tab.fill": "{color.grey.50}",
+        "tab.cornerRadius": "{radius.md}",
+        "tab.shadow": "{shadow.soft.sm}",
+        "tab-label.fill": "{color.grey.900}",
+        "tab-icon.fill": "{color.grey.700}"
+      },
+      "Hover": {
+        "tab.fill": "{color.grey.50}",
+        "tab.cornerRadius": "{radius.md}",
+        "tab-label.fill": "{color.grey.700}",
+        "tab-icon.fill": "{color.grey.500}"
+      },
+      "Disabled": {
+        "tab.fill": "transparent",
+        "tab.cornerRadius": "{radius.md}",
+        "tab-label.fill": "{color.grey.300}",
+        "tab-icon.fill": "{color.grey.300}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Variant",
+      "type": "VARIANT",
+      "values": ["Line", "Pill", "Segmented"],
+      "default": "Line"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Orientation",
+      "type": "VARIANT",
+      "values": ["Horizontal", "Vertical"],
+      "default": "Horizontal"
+    },
+    {
+      "name": "Tab State",
+      "type": "VARIANT",
+      "values": ["Inactive", "Active", "Hover", "Disabled"],
+      "default": "Inactive"
+    },
+    {
+      "name": "Show Icon",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Tab Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Show Badge",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Tab Label",
+      "type": "TEXT",
+      "default": "Tab"
+    }
+  ]
+}

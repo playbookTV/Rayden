@@ -1,0 +1,185 @@
+{
+  "$schema": "../schema.json",
+  "name": "Checkbox",
+  "figmaName": "Checkbox",
+  "description": "Checkbox form control for boolean selection with label support.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "children": ["checkbox-container", "label-container"]
+    },
+    "checkbox-container": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 20,
+      "height": 20,
+      "cornerRadius": "{radius.sm}",
+      "stroke": "{color.grey.300}",
+      "strokeWidth": 1.5,
+      "fill": "transparent",
+      "children": ["checkmark"]
+    },
+    "checkmark": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Checkmark Icon",
+      "size": 14,
+      "fill": "{color.grey.50}"
+    },
+    "label-container": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.0}",
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["label", "description"]
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}"
+    },
+    "description": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "checkbox-container.width": 16,
+      "checkbox-container.height": 16,
+      "checkmark.size": 10,
+      "label.fontSize": "{typography.fontSize.xs}"
+    },
+    "MD": {
+      "checkbox-container.width": 20,
+      "checkbox-container.height": 20,
+      "checkmark.size": 14,
+      "label.fontSize": "{typography.fontSize.sm}"
+    },
+    "LG": {
+      "checkbox-container.width": 24,
+      "checkbox-container.height": 24,
+      "checkmark.size": 16,
+      "label.fontSize": "{typography.fontSize.base}"
+    }
+  },
+
+  "variants": {
+    "Unchecked": {
+      "Default": {
+        "checkbox-container.stroke": "{color.grey.300}",
+        "checkbox-container.fill": "transparent",
+        "checkmark.visible": false
+      },
+      "Hover": {
+        "checkbox-container.stroke": "{color.primary.300}",
+        "checkbox-container.fill": "{color.primary.50}",
+        "checkmark.visible": false
+      },
+      "Focus": {
+        "checkbox-container.stroke": "{color.primary.200}",
+        "checkbox-container.strokeWidth": 2,
+        "checkbox-container.fill": "transparent",
+        "checkmark.visible": false
+      },
+      "Disabled": {
+        "checkbox-container.stroke": "{color.grey.200}",
+        "checkbox-container.fill": "{color.grey.100}",
+        "checkmark.visible": false,
+        "label.fill": "{color.grey.400}"
+      }
+    },
+    "Checked": {
+      "Default": {
+        "checkbox-container.stroke": "{color.primary.500}",
+        "checkbox-container.fill": "{color.primary.500}",
+        "checkmark.visible": true,
+        "checkmark.fill": "{color.grey.50}"
+      },
+      "Hover": {
+        "checkbox-container.stroke": "{color.primary.400}",
+        "checkbox-container.fill": "{color.primary.400}",
+        "checkmark.visible": true,
+        "checkmark.fill": "{color.grey.50}"
+      },
+      "Focus": {
+        "checkbox-container.stroke": "{color.primary.200}",
+        "checkbox-container.strokeWidth": 2,
+        "checkbox-container.fill": "{color.primary.500}",
+        "checkmark.visible": true,
+        "checkmark.fill": "{color.grey.50}"
+      },
+      "Disabled": {
+        "checkbox-container.stroke": "{color.grey.300}",
+        "checkbox-container.fill": "{color.grey.300}",
+        "checkmark.visible": true,
+        "checkmark.fill": "{color.grey.50}",
+        "label.fill": "{color.grey.400}"
+      }
+    },
+    "Indeterminate": {
+      "Default": {
+        "checkbox-container.stroke": "{color.primary.500}",
+        "checkbox-container.fill": "{color.primary.500}",
+        "checkmark.visible": true,
+        "checkmark.fill": "{color.grey.50}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Checked",
+      "type": "VARIANT",
+      "values": ["Unchecked", "Checked", "Indeterminate"],
+      "default": "Unchecked"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Hover", "Focus", "Disabled"],
+      "default": "Default"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Checkbox label"
+    },
+    {
+      "name": "Show Description",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Description",
+      "type": "TEXT",
+      "default": "Description text"
+    }
+  ]
+}

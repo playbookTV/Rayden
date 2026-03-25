@@ -15,13 +15,48 @@ Pixel-perfect components from the [Rayna UI](https://www.raynaui.com/) design sy
 [![Documentation](https://img.shields.io/badge/docs-rayden--docs.vercel.app-F56630)](https://rayden-docs.vercel.app)
 [![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://69b6d5e6cb6bbc778afec0ee-tcxvxzrkrt.chromatic.com/)
 
-## Installation
+## Quick Start
+
+The fastest way to get started is with `create-rayden-app`:
+
+```bash
+npx create-rayden-app my-app
+cd my-app
+npm install
+npm run dev
+```
+
+### Templates
+
+| Template | Description |
+|----------|-------------|
+| `blank` | Empty project, Rayden UI configured |
+| `minimal` | Demo of core components |
+| `landing` | Hero, features, pricing, CTA |
+| `dashboard` | Sidebar, tables, metrics |
+| `ecommerce` | Products, cart, checkout |
+| `blog` | Articles, categories, posts |
+
+### CLI Options
+
+```bash
+npx create-rayden-app my-app -f vite -t landing --ts --pm pnpm
+```
+
+| Flag | Options |
+|------|---------|
+| `-f, --framework` | `vite` (recommended), `nextjs` |
+| `-t, --template` | `blank`, `minimal`, `landing`, `dashboard`, `ecommerce`, `blog` |
+| `--ts` / `--js` | TypeScript (default) or JavaScript |
+| `--pm` | `npm`, `pnpm`, `yarn` |
+
+### Manual Installation
 
 ```bash
 npm install @raydenui/ui
 ```
 
-## Quick Start
+## Usage
 
 ```tsx
 import "@raydenui/ui/styles.css";
@@ -54,6 +89,7 @@ function App() {
 
 - [Documentation](https://rayden-docs.vercel.app) — Full component API and guides
 - [Storybook](https://main--69b6d5d8527b4eddb882e0a7.chromatic.com) — Interactive component explorer
+- [create-rayden-app](https://www.npmjs.com/package/create-rayden-app) — CLI scaffolding with 6 templates
 - [@raydenui/ai](https://www.npmjs.com/package/@raydenui/ai) — MCP server for AI-assisted development
 
 ## License

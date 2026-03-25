@@ -1,0 +1,179 @@
+{
+  "$schema": "../schema.json",
+  "name": "Chip",
+  "figmaName": "Chip",
+  "description": "Compact element for input and filter use cases with optional close button.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.1}",
+      "paddingHorizontal": "{spacing.2}",
+      "paddingVertical": "{spacing.1}",
+      "cornerRadius": "{radius.md}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "fill": "{color.grey.50}",
+      "children": ["leading-icon", "avatar", "label", "close-button"]
+    },
+    "leading-icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Leading Icon",
+      "size": 14,
+      "fill": "{color.grey.500}"
+    },
+    "avatar": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Avatar"
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}"
+    },
+    "close-button": {
+      "type": "FRAME",
+      "optional": true,
+      "defaultVisible": false,
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 16,
+      "height": 16,
+      "cornerRadius": "{radius.full}",
+      "children": ["close-icon"]
+    },
+    "close-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Close Icon",
+      "size": 12,
+      "fill": "{color.grey.500}"
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "root.paddingHorizontal": "{spacing.2}",
+      "root.paddingVertical": "{spacing.0}",
+      "root.height": "24px",
+      "label.fontSize": "{typography.fontSize.xs}",
+      "leading-icon.size": 12,
+      "close-button.width": 14,
+      "close-button.height": 14,
+      "close-icon.size": 10
+    },
+    "MD": {
+      "root.paddingHorizontal": "{spacing.2}",
+      "root.paddingVertical": "{spacing.1}",
+      "root.height": "28px",
+      "label.fontSize": "{typography.fontSize.sm}",
+      "leading-icon.size": 14,
+      "close-button.width": 16,
+      "close-button.height": 16,
+      "close-icon.size": 12
+    },
+    "LG": {
+      "root.paddingHorizontal": "{spacing.3}",
+      "root.paddingVertical": "{spacing.1}",
+      "root.height": "32px",
+      "label.fontSize": "{typography.fontSize.sm}",
+      "leading-icon.size": 16,
+      "close-button.width": 18,
+      "close-button.height": 18,
+      "close-icon.size": 14
+    }
+  },
+
+  "variants": {
+    "Input": {
+      "Default": {
+        "root.stroke": "{color.grey.200}",
+        "root.fill": "{color.grey.50}",
+        "label.fill": "{color.grey.700}"
+      },
+      "Focused": {
+        "root.stroke": "{color.primary.200}",
+        "root.strokeWidth": 2,
+        "root.fill": "{color.grey.50}",
+        "label.fill": "{color.grey.700}"
+      },
+      "Disabled": {
+        "root.stroke": "{color.grey.100}",
+        "root.fill": "{color.grey.50}",
+        "label.fill": "{color.grey.400}",
+        "root.opacity": 0.6
+      }
+    },
+    "Filter": {
+      "Default": {
+        "root.stroke": "{color.grey.200}",
+        "root.fill": "{color.grey.50}",
+        "label.fill": "{color.grey.700}"
+      },
+      "Selected": {
+        "root.stroke": "{color.primary.500}",
+        "root.fill": "{color.primary.50}",
+        "label.fill": "{color.primary.700}"
+      },
+      "Disabled": {
+        "root.stroke": "{color.grey.100}",
+        "root.fill": "{color.grey.50}",
+        "label.fill": "{color.grey.400}",
+        "root.opacity": 0.6
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Variant",
+      "type": "VARIANT",
+      "values": ["Input", "Filter"],
+      "default": "Input"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Focused", "Selected", "Disabled"],
+      "default": "Default"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Show Leading Icon",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Leading Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Show Avatar",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Close Button",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Chip"
+    }
+  ]
+}

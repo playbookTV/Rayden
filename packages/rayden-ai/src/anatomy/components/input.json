@@ -1,0 +1,263 @@
+{
+  "$schema": "../schema.json",
+  "name": "Input",
+  "figmaName": "Input",
+  "description": "Text input field with support for labels, helper text, icons, and addons.",
+
+  "anatomy": {
+    "wrapper": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.1}",
+      "children": ["label", "input-container", "helper-text"]
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "input-container": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "cornerRadius": "{radius.md}",
+      "stroke": "{color.grey.300}",
+      "strokeWidth": 1,
+      "fill": "{color.grey.50}",
+      "children": ["leading-addon", "leading-icon", "input-text", "trailing-icon", "trailing-addon"]
+    },
+    "leading-addon": {
+      "type": "FRAME",
+      "optional": true,
+      "defaultVisible": false,
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "paddingHorizontal": "{spacing.3}",
+      "fill": "{color.grey.100}",
+      "cornerRadius": "{radius.md}"
+    },
+    "leading-icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Leading Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "input-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.base}",
+      "fill": "{color.grey.900}",
+      "layoutGrow": 1
+    },
+    "trailing-icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Trailing Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "trailing-addon": {
+      "type": "FRAME",
+      "optional": true,
+      "defaultVisible": false,
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "paddingHorizontal": "{spacing.3}",
+      "fill": "{color.grey.100}",
+      "cornerRadius": "{radius.md}"
+    },
+    "helper-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "sizes": {
+    "XS": {
+      "input-container.height": "32px",
+      "input-container.paddingHorizontal": "{spacing.2}",
+      "input-container.paddingVertical": "{spacing.1}",
+      "input-text.fontSize": "{typography.fontSize.xs}",
+      "leading-icon.size": 14,
+      "trailing-icon.size": 14
+    },
+    "SM": {
+      "input-container.height": "36px",
+      "input-container.paddingHorizontal": "{spacing.3}",
+      "input-container.paddingVertical": "{spacing.2}",
+      "input-text.fontSize": "{typography.fontSize.sm}",
+      "leading-icon.size": 16,
+      "trailing-icon.size": 16
+    },
+    "MD": {
+      "input-container.height": "44px",
+      "input-container.paddingHorizontal": "{spacing.3}",
+      "input-container.paddingVertical": "{spacing.2}",
+      "input-text.fontSize": "{typography.fontSize.base}",
+      "leading-icon.size": 20,
+      "trailing-icon.size": 20
+    },
+    "LG": {
+      "input-container.height": "52px",
+      "input-container.paddingHorizontal": "{spacing.4}",
+      "input-container.paddingVertical": "{spacing.3}",
+      "input-text.fontSize": "{typography.fontSize.lg}",
+      "leading-icon.size": 24,
+      "trailing-icon.size": 24
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "input-container.stroke": "{color.grey.300}",
+        "input-container.fill": "{color.grey.50}",
+        "input-text.fill": "{color.grey.900}"
+      },
+      "Hover": {
+        "input-container.stroke": "{color.primary.100}",
+        "input-container.fill": "{color.grey.50}"
+      },
+      "Focus": {
+        "input-container.stroke": "{color.primary.200}",
+        "input-container.strokeWidth": 2,
+        "input-container.fill": "{color.grey.50}"
+      },
+      "Filled": {
+        "input-container.stroke": "{color.grey.300}",
+        "input-container.fill": "{color.grey.50}",
+        "input-text.fill": "{color.grey.900}"
+      },
+      "Disabled": {
+        "input-container.stroke": "{color.grey.200}",
+        "input-container.fill": "{color.grey.50}",
+        "input-text.fill": "{color.grey.400}",
+        "input-container.opacity": 0.6
+      },
+      "ReadOnly": {
+        "input-container.stroke": "{color.grey.200}",
+        "input-container.fill": "{color.grey.100}",
+        "input-text.fill": "{color.grey.700}"
+      }
+    },
+    "Error": {
+      "Default": {
+        "input-container.stroke": "{color.error.400}",
+        "input-container.fill": "{color.grey.50}",
+        "helper-text.fill": "{color.error.500}"
+      },
+      "Focus": {
+        "input-container.stroke": "{color.error.200}",
+        "input-container.strokeWidth": 2,
+        "input-container.fill": "{color.grey.50}",
+        "helper-text.fill": "{color.error.500}"
+      }
+    },
+    "Success": {
+      "Default": {
+        "input-container.stroke": "{color.success.400}",
+        "input-container.fill": "{color.grey.50}",
+        "helper-text.fill": "{color.success.500}"
+      },
+      "Focus": {
+        "input-container.stroke": "{color.success.200}",
+        "input-container.strokeWidth": 2,
+        "input-container.fill": "{color.grey.50}",
+        "helper-text.fill": "{color.success.500}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["XS", "SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Hover", "Focus", "Filled", "Disabled", "ReadOnly"],
+      "default": "Default"
+    },
+    {
+      "name": "Validation",
+      "type": "VARIANT",
+      "values": ["None", "Error", "Success"],
+      "default": "None"
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Label"
+    },
+    {
+      "name": "Placeholder",
+      "type": "TEXT",
+      "default": "Placeholder text"
+    },
+    {
+      "name": "Helper Text",
+      "type": "TEXT",
+      "default": ""
+    },
+    {
+      "name": "Show Helper Text",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Leading Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Show Leading Icon",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Trailing Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Show Trailing Icon",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Leading Addon",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Trailing Addon",
+      "type": "BOOLEAN",
+      "default": false
+    }
+  ]
+}

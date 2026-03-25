@@ -1,0 +1,186 @@
+{
+  "$schema": "../schema.json",
+  "name": "FileUpload",
+  "figmaName": "FileUpload",
+  "description": "Drag-and-drop file upload area with progress tracking.",
+  "$relationships": {
+    "depends_on": ["Button", "Icon", "ProgressBar"]
+  },
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.4}",
+      "children": ["dropzone", "file-list"]
+    },
+    "dropzone": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.6}",
+      "paddingVertical": "{spacing.8}",
+      "cornerRadius": "{radius.lg}",
+      "stroke": "{color.grey.300}",
+      "strokeWidth": 1,
+      "strokeDashPattern": [4, 4],
+      "fill": "{color.grey.50}",
+      "children": ["upload-icon", "upload-text", "upload-button"]
+    },
+    "upload-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Upload Icon",
+      "size": 40,
+      "fill": "{color.grey.400}"
+    },
+    "upload-text": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.1}",
+      "children": ["title", "subtitle"]
+    },
+    "title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "textAlignHorizontal": "CENTER"
+    },
+    "subtitle": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "textAlignHorizontal": "CENTER"
+    },
+    "upload-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Upload Button",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "file-list": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["file-item"]
+    },
+    "file-item": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "padding": "{spacing.3}",
+      "cornerRadius": "{radius.md}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "children": ["file-icon", "file-info", "file-actions"]
+    },
+    "file-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "File Icon",
+      "size": 32,
+      "fill": "{color.grey.400}"
+    },
+    "file-info": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.1}",
+      "layoutGrow": 1,
+      "children": ["file-name", "file-size", "progress-bar"]
+    },
+    "file-name": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}"
+    },
+    "file-size": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}"
+    },
+    "progress-bar": {
+      "type": "INSTANCE",
+      "swapProperty": "Progress",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "file-actions": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "children": ["remove-button"]
+    },
+    "remove-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Remove Button"
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Idle": {
+        "dropzone.stroke": "{color.grey.300}",
+        "dropzone.fill": "{color.grey.50}"
+      },
+      "Hover": {
+        "dropzone.stroke": "{color.primary.500}",
+        "dropzone.fill": "{color.primary.50}"
+      },
+      "Uploading": {
+        "file-list.visible": true,
+        "progress-bar.visible": true
+      },
+      "Complete": {
+        "file-list.visible": true,
+        "progress-bar.visible": false
+      },
+      "Error": {
+        "dropzone.stroke": "{color.error.500}",
+        "dropzone.fill": "{color.error.50}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Idle", "Hover", "Uploading", "Complete", "Error"],
+      "default": "Idle"
+    },
+    {
+      "name": "Show Button",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "Drop files here or click to upload"
+    },
+    {
+      "name": "Subtitle",
+      "type": "TEXT",
+      "default": "PNG, JPG up to 10MB"
+    },
+    {
+      "name": "Upload Button",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Primary/Solid/SM/Default"
+    }
+  ]
+}

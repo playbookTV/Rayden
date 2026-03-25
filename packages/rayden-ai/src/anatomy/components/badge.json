@@ -1,0 +1,265 @@
+{
+  "$schema": "../schema.json",
+  "name": "Badge",
+  "figmaName": "Badge",
+  "description": "Small status indicator with color variants for categorization and status display.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "primaryAxisSizingMode": "AUTO",
+      "counterAxisSizingMode": "AUTO",
+      "itemSpacing": "{spacing.1}",
+      "paddingHorizontal": "{spacing.2}",
+      "paddingVertical": "{spacing.1}",
+      "cornerRadius": "{radius.full}",
+      "children": ["dot", "label"]
+    },
+    "dot": {
+      "type": "ELLIPSE",
+      "optional": true,
+      "defaultVisible": false,
+      "size": 6
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.xs}",
+      "textAlignHorizontal": "CENTER",
+      "textAlignVertical": "CENTER"
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "root.paddingHorizontal": "{spacing.2}",
+      "root.paddingVertical": "{spacing.0}",
+      "label.fontSize": "{typography.fontSize.xs}",
+      "dot.size": 4
+    },
+    "MD": {
+      "root.paddingHorizontal": "{spacing.2}",
+      "root.paddingVertical": "{spacing.1}",
+      "label.fontSize": "{typography.fontSize.xs}",
+      "dot.size": 6
+    },
+    "LG": {
+      "root.paddingHorizontal": "{spacing.3}",
+      "root.paddingVertical": "{spacing.1}",
+      "label.fontSize": "{typography.fontSize.sm}",
+      "dot.size": 8
+    }
+  },
+
+  "variants": {
+    "Orange": {
+      "Filled": {
+        "Default": {
+          "root.fill": "{color.primary.400}",
+          "label.fill": "{color.grey.50}",
+          "dot.fill": "{color.grey.50}"
+        }
+      },
+      "Accent": {
+        "Default": {
+          "root.fill": "{color.primary.50}",
+          "label.fill": "{color.primary.700}",
+          "dot.fill": "{color.primary.500}"
+        }
+      },
+      "Outline": {
+        "Default": {
+          "root.fill": "transparent",
+          "root.stroke": "{color.primary.400}",
+          "root.strokeWidth": 1,
+          "label.fill": "{color.primary.600}",
+          "dot.fill": "{color.primary.500}"
+        }
+      }
+    },
+    "Blue": {
+      "Filled": {
+        "Default": {
+          "root.fill": "{color.secondary.400}",
+          "label.fill": "{color.grey.50}",
+          "dot.fill": "{color.grey.50}"
+        }
+      },
+      "Accent": {
+        "Default": {
+          "root.fill": "{color.secondary.50}",
+          "label.fill": "{color.secondary.700}",
+          "dot.fill": "{color.secondary.500}"
+        }
+      },
+      "Outline": {
+        "Default": {
+          "root.fill": "transparent",
+          "root.stroke": "{color.secondary.400}",
+          "root.strokeWidth": 1,
+          "label.fill": "{color.secondary.600}",
+          "dot.fill": "{color.secondary.500}"
+        }
+      }
+    },
+    "Success": {
+      "Filled": {
+        "Default": {
+          "root.fill": "{color.success.500}",
+          "label.fill": "{color.grey.50}",
+          "dot.fill": "{color.grey.50}"
+        }
+      },
+      "Accent": {
+        "Default": {
+          "root.fill": "{color.success.50}",
+          "label.fill": "{color.success.700}",
+          "dot.fill": "{color.success.500}"
+        }
+      },
+      "Outline": {
+        "Default": {
+          "root.fill": "transparent",
+          "root.stroke": "{color.success.500}",
+          "root.strokeWidth": 1,
+          "label.fill": "{color.success.600}",
+          "dot.fill": "{color.success.500}"
+        }
+      }
+    },
+    "Warning": {
+      "Filled": {
+        "Default": {
+          "root.fill": "{color.warning.400}",
+          "label.fill": "{color.grey.900}",
+          "dot.fill": "{color.grey.900}"
+        }
+      },
+      "Accent": {
+        "Default": {
+          "root.fill": "{color.warning.50}",
+          "label.fill": "{color.warning.700}",
+          "dot.fill": "{color.warning.500}"
+        }
+      },
+      "Outline": {
+        "Default": {
+          "root.fill": "transparent",
+          "root.stroke": "{color.warning.400}",
+          "root.strokeWidth": 1,
+          "label.fill": "{color.warning.600}",
+          "dot.fill": "{color.warning.500}"
+        }
+      }
+    },
+    "Error": {
+      "Filled": {
+        "Default": {
+          "root.fill": "{color.error.500}",
+          "label.fill": "{color.grey.50}",
+          "dot.fill": "{color.grey.50}"
+        }
+      },
+      "Accent": {
+        "Default": {
+          "root.fill": "{color.error.50}",
+          "label.fill": "{color.error.700}",
+          "dot.fill": "{color.error.500}"
+        }
+      },
+      "Outline": {
+        "Default": {
+          "root.fill": "transparent",
+          "root.stroke": "{color.error.500}",
+          "root.strokeWidth": 1,
+          "label.fill": "{color.error.600}",
+          "dot.fill": "{color.error.500}"
+        }
+      }
+    },
+    "Neutral": {
+      "Filled": {
+        "Default": {
+          "root.fill": "{color.grey.500}",
+          "label.fill": "{color.grey.50}",
+          "dot.fill": "{color.grey.50}"
+        }
+      },
+      "Accent": {
+        "Default": {
+          "root.fill": "{color.grey.100}",
+          "label.fill": "{color.grey.700}",
+          "dot.fill": "{color.grey.500}"
+        }
+      },
+      "Outline": {
+        "Default": {
+          "root.fill": "transparent",
+          "root.stroke": "{color.grey.300}",
+          "root.strokeWidth": 1,
+          "label.fill": "{color.grey.600}",
+          "dot.fill": "{color.grey.500}"
+        }
+      }
+    },
+    "Disabled": {
+      "Filled": {
+        "Default": {
+          "root.fill": "{color.grey.200}",
+          "label.fill": "{color.grey.400}",
+          "dot.fill": "{color.grey.400}"
+        }
+      },
+      "Accent": {
+        "Default": {
+          "root.fill": "{color.grey.100}",
+          "label.fill": "{color.grey.400}",
+          "dot.fill": "{color.grey.300}"
+        }
+      },
+      "Outline": {
+        "Default": {
+          "root.fill": "transparent",
+          "root.stroke": "{color.grey.200}",
+          "root.strokeWidth": 1,
+          "label.fill": "{color.grey.400}",
+          "dot.fill": "{color.grey.300}"
+        }
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Color",
+      "type": "VARIANT",
+      "values": ["Orange", "Blue", "Success", "Warning", "Error", "Neutral", "Disabled"],
+      "default": "Neutral"
+    },
+    {
+      "name": "Type",
+      "type": "VARIANT",
+      "values": ["Filled", "Accent", "Outline"],
+      "default": "Accent"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Show Dot",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Badge"
+    }
+  ]
+}

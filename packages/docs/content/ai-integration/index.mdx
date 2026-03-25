@@ -12,10 +12,12 @@ AI compatibility layer for Rayden UI — enables LLMs to reliably generate UI co
 `@raydenui/ai` provides:
 
 - **Component Manifests** — Machine-readable JSON schemas for every Rayden UI component
-- **Design Tokens** — Color, typography, spacing, and shadow tokens in JSON format
+- **Component Anatomy** — Figma layer structures for building components in Figma
+- **Design Tokens** — Color, typography, spacing, and shadow tokens in JSON and W3C DTCG formats
 - **Composition Rules** — Rules for correctly nesting compound components
 - **Layout Recipes** — Pre-defined patterns for common UI layouts
 - **MCP Server** — Model Context Protocol server for AI tool integration
+- **Skills** — Claude Code skills for specialized workflows
 
 ## Installation
 
@@ -239,7 +241,79 @@ const formRecipe = recipes.get("form-layout");
 // }
 ```
 
+## Component Anatomy (Figma)
+
+For building Rayden UI components in Figma using `use_figma`, use the anatomy module:
+
+```tsx
+import {
+  getAnatomy,
+  getAvailableComponents,
+  getComponentsByCategory,
+  registry
+} from "@raydenui/ai/anatomy";
+
+// Get Figma layer structure for a component
+const buttonAnatomy = getAnatomy("Button");
+// Returns: { name, figmaName, anatomy, variants, componentProperties }
+
+// List all components with anatomy specs
+const components = getAvailableComponents();
+
+// Get components by category
+const formComponents = getComponentsByCategory("Forms & Inputs");
+
+// Get all variant combinations for a component
+import { getVariantCombinations } from "@raydenui/ai/anatomy";
+const buttonVariants = getVariantCombinations("Button");
+// Returns: [{ Variant: "Primary", Appearance: "Solid", Size: "SM", State: "Default" }, ...]
+```
+
+## W3C DTCG Tokens
+
+Tokens are also available in W3C Design Tokens Community Group format:
+
+```tsx
+import dtcgTokens from "@raydenui/ai/tokens/dtcg";
+
+// Tokens follow the DTCG spec with $value, $type, $description
+console.log(dtcgTokens.color.primary["500"]);
+// { $value: "#EB5017", $type: "color", $description: "Primary brand color" }
+```
+
+## Skills (Claude Code)
+
+Skills provide specialized workflows for Claude Code. Include the skill in your context for guided assistance.
+
+### rayden-use Skill
+
+Build and maintain Rayden UI components directly in Figma:
+
+```tsx
+import skill from "@raydenui/ai/skills/rayden-use";
+
+// The skill provides instructions for:
+// - Building new components in Figma from anatomy specs
+// - Adding variants to existing components
+// - Syncing React components to Figma
+// - Composing screens using Rayden components
+// - Auditing files for design system compliance
+```
+
 ## Exports
+
+| Export | Description |
+|--------|-------------|
+| `@raydenui/ai` | Main entry with manifests, tokens, recipes, rules |
+| `@raydenui/ai/manifests` | Component prop definitions |
+| `@raydenui/ai/tokens` | Design tokens (JSON) |
+| `@raydenui/ai/tokens/dtcg` | W3C DTCG format tokens |
+| `@raydenui/ai/anatomy` | Figma layer structures |
+| `@raydenui/ai/recipes` | Layout patterns |
+| `@raydenui/ai/rules` | Composition rules |
+| `@raydenui/ai/mcp` | MCP server handlers |
+| `@raydenui/ai/RAYDEN_RULES.md` | Human-readable rules file |
+| `@raydenui/ai/skills/rayden-use` | Figma component building skill |
 
 ```tsx
 // Main export
@@ -248,6 +322,7 @@ import { manifests, tokens, recipes, rules } from "@raydenui/ai";
 // Individual exports
 import { getComponent, getAllComponents } from "@raydenui/ai/manifests";
 import { colors, shadows, typography } from "@raydenui/ai/tokens";
+import { getAnatomy, getAvailableComponents } from "@raydenui/ai/anatomy";
 import { getRecipe, getAllRecipes } from "@raydenui/ai/recipes";
 import { compositionRules, aliases } from "@raydenui/ai/rules";
 import { createServer } from "@raydenui/ai/mcp";
@@ -307,9 +382,14 @@ for (const component of manifests.getAll()) {
 ├── dist/
 │   ├── index.js          # Main exports
 │   ├── manifests/        # Component manifests
-│   ├── tokens/           # Design tokens
-│   ├── recipes/          # Layout recipes
+│   ├── anatomy/          # Figma layer structures
+│   ├── tokens/           # Design tokens (JSON + DTCG)
+│   ├── recipes/          # Layout patterns
+│   ├── rules/            # Composition rules
 │   └── mcp/              # MCP server
+├── skills/
+│   └── rayden-use/       # Figma component building skill
+├── references/           # Documentation for skills
 ├── RAYDEN_RULES.md       # Human-readable rules file
 └── package.json
 ```
@@ -325,6 +405,10 @@ The package exposes an `ai` field in package.json for discovery:
     "rulesFile": "RAYDEN_RULES.md",
     "manifestsDir": "dist/manifests",
     "tokensFile": "dist/tokens/tokens.json",
+    "tokensDTCGFile": "dist/tokens/tokens.dtcg.json",
+    "anatomyDir": "dist/anatomy",
+    "skillsDir": "skills",
+    "referencesDir": "references",
     "mcpServer": "dist/mcp/server.js"
   }
 }

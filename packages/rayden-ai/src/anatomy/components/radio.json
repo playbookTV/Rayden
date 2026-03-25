@@ -1,0 +1,177 @@
+{
+  "$schema": "../schema.json",
+  "name": "Radio",
+  "figmaName": "Radio",
+  "description": "Radio button form control for single selection from a group.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "children": ["radio-container", "label-container"]
+    },
+    "radio-container": {
+      "type": "ELLIPSE",
+      "width": 20,
+      "height": 20,
+      "stroke": "{color.grey.300}",
+      "strokeWidth": 1.5,
+      "fill": "transparent",
+      "children": ["radio-dot"]
+    },
+    "radio-dot": {
+      "type": "ELLIPSE",
+      "width": 8,
+      "height": 8,
+      "fill": "{color.grey.50}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "label-container": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.0}",
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["label", "description"]
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}"
+    },
+    "description": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "radio-container.width": 16,
+      "radio-container.height": 16,
+      "radio-dot.width": 6,
+      "radio-dot.height": 6,
+      "label.fontSize": "{typography.fontSize.xs}"
+    },
+    "MD": {
+      "radio-container.width": 20,
+      "radio-container.height": 20,
+      "radio-dot.width": 8,
+      "radio-dot.height": 8,
+      "label.fontSize": "{typography.fontSize.sm}"
+    },
+    "LG": {
+      "radio-container.width": 24,
+      "radio-container.height": 24,
+      "radio-dot.width": 10,
+      "radio-dot.height": 10,
+      "label.fontSize": "{typography.fontSize.base}"
+    }
+  },
+
+  "variants": {
+    "Unselected": {
+      "Default": {
+        "radio-container.stroke": "{color.grey.300}",
+        "radio-container.fill": "transparent",
+        "radio-dot.visible": false
+      },
+      "Hover": {
+        "radio-container.stroke": "{color.primary.300}",
+        "radio-container.fill": "{color.primary.50}",
+        "radio-dot.visible": false
+      },
+      "Focus": {
+        "radio-container.stroke": "{color.primary.200}",
+        "radio-container.strokeWidth": 2,
+        "radio-container.fill": "transparent",
+        "radio-dot.visible": false
+      },
+      "Disabled": {
+        "radio-container.stroke": "{color.grey.200}",
+        "radio-container.fill": "{color.grey.100}",
+        "radio-dot.visible": false,
+        "label.fill": "{color.grey.400}"
+      }
+    },
+    "Selected": {
+      "Default": {
+        "radio-container.stroke": "{color.primary.500}",
+        "radio-container.fill": "{color.primary.500}",
+        "radio-dot.visible": true,
+        "radio-dot.fill": "{color.grey.50}"
+      },
+      "Hover": {
+        "radio-container.stroke": "{color.primary.400}",
+        "radio-container.fill": "{color.primary.400}",
+        "radio-dot.visible": true,
+        "radio-dot.fill": "{color.grey.50}"
+      },
+      "Focus": {
+        "radio-container.stroke": "{color.primary.200}",
+        "radio-container.strokeWidth": 2,
+        "radio-container.fill": "{color.primary.500}",
+        "radio-dot.visible": true,
+        "radio-dot.fill": "{color.grey.50}"
+      },
+      "Disabled": {
+        "radio-container.stroke": "{color.grey.300}",
+        "radio-container.fill": "{color.grey.300}",
+        "radio-dot.visible": true,
+        "radio-dot.fill": "{color.grey.50}",
+        "label.fill": "{color.grey.400}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Selected",
+      "type": "VARIANT",
+      "values": ["Unselected", "Selected"],
+      "default": "Unselected"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Hover", "Focus", "Disabled"],
+      "default": "Default"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Radio label"
+    },
+    {
+      "name": "Show Description",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Description",
+      "type": "TEXT",
+      "default": "Description text"
+    }
+  ]
+}

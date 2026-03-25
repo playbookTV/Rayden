@@ -1,0 +1,143 @@
+{
+  "$schema": "../schema.json",
+  "name": "Spinner",
+  "figmaName": "Spinner",
+  "description": "Loading indicator with multiple style variants.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 24,
+      "height": 24,
+      "children": ["spinner-element"]
+    },
+    "spinner-element": {
+      "type": "ELLIPSE",
+      "width": 24,
+      "height": 24,
+      "stroke": "{color.primary.500}",
+      "strokeWidth": 2,
+      "fill": "transparent"
+    }
+  },
+
+  "sizes": {
+    "XS": {
+      "root.width": 12,
+      "root.height": 12,
+      "spinner-element.width": 12,
+      "spinner-element.height": 12,
+      "spinner-element.strokeWidth": 1.5
+    },
+    "SM": {
+      "root.width": 16,
+      "root.height": 16,
+      "spinner-element.width": 16,
+      "spinner-element.height": 16,
+      "spinner-element.strokeWidth": 2
+    },
+    "MD": {
+      "root.width": 24,
+      "root.height": 24,
+      "spinner-element.width": 24,
+      "spinner-element.height": 24,
+      "spinner-element.strokeWidth": 2
+    },
+    "LG": {
+      "root.width": 32,
+      "root.height": 32,
+      "spinner-element.width": 32,
+      "spinner-element.height": 32,
+      "spinner-element.strokeWidth": 3
+    },
+    "XL": {
+      "root.width": 40,
+      "root.height": 40,
+      "spinner-element.width": 40,
+      "spinner-element.height": 40,
+      "spinner-element.strokeWidth": 3
+    },
+    "2XL": {
+      "root.width": 48,
+      "root.height": 48,
+      "spinner-element.width": 48,
+      "spinner-element.height": 48,
+      "spinner-element.strokeWidth": 4
+    },
+    "3XL": {
+      "root.width": 64,
+      "root.height": 64,
+      "spinner-element.width": 64,
+      "spinner-element.height": 64,
+      "spinner-element.strokeWidth": 4
+    }
+  },
+
+  "variants": {
+    "Thin": {
+      "Default": {
+        "spinner-element.stroke": "{color.primary.500}",
+        "spinner-element.strokeWidth": 2
+      }
+    },
+    "Bold": {
+      "Default": {
+        "spinner-element.stroke": "{color.primary.500}",
+        "spinner-element.strokeWidth": 4
+      }
+    },
+    "DuoTone": {
+      "Default": {
+        "spinner-element.stroke": "{color.primary.500}",
+        "spinner-element.backgroundStroke": "{color.grey.200}"
+      }
+    },
+    "BufferingThin": {
+      "Default": {
+        "spinner-element.stroke": "{color.primary.500}",
+        "spinner-element.strokeWidth": 2
+      }
+    },
+    "BufferingBold": {
+      "Default": {
+        "spinner-element.stroke": "{color.primary.500}",
+        "spinner-element.strokeWidth": 4
+      }
+    },
+    "Dot": {
+      "Default": {
+        "spinner-element.type": "GROUP",
+        "spinner-element.fill": "{color.primary.500}"
+      }
+    },
+    "Juggling": {
+      "Default": {
+        "spinner-element.type": "GROUP",
+        "spinner-element.fill": "{color.primary.500}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Type",
+      "type": "VARIANT",
+      "values": ["Thin", "Bold", "DuoTone", "BufferingThin", "BufferingBold", "Dot", "Juggling"],
+      "default": "Thin"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["XS", "SM", "MD", "LG", "XL", "2XL", "3XL"],
+      "default": "MD"
+    },
+    {
+      "name": "Color",
+      "type": "VARIANT",
+      "values": ["Primary", "Grey", "White"],
+      "default": "Primary"
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "$schema": "../schema.json",
+  "name": "SidebarMenu",
+  "figmaName": "SidebarMenu",
+  "description": "Collapsible sidebar navigation with sections and nested items.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "width": 256,
+      "fill": "{color.white}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "RIGHT",
+      "strokeWidth": 1,
+      "children": ["header", "menu-sections", "footer"]
+    },
+    "header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.4}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "BOTTOM",
+      "strokeWidth": 1,
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["logo", "brand-name", "collapse-button"]
+    },
+    "logo": {
+      "type": "INSTANCE",
+      "swapProperty": "Logo",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "brand-name": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.lg}",
+      "fill": "{color.grey.900}",
+      "layoutGrow": 1
+    },
+    "collapse-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Collapse Button",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "menu-sections": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.4}",
+      "padding": "{spacing.4}",
+      "layoutGrow": 1,
+      "children": ["menu-section"]
+    },
+    "menu-section": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.1}",
+      "children": ["section-title", "menu-items"]
+    },
+    "section-title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "textTransform": "uppercase",
+      "letterSpacing": 0.5,
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "menu-items": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0.5}",
+      "children": ["menu-item"]
+    },
+    "menu-item": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "cornerRadius": "{radius.md}",
+      "children": ["item-icon", "item-label", "item-badge", "chevron"]
+    },
+    "item-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Item Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "item-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "layoutGrow": 1
+    },
+    "item-badge": {
+      "type": "INSTANCE",
+      "swapProperty": "Badge",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "chevron": {
+      "type": "INSTANCE",
+      "swapProperty": "Chevron Icon",
+      "size": 16,
+      "fill": "{color.grey.400}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "footer": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "padding": "{spacing.4}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "TOP",
+      "strokeWidth": 1,
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["user-profile"]
+    },
+    "user-profile": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "children": ["user-avatar", "user-info"]
+    },
+    "user-avatar": {
+      "type": "INSTANCE",
+      "swapProperty": "Avatar"
+    },
+    "user-info": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.0}",
+      "layoutGrow": 1,
+      "children": ["user-name", "user-email"]
+    },
+    "user-name": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}"
+    },
+    "user-email": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}"
+    }
+  },
+
+  "variants": {
+    "Light": {
+      "Default": {
+        "root.fill": "{color.white}",
+        "item-label.fill": "{color.grey.700}",
+        "item-icon.fill": "{color.grey.500}"
+      },
+      "Active": {
+        "menu-item.fill": "{color.primary.50}",
+        "item-label.fill": "{color.primary.600}",
+        "item-icon.fill": "{color.primary.600}"
+      },
+      "Hover": {
+        "menu-item.fill": "{color.grey.50}"
+      }
+    },
+    "Dark": {
+      "Default": {
+        "root.fill": "{color.grey.900}",
+        "root.stroke": "{color.grey.800}",
+        "item-label.fill": "{color.grey.300}",
+        "item-icon.fill": "{color.grey.400}"
+      },
+      "Active": {
+        "menu-item.fill": "{color.primary.900}",
+        "item-label.fill": "{color.primary.300}",
+        "item-icon.fill": "{color.primary.300}"
+      },
+      "Hover": {
+        "menu-item.fill": "{color.grey.800}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Theme",
+      "type": "VARIANT",
+      "values": ["Light", "Dark"],
+      "default": "Light"
+    },
+    {
+      "name": "Collapsed",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Header",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Show Footer",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Brand Name",
+      "type": "TEXT",
+      "default": "Brand"
+    }
+  ]
+}

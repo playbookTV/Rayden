@@ -1,0 +1,236 @@
+{
+  "$schema": "../schema.json",
+  "name": "MetricsCard",
+  "figmaName": "MetricsCard",
+  "description": "Dashboard card displaying key metrics with 6 layout variations.",
+  "$relationships": {
+    "depends_on": ["Icon", "Badge", "Chart"]
+  },
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.4}",
+      "padding": "{spacing.5}",
+      "cornerRadius": "{radius.xl}",
+      "fill": "{color.white}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "children": ["card-header", "card-body", "card-footer"]
+    },
+    "card-header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "children": ["header-icon", "header-content", "header-actions"]
+    },
+    "header-icon": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 40,
+      "height": 40,
+      "cornerRadius": "{radius.lg}",
+      "fill": "{color.primary.50}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["icon"]
+    },
+    "icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Metric Icon",
+      "size": 20,
+      "fill": "{color.primary.600}"
+    },
+    "header-content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.0}",
+      "layoutGrow": 1,
+      "children": ["metric-label", "metric-sublabel"]
+    },
+    "metric-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}"
+    },
+    "metric-sublabel": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.400}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "header-actions": {
+      "type": "INSTANCE",
+      "swapProperty": "Header Action",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "card-body": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.2}",
+      "children": ["metric-value-row", "metric-chart"]
+    },
+    "metric-value-row": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "MIN",
+      "itemSpacing": "{spacing.3}",
+      "children": ["metric-value", "change-indicator"]
+    },
+    "metric-value": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.bold}",
+      "fontSize": "{typography.fontSize.3xl}",
+      "fill": "{color.grey.900}"
+    },
+    "change-indicator": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.1}",
+      "paddingHorizontal": "{spacing.2}",
+      "paddingVertical": "{spacing.0.5}",
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.success.50}",
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["change-icon", "change-text"]
+    },
+    "change-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Change Icon",
+      "size": 14,
+      "fill": "{color.success.600}"
+    },
+    "change-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.success.700}"
+    },
+    "metric-chart": {
+      "type": "INSTANCE",
+      "swapProperty": "Mini Chart",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "card-footer": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["footer-text", "footer-link"]
+    },
+    "footer-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}"
+    },
+    "footer-link": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.primary.600}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "variants": {
+    "Layout1": {
+      "Default": {
+        "header-icon.visible": false,
+        "metric-chart.visible": false,
+        "card-footer.visible": false
+      }
+    },
+    "Layout2": {
+      "Default": {
+        "header-icon.visible": true,
+        "metric-chart.visible": false,
+        "card-footer.visible": false
+      }
+    },
+    "Layout3": {
+      "Default": {
+        "header-icon.visible": false,
+        "metric-chart.visible": true,
+        "card-footer.visible": false
+      }
+    },
+    "Layout4": {
+      "Default": {
+        "header-icon.visible": true,
+        "metric-chart.visible": true,
+        "card-footer.visible": false
+      }
+    },
+    "Layout5": {
+      "Default": {
+        "header-icon.visible": false,
+        "metric-chart.visible": false,
+        "card-footer.visible": true
+      }
+    },
+    "Layout6": {
+      "Default": {
+        "header-icon.visible": true,
+        "metric-chart.visible": true,
+        "card-footer.visible": true
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Layout",
+      "type": "VARIANT",
+      "values": ["Layout1", "Layout2", "Layout3", "Layout4", "Layout5", "Layout6"],
+      "default": "Layout1"
+    },
+    {
+      "name": "Trend",
+      "type": "VARIANT",
+      "values": ["Up", "Down", "Neutral"],
+      "default": "Up"
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Total Revenue"
+    },
+    {
+      "name": "Value",
+      "type": "TEXT",
+      "default": "$45,231.89"
+    },
+    {
+      "name": "Change",
+      "type": "TEXT",
+      "default": "+20.1%"
+    },
+    {
+      "name": "Show Change",
+      "type": "BOOLEAN",
+      "default": true
+    }
+  ]
+}

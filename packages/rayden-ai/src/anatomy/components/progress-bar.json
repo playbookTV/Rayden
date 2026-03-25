@@ -1,0 +1,158 @@
+{
+  "$schema": "../schema.json",
+  "name": "ProgressBar",
+  "figmaName": "ProgressBar",
+  "description": "Linear progress indicator with basic and segmented variants.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.2}",
+      "children": ["label-row", "track", "metadata-row"]
+    },
+    "label-row": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["label", "percentage"]
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "layoutGrow": 1
+    },
+    "percentage": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}"
+    },
+    "track": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "height": 8,
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.grey.200}",
+      "overflow": "hidden",
+      "children": ["fill"]
+    },
+    "fill": {
+      "type": "RECTANGLE",
+      "height": 8,
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.primary.500}"
+    },
+    "metadata-row": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["metadata-left", "metadata-right"]
+    },
+    "metadata-left": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "layoutGrow": 1
+    },
+    "metadata-right": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}"
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "track.height": 4,
+      "fill.height": 4
+    },
+    "MD": {
+      "track.height": 8,
+      "fill.height": 8
+    },
+    "LG": {
+      "track.height": 12,
+      "fill.height": 12
+    }
+  },
+
+  "variants": {
+    "Basic": {
+      "Default": {
+        "fill.fill": "{color.primary.500}"
+      },
+      "Success": {
+        "fill.fill": "{color.success.500}"
+      },
+      "Warning": {
+        "fill.fill": "{color.warning.500}"
+      },
+      "Error": {
+        "fill.fill": "{color.error.500}"
+      }
+    },
+    "Segmented": {
+      "Default": {
+        "track.itemSpacing": "{spacing.1}",
+        "fill.cornerRadius": "{radius.sm}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Type",
+      "type": "VARIANT",
+      "values": ["Basic", "Segmented"],
+      "default": "Basic"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Status",
+      "type": "VARIANT",
+      "values": ["Default", "Success", "Warning", "Error"],
+      "default": "Default"
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Progress"
+    },
+    {
+      "name": "Progress",
+      "type": "TEXT",
+      "default": "60"
+    },
+    {
+      "name": "Show Metadata",
+      "type": "BOOLEAN",
+      "default": false
+    }
+  ]
+}

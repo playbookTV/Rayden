@@ -1,0 +1,183 @@
+{
+  "$schema": "../schema.json",
+  "name": "Slider",
+  "figmaName": "Slider",
+  "description": "Draggable range slider with optional percentage display.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.2}",
+      "children": ["label-row", "track-container", "value-labels"]
+    },
+    "label-row": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "children": ["label", "value-display"]
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "layoutGrow": 1,
+      "optional": true,
+      "defaultVisible": false
+    },
+    "value-display": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "track-container": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "children": ["track"]
+    },
+    "track": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "height": 6,
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.grey.200}",
+      "layoutGrow": 1,
+      "children": ["track-fill", "thumb"]
+    },
+    "track-fill": {
+      "type": "RECTANGLE",
+      "height": 6,
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.primary.500}"
+    },
+    "thumb": {
+      "type": "ELLIPSE",
+      "width": 16,
+      "height": 16,
+      "fill": "{color.white}",
+      "stroke": "{color.primary.500}",
+      "strokeWidth": 2,
+      "shadow": "{shadow.soft.sm}"
+    },
+    "value-labels": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["min-label", "spacer", "max-label"]
+    },
+    "min-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}"
+    },
+    "spacer": {
+      "type": "FRAME",
+      "layoutGrow": 1
+    },
+    "max-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}"
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "track.height": 4,
+      "thumb.width": 12,
+      "thumb.height": 12
+    },
+    "MD": {
+      "track.height": 6,
+      "thumb.width": 16,
+      "thumb.height": 16
+    },
+    "LG": {
+      "track.height": 8,
+      "thumb.width": 20,
+      "thumb.height": 20
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "track-fill.fill": "{color.primary.500}",
+        "thumb.stroke": "{color.primary.500}"
+      },
+      "Hover": {
+        "track-fill.fill": "{color.primary.600}",
+        "thumb.stroke": "{color.primary.600}"
+      },
+      "Disabled": {
+        "track-fill.fill": "{color.grey.300}",
+        "thumb.stroke": "{color.grey.300}",
+        "thumb.fill": "{color.grey.100}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Hover", "Disabled"],
+      "default": "Default"
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Label"
+    },
+    {
+      "name": "Show Value",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Value",
+      "type": "TEXT",
+      "default": "50%"
+    },
+    {
+      "name": "Show Min/Max",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Min",
+      "type": "TEXT",
+      "default": "0"
+    },
+    {
+      "name": "Max",
+      "type": "TEXT",
+      "default": "100"
+    }
+  ]
+}

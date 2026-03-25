@@ -1,0 +1,87 @@
+{
+  "$schema": "../schema.json",
+  "name": "ButtonGroup",
+  "figmaName": "ButtonGroup",
+  "description": "Horizontal group of related buttons with connected styling.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "children": ["button-first", "button-middle", "button-last"]
+    },
+    "button-first": {
+      "type": "INSTANCE",
+      "swapProperty": "First Button",
+      "cornerRadius": "{radius.md} 0 0 {radius.md}"
+    },
+    "button-middle": {
+      "type": "INSTANCE",
+      "swapProperty": "Middle Button",
+      "optional": true,
+      "defaultVisible": false,
+      "cornerRadius": "0"
+    },
+    "button-last": {
+      "type": "INSTANCE",
+      "swapProperty": "Last Button",
+      "cornerRadius": "0 {radius.md} {radius.md} 0"
+    }
+  },
+
+  "variants": {
+    "Primary": {
+      "Default": {
+        "button-first.variant": "Primary",
+        "button-middle.variant": "Primary",
+        "button-last.variant": "Primary"
+      }
+    },
+    "Secondary": {
+      "Default": {
+        "button-first.variant": "Secondary",
+        "button-middle.variant": "Secondary",
+        "button-last.variant": "Secondary"
+      }
+    },
+    "Grey": {
+      "Default": {
+        "button-first.variant": "Grey",
+        "button-middle.variant": "Grey",
+        "button-last.variant": "Grey"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Variant",
+      "type": "VARIANT",
+      "values": ["Primary", "Secondary", "Grey"],
+      "default": "Primary"
+    },
+    {
+      "name": "Button Count",
+      "type": "VARIANT",
+      "values": ["2", "3", "4", "5"],
+      "default": "3"
+    },
+    {
+      "name": "First Button",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Primary/Solid/SM/Default"
+    },
+    {
+      "name": "Middle Button",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Primary/Solid/SM/Default"
+    },
+    {
+      "name": "Last Button",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Primary/Solid/SM/Default"
+    }
+  ]
+}

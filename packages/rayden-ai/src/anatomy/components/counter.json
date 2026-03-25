@@ -1,0 +1,145 @@
+{
+  "$schema": "../schema.json",
+  "name": "Counter",
+  "figmaName": "Counter",
+  "description": "Increment/decrement input with configurable shapes and sizes.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "stroke": "{color.grey.300}",
+      "strokeWidth": 1,
+      "cornerRadius": "{radius.md}",
+      "children": ["decrement-button", "value-display", "increment-button"]
+    },
+    "decrement-button": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "padding": "{spacing.2}",
+      "fill": "{color.grey.50}",
+      "children": ["decrement-icon"]
+    },
+    "decrement-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Decrement Icon",
+      "size": 16,
+      "fill": "{color.grey.600}"
+    },
+    "value-display": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.2}",
+      "fill": "{color.white}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "LEFT_RIGHT",
+      "strokeWidth": 1,
+      "children": ["value-text"]
+    },
+    "value-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}",
+      "textAlignHorizontal": "CENTER"
+    },
+    "increment-button": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "padding": "{spacing.2}",
+      "fill": "{color.grey.50}",
+      "children": ["increment-icon"]
+    },
+    "increment-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Increment Icon",
+      "size": 16,
+      "fill": "{color.grey.600}"
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "root.height": 32,
+      "decrement-button.padding": "{spacing.1.5}",
+      "value-display.paddingHorizontal": "{spacing.3}",
+      "increment-button.padding": "{spacing.1.5}",
+      "decrement-icon.size": 14,
+      "increment-icon.size": 14,
+      "value-text.fontSize": "{typography.fontSize.xs}"
+    },
+    "MD": {
+      "root.height": 40,
+      "decrement-button.padding": "{spacing.2}",
+      "value-display.paddingHorizontal": "{spacing.4}",
+      "increment-button.padding": "{spacing.2}",
+      "decrement-icon.size": 16,
+      "increment-icon.size": 16,
+      "value-text.fontSize": "{typography.fontSize.sm}"
+    },
+    "LG": {
+      "root.height": 48,
+      "decrement-button.padding": "{spacing.2.5}",
+      "value-display.paddingHorizontal": "{spacing.5}",
+      "increment-button.padding": "{spacing.2.5}",
+      "decrement-icon.size": 20,
+      "increment-icon.size": 20,
+      "value-text.fontSize": "{typography.fontSize.base}"
+    }
+  },
+
+  "variants": {
+    "Rounded": {
+      "Default": {
+        "root.cornerRadius": "{radius.md}"
+      }
+    },
+    "Block": {
+      "Default": {
+        "root.cornerRadius": "{radius.none}"
+      }
+    },
+    "Pill": {
+      "Default": {
+        "root.cornerRadius": "{radius.full}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Shape",
+      "type": "VARIANT",
+      "values": ["Rounded", "Block", "Pill"],
+      "default": "Rounded"
+    },
+    {
+      "name": "Value",
+      "type": "TEXT",
+      "default": "1"
+    },
+    {
+      "name": "Decrement Disabled",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Increment Disabled",
+      "type": "BOOLEAN",
+      "default": false
+    }
+  ]
+}

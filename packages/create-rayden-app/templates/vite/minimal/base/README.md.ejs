@@ -1,0 +1,34 @@
+# <%= projectName %>
+
+This project was bootstrapped with [create-rayden-app](https://github.com/raydenui/rayden).
+
+## Getting Started
+
+<% if (packageManager === 'npm') { %>
+```bash
+npm run dev
+```
+<% } else if (packageManager === 'yarn') { %>
+```bash
+yarn dev
+```
+<% } else { %>
+```bash
+pnpm dev
+```
+<% } %>
+
+Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+
+## Available Scripts
+
+- `dev` - Start the development server
+- `build` - Build for production
+- `preview` - Preview the production build
+- `lint` - Run ESLint
+
+## Learn More
+
+- [Rayden UI Documentation](https://raydenui.com/docs)
+- [Vite Documentation](https://vitejs.dev)
+- [Tailwind CSS Documentation](https://tailwindcss.com)

@@ -1,0 +1,199 @@
+{
+  "$schema": "../schema.json",
+  "name": "Avatar",
+  "figmaName": "Avatar",
+  "description": "User representation with image, initials, or icon. Supports status indicators.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "NONE",
+      "cornerRadius": "{radius.full}",
+      "children": ["container", "status-indicator"]
+    },
+    "container": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.primary.50}",
+      "children": ["image", "initials", "icon"]
+    },
+    "image": {
+      "type": "RECTANGLE",
+      "cornerRadius": "{radius.full}",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "initials": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fill": "{color.primary.600}",
+      "textAlignHorizontal": "CENTER",
+      "textAlignVertical": "CENTER",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Icon",
+      "fill": "{color.primary.600}"
+    },
+    "status-indicator": {
+      "type": "ELLIPSE",
+      "optional": true,
+      "defaultVisible": false,
+      "stroke": "{color.grey.50}",
+      "strokeWidth": 2
+    }
+  },
+
+  "sizes": {
+    "XS": {
+      "root.width": 24,
+      "root.height": 24,
+      "container.width": 24,
+      "container.height": 24,
+      "initials.fontSize": "10px",
+      "icon.size": 12,
+      "status-indicator.size": 6,
+      "status-indicator.strokeWidth": 1
+    },
+    "SM": {
+      "root.width": 32,
+      "root.height": 32,
+      "container.width": 32,
+      "container.height": 32,
+      "initials.fontSize": "14px",
+      "icon.size": 16,
+      "status-indicator.size": 8,
+      "status-indicator.strokeWidth": 2
+    },
+    "MD": {
+      "root.width": 40,
+      "root.height": 40,
+      "container.width": 40,
+      "container.height": 40,
+      "initials.fontSize": "16px",
+      "icon.size": 20,
+      "status-indicator.size": 10,
+      "status-indicator.strokeWidth": 2
+    },
+    "LG": {
+      "root.width": 48,
+      "root.height": 48,
+      "container.width": 48,
+      "container.height": 48,
+      "initials.fontSize": "18px",
+      "icon.size": 24,
+      "status-indicator.size": 12,
+      "status-indicator.strokeWidth": 2
+    },
+    "XL": {
+      "root.width": 56,
+      "root.height": 56,
+      "container.width": 56,
+      "container.height": 56,
+      "initials.fontSize": "20px",
+      "icon.size": 28,
+      "status-indicator.size": 14,
+      "status-indicator.strokeWidth": 2
+    },
+    "2XL": {
+      "root.width": 64,
+      "root.height": 64,
+      "container.width": 64,
+      "container.height": 64,
+      "initials.fontSize": "24px",
+      "icon.size": 32,
+      "status-indicator.size": 16,
+      "status-indicator.strokeWidth": 2
+    }
+  },
+
+  "variants": {
+    "Image": {
+      "Default": {
+        "image.visible": true,
+        "initials.visible": false,
+        "icon.visible": false
+      }
+    },
+    "Initials": {
+      "Default": {
+        "image.visible": false,
+        "initials.visible": true,
+        "icon.visible": false,
+        "container.fill": "{color.primary.50}",
+        "initials.fill": "{color.primary.600}"
+      }
+    },
+    "Icon": {
+      "Default": {
+        "image.visible": false,
+        "initials.visible": false,
+        "icon.visible": true,
+        "container.fill": "{color.primary.50}",
+        "icon.fill": "{color.primary.600}"
+      }
+    }
+  },
+
+  "statuses": {
+    "None": {
+      "status-indicator.visible": false
+    },
+    "Online": {
+      "status-indicator.visible": true,
+      "status-indicator.fill": "{color.success.500}"
+    },
+    "Offline": {
+      "status-indicator.visible": true,
+      "status-indicator.fill": "{color.grey.300}"
+    },
+    "Verified": {
+      "status-indicator.visible": true,
+      "status-indicator.fill": "{color.secondary.400}",
+      "status-indicator.icon": "check"
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Type",
+      "type": "VARIANT",
+      "values": ["Image", "Initials", "Icon"],
+      "default": "Image"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["XS", "SM", "MD", "LG", "XL", "2XL"],
+      "default": "MD"
+    },
+    {
+      "name": "Status",
+      "type": "VARIANT",
+      "values": ["None", "Online", "Offline", "Verified"],
+      "default": "None"
+    },
+    {
+      "name": "Initials",
+      "type": "TEXT",
+      "default": "AB"
+    },
+    {
+      "name": "Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/user"
+    },
+    {
+      "name": "Image URL",
+      "type": "TEXT",
+      "default": ""
+    }
+  ]
+}

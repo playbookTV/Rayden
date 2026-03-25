@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "rayden-ui/component/v1",
+  "title": "Rayden UI Component Anatomy Schema",
+  "description": "Defines the Figma layer structure and visual specifications for Rayden UI components",
+  "type": "object",
+  "required": ["name", "figmaName", "anatomy", "variants", "componentProperties"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Schema version identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Component name matching @raydenui/ui export"
+    },
+    "figmaName": {
+      "type": "string",
+      "description": "Component name as it appears in Figma"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the component's purpose"
+    },
+    "$relationships": {
+      "type": "object",
+      "description": "Dependencies on other components",
+      "properties": {
+        "depends_on": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components that must be loaded before this one"
+        }
+      }
+    },
+    "anatomy": {
+      "type": "object",
+      "description": "Layer structure defining component hierarchy",
+      "additionalProperties": {
+        "$ref": "#/definitions/anatomyNode"
+      }
+    },
+    "sizes": {
+      "type": "object",
+      "description": "Size-specific token overrides",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Token values for this size"
+      }
+    },
+    "variants": {
+      "type": "object",
+      "description": "Visual styles per variant and state",
+      "additionalProperties": {
+        "type": "object",
+        "description": "States within this variant",
+        "additionalProperties": {
+          "type": "object",
+          "description": "Token overrides for this variant+state"
+        }
+      }
+    },
+    "componentProperties": {
+      "type": "array",
+      "description": "Figma component properties exposed to users",
+      "items": {
+        "$ref": "#/definitions/componentProperty"
+      }
+    }
+  },
+  "definitions": {
+    "anatomyNode": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["FRAME", "TEXT", "INSTANCE", "RECTANGLE", "ELLIPSE", "GROUP"],
+          "description": "Figma node type"
+        },
+        "layoutMode": {
+          "type": "string",
+          "enum": ["HORIZONTAL", "VERTICAL", "NONE"],
+          "description": "Auto layout direction"
+        },
+        "layoutAlign": {
+          "type": "string",
+          "enum": ["MIN", "CENTER", "MAX", "STRETCH", "BASELINE"],
+          "description": "Cross-axis alignment"
+        },
+        "layoutWrap": {
+          "type": "string",
+          "enum": ["NO_WRAP", "WRAP"],
+          "description": "Whether children wrap"
+        },
+        "primaryAxisSizingMode": {
+          "type": "string",
+          "enum": ["FIXED", "AUTO"],
+          "description": "Main axis sizing"
+        },
+        "counterAxisSizingMode": {
+          "type": "string",
+          "enum": ["FIXED", "AUTO"],
+          "description": "Cross axis sizing"
+        },
+        "itemSpacing": {
+          "type": "string",
+          "description": "Gap between children (token reference)"
+        },
+        "paddingTop": { "type": "string" },
+        "paddingRight": { "type": "string" },
+        "paddingBottom": { "type": "string" },
+        "paddingLeft": { "type": "string" },
+        "paddingHorizontal": {
+          "type": "string",
+          "description": "Shorthand for paddingLeft + paddingRight"
+        },
+        "paddingVertical": {
+          "type": "string",
+          "description": "Shorthand for paddingTop + paddingBottom"
+        },
+        "cornerRadius": { "type": "string" },
+        "fill": { "type": "string" },
+        "stroke": { "type": "string" },
+        "strokeWidth": { "type": "number" },
+        "opacity": { "type": "number" },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "string" },
+        "fontWeight": { "type": "string" },
+        "lineHeight": { "type": "string" },
+        "letterSpacing": { "type": "string" },
+        "textAlignHorizontal": {
+          "type": "string",
+          "enum": ["LEFT", "CENTER", "RIGHT", "JUSTIFIED"]
+        },
+        "textAlignVertical": {
+          "type": "string",
+          "enum": ["TOP", "CENTER", "BOTTOM"]
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Whether this layer is optional"
+        },
+        "defaultVisible": {
+          "type": "boolean",
+          "description": "Whether visible by default when optional"
+        },
+        "swapProperty": {
+          "type": "string",
+          "description": "Name of instance swap property controlling this"
+        },
+        "size": {
+          "type": "number",
+          "description": "Fixed size for icon instances"
+        },
+        "children": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Child layer names in order"
+        }
+      },
+      "required": ["type"]
+    },
+    "componentProperty": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Property name shown in Figma"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["VARIANT", "INSTANCE_SWAP", "BOOLEAN", "TEXT"],
+          "description": "Figma component property type"
+        },
+        "values": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Allowed values for VARIANT type"
+        },
+        "default": {
+          "description": "Default value"
+        }
+      }
+    }
+  }
+}

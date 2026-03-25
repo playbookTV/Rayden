@@ -5,6 +5,7 @@ export default defineConfig({
     index: "src/index.ts",
     "manifests/index": "src/manifests/index.ts",
     "tokens/index": "src/tokens/index.ts",
+    "anatomy/index": "src/anatomy/index.ts",
     "recipes/index": "src/recipes/index.ts",
     "rules/index": "src/rules/index.ts",
     "mcp/index": "src/mcp/index.ts",

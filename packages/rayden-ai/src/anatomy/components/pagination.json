@@ -1,0 +1,136 @@
+{
+  "$schema": "../schema.json",
+  "name": "Pagination",
+  "figmaName": "Pagination",
+  "description": "Page navigation with numbered pages and prev/next controls.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.1}",
+      "children": ["prev-button", "page-numbers", "next-button"]
+    },
+    "prev-button": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "cornerRadius": "{radius.md}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "children": ["prev-icon", "prev-label"]
+    },
+    "prev-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Prev Icon",
+      "size": 16,
+      "fill": "{color.grey.600}"
+    },
+    "prev-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "page-numbers": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.1}",
+      "children": ["page-button"]
+    },
+    "page-button": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 36,
+      "height": 36,
+      "cornerRadius": "{radius.md}",
+      "children": ["page-number"]
+    },
+    "page-number": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "textAlignHorizontal": "CENTER",
+      "textAlignVertical": "CENTER"
+    },
+    "next-button": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "cornerRadius": "{radius.md}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "children": ["next-label", "next-icon"]
+    },
+    "next-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "next-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Next Icon",
+      "size": 16,
+      "fill": "{color.grey.600}"
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "page-button.fill": "transparent"
+      },
+      "Active": {
+        "page-button.fill": "{color.primary.500}",
+        "page-number.fill": "{color.white}"
+      },
+      "Hover": {
+        "page-button.fill": "{color.grey.100}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Show Labels",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Prev Label",
+      "type": "TEXT",
+      "default": "Previous"
+    },
+    {
+      "name": "Next Label",
+      "type": "TEXT",
+      "default": "Next"
+    },
+    {
+      "name": "Current Page",
+      "type": "TEXT",
+      "default": "1"
+    },
+    {
+      "name": "Total Pages",
+      "type": "TEXT",
+      "default": "10"
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "$schema": "../schema.json",
+  "name": "ActivityFeed",
+  "figmaName": "ActivityFeed",
+  "description": "Timeline display for events, notifications, and activity logs.",
+  "$relationships": {
+    "depends_on": ["Avatar", "Icon", "Badge"]
+  },
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "children": ["activity-item"]
+    },
+    "activity-item": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "MIN",
+      "itemSpacing": "{spacing.3}",
+      "children": ["timeline-indicator", "activity-content"]
+    },
+    "timeline-indicator": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "children": ["indicator-icon", "connector-line"]
+    },
+    "indicator-icon": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 32,
+      "height": 32,
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.grey.100}",
+      "children": ["icon"]
+    },
+    "icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Activity Icon",
+      "size": 16,
+      "fill": "{color.grey.500}"
+    },
+    "connector-line": {
+      "type": "RECTANGLE",
+      "width": 2,
+      "fill": "{color.grey.200}",
+      "layoutGrow": 1,
+      "optional": true,
+      "defaultVisible": true
+    },
+    "activity-content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.1}",
+      "paddingBottom": "{spacing.4}",
+      "layoutGrow": 1,
+      "children": ["content-header", "content-body", "content-metadata"]
+    },
+    "content-header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "children": ["actor-avatar", "actor-name", "action-text", "timestamp"]
+    },
+    "actor-avatar": {
+      "type": "INSTANCE",
+      "swapProperty": "Actor Avatar",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "actor-name": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}"
+    },
+    "action-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}"
+    },
+    "timestamp": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.400}"
+    },
+    "content-body": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "content-metadata": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["metadata-badge", "metadata-link"]
+    },
+    "metadata-badge": {
+      "type": "INSTANCE",
+      "swapProperty": "Metadata Badge",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "metadata-link": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.primary.600}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "indicator-icon.fill": "{color.grey.100}",
+        "icon.fill": "{color.grey.500}"
+      }
+    },
+    "Success": {
+      "Default": {
+        "indicator-icon.fill": "{color.success.100}",
+        "icon.fill": "{color.success.600}"
+      }
+    },
+    "Warning": {
+      "Default": {
+        "indicator-icon.fill": "{color.warning.100}",
+        "icon.fill": "{color.warning.600}"
+      }
+    },
+    "Error": {
+      "Default": {
+        "indicator-icon.fill": "{color.error.100}",
+        "icon.fill": "{color.error.600}"
+      }
+    },
+    "Info": {
+      "Default": {
+        "indicator-icon.fill": "{color.info.100}",
+        "icon.fill": "{color.info.600}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Type",
+      "type": "VARIANT",
+      "values": ["Default", "Success", "Warning", "Error", "Info"],
+      "default": "Default"
+    },
+    {
+      "name": "Show Avatar",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Body",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Connector",
+      "type": "BOOLEAN",
+      "default": true
+    }
+  ]
+}

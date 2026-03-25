@@ -1,0 +1,184 @@
+{
+  "$schema": "../schema.json",
+  "name": "ProgressCircle",
+  "figmaName": "ProgressCircle",
+  "description": "Circular progress indicator with default and segmented variants.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 64,
+      "height": 64,
+      "children": ["track-circle", "fill-circle", "center-content"]
+    },
+    "track-circle": {
+      "type": "ELLIPSE",
+      "width": 64,
+      "height": 64,
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 6,
+      "fill": "transparent"
+    },
+    "fill-circle": {
+      "type": "ARC",
+      "width": 64,
+      "height": 64,
+      "stroke": "{color.primary.500}",
+      "strokeWidth": 6,
+      "fill": "transparent",
+      "strokeCap": "ROUND"
+    },
+    "center-content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["value-text", "label-text"]
+    },
+    "value-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.bold}",
+      "fontSize": "{typography.fontSize.lg}",
+      "fill": "{color.grey.900}",
+      "textAlignHorizontal": "CENTER"
+    },
+    "label-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "textAlignHorizontal": "CENTER",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "sizes": {
+    "XS": {
+      "root.width": 32,
+      "root.height": 32,
+      "track-circle.width": 32,
+      "track-circle.height": 32,
+      "track-circle.strokeWidth": 3,
+      "fill-circle.width": 32,
+      "fill-circle.height": 32,
+      "fill-circle.strokeWidth": 3,
+      "value-text.fontSize": "{typography.fontSize.xs}",
+      "center-content.visible": false
+    },
+    "SM": {
+      "root.width": 48,
+      "root.height": 48,
+      "track-circle.width": 48,
+      "track-circle.height": 48,
+      "track-circle.strokeWidth": 4,
+      "fill-circle.width": 48,
+      "fill-circle.height": 48,
+      "fill-circle.strokeWidth": 4,
+      "value-text.fontSize": "{typography.fontSize.sm}"
+    },
+    "MD": {
+      "root.width": 64,
+      "root.height": 64,
+      "track-circle.width": 64,
+      "track-circle.height": 64,
+      "track-circle.strokeWidth": 6,
+      "fill-circle.width": 64,
+      "fill-circle.height": 64,
+      "fill-circle.strokeWidth": 6,
+      "value-text.fontSize": "{typography.fontSize.lg}"
+    },
+    "LG": {
+      "root.width": 96,
+      "root.height": 96,
+      "track-circle.width": 96,
+      "track-circle.height": 96,
+      "track-circle.strokeWidth": 8,
+      "fill-circle.width": 96,
+      "fill-circle.height": 96,
+      "fill-circle.strokeWidth": 8,
+      "value-text.fontSize": "{typography.fontSize.2xl}"
+    },
+    "XL": {
+      "root.width": 128,
+      "root.height": 128,
+      "track-circle.width": 128,
+      "track-circle.height": 128,
+      "track-circle.strokeWidth": 10,
+      "fill-circle.width": 128,
+      "fill-circle.height": 128,
+      "fill-circle.strokeWidth": 10,
+      "value-text.fontSize": "{typography.fontSize.3xl}"
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "fill-circle.stroke": "{color.primary.500}"
+      },
+      "Success": {
+        "fill-circle.stroke": "{color.success.500}"
+      },
+      "Warning": {
+        "fill-circle.stroke": "{color.warning.500}"
+      },
+      "Error": {
+        "fill-circle.stroke": "{color.error.500}"
+      }
+    },
+    "Segmented": {
+      "Default": {
+        "fill-circle.strokeCap": "NONE",
+        "fill-circle.strokeDashPattern": [8, 4]
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Variant",
+      "type": "VARIANT",
+      "values": ["Default", "Segmented"],
+      "default": "Default"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["XS", "SM", "MD", "LG", "XL"],
+      "default": "MD"
+    },
+    {
+      "name": "Status",
+      "type": "VARIANT",
+      "values": ["Default", "Success", "Warning", "Error"],
+      "default": "Default"
+    },
+    {
+      "name": "Progress",
+      "type": "TEXT",
+      "default": "60"
+    },
+    {
+      "name": "Show Value",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Complete"
+    }
+  ]
+}

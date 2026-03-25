@@ -1,0 +1,89 @@
+{
+  "$schema": "../schema.json",
+  "name": "Breadcrumb",
+  "figmaName": "Breadcrumb",
+  "description": "Navigation path indicator with configurable separators.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "cornerRadius": "{radius.md}",
+      "children": ["breadcrumb-item"]
+    },
+    "breadcrumb-item": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "children": ["item-icon", "item-link", "separator"]
+    },
+    "item-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Item Icon",
+      "size": 16,
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "item-link": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.500}"
+    },
+    "separator": {
+      "type": "INSTANCE",
+      "swapProperty": "Separator Icon",
+      "size": 16,
+      "fill": "{color.grey.400}"
+    }
+  },
+
+  "variants": {
+    "Chevron": {
+      "Default": {
+        "separator.icon": "chevron-right"
+      }
+    },
+    "DoubleChevron": {
+      "Default": {
+        "separator.icon": "chevrons-right"
+      }
+    },
+    "Slash": {
+      "Default": {
+        "separator.icon": "slash"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Separator",
+      "type": "VARIANT",
+      "values": ["Chevron", "DoubleChevron", "Slash"],
+      "default": "Chevron"
+    },
+    {
+      "name": "Has Borders",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Icons",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Items",
+      "type": "TEXT",
+      "default": "Home, Products, Category, Item"
+    }
+  ]
+}

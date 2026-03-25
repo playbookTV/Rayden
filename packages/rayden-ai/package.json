@@ -1,6 +1,6 @@
 {
   "name": "@raydenui/ai",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "AI compatibility layer for Rayden UI - enables LLMs to reliably generate UI without hallucination",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -22,6 +22,11 @@
       "import": "./dist/tokens/index.js",
       "require": "./dist/tokens/index.cjs"
     },
+    "./anatomy": {
+      "types": "./dist/anatomy/index.d.ts",
+      "import": "./dist/anatomy/index.js",
+      "require": "./dist/anatomy/index.cjs"
+    },
     "./recipes": {
       "types": "./dist/recipes/index.d.ts",
       "import": "./dist/recipes/index.js",
@@ -37,7 +42,14 @@
       "import": "./dist/mcp/index.js",
       "require": "./dist/mcp/index.cjs"
     },
-    "./RAYDEN_RULES.md": "./RAYDEN_RULES.md"
+    "./RAYDEN_RULES.md": "./RAYDEN_RULES.md",
+    "./tokens/dtcg": {
+      "types": "./dist/tokens/dtcg.d.ts",
+      "import": "./dist/tokens/tokens.dtcg.json",
+      "require": "./dist/tokens/tokens.dtcg.json"
+    },
+    "./skills/rayden-use": "./skills/rayden-use/SKILL.md",
+    "./references/*": "./references/*"
   },
   "bin": {
     "@raydenui/ai": "./dist/mcp/server.js",
@@ -45,13 +57,16 @@
   },
   "files": [
     "dist",
+    "skills",
+    "references",
     "RAYDEN_RULES.md",
     "README.md"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && tsx scripts/generate-dtcg.ts",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
+    "generate-dtcg": "tsx scripts/generate-dtcg.ts",
     "generate-manifests": "tsx scripts/generate-manifests.ts",
     "validate-manifests": "tsx scripts/validate-manifests.ts"
   },
@@ -83,8 +98,15 @@
     "tailwind",
     "typescript",
     "design-tokens",
+    "dtcg",
+    "w3c-design-tokens",
+    "figma-mcp",
+    "figma-plugin",
+    "design-to-code",
+    "code-to-design",
     "ui-kit",
     "component-manifest",
+    "component-anatomy",
     "ai-tools",
     "developer-tools"
   ],
@@ -107,6 +129,10 @@
     "rulesFile": "RAYDEN_RULES.md",
     "manifestsDir": "dist/manifests",
     "tokensFile": "dist/tokens/tokens.json",
+    "tokensDTCGFile": "dist/tokens/tokens.dtcg.json",
+    "anatomyDir": "dist/anatomy",
+    "skillsDir": "skills",
+    "referencesDir": "references",
     "mcpServer": "dist/mcp/server.js"
   },
   "repository": {

@@ -1,0 +1,210 @@
+{
+  "$schema": "../schema.json",
+  "name": "Select",
+  "figmaName": "Select",
+  "description": "Dropdown select component with support for icons, avatars, and status indicators.",
+  "$relationships": {
+    "depends_on": ["Icon", "Avatar"]
+  },
+
+  "anatomy": {
+    "wrapper": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.1}",
+      "children": ["label", "trigger", "helper-text"]
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "trigger": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "cornerRadius": "{radius.md}",
+      "stroke": "{color.grey.300}",
+      "strokeWidth": 1,
+      "fill": "{color.grey.50}",
+      "children": ["leading-content", "selected-value", "chevron"]
+    },
+    "leading-content": {
+      "type": "FRAME",
+      "optional": true,
+      "defaultVisible": false,
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "children": ["leading-icon", "leading-avatar"]
+    },
+    "leading-icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Leading Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "leading-avatar": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Leading Avatar"
+    },
+    "selected-value": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.base}",
+      "fill": "{color.grey.900}",
+      "layoutGrow": 1
+    },
+    "chevron": {
+      "type": "INSTANCE",
+      "swapProperty": "Chevron Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "helper-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "trigger.height": "36px",
+      "trigger.paddingHorizontal": "{spacing.3}",
+      "selected-value.fontSize": "{typography.fontSize.sm}",
+      "leading-icon.size": 16,
+      "chevron.size": 16
+    },
+    "MD": {
+      "trigger.height": "44px",
+      "trigger.paddingHorizontal": "{spacing.3}",
+      "selected-value.fontSize": "{typography.fontSize.base}",
+      "leading-icon.size": 20,
+      "chevron.size": 20
+    },
+    "LG": {
+      "trigger.height": "52px",
+      "trigger.paddingHorizontal": "{spacing.4}",
+      "selected-value.fontSize": "{typography.fontSize.lg}",
+      "leading-icon.size": 24,
+      "chevron.size": 24
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "trigger.stroke": "{color.grey.300}",
+        "trigger.fill": "{color.grey.50}",
+        "selected-value.fill": "{color.grey.900}"
+      },
+      "Hover": {
+        "trigger.stroke": "{color.primary.100}",
+        "trigger.fill": "{color.grey.50}"
+      },
+      "Focus": {
+        "trigger.stroke": "{color.primary.200}",
+        "trigger.strokeWidth": 2,
+        "trigger.fill": "{color.grey.50}"
+      },
+      "Open": {
+        "trigger.stroke": "{color.primary.200}",
+        "trigger.strokeWidth": 2,
+        "trigger.fill": "{color.grey.50}"
+      },
+      "Disabled": {
+        "trigger.stroke": "{color.grey.200}",
+        "trigger.fill": "{color.grey.50}",
+        "selected-value.fill": "{color.grey.400}",
+        "trigger.opacity": 0.6
+      }
+    },
+    "Error": {
+      "Default": {
+        "trigger.stroke": "{color.error.400}",
+        "trigger.fill": "{color.grey.50}",
+        "helper-text.fill": "{color.error.500}"
+      }
+    },
+    "Success": {
+      "Default": {
+        "trigger.stroke": "{color.success.400}",
+        "trigger.fill": "{color.grey.50}",
+        "helper-text.fill": "{color.success.500}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Hover", "Focus", "Open", "Disabled"],
+      "default": "Default"
+    },
+    {
+      "name": "Validation",
+      "type": "VARIANT",
+      "values": ["None", "Error", "Success"],
+      "default": "None"
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Label"
+    },
+    {
+      "name": "Placeholder",
+      "type": "TEXT",
+      "default": "Select option"
+    },
+    {
+      "name": "Selected Value",
+      "type": "TEXT",
+      "default": ""
+    },
+    {
+      "name": "Show Leading Icon",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Leading Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Show Leading Avatar",
+      "type": "BOOLEAN",
+      "default": false
+    }
+  ]
+}
