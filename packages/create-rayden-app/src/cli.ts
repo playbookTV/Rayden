@@ -31,7 +31,9 @@ function parseArgs(args: string[]): CliFlags {
       if (value === "vite" || value === "nextjs") flags.framework = value;
     } else if (arg === "--template" || arg === "-t") {
       const value = args[++i] as Template;
-      if (value === "minimal" || value === "dashboard") flags.template = value;
+      if (["blank", "minimal", "landing", "dashboard", "ecommerce", "blog"].includes(value)) {
+        flags.template = value;
+      }
     } else if (arg === "--typescript" || arg === "--ts") {
       flags.typescript = true;
     } else if (arg === "--javascript" || arg === "--js") {
@@ -127,12 +129,12 @@ export async function cli(): Promise<void> {
           message: "Which template would you like to use?",
           initialValue: flags.template,
           options: [
-            { value: "minimal", label: "Minimal", hint: "Clean starting point" },
-            {
-              value: "dashboard",
-              label: "Dashboard",
-              hint: "With sidebar, tables, metrics",
-            },
+            { value: "blank", label: "Blank", hint: "Empty project, Rayden UI ready" },
+            { value: "minimal", label: "Minimal", hint: "Demo components" },
+            { value: "landing", label: "Landing Page", hint: "Hero, features, CTA" },
+            { value: "dashboard", label: "Dashboard", hint: "Sidebar, tables, metrics" },
+            { value: "ecommerce", label: "E-commerce", hint: "Products, cart, checkout" },
+            { value: "blog", label: "Blog", hint: "Articles, posts, categories" },
           ],
         }),
 
@@ -218,7 +220,7 @@ ${pc.bold("Usage:")}
 ${pc.bold("Options:")}
   -h, --help              Show this help message
   -f, --framework <name>  Framework: vite or nextjs
-  -t, --template <name>   Template: minimal or dashboard
+  -t, --template <name>   Template: blank, minimal, landing, dashboard, ecommerce, or blog
   --ts, --typescript      Use TypeScript (default)
   --js, --javascript      Use JavaScript
   --pm <manager>          Package manager: npm, pnpm, or yarn

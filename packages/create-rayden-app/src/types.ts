@@ -1,5 +1,5 @@
 export type Framework = "vite" | "nextjs";
-export type Template = "minimal" | "dashboard";
+export type Template = "blank" | "minimal" | "landing" | "dashboard" | "ecommerce" | "blog";
 export type PackageManager = "npm" | "pnpm" | "yarn";
 
 export interface ProjectConfig {

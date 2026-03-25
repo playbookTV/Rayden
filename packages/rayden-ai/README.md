@@ -32,10 +32,12 @@ npm install -g @raydenui/ai
 
 This package provides an MCP (Model Context Protocol) server that gives AI assistants structured access to:
 
-- **Component definitions** — Props, variants, and usage examples for all 33 Rayden UI components
-- **Design tokens** — Colors, spacing, typography, shadows, and border radius values
-- **Layout recipes** — Pre-built patterns for common UI scenarios (dashboards, forms, marketing pages)
-- **Anti-hallucination rules** — Constraints that prevent AI from inventing non-existent props or patterns
+- **Component Manifests** — Props, variants, and usage examples for all 33 Rayden UI components
+- **Component Anatomy** — Figma layer structure for building components in Figma via `use_figma`
+- **Design Tokens** — Colors, spacing, typography, shadows in JSON and W3C DTCG format
+- **Layout Recipes** — Pre-built patterns for common UI scenarios (dashboards, forms, marketing pages)
+- **Anti-hallucination Rules** — Constraints that prevent AI from inventing non-existent props or patterns
+- **Skills** — Claude Code skills for specialized workflows (e.g., Figma component building)
 
 ## Available MCP Tools
 
@@ -95,12 +97,68 @@ const buttonManifest = getComponentManifest('Button');
 console.log(tokens.colors.primary);
 ```
 
+## Component Anatomy (Figma Integration)
+
+For building components in Figma via `use_figma`, use the anatomy module:
+
+```typescript
+import { getAnatomy, getAvailableComponents, registry } from '@raydenui/ai/anatomy';
+
+// Get Figma layer structure for a component
+const buttonAnatomy = getAnatomy('Button');
+
+// List all components with anatomy specs
+const components = getAvailableComponents();
+
+// Get components by category
+import { getComponentsByCategory } from '@raydenui/ai/anatomy';
+const formComponents = getComponentsByCategory('Forms & Inputs');
+```
+
+## Design Tokens
+
+Tokens are available in two formats:
+
+```typescript
+// Standard JSON format
+import { tokens } from '@raydenui/ai/tokens';
+
+// W3C Design Tokens Community Group (DTCG) format
+import dtcgTokens from '@raydenui/ai/tokens/dtcg';
+```
+
+## Skills (Claude Code)
+
+Include skills in your Claude Code context for specialized workflows:
+
+```typescript
+// Figma component building skill
+import skill from '@raydenui/ai/skills/rayden-use';
+```
+
+The `rayden-use` skill provides instructions for building Rayden UI components directly in Figma using the `use_figma` MCP tool.
+
 ## CLI Options
 
 ```bash
 npx @raydenui/ai          # Start MCP server (stdio transport)
 npx @raydenui/ai --help   # Show help message
 ```
+
+## Exports
+
+| Export | Description |
+|--------|-------------|
+| `@raydenui/ai` | Main entry with manifests, tokens, recipes, rules |
+| `@raydenui/ai/manifests` | Component prop definitions |
+| `@raydenui/ai/tokens` | Design tokens (JSON) |
+| `@raydenui/ai/tokens/dtcg` | W3C DTCG format tokens |
+| `@raydenui/ai/anatomy` | Figma layer structures |
+| `@raydenui/ai/recipes` | Layout patterns |
+| `@raydenui/ai/rules` | Composition rules |
+| `@raydenui/ai/mcp` | MCP server handlers |
+| `@raydenui/ai/RAYDEN_RULES.md` | Human-readable rules file |
+| `@raydenui/ai/skills/rayden-use` | Figma component building skill |
 
 ## Related Packages
 
