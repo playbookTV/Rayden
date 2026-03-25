@@ -1,0 +1,50 @@
+{
+  "$schema": "rayden-ui/anatomy-registry/v1",
+  "version": "0.1.0",
+  "description": "Registry of Rayden UI component anatomy specs for Figma generation",
+  "components": [
+    {
+      "name": "Button",
+      "file": "components/button.json",
+      "figmaName": "Button",
+      "variants": [
+        "Primary",
+        "Secondary",
+        "Grey",
+        "Destructive",
+        "Text",
+        "Success",
+        "Warning",
+        "Info"
+      ],
+      "appearances": ["Solid", "Outlined"],
+      "sizes": ["SM", "LG"],
+      "states": ["Default", "Hover", "Focus", "Disabled"]
+    },
+    {
+      "name": "Input",
+      "file": "components/input.json",
+      "figmaName": "Input",
+      "variants": null,
+      "sizes": ["XS", "SM", "MD", "LG"],
+      "states": ["Default", "Hover", "Focus", "Filled", "Disabled", "ReadOnly", "Error", "Success"]
+    },
+    {
+      "name": "Badge",
+      "file": "components/badge.json",
+      "figmaName": "Badge",
+      "variants": ["Orange", "Blue", "Success", "Warning", "Error", "Neutral", "Disabled"],
+      "types": ["Filled", "Accent", "Outline"],
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default"]
+    },
+    {
+      "name": "Avatar",
+      "file": "components/avatar.json",
+      "figmaName": "Avatar",
+      "variants": ["Image", "Initials", "Icon"],
+      "sizes": ["XS", "SM", "MD", "LG", "XL", "2XL"],
+      "statuses": ["None", "Online", "Offline", "Verified"]
+    }
+  ]
+}

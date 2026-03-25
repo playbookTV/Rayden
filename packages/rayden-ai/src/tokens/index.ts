@@ -3,6 +3,11 @@
  *
  * Complete design token export from Rayden UI including
  * colors, spacing, typography, shadows, and border radius.
+ *
+ * Architecture:
+ * - tokens.json is the ONLY hand-edited source file
+ * - tokens.dtcg.json is ALWAYS generated (via scripts/generate-dtcg.ts)
+ * - Use getDTCGTokens() for W3C DTCG format (Figma, Style Dictionary, etc.)
  */
 
 import tokensData from "./tokens.json";
@@ -64,6 +69,45 @@ export function getShadow(type: "soft" | "hard", size: string): string | null {
   const shadowData = shadowType[size];
   if (!shadowData || typeof shadowData !== "object" || !("value" in shadowData)) return null;
   return shadowData.value ?? null;
+}
+
+/**
+ * Get the path to the DTCG tokens file.
+ * Use this for tools that need the DTCG format (Figma, Style Dictionary, etc.)
+ *
+ * Note: The DTCG file is generated at build time from tokens.json.
+ * It lives in dist/tokens/tokens.dtcg.json after build.
+ */
+export function getDTCGTokensPath(): string {
+  // This returns a path relative to the package root
+  // Consumers should resolve this against the package location
+  return "dist/tokens/tokens.dtcg.json";
+}
+
+/**
+ * Resolve a DTCG token alias like "{color.primary.500}" to its value.
+ * This is useful for Figma agents that need to resolve token references.
+ */
+export function resolveDTCGAlias(
+  alias: string,
+  dtcgTokens: Record<string, unknown>
+): string | null {
+  // Remove curly braces: "{color.primary.500}" -> "color.primary.500"
+  const path = alias.replace(/^\{/, "").replace(/\}$/, "");
+  const parts = path.split(".");
+
+  let current: unknown = dtcgTokens;
+  for (const part of parts) {
+    if (typeof current !== "object" || current === null) return null;
+    current = (current as Record<string, unknown>)[part];
+  }
+
+  // If we found a token, return its $value
+  if (typeof current === "object" && current !== null && "$value" in current) {
+    return (current as { $value: unknown }).$value as string;
+  }
+
+  return null;
 }
 
 // Generate CSS custom properties for all tokens
