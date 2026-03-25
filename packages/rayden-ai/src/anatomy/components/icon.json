@@ -1,0 +1,93 @@
+{
+  "$schema": "../schema.json",
+  "name": "Icon",
+  "figmaName": "Icon",
+  "description": "Scalable icon component with 200+ icons in outline and solid variants.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 24,
+      "height": 24,
+      "children": ["icon-path"]
+    },
+    "icon-path": {
+      "type": "PATH",
+      "fill": "{color.grey.600}"
+    }
+  },
+
+  "sizes": {
+    "XS": {
+      "root.width": 12,
+      "root.height": 12
+    },
+    "SM": {
+      "root.width": 16,
+      "root.height": 16
+    },
+    "MD": {
+      "root.width": 20,
+      "root.height": 20
+    },
+    "LG": {
+      "root.width": 24,
+      "root.height": 24
+    },
+    "XL": {
+      "root.width": 32,
+      "root.height": 32
+    },
+    "2XL": {
+      "root.width": 40,
+      "root.height": 40
+    },
+    "3XL": {
+      "root.width": 48,
+      "root.height": 48
+    }
+  },
+
+  "variants": {
+    "Outline": {
+      "Default": {
+        "icon-path.strokeWidth": 1.5,
+        "icon-path.fill": "transparent",
+        "icon-path.stroke": "{color.grey.600}"
+      }
+    },
+    "Solid": {
+      "Default": {
+        "icon-path.fill": "{color.grey.600}",
+        "icon-path.stroke": "transparent"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["XS", "SM", "MD", "LG", "XL", "2XL", "3XL"],
+      "default": "LG"
+    },
+    {
+      "name": "Style",
+      "type": "VARIANT",
+      "values": ["Outline", "Solid"],
+      "default": "Outline"
+    },
+    {
+      "name": "Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Color",
+      "type": "TEXT",
+      "default": "{color.grey.600}"
+    }
+  ]
+}

@@ -7,6 +7,7 @@
       "name": "Button",
       "file": "components/button.json",
       "figmaName": "Button",
+      "category": "Forms & Inputs",
       "variants": [
         "Primary",
         "Secondary",
@@ -22,29 +23,326 @@
       "states": ["Default", "Hover", "Focus", "Disabled"]
     },
     {
+      "name": "ButtonGroup",
+      "file": "components/button-group.json",
+      "figmaName": "ButtonGroup",
+      "category": "Forms & Inputs",
+      "variants": ["Primary", "Secondary", "Grey"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
       "name": "Input",
       "file": "components/input.json",
       "figmaName": "Input",
+      "category": "Forms & Inputs",
       "variants": null,
       "sizes": ["XS", "SM", "MD", "LG"],
       "states": ["Default", "Hover", "Focus", "Filled", "Disabled", "ReadOnly", "Error", "Success"]
     },
     {
+      "name": "Select",
+      "file": "components/select.json",
+      "figmaName": "Select",
+      "category": "Forms & Inputs",
+      "variants": null,
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default", "Open", "Disabled"]
+    },
+    {
+      "name": "Checkbox",
+      "file": "components/checkbox.json",
+      "figmaName": "Checkbox",
+      "category": "Forms & Inputs",
+      "variants": null,
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Unchecked", "Checked", "Indeterminate", "Disabled"]
+    },
+    {
+      "name": "Radio",
+      "file": "components/radio.json",
+      "figmaName": "Radio",
+      "category": "Forms & Inputs",
+      "variants": null,
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Unselected", "Selected", "Disabled"]
+    },
+    {
+      "name": "Toggle",
+      "file": "components/toggle.json",
+      "figmaName": "Toggle",
+      "category": "Forms & Inputs",
+      "variants": null,
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Off", "On", "Disabled"]
+    },
+    {
+      "name": "Chip",
+      "file": "components/chip.json",
+      "figmaName": "Chip",
+      "category": "Forms & Inputs",
+      "variants": ["Input", "Filter"],
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default", "Focused", "Disabled"]
+    },
+    {
+      "name": "FileUpload",
+      "file": "components/file-upload.json",
+      "figmaName": "FileUpload",
+      "category": "Forms & Inputs",
+      "variants": null,
+      "sizes": null,
+      "states": ["Idle", "Hover", "Uploading", "Complete", "Error"]
+    },
+    {
+      "name": "Counter",
+      "file": "components/counter.json",
+      "figmaName": "Counter",
+      "category": "Forms & Inputs",
+      "variants": ["Rounded", "Block", "Pill"],
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default"]
+    },
+    {
+      "name": "Slider",
+      "file": "components/slider.json",
+      "figmaName": "Slider",
+      "category": "Forms & Inputs",
+      "variants": null,
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default", "Hover", "Disabled"]
+    },
+    {
+      "name": "DatePicker",
+      "file": "components/date-picker.json",
+      "figmaName": "DatePicker",
+      "category": "Forms & Inputs",
+      "variants": ["Single", "Range", "Year"],
+      "sizes": null,
+      "states": ["Closed", "Open"]
+    },
+    {
+      "name": "Tabs",
+      "file": "components/tabs.json",
+      "figmaName": "Tabs",
+      "category": "Navigation",
+      "variants": ["Line", "Pill", "Segmented"],
+      "orientations": ["Horizontal", "Vertical"],
+      "sizes": null,
+      "states": ["Default", "Active", "Hover", "Disabled"]
+    },
+    {
+      "name": "Breadcrumb",
+      "file": "components/breadcrumb.json",
+      "figmaName": "Breadcrumb",
+      "category": "Navigation",
+      "variants": ["Chevron", "DoubleChevron", "Slash"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
+      "name": "Pagination",
+      "file": "components/pagination.json",
+      "figmaName": "Pagination",
+      "category": "Navigation",
+      "variants": null,
+      "sizes": null,
+      "states": ["Default", "Active", "Hover"]
+    },
+    {
+      "name": "SidebarMenu",
+      "file": "components/sidebar-menu.json",
+      "figmaName": "SidebarMenu",
+      "category": "Navigation",
+      "variants": ["Light", "Dark"],
+      "sizes": null,
+      "states": ["Default", "Active", "Hover"]
+    },
+    {
+      "name": "DropdownMenu",
+      "file": "components/dropdown-menu.json",
+      "figmaName": "DropdownMenu",
+      "category": "Navigation",
+      "variants": ["Default", "Destructive"],
+      "sizes": null,
+      "states": ["Default", "Hover", "Active", "Disabled"]
+    },
+    {
+      "name": "Stepper",
+      "file": "components/stepper.json",
+      "figmaName": "Stepper",
+      "category": "Navigation",
+      "variants": ["Dot", "Number", "Icon"],
+      "orientations": ["Horizontal", "Vertical"],
+      "sizes": null,
+      "states": ["Incomplete", "Current", "Complete"]
+    },
+    {
+      "name": "Table",
+      "file": "components/table.json",
+      "figmaName": "Table",
+      "category": "Data Display",
+      "variants": ["Default", "Striped"],
+      "sizes": null,
+      "states": ["Default", "Hover", "Selected"]
+    },
+    {
+      "name": "Avatar",
+      "file": "components/avatar.json",
+      "figmaName": "Avatar",
+      "category": "Data Display",
+      "variants": ["Image", "Initials", "Icon"],
+      "sizes": ["XS", "SM", "MD", "LG", "XL", "2XL"],
+      "statuses": ["None", "Online", "Offline", "Verified"]
+    },
+    {
+      "name": "AvatarGroup",
+      "file": "components/avatar-group.json",
+      "figmaName": "AvatarGroup",
+      "category": "Data Display",
+      "variants": null,
+      "sizes": ["XS", "SM", "MD", "LG"],
+      "states": ["Default"]
+    },
+    {
+      "name": "ActivityFeed",
+      "file": "components/activity-feed.json",
+      "figmaName": "ActivityFeed",
+      "category": "Data Display",
+      "variants": ["Default", "Success", "Warning", "Error", "Info"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
+      "name": "MetricsCard",
+      "file": "components/metrics-card.json",
+      "figmaName": "MetricsCard",
+      "category": "Data Display",
+      "variants": ["Layout1", "Layout2", "Layout3", "Layout4", "Layout5", "Layout6"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
+      "name": "Icon",
+      "file": "components/icon.json",
+      "figmaName": "Icon",
+      "category": "Data Display",
+      "variants": ["Outline", "Solid"],
+      "sizes": ["XS", "SM", "MD", "LG", "XL", "2XL", "3XL"],
+      "states": ["Default"]
+    },
+    {
+      "name": "EmptyState",
+      "file": "components/empty-state.json",
+      "figmaName": "EmptyState",
+      "category": "Data Display",
+      "variants": ["Default", "Compact", "NoAction"],
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default"]
+    },
+    {
+      "name": "Chart",
+      "file": "components/chart.json",
+      "figmaName": "RaydenChart",
+      "category": "Data Display",
+      "variants": ["Line", "Bar", "Pie", "Doughnut", "Radar", "Scatter", "Bubble", "PolarArea"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
+      "name": "Alert",
+      "file": "components/alert.json",
+      "figmaName": "Alert",
+      "category": "Feedback",
+      "variants": ["Toast", "Banner"],
+      "types": ["Information", "Success", "Warning", "Error"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
       "name": "Badge",
       "file": "components/badge.json",
       "figmaName": "Badge",
+      "category": "Feedback",
       "variants": ["Orange", "Blue", "Success", "Warning", "Error", "Neutral", "Disabled"],
       "types": ["Filled", "Accent", "Outline"],
       "sizes": ["SM", "MD", "LG"],
       "states": ["Default"]
     },
     {
-      "name": "Avatar",
-      "file": "components/avatar.json",
-      "figmaName": "Avatar",
-      "variants": ["Image", "Initials", "Icon"],
-      "sizes": ["XS", "SM", "MD", "LG", "XL", "2XL"],
-      "statuses": ["None", "Online", "Offline", "Verified"]
+      "name": "Banner",
+      "file": "components/banner.json",
+      "figmaName": "Banner",
+      "category": "Feedback",
+      "variants": ["Information", "Success", "Warning", "Error", "Feature", "Opportunity"],
+      "types": ["Bold", "Subtle"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
+      "name": "ProgressBar",
+      "file": "components/progress-bar.json",
+      "figmaName": "ProgressBar",
+      "category": "Feedback",
+      "variants": ["Basic", "Segmented"],
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default", "Success", "Warning", "Error"]
+    },
+    {
+      "name": "ProgressCircle",
+      "file": "components/progress-circle.json",
+      "figmaName": "ProgressCircle",
+      "category": "Feedback",
+      "variants": ["Default", "Segmented"],
+      "sizes": ["XS", "SM", "MD", "LG", "XL"],
+      "states": ["Default", "Success", "Warning", "Error"]
+    },
+    {
+      "name": "Spinner",
+      "file": "components/spinner.json",
+      "figmaName": "Spinner",
+      "category": "Feedback",
+      "variants": ["Thin", "Bold", "Duo-tone", "BufferingThin", "BufferingBold", "Dot", "Juggling"],
+      "sizes": ["XS", "SM", "MD", "LG", "XL", "2XL", "3XL"],
+      "states": ["Default"]
+    },
+    {
+      "name": "Tooltip",
+      "file": "components/tooltip.json",
+      "figmaName": "Tooltip",
+      "category": "Feedback",
+      "variants": ["Dark", "Light"],
+      "sizes": ["SM", "MD"],
+      "positions": ["Top", "Bottom", "Left", "Right"],
+      "states": ["Default"]
+    },
+    {
+      "name": "Accordion",
+      "file": "components/accordion.json",
+      "figmaName": "Accordion",
+      "category": "Layout",
+      "variants": ["Default", "Nested"],
+      "sizes": null,
+      "states": ["Collapsed", "Expanded"]
+    },
+    {
+      "name": "Divider",
+      "file": "components/divider.json",
+      "figmaName": "Divider",
+      "category": "Layout",
+      "variants": ["Default", "WithIcon", "WithLabel", "WithTitle", "WithButton"],
+      "orientations": ["Horizontal", "Vertical"],
+      "sizes": null,
+      "states": ["Default"]
+    },
+    {
+      "name": "Modal",
+      "file": "components/modal.json",
+      "figmaName": "Modal",
+      "category": "Layout",
+      "variants": null,
+      "sizes": ["SM", "MD", "LG"],
+      "states": ["Default"]
     }
   ]
 }

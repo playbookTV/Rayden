@@ -1,0 +1,193 @@
+{
+  "$schema": "../schema.json",
+  "name": "Table",
+  "figmaName": "Table",
+  "description": "Data table with sorting, row selection, and customizable cells.",
+  "$relationships": {
+    "depends_on": ["Checkbox", "Badge", "Avatar"]
+  },
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "cornerRadius": "{radius.lg}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "overflow": "hidden",
+      "children": ["table-header", "table-body"]
+    },
+    "table-header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "fill": "{color.grey.50}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "BOTTOM",
+      "strokeWidth": 1,
+      "children": ["header-cell"]
+    },
+    "header-cell": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "children": ["header-checkbox", "header-text", "sort-icon"]
+    },
+    "header-checkbox": {
+      "type": "INSTANCE",
+      "swapProperty": "Header Checkbox",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "header-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.600}",
+      "textTransform": "uppercase",
+      "letterSpacing": 0.5
+    },
+    "sort-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Sort Icon",
+      "size": 14,
+      "fill": "{color.grey.400}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "table-body": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "children": ["table-row"]
+    },
+    "table-row": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "fill": "{color.white}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "BOTTOM",
+      "strokeWidth": 1,
+      "children": ["row-cell"]
+    },
+    "row-cell": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "children": ["cell-checkbox", "cell-avatar", "cell-content", "cell-badge", "cell-actions"]
+    },
+    "cell-checkbox": {
+      "type": "INSTANCE",
+      "swapProperty": "Cell Checkbox",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "cell-avatar": {
+      "type": "INSTANCE",
+      "swapProperty": "Cell Avatar",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "cell-content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.0}",
+      "layoutGrow": 1,
+      "children": ["cell-text", "cell-subtext"]
+    },
+    "cell-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}"
+    },
+    "cell-subtext": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "cell-badge": {
+      "type": "INSTANCE",
+      "swapProperty": "Cell Badge",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "cell-actions": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["action-button"]
+    },
+    "action-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Action Button"
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "table-row.fill": "{color.white}"
+      },
+      "Hover": {
+        "table-row.fill": "{color.grey.50}"
+      },
+      "Selected": {
+        "table-row.fill": "{color.primary.50}"
+      }
+    },
+    "Striped": {
+      "Default": {
+        "table-row.fill": "{color.white}"
+      },
+      "Alternate": {
+        "table-row.fill": "{color.grey.50}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Style",
+      "type": "VARIANT",
+      "values": ["Default", "Striped"],
+      "default": "Default"
+    },
+    {
+      "name": "Show Selection",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Sorting",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Actions",
+      "type": "BOOLEAN",
+      "default": false
+    }
+  ]
+}

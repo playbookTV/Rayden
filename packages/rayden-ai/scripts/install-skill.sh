@@ -46,14 +46,18 @@ curl -fsSL "$BASE_URL/references/token-usage.md" -o "$SKILL_DIR/references/token
 curl -fsSL "$BASE_URL/references/layout-rules.md" -o "$SKILL_DIR/references/layout-rules.md"
 curl -fsSL "$BASE_URL/references/component-properties.md" -o "$SKILL_DIR/references/component-properties.md"
 
-# Download anatomy files
+# Download anatomy schema and registry
 echo "Downloading component anatomy specs..."
 curl -fsSL "$BASE_URL/src/anatomy/schema.json" -o "$SKILL_DIR/anatomy/schema.json"
 curl -fsSL "$BASE_URL/src/anatomy/components.json" -o "$SKILL_DIR/anatomy/components.json"
-curl -fsSL "$BASE_URL/src/anatomy/components/button.json" -o "$SKILL_DIR/anatomy/components/button.json" 2>/dev/null || true
-curl -fsSL "$BASE_URL/src/anatomy/components/input.json" -o "$SKILL_DIR/anatomy/components/input.json" 2>/dev/null || true
-curl -fsSL "$BASE_URL/src/anatomy/components/badge.json" -o "$SKILL_DIR/anatomy/components/badge.json" 2>/dev/null || true
-curl -fsSL "$BASE_URL/src/anatomy/components/avatar.json" -o "$SKILL_DIR/anatomy/components/avatar.json" 2>/dev/null || true
+
+# Download all component anatomy files
+COMPONENTS="button button-group input select checkbox radio toggle chip file-upload counter slider date-picker tabs breadcrumb pagination sidebar-menu dropdown-menu stepper table avatar avatar-group activity-feed metrics-card icon empty-state chart alert badge banner progress-bar progress-circle spinner tooltip accordion divider modal"
+
+for component in $COMPONENTS; do
+  echo "  - $component.json"
+  curl -fsSL "$BASE_URL/src/anatomy/components/$component.json" -o "$SKILL_DIR/anatomy/components/$component.json" 2>/dev/null || true
+done
 
 # Download tokens (DTCG format)
 echo "Downloading design tokens..."
@@ -66,6 +70,8 @@ echo " Rayden UI Figma skill installed successfully!"
 echo "================================================"
 echo ""
 echo "Installed to: $SKILL_DIR"
+echo ""
+echo "Components included: $(echo $COMPONENTS | wc -w | tr -d ' ')"
 echo ""
 echo "Next steps:"
 echo ""

@@ -1,0 +1,153 @@
+{
+  "$schema": "../schema.json",
+  "name": "EmptyState",
+  "figmaName": "EmptyState",
+  "description": "Placeholder display with illustration, title, description, and action.",
+  "$relationships": {
+    "depends_on": ["Button", "EmptyStateIllustration"]
+  },
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.6}",
+      "padding": "{spacing.8}",
+      "children": ["illustration", "content", "actions"]
+    },
+    "illustration": {
+      "type": "INSTANCE",
+      "swapProperty": "Illustration",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "maxWidth": 400,
+      "children": ["title", "description"]
+    },
+    "title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.lg}",
+      "fill": "{color.grey.900}",
+      "textAlignHorizontal": "CENTER"
+    },
+    "description": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.500}",
+      "textAlignHorizontal": "CENTER",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "actions": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["secondary-action", "primary-action"]
+    },
+    "secondary-action": {
+      "type": "INSTANCE",
+      "swapProperty": "Secondary Action",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "primary-action": {
+      "type": "INSTANCE",
+      "swapProperty": "Primary Action",
+      "optional": true,
+      "defaultVisible": true
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "root.padding": "{spacing.6}",
+      "illustration.width": 120,
+      "illustration.height": 120,
+      "title.fontSize": "{typography.fontSize.base}",
+      "description.fontSize": "{typography.fontSize.xs}"
+    },
+    "MD": {
+      "root.padding": "{spacing.8}",
+      "illustration.width": 180,
+      "illustration.height": 180,
+      "title.fontSize": "{typography.fontSize.lg}",
+      "description.fontSize": "{typography.fontSize.sm}"
+    },
+    "LG": {
+      "root.padding": "{spacing.10}",
+      "illustration.width": 240,
+      "illustration.height": 240,
+      "title.fontSize": "{typography.fontSize.xl}",
+      "description.fontSize": "{typography.fontSize.base}"
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "illustration.visible": true,
+        "actions.visible": true
+      }
+    },
+    "Compact": {
+      "Default": {
+        "illustration.visible": false,
+        "actions.visible": true
+      }
+    },
+    "NoAction": {
+      "Default": {
+        "illustration.visible": true,
+        "actions.visible": false
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Variant",
+      "type": "VARIANT",
+      "values": ["Default", "Compact", "NoAction"],
+      "default": "Default"
+    },
+    {
+      "name": "Illustration",
+      "type": "INSTANCE_SWAP",
+      "default": "EmptyStateIllustration/NoData"
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "No data found"
+    },
+    {
+      "name": "Description",
+      "type": "TEXT",
+      "default": "There's nothing here yet. Get started by adding your first item."
+    },
+    {
+      "name": "Primary Action",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Primary/Solid/SM/Default"
+    }
+  ]
+}

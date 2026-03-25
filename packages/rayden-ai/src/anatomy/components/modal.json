@@ -1,0 +1,211 @@
+{
+  "$schema": "../schema.json",
+  "name": "Modal",
+  "figmaName": "Modal",
+  "description": "Dialog overlay for focused interactions with configurable sizes.",
+  "$relationships": {
+    "depends_on": ["Button"]
+  },
+
+  "anatomy": {
+    "overlay": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "fill": "rgba(16, 25, 40, 0.6)",
+      "children": ["modal"]
+    },
+    "modal": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "cornerRadius": "{radius.xl}",
+      "fill": "{color.grey.50}",
+      "shadow": "{shadow.soft.xl}",
+      "children": ["header", "body", "footer"]
+    },
+    "header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.6}",
+      "paddingVertical": "{spacing.4}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "BOTTOM",
+      "strokeWidth": 1,
+      "children": ["header-content", "close-button"]
+    },
+    "header-content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.1}",
+      "layoutGrow": 1,
+      "children": ["title", "subtitle"]
+    },
+    "title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.lg}",
+      "fill": "{color.grey.900}"
+    },
+    "subtitle": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "close-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Close Button",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "body": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "paddingHorizontal": "{spacing.6}",
+      "paddingVertical": "{spacing.4}",
+      "layoutGrow": 1,
+      "children": ["body-content"]
+    },
+    "body-content": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}"
+    },
+    "footer": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.6}",
+      "paddingVertical": "{spacing.4}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "TOP",
+      "strokeWidth": 1,
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["secondary-action", "primary-action"]
+    },
+    "secondary-action": {
+      "type": "INSTANCE",
+      "swapProperty": "Secondary Button",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "primary-action": {
+      "type": "INSTANCE",
+      "swapProperty": "Primary Button",
+      "optional": true,
+      "defaultVisible": true
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "modal.width": 400,
+      "modal.maxHeight": 480,
+      "header.paddingHorizontal": "{spacing.4}",
+      "header.paddingVertical": "{spacing.3}",
+      "body.paddingHorizontal": "{spacing.4}",
+      "body.paddingVertical": "{spacing.3}",
+      "footer.paddingHorizontal": "{spacing.4}",
+      "footer.paddingVertical": "{spacing.3}",
+      "title.fontSize": "{typography.fontSize.base}"
+    },
+    "MD": {
+      "modal.width": 560,
+      "modal.maxHeight": 640,
+      "header.paddingHorizontal": "{spacing.6}",
+      "header.paddingVertical": "{spacing.4}",
+      "body.paddingHorizontal": "{spacing.6}",
+      "body.paddingVertical": "{spacing.4}",
+      "footer.paddingHorizontal": "{spacing.6}",
+      "footer.paddingVertical": "{spacing.4}",
+      "title.fontSize": "{typography.fontSize.lg}"
+    },
+    "LG": {
+      "modal.width": 720,
+      "modal.maxHeight": 800,
+      "header.paddingHorizontal": "{spacing.8}",
+      "header.paddingVertical": "{spacing.5}",
+      "body.paddingHorizontal": "{spacing.8}",
+      "body.paddingVertical": "{spacing.5}",
+      "footer.paddingHorizontal": "{spacing.8}",
+      "footer.paddingVertical": "{spacing.5}",
+      "title.fontSize": "{typography.fontSize.xl}"
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "modal.fill": "{color.grey.50}",
+        "overlay.fill": "rgba(16, 25, 40, 0.6)"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Show Overlay",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Show Close Button",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "Modal Title"
+    },
+    {
+      "name": "Show Subtitle",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Subtitle",
+      "type": "TEXT",
+      "default": "Optional subtitle"
+    },
+    {
+      "name": "Body Content",
+      "type": "TEXT",
+      "default": "Modal body content goes here."
+    },
+    {
+      "name": "Show Footer",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Primary Button",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Primary/Solid/SM/Default"
+    },
+    {
+      "name": "Secondary Button",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Secondary/Solid/SM/Default"
+    }
+  ]
+}

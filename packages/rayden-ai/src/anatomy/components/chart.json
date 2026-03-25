@@ -1,0 +1,233 @@
+{
+  "$schema": "../schema.json",
+  "name": "Chart",
+  "figmaName": "RaydenChart",
+  "description": "Chart.js wrapper supporting line, bar, pie, doughnut, and other chart types.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.4}",
+      "padding": "{spacing.4}",
+      "cornerRadius": "{radius.lg}",
+      "fill": "{color.white}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "children": ["chart-header", "chart-area", "chart-legend"]
+    },
+    "chart-header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["chart-title", "chart-actions"]
+    },
+    "chart-title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.base}",
+      "fill": "{color.grey.900}",
+      "layoutGrow": 1
+    },
+    "chart-actions": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "chart-area": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "layoutGrow": 1,
+      "minHeight": 200,
+      "children": ["y-axis", "plot-area", "x-axis"]
+    },
+    "y-axis": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "width": 40,
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["y-label"]
+    },
+    "y-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "textAlignHorizontal": "RIGHT"
+    },
+    "plot-area": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "layoutGrow": 1,
+      "children": ["grid-lines", "data-visualization"]
+    },
+    "grid-lines": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "layoutGrow": 1,
+      "children": ["horizontal-line"]
+    },
+    "horizontal-line": {
+      "type": "RECTANGLE",
+      "height": 1,
+      "fill": "{color.grey.100}"
+    },
+    "data-visualization": {
+      "type": "PATH",
+      "fill": "{color.primary.500}"
+    },
+    "x-axis": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "height": 24,
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["x-label"]
+    },
+    "x-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "textAlignHorizontal": "CENTER"
+    },
+    "chart-legend": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.4}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["legend-item"]
+    },
+    "legend-item": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "children": ["legend-color", "legend-label"]
+    },
+    "legend-color": {
+      "type": "RECTANGLE",
+      "width": 12,
+      "height": 12,
+      "cornerRadius": "{radius.sm}",
+      "fill": "{color.primary.500}"
+    },
+    "legend-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.600}"
+    }
+  },
+
+  "variants": {
+    "Line": {
+      "Default": {
+        "data-visualization.type": "PATH",
+        "data-visualization.stroke": "{color.primary.500}",
+        "data-visualization.strokeWidth": 2,
+        "data-visualization.fill": "transparent"
+      }
+    },
+    "Bar": {
+      "Default": {
+        "data-visualization.type": "RECTANGLE",
+        "data-visualization.fill": "{color.primary.500}",
+        "data-visualization.cornerRadius": "{radius.sm} {radius.sm} 0 0"
+      }
+    },
+    "Pie": {
+      "Default": {
+        "data-visualization.type": "ARC",
+        "y-axis.visible": false,
+        "x-axis.visible": false,
+        "grid-lines.visible": false
+      }
+    },
+    "Doughnut": {
+      "Default": {
+        "data-visualization.type": "ARC",
+        "y-axis.visible": false,
+        "x-axis.visible": false,
+        "grid-lines.visible": false
+      }
+    },
+    "Radar": {
+      "Default": {
+        "data-visualization.type": "POLYGON",
+        "y-axis.visible": false,
+        "x-axis.visible": false
+      }
+    },
+    "Scatter": {
+      "Default": {
+        "data-visualization.type": "ELLIPSE",
+        "data-visualization.fill": "{color.primary.500}"
+      }
+    },
+    "Bubble": {
+      "Default": {
+        "data-visualization.type": "ELLIPSE",
+        "data-visualization.fill": "{color.primary.500}",
+        "data-visualization.opacity": 0.6
+      }
+    },
+    "PolarArea": {
+      "Default": {
+        "data-visualization.type": "ARC",
+        "y-axis.visible": false,
+        "x-axis.visible": false
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Type",
+      "type": "VARIANT",
+      "values": ["Line", "Bar", "Pie", "Doughnut", "Radar", "Scatter", "Bubble", "PolarArea"],
+      "default": "Line"
+    },
+    {
+      "name": "Show Header",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Legend",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Grid",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "Chart Title"
+    }
+  ]
+}

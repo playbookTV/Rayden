@@ -58,6 +58,7 @@ export default tseslint.config(
       ".storybook/**",
       "packages/**/dist/**",
       "packages/docs/**",
+      "packages/create-rayden-app/templates/**",
       "scripts/**",
     ],
   }

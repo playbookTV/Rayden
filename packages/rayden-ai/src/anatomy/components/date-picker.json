@@ -1,0 +1,201 @@
+{
+  "$schema": "../schema.json",
+  "name": "DatePicker",
+  "figmaName": "DatePicker",
+  "description": "Calendar date selection with single, range, and year modes.",
+  "$relationships": {
+    "depends_on": ["Input", "Button", "Icon"]
+  },
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "children": ["input-field", "calendar-dropdown"]
+    },
+    "input-field": {
+      "type": "INSTANCE",
+      "swapProperty": "Date Input"
+    },
+    "calendar-dropdown": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "cornerRadius": "{radius.lg}",
+      "fill": "{color.white}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "shadow": "{shadow.soft.lg}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["calendar-header", "calendar-grid", "calendar-footer"]
+    },
+    "calendar-header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "BOTTOM",
+      "strokeWidth": 1,
+      "children": ["prev-button", "month-year-label", "next-button"]
+    },
+    "prev-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Prev Button"
+    },
+    "month-year-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}",
+      "textAlignHorizontal": "CENTER",
+      "layoutGrow": 1
+    },
+    "next-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Next Button"
+    },
+    "calendar-grid": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.1}",
+      "padding": "{spacing.3}",
+      "children": ["weekday-row", "days-grid"]
+    },
+    "weekday-row": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "children": ["weekday-cell"]
+    },
+    "weekday-cell": {
+      "type": "TEXT",
+      "width": 36,
+      "height": 36,
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "textAlignHorizontal": "CENTER",
+      "textAlignVertical": "CENTER"
+    },
+    "days-grid": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.1}",
+      "children": ["day-row"]
+    },
+    "day-row": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.0}",
+      "children": ["day-cell"]
+    },
+    "day-cell": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 36,
+      "height": 36,
+      "cornerRadius": "{radius.md}",
+      "children": ["day-text"]
+    },
+    "day-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "textAlignHorizontal": "CENTER",
+      "textAlignVertical": "CENTER"
+    },
+    "calendar-footer": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "stroke": "{color.grey.200}",
+      "strokeSide": "TOP",
+      "strokeWidth": 1,
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["cancel-button", "apply-button"]
+    },
+    "cancel-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Cancel Button"
+    },
+    "apply-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Apply Button"
+    }
+  },
+
+  "variants": {
+    "Single": {
+      "Closed": {
+        "calendar-dropdown.visible": false
+      },
+      "Open": {
+        "calendar-dropdown.visible": true,
+        "calendar-footer.visible": false
+      }
+    },
+    "Range": {
+      "Closed": {
+        "calendar-dropdown.visible": false
+      },
+      "Open": {
+        "calendar-dropdown.visible": true,
+        "calendar-footer.visible": true
+      }
+    },
+    "Year": {
+      "Closed": {
+        "calendar-dropdown.visible": false
+      },
+      "Open": {
+        "calendar-dropdown.visible": true,
+        "calendar-grid.visible": false
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Mode",
+      "type": "VARIANT",
+      "values": ["Single", "Range", "Year"],
+      "default": "Single"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Closed", "Open"],
+      "default": "Closed"
+    },
+    {
+      "name": "Placeholder",
+      "type": "TEXT",
+      "default": "Select date"
+    },
+    {
+      "name": "Selected Date",
+      "type": "TEXT",
+      "default": ""
+    }
+  ]
+}

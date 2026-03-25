@@ -1,0 +1,150 @@
+{
+  "$schema": "../schema.json",
+  "name": "DropdownMenu",
+  "figmaName": "DropdownMenu",
+  "description": "Contextual menu with icons, shortcuts, and keyboard navigation.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "minWidth": 200,
+      "cornerRadius": "{radius.lg}",
+      "fill": "{color.white}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "shadow": "{shadow.soft.lg}",
+      "paddingVertical": "{spacing.1}",
+      "children": ["menu-group"]
+    },
+    "menu-group": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "children": ["group-label", "menu-items", "divider"]
+    },
+    "group-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "menu-items": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "children": ["menu-item"]
+    },
+    "menu-item": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "children": ["item-icon", "item-label", "item-shortcut", "submenu-chevron"]
+    },
+    "item-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Item Icon",
+      "size": 16,
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "item-label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "layoutGrow": 1
+    },
+    "item-shortcut": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.400}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "submenu-chevron": {
+      "type": "INSTANCE",
+      "swapProperty": "Chevron Icon",
+      "size": 14,
+      "fill": "{color.grey.400}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "divider": {
+      "type": "RECTANGLE",
+      "height": 1,
+      "fill": "{color.grey.200}",
+      "marginVertical": "{spacing.1}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "menu-item.fill": "transparent",
+        "item-label.fill": "{color.grey.700}"
+      },
+      "Hover": {
+        "menu-item.fill": "{color.grey.50}",
+        "item-label.fill": "{color.grey.900}"
+      },
+      "Active": {
+        "menu-item.fill": "{color.primary.50}",
+        "item-label.fill": "{color.primary.600}",
+        "item-icon.fill": "{color.primary.600}"
+      },
+      "Disabled": {
+        "item-label.fill": "{color.grey.300}",
+        "item-icon.fill": "{color.grey.300}"
+      }
+    },
+    "Destructive": {
+      "Default": {
+        "menu-item.fill": "transparent",
+        "item-label.fill": "{color.error.600}",
+        "item-icon.fill": "{color.error.600}"
+      },
+      "Hover": {
+        "menu-item.fill": "{color.error.50}",
+        "item-label.fill": "{color.error.700}",
+        "item-icon.fill": "{color.error.700}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Show Icons",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Show Shortcuts",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Show Dividers",
+      "type": "BOOLEAN",
+      "default": false
+    }
+  ]
+}

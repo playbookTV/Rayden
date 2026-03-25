@@ -1,0 +1,189 @@
+{
+  "$schema": "../schema.json",
+  "name": "Alert",
+  "figmaName": "Alert",
+  "description": "Feedback component for displaying important messages with toast and banner variants.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "MIN",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "cornerRadius": "{radius.lg}",
+      "fill": "{color.grey.50}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "children": ["icon", "content", "actions"]
+    },
+    "icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Alert Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.1}",
+      "layoutGrow": 1,
+      "children": ["title", "description"]
+    },
+    "title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}"
+    },
+    "description": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "actions": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["close-button"]
+    },
+    "close-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Close Button",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "variants": {
+    "Toast": {
+      "Information": {
+        "Default": {
+          "root.fill": "{color.grey.50}",
+          "root.stroke": "{color.grey.200}",
+          "icon.fill": "{color.info.400}",
+          "title.fill": "{color.grey.900}"
+        }
+      },
+      "Success": {
+        "Default": {
+          "root.fill": "{color.success.50}",
+          "root.stroke": "{color.success.200}",
+          "icon.fill": "{color.success.500}",
+          "title.fill": "{color.grey.900}"
+        }
+      },
+      "Warning": {
+        "Default": {
+          "root.fill": "{color.warning.50}",
+          "root.stroke": "{color.warning.200}",
+          "icon.fill": "{color.warning.400}",
+          "title.fill": "{color.grey.900}"
+        }
+      },
+      "Error": {
+        "Default": {
+          "root.fill": "{color.error.50}",
+          "root.stroke": "{color.error.200}",
+          "icon.fill": "{color.error.500}",
+          "title.fill": "{color.grey.900}"
+        }
+      }
+    },
+    "Banner": {
+      "Information": {
+        "Default": {
+          "root.fill": "{color.info.400}",
+          "root.stroke": "transparent",
+          "root.cornerRadius": 0,
+          "icon.fill": "{color.grey.50}",
+          "title.fill": "{color.grey.50}",
+          "description.fill": "{color.grey.100}"
+        }
+      },
+      "Success": {
+        "Default": {
+          "root.fill": "{color.success.500}",
+          "root.stroke": "transparent",
+          "root.cornerRadius": 0,
+          "icon.fill": "{color.grey.50}",
+          "title.fill": "{color.grey.50}",
+          "description.fill": "{color.grey.100}"
+        }
+      },
+      "Warning": {
+        "Default": {
+          "root.fill": "{color.warning.400}",
+          "root.stroke": "transparent",
+          "root.cornerRadius": 0,
+          "icon.fill": "{color.grey.900}",
+          "title.fill": "{color.grey.900}",
+          "description.fill": "{color.grey.800}"
+        }
+      },
+      "Error": {
+        "Default": {
+          "root.fill": "{color.error.500}",
+          "root.stroke": "transparent",
+          "root.cornerRadius": 0,
+          "icon.fill": "{color.grey.50}",
+          "title.fill": "{color.grey.50}",
+          "description.fill": "{color.grey.100}"
+        }
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Variant",
+      "type": "VARIANT",
+      "values": ["Toast", "Banner"],
+      "default": "Toast"
+    },
+    {
+      "name": "Status",
+      "type": "VARIANT",
+      "values": ["Information", "Success", "Warning", "Error"],
+      "default": "Information"
+    },
+    {
+      "name": "Show Icon",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Alert Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/info-circle"
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "Alert title"
+    },
+    {
+      "name": "Show Description",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Description",
+      "type": "TEXT",
+      "default": "Alert description text goes here."
+    },
+    {
+      "name": "Show Close Button",
+      "type": "BOOLEAN",
+      "default": false
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "$schema": "../schema.json",
+  "name": "Toggle",
+  "figmaName": "Toggle",
+  "description": "Toggle switch for binary on/off states.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "children": ["toggle-track", "label-container"]
+    },
+    "toggle-track": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "width": 44,
+      "height": 24,
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.grey.200}",
+      "paddingHorizontal": "{spacing.0}",
+      "children": ["toggle-thumb"]
+    },
+    "toggle-thumb": {
+      "type": "ELLIPSE",
+      "width": 20,
+      "height": 20,
+      "fill": "{color.grey.50}",
+      "x": 2,
+      "y": 2
+    },
+    "label-container": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.0}",
+      "optional": true,
+      "defaultVisible": true,
+      "children": ["label", "description"]
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}"
+    },
+    "description": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "toggle-track.width": 36,
+      "toggle-track.height": 20,
+      "toggle-thumb.width": 16,
+      "toggle-thumb.height": 16,
+      "label.fontSize": "{typography.fontSize.xs}"
+    },
+    "MD": {
+      "toggle-track.width": 44,
+      "toggle-track.height": 24,
+      "toggle-thumb.width": 20,
+      "toggle-thumb.height": 20,
+      "label.fontSize": "{typography.fontSize.sm}"
+    },
+    "LG": {
+      "toggle-track.width": 52,
+      "toggle-track.height": 28,
+      "toggle-thumb.width": 24,
+      "toggle-thumb.height": 24,
+      "label.fontSize": "{typography.fontSize.base}"
+    }
+  },
+
+  "variants": {
+    "Off": {
+      "Default": {
+        "toggle-track.fill": "{color.grey.200}",
+        "toggle-thumb.fill": "{color.grey.50}",
+        "toggle-thumb.x": 2
+      },
+      "Hover": {
+        "toggle-track.fill": "{color.grey.300}",
+        "toggle-thumb.fill": "{color.grey.50}",
+        "toggle-thumb.x": 2
+      },
+      "Focus": {
+        "toggle-track.fill": "{color.grey.200}",
+        "toggle-track.stroke": "{color.primary.200}",
+        "toggle-track.strokeWidth": 2,
+        "toggle-thumb.fill": "{color.grey.50}",
+        "toggle-thumb.x": 2
+      },
+      "Disabled": {
+        "toggle-track.fill": "{color.grey.100}",
+        "toggle-thumb.fill": "{color.grey.200}",
+        "toggle-thumb.x": 2,
+        "label.fill": "{color.grey.400}"
+      }
+    },
+    "On": {
+      "Default": {
+        "toggle-track.fill": "{color.primary.500}",
+        "toggle-thumb.fill": "{color.grey.50}",
+        "toggle-thumb.x": 22
+      },
+      "Hover": {
+        "toggle-track.fill": "{color.primary.400}",
+        "toggle-thumb.fill": "{color.grey.50}",
+        "toggle-thumb.x": 22
+      },
+      "Focus": {
+        "toggle-track.fill": "{color.primary.500}",
+        "toggle-track.stroke": "{color.primary.200}",
+        "toggle-track.strokeWidth": 2,
+        "toggle-thumb.fill": "{color.grey.50}",
+        "toggle-thumb.x": 22
+      },
+      "Disabled": {
+        "toggle-track.fill": "{color.grey.300}",
+        "toggle-thumb.fill": "{color.grey.50}",
+        "toggle-thumb.x": 22,
+        "label.fill": "{color.grey.400}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Toggled",
+      "type": "VARIANT",
+      "values": ["Off", "On"],
+      "default": "Off"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Default", "Hover", "Focus", "Disabled"],
+      "default": "Default"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD", "LG"],
+      "default": "MD"
+    },
+    {
+      "name": "Label Position",
+      "type": "VARIANT",
+      "values": ["Left", "Right"],
+      "default": "Right"
+    },
+    {
+      "name": "Show Label",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Toggle label"
+    },
+    {
+      "name": "Show Description",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Description",
+      "type": "TEXT",
+      "default": "Description text"
+    }
+  ]
+}

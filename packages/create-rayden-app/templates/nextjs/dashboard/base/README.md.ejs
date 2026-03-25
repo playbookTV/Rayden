@@ -1,0 +1,50 @@
+# <%= projectName %>
+
+This project was bootstrapped with [create-rayden-app](https://github.com/raydenui/rayden) using the **dashboard** template and Next.js.
+
+## Getting Started
+
+<% if (packageManager === 'npm') { %>
+```bash
+npm run dev
+```
+<% } else if (packageManager === 'yarn') { %>
+```bash
+yarn dev
+```
+<% } else { %>
+```bash
+pnpm dev
+```
+<% } %>
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Project Structure
+
+```
+app/
+├── layout.tsx            # Root layout with sidebar
+├── page.tsx              # Redirects to /dashboard
+├── dashboard/
+│   └── page.tsx          # Dashboard overview
+├── transactions/
+│   └── page.tsx          # Transactions table
+└── settings/
+    └── page.tsx          # Settings page
+components/
+├── Sidebar.tsx           # Navigation sidebar
+```
+
+## Available Scripts
+
+- `dev` - Start the development server with Turbopack
+- `build` - Build for production
+- `start` - Start the production server
+- `lint` - Run ESLint
+
+## Learn More
+
+- [Rayden UI Documentation](https://raydenui.com/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com)

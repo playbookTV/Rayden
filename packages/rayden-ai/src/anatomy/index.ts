@@ -11,29 +11,122 @@
  */
 
 import componentsRegistry from "./components.json";
+
+// Forms & Inputs
 import buttonAnatomy from "./components/button.json";
+import buttonGroupAnatomy from "./components/button-group.json";
 import inputAnatomy from "./components/input.json";
-import badgeAnatomy from "./components/badge.json";
+import selectAnatomy from "./components/select.json";
+import checkboxAnatomy from "./components/checkbox.json";
+import radioAnatomy from "./components/radio.json";
+import toggleAnatomy from "./components/toggle.json";
+import chipAnatomy from "./components/chip.json";
+import fileUploadAnatomy from "./components/file-upload.json";
+import counterAnatomy from "./components/counter.json";
+import sliderAnatomy from "./components/slider.json";
+import datePickerAnatomy from "./components/date-picker.json";
+
+// Navigation
+import tabsAnatomy from "./components/tabs.json";
+import breadcrumbAnatomy from "./components/breadcrumb.json";
+import paginationAnatomy from "./components/pagination.json";
+import sidebarMenuAnatomy from "./components/sidebar-menu.json";
+import dropdownMenuAnatomy from "./components/dropdown-menu.json";
+import stepperAnatomy from "./components/stepper.json";
+
+// Data Display
+import tableAnatomy from "./components/table.json";
 import avatarAnatomy from "./components/avatar.json";
+import avatarGroupAnatomy from "./components/avatar-group.json";
+import activityFeedAnatomy from "./components/activity-feed.json";
+import metricsCardAnatomy from "./components/metrics-card.json";
+import iconAnatomy from "./components/icon.json";
+import emptyStateAnatomy from "./components/empty-state.json";
+import chartAnatomy from "./components/chart.json";
+
+// Feedback
+import alertAnatomy from "./components/alert.json";
+import badgeAnatomy from "./components/badge.json";
+import bannerAnatomy from "./components/banner.json";
+import progressBarAnatomy from "./components/progress-bar.json";
+import progressCircleAnatomy from "./components/progress-circle.json";
+import spinnerAnatomy from "./components/spinner.json";
+import tooltipAnatomy from "./components/tooltip.json";
+
+// Layout
+import accordionAnatomy from "./components/accordion.json";
+import dividerAnatomy from "./components/divider.json";
+import modalAnatomy from "./components/modal.json";
 
 // Export registry
 export const registry = componentsRegistry;
 
 // Export individual anatomy specs
 export const anatomySpecs = {
+  // Forms & Inputs
   Button: buttonAnatomy,
+  ButtonGroup: buttonGroupAnatomy,
   Input: inputAnatomy,
-  Badge: badgeAnatomy,
+  Select: selectAnatomy,
+  Checkbox: checkboxAnatomy,
+  Radio: radioAnatomy,
+  Toggle: toggleAnatomy,
+  Chip: chipAnatomy,
+  FileUpload: fileUploadAnatomy,
+  Counter: counterAnatomy,
+  Slider: sliderAnatomy,
+  DatePicker: datePickerAnatomy,
+
+  // Navigation
+  Tabs: tabsAnatomy,
+  Breadcrumb: breadcrumbAnatomy,
+  Pagination: paginationAnatomy,
+  SidebarMenu: sidebarMenuAnatomy,
+  DropdownMenu: dropdownMenuAnatomy,
+  Stepper: stepperAnatomy,
+
+  // Data Display
+  Table: tableAnatomy,
   Avatar: avatarAnatomy,
+  AvatarGroup: avatarGroupAnatomy,
+  ActivityFeed: activityFeedAnatomy,
+  MetricsCard: metricsCardAnatomy,
+  Icon: iconAnatomy,
+  EmptyState: emptyStateAnatomy,
+  Chart: chartAnatomy,
+
+  // Feedback
+  Alert: alertAnatomy,
+  Badge: badgeAnatomy,
+  Banner: bannerAnatomy,
+  ProgressBar: progressBarAnatomy,
+  ProgressCircle: progressCircleAnatomy,
+  Spinner: spinnerAnatomy,
+  Tooltip: tooltipAnatomy,
+
+  // Layout
+  Accordion: accordionAnatomy,
+  Divider: dividerAnatomy,
+  Modal: modalAnatomy,
 } as const;
 
 export type AnatomyComponentName = keyof typeof anatomySpecs;
 
 // Types for anatomy structure
 export interface AnatomyNode {
-  type: "FRAME" | "TEXT" | "INSTANCE" | "RECTANGLE" | "ELLIPSE" | "GROUP";
+  type:
+    | "FRAME"
+    | "TEXT"
+    | "INSTANCE"
+    | "RECTANGLE"
+    | "ELLIPSE"
+    | "GROUP"
+    | "POLYGON"
+    | "PATH"
+    | "ARC";
   layoutMode?: "HORIZONTAL" | "VERTICAL" | "NONE";
   layoutAlign?: "MIN" | "CENTER" | "MAX" | "STRETCH" | "BASELINE";
+  layoutGrow?: number;
   itemSpacing?: string;
   paddingHorizontal?: string;
   paddingVertical?: string;
@@ -41,22 +134,35 @@ export interface AnatomyNode {
   paddingRight?: string;
   paddingBottom?: string;
   paddingLeft?: string;
+  padding?: string;
   cornerRadius?: string;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
+  strokeSide?: "ALL" | "TOP" | "RIGHT" | "BOTTOM" | "LEFT" | "LEFT_RIGHT" | "TOP_BOTTOM";
+  strokeDashPattern?: number[];
+  strokeCap?: "NONE" | "ROUND" | "SQUARE";
   opacity?: number;
+  shadow?: string;
   fontFamily?: string;
   fontSize?: string;
   fontWeight?: string;
   lineHeight?: string;
-  letterSpacing?: string;
+  letterSpacing?: string | number;
+  textTransform?: string;
   textAlignHorizontal?: "LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED";
   textAlignVertical?: "TOP" | "CENTER" | "BOTTOM";
   optional?: boolean;
   defaultVisible?: boolean;
   swapProperty?: string;
   size?: number;
+  width?: number | string;
+  height?: number | string;
+  minWidth?: number;
+  minHeight?: number;
+  maxWidth?: number;
+  maxHeight?: number;
+  overflow?: "visible" | "hidden" | "scroll";
   children?: string[];
   [key: string]: unknown;
 }
@@ -87,12 +193,15 @@ export interface RegistryComponent {
   name: string;
   file: string;
   figmaName: string;
+  category?: string;
   variants?: string[] | null;
   appearances?: string[];
   types?: string[];
   sizes?: string[] | null;
   states?: string[];
   statuses?: string[];
+  orientations?: string[];
+  positions?: string[];
 }
 
 export interface Registry {
@@ -115,6 +224,21 @@ export function getAnatomy(componentName: string): AnatomySpec | null {
  */
 export function getAvailableComponents(): string[] {
   return registry.components.map((c) => c.name);
+}
+
+/**
+ * Get components by category.
+ */
+export function getComponentsByCategory(category: string): RegistryComponent[] {
+  return registry.components.filter((c) => c.category === category);
+}
+
+/**
+ * Get all unique categories.
+ */
+export function getCategories(): string[] {
+  const categories = new Set(registry.components.map((c) => c.category).filter(Boolean));
+  return Array.from(categories) as string[];
 }
 
 /**
@@ -194,6 +318,12 @@ export function getVariantCombinations(componentName: string): Array<Record<stri
   if (entry.statuses && entry.statuses.length > 0) {
     dimensions.push({ name: "Status", values: entry.statuses });
   }
+  if (entry.orientations && entry.orientations.length > 0) {
+    dimensions.push({ name: "Orientation", values: entry.orientations });
+  }
+  if (entry.positions && entry.positions.length > 0) {
+    dimensions.push({ name: "Position", values: entry.positions });
+  }
 
   // Generate all combinations
   function generateCombinations(index: number, current: Record<string, string>) {
@@ -227,7 +357,16 @@ export function generateFigmaName(
   const parts = [componentName];
 
   // Add in standard order
-  const order = ["Variant", "Type", "Appearance", "Size", "State", "Status"];
+  const order = [
+    "Variant",
+    "Type",
+    "Appearance",
+    "Size",
+    "State",
+    "Status",
+    "Orientation",
+    "Position",
+  ];
   for (const key of order) {
     if (combination[key]) {
       parts.push(combination[key]);

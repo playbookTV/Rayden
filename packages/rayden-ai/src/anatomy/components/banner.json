@@ -1,0 +1,204 @@
+{
+  "$schema": "../schema.json",
+  "name": "Banner",
+  "figmaName": "Banner",
+  "description": "Full-width notification banner with status variations and emphasis levels.",
+  "$relationships": {
+    "depends_on": ["Icon", "Button"]
+  },
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "fill": "{color.info.50}",
+      "children": ["banner-icon", "banner-content", "banner-actions", "dismiss-button"]
+    },
+    "banner-icon": {
+      "type": "INSTANCE",
+      "swapProperty": "Banner Icon",
+      "size": 20,
+      "fill": "{color.info.600}",
+      "optional": true,
+      "defaultVisible": true
+    },
+    "banner-content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.1}",
+      "layoutGrow": 1,
+      "children": ["banner-title", "banner-description"]
+    },
+    "banner-title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.info.800}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "banner-description": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.info.700}"
+    },
+    "banner-actions": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.2}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["action-button"]
+    },
+    "action-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Action Button"
+    },
+    "dismiss-button": {
+      "type": "INSTANCE",
+      "swapProperty": "Dismiss Button",
+      "optional": true,
+      "defaultVisible": true
+    }
+  },
+
+  "variants": {
+    "Information": {
+      "Bold": {
+        "root.fill": "{color.info.500}",
+        "banner-icon.fill": "{color.white}",
+        "banner-title.fill": "{color.white}",
+        "banner-description.fill": "{color.info.100}"
+      },
+      "Subtle": {
+        "root.fill": "{color.info.50}",
+        "banner-icon.fill": "{color.info.600}",
+        "banner-title.fill": "{color.info.800}",
+        "banner-description.fill": "{color.info.700}"
+      }
+    },
+    "Success": {
+      "Bold": {
+        "root.fill": "{color.success.500}",
+        "banner-icon.fill": "{color.white}",
+        "banner-title.fill": "{color.white}",
+        "banner-description.fill": "{color.success.100}"
+      },
+      "Subtle": {
+        "root.fill": "{color.success.50}",
+        "banner-icon.fill": "{color.success.600}",
+        "banner-title.fill": "{color.success.800}",
+        "banner-description.fill": "{color.success.700}"
+      }
+    },
+    "Warning": {
+      "Bold": {
+        "root.fill": "{color.warning.500}",
+        "banner-icon.fill": "{color.white}",
+        "banner-title.fill": "{color.white}",
+        "banner-description.fill": "{color.warning.100}"
+      },
+      "Subtle": {
+        "root.fill": "{color.warning.50}",
+        "banner-icon.fill": "{color.warning.600}",
+        "banner-title.fill": "{color.warning.800}",
+        "banner-description.fill": "{color.warning.700}"
+      }
+    },
+    "Error": {
+      "Bold": {
+        "root.fill": "{color.error.500}",
+        "banner-icon.fill": "{color.white}",
+        "banner-title.fill": "{color.white}",
+        "banner-description.fill": "{color.error.100}"
+      },
+      "Subtle": {
+        "root.fill": "{color.error.50}",
+        "banner-icon.fill": "{color.error.600}",
+        "banner-title.fill": "{color.error.800}",
+        "banner-description.fill": "{color.error.700}"
+      }
+    },
+    "Feature": {
+      "Bold": {
+        "root.fill": "{color.primary.500}",
+        "banner-icon.fill": "{color.white}",
+        "banner-title.fill": "{color.white}",
+        "banner-description.fill": "{color.primary.100}"
+      },
+      "Subtle": {
+        "root.fill": "{color.primary.50}",
+        "banner-icon.fill": "{color.primary.600}",
+        "banner-title.fill": "{color.primary.800}",
+        "banner-description.fill": "{color.primary.700}"
+      }
+    },
+    "Opportunity": {
+      "Bold": {
+        "root.fill": "{color.grey.900}",
+        "banner-icon.fill": "{color.white}",
+        "banner-title.fill": "{color.white}",
+        "banner-description.fill": "{color.grey.300}"
+      },
+      "Subtle": {
+        "root.fill": "{color.grey.100}",
+        "banner-icon.fill": "{color.grey.600}",
+        "banner-title.fill": "{color.grey.900}",
+        "banner-description.fill": "{color.grey.700}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Status",
+      "type": "VARIANT",
+      "values": ["Information", "Success", "Warning", "Error", "Feature", "Opportunity"],
+      "default": "Information"
+    },
+    {
+      "name": "Emphasis",
+      "type": "VARIANT",
+      "values": ["Bold", "Subtle"],
+      "default": "Subtle"
+    },
+    {
+      "name": "Show Icon",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Show Title",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "Banner Title"
+    },
+    {
+      "name": "Description",
+      "type": "TEXT",
+      "default": "This is a banner message with important information."
+    },
+    {
+      "name": "Show Actions",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Dismissible",
+      "type": "BOOLEAN",
+      "default": true
+    }
+  ]
+}

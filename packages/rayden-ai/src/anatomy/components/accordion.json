@@ -1,0 +1,211 @@
+{
+  "$schema": "../schema.json",
+  "name": "Accordion",
+  "figmaName": "Accordion",
+  "description": "Expandable content sections with default and nested variants.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "stroke": "{color.grey.200}",
+      "strokeWidth": 1,
+      "cornerRadius": "{radius.lg}",
+      "children": ["accordion-item"]
+    },
+    "accordion-item": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "itemSpacing": "{spacing.0}",
+      "children": ["item-header", "item-content"]
+    },
+    "item-header": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "fill": "{color.grey.50}",
+      "children": ["leading-content", "header-text", "chevron"]
+    },
+    "leading-content": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["leading-icon", "leading-number", "leading-logo"]
+    },
+    "leading-icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Leading Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "leading-number": {
+      "type": "FRAME",
+      "optional": true,
+      "defaultVisible": false,
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "width": 24,
+      "height": 24,
+      "cornerRadius": "{radius.full}",
+      "fill": "{color.grey.100}",
+      "children": ["number-text"]
+    },
+    "number-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.700}"
+    },
+    "leading-logo": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Leading Logo"
+    },
+    "header-text": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "itemSpacing": "{spacing.0}",
+      "layoutGrow": 1,
+      "children": ["title", "subtitle"]
+    },
+    "title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.900}"
+    },
+    "subtitle": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "chevron": {
+      "type": "INSTANCE",
+      "swapProperty": "Chevron Icon",
+      "size": 20,
+      "fill": "{color.grey.500}"
+    },
+    "item-content": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "STRETCH",
+      "paddingHorizontal": "{spacing.4}",
+      "paddingVertical": "{spacing.3}",
+      "fill": "{color.grey.50}",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["content-text"]
+    },
+    "content-text": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.600}"
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Collapsed": {
+        "item-content.visible": false,
+        "chevron.rotation": 0
+      },
+      "Expanded": {
+        "item-content.visible": true,
+        "chevron.rotation": 180
+      }
+    },
+    "Nested": {
+      "Collapsed": {
+        "root.stroke": "transparent",
+        "item-header.paddingLeft": "{spacing.8}",
+        "item-content.visible": false,
+        "chevron.rotation": 0
+      },
+      "Expanded": {
+        "root.stroke": "transparent",
+        "item-header.paddingLeft": "{spacing.8}",
+        "item-content.visible": true,
+        "chevron.rotation": 180
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Type",
+      "type": "VARIANT",
+      "values": ["Default", "Nested"],
+      "default": "Default"
+    },
+    {
+      "name": "State",
+      "type": "VARIANT",
+      "values": ["Collapsed", "Expanded"],
+      "default": "Collapsed"
+    },
+    {
+      "name": "Show Leading Icon",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Leading Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Show Leading Number",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Number",
+      "type": "TEXT",
+      "default": "1"
+    },
+    {
+      "name": "Show Leading Logo",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "Accordion title"
+    },
+    {
+      "name": "Show Subtitle",
+      "type": "BOOLEAN",
+      "default": false
+    },
+    {
+      "name": "Subtitle",
+      "type": "TEXT",
+      "default": "Subtitle text"
+    },
+    {
+      "name": "Content",
+      "type": "TEXT",
+      "default": "Accordion content goes here."
+    }
+  ]
+}

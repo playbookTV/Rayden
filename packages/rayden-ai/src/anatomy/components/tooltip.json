@@ -1,0 +1,101 @@
+{
+  "$schema": "../schema.json",
+  "name": "Tooltip",
+  "figmaName": "Tooltip",
+  "description": "Contextual information popover that appears on hover or focus.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "VERTICAL",
+      "layoutAlign": "MIN",
+      "itemSpacing": "{spacing.1}",
+      "paddingHorizontal": "{spacing.3}",
+      "paddingVertical": "{spacing.2}",
+      "cornerRadius": "{radius.md}",
+      "fill": "{color.grey.900}",
+      "children": ["content", "arrow"]
+    },
+    "content": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.regular}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.50}",
+      "textAlignHorizontal": "CENTER"
+    },
+    "arrow": {
+      "type": "POLYGON",
+      "width": 8,
+      "height": 4,
+      "fill": "{color.grey.900}"
+    }
+  },
+
+  "sizes": {
+    "SM": {
+      "root.paddingHorizontal": "{spacing.2}",
+      "root.paddingVertical": "{spacing.1}",
+      "content.fontSize": "{typography.fontSize.xs}",
+      "arrow.width": 6,
+      "arrow.height": 3
+    },
+    "MD": {
+      "root.paddingHorizontal": "{spacing.3}",
+      "root.paddingVertical": "{spacing.2}",
+      "content.fontSize": "{typography.fontSize.sm}",
+      "arrow.width": 8,
+      "arrow.height": 4
+    }
+  },
+
+  "variants": {
+    "Dark": {
+      "Default": {
+        "root.fill": "{color.grey.900}",
+        "content.fill": "{color.grey.50}",
+        "arrow.fill": "{color.grey.900}"
+      }
+    },
+    "Light": {
+      "Default": {
+        "root.fill": "{color.grey.50}",
+        "root.stroke": "{color.grey.200}",
+        "root.strokeWidth": 1,
+        "content.fill": "{color.grey.700}",
+        "arrow.fill": "{color.grey.50}"
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Theme",
+      "type": "VARIANT",
+      "values": ["Dark", "Light"],
+      "default": "Dark"
+    },
+    {
+      "name": "Size",
+      "type": "VARIANT",
+      "values": ["SM", "MD"],
+      "default": "MD"
+    },
+    {
+      "name": "Position",
+      "type": "VARIANT",
+      "values": ["Top", "Bottom", "Left", "Right"],
+      "default": "Top"
+    },
+    {
+      "name": "Show Arrow",
+      "type": "BOOLEAN",
+      "default": true
+    },
+    {
+      "name": "Content",
+      "type": "TEXT",
+      "default": "Tooltip text"
+    }
+  ]
+}

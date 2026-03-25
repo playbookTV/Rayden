@@ -1,0 +1,149 @@
+{
+  "$schema": "../schema.json",
+  "name": "Divider",
+  "figmaName": "Divider",
+  "description": "Visual separator with optional icon, label, title, or button.",
+
+  "anatomy": {
+    "root": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "itemSpacing": "{spacing.3}",
+      "children": ["line-left", "center-content", "line-right"]
+    },
+    "line-left": {
+      "type": "RECTANGLE",
+      "height": 1,
+      "fill": "{color.grey.200}",
+      "layoutGrow": 1
+    },
+    "center-content": {
+      "type": "FRAME",
+      "layoutMode": "HORIZONTAL",
+      "layoutAlign": "CENTER",
+      "optional": true,
+      "defaultVisible": false,
+      "children": ["icon", "label", "title", "button"]
+    },
+    "icon": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Icon",
+      "size": 16,
+      "fill": "{color.grey.400}"
+    },
+    "label": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.medium}",
+      "fontSize": "{typography.fontSize.xs}",
+      "fill": "{color.grey.500}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "title": {
+      "type": "TEXT",
+      "fontFamily": "{typography.fontFamily.sans}",
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": "{typography.fontSize.sm}",
+      "fill": "{color.grey.700}",
+      "optional": true,
+      "defaultVisible": false
+    },
+    "button": {
+      "type": "INSTANCE",
+      "optional": true,
+      "defaultVisible": false,
+      "swapProperty": "Button"
+    },
+    "line-right": {
+      "type": "RECTANGLE",
+      "height": 1,
+      "fill": "{color.grey.200}",
+      "layoutGrow": 1
+    }
+  },
+
+  "variants": {
+    "Default": {
+      "Default": {
+        "center-content.visible": false,
+        "line-left.visible": true,
+        "line-right.visible": false
+      }
+    },
+    "WithIcon": {
+      "Default": {
+        "center-content.visible": true,
+        "icon.visible": true,
+        "label.visible": false,
+        "title.visible": false,
+        "button.visible": false
+      }
+    },
+    "WithLabel": {
+      "Default": {
+        "center-content.visible": true,
+        "icon.visible": false,
+        "label.visible": true,
+        "title.visible": false,
+        "button.visible": false
+      }
+    },
+    "WithTitle": {
+      "Default": {
+        "center-content.visible": true,
+        "icon.visible": false,
+        "label.visible": false,
+        "title.visible": true,
+        "button.visible": false
+      }
+    },
+    "WithButton": {
+      "Default": {
+        "center-content.visible": true,
+        "icon.visible": false,
+        "label.visible": false,
+        "title.visible": false,
+        "button.visible": true
+      }
+    }
+  },
+
+  "componentProperties": [
+    {
+      "name": "Variant",
+      "type": "VARIANT",
+      "values": ["Default", "WithIcon", "WithLabel", "WithTitle", "WithButton"],
+      "default": "Default"
+    },
+    {
+      "name": "Orientation",
+      "type": "VARIANT",
+      "values": ["Horizontal", "Vertical"],
+      "default": "Horizontal"
+    },
+    {
+      "name": "Icon",
+      "type": "INSTANCE_SWAP",
+      "default": "icon/placeholder"
+    },
+    {
+      "name": "Label",
+      "type": "TEXT",
+      "default": "Label"
+    },
+    {
+      "name": "Title",
+      "type": "TEXT",
+      "default": "Title"
+    },
+    {
+      "name": "Button",
+      "type": "INSTANCE_SWAP",
+      "default": "Button/Text/Solid/SM/Default"
+    }
+  ]
+}
