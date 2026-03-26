@@ -45,7 +45,7 @@
     },
     "layout": {
       "description": "Layout and container components",
-      "components": ["Accordion", "Modal"]
+      "components": ["Accordion", "Card", "Modal"]
     },
     "composite": {
       "description": "Complex compound components",
@@ -317,6 +317,15 @@
       "manifestFile": "Accordion.json"
     },
     {
+      "name": "Card",
+      "displayName": "Card",
+      "category": "layout",
+      "description": "Flexible container for grouping related content",
+      "hasSubComponents": true,
+      "subComponents": ["CardHeader", "CardBody", "CardFooter", "CardImage"],
+      "manifestFile": "Card.json"
+    },
+    {
       "name": "Modal",
       "displayName": "Modal",
       "category": "layout",
@@ -363,7 +372,6 @@
     "Dialog",
     "Popup",
     "Overlay",
-    "Card",
     "Panel",
     "Box",
     "Container",

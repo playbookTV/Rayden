@@ -1,0 +1,203 @@
+---
+title: Card
+description: Flexible container for grouping related content
+---
+
+# Card
+
+Cards are flexible containers that group related content with optional header, body, footer, and image sections.
+
+## Import
+
+```tsx
+import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui";
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Card>
+  <CardHeader title="Card Title" subtitle="Description" />
+  <CardBody>
+    <p className="text-grey-600">Card content goes here.</p>
+  </CardBody>
+  <CardFooter>
+    <Button variant="grey" appearance="outlined" size="sm">Cancel</Button>
+    <Button variant="primary" size="sm">Save</Button>
+  </CardFooter>
+</Card>
+```
+
+### Variants
+
+```tsx
+// Default (border + subtle shadow)
+<Card variant="default">...</Card>
+
+// Outlined (thicker border, no shadow)
+<Card variant="outlined">...</Card>
+
+// Elevated (prominent shadow)
+<Card variant="elevated">...</Card>
+
+// Ghost (no border or background)
+<Card variant="ghost">...</Card>
+```
+
+### With Image
+
+```tsx
+<Card className="w-80">
+  <CardImage
+    src="/image.jpg"
+    alt="Mountain landscape"
+    aspectRatio="video"
+  />
+  <CardHeader title="Beautiful Mountains" subtitle="Explore nature" />
+  <CardBody>
+    <p className="text-sm text-grey-600">
+      Discover breathtaking mountain views.
+    </p>
+  </CardBody>
+</Card>
+```
+
+### Header with Actions
+
+```tsx
+<Card>
+  <CardHeader
+    title="Project Updates"
+    subtitle="Last updated 2 hours ago"
+    actions={
+      <>
+        <Badge color="success">Active</Badge>
+        <Button variant="grey" appearance="outlined" size="sm">
+          <Icon name="ellipsis-horizontal" />
+        </Button>
+      </>
+    }
+    bordered
+  />
+  <CardBody>
+    <p>Your project has been updated with 5 new commits.</p>
+  </CardBody>
+</Card>
+```
+
+### Hoverable
+
+```tsx
+<Card hoverable className="cursor-pointer">
+  <CardBody>
+    <h3 className="font-semibold text-grey-900">Interactive Card</h3>
+    <p className="text-sm text-grey-500">Hover to see shadow effect</p>
+  </CardBody>
+</Card>
+```
+
+### Footer Alignment
+
+```tsx
+// Left aligned
+<CardFooter align="left">...</CardFooter>
+
+// Center aligned
+<CardFooter align="center">...</CardFooter>
+
+// Right aligned (default)
+<CardFooter align="right">...</CardFooter>
+
+// Space between
+<CardFooter align="between">...</CardFooter>
+```
+
+### Sizes
+
+```tsx
+// Small padding
+<Card size="sm">...</Card>
+
+// Medium padding (default)
+<Card size="md">...</Card>
+
+// Large padding
+<Card size="lg">...</Card>
+```
+
+### Product Card Example
+
+```tsx
+<Card hoverable className="w-72">
+  <CardImage src="/product.jpg" alt="Product" aspectRatio="square" />
+  <CardBody>
+    <div className="flex items-start justify-between">
+      <div>
+        <p className="font-semibold text-grey-900">Premium Watch</p>
+        <p className="text-sm text-grey-500">Leather strap</p>
+      </div>
+      <Badge color="orange">Sale</Badge>
+    </div>
+    <div className="mt-3">
+      <span className="text-lg font-bold">$299</span>
+      <span className="text-sm text-grey-400 line-through ml-2">$399</span>
+    </div>
+  </CardBody>
+  <CardFooter>
+    <Button variant="primary" className="w-full">Add to Cart</Button>
+  </CardFooter>
+</Card>
+```
+
+## Card Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "outlined" \| "elevated" \| "ghost"` | `"default"` | Visual style |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Padding scale |
+| `rounded` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` | `"lg"` | Corner radius |
+| `shadow` | `"none" \| "sm" \| "md" \| "lg"` | `"sm"` | Shadow intensity |
+| `hoverable` | `boolean` | `false` | Enable hover shadow effect |
+| `className` | `string` | — | Additional CSS classes |
+
+## CardHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `ReactNode` | — | Header title |
+| `subtitle` | `ReactNode` | — | Header subtitle |
+| `actions` | `ReactNode` | — | Actions slot (right side) |
+| `bordered` | `boolean` | `false` | Show bottom border |
+
+## CardBody Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `noPadding` | `boolean` | `false` | Remove default padding |
+| `className` | `string` | — | Additional CSS classes |
+
+## CardFooter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `"left" \| "center" \| "right" \| "between"` | `"right"` | Content alignment |
+| `bordered` | `boolean` | `false` | Show top border |
+
+## CardImage Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | — | Image source URL |
+| `alt` | `string` | — | Alt text (required) |
+| `position` | `"top" \| "bottom" \| "full"` | `"top"` | Image position |
+| `aspectRatio` | `"auto" \| "video" \| "square" \| "portrait"` | `"auto"` | Aspect ratio |
+| `objectFit` | `"cover" \| "contain" \| "fill"` | `"cover"` | Object fit behavior |
+
+## Accessibility
+
+- Card uses semantic HTML `<div>` elements
+- Add `role="article"` or `role="region"` with `aria-labelledby` when semantically appropriate
+- Use semantic heading tags (h2, h3) in CardHeader title for proper document outline
+- CardImage requires `alt` text for screen readers

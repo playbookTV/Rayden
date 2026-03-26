@@ -1,0 +1,191 @@
+{
+  "$schema": "./schema.json",
+  "name": "Card",
+  "displayName": "Card",
+  "description": "Flexible container component for grouping related content with optional header, body, footer, and image sections.",
+  "category": "layout",
+  "importPath": "@raydenui/ui",
+  "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": ["default", "outlined", "elevated", "ghost"],
+      "default": "default",
+      "description": "Visual style: default (border + shadow), outlined (thicker border), elevated (prominent shadow), ghost (no border)"
+    },
+    "size": {
+      "type": "enum",
+      "values": ["sm", "md", "lg"],
+      "default": "md",
+      "description": "Padding scale for sub-components"
+    },
+    "rounded": {
+      "type": "enum",
+      "values": ["sm", "md", "lg", "xl", "full"],
+      "default": "lg",
+      "description": "Corner radius size"
+    },
+    "shadow": {
+      "type": "enum",
+      "values": ["none", "sm", "md", "lg"],
+      "default": "sm",
+      "description": "Shadow intensity (not applied to elevated variant)"
+    },
+    "hoverable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable hover shadow effect with transition"
+    }
+  },
+  "subComponents": [
+    {
+      "name": "CardHeader",
+      "description": "Optional header area with title, subtitle, and actions slot",
+      "props": {
+        "title": {
+          "type": "ReactNode",
+          "description": "Header title text or element"
+        },
+        "subtitle": {
+          "type": "ReactNode",
+          "description": "Header subtitle text or element"
+        },
+        "actions": {
+          "type": "ReactNode",
+          "description": "Actions slot displayed on the right side (buttons, badges, etc.)"
+        },
+        "bordered": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show bottom border separator"
+        }
+      }
+    },
+    {
+      "name": "CardBody",
+      "description": "Main content area with inherited padding",
+      "props": {
+        "noPadding": {
+          "type": "boolean",
+          "default": false,
+          "description": "Remove default padding for custom layouts"
+        }
+      }
+    },
+    {
+      "name": "CardFooter",
+      "description": "Optional footer area for actions",
+      "props": {
+        "align": {
+          "type": "enum",
+          "values": ["left", "center", "right", "between"],
+          "default": "right",
+          "description": "Content alignment within footer"
+        },
+        "bordered": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show top border separator"
+        }
+      }
+    },
+    {
+      "name": "CardImage",
+      "description": "Optional image/media section with aspect ratio control",
+      "props": {
+        "src": {
+          "type": "string",
+          "required": true,
+          "description": "Image source URL"
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alt text for accessibility"
+        },
+        "position": {
+          "type": "enum",
+          "values": ["top", "bottom", "full"],
+          "default": "top",
+          "description": "Image position relative to card content"
+        },
+        "aspectRatio": {
+          "type": "enum",
+          "values": ["auto", "video", "square", "portrait"],
+          "default": "auto",
+          "description": "Image aspect ratio: video (16:9), square (1:1), portrait (3:4)"
+        },
+        "objectFit": {
+          "type": "enum",
+          "values": ["cover", "contain", "fill"],
+          "default": "cover",
+          "description": "How the image fills its container"
+        }
+      }
+    }
+  ],
+  "composition": {
+    "requiredStructure": "Card > [CardImage?, CardHeader?, CardBody, CardFooter?]",
+    "relatedComponents": ["MetricsCard", "Accordion", "Modal"]
+  },
+  "accessibility": {
+    "role": "Generic container; add role='article' or role='region' with aria-labelledby when semantically appropriate",
+    "focusManagement": "Card itself is not focusable; interactive children receive focus",
+    "screenReaderNotes": "Use semantic heading tags in CardHeader title for proper document outline"
+  },
+  "antiHallucination": {
+    "aliases": ["Panel", "Box", "Container", "Paper", "Surface", "Tile"],
+    "notTheSameAs": ["MetricsCard", "Modal", "Accordion"],
+    "doesNotExist": [
+      "loading",
+      "isLoading",
+      "onClick",
+      "href",
+      "as",
+      "elevation",
+      "padding",
+      "margin",
+      "color",
+      "background",
+      "header",
+      "footer",
+      "image",
+      "clickable"
+    ],
+    "commonMistakes": [
+      { "mistake": "padding='lg'", "correction": "size='lg'" },
+      { "mistake": "elevation={2}", "correction": "shadow='md' or variant='elevated'" },
+      {
+        "mistake": "<Card onClick={...}>",
+        "correction": "Wrap Card content in a button/link, or use hoverable + cursor-pointer className"
+      },
+      {
+        "mistake": "<Card header={...} footer={...}>",
+        "correction": "Use CardHeader and CardFooter sub-components"
+      },
+      { "mistake": "<Card image={...}>", "correction": "Use CardImage sub-component" }
+    ]
+  },
+  "examples": [
+    {
+      "title": "Basic Card",
+      "code": "<Card>\n  <CardHeader title=\"Card Title\" subtitle=\"Description\" />\n  <CardBody>\n    <p className=\"text-grey-600\">Card content goes here.</p>\n  </CardBody>\n  <CardFooter>\n    <Button variant=\"grey\" appearance=\"outlined\" size=\"sm\">Cancel</Button>\n    <Button variant=\"primary\" size=\"sm\">Save</Button>\n  </CardFooter>\n</Card>"
+    },
+    {
+      "title": "Card with Image",
+      "code": "<Card className=\"w-80\">\n  <CardImage src=\"/image.jpg\" alt=\"Description\" aspectRatio=\"video\" />\n  <CardHeader title=\"Beautiful Mountains\" subtitle=\"Explore nature\" />\n  <CardBody>\n    <p className=\"text-sm text-grey-600\">Discover breathtaking views.</p>\n  </CardBody>\n</Card>"
+    },
+    {
+      "title": "Elevated Hoverable Card",
+      "code": "<Card variant=\"elevated\" hoverable className=\"cursor-pointer\">\n  <CardBody>\n    <h3 className=\"font-semibold text-grey-900\">Interactive Card</h3>\n    <p className=\"text-sm text-grey-500 mt-1\">Hover to see effect</p>\n  </CardBody>\n</Card>"
+    },
+    {
+      "title": "Card with Header Actions",
+      "code": "<Card>\n  <CardHeader\n    title=\"Project Updates\"\n    subtitle=\"Last updated 2 hours ago\"\n    actions={<Badge color=\"success\">Active</Badge>}\n    bordered\n  />\n  <CardBody>\n    <p>Your project has been updated.</p>\n  </CardBody>\n</Card>"
+    },
+    {
+      "title": "Product Card",
+      "code": "<Card hoverable className=\"w-72\">\n  <CardImage src=\"/product.jpg\" alt=\"Product\" aspectRatio=\"square\" />\n  <CardBody>\n    <div className=\"flex items-start justify-between\">\n      <div>\n        <p className=\"font-semibold text-grey-900\">Premium Watch</p>\n        <p className=\"text-sm text-grey-500\">Leather strap</p>\n      </div>\n      <Badge color=\"orange\">Sale</Badge>\n    </div>\n    <div className=\"mt-3\">\n      <span className=\"text-lg font-bold\">$299</span>\n      <span className=\"text-sm text-grey-400 line-through ml-2\">$399</span>\n    </div>\n  </CardBody>\n  <CardFooter>\n    <Button variant=\"primary\" className=\"w-full\">Add to Cart</Button>\n  </CardFooter>\n</Card>"
+    }
+  ]
+}

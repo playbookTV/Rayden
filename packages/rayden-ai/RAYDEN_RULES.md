@@ -36,7 +36,8 @@ import {
   Avatar, AvatarGroup, MetricsCard, EmptyStateIllustration,
   ActivityFeed, ActivityItem, ActivityContent, RaydenChart,
   // Layout
-  Accordion, AccordionItem, AccordionTrigger, AccordionContent, Modal,
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+  Card, CardHeader, CardBody, CardFooter, CardImage, Modal,
   // Composite
   ButtonGroup, ButtonGroupItem,
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
@@ -513,7 +514,7 @@ Premium layouts follow predictable, grid-aligned patterns.
 
 ---
 
-## Available Components (33 Total)
+## Available Components (34 Total)
 
 ### Primitives
 | Component | Description |
@@ -569,6 +570,7 @@ Premium layouts follow predictable, grid-aligned patterns.
 | Component | Description |
 |-----------|-------------|
 | `Accordion` | Collapsible content panels (compound component) |
+| `Card` | Flexible container with header, body, footer, and image sub-components |
 | `Modal` | Dialog overlay with backdrop and focus management |
 
 ### Composite
@@ -585,7 +587,7 @@ Premium layouts follow predictable, grid-aligned patterns.
 **DO NOT use these — they will not work:**
 
 - `Dialog`, `Popup`, `Overlay`, `Lightbox` (use `Modal`)
-- `Card`, `Panel`, `Box`, `Container`, `Paper`, `Surface` (use `<div>` with Tailwind)
+- `Panel`, `Box`, `Container`, `Paper`, `Surface` (use `Card` or `<div>` with Tailwind)
 - `Collapse`, `Collapsible`, `Expandable` (use `Accordion`)
 - `Carousel`
 - `TimePicker`, `DateTimePicker`, `Calendar` (use `DatePicker`)
@@ -609,7 +611,7 @@ Premium layouts follow predictable, grid-aligned patterns.
 
 | Need | Solution |
 |------|----------|
-| Card / Panel | `<div className="bg-white rounded-xl border border-grey-200 p-6">` |
+| Panel | Use `Card` component or `<div className="bg-white rounded-xl border border-grey-200 p-6">` |
 | Sidebar layout | `<div className="flex"><aside className="w-64 shrink-0">` + `<main className="flex-1">` |
 | Grid layout | `<div className="grid grid-cols-1 md:grid-cols-3 gap-6">` |
 | Skeleton loading | `<div className="animate-pulse bg-grey-100 rounded-lg h-4 w-3/4">` |
@@ -1405,6 +1407,119 @@ Tables require specific nesting: `Table` → `TableHeader`/`TableBody` → `Tabl
 | `expanded` / `isOpen` | Use `value` on AccordionItem and `defaultValue` on Accordion |
 | `onToggle` | Use `onValueChange` on Accordion |
 | Missing `value` on AccordionItem | Each AccordionItem requires a unique `value` prop |
+
+---
+
+## Card (Compound Component)
+
+Flexible container for grouping related content with optional header, body, footer, and image sections.
+
+```tsx
+// Basic card with header, body, footer
+<Card>
+  <CardHeader title="Card Title" subtitle="Description" />
+  <CardBody>
+    <p className="text-grey-600">Card content goes here.</p>
+  </CardBody>
+  <CardFooter>
+    <Button variant="grey" appearance="outlined" size="sm">Cancel</Button>
+    <Button variant="primary" size="sm">Save</Button>
+  </CardFooter>
+</Card>
+
+// Card with image
+<Card className="w-80">
+  <CardImage src="/image.jpg" alt="Description" aspectRatio="video" />
+  <CardHeader title="Beautiful Mountains" subtitle="Explore nature" />
+  <CardBody>
+    <p className="text-sm text-grey-600">Discover breathtaking views.</p>
+  </CardBody>
+</Card>
+
+// Variants
+<Card variant="default">...</Card>     // Border + subtle shadow
+<Card variant="outlined">...</Card>    // Thicker border, no shadow
+<Card variant="elevated">...</Card>    // Prominent shadow
+<Card variant="ghost">...</Card>       // No border or background
+
+// Sizes (controls sub-component padding)
+<Card size="sm">...</Card>  // px-4 py-3
+<Card size="md">...</Card>  // px-5 py-4 (default)
+<Card size="lg">...</Card>  // px-6 py-5
+
+// Hoverable card
+<Card hoverable className="cursor-pointer">
+  <CardBody>
+    <h3 className="font-semibold text-grey-900">Interactive Card</h3>
+    <p className="text-sm text-grey-500">Hover to see shadow effect</p>
+  </CardBody>
+</Card>
+
+// Header with actions
+<Card>
+  <CardHeader
+    title="Project Updates"
+    subtitle="Last updated 2 hours ago"
+    actions={
+      <>
+        <Badge color="success">Active</Badge>
+        <Button variant="grey" appearance="outlined" size="sm">
+          <Icon name="ellipsis-horizontal" />
+        </Button>
+      </>
+    }
+    bordered
+  />
+  <CardBody>...</CardBody>
+</Card>
+
+// Footer alignment
+<CardFooter align="left">...</CardFooter>
+<CardFooter align="center">...</CardFooter>
+<CardFooter align="right">...</CardFooter>   // default
+<CardFooter align="between">...</CardFooter>
+
+// Product card example
+<Card hoverable className="w-72">
+  <CardImage src="/product.jpg" alt="Product" aspectRatio="square" />
+  <CardBody>
+    <div className="flex items-start justify-between">
+      <div>
+        <p className="font-semibold text-grey-900">Premium Watch</p>
+        <p className="text-sm text-grey-500">Leather strap</p>
+      </div>
+      <Badge color="orange">Sale</Badge>
+    </div>
+    <div className="mt-3">
+      <span className="text-lg font-bold">$299</span>
+      <span className="text-sm text-grey-400 line-through ml-2">$399</span>
+    </div>
+  </CardBody>
+  <CardFooter>
+    <Button variant="primary" className="w-full">Add to Cart</Button>
+  </CardFooter>
+</Card>
+```
+
+### Card Props
+
+| Prop | Type | Default |
+|------|------|---------|
+| `variant` | `"default" \| "outlined" \| "elevated" \| "ghost"` | `"default"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `rounded` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` | `"lg"` |
+| `shadow` | `"none" \| "sm" \| "md" \| "lg"` | `"sm"` |
+| `hoverable` | `boolean` | `false` |
+
+### Card — Common Mistakes
+
+| Wrong | Correct |
+|-------|---------|
+| `<Card header={...} footer={...}>` | Use `CardHeader` and `CardFooter` sub-components |
+| `<Card image={...}>` | Use `CardImage` sub-component |
+| `padding="lg"` | `size="lg"` |
+| `elevation={2}` | `shadow="md"` or `variant="elevated"` |
+| `<Card onClick={...}>` | Wrap content in button/link, or use `hoverable` + `cursor-pointer` className |
 
 ---
 
@@ -2309,7 +2424,7 @@ If you see these names, use the correct Rayden UI component:
 | `TabList`, `TabGroup` | `Tabs` |
 | `Check` | `Checkbox` |
 | `Separator`, `HR` | `Divider` |
-| `Card`, `Panel`, `Surface` | `<div>` with Tailwind classes |
+| `Panel`, `Box`, `Surface` | `Card` |
 | `Dialog`, `Popup`, `Lightbox` | `Modal` |
 | `Collapse`, `Collapsible`, `Expandable` | `Accordion` |
 | `Range`, `RangeInput`, `SliderInput` | `Slider` or `RangeSlider` |

@@ -15,6 +15,7 @@ import badgeManifest from "./Badge.json";
 import breadcrumbManifest from "./Breadcrumb.json";
 import buttonManifest from "./Button.json";
 import buttonGroupManifest from "./ButtonGroup.json";
+import cardManifest from "./Card.json";
 import checkboxManifest from "./Checkbox.json";
 import chipManifest from "./Chip.json";
 import dividerManifest from "./Divider.json";
@@ -49,6 +50,7 @@ export const manifests = {
   Breadcrumb: breadcrumbManifest,
   Button: buttonManifest,
   ButtonGroup: buttonGroupManifest,
+  Card: cardManifest,
   Checkbox: checkboxManifest,
   Chip: chipManifest,
   Divider: dividerManifest,
