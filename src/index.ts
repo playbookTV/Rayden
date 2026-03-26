@@ -67,6 +67,20 @@ export type { BannerProps, BannerStatus, BannerEmphasis, BannerSize } from "./co
 export { Badge } from "./components/Badge";
 export type { BadgeProps, BadgeColor, BadgeType, BadgeSize } from "./components/Badge";
 
+export { Card, CardHeader, CardBody, CardFooter, CardImage } from "./components/Card";
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardBodyProps,
+  CardFooterProps,
+  CardImageProps,
+  CardVariant,
+  CardSize,
+  CardRounded,
+  CardShadow,
+  CardImagePosition,
+} from "./components/Card";
+
 export { Alert } from "./components/Alert";
 export type { AlertProps, AlertVariant, AlertState, AlertAction } from "./components/Alert";
 

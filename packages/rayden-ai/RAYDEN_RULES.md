@@ -6,6 +6,18 @@ AI agent instructions for generating Rayden UI code. Follow these rules precisel
 
 ## Quick Start
 
+### Installation
+
+```bash
+# Using CLI (Recommended)
+npx create-rayden-app my-app
+
+# Manual Installation
+npm install @raydenui/ui
+```
+
+### Usage
+
 ```tsx
 import {
   // Primitives

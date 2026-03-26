@@ -3,15 +3,15 @@
 # Downloads and installs the rayden-use skill for Claude Code or Cursor
 #
 # Usage:
-#   curl -fsSL https://raydenui.com/install-skill | sh
+#   curl -fsSL https://rayden-ui.dev/install-skill | sh
 #
 # Or specify a version:
-#   curl -fsSL https://raydenui.com/install-skill | sh -s -- v1.0.0
+#   curl -fsSL https://rayden-ui.dev/install-skill | sh -s -- v1.0.0
 
 set -e
 
 # Configuration
-REPO="ovalay-studios/rayden-ui"
+REPO="playbookTV/Rayden"
 BRANCH="${1:-main}"
 BASE_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}/packages/rayden-ai"
 
@@ -83,5 +83,5 @@ echo ""
 echo "  3. Try it out:"
 echo '     "Use the rayden-use skill to build a Button component"'
 echo ""
-echo "Documentation: https://raydenui.com/docs/figma-integration"
+echo "Documentation: https://rayden-ui.dev/docs/figma-integration"
 echo ""

@@ -92,6 +92,17 @@ function App() {
 - [create-rayden-app](https://www.npmjs.com/package/create-rayden-app) — CLI scaffolding with 6 templates
 - [@raydenui/ai](https://www.npmjs.com/package/@raydenui/ai) — MCP server for AI-assisted development
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/playbookTV"><img src="https://github.com/playbookTV.png" width="100px;" alt=""/><br /><sub><b>Leslie Isah</b></sub></a></td>
+    <td align="center"><a href="https://github.com/ZyhvarZeGreat"><img src="https://github.com/ZyhvarZeGreat.png" width="100px;" alt=""/><br /><sub><b>Bolude Daniel</b></sub></a></td>
+  </tr>
+</table>
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## License
 
 MIT
