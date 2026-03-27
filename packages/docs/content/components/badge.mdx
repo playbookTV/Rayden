@@ -17,11 +17,25 @@ import { Badge } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Badge>Default</Badge>
+</Preview>
+
 ```tsx
 <Badge>Default</Badge>
 ```
 
 ### Colors
+
+<Preview>
+  <Badge color="orange">Orange</Badge>
+  <Badge color="blue">Blue</Badge>
+  <Badge color="success">Success</Badge>
+  <Badge color="warning">Warning</Badge>
+  <Badge color="error">Error</Badge>
+  <Badge color="neutral">Neutral</Badge>
+  <Badge color="disabled">Disabled</Badge>
+</Preview>
 
 ```tsx
 <Badge color="orange">Orange</Badge>
@@ -35,6 +49,12 @@ import { Badge } from "@raydenui/ui";
 
 ### Types
 
+<Preview>
+  <Badge type="filled" color="success">Filled</Badge>
+  <Badge type="accent" color="success">Accent</Badge>
+  <Badge type="outline" color="success">Outline</Badge>
+</Preview>
+
 ```tsx
 // Filled (default)
 <Badge type="filled" color="success">Active</Badge>
@@ -47,6 +67,11 @@ import { Badge } from "@raydenui/ui";
 ```
 
 ### With Dot
+
+<Preview>
+  <Badge color="success" dot>Online</Badge>
+  <Badge color="error" dot>Offline</Badge>
+</Preview>
 
 ```tsx
 <Badge color="success" dot>Online</Badge>

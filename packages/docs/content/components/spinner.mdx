@@ -17,11 +17,25 @@ import { Spinner } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Spinner />
+</Preview>
+
 ```tsx
 <Spinner />
 ```
 
 ### Types
+
+<Preview>
+  <Spinner type="thin" />
+  <Spinner type="bold" />
+  <Spinner type="duo-tone" />
+  <Spinner type="buffering-thin" />
+  <Spinner type="buffering-bold" />
+  <Spinner type="dot" />
+  <Spinner type="juggling" />
+</Preview>
 
 ```tsx
 <Spinner type="thin" />
@@ -35,6 +49,16 @@ import { Spinner } from "@raydenui/ui";
 
 ### Sizes
 
+<Preview>
+  <Spinner size="xs" />
+  <Spinner size="sm" />
+  <Spinner size="md" />
+  <Spinner size="lg" />
+  <Spinner size="xl" />
+  <Spinner size="2xl" />
+  <Spinner size="3xl" />
+</Preview>
+
 ```tsx
 <Spinner size="xs" />  {/* 20px */}
 <Spinner size="sm" />  {/* 24px */}
@@ -47,11 +71,22 @@ import { Spinner } from "@raydenui/ui";
 
 ### With Label
 
+<Preview>
+  <Spinner label="Loading..." />
+</Preview>
+
 ```tsx
 <Spinner label="Loading..." />
 ```
 
 ### Label Positions
+
+<Preview vertical>
+  <Spinner label="Loading" labelPosition="after" />
+  <Spinner label="Loading" labelPosition="before" />
+  <Spinner label="Loading" labelPosition="above" />
+  <Spinner label="Loading" labelPosition="below" />
+</Preview>
 
 ```tsx
 <Spinner label="Loading" labelPosition="after" />
@@ -64,48 +99,15 @@ import { Spinner } from "@raydenui/ui";
 
 For dark backgrounds:
 
+<Preview>
+  <div className="bg-grey-900 p-4 rounded-lg">
+    <Spinner colorStyle="white" label="Loading..." />
+  </div>
+</Preview>
+
 ```tsx
 <div className="bg-grey-900 p-4 rounded-lg">
   <Spinner colorStyle="white" label="Loading..." />
-</div>
-```
-
-### No Label
-
-```tsx
-<Spinner />
-```
-
-### In Context
-
-```tsx
-// Button loading state
-<Button disabled>
-  <Spinner size="sm" colorStyle="white" />
-  <span>Saving...</span>
-</Button>
-
-// Page loading
-<div className="flex items-center justify-center h-screen">
-  <Spinner size="xl" label="Loading content..." labelPosition="below" />
-</div>
-
-// Inline loading
-<p>
-  Processing your request <Spinner size="xs" />
-</p>
-```
-
-### All Types Grid
-
-```tsx
-<div className="grid grid-cols-4 gap-4">
-  {["thin", "bold", "duo-tone", "buffering-thin", "buffering-bold", "dot", "juggling"].map((type) => (
-    <div key={type} className="flex flex-col items-center gap-2">
-      <Spinner type={type} size="lg" />
-      <span className="text-xs">{type}</span>
-    </div>
-  ))}
 </div>
 ```
 

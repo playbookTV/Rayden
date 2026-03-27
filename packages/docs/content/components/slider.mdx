@@ -17,6 +17,10 @@ import { Slider, RangeSlider } from "@raydenui/ui";
 
 ### Basic Slider
 
+<Preview>
+  <Slider />
+</Preview>
+
 ```tsx
 <Slider />
 ```
@@ -31,6 +35,12 @@ const [value, setValue] = useState(50);
 
 ### Sizes
 
+<Preview vertical>
+  <Slider size="sm" defaultValue={30} />
+  <Slider size="md" defaultValue={50} />
+  <Slider size="lg" defaultValue={70} />
+</Preview>
+
 ```tsx
 <Slider size="sm" />
 <Slider size="md" />
@@ -39,11 +49,28 @@ const [value, setValue] = useState(50);
 
 ### With Label
 
+<Preview>
+  <Slider label="Volume" defaultValue={60} />
+</Preview>
+
 ```tsx
 <Slider label="Volume" />
 ```
 
 ### With Metadata
+
+<Preview vertical>
+  <Slider
+    label="Download Speed"
+    metadata="50 MB/s"
+    defaultValue={50}
+  />
+  <Slider
+    label="Connection"
+    metadata={["5G", "Low latency", "Stable"]}
+    defaultValue={75}
+  />
+</Preview>
 
 ```tsx
 <Slider
@@ -59,17 +86,29 @@ const [value, setValue] = useState(50);
 
 ### Hide Percentage
 
+<Preview>
+  <Slider showPercentage={false} defaultValue={40} />
+</Preview>
+
 ```tsx
 <Slider showPercentage={false} />
 ```
 
 ### Custom Range
 
+<Preview>
+  <Slider min={0} max={1000} step={10} defaultValue={500} label="Custom Range (0-1000)" />
+</Preview>
+
 ```tsx
 <Slider min={0} max={1000} step={10} />
 ```
 
 ### Disabled
+
+<Preview>
+  <Slider disabled defaultValue={30} label="Disabled Slider" />
+</Preview>
 
 ```tsx
 <Slider disabled value={30} />
@@ -80,6 +119,10 @@ const [value, setValue] = useState(50);
 A dual-handle slider for selecting a range of values.
 
 ### Basic Range
+
+<Preview>
+  <RangeSlider />
+</Preview>
 
 ```tsx
 <RangeSlider />
@@ -95,17 +138,35 @@ const [range, setRange] = useState<[number, number]>([25, 75]);
 
 ### With Label
 
+<Preview>
+  <RangeSlider label="Price Range" defaultValue={[20, 80]} />
+</Preview>
+
 ```tsx
 <RangeSlider label="Price Range" />
 ```
 
 ### Hide Labels
 
+<Preview>
+  <RangeSlider showLabels={false} defaultValue={[30, 70]} />
+</Preview>
+
 ```tsx
 <RangeSlider showLabels={false} />
 ```
 
 ### Custom Range
+
+<Preview>
+  <RangeSlider
+    min={0}
+    max={1000}
+    step={50}
+    label="Budget ($)"
+    defaultValue={[200, 800]}
+  />
+</Preview>
 
 ```tsx
 <RangeSlider

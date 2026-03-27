@@ -17,36 +17,62 @@ import { FileUpload } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <FileUploadDemo />
+</Preview>
+
 ```tsx
-<FileUpload onUpload={(files) => handleUpload(files)} />
+const [files, setFiles] = useState<FileUploadFileData[]>([]);
+
+<FileUpload
+  files={files}
+  onFilesChange={setFiles}
+  onUpload={(file) => handleUpload(file)}
+/>
 ```
 
 ### With File Type Restrictions
 
+<Preview>
+  <FileUploadRestrictedDemo />
+</Preview>
+
 ```tsx
 <FileUpload
+  files={files}
+  onFilesChange={setFiles}
   accept=".pdf,.doc,.docx"
-  onUpload={(files) => handleUpload(files)}
-/>
-```
-
-### With Max File Size
-
-```tsx
-<FileUpload
-  maxSize={5 * 1024 * 1024} // 5MB
-  onUpload={(files) => handleUpload(files)}
-  onError={(error) => showError(error)}
+  description="PDF, DOC up to 10MB"
 />
 ```
 
 ### Multiple Files
 
+<Preview>
+  <FileUploadMultipleDemo />
+</Preview>
+
 ```tsx
 <FileUpload
+  files={files}
+  onFilesChange={setFiles}
   multiple
   maxFiles={5}
-  onUpload={(files) => handleUpload(files)}
+/>
+```
+
+### Custom Styling
+
+<Preview>
+  <FileUploadCustomDemo />
+</Preview>
+
+```tsx
+<FileUpload
+  files={files}
+  onFilesChange={setFiles}
+  title="Upload Images"
+  description="PNG, JPG up to 10MB"
 />
 ```
 
@@ -67,14 +93,13 @@ const [progress, setProgress] = useState(0);
 />
 ```
 
-### Custom Styling
+### With Max File Size
 
 ```tsx
 <FileUpload
-  title="Upload Images"
-  description="PNG, JPG up to 10MB"
-  icon={<PhotoIcon />}
+  maxSize={5 * 1024 * 1024} // 5MB
   onUpload={(files) => handleUpload(files)}
+  onError={(error) => showError(error)}
 />
 ```
 
@@ -82,7 +107,7 @@ const [progress, setProgress] = useState(0);
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `onUpload` | `(files: File[]) => void` | — | Upload handler (required) |
+| `onUpload` | `(files: File[]) => void` | — | Upload handler |
 | `onError` | `(error: string) => void` | — | Error handler |
 | `accept` | `string` | — | Accepted file types |
 | `maxSize` | `number` | — | Max file size in bytes |

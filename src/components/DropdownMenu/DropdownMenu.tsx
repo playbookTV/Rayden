@@ -266,6 +266,8 @@ export interface DropdownMenuItemProps extends Omit<
   selected?: boolean;
   /** Whether this item is disabled */
   disabled?: boolean;
+  /** Whether this is a destructive/dangerous action */
+  destructive?: boolean;
   /** Called when the item is selected (click or Enter/Space) */
   onSelect?: () => void;
 }
@@ -277,6 +279,7 @@ export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemPr
       shortcut,
       selected = false,
       disabled = false,
+      destructive = false,
       onSelect,
       onClick,
       children,
@@ -310,7 +313,9 @@ export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemPr
           "flex w-full items-center gap-1 px-4 py-2 text-left text-body-sm outline-none transition-colors",
           disabled
             ? "bg-grey-100 text-grey-400 cursor-not-allowed"
-            : "text-grey-900 hover:bg-grey-50 focus:bg-grey-100",
+            : destructive
+              ? "text-error-500 hover:bg-error-50 focus:bg-error-100"
+              : "text-grey-900 hover:bg-grey-50 focus:bg-grey-100",
           className
         )}
         {...rest}

@@ -17,15 +17,31 @@ import { Checkbox, Radio, Toggle } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Checkbox label="I agree to the terms" />
+</Preview>
+
 ```tsx
 <Checkbox label="I agree to the terms" />
 ```
 
 ### With Description
 
+<Preview>
+  <Checkbox label="Email notifications" description="Receive email updates about your account" />
+</Preview>
+
 ```tsx
 <Checkbox label="Email notifications" description="Receive email updates about your account" />
 ```
+
+### States
+
+<Preview>
+  <Checkbox label="Unchecked" />
+  <Checkbox label="Checked" checked />
+  <Checkbox label="Disabled" disabled />
+</Preview>
 
 ### Controlled
 
@@ -48,6 +64,12 @@ const [checked, setChecked] = useState(false);
 ## Radio
 
 ### Basic Group
+
+<Preview vertical>
+  <Radio name="preview-options" value="option1" label="Option 1" checked />
+  <Radio name="preview-options" value="option2" label="Option 2" />
+  <Radio name="preview-options" value="option3" label="Option 3" />
+</Preview>
 
 ```tsx
 const [value, setValue] = useState("option1");
@@ -79,6 +101,16 @@ const [value, setValue] = useState("option1");
 
 ### With Description
 
+<Preview>
+  <Radio
+    name="plan"
+    value="pro"
+    label="Pro Plan"
+    description="$29/month, unlimited features"
+    checked
+  />
+</Preview>
+
 ```tsx
 <Radio
   name="plan"
@@ -106,15 +138,31 @@ const [value, setValue] = useState("option1");
 
 ### Basic
 
+<Preview>
+  <Toggle label="Dark mode" />
+</Preview>
+
 ```tsx
 <Toggle label="Dark mode" />
 ```
 
 ### With Description
 
+<Preview>
+  <Toggle label="Auto-save" description="Automatically save changes every 5 minutes" />
+</Preview>
+
 ```tsx
 <Toggle label="Auto-save" description="Automatically save changes every 5 minutes" />
 ```
+
+### States
+
+<Preview>
+  <Toggle label="Off" />
+  <Toggle label="On" checked />
+  <Toggle label="Disabled" disabled />
+</Preview>
 
 ### Controlled
 

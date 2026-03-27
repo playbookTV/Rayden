@@ -17,11 +17,21 @@ import { ProgressBar } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <ProgressBar value={60} />
+</Preview>
+
 ```tsx
 <ProgressBar value={60} />
 ```
 
 ### Sizes
+
+<Preview vertical>
+  <ProgressBar size="sm" value={40} />
+  <ProgressBar size="md" value={40} />
+  <ProgressBar size="lg" value={40} />
+</Preview>
 
 ```tsx
 <ProgressBar size="sm" value={40} />  {/* 4px height */}
@@ -33,11 +43,19 @@ import { ProgressBar } from "@raydenui/ui";
 
 Display progress as 10 discrete segments instead of a continuous bar.
 
+<Preview>
+  <ProgressBar type="segmented" value={70} />
+</Preview>
+
 ```tsx
 <ProgressBar type="segmented" value={70} />
 ```
 
 ### With Label
+
+<Preview>
+  <ProgressBar value={75} label="Uploading files..." />
+</Preview>
 
 ```tsx
 <ProgressBar value={75} label="Uploading files..." />
@@ -45,15 +63,19 @@ Display progress as 10 discrete segments instead of a continuous bar.
 
 ### With Metadata
 
-Single metadata item:
+<Preview vertical>
+  <ProgressBar value={60} metadata="Estimated time: 2 min" />
+  <ProgressBar
+    value={45}
+    metadata={["25 MB / 50 MB", "2:30 remaining", "Fast"]}
+  />
+</Preview>
 
 ```tsx
+// Single metadata item
 <ProgressBar value={60} metadata="Estimated time: 2 min" />
-```
 
-Multiple metadata items (dot-separated):
-
-```tsx
+// Multiple metadata items (dot-separated)
 <ProgressBar
   value={45}
   metadata={["25 MB / 50 MB", "2:30 remaining", "Fast"]}
@@ -61,6 +83,12 @@ Multiple metadata items (dot-separated):
 ```
 
 ### Percentage Position
+
+<Preview vertical>
+  <ProgressBar value={75} percentagePosition="bottom" />
+  <ProgressBar value={75} percentagePosition="top" />
+  <ProgressBar value={75} showPercentage={false} />
+</Preview>
 
 ```tsx
 // Bottom (default)
@@ -75,6 +103,18 @@ Multiple metadata items (dot-separated):
 
 ### Complete Example
 
+<Preview>
+  <ProgressBar
+    value={65}
+    size="lg"
+    type="basic"
+    label="Downloading update..."
+    metadata={["128 MB / 200 MB", "5 min left"]}
+    showPercentage
+    percentagePosition="top"
+  />
+</Preview>
+
 ```tsx
 <ProgressBar
   value={65}
@@ -85,26 +125,6 @@ Multiple metadata items (dot-separated):
   showPercentage
   percentagePosition="top"
 />
-```
-
-### In Context
-
-```tsx
-// File upload progress
-<div className="space-y-2">
-  <div className="flex items-center gap-3">
-    <DocumentIcon className="w-5 h-5" />
-    <span className="flex-1">document.pdf</span>
-  </div>
-  <ProgressBar value={75} metadata="75 KB / 100 KB" />
-</div>
-
-// Task completion with segmented bar
-<div className="space-y-1">
-  <p className="text-sm font-medium">Profile Completion</p>
-  <ProgressBar type="segmented" value={80} />
-  <p className="text-xs text-grey-500">8 of 10 steps complete</p>
-</div>
 ```
 
 ## Props

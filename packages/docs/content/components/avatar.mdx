@@ -17,11 +17,21 @@ import { Avatar, AvatarGroup } from "@raydenui/ui";
 
 ### Image Avatar
 
+<Preview>
+  <Avatar type="image" src="https://i.pravatar.cc/150?img=1" alt="John Doe" />
+</Preview>
+
 ```tsx
 <Avatar type="image" src="/avatar.jpg" alt="John Doe" />
 ```
 
 ### Initials Avatar
+
+<Preview>
+  <Avatar type="initials" initials="JD" />
+  <Avatar type="initials" initials="AB" />
+  <Avatar type="initials" initials="CD" />
+</Preview>
 
 ```tsx
 <Avatar type="initials" initials="JD" />
@@ -29,13 +39,25 @@ import { Avatar, AvatarGroup } from "@raydenui/ui";
 
 ### Icon Avatar
 
-```tsx
-import { UserIcon } from "@heroicons/react/20/solid";
+<Preview>
+  <Avatar type="icon" icon={<Icon name="user" variant="solid" />} />
+</Preview>
 
-<Avatar type="icon" icon={<UserIcon />} />
+```tsx
+import { Icon } from "@raydenui/ui";
+
+<Avatar type="icon" icon={<Icon name="user" />} />
 ```
 
 ### Sizes
+
+<Preview>
+  <Avatar type="initials" initials="XS" size="xs" />
+  <Avatar type="initials" initials="SM" size="sm" />
+  <Avatar type="initials" initials="MD" size="md" />
+  <Avatar type="initials" initials="LG" size="lg" />
+  <Avatar type="initials" initials="XL" size="xl" />
+</Preview>
 
 ```tsx
 <Avatar type="initials" initials="XS" size="xs" />
@@ -47,6 +69,13 @@ import { UserIcon } from "@heroicons/react/20/solid";
 
 ### With Status Indicator
 
+<Preview>
+  <Avatar type="image" src="https://i.pravatar.cc/150?img=2" status="online" />
+  <Avatar type="image" src="https://i.pravatar.cc/150?img=3" status="offline" />
+  <Avatar type="image" src="https://i.pravatar.cc/150?img=4" status="busy" />
+  <Avatar type="image" src="https://i.pravatar.cc/150?img=5" status="away" />
+</Preview>
+
 ```tsx
 <Avatar type="image" src="/avatar.jpg" status="online" />
 <Avatar type="image" src="/avatar.jpg" status="offline" />
@@ -55,6 +84,15 @@ import { UserIcon } from "@heroicons/react/20/solid";
 ```
 
 ### Avatar Group
+
+<Preview>
+  <AvatarGroup>
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=6" />
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=7" />
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=8" />
+    <Avatar type="initials" initials="+5" />
+  </AvatarGroup>
+</Preview>
 
 ```tsx
 <AvatarGroup>
@@ -66,6 +104,16 @@ import { UserIcon } from "@heroicons/react/20/solid";
 ```
 
 ### Avatar Group with Max
+
+<Preview>
+  <AvatarGroup max={3}>
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=9" />
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=10" />
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=11" />
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=12" />
+    <Avatar type="image" src="https://i.pravatar.cc/150?img=13" />
+  </AvatarGroup>
+</Preview>
 
 ```tsx
 <AvatarGroup max={3}>

@@ -83,19 +83,6 @@ const [open, setOpen] = useState(false);
 />
 ```
 
-### Custom Icon
-
-```tsx
-<Modal
-  open={open}
-  onClose={() => setOpen(false)}
-  title="Warning"
-  description="This will permanently delete your data."
-  icon={<AlertTriangleIcon className="text-warning-400" />}
-  primaryLabel="Delete Anyway"
-/>
-```
-
 ### Primary Only
 
 ```tsx
@@ -107,19 +94,6 @@ const [open, setOpen] = useState(false);
   primaryLabel="Get Started"
   onPrimaryClick={() => setOpen(false)}
 />
-```
-
-### No Blur
-
-```tsx
-<Modal
-  open={open}
-  onClose={() => setOpen(false)}
-  title="Settings"
-  blur={false}
->
-  Modal without backdrop blur effect.
-</Modal>
 ```
 
 ### Prevent Close on Overlay

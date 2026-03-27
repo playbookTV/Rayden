@@ -1,0 +1,88 @@
+---
+title: RecentTransactionsBlock
+description: Transaction history list with direction indicators and amounts
+---
+
+# RecentTransactionsBlock
+
+A transaction history list with direction indicators and amounts.
+
+## Import
+
+```tsx
+import { RecentTransactionsBlock } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+<Preview>
+  <RecentTransactionsBlockDemo />
+</Preview>
+
+```tsx
+<RecentTransactionsBlock
+  transactions={[
+    {
+      id: "1",
+      direction: "outgoing",
+      name: "Netflix",
+      category: "Entertainment",
+      amount: "$15.99",
+    },
+    {
+      id: "2",
+      direction: "incoming",
+      name: "Payroll Inc",
+      category: "Salary",
+      amount: "$5,000.00",
+    },
+    {
+      id: "3",
+      direction: "outgoing",
+      name: "Grocery Store",
+      category: "Shopping",
+      amount: "$89.50",
+    },
+  ]}
+  onSeeAll={() => navigate("/transactions")}
+/>
+```
+
+### With Custom Title
+
+```tsx
+<RecentTransactionsBlock
+  title="Transaction History"
+  seeAllLabel="View all transactions"
+  transactions={transactions}
+  onSeeAll={() => navigate("/transactions")}
+  onTransactionClick={(id) => viewTransaction(id)}
+/>
+```
+
+## Props
+
+| Prop                 | Type                       | Default                 | Description                 |
+| -------------------- | -------------------------- | ----------------------- | --------------------------- |
+| `title`              | `string`                   | `"Recent Transactions"` | Header title                |
+| `seeAllLabel`        | `string`                   | `"See all"`             | See all link label          |
+| `onSeeAll`           | `() => void`               | —                       | See all handler             |
+| `transactions`       | `Transaction[]`            | —                       | Transaction list (required) |
+| `onTransactionClick` | `(id: string) => void`     | —                       | Transaction click handler   |
+| `className`          | `string`                   | —                       | Additional CSS classes      |
+
+### Transaction
+
+| Prop        | Type                        | Required | Description                      |
+| ----------- | --------------------------- | -------- | -------------------------------- |
+| `id`        | `string`                    | Yes      | Unique identifier                |
+| `direction` | `"incoming" \| "outgoing"`  | Yes      | Transaction direction            |
+| `name`      | `string`                    | Yes      | Recipient or sender name         |
+| `category`  | `string`                    | Yes      | Transaction category             |
+| `amount`    | `string`                    | Yes      | Formatted amount (e.g., "$15.99")|
+
+## Accessibility
+
+- Transaction items are keyboard navigable
+- Direction indicators have appropriate colors (green for incoming, red for outgoing)
+- Screen readers announce transaction details

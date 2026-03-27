@@ -17,6 +17,15 @@ import { MetricsCard } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <MetricsCard
+    title="Total Revenue"
+    value="$45,231.89"
+    change="+20.1%"
+    changeType="positive"
+  />
+</Preview>
+
 ```tsx
 <MetricsCard
   title="Total Revenue"
@@ -27,6 +36,28 @@ import { MetricsCard } from "@raydenui/ui";
 ```
 
 ### Layout Variants
+
+<Preview vertical>
+  <MetricsCard
+    variant="default"
+    title="Users"
+    value="2,350"
+    change="+12%"
+    changeType="positive"
+  />
+  <MetricsCard
+    variant="stacked"
+    title="Orders"
+    value="1,234"
+    change="-5%"
+    changeType="negative"
+  />
+  <MetricsCard
+    variant="compact"
+    title="Conversion"
+    value="3.2%"
+  />
+</Preview>
 
 ```tsx
 // Default - horizontal layout
@@ -53,24 +84,40 @@ import { MetricsCard } from "@raydenui/ui";
   title="Conversion"
   value="3.2%"
 />
+```
 
-// With icon
+### With Icon
+
+<Preview>
+  <MetricsCard
+    variant="with-icon"
+    title="Revenue"
+    value="$12,345"
+    icon={<Icon name="currency-dollar" />}
+  />
+</Preview>
+
+```tsx
 <MetricsCard
   variant="with-icon"
   title="Revenue"
   value="$12,345"
-  icon={<CurrencyDollarIcon />}
+  icon={<Icon name="currency-dollar" />}
 />
+```
 
-// With chart
-<MetricsCard
-  variant="with-chart"
-  title="Traffic"
-  value="45.2K"
-  chart={<SparklineChart data={data} />}
-/>
+### With Progress
 
-// With progress
+<Preview>
+  <MetricsCard
+    variant="with-progress"
+    title="Storage"
+    value="75%"
+    progress={75}
+  />
+</Preview>
+
+```tsx
 <MetricsCard
   variant="with-progress"
   title="Storage"
@@ -80,6 +127,23 @@ import { MetricsCard } from "@raydenui/ui";
 ```
 
 ### With Trend
+
+<Preview>
+  <MetricsCard
+    title="Active Users"
+    value="12,543"
+    change="+8.2%"
+    changeType="positive"
+    trend="up"
+  />
+  <MetricsCard
+    title="Bounce Rate"
+    value="32.1%"
+    change="+2.4%"
+    changeType="negative"
+    trend="up"
+  />
+</Preview>
 
 ```tsx
 <MetricsCard
@@ -100,6 +164,16 @@ import { MetricsCard } from "@raydenui/ui";
 ```
 
 ### With Subtitle
+
+<Preview>
+  <MetricsCard
+    title="Total Sales"
+    subtitle="Last 30 days"
+    value="$98,765"
+    change="+15.3%"
+    changeType="positive"
+  />
+</Preview>
 
 ```tsx
 <MetricsCard

@@ -1,4 +1,9 @@
+@import "tailwindcss";
+@import "@raydenui/ui/styles.css";
 @import "nextra-theme-docs/style.css";
+
+/* Enable class-based dark mode for Preview component */
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   /* Override Nextra primary color with Rayden orange #F56630 */

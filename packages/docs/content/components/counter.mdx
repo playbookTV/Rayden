@@ -17,6 +17,10 @@ import { Counter, NumberCounter } from "@raydenui/ui";
 
 ### Basic Counter
 
+<Preview>
+  <Counter />
+</Preview>
+
 ```tsx
 <Counter />
 ```
@@ -31,6 +35,12 @@ const [value, setValue] = useState(5);
 
 ### Sizes
 
+<Preview>
+  <Counter size="sm" defaultValue={3} />
+  <Counter size="md" defaultValue={5} />
+  <Counter size="lg" defaultValue={7} />
+</Preview>
+
 ```tsx
 <Counter size="sm" />
 <Counter size="md" />
@@ -38,6 +48,12 @@ const [value, setValue] = useState(5);
 ```
 
 ### Shapes
+
+<Preview>
+  <Counter shape="rounded" defaultValue={1} />
+  <Counter shape="block" defaultValue={2} />
+  <Counter shape="pill" defaultValue={3} />
+</Preview>
 
 ```tsx
 <Counter shape="rounded" />
@@ -47,17 +63,29 @@ const [value, setValue] = useState(5);
 
 ### With Min/Max
 
+<Preview>
+  <Counter min={0} max={10} defaultValue={5} />
+</Preview>
+
 ```tsx
 <Counter min={0} max={10} defaultValue={5} />
 ```
 
 ### With Step
 
+<Preview>
+  <Counter step={5} defaultValue={10} />
+</Preview>
+
 ```tsx
 <Counter step={5} defaultValue={0} />
 ```
 
 ### Disabled
+
+<Preview>
+  <Counter disabled defaultValue={3} />
+</Preview>
 
 ```tsx
 <Counter disabled defaultValue={3} />
@@ -69,11 +97,21 @@ A badge-style display for showing numeric values.
 
 ### Basic
 
+<Preview>
+  <NumberCounter value={5} />
+</Preview>
+
 ```tsx
 <NumberCounter value={5} />
 ```
 
 ### Sizes
+
+<Preview>
+  <NumberCounter value={3} size="sm" />
+  <NumberCounter value={12} size="md" />
+  <NumberCounter value={99} size="lg" />
+</Preview>
 
 ```tsx
 <NumberCounter value={3} size="sm" />
@@ -82,6 +120,13 @@ A badge-style display for showing numeric values.
 ```
 
 ### Colors
+
+<Preview>
+  <NumberCounter value={5} color="orange" />
+  <NumberCounter value={3} color="red" />
+  <NumberCounter value={8} color="grey" />
+  <NumberCounter value={2} color="white" />
+</Preview>
 
 ```tsx
 <NumberCounter value={5} color="orange" />

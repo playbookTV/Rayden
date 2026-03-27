@@ -1,0 +1,82 @@
+---
+title: QuickSendBlock
+description: Quick money transfer interface with beneficiary selection
+---
+
+# QuickSendBlock
+
+A quick money transfer interface with beneficiary selection.
+
+## Import
+
+```tsx
+import { QuickSendBlock } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+<Preview>
+  <QuickSendBlockDemo />
+</Preview>
+
+```tsx
+<QuickSendBlock
+  beneficiaries={[
+    { id: "1", name: "John Doe", handle: "johndoe", avatar: <Avatar type="image" src="..." size="lg" /> },
+    { id: "2", name: "Sarah", handle: "sarah_m", avatar: <Avatar type="image" src="..." size="lg" /> },
+    { id: "3", name: "Mike", handle: "mike_t", avatar: <Avatar type="image" src="..." size="lg" /> },
+  ]}
+  onSelect={(id) => handleBeneficiarySelect(id)}
+/>
+```
+
+### With See All Link
+
+```tsx
+<QuickSendBlock
+  title="Quick Send"
+  seeAllLabel="See all beneficiaries"
+  onSeeAll={() => navigate("/beneficiaries")}
+  beneficiaries={beneficiaries}
+  onSelect={(id) => handleBeneficiarySelect(id)}
+/>
+```
+
+### With Initials
+
+```tsx
+<QuickSendBlock
+  beneficiaries={[
+    { id: "1", name: "John Doe", handle: "johndoe", initials: "JD" },
+    { id: "2", name: "Sarah Miller", handle: "sarah_m", initials: "SM" },
+  ]}
+  onSelect={(id) => handleBeneficiarySelect(id)}
+/>
+```
+
+## Props
+
+| Prop            | Type                     | Default        | Description                   |
+| --------------- | ------------------------ | -------------- | ----------------------------- |
+| `title`         | `string`                 | `"Quick Send"` | Header title                  |
+| `seeAllLabel`   | `string`                 | `"See all beneficiaries"` | See all link label |
+| `onSeeAll`      | `() => void`             | —              | See all click handler         |
+| `beneficiaries` | `QuickSendBeneficiary[]` | —              | List of recipients (required) |
+| `onSelect`      | `(id: string) => void`   | —              | Selection handler             |
+| `className`     | `string`                 | —              | Additional CSS classes        |
+
+### QuickSendBeneficiary
+
+| Prop       | Type        | Required | Description                      |
+| ---------- | ----------- | -------- | -------------------------------- |
+| `id`       | `string`    | Yes      | Unique identifier                |
+| `name`     | `string`    | Yes      | Beneficiary name                 |
+| `handle`   | `string`    | Yes      | Username/handle (e.g., @johndoe) |
+| `avatar`   | `ReactNode` | No       | Custom avatar element            |
+| `initials` | `string`    | No       | Initials for default avatar      |
+
+## Accessibility
+
+- Beneficiary buttons are keyboard navigable
+- Names and handles are announced to screen readers
+- Focus states are clearly visible

@@ -1,0 +1,106 @@
+---
+title: EmptyStateBlock
+description: Empty state display with illustration, title, description, and action buttons
+---
+
+# EmptyStateBlock
+
+An empty state display with illustration, title, description, and action buttons.
+
+## Import
+
+```tsx
+import { EmptyStateBlock } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+<Preview>
+  <EmptyStateBlockDemo />
+</Preview>
+
+```tsx
+<EmptyStateBlock
+  illustration="task-templates"
+  title="No tasks to show"
+  description={`You don't have any pending tasks for today.\nAdd new tasks to track productivity`}
+  action={{ label: "New Task", icon: "plus" }}
+/>
+```
+
+### No Results Variant
+
+<Preview>
+  <EmptyStateBlockSearchDemo />
+</Preview>
+
+```tsx
+<EmptyStateBlock
+  illustration="search"
+  illustrationColored={false}
+  title="No results found"
+  description={`"Access" did not match any results.\nPlease try again`}
+/>
+```
+
+### Card Variant
+
+```tsx
+<EmptyStateBlock
+  illustration="gallery"
+  variant="card"
+  title="Ready to add some photos?"
+  description={`Tap the button below to upload and\nshare photos with your community`}
+  action={{ label: "Upload Photos", icon: "upload" }}
+/>
+```
+
+## Illustration Variants
+
+| Illustration         | Use Case                     |
+| -------------------- | ---------------------------- |
+| `task-templates`     | No tasks                     |
+| `search`             | No search results            |
+| `gallery`            | No photos/images             |
+| `folder`             | Empty folder                 |
+| `inbox`              | Empty inbox                  |
+| `notifications`      | No notifications             |
+| `documents`          | No documents                 |
+| `users`              | No team members              |
+| `chart`              | No data/analytics            |
+| `calendar`           | No events                    |
+| `cart`               | Empty cart                   |
+| `bookmark`           | No bookmarks                 |
+| `message`            | No messages                  |
+| `cloud`              | No cloud storage             |
+| `settings`           | No configuration             |
+| `error`              | General error state          |
+| `success`            | Action completed             |
+| `connection`         | No internet connection       |
+| `location`           | No location data             |
+
+## Props
+
+| Prop                  | Type                    | Default     | Description                |
+| --------------------- | ----------------------- | ----------- | -------------------------- |
+| `illustration`        | `string`                | —           | Illustration name          |
+| `illustrationColored` | `boolean`               | `true`      | Use colored illustration   |
+| `variant`             | `"default" \| "card"`   | `"default"` | Display variant            |
+| `title`               | `string`                | —           | Title text (required)      |
+| `description`         | `string`                | —           | Description text           |
+| `action`              | `EmptyStateBlockAction` | —           | Primary action button      |
+| `className`           | `string`                | —           | Additional CSS classes     |
+
+### EmptyStateBlockAction
+
+| Prop      | Type         | Required | Description         |
+| --------- | ------------ | -------- | ------------------- |
+| `label`   | `string`     | Yes      | Button label        |
+| `icon`    | `string`     | No       | Icon name           |
+| `onClick` | `() => void` | No       | Click handler       |
+
+## Accessibility
+
+- Illustrations are decorative (aria-hidden)
+- Action buttons have proper focus states
+- Description text supports multi-line content

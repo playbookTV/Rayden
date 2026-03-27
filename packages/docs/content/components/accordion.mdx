@@ -17,6 +17,25 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@r
 
 ### Basic
 
+<Preview>
+  <div className="w-full">
+    <Accordion>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>What is Rayden UI?</AccordionTrigger>
+        <AccordionContent>
+          Rayden UI is a React component library built with Tailwind CSS.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>How do I install it?</AccordionTrigger>
+        <AccordionContent>
+          Install with npm, yarn, or pnpm: npm install @raydenui/ui
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+</Preview>
+
 ```tsx
 <Accordion>
   <AccordionItem value="item-1">
@@ -38,6 +57,21 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@r
 
 The nested type has full borders with rounded corners instead of bottom borders.
 
+<Preview>
+  <div className="w-full">
+    <Accordion type="nested">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Section One</AccordionTrigger>
+        <AccordionContent>Content for section one.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Section Two</AccordionTrigger>
+        <AccordionContent>Content for section two.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+</Preview>
+
 ```tsx
 <Accordion type="nested">
   <AccordionItem value="item-1">
@@ -55,6 +89,21 @@ The nested type has full borders with rounded corners instead of bottom borders.
 
 Allow multiple items to be open simultaneously.
 
+<Preview>
+  <div className="w-full">
+    <Accordion multiple defaultValue={["item-1", "item-2"]}>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>First Item</AccordionTrigger>
+        <AccordionContent>This can stay open...</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Second Item</AccordionTrigger>
+        <AccordionContent>...while this is also open.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+</Preview>
+
 ```tsx
 <Accordion multiple>
   <AccordionItem value="item-1">
@@ -70,20 +119,50 @@ Allow multiple items to be open simultaneously.
 
 ### With Icons
 
+<Preview>
+  <div className="w-full">
+    <Accordion>
+      <AccordionItem value="settings">
+        <AccordionTrigger leadingIcon="settings">Settings</AccordionTrigger>
+        <AccordionContent>Configure your preferences here.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="users">
+        <AccordionTrigger leadingIcon="users">Users</AccordionTrigger>
+        <AccordionContent>Manage team members and permissions.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+</Preview>
+
 ```tsx
 <Accordion>
   <AccordionItem value="settings">
-    <AccordionTrigger leadingIcon="settings-02">Settings</AccordionTrigger>
+    <AccordionTrigger leadingIcon="settings">Settings</AccordionTrigger>
     <AccordionContent>Configure your preferences here.</AccordionContent>
   </AccordionItem>
   <AccordionItem value="users">
-    <AccordionTrigger leadingIcon="users-01">Users</AccordionTrigger>
+    <AccordionTrigger leadingIcon="users">Users</AccordionTrigger>
     <AccordionContent>Manage team members and permissions.</AccordionContent>
   </AccordionItem>
 </Accordion>
 ```
 
 ### With Numbers
+
+<Preview>
+  <div className="w-full">
+    <Accordion>
+      <AccordionItem value="step-1">
+        <AccordionTrigger leadingNumber="01">Getting Started</AccordionTrigger>
+        <AccordionContent>Begin with installation.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="step-2">
+        <AccordionTrigger leadingNumber="02">Configuration</AccordionTrigger>
+        <AccordionContent>Set up your project.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+</Preview>
 
 ```tsx
 <Accordion>
@@ -94,17 +173,6 @@ Allow multiple items to be open simultaneously.
   <AccordionItem value="step-2">
     <AccordionTrigger leadingNumber="02">Configuration</AccordionTrigger>
     <AccordionContent>Set up your project.</AccordionContent>
-  </AccordionItem>
-</Accordion>
-```
-
-### With Badge
-
-```tsx
-<Accordion>
-  <AccordionItem value="notifications">
-    <AccordionTrigger badge={5}>Notifications</AccordionTrigger>
-    <AccordionContent>You have 5 unread notifications.</AccordionContent>
   </AccordionItem>
 </Accordion>
 ```

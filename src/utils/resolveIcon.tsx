@@ -17,5 +17,7 @@ export function resolveIcon(
 ): ReactNode | undefined {
   if (icon == null) return undefined;
   if (isIconName(icon)) return <Icon name={icon} size={size} />;
+  // If it's a string but not a valid icon name, ignore it to prevent broken rendering
+  if (typeof icon === "string") return undefined;
   return icon;
 }

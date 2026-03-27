@@ -17,11 +17,22 @@ import { Alert } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Alert state="information">This is an informational message</Alert>
+</Preview>
+
 ```tsx
 <Alert state="information">This is an informational message</Alert>
 ```
 
 ### States
+
+<Preview vertical>
+  <Alert state="information">Information alert</Alert>
+  <Alert state="success">Success! Operation completed.</Alert>
+  <Alert state="warning">Warning: Please review before proceeding.</Alert>
+  <Alert state="error">Error: Something went wrong.</Alert>
+</Preview>
 
 ```tsx
 <Alert state="information">Information alert</Alert>
@@ -31,6 +42,15 @@ import { Alert } from "@raydenui/ui";
 ```
 
 ### Variants
+
+<Preview vertical>
+  <Alert variant="toast" state="success">
+    Changes saved successfully
+  </Alert>
+  <Alert variant="banner" state="warning">
+    Your trial expires in 3 days
+  </Alert>
+</Preview>
 
 ```tsx
 // Toast variant (default)
@@ -46,6 +66,12 @@ import { Alert } from "@raydenui/ui";
 
 ### With Title
 
+<Preview>
+  <Alert state="success" title="Payment Successful">
+    Your payment of $99.00 has been processed.
+  </Alert>
+</Preview>
+
 ```tsx
 <Alert state="success" title="Payment Successful">
   Your payment of $99.00 has been processed.
@@ -53,6 +79,20 @@ import { Alert } from "@raydenui/ui";
 ```
 
 ### With Actions
+
+<Preview>
+  <Alert
+    state="error"
+    title="Connection Lost"
+    actions={
+      <Button size="sm" variant="destructive" appearance="outlined">
+        Retry
+      </Button>
+    }
+  >
+    Unable to connect to the server. Please try again.
+  </Alert>
+</Preview>
 
 ```tsx
 <Alert
@@ -81,17 +121,6 @@ const [show, setShow] = useState(true);
     New features are available!
   </Alert>
 )}
-```
-
-### With Icon Override
-
-```tsx
-<Alert
-  state="information"
-  icon={<SparklesIcon />}
->
-  New AI features are now available
-</Alert>
 ```
 
 ## Props

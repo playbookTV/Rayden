@@ -125,11 +125,11 @@ export function Tabs({
         className={cn(
           "inline-flex",
           isVertical ? "flex-col" : "",
-          variant === "line" && !isVertical && "border-b border-grey-200",
-          variant === "line" && isVertical && "border-r border-grey-200",
+          variant === "line" && !isVertical && "border-b border-grey-200 dark:border-grey-700",
+          variant === "line" && isVertical && "border-r border-grey-200 dark:border-grey-700",
           variant === "pill" && (isVertical ? "gap-1" : "gap-1"),
           variant === "segmented" &&
-            "border border-grey-100 rounded-lg p-0.5 gap-0.5 overflow-hidden",
+            "border border-grey-100 dark:border-grey-700 bg-grey-50 dark:bg-grey-800 rounded-lg p-0.5 gap-0.5 overflow-hidden",
           className
         )}
         role="tablist"

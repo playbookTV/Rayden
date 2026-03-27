@@ -17,11 +17,22 @@ import { EmptyStateIllustration } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <EmptyStateIllustration variant="no-data" />
+</Preview>
+
 ```tsx
 <EmptyStateIllustration variant="no-data" />
 ```
 
-### All Variants
+### Common Variants
+
+<Preview>
+  <EmptyStateIllustration variant="no-data" />
+  <EmptyStateIllustration variant="no-results" />
+  <EmptyStateIllustration variant="empty-folder" />
+  <EmptyStateIllustration variant="empty-inbox" />
+</Preview>
 
 ```tsx
 // Data states
@@ -29,36 +40,43 @@ import { EmptyStateIllustration } from "@raydenui/ui";
 <EmptyStateIllustration variant="no-results" />
 <EmptyStateIllustration variant="empty-folder" />
 <EmptyStateIllustration variant="empty-inbox" />
+```
 
-// Status states
+### Status States
+
+<Preview>
+  <EmptyStateIllustration variant="success" />
+  <EmptyStateIllustration variant="error" />
+  <EmptyStateIllustration variant="warning" />
+</Preview>
+
+```tsx
 <EmptyStateIllustration variant="success" />
 <EmptyStateIllustration variant="error" />
 <EmptyStateIllustration variant="warning" />
+```
 
-// Network states
+### Network States
+
+<Preview>
+  <EmptyStateIllustration variant="no-connection" />
+  <EmptyStateIllustration variant="offline" />
+</Preview>
+
+```tsx
 <EmptyStateIllustration variant="no-connection" />
 <EmptyStateIllustration variant="offline" />
-
-// Content states
-<EmptyStateIllustration variant="no-notifications" />
-<EmptyStateIllustration variant="no-messages" />
-<EmptyStateIllustration variant="no-tasks" />
-<EmptyStateIllustration variant="no-projects" />
-
-// User states
-<EmptyStateIllustration variant="no-users" />
-<EmptyStateIllustration variant="no-teams" />
-
-// Commerce states
-<EmptyStateIllustration variant="empty-cart" />
-<EmptyStateIllustration variant="no-orders" />
-
-// Other states
-<EmptyStateIllustration variant="maintenance" />
-<EmptyStateIllustration variant="coming-soon" />
 ```
 
 ### Custom Colors
+
+<Preview>
+  <EmptyStateIllustration
+    variant="no-data"
+    primaryColor="#F56630"
+    secondaryColor="#FCB59A"
+  />
+</Preview>
 
 ```tsx
 <EmptyStateIllustration
@@ -70,6 +88,12 @@ import { EmptyStateIllustration } from "@raydenui/ui";
 
 ### Sizes
 
+<Preview>
+  <EmptyStateIllustration variant="no-data" size="sm" />
+  <EmptyStateIllustration variant="no-data" size="md" />
+  <EmptyStateIllustration variant="no-data" size="lg" />
+</Preview>
+
 ```tsx
 <EmptyStateIllustration variant="no-data" size="sm" /> {/* 120px */}
 <EmptyStateIllustration variant="no-data" size="md" /> {/* 200px */}
@@ -77,6 +101,15 @@ import { EmptyStateIllustration } from "@raydenui/ui";
 ```
 
 ### With Content
+
+<Preview>
+  <div className="flex flex-col items-center gap-4 p-8">
+    <EmptyStateIllustration variant="no-data" size="lg" />
+    <h3 className="text-lg font-semibold text-grey-800">No data yet</h3>
+    <span className="text-grey-500">Get started by adding your first item</span>
+    <Button variant="primary">Add Item</Button>
+  </div>
+</Preview>
 
 ```tsx
 <div className="flex flex-col items-center gap-4 p-8">

@@ -24,6 +24,30 @@ import {
 
 ### Basic
 
+<Preview>
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Name</TableHead>
+        <TableHead>Email</TableHead>
+        <TableHead>Role</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>John Doe</TableCell>
+        <TableCell>john@example.com</TableCell>
+        <TableCell>Admin</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Jane Smith</TableCell>
+        <TableCell>jane@example.com</TableCell>
+        <TableCell>User</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</Preview>
+
 ```tsx
 <Table>
   <TableHeader>
@@ -119,7 +143,48 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
 </Table>
 ```
 
-### With Avatars
+### With Avatars and Badges
+
+<Preview>
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>User</TableHead>
+        <TableHead>Status</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>
+          <div className="flex items-center gap-3">
+            <Avatar type="image" src="https://i.pravatar.cc/150?img=1" size="sm" />
+            <div>
+              <span className="block font-medium text-grey-900 dark:text-grey-100">John Doe</span>
+              <span className="block text-sm text-grey-500 dark:text-grey-400">john@example.com</span>
+            </div>
+          </div>
+        </TableCell>
+        <TableCell>
+          <Badge color="success">Active</Badge>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          <div className="flex items-center gap-3">
+            <Avatar type="image" src="https://i.pravatar.cc/150?img=2" size="sm" />
+            <div>
+              <span className="block font-medium text-grey-900 dark:text-grey-100">Jane Smith</span>
+              <span className="block text-sm text-grey-500 dark:text-grey-400">jane@example.com</span>
+            </div>
+          </div>
+        </TableCell>
+        <TableCell>
+          <Badge color="warning">Pending</Badge>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</Preview>
 
 ```tsx
 <Table>
@@ -135,8 +200,8 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
         <div className="flex items-center gap-3">
           <Avatar type="image" src="/avatar.jpg" size="sm" />
           <div>
-            <p className="font-medium">John Doe</p>
-            <p className="text-sm text-grey-500">john@example.com</p>
+            <p className="font-medium text-grey-900 dark:text-grey-100">John Doe</p>
+            <p className="text-sm text-grey-500 dark:text-grey-400">john@example.com</p>
           </div>
         </div>
       </TableCell>

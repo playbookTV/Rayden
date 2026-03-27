@@ -1,0 +1,143 @@
+---
+title: SearchableTableBlock
+description: Full-featured table with search input, filters, and sortable columns
+---
+
+# SearchableTableBlock
+
+A full-featured table with search input, filters, and sortable columns.
+
+## Import
+
+```tsx
+import { SearchableTableBlock } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+<SearchableTableBlock
+  title="Products"
+  searchPlaceholder="Search products..."
+  columns={[
+    { key: "name", label: "Name", sortable: true },
+    { key: "category", label: "Category" },
+    { key: "price", label: "Price", sortable: true },
+    { key: "stock", label: "Stock" },
+  ]}
+  data={products}
+  onSearch={(query) => searchProducts(query)}
+  onSort={(key, direction) => sortProducts(key, direction)}
+/>
+```
+
+### With Filters
+
+```tsx
+<SearchableTableBlock
+  title="Orders"
+  columns={[
+    { key: "id", label: "Order ID" },
+    { key: "customer", label: "Customer", sortable: true },
+    { key: "status", label: "Status" },
+    { key: "total", label: "Total", sortable: true },
+  ]}
+  data={orders}
+  onSearch={(query) => searchOrders(query)}
+  filters={[
+    {
+      key: "status",
+      label: "Status",
+      options: ["Pending", "Processing", "Shipped", "Delivered"],
+    },
+    {
+      key: "date",
+      label: "Date Range",
+      options: ["Today", "This Week", "This Month", "All Time"],
+    },
+  ]}
+  onFilterChange={(filters) => applyFilters(filters)}
+/>
+```
+
+### With Row Actions
+
+```tsx
+<SearchableTableBlock
+  title="Users"
+  columns={[
+    { key: "name", label: "Name", sortable: true },
+    { key: "email", label: "Email" },
+    { key: "role", label: "Role" },
+    {
+      key: "actions",
+      label: "Actions",
+      render: (row) => (
+        <div className="flex gap-2">
+          <Button size="sm" variant="text">Edit</Button>
+          <Button size="sm" variant="text" destructive>Delete</Button>
+        </div>
+      ),
+    },
+  ]}
+  data={users}
+  onSearch={(query) => searchUsers(query)}
+/>
+```
+
+### With Pagination
+
+```tsx
+const [page, setPage] = useState(1);
+
+<SearchableTableBlock
+  title="Inventory"
+  columns={columns}
+  data={paginatedData}
+  onSearch={(query) => searchInventory(query)}
+  pagination={{
+    currentPage: page,
+    totalPages: totalPages,
+    onPageChange: setPage,
+  }}
+/>
+```
+
+## Props
+
+| Prop                | Type                       | Default       | Description              |
+| ------------------- | -------------------------- | ------------- | ------------------------ |
+| `title`             | `string`                   | —             | Header title             |
+| `searchPlaceholder` | `string`                   | `"Search..."` | Search input placeholder |
+| `columns`           | `SearchableTableColumn[]`  | —             | Column config (required) |
+| `data`              | `any[]`                    | —             | Table data (required)    |
+| `onSearch`          | `(query: string) => void`  | —             | Search handler           |
+| `onSort`            | `(key, direction) => void` | —             | Sort handler             |
+| `filters`           | `FilterConfig[]`           | —             | Filter options           |
+| `onFilterChange`    | `(filters) => void`        | —             | Filter change handler    |
+| `pagination`        | `PaginationProps`          | —             | Pagination config        |
+| `className`         | `string`                   | —             | Additional CSS classes   |
+
+### SearchableTableColumn
+
+| Prop       | Type                           | Required | Description               |
+| ---------- | ------------------------------ | -------- | ------------------------- |
+| `key`      | `string`                       | Yes      | Data key                  |
+| `label`    | `string`                       | Yes      | Column header label       |
+| `sortable` | `boolean`                      | No       | Enable sorting            |
+| `render`   | `(row: any) => ReactNode`      | No       | Custom cell renderer      |
+
+### FilterConfig
+
+| Prop      | Type       | Required | Description          |
+| --------- | ---------- | -------- | -------------------- |
+| `key`     | `string`   | Yes      | Filter key           |
+| `label`   | `string`   | Yes      | Filter label         |
+| `options` | `string[]` | Yes      | Available options    |
+
+## Accessibility
+
+- Search input has proper label
+- Sortable columns have ARIA sort attributes
+- Filters are keyboard navigable
+- Table uses semantic HTML elements

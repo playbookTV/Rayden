@@ -10,7 +10,7 @@ A collapsible sidebar navigation component with support for sections, submenus, 
 ## Import
 
 ```tsx
-import { SidebarMenu, SidebarSection, SidebarItem, SidebarSubmenu } from "@raydenui/ui";
+import { SidebarMenu, SidebarMenuSection, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubItem } from "@raydenui/ui";
 ```
 
 ## Usage
@@ -19,15 +19,15 @@ import { SidebarMenu, SidebarSection, SidebarItem, SidebarSubmenu } from "@rayde
 
 ```tsx
 <SidebarMenu>
-  <SidebarItem icon={<HomeIcon />} href="/">
+  <SidebarMenuItem icon={<HomeIcon />} href="/">
     Dashboard
-  </SidebarItem>
-  <SidebarItem icon={<UsersIcon />} href="/users">
+  </SidebarMenuItem>
+  <SidebarMenuItem icon={<UsersIcon />} href="/users">
     Users
-  </SidebarItem>
-  <SidebarItem icon={<CogIcon />} href="/settings">
+  </SidebarMenuItem>
+  <SidebarMenuItem icon={<CogIcon />} href="/settings">
     Settings
-  </SidebarItem>
+  </SidebarMenuItem>
 </SidebarMenu>
 ```
 
@@ -35,23 +35,23 @@ import { SidebarMenu, SidebarSection, SidebarItem, SidebarSubmenu } from "@rayde
 
 ```tsx
 <SidebarMenu>
-  <SidebarSection title="Main">
-    <SidebarItem icon={<HomeIcon />} href="/">
+  <SidebarMenuSection title="Main">
+    <SidebarMenuItem icon={<HomeIcon />} href="/">
       Dashboard
-    </SidebarItem>
-    <SidebarItem icon={<ChartBarIcon />} href="/analytics">
+    </SidebarMenuItem>
+    <SidebarMenuItem icon={<ChartBarIcon />} href="/analytics">
       Analytics
-    </SidebarItem>
-  </SidebarSection>
+    </SidebarMenuItem>
+  </SidebarMenuSection>
 
-  <SidebarSection title="Management">
-    <SidebarItem icon={<UsersIcon />} href="/users">
+  <SidebarMenuSection title="Management">
+    <SidebarMenuItem icon={<UsersIcon />} href="/users">
       Users
-    </SidebarItem>
-    <SidebarItem icon={<FolderIcon />} href="/projects">
+    </SidebarMenuItem>
+    <SidebarMenuItem icon={<FolderIcon />} href="/projects">
       Projects
-    </SidebarItem>
-  </SidebarSection>
+    </SidebarMenuItem>
+  </SidebarMenuSection>
 </SidebarMenu>
 ```
 
@@ -59,14 +59,14 @@ import { SidebarMenu, SidebarSection, SidebarItem, SidebarSubmenu } from "@rayde
 
 ```tsx
 <SidebarMenu>
-  <SidebarItem icon={<HomeIcon />} href="/">
+  <SidebarMenuItem icon={<HomeIcon />} href="/">
     Dashboard
-  </SidebarItem>
-  <SidebarSubmenu icon={<CogIcon />} label="Settings">
-    <SidebarItem href="/settings/profile">Profile</SidebarItem>
-    <SidebarItem href="/settings/security">Security</SidebarItem>
-    <SidebarItem href="/settings/notifications">Notifications</SidebarItem>
-  </SidebarSubmenu>
+  </SidebarMenuItem>
+  <SidebarMenuSub icon={<CogIcon />} label="Settings">
+    <SidebarMenuSubItem href="/settings/profile">Profile</SidebarMenuSubItem>
+    <SidebarMenuSubItem href="/settings/security">Security</SidebarMenuSubItem>
+    <SidebarMenuSubItem href="/settings/notifications">Notifications</SidebarMenuSubItem>
+  </SidebarMenuSub>
 </SidebarMenu>
 ```
 
@@ -74,12 +74,12 @@ import { SidebarMenu, SidebarSection, SidebarItem, SidebarSubmenu } from "@rayde
 
 ```tsx
 <SidebarMenu>
-  <SidebarItem icon={<InboxIcon />} badge={5} href="/inbox">
+  <SidebarMenuItem icon={<InboxIcon />} badge={5} href="/inbox">
     Inbox
-  </SidebarItem>
-  <SidebarItem icon={<BellIcon />} badge="New" href="/notifications">
+  </SidebarMenuItem>
+  <SidebarMenuItem icon={<BellIcon />} badge="New" href="/notifications">
     Notifications
-  </SidebarItem>
+  </SidebarMenuItem>
 </SidebarMenu>
 ```
 
@@ -89,9 +89,9 @@ import { SidebarMenu, SidebarSection, SidebarItem, SidebarSubmenu } from "@rayde
 const [collapsed, setCollapsed] = useState(false);
 
 <SidebarMenu collapsed={collapsed}>
-  <SidebarItem icon={<HomeIcon />} href="/">
+  <SidebarMenuItem icon={<HomeIcon />} href="/">
     Dashboard
-  </SidebarItem>
+  </SidebarMenuItem>
   {/* Icons only shown when collapsed */}
 </SidebarMenu>
 
@@ -124,14 +124,14 @@ const [collapsed, setCollapsed] = useState(false);
 | `theme` | `"light" \| "dark"` | `"light"` | Color theme |
 | `className` | `string` | — | Additional CSS classes |
 
-### SidebarSection
+### SidebarMenuSection
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `title` | `string` | — | Section title |
 | `className` | `string` | — | Additional CSS classes |
 
-### SidebarItem
+### SidebarMenuItem
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
@@ -142,7 +142,7 @@ const [collapsed, setCollapsed] = useState(false);
 | `onClick` | `() => void` | — | Click handler |
 | `className` | `string` | — | Additional CSS classes |
 
-### SidebarSubmenu
+### SidebarMenuSub
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|

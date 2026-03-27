@@ -18,6 +18,10 @@ import type { ButtonProps, ButtonVariant, ButtonAppearance, ButtonSize } from "@
 
 ### Basic
 
+<Preview>
+  <Button>Click me</Button>
+</Preview>
+
 ```tsx
 <Button>Click me</Button>
 ```
@@ -25,6 +29,17 @@ import type { ButtonProps, ButtonVariant, ButtonAppearance, ButtonSize } from "@
 ### Variants
 
 The `variant` prop controls the button's color scheme:
+
+<Preview>
+  <Button variant="primary">Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="grey">Grey</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="text">Text</Button>
+  <Button variant="success">Success</Button>
+  <Button variant="warning">Warning</Button>
+  <Button variant="info">Info</Button>
+</Preview>
 
 ```tsx
 <Button variant="primary">Primary</Button>
@@ -41,12 +56,22 @@ The `variant` prop controls the button's color scheme:
 
 The `appearance` prop controls whether the button is solid or outlined:
 
+<Preview>
+  <Button appearance="solid">Solid</Button>
+  <Button appearance="outlined">Outlined</Button>
+</Preview>
+
 ```tsx
 <Button appearance="solid">Solid</Button>
 <Button appearance="outlined">Outlined</Button>
 ```
 
 ### Sizes
+
+<Preview>
+  <Button size="sm">Small</Button>
+  <Button size="lg">Large</Button>
+</Preview>
 
 ```tsx
 <Button size="sm">Small</Button>
@@ -55,24 +80,38 @@ The `appearance` prop controls whether the button is solid or outlined:
 
 ### With Icons
 
+<Preview>
+  <Button icon={<Icon name="plus" />} iconPosition="leading">
+    Add Item
+  </Button>
+  <Button icon={<Icon name="arrow-right" />} iconPosition="trailing">
+    Continue
+  </Button>
+  <Button icon={<Icon name="plus" />} iconPosition="icon-only" aria-label="Add" />
+</Preview>
+
 ```tsx
-import { PlusIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
+import { Icon } from "@raydenui/ui";
 
 // Leading icon
-<Button icon={<PlusIcon />} iconPosition="leading">
+<Button icon={<Icon name="plus" />} iconPosition="leading">
   Add Item
 </Button>
 
 // Trailing icon
-<Button icon={<ArrowRightIcon />} iconPosition="trailing">
+<Button icon={<Icon name="arrow-right" />} iconPosition="trailing">
   Continue
 </Button>
 
 // Icon only
-<Button icon={<PlusIcon />} iconPosition="icon-only" aria-label="Add" />
+<Button icon={<Icon name="plus" />} iconPosition="icon-only" aria-label="Add" />
 ```
 
 ### States
+
+<Preview>
+  <Button disabled>Disabled</Button>
+</Preview>
 
 ```tsx
 <Button disabled>Disabled</Button>

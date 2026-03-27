@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode (responds to .dark class instead of prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "../components";
 
 @theme {

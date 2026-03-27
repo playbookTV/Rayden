@@ -17,6 +17,18 @@ import { Chip } from "@raydenui/ui";
 
 ### Input Chip (with close button)
 
+<Preview>
+  <Chip variant="input">
+    React
+  </Chip>
+  <Chip variant="input">
+    TypeScript
+  </Chip>
+  <Chip variant="input">
+    Tailwind
+  </Chip>
+</Preview>
+
 ```tsx
 <Chip variant="input" onClose={() => removeTag()}>
   React
@@ -25,6 +37,15 @@ import { Chip } from "@raydenui/ui";
 
 ### Filter Chip (with chevron)
 
+<Preview>
+  <Chip variant="filter">
+    Category
+  </Chip>
+  <Chip variant="filter">
+    Status
+  </Chip>
+</Preview>
+
 ```tsx
 <Chip variant="filter" onClick={() => openFilter()}>
   Category
@@ -32,6 +53,12 @@ import { Chip } from "@raydenui/ui";
 ```
 
 ### States
+
+<Preview>
+  <Chip variant="input">Default</Chip>
+  <Chip variant="input" focused>Focused</Chip>
+  <Chip variant="input" disabled>Disabled</Chip>
+</Preview>
 
 ```tsx
 // Default
@@ -45,6 +72,12 @@ import { Chip } from "@raydenui/ui";
 ```
 
 ### With Avatar
+
+<Preview>
+  <Chip variant="input" avatar="https://i.pravatar.cc/150?img=1">
+    John Doe
+  </Chip>
+</Preview>
 
 ```tsx
 <Chip variant="input" avatar="/avatars/user.jpg" onClose={() => {}}>

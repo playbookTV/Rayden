@@ -17,6 +17,17 @@ import { Stepper, LinearStepper, SegmentedStepper } from "@raydenui/ui";
 
 ### Basic Stepper
 
+<Preview>
+  <Stepper
+    steps={[
+      { title: "Account" },
+      { title: "Profile" },
+      { title: "Review" },
+    ]}
+    activeStep={1}
+  />
+</Preview>
+
 ```tsx
 const steps = [
   { title: "Account" },
@@ -29,6 +40,17 @@ const steps = [
 
 ### With Descriptions
 
+<Preview>
+  <Stepper
+    steps={[
+      { title: "Account", description: "Create your account" },
+      { title: "Profile", description: "Complete your profile" },
+      { title: "Review", description: "Review and submit" },
+    ]}
+    activeStep={0}
+  />
+</Preview>
+
 ```tsx
 const steps = [
   { title: "Account", description: "Create your account" },
@@ -39,31 +61,36 @@ const steps = [
 <Stepper steps={steps} activeStep={0} />
 ```
 
-### Vertical Orientation
-
-```tsx
-<Stepper steps={steps} activeStep={1} orientation="vertical" />
-```
-
 ### Number Indicators
+
+<Preview>
+  <Stepper
+    steps={[
+      { title: "Account" },
+      { title: "Profile" },
+      { title: "Review" },
+    ]}
+    activeStep={2}
+    indicator="number"
+  />
+</Preview>
 
 ```tsx
 <Stepper steps={steps} activeStep={2} indicator="number" />
 ```
 
-### Icon Indicators
-
-```tsx
-const steps = [
-  { title: "Account", icon: <UserIcon /> },
-  { title: "Settings", icon: <SettingsIcon /> },
-  { title: "Done", icon: <CheckIcon /> },
-];
-
-<Stepper steps={steps} activeStep={1} indicator="icon" />
-```
-
 ### With Status Control
+
+<Preview>
+  <Stepper
+    steps={[
+      { title: "Completed", status: "completed" },
+      { title: "In Progress", status: "active" },
+      { title: "Pending", status: "incomplete" },
+      { title: "Disabled", status: "disabled" },
+    ]}
+  />
+</Preview>
 
 ```tsx
 const steps = [
@@ -80,11 +107,19 @@ const steps = [
 
 A simple progress bar showing step completion.
 
+<Preview>
+  <LinearStepper currentStep={3} totalSteps={5} />
+</Preview>
+
 ```tsx
 <LinearStepper currentStep={3} totalSteps={5} />
 ```
 
 ### Without Label
+
+<Preview>
+  <LinearStepper currentStep={2} totalSteps={4} showLabel={false} />
+</Preview>
 
 ```tsx
 <LinearStepper currentStep={2} totalSteps={4} showLabel={false} />
@@ -94,43 +129,22 @@ A simple progress bar showing step completion.
 
 A segmented progress bar with individual step segments.
 
+<Preview>
+  <SegmentedStepper currentStep={2} totalSteps={5} />
+</Preview>
+
 ```tsx
 <SegmentedStepper currentStep={2} totalSteps={5} />
 ```
 
 ### Without Label
 
+<Preview>
+  <SegmentedStepper currentStep={3} totalSteps={6} showLabel={false} />
+</Preview>
+
 ```tsx
 <SegmentedStepper currentStep={3} totalSteps={6} showLabel={false} />
-```
-
-### In Context
-
-```tsx
-// Checkout flow
-<div className="space-y-8">
-  <Stepper
-    steps={[
-      { title: "Cart" },
-      { title: "Shipping" },
-      { title: "Payment" },
-      { title: "Confirm" },
-    ]}
-    activeStep={currentStep}
-  />
-
-  {/* Step content */}
-  {currentStep === 0 && <CartStep />}
-  {currentStep === 1 && <ShippingStep />}
-  {currentStep === 2 && <PaymentStep />}
-  {currentStep === 3 && <ConfirmStep />}
-</div>
-
-// File upload progress
-<LinearStepper currentStep={uploadedFiles} totalSteps={totalFiles} />
-
-// Onboarding progress
-<SegmentedStepper currentStep={completedSteps} totalSteps={5} />
 ```
 
 ## Props

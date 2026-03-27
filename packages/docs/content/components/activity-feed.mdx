@@ -10,15 +10,36 @@ Display activity timelines and notification feeds with customizable content.
 ## Import
 
 ```tsx
-import { ActivityFeed, ActivityItem, ActivityContent } from "@raydenui/ui";
+import { ActivityItem, ActivityContent } from "@raydenui/ui";
 ```
 
 ## Usage
 
 ### Basic
 
+<Preview vertical>
+  <div className="space-y-4 w-full max-w-md">
+    <ActivityItem
+      avatar={<Avatar type="image" src="https://i.pravatar.cc/150?img=1" />}
+      timestamp="5 mins ago"
+    >
+      <ActivityContent>
+        <strong>John Doe</strong> commented on your post
+      </ActivityContent>
+    </ActivityItem>
+    <ActivityItem
+      avatar={<Avatar type="initials" initials="AS" />}
+      timestamp="1 hour ago"
+    >
+      <ActivityContent>
+        <strong>Alice Smith</strong> shared a document with you
+      </ActivityContent>
+    </ActivityItem>
+  </div>
+</Preview>
+
 ```tsx
-<ActivityFeed>
+<div className="space-y-4">
   <ActivityItem
     avatar={<Avatar type="image" src="/user1.jpg" />}
     timestamp="5 mins ago"
@@ -35,15 +56,36 @@ import { ActivityFeed, ActivityItem, ActivityContent } from "@raydenui/ui";
       <strong>Alice Smith</strong> shared a document with you
     </ActivityContent>
   </ActivityItem>
-</ActivityFeed>
+</div>
 ```
 
 ### With Icons
 
+<Preview vertical>
+  <div className="space-y-4 w-full max-w-md">
+    <ActivityItem
+      icon={<Icon name="check-circle" className="text-success-400" />}
+      timestamp="2 hours ago"
+    >
+      <ActivityContent>
+        Project <strong>"Dashboard"</strong> was completed
+      </ActivityContent>
+    </ActivityItem>
+    <ActivityItem
+      icon={<Icon name="alert-circle" className="text-warning-400" />}
+      timestamp="3 hours ago"
+    >
+      <ActivityContent>
+        Build failed for <strong>main</strong> branch
+      </ActivityContent>
+    </ActivityItem>
+  </div>
+</Preview>
+
 ```tsx
-<ActivityFeed>
+<div className="space-y-4">
   <ActivityItem
-    icon={<CheckCircleIcon className="text-success-400" />}
+    icon={<Icon name="check-circle" className="text-success-400" />}
     timestamp="2 hours ago"
   >
     <ActivityContent>
@@ -51,41 +93,72 @@ import { ActivityFeed, ActivityItem, ActivityContent } from "@raydenui/ui";
     </ActivityContent>
   </ActivityItem>
   <ActivityItem
-    icon={<ExclamationCircleIcon className="text-warning-400" />}
+    icon={<Icon name="alert-circle" className="text-warning-400" />}
     timestamp="3 hours ago"
   >
     <ActivityContent>
       Build failed for <strong>main</strong> branch
     </ActivityContent>
   </ActivityItem>
-</ActivityFeed>
+</div>
 ```
 
 ### With Actions
 
+<Preview vertical>
+  <div className="space-y-4 w-full max-w-md">
+    <ActivityItem
+      avatar={<Avatar type="image" src="https://i.pravatar.cc/150?img=3" />}
+      timestamp="10 mins ago"
+      actions={
+        <div className="flex gap-2">
+          <Button size="sm" variant="primary">Accept</Button>
+          <Button size="sm" variant="grey">Decline</Button>
+        </div>
+      }
+    >
+      <ActivityContent>
+        <strong>Bob Wilson</strong> wants to join your team
+      </ActivityContent>
+    </ActivityItem>
+  </div>
+</Preview>
+
 ```tsx
-<ActivityFeed>
-  <ActivityItem
-    avatar={<Avatar type="image" src="/user.jpg" />}
-    timestamp="10 mins ago"
-    actions={
-      <div className="flex gap-2">
-        <Button size="sm" variant="primary">Accept</Button>
-        <Button size="sm" variant="grey">Decline</Button>
-      </div>
-    }
-  >
-    <ActivityContent>
-      <strong>Bob Wilson</strong> wants to join your team
-    </ActivityContent>
-  </ActivityItem>
-</ActivityFeed>
+<ActivityItem
+  avatar={<Avatar type="image" src="/user.jpg" />}
+  timestamp="10 mins ago"
+  actions={
+    <div className="flex gap-2">
+      <Button size="sm" variant="primary">Accept</Button>
+      <Button size="sm" variant="grey">Decline</Button>
+    </div>
+  }
+>
+  <ActivityContent>
+    <strong>Bob Wilson</strong> wants to join your team
+  </ActivityContent>
+</ActivityItem>
 ```
 
-### Compact Variant
+### Compact List
+
+<Preview vertical>
+  <div className="space-y-2 w-full max-w-md">
+    <ActivityItem timestamp="Just now">
+      File uploaded successfully
+    </ActivityItem>
+    <ActivityItem timestamp="2 mins ago">
+      Settings updated
+    </ActivityItem>
+    <ActivityItem timestamp="5 mins ago">
+      New comment received
+    </ActivityItem>
+  </div>
+</Preview>
 
 ```tsx
-<ActivityFeed variant="compact">
+<div className="space-y-2">
   <ActivityItem timestamp="Just now">
     File uploaded successfully
   </ActivityItem>
@@ -95,17 +168,10 @@ import { ActivityFeed, ActivityItem, ActivityContent } from "@raydenui/ui";
   <ActivityItem timestamp="5 mins ago">
     New comment received
   </ActivityItem>
-</ActivityFeed>
+</div>
 ```
 
 ## Props
-
-### ActivityFeed
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"default" \| "compact"` | `"default"` | Feed variant |
-| `className` | `string` | — | Additional CSS classes |
 
 ### ActivityItem
 

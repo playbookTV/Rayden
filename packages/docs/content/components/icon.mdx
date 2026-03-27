@@ -17,11 +17,26 @@ import { Icon } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Icon name="home" />
+  <Icon name="user" />
+  <Icon name="settings" />
+  <Icon name="bell" />
+  <Icon name="mail" />
+</Preview>
+
 ```tsx
 <Icon name="home" />
 ```
 
 ### Variants
+
+<Preview>
+  <Icon name="heart" variant="outline" />
+  <Icon name="heart" variant="solid" />
+  <Icon name="star" variant="outline" />
+  <Icon name="star" variant="solid" />
+</Preview>
 
 ```tsx
 // Outline (default)
@@ -33,6 +48,14 @@ import { Icon } from "@raydenui/ui";
 
 ### Sizes
 
+<Preview>
+  <Icon name="home" size="xs" />
+  <Icon name="home" size="sm" />
+  <Icon name="home" size="md" />
+  <Icon name="home" size="lg" />
+  <Icon name="home" size="xl" />
+</Preview>
+
 ```tsx
 <Icon name="home" size="xs" /> {/* 12px */}
 <Icon name="home" size="sm" /> {/* 16px */}
@@ -42,6 +65,13 @@ import { Icon } from "@raydenui/ui";
 ```
 
 ### Custom Color
+
+<Preview>
+  <Icon name="heart" className="text-primary-500" />
+  <Icon name="check-circle" className="text-success-400" />
+  <Icon name="x-circle" className="text-error-400" />
+  <Icon name="info-circle" className="text-warning-400" />
+</Preview>
 
 ```tsx
 <Icon name="heart" className="text-primary-500" />
@@ -53,37 +83,27 @@ import { Icon } from "@raydenui/ui";
 
 ### Navigation
 
-- `home`, `menu`, `x`, `chevron-left`, `chevron-right`, `chevron-up`, `chevron-down`
+- `home`, `home-alt`, `x`, `chevron-left`, `chevron-right`, `chevron-up`, `chevron-down`
 - `arrow-left`, `arrow-right`, `arrow-up`, `arrow-down`
-- `external-link`, `link`, `refresh`, `logout`
+- `link`, `link-detach`, `log-out`
 
 ### Actions
 
-- `plus`, `minus`, `edit`, `trash`, `copy`, `download`, `upload`
-- `search`, `filter`, `sort`, `settings`, `share`
+- `plus`, `minus`, `pencil`, `pencil-edit`, `bin`, `copy`, `download`, `upload`
+- `search`, `filter`, `settings`, `settings-1`, `settings-2`
 
 ### Status
 
-- `check`, `check-circle`, `x-circle`, `exclamation-circle`, `information-circle`
-- `bell`, `bell-alert`, `star`, `heart`, `bookmark`
+- `check`, `check-circle`, `x-circle`, `info-circle`
+- `bell`, `star`, `heart`, `bookmark`
 
 ### Content
 
-- `document`, `folder`, `image`, `video`, `music`, `file`
-- `calendar`, `clock`, `map-pin`, `globe`, `mail`, `phone`
+- `file`, `folder`, `image`, `calendar`, `clock`, `map-marker`, `globe`, `mail`
 
 ### Users
 
-- `user`, `users`, `user-plus`, `user-minus`, `user-circle`
-
-### Commerce
-
-- `shopping-cart`, `credit-card`, `currency-dollar`, `receipt`, `tag`
-
-### Data
-
-- `chart-bar`, `chart-pie`, `trending-up`, `trending-down`
-- `database`, `server`, `cloud`, `code`
+- `user`, `users`, `user-add`, `user-cross`, `user-circle`
 
 ## Props
 

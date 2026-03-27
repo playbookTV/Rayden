@@ -64,10 +64,10 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
           variant === "segmented" && isActive
             ? "bg-primary-500 text-white"
             : isActive
-              ? "bg-primary-50 text-primary-500"
+              ? "bg-primary-50 text-primary-500 dark:bg-primary-900 dark:text-primary-400"
               : disabled
-                ? "bg-grey-200 text-grey-400"
-                : "bg-grey-100 text-grey-500"
+                ? "bg-grey-200 text-grey-400 dark:bg-grey-700 dark:text-grey-500"
+                : "bg-grey-100 text-grey-500 dark:bg-grey-800 dark:text-grey-400"
         )}
       >
         {badge}
@@ -89,10 +89,10 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
           segmentedPadding[size],
           textSize[size],
           isActive
-            ? "bg-primary-50 text-grey-900"
+            ? "bg-primary-50 text-grey-900 dark:bg-primary-900 dark:text-grey-100"
             : disabled
-              ? "text-grey-300 cursor-not-allowed"
-              : "text-grey-500 hover:bg-grey-50",
+              ? "text-grey-300 cursor-not-allowed dark:text-grey-600"
+              : "text-grey-500 hover:bg-grey-50 dark:text-grey-400 dark:hover:bg-grey-800",
           className
         )}
       >
@@ -118,10 +118,10 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
           pillPadding[size],
           textSize[size],
           isActive
-            ? "bg-primary-50 text-primary-400"
+            ? "bg-primary-50 text-primary-400 dark:bg-primary-900 dark:text-primary-300"
             : disabled
-              ? "text-grey-300 cursor-not-allowed"
-              : "text-grey-500 hover:bg-grey-50",
+              ? "text-grey-300 cursor-not-allowed dark:text-grey-600"
+              : "text-grey-500 hover:bg-grey-50 dark:text-grey-400 dark:hover:bg-grey-800",
           className
         )}
       >
@@ -154,7 +154,11 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
           className={cn(
             "font-normal leading-[1.45] whitespace-nowrap transition-colors",
             textSize[size],
-            isActive ? "text-grey-900" : disabled ? "text-grey-300" : "text-grey-500"
+            isActive
+              ? "text-grey-900 dark:text-grey-100"
+              : disabled
+                ? "text-grey-300 dark:text-grey-600"
+                : "text-grey-500 dark:text-grey-400"
           )}
         >
           {children}
@@ -166,14 +170,14 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
         <div
           className={cn(
             "w-0.5 self-stretch transition-colors",
-            isActive ? "bg-primary-400" : "bg-grey-100"
+            isActive ? "bg-primary-400" : "bg-grey-100 dark:bg-grey-700"
           )}
         />
       ) : (
         <div
           className={cn(
             "h-0.5 w-full transition-colors",
-            isActive ? "bg-primary-400" : "bg-grey-100"
+            isActive ? "bg-primary-400" : "bg-grey-100 dark:bg-grey-700"
           )}
         />
       )}

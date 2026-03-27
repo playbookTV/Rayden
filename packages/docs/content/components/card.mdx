@@ -17,6 +17,19 @@ import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui"
 
 ### Basic
 
+<Preview>
+  <Card className="w-80">
+    <CardHeader title="Card Title" subtitle="Description" />
+    <CardBody>
+      <span className="text-grey-600 dark:text-grey-400">Card content goes here.</span>
+    </CardBody>
+    <CardFooter>
+      <Button variant="grey" appearance="outlined" size="sm">Cancel</Button>
+      <Button variant="primary" size="sm">Save</Button>
+    </CardFooter>
+  </Card>
+</Preview>
+
 ```tsx
 <Card>
   <CardHeader title="Card Title" subtitle="Description" />
@@ -31,6 +44,21 @@ import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui"
 ```
 
 ### Variants
+
+<Preview>
+  <Card variant="default" className="w-48">
+    <CardBody><span className="text-sm text-grey-600 dark:text-grey-400">Default</span></CardBody>
+  </Card>
+  <Card variant="outlined" className="w-48">
+    <CardBody><span className="text-sm text-grey-600 dark:text-grey-400">Outlined</span></CardBody>
+  </Card>
+  <Card variant="elevated" className="w-48">
+    <CardBody><span className="text-sm text-grey-600 dark:text-grey-400">Elevated</span></CardBody>
+  </Card>
+  <Card variant="ghost" className="w-48">
+    <CardBody><span className="text-sm text-grey-600 dark:text-grey-400">Ghost</span></CardBody>
+  </Card>
+</Preview>
 
 ```tsx
 // Default (border + subtle shadow)
@@ -47,6 +75,20 @@ import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui"
 ```
 
 ### With Image
+
+<Preview>
+  <Card className="w-72">
+    <CardImage
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400"
+      alt="Mountain landscape"
+      aspectRatio="video"
+    />
+    <CardHeader title="Beautiful Mountains" subtitle="Explore nature" />
+    <CardBody>
+      <span className="text-sm text-grey-600 dark:text-grey-400">Discover breathtaking mountain views.</span>
+    </CardBody>
+  </Card>
+</Preview>
 
 ```tsx
 <Card className="w-80">
@@ -66,6 +108,24 @@ import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui"
 
 ### Header with Actions
 
+<Preview>
+  <Card className="w-80">
+    <CardHeader
+      title="Project Updates"
+      subtitle="Last updated 2 hours ago"
+      actions={
+        <>
+          <Badge color="success">Active</Badge>
+        </>
+      }
+      bordered
+    />
+    <CardBody>
+      <span className="text-grey-600 dark:text-grey-400">Your project has been updated with 5 new commits.</span>
+    </CardBody>
+  </Card>
+</Preview>
+
 ```tsx
 <Card>
   <CardHeader
@@ -75,7 +135,7 @@ import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui"
       <>
         <Badge color="success">Active</Badge>
         <Button variant="grey" appearance="outlined" size="sm">
-          <Icon name="ellipsis-horizontal" />
+          <Icon name="dots-horizontal" />
         </Button>
       </>
     }
@@ -89,6 +149,15 @@ import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui"
 
 ### Hoverable
 
+<Preview>
+  <Card hoverable className="w-64 cursor-pointer">
+    <CardBody>
+      <span className="block font-semibold text-grey-900 dark:text-grey-100">Interactive Card</span>
+      <span className="text-sm text-grey-500 dark:text-grey-400">Hover to see shadow effect</span>
+    </CardBody>
+  </Card>
+</Preview>
+
 ```tsx
 <Card hoverable className="cursor-pointer">
   <CardBody>
@@ -100,55 +169,30 @@ import { Card, CardHeader, CardBody, CardFooter, CardImage } from "@raydenui/ui"
 
 ### Footer Alignment
 
+<Preview vertical>
+  <Card className="w-64">
+    <CardBody><span className="text-sm text-grey-600 dark:text-grey-400">Left aligned</span></CardBody>
+    <CardFooter align="left">
+      <Button size="sm">Action</Button>
+    </CardFooter>
+  </Card>
+  <Card className="w-64">
+    <CardBody><span className="text-sm text-grey-600 dark:text-grey-400">Right aligned</span></CardBody>
+    <CardFooter align="right">
+      <Button size="sm">Action</Button>
+    </CardFooter>
+  </Card>
+</Preview>
+
 ```tsx
 // Left aligned
 <CardFooter align="left">...</CardFooter>
-
-// Center aligned
-<CardFooter align="center">...</CardFooter>
 
 // Right aligned (default)
 <CardFooter align="right">...</CardFooter>
 
 // Space between
 <CardFooter align="between">...</CardFooter>
-```
-
-### Sizes
-
-```tsx
-// Small padding
-<Card size="sm">...</Card>
-
-// Medium padding (default)
-<Card size="md">...</Card>
-
-// Large padding
-<Card size="lg">...</Card>
-```
-
-### Product Card Example
-
-```tsx
-<Card hoverable className="w-72">
-  <CardImage src="/product.jpg" alt="Product" aspectRatio="square" />
-  <CardBody>
-    <div className="flex items-start justify-between">
-      <div>
-        <p className="font-semibold text-grey-900">Premium Watch</p>
-        <p className="text-sm text-grey-500">Leather strap</p>
-      </div>
-      <Badge color="orange">Sale</Badge>
-    </div>
-    <div className="mt-3">
-      <span className="text-lg font-bold">$299</span>
-      <span className="text-sm text-grey-400 line-through ml-2">$399</span>
-    </div>
-  </CardBody>
-  <CardFooter>
-    <Button variant="primary" className="w-full">Add to Cart</Button>
-  </CardFooter>
-</Card>
 ```
 
 ## Card Props

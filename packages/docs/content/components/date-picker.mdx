@@ -17,6 +17,10 @@ import { DatePicker } from "@raydenui/ui";
 
 ### Basic (Single Date)
 
+<Preview>
+  <DatePicker />
+</Preview>
+
 ```tsx
 const [date, setDate] = useState<Date | null>(null);
 
@@ -24,6 +28,10 @@ const [date, setDate] = useState<Date | null>(null);
 ```
 
 ### With Footer
+
+<Preview>
+  <DatePicker showFooter />
+</Preview>
 
 ```tsx
 <DatePicker
@@ -37,6 +45,10 @@ const [date, setDate] = useState<Date | null>(null);
 
 ### Date Range
 
+<Preview>
+  <DatePicker mode="range" />
+</Preview>
+
 ```tsx
 const [range, setRange] = useState<[Date | null, Date | null]>([null, null]);
 
@@ -48,6 +60,10 @@ const [range, setRange] = useState<[Date | null, Date | null]>([null, null]);
 ```
 
 ### Year Picker
+
+<Preview>
+  <DatePicker mode="year" />
+</Preview>
 
 ```tsx
 const [date, setDate] = useState<Date | null>(new Date());

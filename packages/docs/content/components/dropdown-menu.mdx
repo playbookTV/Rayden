@@ -24,6 +24,21 @@ import {
 
 ### Basic
 
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-md border border-grey-300 bg-white px-3 py-2 text-body-sm font-semibold text-grey-700 hover:border-primary-300 focus:border-primary-500 focus:outline-none transition-colors">
+      Options
+      <Icon name="chevron-down" size="sm" />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>Edit</DropdownMenuItem>
+      <DropdownMenuItem>Duplicate</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Delete</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
 ```tsx
 <DropdownMenu>
   <DropdownMenuTrigger>
@@ -40,18 +55,33 @@ import {
 
 ### With Icons
 
-```tsx
-import { PencilIcon, DocumentDuplicateIcon, TrashIcon } from "@heroicons/react/20/solid";
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-md border border-grey-300 bg-white px-3 py-2 text-body-sm font-semibold text-grey-700 hover:border-primary-300 focus:border-primary-500 focus:outline-none transition-colors">
+      Actions
+      <Icon name="chevron-down" size="sm" />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem icon={<Icon name="pencil-edit" />}>Edit</DropdownMenuItem>
+      <DropdownMenuItem icon={<Icon name="copy" />}>Duplicate</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem icon={<Icon name="bin" />} destructive>
+        Delete
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
 
+```tsx
 <DropdownMenu>
   <DropdownMenuTrigger>
     <Button>Actions</Button>
   </DropdownMenuTrigger>
   <DropdownMenuContent>
-    <DropdownMenuItem icon={<PencilIcon />}>Edit</DropdownMenuItem>
-    <DropdownMenuItem icon={<DocumentDuplicateIcon />}>Duplicate</DropdownMenuItem>
+    <DropdownMenuItem icon={<Icon name="pencil-edit" />}>Edit</DropdownMenuItem>
+    <DropdownMenuItem icon={<Icon name="copy" />}>Duplicate</DropdownMenuItem>
     <DropdownMenuSeparator />
-    <DropdownMenuItem icon={<TrashIcon />} destructive>
+    <DropdownMenuItem icon={<Icon name="bin" />} destructive>
       Delete
     </DropdownMenuItem>
   </DropdownMenuContent>
@@ -59,6 +89,20 @@ import { PencilIcon, DocumentDuplicateIcon, TrashIcon } from "@heroicons/react/2
 ```
 
 ### With Shortcuts
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-md border border-grey-300 bg-white px-3 py-2 text-body-sm font-semibold text-grey-700 hover:border-primary-300 focus:border-primary-500 focus:outline-none transition-colors">
+      Edit
+      <Icon name="chevron-down" size="sm" />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem shortcut="Cmd+C">Copy</DropdownMenuItem>
+      <DropdownMenuItem shortcut="Cmd+V">Paste</DropdownMenuItem>
+      <DropdownMenuItem shortcut="Cmd+X">Cut</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
 
 ```tsx
 <DropdownMenu>
@@ -74,6 +118,26 @@ import { PencilIcon, DocumentDuplicateIcon, TrashIcon } from "@heroicons/react/2
 ```
 
 ### With Labels and Groups
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-md border border-grey-300 bg-white px-3 py-2 text-body-sm font-semibold text-grey-700 hover:border-primary-300 focus:border-primary-500 focus:outline-none transition-colors">
+      Account
+      <Icon name="chevron-down" size="sm" />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Settings</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuLabel>Team</DropdownMenuLabel>
+      <DropdownMenuItem>Invite Members</DropdownMenuItem>
+      <DropdownMenuItem>Team Settings</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Log Out</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
 
 ```tsx
 <DropdownMenu>
@@ -95,6 +159,19 @@ import { PencilIcon, DocumentDuplicateIcon, TrashIcon } from "@heroicons/react/2
 ```
 
 ### Disabled Items
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-md border border-grey-300 bg-white px-3 py-2 text-body-sm font-semibold text-grey-700 hover:border-primary-300 focus:border-primary-500 focus:outline-none transition-colors">
+      Options
+      <Icon name="chevron-down" size="sm" />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>Available Action</DropdownMenuItem>
+      <DropdownMenuItem disabled>Disabled Action</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
 
 ```tsx
 <DropdownMenu>

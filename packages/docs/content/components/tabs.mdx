@@ -17,37 +17,78 @@ import { Tabs, Tab } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Tabs defaultValue="overview">
+    <Tab value="overview">Overview</Tab>
+    <Tab value="settings">Settings</Tab>
+    <Tab value="billing">Billing</Tab>
+  </Tabs>
+</Preview>
+
 ```tsx
 <Tabs defaultValue="overview">
-  <Tab value="overview" label="Overview" />
-  <Tab value="settings" label="Settings" />
-  <Tab value="billing" label="Billing" />
+  <Tab value="overview">Overview</Tab>
+  <Tab value="settings">Settings</Tab>
+  <Tab value="billing">Billing</Tab>
 </Tabs>
 ```
 
 ### Variants
 
+<Preview vertical>
+  <Tabs variant="line" defaultValue="tab1">
+    <Tab value="tab1">Line Tab</Tab>
+    <Tab value="tab2">Tab 2</Tab>
+    <Tab value="tab3">Tab 3</Tab>
+  </Tabs>
+  <Tabs variant="pill" defaultValue="tab1">
+    <Tab value="tab1">Pill Tab</Tab>
+    <Tab value="tab2">Tab 2</Tab>
+    <Tab value="tab3">Tab 3</Tab>
+  </Tabs>
+  <Tabs variant="segmented" defaultValue="tab1">
+    <Tab value="tab1">Segmented</Tab>
+    <Tab value="tab2">Tab 2</Tab>
+    <Tab value="tab3">Tab 3</Tab>
+  </Tabs>
+</Preview>
+
 ```tsx
 // Line variant (default)
 <Tabs variant="line" defaultValue="tab1">
-  <Tab value="tab1" label="Tab 1" />
-  <Tab value="tab2" label="Tab 2" />
+  <Tab value="tab1">Tab 1</Tab>
+  <Tab value="tab2">Tab 2</Tab>
 </Tabs>
 
 // Pill variant
 <Tabs variant="pill" defaultValue="tab1">
-  <Tab value="tab1" label="Tab 1" />
-  <Tab value="tab2" label="Tab 2" />
+  <Tab value="tab1">Tab 1</Tab>
+  <Tab value="tab2">Tab 2</Tab>
 </Tabs>
 
 // Segmented variant
 <Tabs variant="segmented" defaultValue="tab1">
-  <Tab value="tab1" label="Tab 1" />
-  <Tab value="tab2" label="Tab 2" />
+  <Tab value="tab1">Tab 1</Tab>
+  <Tab value="tab2">Tab 2</Tab>
 </Tabs>
 ```
 
 ### Sizes
+
+<Preview vertical>
+  <Tabs size="sm" defaultValue="tab1">
+    <Tab value="tab1">Small</Tab>
+    <Tab value="tab2">Tabs</Tab>
+  </Tabs>
+  <Tabs size="md" defaultValue="tab1">
+    <Tab value="tab1">Medium</Tab>
+    <Tab value="tab2">Tabs</Tab>
+  </Tabs>
+  <Tabs size="lg" defaultValue="tab1">
+    <Tab value="tab1">Large</Tab>
+    <Tab value="tab2">Tabs</Tab>
+  </Tabs>
+</Preview>
 
 ```tsx
 <Tabs size="sm" defaultValue="tab1">...</Tabs>
@@ -55,33 +96,57 @@ import { Tabs, Tab } from "@raydenui/ui";
 <Tabs size="lg" defaultValue="tab1">...</Tabs>
 ```
 
-### Vertical Orientation
-
-```tsx
-<Tabs orientation="vertical" defaultValue="account">
-  <Tab value="account" label="Account" />
-  <Tab value="security" label="Security" />
-  <Tab value="notifications" label="Notifications" />
-</Tabs>
-```
-
 ### With Icons
+
+<Preview>
+  <Tabs defaultValue="home">
+    <Tab value="home" icon="home">Home</Tab>
+    <Tab value="settings" icon="settings">Settings</Tab>
+    <Tab value="users" icon="users">Users</Tab>
+  </Tabs>
+</Preview>
 
 ```tsx
 <Tabs defaultValue="home">
-  <Tab value="home" label="Home" icon="home-03" />
-  <Tab value="settings" label="Settings" icon="settings-02" />
-  <Tab value="users" label="Users" icon="users-01" />
+  <Tab value="home" icon="home">Home</Tab>
+  <Tab value="settings" icon="settings">Settings</Tab>
+  <Tab value="users" icon="users">Users</Tab>
 </Tabs>
 ```
 
 ### With Badges
 
+<Preview>
+  <Tabs defaultValue="inbox">
+    <Tab value="inbox" badge={12}>Inbox</Tab>
+    <Tab value="drafts" badge={3}>Drafts</Tab>
+    <Tab value="sent">Sent</Tab>
+  </Tabs>
+</Preview>
+
 ```tsx
 <Tabs defaultValue="inbox">
-  <Tab value="inbox" label="Inbox" badge={12} />
-  <Tab value="drafts" label="Drafts" badge={3} />
-  <Tab value="sent" label="Sent" />
+  <Tab value="inbox" badge={12}>Inbox</Tab>
+  <Tab value="drafts" badge={3}>Drafts</Tab>
+  <Tab value="sent">Sent</Tab>
+</Tabs>
+```
+
+### Disabled Tab
+
+<Preview>
+  <Tabs defaultValue="active">
+    <Tab value="active">Active</Tab>
+    <Tab value="disabled" disabled>Disabled</Tab>
+    <Tab value="another">Another</Tab>
+  </Tabs>
+</Preview>
+
+```tsx
+<Tabs defaultValue="active">
+  <Tab value="active">Active</Tab>
+  <Tab value="disabled" disabled>Disabled</Tab>
+  <Tab value="another">Another</Tab>
 </Tabs>
 ```
 
@@ -91,19 +156,9 @@ import { Tabs, Tab } from "@raydenui/ui";
 const [activeTab, setActiveTab] = useState("first");
 
 <Tabs value={activeTab} onValueChange={setActiveTab}>
-  <Tab value="first" label="First" />
-  <Tab value="second" label="Second" />
-  <Tab value="third" label="Third" />
-</Tabs>
-```
-
-### Disabled Tab
-
-```tsx
-<Tabs defaultValue="active">
-  <Tab value="active" label="Active" />
-  <Tab value="disabled" label="Disabled" disabled />
-  <Tab value="another" label="Another" />
+  <Tab value="first">First</Tab>
+  <Tab value="second">Second</Tab>
+  <Tab value="third">Third</Tab>
 </Tabs>
 ```
 
@@ -126,7 +181,7 @@ const [activeTab, setActiveTab] = useState("first");
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `value` | `string` | — | Unique tab identifier (required) |
-| `label` | `string` | — | Tab label (required) |
+| `children` | `ReactNode` | — | Tab label content (required) |
 | `icon` | `ReactNode \| IconName` | — | Leading icon |
 | `badge` | `number \| string` | — | Badge content |
 | `disabled` | `boolean` | `false` | Disables the tab |

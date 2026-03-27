@@ -44,7 +44,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
       aria-selected={selected || undefined}
       className={cn(
         "transition-colors",
-        selected ? "bg-primary-50" : "bg-white dark:bg-grey-50",
+        selected ? "bg-primary-50 dark:bg-primary-900" : "bg-white dark:bg-grey-900",
         className
       )}
       {...rest}
@@ -74,8 +74,8 @@ export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
         sortDirection === "asc" ? "ascending" : sortDirection === "desc" ? "descending" : undefined
       }
       className={cn(
-        "h-11 px-6 py-3 text-left text-body-xs font-medium text-grey-700 border-b border-grey-200",
-        "bg-white dark:bg-grey-50 hover:bg-grey-50 transition-colors",
+        "h-11 px-6 py-3 text-left text-body-xs font-medium text-grey-700 dark:text-grey-300 border-b border-grey-200 dark:border-grey-700",
+        "bg-white dark:bg-grey-800 hover:bg-grey-50 dark:hover:bg-grey-700 transition-colors",
         sortable && "cursor-pointer select-none",
         className
       )}
@@ -89,7 +89,12 @@ export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
             name={sortDirection === "asc" ? "chevron-up" : "chevron-down"}
             size="sm"
             aria-hidden="true"
-            className={cn("shrink-0", sortDirection ? "text-grey-700" : "text-grey-400")}
+            className={cn(
+              "shrink-0",
+              sortDirection
+                ? "text-grey-700 dark:text-grey-300"
+                : "text-grey-400 dark:text-grey-500"
+            )}
           />
         )}
       </div>
@@ -106,7 +111,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     <td
       ref={ref}
       className={cn(
-        "h-[72px] px-6 py-4 border-b border-grey-200 text-body-sm text-grey-900",
+        "h-[72px] px-6 py-4 border-b border-grey-200 dark:border-grey-700 text-body-sm text-grey-900 dark:text-grey-100",
         className
       )}
       {...rest}

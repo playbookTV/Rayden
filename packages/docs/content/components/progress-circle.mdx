@@ -17,11 +17,23 @@ import { ProgressCircle } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <ProgressCircle value={65} />
+</Preview>
+
 ```tsx
 <ProgressCircle value={65} />
 ```
 
 ### Sizes
+
+<Preview>
+  <ProgressCircle size="xs" value={50} />
+  <ProgressCircle size="sm" value={50} />
+  <ProgressCircle size="md" value={50} />
+  <ProgressCircle size="lg" value={50} />
+  <ProgressCircle size="xl" value={50} />
+</Preview>
 
 ```tsx
 <ProgressCircle size="xs" value={50} />  {/* 48px */}
@@ -35,11 +47,20 @@ import { ProgressCircle } from "@raydenui/ui";
 
 Display progress as 10 discrete segments with gaps.
 
+<Preview>
+  <ProgressCircle variant="segmented" value={70} />
+</Preview>
+
 ```tsx
 <ProgressCircle variant="segmented" value={70} />
 ```
 
 ### Show/Hide Text
+
+<Preview>
+  <ProgressCircle value={75} showText />
+  <ProgressCircle value={75} showText={false} />
+</Preview>
 
 ```tsx
 // With percentage (default)
@@ -51,6 +72,17 @@ Display progress as 10 discrete segments with gaps.
 
 ### Variants Comparison
 
+<Preview>
+  <div className="flex flex-col items-center">
+    <ProgressCircle variant="default" value={60} />
+    <span className="block mt-2 text-sm text-grey-600">Default</span>
+  </div>
+  <div className="flex flex-col items-center">
+    <ProgressCircle variant="segmented" value={60} />
+    <span className="block mt-2 text-sm text-grey-600">Segmented</span>
+  </div>
+</Preview>
+
 ```tsx
 <div className="flex gap-8">
   <div className="text-center">
@@ -61,31 +93,6 @@ Display progress as 10 discrete segments with gaps.
     <ProgressCircle variant="segmented" value={60} />
     <p className="mt-2 text-sm">Segmented</p>
   </div>
-</div>
-```
-
-### In Context
-
-```tsx
-// Dashboard stat
-<div className="flex items-center gap-4">
-  <ProgressCircle value={78} size="lg" />
-  <div>
-    <p className="font-medium">Conversion Rate</p>
-    <p className="text-sm text-grey-500">+5.2% from last month</p>
-  </div>
-</div>
-
-// Skill indicator
-<div className="flex items-center gap-3">
-  <ProgressCircle value={90} size="sm" />
-  <span>React</span>
-</div>
-
-// Loading indicator
-<div className="flex flex-col items-center gap-2">
-  <ProgressCircle variant="segmented" value={45} size="lg" />
-  <span className="text-sm text-grey-500">Processing...</span>
 </div>
 ```
 

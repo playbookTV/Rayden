@@ -17,11 +17,23 @@ import { Divider } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <div className="w-full">
+    <Divider />
+  </div>
+</Preview>
+
 ```tsx
 <Divider />
 ```
 
 ### With Label
+
+<Preview>
+  <div className="w-full">
+    <Divider label="Or continue with" />
+  </div>
+</Preview>
 
 ```tsx
 <Divider label="Or continue with" />
@@ -29,19 +41,40 @@ import { Divider } from "@raydenui/ui";
 
 ### With Title
 
+<Preview>
+  <div className="w-full">
+    <Divider variant="with-title" title="Section Title" />
+  </div>
+</Preview>
+
 ```tsx
 <Divider variant="with-title" title="Section Title" />
 ```
 
 ### With Icon
 
-```tsx
-import { SparklesIcon } from "@heroicons/react/20/solid";
+<Preview>
+  <div className="w-full">
+    <Divider variant="with-icon" icon={<Icon name="stars" />} />
+  </div>
+</Preview>
 
-<Divider variant="with-icon" icon={<SparklesIcon />} />
+```tsx
+import { Icon } from "@raydenui/ui";
+
+<Divider variant="with-icon" icon={<Icon name="stars" />} />
 ```
 
 ### With Button
+
+<Preview>
+  <div className="w-full">
+    <Divider
+      variant="with-button"
+      buttonText="Load More"
+    />
+  </div>
+</Preview>
 
 ```tsx
 <Divider
@@ -51,55 +84,25 @@ import { SparklesIcon } from "@heroicons/react/20/solid";
 />
 ```
 
-### Orientation
+### Vertical Orientation
+
+<Preview>
+  <div className="flex items-center h-8 gap-4">
+    <span>Item 1</span>
+    <Divider orientation="vertical" />
+    <span>Item 2</span>
+    <Divider orientation="vertical" />
+    <span>Item 3</span>
+  </div>
+</Preview>
 
 ```tsx
-// Horizontal (default)
-<Divider orientation="horizontal" />
-
-// Vertical
 <div className="flex items-center h-8 gap-4">
   <span>Item 1</span>
   <Divider orientation="vertical" />
   <span>Item 2</span>
   <Divider orientation="vertical" />
   <span>Item 3</span>
-</div>
-```
-
-### In Context
-
-```tsx
-// Login form divider
-<form className="space-y-4">
-  <Input label="Email" />
-  <Input label="Password" type="password" />
-  <Button variant="primary" className="w-full">Sign In</Button>
-
-  <Divider label="Or continue with" />
-
-  <div className="flex gap-3">
-    <Button variant="grey" appearance="outlined" className="flex-1">
-      Google
-    </Button>
-    <Button variant="grey" appearance="outlined" className="flex-1">
-      GitHub
-    </Button>
-  </div>
-</form>
-
-// Section divider
-<div className="space-y-6">
-  <section>
-    <h2>Account Settings</h2>
-    {/* content */}
-  </section>
-
-  <Divider variant="with-title" title="Danger Zone" />
-
-  <section>
-    <Button variant="destructive">Delete Account</Button>
-  </section>
 </div>
 ```
 

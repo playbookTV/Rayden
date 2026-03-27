@@ -17,11 +17,22 @@ import { Banner } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Banner title="New feature available" />
+</Preview>
+
 ```tsx
 <Banner title="New feature available" />
 ```
 
 ### With Description
+
+<Preview>
+  <Banner
+    title="Update available"
+    description="A new version of the app is ready to install."
+  />
+</Preview>
 
 ```tsx
 <Banner
@@ -31,6 +42,15 @@ import { Banner } from "@raydenui/ui";
 ```
 
 ### Status Variants
+
+<Preview vertical>
+  <Banner status="information" title="Information" description="This is an informational message." />
+  <Banner status="success" title="Success" description="Your changes have been saved." />
+  <Banner status="warning" title="Warning" description="This action cannot be undone." />
+  <Banner status="error" title="Error" description="Something went wrong." />
+  <Banner status="feature" title="New Feature" description="Check out our latest update." />
+  <Banner status="opportunity" title="Opportunity" description="Limited time offer available." />
+</Preview>
 
 ```tsx
 <Banner status="information" title="Information" description="This is an informational message." />
@@ -45,6 +65,11 @@ import { Banner } from "@raydenui/ui";
 
 Bold banners have a solid background with white text.
 
+<Preview vertical>
+  <Banner status="success" emphasis="bold" title="Payment successful" description="Your order has been confirmed." />
+  <Banner status="error" emphasis="bold" title="Payment failed" description="Please try again." />
+</Preview>
+
 ```tsx
 <Banner
   status="success"
@@ -56,12 +81,24 @@ Bold banners have a solid background with white text.
 
 ### Sizes
 
+<Preview vertical>
+  <Banner size="sm" title="Small banner" />
+  <Banner size="lg" title="Large banner" />
+</Preview>
+
 ```tsx
 <Banner size="sm" title="Small banner" />
 <Banner size="lg" title="Large banner" />
 ```
 
 ### With Action Button
+
+<Preview>
+  <Banner
+    title="New update available"
+    buttonLabel="Update now"
+  />
+</Preview>
 
 ```tsx
 <Banner
@@ -71,37 +108,19 @@ Bold banners have a solid background with white text.
 />
 ```
 
-### With Custom Icon
-
-```tsx
-<Banner
-  title="Custom notification"
-  icon="bell-01"
-/>
-```
-
 ### Non-dismissible
+
+<Preview>
+  <Banner
+    title="Important notice"
+    dismissible={false}
+  />
+</Preview>
 
 ```tsx
 <Banner
   title="Important notice"
   dismissible={false}
-/>
-```
-
-### Complete Example
-
-```tsx
-<Banner
-  status="warning"
-  emphasis="bold"
-  size="lg"
-  title="Maintenance scheduled"
-  description="The system will be down for maintenance on Sunday."
-  icon="alert-triangle"
-  buttonLabel="Learn more"
-  onButtonClick={() => openModal()}
-  onDismiss={() => hideBanner()}
 />
 ```
 

@@ -1,0 +1,91 @@
+---
+title: LoginBlock
+description: Authentication form with email/password fields and social login options
+---
+
+# LoginBlock
+
+A complete authentication form with email/password fields and social login options.
+
+## Import
+
+```tsx
+import { LoginBlock } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+### Card Variant
+
+<Preview>
+  <LoginBlockDemo />
+</Preview>
+
+```tsx
+<LoginBlock
+  variant="card"
+  onForgotPassword={() => navigate("/forgot-password")}
+  onSubmit={(data) => signIn(data.email, data.password)}
+  onSignUp={() => navigate("/sign-up")}
+/>
+```
+
+### Standard Variant
+
+<Preview>
+  <LoginBlockStandardDemo />
+</Preview>
+
+```tsx
+<LoginBlock
+  variant="standard"
+  onForgotPassword={() => navigate("/forgot-password")}
+  onSubmit={(data) => signIn(data.email, data.password)}
+  onSignUp={() => navigate("/sign-up")}
+/>
+```
+
+### Work Email Variant
+
+```tsx
+<LoginBlock
+  variant="work-email"
+  onForgotPassword={() => navigate("/forgot-password")}
+  onSubmit={(data) => signIn(data.email, data.password)}
+  onSignUp={() => navigate("/sign-up")}
+  showRememberMe={false}
+/>
+```
+
+### With Social Providers
+
+```tsx
+<LoginBlock
+  variant="card"
+  socialProviders={["google", "github", "apple"]}
+  onSocialLogin={(provider) => handleSocialAuth(provider)}
+  onSubmit={(data) => signIn(data.email, data.password)}
+/>
+```
+
+## Props
+
+| Prop                 | Type                                  | Default     | Description                   |
+| -------------------- | ------------------------------------- | ----------- | ----------------------------- |
+| `variant`            | `"standard" \| "card" \| "work-email"` | `"standard"` | Form variant                 |
+| `title`              | `string`                              | —           | Header title                  |
+| `subtitle`           | `string`                              | —           | Header subtitle               |
+| `onSubmit`           | `(data: { email, password }) => void` | —           | Form submit handler           |
+| `socialProviders`    | `("google" \| "github" \| "apple")[]` | —           | Social login buttons          |
+| `onSocialLogin`      | `(provider: string) => void`          | —           | Social login handler          |
+| `onForgotPassword`   | `() => void`                          | —           | Forgot password handler       |
+| `onSignUp`           | `() => void`                          | —           | Sign up link handler          |
+| `showRememberMe`     | `boolean`                             | `true`      | Show remember me checkbox     |
+| `className`          | `string`                              | —           | Additional CSS classes        |
+
+## Accessibility
+
+- Form inputs have proper labels
+- Error messages are announced to screen readers
+- Social login buttons have descriptive labels
+- Focus management on form submission

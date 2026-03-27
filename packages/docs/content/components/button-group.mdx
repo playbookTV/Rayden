@@ -17,6 +17,14 @@ import { ButtonGroup, ButtonGroupItem } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <ButtonGroup>
+    <ButtonGroupItem>Left</ButtonGroupItem>
+    <ButtonGroupItem>Center</ButtonGroupItem>
+    <ButtonGroupItem>Right</ButtonGroupItem>
+  </ButtonGroup>
+</Preview>
+
 ```tsx
 <ButtonGroup>
   <ButtonGroupItem>Left</ButtonGroupItem>
@@ -26,6 +34,14 @@ import { ButtonGroup, ButtonGroupItem } from "@raydenui/ui";
 ```
 
 ### With Active State
+
+<Preview>
+  <ButtonGroup>
+    <ButtonGroupItem>Left</ButtonGroupItem>
+    <ButtonGroupItem active>Center</ButtonGroupItem>
+    <ButtonGroupItem>Right</ButtonGroupItem>
+  </ButtonGroup>
+</Preview>
 
 ```tsx
 const [active, setActive] = useState("center");
@@ -45,14 +61,23 @@ const [active, setActive] = useState("center");
 
 ### With Icons
 
+<Preview>
+  <ButtonGroup>
+    <ButtonGroupItem icon={<Icon name="list" />} active>
+      List
+    </ButtonGroupItem>
+    <ButtonGroupItem icon={<Icon name="grid" />}>Grid</ButtonGroupItem>
+  </ButtonGroup>
+</Preview>
+
 ```tsx
-import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/20/solid";
+import { Icon } from "@raydenui/ui";
 
 <ButtonGroup>
-  <ButtonGroupItem icon={<ListBulletIcon />} active>
+  <ButtonGroupItem icon={<Icon name="list" />} active>
     List
   </ButtonGroupItem>
-  <ButtonGroupItem icon={<Squares2X2Icon />}>Grid</ButtonGroupItem>
+  <ButtonGroupItem icon={<Icon name="grid" />}>Grid</ButtonGroupItem>
 </ButtonGroup>;
 ```
 

@@ -1,0 +1,130 @@
+---
+title: NotificationsBlock
+description: A notification panel with read/unread states, avatars, and timestamps
+---
+
+# NotificationsBlock
+
+A notification panel with support for read/unread states, avatars, and timestamps.
+
+## Import
+
+```tsx
+import { NotificationsBlock } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+<Preview>
+  <NotificationsBlockDemo />
+</Preview>
+
+```tsx
+<NotificationsBlock
+  unreadCount={7}
+  items={[
+    {
+      id: "1",
+      avatar: <Avatar type="image" src="..." size="sm" />,
+      text: (
+        <>
+          <span className="font-medium">David</span> left a comment on{" "}
+          <span className="font-medium text-primary-400">Site redesign</span>
+        </>
+      ),
+      date: "Mar 21, 2024",
+      time: "10 mins",
+      unread: true,
+    },
+    {
+      id: "2",
+      avatar: <Avatar type="image" src="..." size="sm" />,
+      text: (
+        <>
+          <span className="font-medium">Sarah</span> shared a file with you
+        </>
+      ),
+      date: "Mar 20, 2024",
+      time: "2 hours",
+      unread: false,
+    },
+  ]}
+/>
+```
+
+### With File Attachment
+
+```tsx
+<NotificationsBlock
+  items={[
+    {
+      id: "1",
+      avatar: <Avatar type="image" src="..." size="sm" />,
+      text: "David shared a file",
+      date: "Mar 21, 2024",
+      time: "10 mins",
+      unread: true,
+      content: {
+        type: "file",
+        title: "Meeting minutes",
+        size: "13MB",
+        fileType: "PDF File",
+        date: "11 Sept 23",
+      },
+    },
+  ]}
+/>
+```
+
+### With Action Buttons
+
+```tsx
+<NotificationsBlock
+  items={[
+    {
+      id: "1",
+      avatar: <Avatar type="image" src="..." size="sm" />,
+      text: "You have a pending invitation",
+      date: "Mar 21, 2024",
+      time: "10 mins",
+      content: {
+        type: "cta",
+        primaryAction: { label: "Accept" },
+        secondaryAction: { label: "Decline" },
+      },
+    },
+  ]}
+/>
+```
+
+## Props
+
+### NotificationsBlockProps
+
+| Prop          | Type                 | Default           | Description                       |
+| ------------- | -------------------- | ----------------- | --------------------------------- |
+| `title`       | `string`             | `"Notifications"` | Header title                      |
+| `unreadCount` | `number`             | —                 | Number of unread notifications    |
+| `items`       | `NotificationItem[]` | —                 | Array of notifications (required) |
+| `onItemClick` | `(id: string) => void` | —               | Click handler                     |
+| `onMarkAllRead` | `() => void`       | —                 | Mark all as read handler          |
+| `className`   | `string`             | —                 | Additional CSS classes            |
+
+### NotificationItem
+
+| Prop      | Type                          | Required | Description                    |
+| --------- | ----------------------------- | -------- | ------------------------------ |
+| `id`      | `string`                      | Yes      | Unique identifier              |
+| `avatar`  | `ReactNode`                   | Yes      | Avatar element                 |
+| `text`    | `ReactNode`                   | Yes      | Notification message           |
+| `date`    | `string`                      | Yes      | Date string                    |
+| `time`    | `string`                      | Yes      | Relative time (e.g., "10 mins")|
+| `unread`  | `boolean`                     | No       | Unread state indicator         |
+| `link`    | `{ label, href }`             | No       | Optional link                  |
+| `content` | `FileContent \| CTAContent \| CommentContent` | No | Additional content |
+
+## Accessibility
+
+- Notification items are keyboard navigable
+- Unread indicators are announced to screen readers
+- Action buttons have proper focus states

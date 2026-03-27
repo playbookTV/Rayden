@@ -17,6 +17,10 @@ import { Pagination } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <PaginationDemo />
+</Preview>
+
 ```tsx
 <Pagination
   currentPage={1}
@@ -25,7 +29,17 @@ import { Pagination } from "@raydenui/ui";
 />
 ```
 
+### Different Page Positions
+
+<Preview>
+  <PaginationPositionsDemo />
+</Preview>
+
 ### With Sibling Count
+
+<Preview>
+  <PaginationSiblingDemo />
+</Preview>
 
 ```tsx
 <Pagination
@@ -45,18 +59,6 @@ const [page, setPage] = useState(1);
   currentPage={page}
   totalPages={10}
   onPageChange={setPage}
-/>
-```
-
-### With Boundary Count
-
-```tsx
-<Pagination
-  currentPage={10}
-  totalPages={20}
-  boundaryCount={2}
-  siblingCount={1}
-  onPageChange={(page) => setPage(page)}
 />
 ```
 

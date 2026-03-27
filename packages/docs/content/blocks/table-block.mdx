@@ -1,0 +1,111 @@
+---
+title: TableBlock
+description: Data table with header, columns, and built-in pagination
+---
+
+# TableBlock
+
+A data table block with header, columns, and built-in pagination.
+
+## Import
+
+```tsx
+import { TableBlock } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+<TableBlock
+  title="Team Members"
+  description="Manage your team members and their roles"
+  columns={["Name", "Email", "Role", "Status"]}
+  rows={users.map((user) => ({
+    id: user.id,
+    cells: [
+      <div className="flex items-center gap-3">
+        <Avatar type="image" src={user.avatar} size="sm" />
+        {user.name}
+      </div>,
+      user.email,
+      user.role,
+      <Badge color={user.active ? "success" : "neutral"}>
+        {user.active ? "Active" : "Inactive"}
+      </Badge>,
+    ],
+  }))}
+  onRowClick={(id) => viewUser(id)}
+/>
+```
+
+### With Pagination
+
+```tsx
+const [page, setPage] = useState(1);
+
+<TableBlock
+  title="Products"
+  columns={["Name", "SKU", "Price", "Stock"]}
+  rows={products.map((p) => ({
+    id: p.id,
+    cells: [p.name, p.sku, `$${p.price}`, p.stock],
+  }))}
+  pagination={{
+    currentPage: page,
+    totalPages: 10,
+    onPageChange: setPage,
+  }}
+/>
+```
+
+### With Actions
+
+```tsx
+<TableBlock
+  title="Orders"
+  description="Recent customer orders"
+  columns={["Order ID", "Customer", "Total", "Actions"]}
+  rows={orders.map((order) => ({
+    id: order.id,
+    cells: [
+      order.id,
+      order.customerName,
+      `$${order.total}`,
+      <Button size="sm" variant="text">View</Button>,
+    ],
+  }))}
+/>
+```
+
+## Props
+
+| Prop          | Type                   | Default | Description               |
+| ------------- | ---------------------- | ------- | ------------------------- |
+| `title`       | `string`               | —       | Header title              |
+| `description` | `string`               | —       | Header description        |
+| `columns`     | `string[]`             | —       | Column headers (required) |
+| `rows`        | `TableBlockRow[]`      | —       | Table rows (required)     |
+| `onRowClick`  | `(id: string) => void` | —       | Row click handler         |
+| `pagination`  | `PaginationProps`      | —       | Pagination config         |
+| `className`   | `string`               | —       | Additional CSS classes    |
+
+### TableBlockRow
+
+| Prop    | Type          | Required | Description          |
+| ------- | ------------- | -------- | -------------------- |
+| `id`    | `string`      | Yes      | Unique row identifier|
+| `cells` | `ReactNode[]` | Yes      | Cell content array   |
+
+### PaginationProps
+
+| Prop           | Type                       | Required | Description              |
+| -------------- | -------------------------- | -------- | ------------------------ |
+| `currentPage`  | `number`                   | Yes      | Current page number      |
+| `totalPages`   | `number`                   | Yes      | Total number of pages    |
+| `onPageChange` | `(page: number) => void`   | Yes      | Page change handler      |
+
+## Accessibility
+
+- Uses semantic `<table>` elements
+- Row click handlers are keyboard accessible
+- Pagination controls have proper ARIA labels

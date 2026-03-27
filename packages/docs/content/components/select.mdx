@@ -17,6 +17,14 @@ import { Select, SelectOption } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Select placeholder="Select an option">
+    <SelectOption value="option1">Option 1</SelectOption>
+    <SelectOption value="option2">Option 2</SelectOption>
+    <SelectOption value="option3">Option 3</SelectOption>
+  </Select>
+</Preview>
+
 ```tsx
 <Select placeholder="Select an option">
   <SelectOption value="option1">Option 1</SelectOption>
@@ -26,6 +34,14 @@ import { Select, SelectOption } from "@raydenui/ui";
 ```
 
 ### With Label
+
+<Preview>
+  <Select label="Country" placeholder="Select a country">
+    <SelectOption value="us">United States</SelectOption>
+    <SelectOption value="uk">United Kingdom</SelectOption>
+    <SelectOption value="ca">Canada</SelectOption>
+  </Select>
+</Preview>
 
 ```tsx
 <Select label="Country" placeholder="Select a country">
@@ -37,21 +53,43 @@ import { Select, SelectOption } from "@raydenui/ui";
 
 ### With Icons
 
+<Preview>
+  <Select label="Payment Method" placeholder="Select payment">
+    <SelectOption value="card" icon={<Icon name="card" />}>
+      Credit Card
+    </SelectOption>
+    <SelectOption value="bank" icon={<Icon name="bank" />}>
+      Bank Transfer
+    </SelectOption>
+    <SelectOption value="wallet" icon={<Icon name="wallet" />}>
+      Digital Wallet
+    </SelectOption>
+  </Select>
+</Preview>
+
 ```tsx
 <Select label="Payment Method" placeholder="Select payment">
-  <SelectOption value="card" icon={<CreditCardIcon />}>
+  <SelectOption value="card" icon={<Icon name="card" />}>
     Credit Card
   </SelectOption>
-  <SelectOption value="bank" icon={<BuildingLibraryIcon />}>
+  <SelectOption value="bank" icon={<Icon name="bank" />}>
     Bank Transfer
-  </SelectOption>
-  <SelectOption value="paypal" icon={<PayPalIcon />}>
-    PayPal
   </SelectOption>
 </Select>
 ```
 
 ### With Avatars
+
+<Preview>
+  <Select label="Assignee" placeholder="Select team member">
+    <SelectOption value="john" avatar="https://i.pravatar.cc/150?img=1">
+      John Doe
+    </SelectOption>
+    <SelectOption value="jane" avatar="https://i.pravatar.cc/150?img=2">
+      Jane Smith
+    </SelectOption>
+  </Select>
+</Preview>
 
 ```tsx
 <Select label="Assignee" placeholder="Select team member">
@@ -65,6 +103,20 @@ import { Select, SelectOption } from "@raydenui/ui";
 ```
 
 ### With Status Indicators
+
+<Preview>
+  <Select label="Status" placeholder="Select status">
+    <SelectOption value="active" status="success">
+      Active
+    </SelectOption>
+    <SelectOption value="pending" status="warning">
+      Pending
+    </SelectOption>
+    <SelectOption value="inactive" status="error">
+      Inactive
+    </SelectOption>
+  </Select>
+</Preview>
 
 ```tsx
 <Select label="Status" placeholder="Select status">

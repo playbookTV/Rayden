@@ -18,11 +18,19 @@ import type { InputProps, InputSize } from "@raydenui/ui";
 
 ### Basic
 
+<Preview>
+  <Input placeholder="Enter your name" />
+</Preview>
+
 ```tsx
 <Input placeholder="Enter your name" />
 ```
 
 ### With Label
+
+<Preview>
+  <Input label="Email" placeholder="you@example.com" />
+</Preview>
 
 ```tsx
 <Input label="Email" placeholder="you@example.com" />
@@ -30,11 +38,22 @@ import type { InputProps, InputSize } from "@raydenui/ui";
 
 ### With Helper Text
 
+<Preview>
+  <Input label="Password" type="password" helperText="Must be at least 8 characters" />
+</Preview>
+
 ```tsx
 <Input label="Password" type="password" helperText="Must be at least 8 characters" />
 ```
 
 ### Sizes
+
+<Preview vertical>
+  <Input size="xs" placeholder="Extra small" />
+  <Input size="sm" placeholder="Small (default)" />
+  <Input size="md" placeholder="Medium" />
+  <Input size="lg" placeholder="Large" />
+</Preview>
 
 ```tsx
 <Input size="xs" placeholder="Extra small" />
@@ -45,6 +64,19 @@ import type { InputProps, InputSize } from "@raydenui/ui";
 
 ### Validation States
 
+<Preview vertical>
+  <Input
+    label="Email"
+    success="Email is available"
+    defaultValue="user@example.com"
+  />
+  <Input
+    label="Email"
+    error="Please enter a valid email"
+    defaultValue="invalid-email"
+  />
+</Preview>
+
 ```tsx
 // Success
 <Input
@@ -53,52 +85,58 @@ import type { InputProps, InputSize } from "@raydenui/ui";
   defaultValue="user@example.com"
 />
 
-// Success (boolean)
-<Input
-  label="Username"
-  success
-  defaultValue="john_doe"
-/>
-
 // Error
 <Input
   label="Email"
   error="Please enter a valid email"
   defaultValue="invalid-email"
 />
-
-// Error (boolean)
-<Input
-  label="Password"
-  error
-  defaultValue="123"
-/>
 ```
 
 ### With Icons
 
+<Preview vertical>
+  <Input
+    leadingIcon="search"
+    placeholder="Search..."
+  />
+  <Input
+    trailingIcon="x"
+    placeholder="Clearable input"
+  />
+  <Input
+    leadingIcon="mail"
+    trailingIcon="check"
+    placeholder="Email"
+  />
+</Preview>
+
 ```tsx
 // Leading icon
 <Input
-  leadingIcon="search-md"
+  leadingIcon="search"
   placeholder="Search..."
 />
 
 // Trailing icon
 <Input
-  trailingIcon="x-close"
+  trailingIcon="x"
   placeholder="Clearable input"
 />
 
 // Both icons
 <Input
-  leadingIcon="mail-01"
+  leadingIcon="mail"
   trailingIcon="check"
   placeholder="Email"
 />
 ```
 
 ### With Text Addon
+
+<Preview>
+  <Input addonRight=".com" placeholder="domain" />
+</Preview>
 
 ```tsx
 <Input addonRight=".com" placeholder="domain" />
@@ -107,6 +145,22 @@ import type { InputProps, InputSize } from "@raydenui/ui";
 ### With Leading/Trailing Addons
 
 Leading and trailing addons render as separate bordered sections.
+
+<Preview vertical>
+  <Input
+    leadingAddon={<span>https://</span>}
+    placeholder="example.com"
+  />
+  <Input
+    trailingAddon={<Button size="sm">Search</Button>}
+    placeholder="Search..."
+  />
+  <Input
+    leadingAddon={<span>$</span>}
+    trailingAddon={<span>USD</span>}
+    placeholder="0.00"
+  />
+</Preview>
 
 ```tsx
 // Leading addon (e.g., dropdown)
@@ -131,26 +185,17 @@ Leading and trailing addons render as separate bordered sections.
 
 ### Read-only and Disabled
 
+<Preview vertical>
+  <Input label="ID" value="USR-12345" readOnly />
+  <Input label="Email" placeholder="Enter email" disabled />
+</Preview>
+
 ```tsx
 // Read-only
 <Input label="ID" value="USR-12345" readOnly />
 
 // Disabled
 <Input label="Email" placeholder="Enter email" disabled />
-```
-
-### Complete Example
-
-```tsx
-<Input
-  label="Website URL"
-  leadingAddon={<span>https://</span>}
-  leadingIcon="globe-02"
-  placeholder="example.com"
-  trailingIcon="check"
-  helperText="Enter your website URL"
-  size="md"
-/>
 ```
 
 ## Props
