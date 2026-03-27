@@ -63,7 +63,7 @@ export function NotificationsBlock({
     <section
       aria-labelledby={headingId}
       className={cn(
-        "bg-white rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8 overflow-clip",
+        "bg-white dark:bg-grey-50 rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8 overflow-clip",
         className
       )}
     >

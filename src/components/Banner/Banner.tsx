@@ -192,13 +192,19 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
 
           {/* Text */}
           <span
-            className={cn("font-semibold leading-[1.45] whitespace-nowrap", textSize, textColor)}
+            className={cn("font-semibold leading-[1.45] sm:whitespace-nowrap", textSize, textColor)}
           >
             {title}
           </span>
 
           {description && (
-            <span className={cn("leading-[1.45] whitespace-nowrap", textSize, descColor)}>
+            <span
+              className={cn(
+                "leading-[1.45] sm:whitespace-nowrap hidden sm:inline",
+                textSize,
+                descColor
+              )}
+            >
               {description}
             </span>
           )}

@@ -30,14 +30,14 @@ export const sidebarThemeStyles: Record<
   }
 > = {
   light: {
-    container: "bg-white",
+    container: "bg-white dark:bg-grey-50",
     defaultText: "text-grey-700",
     defaultIcon: "text-grey-400",
     selectedBg: "bg-primary-50",
     selectedText: "text-grey-900",
     selectedBorder: "border-l-2 border-primary-400",
     selectedIcon: "text-grey-900",
-    hoverBg: "hover:bg-grey-50",
+    hoverBg: "hover:bg-grey-50 dark:hover:bg-grey-100",
     sectionTitle: "text-grey-400",
     divider: "border-grey-100",
     badgeDefault: "bg-grey-100 text-grey-700",

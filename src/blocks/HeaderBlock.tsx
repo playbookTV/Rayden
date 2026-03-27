@@ -127,6 +127,7 @@ export function HeaderBlock({
 }: HeaderBlockProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState(switcher?.activeIndex ?? 0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isDark = variant === 4 || variant === 8;
   const isLargeLinks = [3, 4, 5, 6, 9, 10, 11].includes(variant);
@@ -311,11 +312,11 @@ export function HeaderBlock({
   // ═══════════════════════════════════════════════════════════════
   if (variant === 11) {
     return (
-      <div className={cn("flex flex-col bg-white w-full", className)}>
+      <div className={cn("flex flex-col bg-white dark:bg-grey-50 w-full", className)}>
         {/* Top row: switcher + secondary links */}
-        <div className="flex items-center justify-between px-[72px] py-6">
-          {renderSwitcher()}
-          <div className="flex items-center gap-6">
+        <div className="flex items-center justify-between px-4 md:px-[72px] py-4 md:py-6">
+          <div className="hidden md:block">{renderSwitcher()}</div>
+          <div className="hidden md:flex items-center gap-6">
             {secondaryLinks.map((link) => (
               <button
                 key={link.label}
@@ -327,19 +328,53 @@ export function HeaderBlock({
               </button>
             ))}
           </div>
+          {/* Mobile: just show logo area */}
+          <div className="md:hidden flex-1">{logo}</div>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-grey-700"
+            aria-label="Toggle menu"
+          >
+            <Icon name={mobileMenuOpen ? "multiply" : "list"} size="md" />
+          </button>
         </div>
 
         {/* Divider */}
         <div className="h-px w-full bg-grey-200" />
 
-        {/* Bottom row: logo + links | actions */}
-        <div className="flex items-center justify-between px-[72px] py-6">
+        {/* Bottom row: logo + links | actions - hidden on mobile */}
+        <div className="hidden md:flex items-center justify-between px-4 md:px-[72px] py-4 md:py-6">
           <div className="flex items-center gap-10">
             {logo}
             <NavLinks links={links} large gap="gap-8" />
           </div>
           {actionsSection}
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden px-4 pb-4 flex flex-col gap-4 bg-white dark:bg-grey-50">
+            {links.map((link) => (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => {
+                  link.onClick?.();
+                  setMobileMenuOpen(false);
+                }}
+                className="text-left py-2 font-semibold text-grey-900"
+              >
+                {link.label}
+              </button>
+            ))}
+            {actions.length > 0 && (
+              <div className="flex flex-col gap-2 pt-2 border-t border-grey-200">
+                {actions.map((action, i) => renderAction(action, i))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -350,20 +385,71 @@ export function HeaderBlock({
   // ═══════════════════════════════════════════════════════════════
   if (variant === 7 || variant === 8) {
     return (
-      <div className={cn("flex flex-col w-full", isDark ? "bg-grey-900" : "bg-white", className)}>
-        <div className="flex items-center justify-between px-[72px] py-6 w-full">
-          {/* Left: nav links */}
-          <NavLinks links={links} dark={isDark} />
+      <div
+        className={cn(
+          "flex flex-col w-full",
+          isDark ? "bg-grey-900" : "bg-white dark:bg-grey-50",
+          className
+        )}
+      >
+        <div className="flex items-center justify-between px-4 md:px-[72px] py-4 md:py-6 w-full">
+          {/* Left: nav links - hidden on mobile */}
+          <div className="hidden md:block">
+            <NavLinks links={links} dark={isDark} />
+          </div>
 
           {/* Center: logo */}
           {logo}
 
           {/* Right: rightLinks + action buttons */}
-          <div className="flex items-center gap-6">
-            <NavLinks links={rightLinks} dark={isDark} />
-            {actionsSection}
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="hidden md:flex items-center gap-6">
+              <NavLinks links={rightLinks} dark={isDark} />
+              {actionsSection}
+            </div>
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={cn("md:hidden p-2", isDark ? "text-white" : "text-grey-700")}
+              aria-label="Toggle menu"
+            >
+              <Icon name={mobileMenuOpen ? "multiply" : "list"} size="md" />
+            </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div
+            className={cn(
+              "md:hidden px-4 pb-4 flex flex-col gap-4",
+              isDark ? "bg-grey-900" : "bg-white dark:bg-grey-50"
+            )}
+          >
+            {[...links, ...rightLinks].map((link) => (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => {
+                  link.onClick?.();
+                  setMobileMenuOpen(false);
+                }}
+                className={cn(
+                  "text-left py-2 font-semibold",
+                  isDark ? "text-grey-50" : "text-grey-900"
+                )}
+              >
+                {link.label}
+              </button>
+            ))}
+            {actions.length > 0 && (
+              <div className="flex flex-col gap-2 pt-2 border-t border-grey-200">
+                {actions.map((action, i) => renderAction(action, i))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -373,7 +459,13 @@ export function HeaderBlock({
   // Logo (left) | Links (center) | Actions (right)
   // ═══════════════════════════════════════════════════════════════
   return (
-    <div className={cn("flex flex-col w-full", isDark ? "bg-grey-900" : "bg-white", className)}>
+    <div
+      className={cn(
+        "flex flex-col w-full",
+        isDark ? "bg-grey-900" : "bg-white dark:bg-grey-50",
+        className
+      )}
+    >
       {/* Announcement banner (v1 only) */}
       {variant === 1 && announcement && (
         <div className="flex items-center justify-center gap-2 bg-[#290b00] px-4 py-4 w-full">
@@ -393,12 +485,12 @@ export function HeaderBlock({
       {/* Main nav row */}
       <div
         className={cn(
-          "flex items-center justify-between py-6 w-full",
-          variant === 3 || variant === 4 ? "px-[112px]" : "px-[72px]"
+          "flex items-center justify-between py-4 md:py-6 w-full",
+          variant === 3 || variant === 4 ? "px-4 md:px-[112px]" : "px-4 md:px-[72px]"
         )}
       >
         {/* Left: logo + optional search/switcher */}
-        <div className="flex items-center gap-10 shrink-0">
+        <div className="flex items-center gap-4 md:gap-10 shrink-0">
           {logo}
 
           {variant === 9 && (
@@ -411,26 +503,95 @@ export function HeaderBlock({
                 setSearchQuery(e.target.value);
                 onSearch?.(e.target.value);
               }}
-              wrapperClassName="w-[375px]"
+              wrapperClassName="hidden md:block w-[375px]"
             />
           )}
 
-          {variant === 10 && renderSwitcher()}
+          {variant === 10 && <div className="hidden md:block">{renderSwitcher()}</div>}
         </div>
 
-        {/* Center: links (pill or regular) */}
-        {variant === 3 || variant === 4 ? (
-          renderPillNav()
-        ) : (
-          <NavLinks links={links} dark={isDark} large={isLargeLinks} />
-        )}
+        {/* Center: links (pill or regular) - hidden on mobile */}
+        <div className="hidden md:block">
+          {variant === 3 || variant === 4 ? (
+            renderPillNav()
+          ) : (
+            <NavLinks links={links} dark={isDark} large={isLargeLinks} />
+          )}
+        </div>
 
         {/* Right: optional rightLinks + actions */}
-        <div className="flex items-center gap-6 shrink-0">
-          <NavLinks links={rightLinks} dark={isDark} large={isLargeLinks} />
-          {actionsSection}
+        <div className="flex items-center gap-4 md:gap-6 shrink-0">
+          <div className="hidden md:flex items-center gap-6">
+            <NavLinks links={rightLinks} dark={isDark} large={isLargeLinks} />
+          </div>
+          <div className="hidden md:flex items-center gap-6">{actionsSection}</div>
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={cn("md:hidden p-2", isDark ? "text-white" : "text-grey-700")}
+            aria-label="Toggle menu"
+          >
+            <Icon name={mobileMenuOpen ? "multiply" : "list"} size="md" />
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div
+          className={cn(
+            "md:hidden px-4 pb-4 flex flex-col gap-4",
+            isDark ? "bg-grey-900" : "bg-white dark:bg-grey-50"
+          )}
+        >
+          {links.length > 0 && (
+            <div className="flex flex-col gap-2">
+              {links.map((link) => (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => {
+                    link.onClick?.();
+                    setMobileMenuOpen(false);
+                  }}
+                  className={cn(
+                    "text-left py-2 font-semibold",
+                    isDark ? "text-grey-50" : "text-grey-900"
+                  )}
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
+          )}
+          {rightLinks.length > 0 && (
+            <div className="flex flex-col gap-2">
+              {rightLinks.map((link) => (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => {
+                    link.onClick?.();
+                    setMobileMenuOpen(false);
+                  }}
+                  className={cn(
+                    "text-left py-2 font-semibold",
+                    isDark ? "text-grey-50" : "text-grey-900"
+                  )}
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
+          )}
+          {actions.length > 0 && (
+            <div className="flex flex-col gap-2 pt-2 border-t border-grey-200">
+              {actions.map((action, i) => renderAction(action, i))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

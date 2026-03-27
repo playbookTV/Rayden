@@ -36,8 +36,8 @@ const colorStyles: Record<BadgeColor, Record<BadgeType, string>> = {
   },
   success: {
     filled: "bg-success-400 text-white",
-    accent: "bg-success-50 text-[#036B26]",
-    outline: "border border-[#036B26] text-[#036B26]",
+    accent: "bg-success-50 text-success-700",
+    outline: "border border-success-700 text-success-700",
   },
   warning: {
     filled: "bg-warning-400 text-black",
@@ -46,8 +46,8 @@ const colorStyles: Record<BadgeColor, Record<BadgeType, string>> = {
   },
   error: {
     filled: "bg-error-400 text-white",
-    accent: "bg-error-50 text-[#9E0A05]",
-    outline: "border border-[#9E0A05] text-[#9E0A05]",
+    accent: "bg-error-50 text-error-700",
+    outline: "border border-error-700 text-error-700",
   },
   neutral: {
     filled: "bg-grey-900 text-grey-50",

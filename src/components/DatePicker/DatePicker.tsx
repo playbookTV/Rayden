@@ -387,10 +387,12 @@ function NavButton({
   direction,
   onClick,
   hidden,
+  className,
 }: {
   direction: "left" | "right";
   onClick?: () => void;
   hidden?: boolean;
+  className?: string;
 }) {
   return (
     <button
@@ -401,7 +403,8 @@ function NavButton({
       tabIndex={hidden ? -1 : undefined}
       className={cn(
         "flex items-center justify-center p-2 rounded-lg bg-grey-75 hover:bg-grey-200 transition-colors cursor-pointer",
-        hidden && "opacity-0 pointer-events-none"
+        hidden && "opacity-0 pointer-events-none",
+        className
       )}
     >
       {direction === "left" ? (
@@ -517,7 +520,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         className={cn(
           "bg-white dark:bg-grey-50 border border-grey-75 rounded-2xl p-5 shadow-soft-xs",
           "flex flex-col gap-6",
-          mode !== "range" && "w-[340px]",
+          mode !== "range" && "w-full max-w-[340px]",
           className
         )}
         {...rest}
@@ -553,16 +556,17 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         )}
 
         {mode === "range" && (
-          <div className="flex gap-8">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
             {/* Left month */}
             <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-10 w-[280px]">
+              <div className="flex items-center justify-between w-full md:w-[280px]">
                 <NavButton direction="left" onClick={goToPrevMonth} />
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-grey-700">{monthYearLabel}</span>
                   <ChevronDown className="size-6 text-grey-500" />
                 </div>
-                <NavButton direction="right" hidden />
+                <NavButton direction="right" onClick={goToNextMonth} className="md:hidden" />
+                <NavButton direction="right" hidden className="hidden md:flex" />
               </div>
               <MonthGrid
                 year={viewYear}
@@ -576,8 +580,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               />
             </div>
 
-            {/* Right month */}
-            <div className="flex flex-col gap-4">
+            {/* Right month - hidden on mobile, shown on md+ */}
+            <div className="hidden md:flex flex-col gap-4">
               <div className="flex items-center justify-between w-[280px]">
                 <NavButton direction="left" hidden />
                 <div className="flex items-center gap-2">

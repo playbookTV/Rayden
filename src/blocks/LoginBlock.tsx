@@ -133,7 +133,7 @@ export function LoginBlock({
           key={provider.name}
           type="button"
           onClick={provider.onClick}
-          className="flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-grey-300 bg-white p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 transition-colors"
+          className="flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 dark:hover:bg-grey-100 transition-colors"
         >
           <span className="shrink-0 size-5">{provider.icon}</span>
           Continue with {provider.name}
@@ -160,7 +160,7 @@ export function LoginBlock({
             <button
               type="button"
               onClick={resolvedProviders[0]?.onClick}
-              className="flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-grey-300 bg-white p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 transition-colors"
+              className="flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 dark:hover:bg-grey-100 transition-colors"
             >
               <span className="shrink-0 size-5">{resolvedProviders[0]?.icon}</span>
               Continue with Google
@@ -171,7 +171,7 @@ export function LoginBlock({
               <div className="w-full border-t border-grey-100" />
             </div>
             <div className="relative flex justify-center">
-              <span className="bg-white px-2 text-sm text-grey-500">OR</span>
+              <span className="bg-white dark:bg-grey-50 px-2 text-sm text-grey-500">OR</span>
             </div>
           </div>
         </>
@@ -259,15 +259,25 @@ export function LoginBlock({
   // Card variant wraps in a bordered card
   if (isCard) {
     return (
-      <div className={cn("bg-white border border-grey-300 rounded-[10px] px-7 py-8", className)}>
-        <div className="flex flex-col gap-8 w-[400px]">{formContent}</div>
+      <div
+        className={cn(
+          "bg-white dark:bg-grey-50 border border-grey-300 rounded-[10px] px-7 py-8 w-full max-w-[432px]",
+          className
+        )}
+      >
+        <div className="flex flex-col gap-8">{formContent}</div>
       </div>
     );
   }
 
   // Standard / Work-email: no card wrapper
   return (
-    <div className={cn("flex flex-col items-center justify-center gap-6 w-[400px]", className)}>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center gap-6 w-full max-w-[400px] px-4 sm:px-0",
+        className
+      )}
+    >
       {formContent}
     </div>
   );

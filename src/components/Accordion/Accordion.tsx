@@ -209,7 +209,7 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
         onClick={() => toggle(value)}
         className={cn(
           "flex items-center gap-3 px-4 py-6 w-full text-left transition-colors",
-          !isOpen && !disabled && "hover:bg-grey-50",
+          !isOpen && !disabled && "hover:bg-grey-50 dark:hover:bg-grey-100",
           disabled && "opacity-50 cursor-not-allowed",
           className
         )}

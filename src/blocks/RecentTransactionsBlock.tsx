@@ -58,7 +58,7 @@ export function RecentTransactionsBlock({
       </div>
 
       {/* Transaction list */}
-      <div className="bg-white border border-grey-100 rounded-[10px] px-5 py-6">
+      <div className="bg-white dark:bg-grey-50 border border-grey-100 rounded-[10px] px-5 py-6">
         <div className="flex flex-col gap-5">
           {transactions.map((tx) => {
             const isOutgoing = tx.direction === "outgoing";

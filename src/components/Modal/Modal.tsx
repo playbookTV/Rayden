@@ -86,9 +86,9 @@ function BoxIcon({ className }: { className?: string }) {
 /* ─── Size Config ──────────────────────────────────────────────────────── */
 
 const sizeClasses: Record<ModalSize, string> = {
-  sm: "w-[400px]",
-  md: "w-[500px]",
-  lg: "w-[640px]",
+  sm: "w-full max-w-[400px] mx-4 sm:mx-0",
+  md: "w-full max-w-[500px] mx-4 sm:mx-0",
+  lg: "w-full max-w-[640px] mx-4 sm:mx-0",
 };
 
 /* ─── Modal ────────────────────────────────────────────────────────────── */

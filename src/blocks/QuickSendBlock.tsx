@@ -54,7 +54,7 @@ export function QuickSendBlock({
       </div>
 
       {/* Beneficiaries */}
-      <div className="bg-white border border-grey-100 rounded-[10px] px-6 py-6">
+      <div className="bg-white dark:bg-grey-50 border border-grey-100 rounded-[10px] px-6 py-6">
         <div className="flex gap-5 overflow-x-auto">
           {beneficiaries.map((b) => (
             <button
