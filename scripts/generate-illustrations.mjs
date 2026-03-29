@@ -73,6 +73,16 @@ for (const file of readdirSync(SVG_DIR).filter((f) => f.endsWith(".svg"))) {
 // Sort keys alphabetically
 const sortedKeys = [...new Set([...Object.keys(colored), ...Object.keys(grey)])].sort();
 
+/**
+ * Escape a string for safe embedding in a JavaScript template literal.
+ * Handles backslashes, backticks, and dollar signs.
+ */
+const escapeForTemplateLiteral = (str) =>
+  (str || "")
+    .replace(/\\/g, "\\\\")  // Escape backslashes first
+    .replace(/`/g, "\\`")    // Escape backticks
+    .replace(/\$/g, "\\$");  // Escape dollar signs
+
 // Generate TS file
 let output = `// Auto-generated from icon-assets/empty-state/ — do not edit manually\n// Run: node scripts/generate-illustrations.mjs\n\n`;
 
@@ -86,13 +96,13 @@ output += `export type IllustrationName = (typeof illustrationNames)[number];\n\
 
 output += `export const coloredIllustrations: Record<IllustrationName, string> = {\n`;
 for (const key of sortedKeys) {
-  output += `  "${key}": \`${(colored[key] || "").replace(/`/g, "\\`").replace(/\$/g, "\\$")}\`,\n`;
+  output += `  "${key}": \`${escapeForTemplateLiteral(colored[key])}\`,\n`;
 }
 output += `};\n\n`;
 
 output += `export const greyIllustrations: Record<IllustrationName, string> = {\n`;
 for (const key of sortedKeys) {
-  output += `  "${key}": \`${(grey[key] || "").replace(/`/g, "\\`").replace(/\$/g, "\\$")}\`,\n`;
+  output += `  "${key}": \`${escapeForTemplateLiteral(grey[key])}\`,\n`;
 }
 output += `};\n`;
 

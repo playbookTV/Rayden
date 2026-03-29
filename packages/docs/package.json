@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@raydenui/ui": "workspace:*",
-    "next": "^15.1.0",
+    "next": "^15.5.14",
     "nextra": "^4.2.0",
     "nextra-theme-docs": "^4.2.0",
     "react": "^19.0.0",
