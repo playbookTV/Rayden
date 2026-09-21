@@ -96,7 +96,13 @@ for (const entry of ["src/index.ts", "src/chart.ts", "src/motion/index.ts"]) {
         const propType = checker.getTypeOfSymbolAtLocation(prop, decl);
         props[prop.name] = {
           ...describe(propType),
-          typeText: checker.typeToString(propType, decl, ts.TypeFormatFlags.NoTruncation),
+          // These are display types, not standalone declarations. Preserve external
+          // aliases so React types do not expand to imports of checkout-specific paths.
+          typeText: checker.typeToString(
+            propType,
+            decl,
+            ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
+          ),
           required: !(prop.flags & ts.SymbolFlags.Optional),
           description: ts.displayPartsToString(prop.getDocumentationComment(checker)),
         };

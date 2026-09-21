@@ -22,6 +22,29 @@ import { callTool, tools } from "@raydenui/ai/mcp";
 const require = createRequire(import.meta.url);
 const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
 
+test("generated contracts and published guidance contain no machine-specific type paths", () => {
+  const artifacts = [
+    new URL("../src/manifests/contracts.generated.json", import.meta.url),
+    new URL("../../docs/public/ai/catalog.json", import.meta.url),
+    new URL("../../docs/public/llms-full.txt", import.meta.url),
+  ];
+  for (const artifact of artifacts) {
+    const content = readFileSync(artifact, "utf8");
+    // JSON-encoded type strings escape quotes and Windows path separators.
+    const readable = content.replaceAll('\\"', '"').replaceAll("\\\\", "/");
+    assert.equal(
+      /import\(["'](?:\/|[A-Za-z]:\/|file:)/.test(readable),
+      false,
+      `Absolute type import in ${artifact.pathname}`
+    );
+    assert.equal(
+      /node_modules[\\/]/.test(readable),
+      false,
+      `Dependency installation path in ${artifact.pathname}`
+    );
+  }
+});
+
 test("every family and named export has its own accurate contract", () => {
   const catalog = getCatalog();
   assert.equal(catalog.flavor, "citrionus");

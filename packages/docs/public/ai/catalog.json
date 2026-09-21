@@ -1542,7 +1542,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Icon element or registered icon name string"
         },
@@ -2052,7 +2052,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": ""
         },
@@ -2101,7 +2101,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": ""
         },
@@ -3561,7 +3561,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": ""
         },
@@ -3605,7 +3605,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Icon for with-icon variant"
         },
@@ -3994,7 +3994,7 @@
       "props": {
         "children": {
           "type": "object",
-          "typeText": "ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | undefined",
+          "typeText": "ReactElement<unknown, string | JSXElementConstructor<any>> | undefined",
           "required": false,
           "description": "Trigger element"
         },
@@ -4581,7 +4581,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Icon on the left side of the input"
         },
@@ -4724,7 +4724,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Icon on the right side of the input"
         },
@@ -5350,7 +5350,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": "Leading icon — accepts a ReactNode or IconName string"
             },
@@ -7343,7 +7343,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Optional leading icon"
         },
@@ -9812,7 +9812,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Custom icon (default icon based on state if not provided)"
         },
@@ -10292,7 +10292,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Optional leading icon"
         },
@@ -12209,7 +12209,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": ""
             },
@@ -13287,7 +13287,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": "Icon displayed to the left — accepts IconName string or ReactNode"
             },
@@ -17762,7 +17762,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Custom icon (for type=\"icon\"). Accepts ReactNode or IconName."
         },
@@ -18557,7 +18557,7 @@
               "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
           "required": false,
           "description": "Optional icon — renders in a bordered square (v2,3,6) or large tinted square (v4)"
         },
@@ -19935,7 +19935,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": "Leading icon for file variant"
             },
@@ -21193,7 +21193,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": "Leading icon (left side)"
             },
@@ -24619,7 +24619,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": ""
             },
@@ -24657,7 +24657,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": ""
             }
@@ -26365,7 +26365,7 @@
                   "type": "object"
                 }
               ],
-              "typeText": "string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | Promise<string | number | bigint | boolean | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactPortal | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").ReactElement<unknown, string | import(\"/Users/leslieisah/app-dev/Rayden/node_modules/.pnpm/@types+react@19.2.14/node_modules/@types/react/index\").JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined",
+              "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
               "required": false,
               "description": "Leading icon — accepts a ReactNode or an IconName string"
             },
