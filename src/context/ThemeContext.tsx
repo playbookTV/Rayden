@@ -33,13 +33,18 @@ function getSystemTheme(): ResolvedTheme {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function getStoredTheme(): Theme {
-  if (typeof window === "undefined") return "system";
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === "light" || stored === "dark" || stored === "system") {
-    return stored;
+function getStoredTheme(storageKey: string): Theme | null {
+  if (typeof window === "undefined") return null;
+  let stored: string | null;
+  try {
+    stored = localStorage.getItem(storageKey);
+  } catch {
+    // Storage can throw in a private window or when site data is blocked.
+    return null;
   }
-  return "system";
+  if (stored === "light" || stored === "dark" || stored === "system") return stored;
+  // null means "no stored preference", which is distinct from a stored "system".
+  return null;
 }
 
 export interface ThemeProviderProps {
@@ -60,7 +65,7 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window === "undefined") return defaultTheme;
-    return getStoredTheme() || defaultTheme;
+    return getStoredTheme(storageKey) ?? defaultTheme;
   });
 
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => getSystemTheme());
@@ -96,7 +101,11 @@ export function ThemeProvider({
   const setTheme = useCallback(
     (newTheme: Theme) => {
       setThemeState(newTheme);
-      localStorage.setItem(storageKey, newTheme);
+      try {
+        localStorage.setItem(storageKey, newTheme);
+      } catch {
+        // Persisting is best-effort; the in-memory theme still applies.
+      }
     },
     [storageKey]
   );

@@ -32,6 +32,11 @@ export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, "title
   /** Called when the action button is clicked */
   onButtonClick?: () => void;
   /** Show the close button */
+  /**
+   * Show the dismiss control. Defaults to true only when `onDismiss` is supplied —
+   * a close button with no handler used to render and do nothing. Set it explicitly
+   * to force the control on or off.
+   */
   dismissible?: boolean;
   /** Called when the close button is clicked */
   onDismiss?: () => void;
@@ -46,16 +51,16 @@ interface StatusColors {
 
 const statusColors: Record<BannerStatus, StatusColors> = {
   information: {
-    bold: { bg: "bg-[#4a9fed]", divider: "bg-[#f0f7ff]" },
+    bold: { bg: "bg-action-info", divider: "bg-secondary-50" },
     subtle: {
-      bg: "bg-[#f0f7ff]",
+      bg: "bg-secondary-50",
       text: "text-grey-900",
       descText: "text-grey-600",
-      divider: "bg-[#0063ad]",
+      divider: "bg-secondary-500",
     },
   },
   success: {
-    bold: { bg: "bg-success-400", divider: "bg-success-50" },
+    bold: { bg: "bg-action-success", divider: "bg-success-50" },
     subtle: {
       bg: "bg-success-50",
       text: "text-grey-900",
@@ -64,7 +69,7 @@ const statusColors: Record<BannerStatus, StatusColors> = {
     },
   },
   error: {
-    bold: { bg: "bg-error-400", divider: "bg-error-50" },
+    bold: { bg: "bg-action-danger", divider: "bg-error-50" },
     subtle: {
       bg: "bg-error-50",
       text: "text-grey-900",
@@ -73,7 +78,7 @@ const statusColors: Record<BannerStatus, StatusColors> = {
     },
   },
   warning: {
-    bold: { bg: "bg-warning-400", divider: "bg-warning-50" },
+    bold: { bg: "bg-action-warning", divider: "bg-warning-50" },
     subtle: {
       bg: "bg-warning-50",
       text: "text-grey-900",
@@ -82,21 +87,21 @@ const statusColors: Record<BannerStatus, StatusColors> = {
     },
   },
   feature: {
-    bold: { bg: "bg-grey-900", divider: "bg-grey-100" },
+    bold: { bg: "bg-[#101928]", divider: "bg-grey-100" },
     subtle: {
       bg: "bg-grey-50",
-      text: "text-black",
-      descText: "text-black",
+      text: "text-grey-900",
+      descText: "text-grey-600",
       divider: "bg-grey-300",
     },
   },
   opportunity: {
-    bold: { bg: "bg-[#475ccc]", divider: "bg-[#b1bae9]" },
+    bold: { bg: "bg-[#475ccc]", divider: "bg-secondary-50" },
     subtle: {
-      bg: "bg-[#f7f8fd]",
+      bg: "bg-secondary-50",
       text: "text-grey-900",
       descText: "text-grey-600",
-      divider: "bg-[#b1bae9]",
+      divider: "bg-secondary-500",
     },
   },
 };
@@ -149,7 +154,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
       icon,
       buttonLabel,
       onButtonClick,
-      dismissible = true,
+      dismissible,
       onDismiss,
       className,
       ...rest
@@ -172,15 +177,20 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
         ref={ref}
         role="alert"
         className={cn(
-          "flex items-center justify-between overflow-hidden rounded-[4px] w-full",
+          "flex items-center justify-between gap-3 overflow-hidden rounded-[4px] w-full",
           colorSet.bg,
-          size === "sm" ? "h-10 px-3 py-2" : "h-12 px-8 py-3",
+          size === "sm" ? "min-h-10 px-3 py-2" : "min-h-12 px-8 py-3",
           className
         )}
         {...rest}
       >
         {/* Content */}
-        <div className={cn("flex flex-1 items-center", size === "sm" ? "gap-2" : "gap-3")}>
+        <div
+          className={cn(
+            "flex min-w-0 flex-1 flex-wrap items-center gap-y-1",
+            size === "sm" ? "gap-x-2" : "gap-x-3"
+          )}
+        >
           {/* Icon */}
           {icon ? (
             <span className={cn("shrink-0", iconSize, textColor)}>
@@ -191,20 +201,12 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
           )}
 
           {/* Text */}
-          <span
-            className={cn("font-semibold leading-[1.45] sm:whitespace-nowrap", textSize, textColor)}
-          >
+          <span className={cn("min-w-0 font-semibold leading-[1.45]", textSize, textColor)}>
             {title}
           </span>
 
           {description && (
-            <span
-              className={cn(
-                "leading-[1.45] sm:whitespace-nowrap hidden sm:inline",
-                textSize,
-                descColor
-              )}
-            >
+            <span className={cn("min-w-0 leading-[1.45] hidden sm:inline", textSize, descColor)}>
               {description}
             </span>
           )}
@@ -227,14 +229,14 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
         </div>
 
         {/* Close section */}
-        {dismissible && (
+        {(dismissible ?? !!onDismiss) && (
           <div className="flex items-center gap-3 self-stretch shrink-0">
             <div className={cn("w-px self-stretch", colorSet.divider)} />
             <button
               type="button"
               onClick={onDismiss}
               aria-label="Dismiss banner"
-              className={cn("shrink-0 cursor-pointer", iconSize, textColor)}
+              className={cn("shrink-0 box-content p-1 -m-1 cursor-pointer", iconSize, textColor)}
             >
               <CloseIcon className="size-full" />
             </button>

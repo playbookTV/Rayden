@@ -67,6 +67,13 @@ function CheckIcon({ className }: { className?: string }) {
 
 /* ─── Step Indicator Circle ────────────────────────────────────────────── */
 
+const statusText: Record<StepStatus, string> = {
+  completed: "Completed",
+  active: "Current step",
+  incomplete: "Not started",
+  disabled: "Unavailable",
+};
+
 function StepCircle({
   status,
   indicator,
@@ -86,12 +93,13 @@ function StepCircle({
     <div
       className={cn(
         "shrink-0 flex items-center justify-center rounded-full size-6 border transition-colors",
-        isCompleted && "bg-primary-400 border-primary-400 text-white",
-        isActive && "bg-primary-50 border-primary-400 text-primary-400",
+        isCompleted && "bg-action-primary border-action-primary text-white",
+        isActive && "bg-primary-50 border-primary-400 text-action-primary-text",
         !isCompleted && !isActive && !isDisabled && "bg-white dark:bg-grey-50 border-grey-300",
         isDisabled && "bg-grey-100 border-grey-200 text-grey-300"
       )}
     >
+      <span className="sr-only">{statusText[status]}</span>
       {isCompleted ? (
         (icon ?? <CheckIcon className="size-3.5" />)
       ) : indicator === "dot" ? (
@@ -274,10 +282,18 @@ export const LinearStepper = forwardRef<HTMLDivElement, LinearStepperProps>(
         {showLabel && (
           <p className="text-sm font-semibold leading-[1.45]">
             <span className="text-grey-900">{currentStep}</span>
-            <span className="text-grey-400"> / {totalSteps} complete</span>
+            <span className="text-grey-500"> / {totalSteps} complete</span>
           </p>
         )}
-        <div className="bg-grey-200 rounded-full p-1 w-full overflow-hidden">
+        <div
+          className="bg-grey-200 rounded-full p-1 w-full overflow-hidden"
+          role="progressbar"
+          aria-valuenow={currentStep}
+          aria-valuemin={0}
+          aria-valuemax={totalSteps}
+          aria-valuetext={`Step ${currentStep} of ${totalSteps}`}
+          aria-label="Progress"
+        >
           <div
             className="h-2 bg-primary-400 rounded-[10px] transition-all duration-300"
             style={{ width: `${pct}%` }}
@@ -298,10 +314,18 @@ export const SegmentedStepper = forwardRef<HTMLDivElement, SegmentedStepperProps
         {showLabel && (
           <p className="text-sm font-semibold leading-[1.45]">
             <span className="text-grey-900">{currentStep}</span>
-            <span className="text-grey-400"> / {totalSteps} complete</span>
+            <span className="text-grey-500"> / {totalSteps} complete</span>
           </p>
         )}
-        <div className="bg-grey-200 rounded-full p-1 w-full overflow-hidden">
+        <div
+          className="bg-grey-200 rounded-full p-1 w-full overflow-hidden"
+          role="progressbar"
+          aria-valuenow={currentStep}
+          aria-valuemin={0}
+          aria-valuemax={totalSteps}
+          aria-valuetext={`Step ${currentStep} of ${totalSteps}`}
+          aria-label="Progress"
+        >
           <div className="flex gap-1 h-2 w-full">
             {Array.from({ length: totalSteps }, (_, i) => (
               <div

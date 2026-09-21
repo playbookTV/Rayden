@@ -1,11 +1,16 @@
 ---
 title: TableBlock
-description: Data table with header, columns, and built-in pagination
+description: Transactions table with selection, row actions and built-in pagination
 ---
 
 # TableBlock
 
-A data table block with header, columns, and built-in pagination.
+A ready-made transactions table with row selection, a per-row action menu and built-in
+pagination.
+
+`TableBlock` has a fixed row shape rather than configurable columns. When you need
+arbitrary columns, use [SearchableTableBlock](/blocks/searchable-table-block), or compose
+`Table` directly from `@raydenui/ui`.
 
 ## Import
 
@@ -15,97 +20,84 @@ import { TableBlock } from "@raydenui/ui/blocks";
 
 ## Usage
 
+### Basic
+
+Each row supplies the full set of fields the table renders.
+
 ```tsx
-<TableBlock
-  title="Team Members"
-  description="Manage your team members and their roles"
-  columns={["Name", "Email", "Role", "Status"]}
-  rows={users.map((user) => ({
-    id: user.id,
-    cells: [
-      <div className="flex items-center gap-3">
-        <Avatar type="image" src={user.avatar} size="sm" />
-        {user.name}
-      </div>,
-      user.email,
-      user.role,
-      <Badge color={user.active ? "success" : "neutral"}>
-        {user.active ? "Active" : "Inactive"}
-      </Badge>,
-    ],
-  }))}
-  onRowClick={(id) => viewUser(id)}
-/>
+const rows = [
+  {
+    id: "1",
+    name: "Ada Lovelace",
+    email: "ada@example.com",
+    initials: "AL",
+    amount: "$1,200.00",
+    paymentType: "Card",
+    date: "12 Jun 2023",
+    time: "10:24 AM",
+    status: "Paid",
+    statusColor: "success",
+  },
+];
+
+<TableBlock rows={rows} />;
 ```
 
-### With Pagination
+### Row actions
+
+`onRowAction` fires with the row id when the kebab menu is activated. The control is
+named after the row, so screen reader users know which row it affects.
+
+```tsx
+<TableBlock rows={rows} onRowAction={(rowId) => openMenuFor(rowId)} />
+```
+
+### Pagination
+
+Pagination is controlled: pass `page` and `totalPages` and update them in `onPageChange`.
 
 ```tsx
 const [page, setPage] = useState(1);
 
-<TableBlock
-  title="Products"
-  columns={["Name", "SKU", "Price", "Stock"]}
-  rows={products.map((p) => ({
-    id: p.id,
-    cells: [p.name, p.sku, `$${p.price}`, p.stock],
-  }))}
-  pagination={{
-    currentPage: page,
-    totalPages: 10,
-    onPageChange: setPage,
-  }}
-/>
+<TableBlock rows={rows} page={page} totalPages={8} onPageChange={setPage} />;
 ```
 
-### With Actions
+### Custom styling
 
 ```tsx
-<TableBlock
-  title="Orders"
-  description="Recent customer orders"
-  columns={["Order ID", "Customer", "Total", "Actions"]}
-  rows={orders.map((order) => ({
-    id: order.id,
-    cells: [
-      order.id,
-      order.customerName,
-      `$${order.total}`,
-      <Button size="sm" variant="text">View</Button>,
-    ],
-  }))}
-/>
+<TableBlock className="rounded-xl shadow-soft-lg" rows={rows} />
 ```
 
 ## Props
 
-| Prop          | Type                   | Default | Description               |
-| ------------- | ---------------------- | ------- | ------------------------- |
-| `title`       | `string`               | —       | Header title              |
-| `description` | `string`               | —       | Header description        |
-| `columns`     | `string[]`             | —       | Column headers (required) |
-| `rows`        | `TableBlockRow[]`      | —       | Table rows (required)     |
-| `onRowClick`  | `(id: string) => void` | —       | Row click handler         |
-| `pagination`  | `PaginationProps`      | —       | Pagination config         |
-| `className`   | `string`               | —       | Additional CSS classes    |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `rows` | `TableBlockRow[]` | — | Table rows (required) |
+| `page` | `number` | — | Current page, 1-indexed |
+| `totalPages` | `number` | — | Total pages |
+| `onPageChange` | `(page: number) => void` | — | Page change handler |
+| `onRowAction` | `(rowId: string) => void` | — | Row action (kebab menu) handler |
+| `className` | `string` | — | Additional CSS classes |
 
 ### TableBlockRow
 
-| Prop    | Type          | Required | Description          |
-| ------- | ------------- | -------- | -------------------- |
-| `id`    | `string`      | Yes      | Unique row identifier|
-| `cells` | `ReactNode[]` | Yes      | Cell content array   |
-
-### PaginationProps
-
-| Prop           | Type                       | Required | Description              |
-| -------------- | -------------------------- | -------- | ------------------------ |
-| `currentPage`  | `number`                   | Yes      | Current page number      |
-| `totalPages`   | `number`                   | Yes      | Total number of pages    |
-| `onPageChange` | `(page: number) => void`   | Yes      | Page change handler      |
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Unique row identifier |
+| `name` | `string` | Person's name |
+| `email` | `string` | Email address, shown under the name |
+| `initials` | `string` | Avatar initials |
+| `amount` | `string` | Formatted amount |
+| `paymentType` | `string` | Payment method label |
+| `date` | `string` | Date label |
+| `time` | `string` | Time label |
+| `status` | `string` | Status label |
+| `statusColor` | `"success" \| "warning" \| "error" \| "orange" \| "blue" \| "neutral"` | Status badge colour |
 
 ## Accessibility
 
-- Uses semantic `<table>` elements
-- Row click handlers are keyboard accessible
-- Pagination controls have proper ARIA labels
+- Selection checkboxes are named after their row, and the select-all control is named
+  "Select all rows".
+- The row action button is named `Actions for <name>`, using the row's own name.
+- The action column has a visually hidden "Actions" heading, so the column is not empty
+  for screen readers.

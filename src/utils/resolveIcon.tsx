@@ -1,11 +1,5 @@
 import { type ReactNode } from "react";
 import { Icon, type IconName, type IconSize } from "../components/Icon";
-import { icons } from "../components/Icon/icons";
-
-/** Check if a value is a registered IconName string. */
-function isIconName(value: unknown): value is IconName {
-  return typeof value === "string" && value in icons;
-}
 
 /**
  * Resolve an icon value that can be either a ReactNode or an IconName string.
@@ -16,8 +10,6 @@ export function resolveIcon(
   size: IconSize = "md"
 ): ReactNode | undefined {
   if (icon == null) return undefined;
-  if (isIconName(icon)) return <Icon name={icon} size={size} />;
-  // If it's a string but not a valid icon name, ignore it to prevent broken rendering
-  if (typeof icon === "string") return undefined;
+  if (typeof icon === "string") return <Icon name={icon as IconName} size={size} />;
   return icon;
 }

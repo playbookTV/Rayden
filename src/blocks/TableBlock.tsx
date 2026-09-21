@@ -73,7 +73,11 @@ export function TableBlock({
           <TableRow>
             <TableHead className="w-[287px]">
               <div className="flex items-center gap-3">
-                <Checkbox checked={allSelected || someSelected} onChange={toggleAll} />
+                <Checkbox
+                  checked={allSelected || someSelected}
+                  onChange={toggleAll}
+                  aria-label="Select all rows"
+                />
                 <span>Name</span>
               </div>
             </TableHead>
@@ -81,7 +85,9 @@ export function TableBlock({
             <TableHead>Payment Type</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead className="w-[67px]" />
+            <TableHead className="w-[67px]">
+              <span className="sr-only">Actions</span>
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -89,11 +95,15 @@ export function TableBlock({
             <TableRow key={row.id} selected={selectedIds.has(row.id)}>
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <Checkbox checked={selectedIds.has(row.id)} onChange={() => toggleRow(row.id)} />
+                  <Checkbox
+                    checked={selectedIds.has(row.id)}
+                    onChange={() => toggleRow(row.id)}
+                    aria-label={`Select ${row.name}`}
+                  />
                   <Avatar type="initials" initials={row.initials} size="sm" />
                   <div className="flex flex-col">
                     <span className="text-sm font-medium text-grey-900">{row.name}</span>
-                    <span className="text-xs text-grey-400 truncate max-w-[150px]">
+                    <span className="text-xs text-grey-500 truncate max-w-[150px]">
                       {row.email}
                     </span>
                   </div>
@@ -110,7 +120,7 @@ export function TableBlock({
               <TableCell>
                 <span className="text-sm text-grey-700">
                   {row.date}
-                  <span className="text-grey-400 mx-2">|</span>
+                  <span className="text-grey-500 mx-2">|</span>
                   {row.time}
                 </span>
               </TableCell>
@@ -123,9 +133,10 @@ export function TableBlock({
                 <button
                   type="button"
                   onClick={() => onRowAction?.(row.id)}
-                  className="flex items-center justify-center size-8 rounded-md hover:bg-grey-50 text-grey-400"
+                  aria-label={`Actions for ${row.name}`}
+                  className="flex items-center justify-center size-8 rounded-md hover:bg-grey-50 text-grey-500"
                 >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <circle cx="8" cy="3" r="1.5" fill="currentColor" />
                     <circle cx="8" cy="8" r="1.5" fill="currentColor" />
                     <circle cx="8" cy="13" r="1.5" fill="currentColor" />

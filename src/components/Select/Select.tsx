@@ -14,6 +14,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { cn } from "../../utils/cn";
+import { useCollisionAwareSide } from "../../hooks/useCollisionAwareSide";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { Icon } from "../Icon";
 import type { IconName } from "../Icon";
@@ -74,6 +75,12 @@ export interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "defau
   label?: string;
   /** Helper text below the select */
   helperText?: string;
+  /**
+   * Error message, or true for an error state with no message. Replaces helperText
+   * and marks the trigger aria-invalid. Mirrors Input's error contract so the
+   * useRaydenSelect adapter has somewhere to deliver validation feedback.
+   */
+  error?: string | boolean;
   /** Whether the select is disabled */
   disabled?: boolean;
   /** Wrapper className for the outermost div */
@@ -90,6 +97,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
       placeholder = "Select an option",
       label,
       helperText,
+      error,
       disabled = false,
       children,
       className,
@@ -102,12 +110,17 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
     const [open, setOpen] = useState(false);
     const value = controlledValue ?? internalValue;
 
+    const hasError = error !== undefined && error !== false;
+    const bottomText = hasError ? (typeof error === "string" ? error : undefined) : helperText;
+
     const listboxId = useId();
     const labelId = useId();
     const helperId = useId();
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
+    // The listbox always opened downward, so near the bottom edge it ran off-screen.
+    const listSide = useCollisionAwareSide("bottom", open, triggerRef, listRef);
 
     const onSelect = useCallback(
       (val: string) => {
@@ -220,8 +233,12 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           if (typeof ref === "function") ref(node);
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
-        className={cn("relative flex flex-col gap-2 w-full", wrapperClassName)}
         {...rest}
+        className={cn("relative flex flex-col gap-2 w-full", wrapperClassName)}
+        onBlur={(event) => {
+          rest.onBlur?.(event);
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false);
+        }}
       >
         {/* Label */}
         {label && (
@@ -239,16 +256,19 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
           aria-haspopup="listbox"
           aria-controls={listboxId}
           aria-labelledby={label ? labelId : undefined}
-          aria-describedby={helperText ? helperId : undefined}
+          aria-describedby={bottomText ? helperId : undefined}
+          aria-invalid={hasError || undefined}
           disabled={disabled}
           onClick={() => !disabled && setOpen(!open)}
           className={cn(
             "flex h-14 w-full items-center gap-3 rounded-md border px-4 transition-colors",
             disabled
               ? "bg-grey-100 border-grey-300 cursor-not-allowed"
-              : open
-                ? "bg-white dark:bg-grey-50 border-[#1671D9]"
-                : "bg-white dark:bg-grey-50 border-grey-300 hover:border-[#B6D8FF]",
+              : hasError
+                ? "bg-white dark:bg-grey-50 border-error-400"
+                : open
+                  ? "bg-white dark:bg-grey-50 border-[#1671D9]"
+                  : "bg-white dark:bg-grey-50 border-grey-300 hover:border-[#B6D8FF]",
             className
           )}
         >
@@ -257,7 +277,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
             <span
               className={cn(
                 "truncate text-body-sm",
-                selectedOption ? "text-grey-900" : "text-grey-400"
+                selectedOption ? "text-grey-900" : "text-grey-500"
               )}
             >
               {selectedOption ? selectedOption.label : placeholder}
@@ -276,9 +296,15 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
         </button>
 
         {/* Helper text */}
-        {helperText && (
-          <p id={helperId} className="text-sm text-grey-500 leading-[1.45]">
-            {helperText}
+        {bottomText && (
+          <p
+            id={helperId}
+            className={cn(
+              "text-sm leading-[1.45]",
+              hasError ? "text-feedback-error" : "text-grey-500"
+            )}
+          >
+            {bottomText}
           </p>
         )}
 
@@ -290,7 +316,10 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(
               id={listboxId}
               role="listbox"
               onKeyDown={handleListKeyDown}
-              className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[320px] overflow-y-auto rounded-lg border border-grey-200 bg-white dark:bg-grey-50 py-1 shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)]"
+              className={cn(
+                "absolute left-0 right-0 z-50 max-h-[320px] overflow-y-auto rounded-lg border border-grey-200 bg-white dark:bg-grey-50 py-1 shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)]",
+                listSide === "top" ? "bottom-full mb-2" : "top-full mt-2"
+              )}
             >
               {children}
             </div>

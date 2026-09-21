@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fireEvent, userEvent, within } from "storybook/test";
 import { Modal } from "./Modal";
 
 const meta: Meta<typeof Modal> = {
@@ -211,4 +212,68 @@ export const NoBlur: Story = {
 
 export const CustomIcon: Story = {
   render: () => <CustomIconModal />,
+};
+
+export const FocusManagement: Story = {
+  render: () => <DefaultModal />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Open Modal" });
+    await userEvent.click(trigger);
+    const dialog = within(document.body).getByRole("dialog", { name: "Title" });
+    await expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    for (let index = 0; index < 5; index++) {
+      await userEvent.tab();
+      await expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    }
+    await userEvent.tab({ shift: true });
+    await expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    await userEvent.click(within(dialog).getByRole("button", { name: "Cancel" }));
+    await expect(trigger).toHaveFocus();
+    await expect(dialog).not.toBeInTheDocument();
+
+    await userEvent.click(trigger);
+    const reopened = within(document.body).getByRole("dialog", { name: "Title" });
+    fireEvent(reopened, new Event("cancel", { cancelable: true }));
+    await expect(reopened).not.toBeInTheDocument();
+    await expect(trigger).toHaveFocus();
+
+    await userEvent.click(trigger);
+    const backdrop = within(document.body).getByRole("dialog", { name: "Title" });
+    fireEvent.click(backdrop);
+    await expect(backdrop).not.toBeInTheDocument();
+    await expect(trigger).toHaveFocus();
+  },
+};
+
+function DismissalPolicyDemo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open protected dialog</button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Keep your work"
+        closeOnEscape={false}
+        closeOnOverlay={false}
+        primaryLabel="Done"
+        onPrimaryClick={() => setOpen(false)}
+      />
+    </>
+  );
+}
+
+export const DismissalPolicy: Story = {
+  render: () => <DismissalPolicyDemo />,
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole("button", { name: "Open protected dialog" });
+    await userEvent.click(trigger);
+    const dialog = within(document.body).getByRole("dialog", { name: "Keep your work" });
+    fireEvent(dialog, new Event("cancel", { cancelable: true }));
+    fireEvent.click(dialog);
+    await expect(dialog).toBeVisible();
+    await userEvent.click(within(dialog).getByRole("button", { name: "Done" }));
+    await expect(trigger).toHaveFocus();
+  },
 };

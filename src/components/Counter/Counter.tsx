@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState, type HTMLAttributes } from "react";
+import { forwardRef, useCallback, useEffect, useState, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 
 /* ─── Types ────────────────────────────────────────────────────────────── */
@@ -116,7 +116,13 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
     },
     ref
   ) => {
-    const [uncontrolled, setUncontrolled] = useState(defaultValue);
+    // Only update() used to clamp, so min=5 still displayed 0 until first use.
+    const clamp = useCallback((n: number) => Math.min(max, Math.max(min, n)), [min, max]);
+    const [uncontrolled, setUncontrolled] = useState(() => clamp(defaultValue));
+    // Keep an uncontrolled value inside bounds when the bounds themselves change.
+    useEffect(() => {
+      if (controlledValue === undefined) setUncontrolled((prev) => clamp(prev));
+    }, [clamp, controlledValue]);
     const val = controlledValue ?? uncontrolled;
 
     const update = useCallback(
@@ -195,7 +201,7 @@ const ncSize: Record<NumberCounterSize, { container: string; text: string }> = {
 };
 
 const ncColor: Record<NumberCounterColor, { bg: string; text: string }> = {
-  orange: { bg: "bg-primary-400", text: "text-white" },
+  orange: { bg: "bg-action-primary", text: "text-white" },
   red: { bg: "bg-error-400", text: "text-white" },
   grey: { bg: "bg-grey-300", text: "text-white" },
   white: { bg: "bg-white dark:bg-grey-50", text: "text-grey-600" },

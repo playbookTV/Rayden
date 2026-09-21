@@ -1,7 +1,18 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { Icon } from "../components/Icon";
 import { Input } from "../components/Input";
+
+/**
+ * INTERNAL — not exported from `src/blocks/index.ts` or the published `./blocks`
+ * entry, and not ready to be. Remaining gates before it can ship:
+ *   - `switcher.activeIndex` is only an initial value; a controlled contract with an
+ *     onChange callback is still missing.
+ *   - Variant 11's mobile menu exists but has not been checked against the desktop
+ *     feature set.
+ * Fixed since the 2026-09-21 sweep: `href` now renders an anchor, and the mobile menu
+ * toggles expose aria-expanded/aria-controls.
+ */
 
 // ─── Types ───────────────────────────────────────────────────────────
 export type HeaderBlockVariant = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -69,9 +80,12 @@ function NavLink({
   dark?: boolean;
   large?: boolean;
 }) {
+  // A link with an href must be an anchor, or it is not a link: no middle-click, no
+  // open-in-new-tab, and the wrong role.
+  const Tag = link.href ? "a" : "button";
   return (
-    <button
-      type="button"
+    <Tag
+      {...(link.href ? { href: link.href } : { type: "button" as const })}
       onClick={link.onClick}
       className={cn(
         "flex items-center gap-2 font-semibold whitespace-nowrap transition-colors",
@@ -84,7 +98,7 @@ function NavLink({
       {link.hasDropdown && (
         <Icon name="chevron-down" size="xs" className={dark ? "text-grey-400" : "text-grey-900"} />
       )}
-    </button>
+    </Tag>
   );
 }
 
@@ -128,6 +142,11 @@ export function HeaderBlock({
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState(switcher?.activeIndex ?? 0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuId = useId();
+  // activeIndex was read only at mount, so a controlled parent could not move it.
+  useEffect(() => {
+    if (switcher?.activeIndex !== undefined) setActiveTab(switcher.activeIndex);
+  }, [switcher?.activeIndex]);
 
   const isDark = variant === 4 || variant === 8;
   const isLargeLinks = [3, 4, 5, 6, 9, 10, 11].includes(variant);
@@ -219,7 +238,7 @@ export function HeaderBlock({
         type="button"
         onClick={action.onClick}
         className={cn(
-          "font-semibold text-white bg-primary-500 whitespace-nowrap",
+          "font-semibold text-white bg-action-primary whitespace-nowrap",
           isLargeButton ? "px-6 py-4 text-base" : "px-4 py-2 text-sm",
           variant === 3 || variant === 4 ? "rounded-full" : rounded
         )}
@@ -333,8 +352,10 @@ export function HeaderBlock({
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls={mobileMenuId}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             className="md:hidden p-2 text-grey-700"
-            aria-label="Toggle menu"
           >
             <Icon name={mobileMenuOpen ? "multiply" : "list"} size="md" />
           </button>
@@ -411,8 +432,10 @@ export function HeaderBlock({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-controls={mobileMenuId}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               className={cn("md:hidden p-2", isDark ? "text-white" : "text-grey-700")}
-              aria-label="Toggle menu"
             >
               <Icon name={mobileMenuOpen ? "multiply" : "list"} size="md" />
             </button>
@@ -529,8 +552,10 @@ export function HeaderBlock({
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls={mobileMenuId}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             className={cn("md:hidden p-2", isDark ? "text-white" : "text-grey-700")}
-            aria-label="Toggle menu"
           >
             <Icon name={mobileMenuOpen ? "multiply" : "list"} size="md" />
           </button>

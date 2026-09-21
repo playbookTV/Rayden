@@ -4,6 +4,12 @@ Welcome to the Rayden UI documentation. This guide covers everything you need to
 
 ## Quick Links
 
+- [Vision and Roadmap](./vision-and-roadmap.md)
+- [Citrionus Product Brief](./citrionus-product-brief.md)
+- [Flavor Contract](./flavor-contract.md)
+- [Foundation Backlog](./foundation-backlog.md)
+- [Foundation and Pilot Implementation Report](./implementation-pilots-2026-09-21.md)
+- [Registry Pilot](./registry-pilot.md)
 - [Getting Started](../README.md#quick-start)
 - [Design Tokens](./design-tokens.md)
 - [Contributing](../CONTRIBUTING.md)

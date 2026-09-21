@@ -1,4 +1,12 @@
-import { forwardRef, useCallback, useRef, useState, type HTMLAttributes } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type HTMLAttributes,
+} from "react";
 import { cn } from "../../utils/cn";
 
 /* ─── Types ────────────────────────────────────────────────────────────── */
@@ -71,7 +79,16 @@ function clamp(val: number, min: number, max: number) {
 }
 
 function getPercent(val: number, min: number, max: number) {
-  return ((val - min) / (max - min)) * 100;
+  return max > min ? ((val - min) / (max - min)) * 100 : 0;
+}
+
+function snapValue(value: number, min: number, max: number, step: number) {
+  const increment = step > 0 ? step : 1;
+  return clamp(
+    Number((min + Math.round((value - min) / increment) * increment).toFixed(10)),
+    min,
+    max
+  );
 }
 
 function getValueFromPosition(
@@ -83,8 +100,29 @@ function getValueFromPosition(
 ) {
   const pct = clamp((clientX - rect.left) / rect.width, 0, 1);
   const raw = min + pct * (max - min);
-  const stepped = Math.round(raw / step) * step;
-  return clamp(stepped, min, max);
+  return snapValue(raw, min, max, step);
+}
+
+function keyboardValue(key: string, value: number, min: number, max: number, step: number) {
+  const delta = step > 0 ? step : 1;
+  switch (key) {
+    case "ArrowRight":
+    case "ArrowUp":
+      return clamp(value + delta, min, max);
+    case "ArrowLeft":
+    case "ArrowDown":
+      return clamp(value - delta, min, max);
+    case "PageUp":
+      return clamp(value + delta * 10, min, max);
+    case "PageDown":
+      return clamp(value - delta * 10, min, max);
+    case "Home":
+      return min;
+    case "End":
+      return max;
+    default:
+      return null;
+  }
 }
 
 /* ─── Slider ───────────────────────────────────────────────────────────── */
@@ -103,12 +141,15 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       step = 1,
       disabled = false,
       className,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
       ...rest
     },
     ref
   ) => {
-    const [uncontrolled, setUncontrolled] = useState(0);
-    const val = controlledValue ?? uncontrolled;
+    const [uncontrolled, setUncontrolled] = useState(min);
+    const val = clamp(controlledValue ?? uncontrolled, min, max);
+    const labelId = useId();
     const trackRef = useRef<HTMLDivElement>(null);
     const config = sizeConfig[size];
     const pct = getPercent(val, min, max);
@@ -129,7 +170,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       (e: React.PointerEvent) => {
         if (disabled) return;
         e.preventDefault();
-        (e.target as HTMLElement).setPointerCapture(e.pointerId);
+        e.currentTarget.setPointerCapture(e.pointerId);
+        (e.currentTarget as HTMLElement).focus();
         updateValue(e.clientX);
       },
       [disabled, updateValue]
@@ -149,31 +191,54 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
         className={cn("flex flex-col gap-2 w-full", disabled && "opacity-50", className)}
         {...rest}
       >
-        {label && <span className="text-sm font-medium text-grey-900 leading-[1.45]">{label}</span>}
+        {label && (
+          <span id={labelId} className="text-sm font-medium text-grey-900 leading-[1.45]">
+            {label}
+          </span>
+        )}
         <div
           ref={trackRef}
           className={cn(
-            "relative w-full rounded-full bg-grey-200 cursor-pointer",
-            config.track,
+            "relative w-full h-11 touch-none cursor-pointer rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text",
             disabled && "cursor-not-allowed"
           )}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
+          onKeyDown={(event) => {
+            if (disabled) return;
+            const next = keyboardValue(event.key, val, min, max, step);
+            if (next === null) return;
+            event.preventDefault();
+            if (controlledValue === undefined) setUncontrolled(next);
+            onChange?.(next);
+          }}
+          aria-label={ariaLabel ?? (!label && !ariaLabelledBy ? "Value" : undefined)}
+          aria-labelledby={ariaLabelledBy ?? (label ? labelId : undefined)}
+          aria-disabled={disabled || undefined}
           role="slider"
           aria-valuenow={val}
           aria-valuemin={min}
           aria-valuemax={max}
           tabIndex={disabled ? -1 : 0}
         >
+          <div
+            className={cn(
+              "absolute inset-x-0 top-1/2 -translate-y-1/2 rounded-full bg-grey-200",
+              config.track
+            )}
+          />
           {/* Filled track */}
           <div
-            className={cn("absolute left-0 top-0 rounded-full bg-primary-400", config.track)}
+            className={cn(
+              "absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-action-primary",
+              config.track
+            )}
             style={{ width: `${pct}%` }}
           />
           {/* Handle */}
           <div
             className={cn(
-              "absolute top-1/2 -translate-y-1/2 rounded-full bg-primary-500 border-white border-solid shadow-sm",
+              "absolute top-1/2 rounded-full bg-action-primary border-white border-solid shadow-sm",
               config.handle,
               config.border
             )}
@@ -186,7 +251,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               <div className="flex flex-1 items-center gap-1">
                 {metaItems.map((item, i) => (
                   <span key={i} className="contents">
-                    {i > 0 && <span className="text-xs text-grey-400">•</span>}
+                    {i > 0 && <span className="text-xs text-grey-500">•</span>}
                     <span className="text-sm font-medium text-grey-500 leading-[1.45]">{item}</span>
                   </span>
                 ))}
@@ -220,12 +285,24 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(
       step = 1,
       disabled = false,
       className,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
       ...rest
     },
     ref
   ) => {
-    const [uncontrolled, setUncontrolled] = useState<[number, number]>([25, 75]);
-    const val = controlledValue ?? uncontrolled;
+    const [uncontrolled, setUncontrolled] = useState<[number, number]>(() => [
+      snapValue(min + (max - min) * 0.25, min, max, step),
+      snapValue(min + (max - min) * 0.75, min, max, step),
+    ]);
+    const rawValue = controlledValue ?? uncontrolled;
+    const val = useMemo<[number, number]>(() => {
+      const low = clamp(rawValue[0], min, max);
+      return [low, clamp(rawValue[1], low, max)];
+    }, [rawValue, min, max]);
+    const labelId = useId();
+    const lowRef = useRef<HTMLDivElement>(null);
+    const highRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
     const dragging = useRef<"low" | "high" | null>(null);
     const config = sizeConfig[size];
@@ -245,12 +322,16 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(
       (e: React.PointerEvent) => {
         if (disabled || !trackRef.current) return;
         e.preventDefault();
-        (e.target as HTMLElement).setPointerCapture(e.pointerId);
+        e.currentTarget.setPointerCapture(e.pointerId);
         const rect = trackRef.current.getBoundingClientRect();
         const v = getValueFromPosition(e.clientX, rect, min, max, step);
         const distLow = Math.abs(v - val[0]);
         const distHigh = Math.abs(v - val[1]);
-        dragging.current = distLow <= distHigh ? "low" : "high";
+        dragging.current =
+          ((e.target as HTMLElement).closest<HTMLElement>("[data-thumb]")?.dataset.thumb as
+            | "low"
+            | "high") || (distLow <= distHigh ? "low" : "high");
+        (dragging.current === "low" ? lowRef : highRef).current?.focus();
         if (dragging.current === "low") {
           update([clamp(v, min, val[1]), val[1]]);
         } else {
@@ -284,46 +365,73 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(
         className={cn("flex flex-col gap-2 w-full", disabled && "opacity-50", className)}
         {...rest}
       >
-        {label && <span className="text-sm font-medium text-grey-900 leading-[1.45]">{label}</span>}
+        {label && (
+          <span id={labelId} className="text-sm font-medium text-grey-900 leading-[1.45]">
+            {label}
+          </span>
+        )}
         <div
           ref={trackRef}
           className={cn(
-            "relative w-full rounded-full bg-grey-200 cursor-pointer",
-            config.track,
+            "relative w-full h-11 touch-none cursor-pointer rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text",
             disabled && "cursor-not-allowed"
           )}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          role="slider"
-          aria-valuenow={val[0]}
-          aria-valuemin={min}
-          aria-valuemax={max}
-          tabIndex={disabled ? -1 : 0}
+          onPointerCancel={handlePointerUp}
         >
-          {/* Filled range track */}
           <div
-            className={cn("absolute top-0 rounded-full bg-primary-400", config.track)}
+            className={cn(
+              "absolute inset-x-0 top-1/2 -translate-y-1/2 rounded-full bg-grey-200",
+              config.track
+            )}
+          />
+          <div
+            className={cn(
+              "absolute top-1/2 -translate-y-1/2 rounded-full bg-action-primary",
+              config.track
+            )}
             style={{ left: `${lowPct}%`, width: `${highPct - lowPct}%` }}
           />
-          {/* Low handle */}
-          <div
-            className={cn(
-              "absolute top-1/2 rounded-full bg-primary-500 border-white border-solid shadow-sm z-10",
-              config.handle,
-              config.border
-            )}
-            style={{ left: `${lowPct}%`, transform: `translate(-50%, -50%)` }}
-          />
-          {/* High handle */}
-          <div
-            className={cn(
-              "absolute top-1/2 rounded-full bg-primary-500 border-white border-solid shadow-sm z-10",
-              config.handle,
-              config.border
-            )}
-            style={{ left: `${highPct}%`, transform: `translate(-50%, -50%)` }}
-          />
+          {(["low", "high"] as const).map((thumb, index) => (
+            <div
+              key={thumb}
+              ref={thumb === "low" ? lowRef : highRef}
+              data-thumb={thumb}
+              role="slider"
+              tabIndex={disabled ? -1 : 0}
+              aria-disabled={disabled || undefined}
+              aria-label={`${ariaLabel ?? label ?? "Range"} ${index === 0 ? "minimum" : "maximum"}`}
+              aria-describedby={ariaLabelledBy}
+              aria-valuenow={val[index]}
+              aria-valuemin={index === 0 ? min : val[0]}
+              aria-valuemax={index === 0 ? val[1] : max}
+              onKeyDown={(event) => {
+                if (disabled) return;
+                const next = keyboardValue(
+                  event.key,
+                  val[index],
+                  index === 0 ? min : val[0],
+                  index === 0 ? val[1] : max,
+                  step
+                );
+                if (next === null) return;
+                event.preventDefault();
+                update(index === 0 ? [next, val[1]] : [val[0], next]);
+              }}
+              className="absolute top-1/2 size-11 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-action-primary-text"
+              style={{ left: `${index === 0 ? lowPct : highPct}%` }}
+            >
+              <div
+                className={cn(
+                  "rounded-full bg-action-primary border-white border-solid shadow-sm",
+                  config.handle,
+                  config.border
+                )}
+              />
+            </div>
+          ))}
         </div>
         {showLabels && (
           <div className="flex items-center justify-between">

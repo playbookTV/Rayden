@@ -1,170 +1,86 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://i.postimg.cc/L8Cf5Hbj/Mac-Book-Air-18.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://i.postimg.cc/L8Cf5Hbj/Mac-Book-Air-18.png">
-  <img alt="Rayden AI - AI compatibility layer for Rayden UI. Supercharge your LLMs to reliably generate UI components without hallucination." src="https://i.postimg.cc/L8Cf5Hbj/Mac-Book-Air-18.png" width="100%">
-</picture>
-
-<p align="center">
-  <a href="https://www.npmjs.com/package/@raydenui/ai"><img src="https://img.shields.io/npm/v/@raydenui/ai?style=flat-square&color=F56630&label=npm" alt="npm version"></a>
-  <a href="https://www.npmjs.com/package/@raydenui/ai"><img src="https://img.shields.io/npm/dm/@raydenui/ai?style=flat-square&color=667185&label=downloads" alt="npm downloads"></a>
-  <a href="https://github.com/raydenui/rayden"><img src="https://img.shields.io/github/stars/raydenui/rayden?style=flat-square&color=F56630" alt="GitHub stars"></a>
-  <a href="https://github.com/raydenui/rayden/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@raydenui/ai?style=flat-square&color=099137" alt="license"></a>
-  <img src="https://img.shields.io/badge/MCP-compatible-8B5CF6?style=flat-square" alt="MCP compatible">
-  <img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node.js">
-</p>
-
 # @raydenui/ai
 
-AI compatibility layer for Rayden UI — enables LLMs to reliably generate UI components without hallucination.
+Reference knowledge and MCP tools for Rayden UI's complete, free default flavor, **Citrionus**. Public component names and prop contracts are derived from the UI source. Authored design guidance, examples, token data, and Figma anatomy remain explicit reference material.
 
-## Installation
+## Running the MCP server
 
-```bash
-# Run directly with npx (no install needed)
-npx @raydenui/ai
+For a released package, use `npx @raydenui/ai`. For this checkout, build the AI package and run `node packages/rayden-ai/dist/mcp/server.js` from the repository root. Local changes are not available through npm until a release is published.
 
-# Or install globally
-npm install -g @raydenui/ai
-```
+The server uses stdio. `--help` lists its tools and `--version` prints its package version. Add the executable to your MCP client's configuration using that client's setup instructions; this package does not modify client configuration.
 
-## What It Does
+| Tool | Inputs and result |
+| --- | --- |
+| `get_components` | Optional category; families, real exports, and import paths |
+| `get_component_props` | Required `component`; source-derived props and inherited attributes |
+| `get_tokens` | Optional category; authored design-token reference |
+| `get_layout_recipes` | Optional category; authored layout examples |
+| `get_catalog` | Optional `flavor` and exact `uiVersion`; reference identity, capabilities, components, motion metadata |
+| `get_component_guidance` | Required `component`; structured guidance and copyable `prompt` |
+| `validate_component_usage` | Required `component`, `props`; optional array of immediate `children` names |
 
-This package provides an MCP (Model Context Protocol) server that gives AI assistants structured access to:
+Component categories include `primitives`, `inputs`, `feedback`, `navigation`, `data-display`, `layout`, and `composite`. Invalid input and lookup failures return `isError: true`. Invalid component usage is a successful validation request whose data contains `valid: false` and errors.
 
-- **Component Manifests** — Props, variants, and usage examples for all 33 Rayden UI components
-- **Component Anatomy** — Figma layer structure for building components in Figma via `use_figma`
-- **Design Tokens** — Colors, spacing, typography, shadows in JSON and W3C DTCG format
-- **Layout Recipes** — Pre-built patterns for common UI scenarios (dashboards, forms, marketing pages)
-- **Anti-hallucination Rules** — Constraints that prevent AI from inventing non-existent props or patterns
-- **Skills** — Claude Code skills for specialized workflows (e.g., Figma component building)
+Every response identifies the reference flavor and UI/AI versions. The server does not inspect the consumer's installed packages. Unsupported requested flavors or versions return an explicit error; future flavor support is not implied.
 
-## Available MCP Tools
+## Programmatic usage
 
-| Tool | Description |
-|------|-------------|
-| `get_components` | List all components, optionally filtered by category |
-| `get_component_props` | Get detailed props, examples, and rules for a specific component |
-| `get_tokens` | Retrieve design tokens (colors, spacing, typography, etc.) |
-| `get_layout_recipes` | Get pre-built layout patterns for common UI scenarios |
-
-## Claude Desktop Integration
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
-
-```json
-{
-  "mcpServers": {
-    "rayden-ai": {
-      "command": "npx",
-      "args": ["@raydenui/ai"]
-    }
-  }
-}
-```
-
-## Claude Code Integration
-
-Add to your project's `.mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "rayden-ai": {
-      "command": "npx",
-      "args": ["@raydenui/ai"]
-    }
-  }
-}
-```
-
-## Programmatic Usage
-
-You can also import the component manifests and tokens directly:
-
-```typescript
-import { getComponentManifest, getAllManifests } from '@raydenui/ai/manifests';
-import { tokens } from '@raydenui/ai/tokens';
+```ts
+import { getCatalog, getComponentGuidance, validateComponentUsage } from '@raydenui/ai';
+import { getManifest, getComponentNames, manifests } from '@raydenui/ai/manifests';
+import { tokens, getSpacing, getTypography } from '@raydenui/ai/tokens';
 import { recipes } from '@raydenui/ai/recipes';
 
-// Get all component definitions
-const manifests = getAllManifests();
-
-// Get a specific component
-const buttonManifest = getComponentManifest('Button');
-
-// Access design tokens
-console.log(tokens.colors.primary);
+const catalog = getCatalog();
+const guidance = getComponentGuidance('Button');
+const button = getManifest('Button');
+const names = getComponentNames();
+const result = validateComponentUsage('Button', { size: 'sm', 'aria-label': 'Save' });
+console.log(catalog.flavor, guidance?.prompt, button?.props, names, result);
 ```
 
-## Component Anatomy (Figma Integration)
+`ActivityFeed` is a family with `ActivityItem` and `ActivityContent` exports; it is not an importable component. `Chart` resolves to `RaydenChart`, imported from `@raydenui/ui/chart`. Exact supported names always take priority over aliases. Lookups accept unambiguous aliases; validation rejects alias spellings as imports and supplies the real export name.
 
-For building components in Figma via `use_figma`, use the anatomy module:
+Each catalog entry includes `name`, `exportNames`, `importPath`, `category`, `description`, `props`, `inheritedProps`, `subComponents`, and `prompt`. Subcomponents have their own contracts. Motion APIs are described separately under `catalog.motion`, including the `@raydenui/ui/motion` import path, actual presets and recipes, and primitive contracts.
 
-```typescript
-import { getAnatomy, getAvailableComponents, registry } from '@raydenui/ai/anatomy';
+Validation checks required props, supported names, enums, primitive types, inherited HTML attributes, and immediate composition constraints. Complex React values, array/object internals, ancestor structure, runtime accessibility, and callback behavior are reported in `notAssessed`. JSON clients can represent a dynamic value as `{ "$expression": "state.size" }`; this is not a validated value. `valid: true` means no demonstrated errors in assessed checks, not complete certification.
 
-// Get Figma layer structure for a component
-const buttonAnatomy = getAnatomy('Button');
+## Figma and tokens
 
-// List all components with anatomy specs
-const components = getAvailableComponents();
-
-// Get components by category
-import { getComponentsByCategory } from '@raydenui/ai/anatomy';
-const formComponents = getComponentsByCategory('Forms & Inputs');
+```ts
+import { getAnatomy, getAvailableComponents } from '@raydenui/ai/anatomy';
+const anatomy = getAnatomy('Button');
 ```
 
-## Design Tokens
+Anatomy is available through this separate package subpath. Rayden MCP does not control Figma. The included `skills/rayden-use` material requires separately available Figma tools when used for design work.
 
-Tokens are available in two formats:
+AI `src/tokens/tokens.json` generates the packaged DTCG JSON at `@raydenui/ai/tokens/dtcg`; runtime CSS and the UI preset remain separate authorities for rendered behavior. Token-reference checks track anatomy resolution; a resolved reference alone does not prove visual parity, dark-mode parity, or correctness of a Figma design.
 
-```typescript
-// Standard JSON format
-import { tokens } from '@raydenui/ai/tokens';
+## Token ownership and compatibility
 
-// W3C Design Tokens Community Group (DTCG) format
-import dtcgTokens from '@raydenui/ai/tokens/dtcg';
+| Data | Maintained authority | Checked or generated output |
+| --- | --- | --- |
+| Rendered colors, modes, and utilities | UI `src/styles/globals.css` and `src/preset.ts` | UI build and tests; selected action colors checked against AI data |
+| AI reference values | AI `src/tokens/tokens.json` | Packaged DTCG JSON and token helper output |
+| Font/spacing primitives | Recorded runtime and Tailwind sources in `tokens.json.referenceSources` | Anatomy references resolve against generated tokens |
+| Figma layer structure | AI `src/anatomy/components/*.json` | Packaged anatomy files and token-reference validation |
+| Public props and imports | UI exported TypeScript source | Generated contracts, MCP, catalog, and documentation prompts |
+
+The AI/DTCG token snapshot describes default/light values. It does **not** encode the full runtime dark-mode override system. Anatomy reference resolution is now checked with no accepted missing tokens; this does not certify all visual values or every Figma/runtime variant. Update the relevant maintained source before regenerating derived files.
+
+## Maintenance and verification
+
+Run these commands inside `packages/rayden-ai`:
+
+```sh
+npm run generate-manifests
+npm run generate-catalog
+npm run typecheck
+npm run build
+npm run validate-manifests
+npm run check-generated
+npm test
 ```
 
-## Skills (Claude Code)
+`generate-manifests` now generates `src/manifests/contracts.generated.json` from the actual public UI exports and TypeScript prop types. It does not invent authored descriptions or runtime defaults. `generate-catalog` writes `../docs/public/ai/catalog.json`. Both generated outputs have stale-file checks. Update authored descriptions/examples deliberately when changing behavior, then regenerate and review the diff.
 
-Include skills in your Claude Code context for specialized workflows:
-
-```typescript
-// Figma component building skill
-import skill from '@raydenui/ai/skills/rayden-use';
-```
-
-The `rayden-use` skill provides instructions for building Rayden UI components directly in Figma using the `use_figma` MCP tool.
-
-## CLI Options
-
-```bash
-npx @raydenui/ai          # Start MCP server (stdio transport)
-npx @raydenui/ai --help   # Show help message
-```
-
-## Exports
-
-| Export | Description |
-|--------|-------------|
-| `@raydenui/ai` | Main entry with manifests, tokens, recipes, rules |
-| `@raydenui/ai/manifests` | Component prop definitions |
-| `@raydenui/ai/tokens` | Design tokens (JSON) |
-| `@raydenui/ai/tokens/dtcg` | W3C DTCG format tokens |
-| `@raydenui/ai/anatomy` | Figma layer structures |
-| `@raydenui/ai/recipes` | Layout patterns |
-| `@raydenui/ai/rules` | Composition rules |
-| `@raydenui/ai/mcp` | MCP server handlers |
-| `@raydenui/ai/RAYDEN_RULES.md` | Human-readable rules file |
-| `@raydenui/ai/skills/rayden-use` | Figma component building skill |
-
-## Related Packages
-
-- [`@raydenui/ui`](https://www.npmjs.com/package/@raydenui/ui) — The React component library
-- [Rayna UI Figma](https://www.figma.com/community/file/tUAP8Crure0g1eewihmYUp) — Design system source
-
-## License
-
-MIT
+The checks cover export mapping completeness, authored manifest structure, contradictory aliases/exclusions, token references, built ESM/CommonJS exports, packed asset paths, and a real stdio MCP client/server session. Examples are authored JSX fragments that can require surrounding imports, state, or dependencies; all examples are not certified end-to-end applications.

@@ -32,9 +32,8 @@
       "description": "Callback when open items change: (value: string[]) => void"
     }
   },
-  "subComponents": [
-    {
-      "name": "AccordionItem",
+  "subComponents": {
+    "AccordionItem": {
       "description": "Individual accordion panel container",
       "props": {
         "value": {
@@ -49,8 +48,7 @@
         }
       }
     },
-    {
-      "name": "AccordionTrigger",
+    "AccordionTrigger": {
       "description": "Clickable header that toggles the accordion item",
       "props": {
         "leadingIcon": {
@@ -78,18 +76,22 @@
         }
       }
     },
-    {
-      "name": "AccordionContent",
+    "AccordionContent": {
       "description": "Collapsible content area with smooth animation"
     }
-  ],
+  },
   "composition": {
     "requiredStructure": "Accordion > AccordionItem > [AccordionTrigger, AccordionContent]",
     "relatedComponents": ["Divider", "Tabs"]
   },
   "accessibility": {
     "role": "Trigger uses button role, Content uses region role",
-    "keyboardNav": [{ "key": "Enter/Space", "action": "Toggle accordion item" }],
+    "keyboardNav": [
+      {
+        "key": "Enter/Space",
+        "action": "Toggle accordion item"
+      }
+    ],
     "focusManagement": "Trigger receives focus, aria-expanded indicates state",
     "screenReaderNotes": "Content region is labeled by its trigger via aria-labelledby"
   },
@@ -108,9 +110,18 @@
       "preExpanded"
     ],
     "commonMistakes": [
-      { "mistake": "expanded={true}", "correction": "value={['item-key']}" },
-      { "mistake": "defaultExpanded", "correction": "defaultValue={['item-key']}" },
-      { "mistake": "onChange", "correction": "onValueChange" },
+      {
+        "mistake": "expanded={true}",
+        "correction": "value={['item-key']}"
+      },
+      {
+        "mistake": "defaultExpanded",
+        "correction": "defaultValue={['item-key']}"
+      },
+      {
+        "mistake": "onChange",
+        "correction": "onValueChange"
+      },
       {
         "mistake": "icon='chevron'",
         "correction": "Chevron is built-in, use hideChevron to remove"

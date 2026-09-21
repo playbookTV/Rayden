@@ -12,6 +12,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { cn } from "../../utils/cn";
+import { useCollisionAwareSide } from "../../hooks/useCollisionAwareSide";
 import { resolveIcon } from "../../utils/resolveIcon";
 import type { IconName } from "../Icon";
 
@@ -93,8 +94,12 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
             if (typeof ref === "function") ref(node);
             else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
           }}
-          className={cn("relative inline-flex", className)}
           {...rest}
+          className={cn("relative inline-flex", className)}
+          onBlur={(event) => {
+            rest.onBlur?.(event);
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false);
+          }}
         >
           {children}
         </div>
@@ -105,7 +110,7 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
 DropdownMenu.displayName = "DropdownMenu";
 
 // ─── DropdownMenuTrigger ──────────────────────────────────────────
-export interface DropdownMenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export type DropdownMenuTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const DropdownMenuTrigger = forwardRef<HTMLButtonElement, DropdownMenuTriggerProps>(
   ({ onClick, children, className, ...rest }, ref) => {
@@ -145,8 +150,10 @@ export interface DropdownMenuContentProps extends HTMLAttributes<HTMLDivElement>
 
 export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
   ({ align = "end", sideOffset = 4, children, className, onKeyDown, ...rest }, ref) => {
-    const { open, setOpen, triggerRef } = useDropdownMenuContext();
+    const { open, triggerRef } = useDropdownMenuContext();
     const contentRef = useRef<HTMLDivElement>(null);
+    // The menu always opened downward, so near the bottom edge it ran off-screen.
+    const menuSide = useCollisionAwareSide("bottom", open, triggerRef, contentRef);
 
     // Focus first item on open
     useEffect(() => {
@@ -211,13 +218,14 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
         aria-orientation="vertical"
         onKeyDown={handleKeyDown}
         className={cn(
-          "absolute top-full z-50 min-w-[200px] overflow-hidden rounded-lg bg-white dark:bg-grey-50 py-1",
+          "absolute z-50 min-w-[200px] overflow-hidden rounded-lg bg-white dark:bg-grey-50 py-1",
           "shadow-lg ring-1 ring-black/5",
           "animate-in fade-in-0 zoom-in-95",
+          menuSide === "top" ? "bottom-full" : "top-full",
           align === "end" ? "right-0" : "left-0",
           className
         )}
-        style={{ marginTop: sideOffset }}
+        style={menuSide === "top" ? { marginBottom: sideOffset } : { marginTop: sideOffset }}
         {...rest}
       >
         {children}
@@ -228,7 +236,7 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
 DropdownMenuContent.displayName = "DropdownMenuContent";
 
 // ─── DropdownMenuGroup ────────────────────────────────────────────
-export interface DropdownMenuGroupProps extends HTMLAttributes<HTMLDivElement> {}
+export type DropdownMenuGroupProps = HTMLAttributes<HTMLDivElement>;
 
 export const DropdownMenuGroup = forwardRef<HTMLDivElement, DropdownMenuGroupProps>(
   ({ className, ...rest }, ref) => (
@@ -312,7 +320,7 @@ export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemPr
         className={cn(
           "flex w-full items-center gap-1 px-4 py-2 text-left text-body-sm outline-none transition-colors",
           disabled
-            ? "bg-grey-100 text-grey-400 cursor-not-allowed"
+            ? "bg-grey-100 text-grey-500 cursor-not-allowed"
             : destructive
               ? "text-error-500 hover:bg-error-50 focus:bg-error-100"
               : "text-grey-900 hover:bg-grey-50 focus:bg-grey-100",
@@ -354,7 +362,7 @@ export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemPr
 DropdownMenuItem.displayName = "DropdownMenuItem";
 
 // ─── DropdownMenuSeparator ────────────────────────────────────────
-export interface DropdownMenuSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
+export type DropdownMenuSeparatorProps = HTMLAttributes<HTMLDivElement>;
 
 export const DropdownMenuSeparator = forwardRef<HTMLDivElement, DropdownMenuSeparatorProps>(
   ({ className, ...rest }, ref) => (

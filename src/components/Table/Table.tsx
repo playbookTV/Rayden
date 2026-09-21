@@ -8,15 +8,22 @@ import { cn } from "../../utils/cn";
 import { Icon } from "../Icon";
 
 // ─── Table ─────────────────────────────────────────────────────────
-export interface TableProps extends HTMLAttributes<HTMLTableElement> {}
+export type TableProps = HTMLAttributes<HTMLTableElement>;
 
 export const Table = forwardRef<HTMLTableElement, TableProps>(({ className, ...rest }, ref) => (
-  <table ref={ref} className={cn("w-full border-collapse", className)} {...rest} />
+  <div
+    role="region"
+    aria-label={rest["aria-label"] ?? "Data table"}
+    tabIndex={0}
+    className="w-full min-w-0 max-w-full overflow-x-auto rounded focus-visible:outline-2 focus-visible:outline-action-primary-text"
+  >
+    <table ref={ref} className={cn("w-full border-collapse", className)} {...rest} />
+  </div>
 ));
 Table.displayName = "Table";
 
 // ─── TableHeader ───────────────────────────────────────────────────
-export interface TableHeaderProps extends HTMLAttributes<HTMLTableSectionElement> {}
+export type TableHeaderProps = HTMLAttributes<HTMLTableSectionElement>;
 
 export const TableHeader = forwardRef<HTMLTableSectionElement, TableHeaderProps>(
   ({ className, ...rest }, ref) => <thead ref={ref} className={cn("", className)} {...rest} />
@@ -24,7 +31,7 @@ export const TableHeader = forwardRef<HTMLTableSectionElement, TableHeaderProps>
 TableHeader.displayName = "TableHeader";
 
 // ─── TableBody ─────────────────────────────────────────────────────
-export interface TableBodyProps extends HTMLAttributes<HTMLTableSectionElement> {}
+export type TableBodyProps = HTMLAttributes<HTMLTableSectionElement>;
 
 export const TableBody = forwardRef<HTMLTableSectionElement, TableBodyProps>(
   ({ className, ...rest }, ref) => <tbody ref={ref} className={cn("", className)} {...rest} />
@@ -42,11 +49,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
     <tr
       ref={ref}
       aria-selected={selected || undefined}
-      className={cn(
-        "transition-colors",
-        selected ? "bg-primary-50 dark:bg-primary-900" : "bg-white dark:bg-grey-900",
-        className
-      )}
+      className={cn("transition-colors", selected ? "bg-primary-50" : "bg-surface", className)}
       {...rest}
     />
   )
@@ -74,44 +77,46 @@ export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
         sortDirection === "asc" ? "ascending" : sortDirection === "desc" ? "descending" : undefined
       }
       className={cn(
-        "h-11 px-6 py-3 text-left text-body-xs font-medium text-grey-700 dark:text-grey-300 border-b border-grey-200 dark:border-grey-700",
-        "bg-white dark:bg-grey-800 hover:bg-grey-50 dark:hover:bg-grey-700 transition-colors",
+        "h-11 px-6 py-3 text-left text-body-xs font-medium text-grey-700 border-b border-grey-200",
+        "bg-surface hover:bg-grey-50 transition-colors",
         sortable && "cursor-pointer select-none",
         className
       )}
-      onClick={sortable ? onSort : undefined}
       {...rest}
     >
-      <div className="flex items-center gap-1">
-        {children}
-        {sortable && (
-          <Icon
-            name={sortDirection === "asc" ? "chevron-up" : "chevron-down"}
-            size="sm"
-            aria-hidden="true"
-            className={cn(
-              "shrink-0",
-              sortDirection
-                ? "text-grey-700 dark:text-grey-300"
-                : "text-grey-400 dark:text-grey-500"
-            )}
-          />
-        )}
-      </div>
+      {sortable ? (
+        <button
+          type="button"
+          onClick={onSort}
+          className="flex w-full items-center gap-1 rounded text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text"
+        >
+          {children}
+          {sortable && (
+            <Icon
+              name={sortDirection === "asc" ? "chevron-up" : "chevron-down"}
+              size="sm"
+              aria-hidden="true"
+              className={cn("shrink-0", sortDirection ? "text-grey-700" : "text-grey-500")}
+            />
+          )}
+        </button>
+      ) : (
+        children
+      )}
     </th>
   )
 );
 TableHead.displayName = "TableHead";
 
 // ─── TableCell ─────────────────────────────────────────────────────
-export interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {}
+export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement>;
 
 export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
   ({ className, ...rest }, ref) => (
     <td
       ref={ref}
       className={cn(
-        "h-[72px] px-6 py-4 border-b border-grey-200 dark:border-grey-700 text-body-sm text-grey-900 dark:text-grey-100",
+        "h-[72px] px-6 py-4 border-b border-grey-200 text-body-sm text-grey-900",
         className
       )}
       {...rest}

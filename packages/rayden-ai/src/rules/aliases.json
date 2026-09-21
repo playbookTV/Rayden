@@ -2,7 +2,6 @@
   "$schema": "https://raydenui.com/schemas/aliases.json",
   "version": "0.2.1",
   "description": "Alias mappings and anti-hallucination rules for Rayden UI",
-
   "componentAliases": {
     "Btn": "Button",
     "CTA": "Button",
@@ -10,133 +9,100 @@
     "ActionButton": "Button",
     "PrimaryButton": "Button",
     "SecondaryButton": "Button",
-
     "TextInput": "Input",
     "TextField": "Input",
     "TextBox": "Input",
     "FormInput": "Input",
     "TextArea": "Input",
-
     "Dropdown": "Select",
     "Combobox": "Select",
     "Picker": "Select",
     "DropdownSelect": "Select",
-
     "DataTable": "Table",
     "DataGrid": "Table",
     "Grid": "Table",
     "List": "Table",
-
     "Nav": "SidebarMenu",
     "Navigation": "SidebarMenu",
     "Sidebar": "SidebarMenu",
     "VerticalNav": "SidebarMenu",
-
     "Menu": "DropdownMenu",
     "ContextMenu": "DropdownMenu",
     "ActionMenu": "DropdownMenu",
     "Popover": "DropdownMenu",
-
     "Notification": "Alert",
     "Toast": "Alert",
     "Snackbar": "Alert",
-    "Banner": "Alert",
     "Message": "Alert",
     "Notice": "Alert",
-
     "Tag": "Badge",
     "Label": "Badge",
     "Pill": "Badge",
     "Status": "Badge",
-
-    "Spinner": "ProgressCircle",
     "Loading": "ProgressCircle",
     "Loader": "ProgressCircle",
     "CircularProgress": "ProgressCircle",
-
     "Progress": "ProgressBar",
     "LinearProgress": "ProgressBar",
     "LoadingBar": "ProgressBar",
-
     "Switch": "Toggle",
     "ToggleSwitch": "Toggle",
-
     "TabList": "Tabs",
     "TabGroup": "Tabs",
     "TabNavigation": "Tabs",
-
     "Check": "Checkbox",
     "CheckBox": "Checkbox",
     "CheckInput": "Checkbox",
-
     "RadioButton": "Radio",
     "RadioInput": "Radio",
-
     "Separator": "Divider",
     "HR": "Divider",
     "Line": "Divider",
-
     "Hint": "Tooltip",
     "Info": "Tooltip",
-
     "UserAvatar": "Avatar",
     "ProfileImage": "Avatar",
     "ProfilePic": "Avatar",
-
     "StatCard": "MetricsCard",
     "StatsCard": "MetricsCard",
     "KPICard": "MetricsCard",
-
     "EmptyState": "EmptyStateIllustration",
     "Placeholder": "EmptyStateIllustration",
     "NoData": "EmptyStateIllustration",
-
     "SegmentedControl": "ButtonGroup",
     "ToggleGroup": "ButtonGroup",
     "ButtonBar": "ButtonGroup",
-
     "FileInput": "FileUpload",
     "Upload": "FileUpload",
     "Dropzone": "FileUpload",
     "FileDrop": "FileUpload",
-
     "Token": "Chip",
     "FilterChip": "Chip",
     "InputChip": "Chip",
-
     "Pager": "Pagination",
     "PageNavigation": "Pagination",
     "Pages": "Pagination",
-
     "BreadcrumbTrail": "Breadcrumb",
     "Breadcrumbs": "Breadcrumb",
     "PathNav": "Breadcrumb",
-
     "SVGIcon": "Icon",
-    "IconComponent": "Icon"
+    "IconComponent": "Icon",
+    "Chart": "RaydenChart"
   },
-
   "doesNotExist": [
-    "Modal",
     "Dialog",
     "Popup",
     "Overlay",
     "Lightbox",
-    "Card",
     "Panel",
     "Box",
     "Container",
     "Paper",
     "Surface",
-    "Accordion",
-    "Collapse",
     "Collapsible",
     "Expandable",
     "Carousel",
-    "Slider",
-    "RangeSlider",
     "Range",
-    "DatePicker",
     "TimePicker",
     "DateTimePicker",
     "Calendar",
@@ -160,14 +126,12 @@
     "AspectRatio",
     "ScrollArea",
     "ScrollView",
-    "Stepper",
     "Steps",
     "Wizard",
     "Timeline",
     "Rating",
     "Stars",
     "StarRating",
-    "Slider",
     "Stack",
     "Flex",
     "Grid",
@@ -181,7 +145,6 @@
     "ResizablePanel",
     "Splitter"
   ],
-
   "propAliases": {
     "leftIcon": "leadingIcon",
     "rightIcon": "trailingIcon",
@@ -211,28 +174,63 @@
     "text": "content",
     "message": "content"
   },
-
   "commonMistakes": [
     {
       "component": "Button",
       "mistakes": [
-        { "wrong": "color='red'", "correct": "variant='destructive'" },
-        { "wrong": "color='primary'", "correct": "variant='primary'" },
-        { "wrong": "outline={true}", "correct": "appearance='outlined'" },
-        { "wrong": "size='medium'", "correct": "size='sm' or size='lg'" },
-        { "wrong": "size='md'", "correct": "size='sm' (only sm and lg exist)" },
-        { "wrong": "leftIcon={...}", "correct": "icon={...} iconPosition='leading'" },
-        { "wrong": "loading={true}", "correct": "Not supported" },
-        { "wrong": "fullWidth", "correct": "className='w-full'" }
+        {
+          "wrong": "color='red'",
+          "correct": "variant='destructive'"
+        },
+        {
+          "wrong": "color='primary'",
+          "correct": "variant='primary'"
+        },
+        {
+          "wrong": "outline={true}",
+          "correct": "appearance='outlined'"
+        },
+        {
+          "wrong": "size='medium'",
+          "correct": "size='sm' or size='lg'"
+        },
+        {
+          "wrong": "size='md'",
+          "correct": "size='sm' (only sm and lg exist)"
+        },
+        {
+          "wrong": "leftIcon={...}",
+          "correct": "icon={...} iconPosition='leading'"
+        },
+        {
+          "wrong": "loading={true}",
+          "correct": "Not supported"
+        },
+        {
+          "wrong": "fullWidth",
+          "correct": "className='w-full'"
+        }
       ]
     },
     {
       "component": "Input",
       "mistakes": [
-        { "wrong": "leftIcon", "correct": "leadingIcon" },
-        { "wrong": "rightIcon", "correct": "trailingIcon" },
-        { "wrong": "errorMessage='...'", "correct": "error='...'" },
-        { "wrong": "variant='outlined'", "correct": "No variant - always outlined" }
+        {
+          "wrong": "leftIcon",
+          "correct": "leadingIcon"
+        },
+        {
+          "wrong": "rightIcon",
+          "correct": "trailingIcon"
+        },
+        {
+          "wrong": "errorMessage='...'",
+          "correct": "error='...'"
+        },
+        {
+          "wrong": "variant='outlined'",
+          "correct": "No variant - always outlined"
+        }
       ]
     },
     {
@@ -242,23 +240,44 @@
           "wrong": "<Table data={...} columns={...}>",
           "correct": "Map data to TableRow components"
         },
-        { "wrong": "<th>", "correct": "<TableHead>" },
-        { "wrong": "<td>", "correct": "<TableCell>" },
-        { "wrong": "<thead>", "correct": "<TableHeader>" },
-        { "wrong": "<tbody>", "correct": "<TableBody>" }
+        {
+          "wrong": "<th>",
+          "correct": "<TableHead>"
+        },
+        {
+          "wrong": "<td>",
+          "correct": "<TableCell>"
+        },
+        {
+          "wrong": "<thead>",
+          "correct": "<TableHeader>"
+        },
+        {
+          "wrong": "<tbody>",
+          "correct": "<TableBody>"
+        }
       ]
     },
     {
       "component": "Select",
       "mistakes": [
-        { "wrong": "options={[...]}", "correct": "Use SelectOption children" },
-        { "wrong": "onChange={fn}", "correct": "onValueChange={fn}" }
+        {
+          "wrong": "options={[...]}",
+          "correct": "Use SelectOption children"
+        },
+        {
+          "wrong": "onChange={fn}",
+          "correct": "onValueChange={fn}"
+        }
       ]
     },
     {
       "component": "DropdownMenu",
       "mistakes": [
-        { "wrong": "items={[...]}", "correct": "Use DropdownMenuItem children" },
+        {
+          "wrong": "items={[...]}",
+          "correct": "Use DropdownMenuItem children"
+        },
         {
           "wrong": "trigger={<Button />}",
           "correct": "Use <DropdownMenuTrigger><Button /></DropdownMenuTrigger>"
@@ -266,7 +285,6 @@
       ]
     }
   ],
-
   "htmlReplacements": {
     "<button>": "<Button>",
     "<input type='text'>": "<Input>",

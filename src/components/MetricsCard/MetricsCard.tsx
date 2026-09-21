@@ -98,7 +98,7 @@ function SmallIcon({ icon }: { icon: ReactNode | IconName }) {
 /** Large tinted icon container (48×48) used in v4 */
 function LargeIcon({ icon }: { icon: ReactNode | IconName }) {
   return (
-    <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-400">
+    <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-action-primary-text">
       <span className="size-6">{resolveIcon(icon, "lg")}</span>
     </div>
   );
@@ -199,7 +199,7 @@ function Variation2({ label, value, icon, trendBadge, description, cta }: Metric
                 {trendBadge && <TrendBadge badge={trendBadge} />}
                 {description && (
                   <span
-                    className="text-body-xs font-medium text-grey-400"
+                    className="text-body-xs font-medium text-grey-500"
                     style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                   >
                     {description}
@@ -234,7 +234,7 @@ function Variation3({ label, value, icon, trendBadge, description, cta }: Metric
               {trendBadge && <TrendBadge badge={trendBadge} />}
               {description && (
                 <span
-                  className="text-body-xs font-medium text-grey-400"
+                  className="text-body-xs font-medium text-grey-500"
                   style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                 >
                   {description}
@@ -287,7 +287,7 @@ function Variation4({ label, value, icon, trendBadge, description, cta }: Metric
                 {trendBadge && <TrendBadge badge={trendBadge} />}
                 {description && (
                   <span
-                    className="text-body-xs font-medium text-grey-400"
+                    className="text-body-xs font-medium text-grey-500"
                     style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                   >
                     {description}
@@ -377,7 +377,7 @@ function Variation6({ label, value, icon, trendBadge, description, cta }: Metric
               {trendBadge && <TrendBadge badge={trendBadge} />}
               {description && (
                 <span
-                  className="text-body-xs font-medium text-grey-400"
+                  className="text-body-xs font-medium text-grey-500"
                   style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                 >
                   {description}

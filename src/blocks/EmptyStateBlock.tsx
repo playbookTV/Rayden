@@ -57,7 +57,7 @@ export function EmptyStateBlock({
       />
 
       <div className="flex flex-col items-center gap-0.5">
-        <h3 className="text-base font-semibold text-black">{title}</h3>
+        <h3 className="text-base font-semibold text-grey-900">{title}</h3>
         <p className="text-xs text-grey-600 whitespace-pre-line">{description}</p>
       </div>
 

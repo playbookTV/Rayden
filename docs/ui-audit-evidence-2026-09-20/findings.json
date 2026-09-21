@@ -1,0 +1,472 @@
+[
+  {
+    "p": 1,
+    "title": "The documented blocks import cannot resolve",
+    "category": "Packaging / onboarding",
+    "file": "package.json",
+    "line": 9,
+    "evidence": "All seven published block guides import from `@raydenui/ui/blocks`, but the package has no `./blocks` export. Blocks are also absent from the root exports. An isolated consumer reproduced `ERR_PACKAGE_PATH_NOT_EXPORTED`; the documentation demos bypass this using local source imports. This blocks the advertised adoption path.",
+    "fix": "Publish the blocks entry, declarations, and export mapping; test the exact documented import from a packed package.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Optional chart dependencies are required by the root import",
+    "category": "Packaging / reliability",
+    "file": "src/index.ts",
+    "line": 70,
+    "evidence": "With React and the declared regular dependencies installed, importing the package root fails with `ERR_MODULE_NOT_FOUND: chart.js`. The root eagerly re-exports Chart, while chart.js and react-chartjs-2 are marked optional. A bundler can remove unused code, but direct Node/SSR module loading still evaluates the dependency graph.",
+    "fix": "Isolate charts behind a subpath or otherwise prevent optional peers from being evaluated by unrelated imports. Test a consumer with no chart packages.",
+    "command": "/optimize"
+  },
+  {
+    "p": 1,
+    "title": "An initially open modal crashes server rendering",
+    "category": "Reliability / SSR",
+    "file": "src/components/Modal/Modal.tsx",
+    "line": 308,
+    "evidence": "`renderToString(<Modal open ... />)` reproduced `ReferenceError: document is not defined`. The open render accesses document.body before mounting. This can break an initial welcome, confirmation, or deep-linked dialog in a server-rendered application.",
+    "fix": "Guard portal creation until a browser container exists and test initially open as well as closed server renders.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Documentation search is broken in the production preview",
+    "category": "Navigation / documentation",
+    "file": "packages/docs/package.json",
+    "line": 7,
+    "evidence": "Searching for \u201cAccordion\u201d at localhost:3001 ends with \u201cFailed to load search index\u201d and a failed import of `/_pagefind/pagefind.js`. The build script runs Next only. Readers cannot search the component reference.",
+    "fix": "Generate and serve the search index as part of the production build, then smoke-test an actual query.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Documentation examples and prop tables describe a different API",
+    "category": "Documentation correctness",
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 24,
+    "evidence": "The direct JSX contract scan found 109 unsupported prop/value occurrences across 17 pages. Examples include MetricsCard variant/change/trend, EmptyStateIllustration variant/string sizes instead of required name/numeric size, SidebarMenu href and invalid nesting props, TableBlock columns/cells/pagination, SearchableTableBlock data/onSort/filters, and unsupported icon names. The earlier Checkbox/Toggle boolean-callback error adds another affected page. These are adoption failures, not stylistic preferences. The appendix lists every direct-prop finding; required props, nested objects and callbacks need additional compilation checks.",
+    "fix": "Regenerate examples and tables from current component types, compile complete snippets, and make live previews use the same source as their copyable example.",
+    "command": "/clarify"
+  },
+  {
+    "p": 1,
+    "title": "Starter templates contain reproducible UI contract errors",
+    "category": "Starter reliability",
+    "file": "packages/create-rayden-app/templates/vite/dashboard/typescript/src/pages/Dashboard.tsx",
+    "line": 13,
+    "evidence": "A targeted TypeScript check across all 12 TypeScript template combinations found 16 UI errors in 10 files. Both frameworks have numeric MetricsCard variation where strings are required, boolean setters passed to native Toggle events, invalid Select required/native-event usage, and the nonexistent monitor icon in landing pages. JavaScript copies repeat these patterns. Numeric variation matches none of MetricsCard\u2019s string branches, producing empty cards; clicking a native option in the custom Select was separately reproduced as not selecting it.",
+    "fix": "Repair all framework/language copies together. Use SelectOption/onValueChange, native event.target.checked, valid variation strings and icon names. Build and exercise each generated starter.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Collapsed accordion content still receives keyboard focus",
+    "category": "Accessibility",
+    "file": "src/components/Accordion/Accordion.tsx",
+    "line": 266,
+    "evidence": "Carried forward from the previous audit: Tab moved from an expanded=false trigger into a button inside its visually collapsed panel. Grid height and clipping do not hide descendants from focus or assistive technology.",
+    "fix": "Coordinate hidden/inert semantics with the collapse animation; test closing while focus is inside.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Collapsed sidebar navigation loses destinations and names",
+    "category": "Accessibility / navigation",
+    "file": "src/components/SidebarMenu/SidebarMenuItem.tsx",
+    "line": 125,
+    "evidence": "Carried forward: activating a collapsed expandable item does nothing and its children are unavailable. A React-node label such as <span>Home</span> also yields an unnamed compact item because naming only handles string children. Compact navigation is functionally incomplete.",
+    "fix": "Provide an accessible flyout or expand the sidebar, and require a reliable compact label for every destination.",
+    "command": "/adapt"
+  },
+  {
+    "p": 1,
+    "title": "The password reveal control is hidden from assistive technology",
+    "category": "Accessibility",
+    "file": "src/blocks/LoginBlock.tsx",
+    "line": 202,
+    "evidence": "LoginBlock places a focusable, unnamed eye button inside Input\u2019s decorative trailingIcon slot, whose wrapper is aria-hidden=true. Axe flags aria-hidden-focus in all three login examples in both themes. Keyboard focus can enter a control that screen readers cannot identify.",
+    "fix": "Use an interactive addon slot and an explicit Show password/Hide password name and state; keep decorative icon wrappers noninteractive.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "TableBlock row actions and selection controls are unnamed",
+    "category": "Accessibility",
+    "file": "src/blocks/TableBlock.tsx",
+    "line": 76,
+    "evidence": "Axe confirms unnamed row/select-all checkboxes and unnamed kebab buttons. Empty action column headers also occur in TableBlock, SearchableTableBlock and table examples. A screen-reader user cannot reliably identify which row an action affects.",
+    "fix": "Name selection and action controls using the row identity, and provide a visually hidden Actions column heading.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Progress indicators do not expose their visible labels",
+    "category": "Accessibility",
+    "file": "src/components/ProgressBar/ProgressBar.tsx",
+    "line": 67,
+    "evidence": "ProgressBar puts role=progressbar on an inner element but spreads aria-label onto the outer wrapper; the visible label is not connected. Every ProgressBar example fails the naming check, and FileUpload inherits the problem. ProgressCircle examples also omit names, although its root does accept aria-label. Across desktop theme scans there are 38 story/theme naming flags.",
+    "fix": "Attach naming props and value semantics to the same progress element. Connect visible labels and give each upload a filename-specific progress name.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Charts have no accessible data alternative",
+    "category": "Accessibility / data comprehension",
+    "file": "src/components/Chart/Chart.tsx",
+    "line": 187,
+    "evidence": "All nine chart examples trigger role-img-alt in both themes: the rendered canvas has no accessible name. The wrapper offers no forwarded canvas description or fallback data table. Users who cannot interpret the canvas lose the information, not just decoration.",
+    "fix": "Expose an accessible chart title/summary and an equivalent data table or meaningful text alternative; forward appropriate canvas accessibility props.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Shared accent and muted text colors repeatedly fail contrast",
+    "category": "Accessibility / theming",
+    "file": "src/styles/globals.css",
+    "line": 36,
+    "evidence": "The desktop scan flags contrast in 136 story/theme combinations. Confirmed recurring pairs include white on primary-400 at 3.07:1, white on primary-500 at 3.68:1, and grey-400 on white at 2.57:1. Affected content includes Badge, active ButtonGroupItem, NumberCounter, Breadcrumb\u2019s current page, Divider labels, ActivityFeed metadata/actions, MetricsCard context, Stepper labels and block links. Normal text needs 4.5:1. Raw scan totals also include fixture and disabled-state flags, which are not all independent component violations.",
+    "fix": "Replace ad hoc palette choices with tested foreground/surface pairs for text, badges, metadata and actions. Validate every status and theme.",
+    "command": "/colorize"
+  },
+  {
+    "p": 1,
+    "title": "Literal surfaces and text break dark mode",
+    "category": "Theming / accessibility",
+    "file": "src/components/Banner/Banner.tsx",
+    "line": 47,
+    "evidence": "Banner\u2019s information title measures 1.03:1 on its pale surface; its feature title is literal black. EmptyStateBlock headings and RecentTransactionsBlock amounts are also black on a dark surface at 1.19:1. Numbered Accordion badges combine white text with a grey token that becomes pale. Chip\u2019s literal pale focus background similarly conflicts with adaptive text. These are core component color-pair defects; pale custom story backgrounds are tracked separately.",
+    "fix": "Use paired semantic tokens for each surface/state and remove literal black/white assumptions from adaptive themes.",
+    "command": "/colorize"
+  },
+  {
+    "p": 1,
+    "title": "SearchableTableBlock claims to sort without sorting",
+    "category": "Data integrity / interaction",
+    "file": "src/blocks/SearchableTableBlock.tsx",
+    "line": 110,
+    "evidence": "A browser probe clicked Name: aria-sort changed to ascending, but the rows remained Zelda then Alice. handleSort changes only local indicators; rendering still maps the original rows, and there is no exposed sort callback. Users are given an incorrect description of the data order.",
+    "fix": "Implement sorting or expose a controlled sort contract that updates rows and indicators together. Test actual row order.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "ButtonGroupItem unexpectedly submits surrounding forms",
+    "category": "Form reliability",
+    "file": "src/components/ButtonGroup/ButtonGroupItem.tsx",
+    "line": 18,
+    "evidence": "The native button has no default type. A diagnostic form submitted when its Monthly group item was clicked. This differs from the corrected Button behavior and can submit incomplete or unintended data.",
+    "fix": "Default to type=button while preserving an explicit submit override, and test grouped controls inside forms.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Interactive tooltip rerenders steal focus while typing",
+    "category": "Accessibility / form reliability",
+    "file": "src/components/Tooltip/Tooltip.tsx",
+    "line": 94,
+    "evidence": "In a reproduced popover containing a controlled Note input, entering the first character rerendered the parent and moved focus from the input back to the dialog. The focus effect depends on children and callback identities, so ordinary rerenders refocus the panel.",
+    "fix": "Focus on the closed-to-open transition only; keep live callbacks in refs where needed. Test multi-character typing and parent rerenders while the popover is open.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Form adapters lose nested-field errors",
+    "category": "Form validation",
+    "file": "src/hooks/form/useRaydenInput.ts",
+    "line": 44,
+    "evidence": "Both input and select adapters index errors with the complete field path string. For profile.email, React Hook Form stores nested objects instead. A probe with an existing Required error returned hasError=false, hiding why submission failed.",
+    "fix": "Use a nested-path resolver or the form library\u2019s field-state API. Cover nested objects and field arrays.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "The select adapter returns errors that Select cannot display",
+    "category": "Form validation / accessibility",
+    "file": "src/hooks/form/useRaydenSelect.ts",
+    "line": 62,
+    "evidence": "useRaydenSelect returns error and hasError, but Select has no error prop, error rendering or invalid-state wiring. Spreading the advertised adapter into Select silently loses even flat-field validation feedback; the extra properties land on a div.",
+    "fix": "Give Select a defined error contract and associated error text/aria-invalid, and make the adapter return only supported props.",
+    "command": "/harden"
+  },
+  {
+    "p": 1,
+    "title": "Banner clipping hides notification content on phones",
+    "category": "Responsive design",
+    "file": "src/components/Banner/Banner.tsx",
+    "line": 175,
+    "evidence": "Carried forward and visible in the full documentation crawl: at 390px the Update available banner had 538px of content in a 308px-wide, fixed-height clipped container. The page itself did not overflow, so page-width checks alone miss the loss.",
+    "fix": "Allow content-driven height and wrapping; reserve space for dismissal/actions without hiding important copy.",
+    "command": "/adapt"
+  },
+  {
+    "p": 1,
+    "title": "The search-table toolbar exceeds phone width",
+    "category": "Responsive design",
+    "file": "src/blocks/SearchableTableBlock.tsx",
+    "line": 182,
+    "evidence": "At a verified 390px viewport, the With Search example reaches 505px. The toolbar combines a 260px input, filter button and optional date action in nonwrapping rows. The table has a scroll wrapper, but the toolbar is outside it.",
+    "fix": "Wrap or stack toolbar controls according to available container width; let the search field shrink.",
+    "command": "/adapt"
+  },
+  {
+    "p": 2,
+    "title": "Theme defaults and custom persistence keys are ignored",
+    "category": "Theming / state",
+    "file": "src/context/ThemeContext.tsx",
+    "line": 63,
+    "evidence": "Two browser probes confirmed defaultTheme=dark becomes system when storage is empty, and a dark value under a custom storageKey is ignored. getStoredTheme always returns a truthy system fallback and always reads the fixed key, while writes use the custom key.",
+    "fix": "Read the supplied key and distinguish no stored preference from a stored system preference.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Table selection becomes misleading after row changes",
+    "category": "State / accessibility",
+    "file": "src/blocks/SearchableTableBlock.tsx",
+    "line": 122,
+    "evidence": "After selecting Alice and replacing the rows with Bob, the probe showed Select all checked while Bob was unchecked. Both table blocks compare selection count rather than membership and retain stale IDs. Partial selection is also rendered as fully checked rather than mixed.",
+    "fix": "Reconcile selection against the intended row scope, derive allSelected by membership, and expose an indeterminate/mixed header checkbox.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Title-table Search and Sort buttons do nothing",
+    "category": "Interaction",
+    "file": "src/blocks/SearchableTableBlock.tsx",
+    "line": 146,
+    "evidence": "The title toolbar\u2019s Search and Sort buttons have explicit empty handlers and no callback API. Unlike a consumer-owned optional action, these cannot be wired through the published props. The input toolbar forwards search text but does not filter rows itself, which also needs clear documentation.",
+    "fix": "Implement the toolbar actions or expose callbacks; state whether search/filtering is local or consumer-controlled.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Adding an accordion click callback disables expansion",
+    "category": "Interaction contract",
+    "file": "src/components/Accordion/Accordion.tsx",
+    "line": 209,
+    "evidence": "Carried forward: spreading rest after the internal onClick allows an analytics or integration callback to replace the toggle. The earlier browser probe confirmed the callback ran but expansion did not.",
+    "fix": "Compose handlers and define cancellation semantics instead of replacing the internal action.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Counter starts outside its configured range",
+    "category": "State",
+    "file": "src/components/Counter/Counter.tsx",
+    "line": 107,
+    "evidence": "Carried forward: Counter min=5 max=10 displays 0 initially, then jumps to 5 on the first increase. Only update-time values are clamped.",
+    "fix": "Normalize uncontrolled initialization and changed bounds; document invalid controlled-value behavior.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Banner displays a close control without close behavior",
+    "category": "Interaction",
+    "file": "src/components/Banner/Banner.tsx",
+    "line": 152,
+    "evidence": "Carried forward: dismissible defaults true while onDismiss is optional. Without a callback, the close control remains visible and does nothing, including in documented examples.",
+    "fix": "Hide unavailable dismissal, require its callback, or provide a documented uncontrolled dismissal mode.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Modal can render inert or empty primary actions",
+    "category": "Interaction / accessibility",
+    "file": "src/components/Modal/Modal.tsx",
+    "line": 108,
+    "evidence": "Save is supplied by default even when onPrimaryClick is absent. A new browser probe also confirmed primaryLabel=\"\" with secondaryLabel=\"Cancel\" still produces a third, empty primary button because the footer condition controls the whole footer, not that button.",
+    "fix": "Render each action only when configured, and make default action behavior explicit.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Modal description can reference content that is not rendered",
+    "category": "Accessibility / content",
+    "file": "src/components/Modal/Modal.tsx",
+    "line": 223,
+    "evidence": "With description supplied, no title and showClose=false, the whole header is omitted although aria-describedby still references the description ID. The explanatory copy disappears and the relationship points nowhere.",
+    "fix": "Render descriptions independently of title/close visibility and only reference mounted descriptions.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "An open modal can retain a stale theme",
+    "category": "Theming",
+    "file": "src/components/Modal/Modal.tsx",
+    "line": 136,
+    "evidence": "The portal copies its nearest theme class only when open changes. If the theme changes while the modal remains open, that copied class can keep the dialog in its old theme even after the root changes.",
+    "fix": "Synchronize portal theme context during theme changes or inherit a stable semantic theme container.",
+    "command": "/colorize"
+  },
+  {
+    "p": 2,
+    "title": "Remember me has no effect on the login contract",
+    "category": "Form behavior / copy",
+    "file": "src/blocks/LoginBlock.tsx",
+    "line": 122,
+    "evidence": "The visible \u201cRemember me for 30 days\u201d checkbox updates internal state, but that value is never passed to onSubmit or exposed through a callback. The integrator cannot honor the preference through the advertised API.",
+    "fix": "Expose rememberMe in the submission/controlled contract and avoid promising a fixed duration the component cannot implement.",
+    "command": "/clarify"
+  },
+  {
+    "p": 2,
+    "title": "Login fields omit basic validation and submission states",
+    "category": "Forms / usability",
+    "file": "src/blocks/LoginBlock.tsx",
+    "line": 188,
+    "evidence": "The email field is type=text; neither credential is required. The submit callback accepts blank values. There are no props for pending state, a server error, or disabled submission. Consumers can validate externally, but the block cannot present the outcome through its intended interface.",
+    "fix": "Use email/password autocomplete and required semantics as appropriate, and expose pending/error state without hardcoding authentication policy.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Work-email login misnames custom identity providers",
+    "category": "Content correctness",
+    "file": "src/blocks/LoginBlock.tsx",
+    "line": 166,
+    "evidence": "The work-email variant uses the first custom provider\u2019s icon and callback but always labels it Continue with Google. Supplying Microsoft or another provider creates a misleading sign-in action.",
+    "fix": "Use the configured provider name and define whether the variant accepts one provider or many.",
+    "command": "/clarify"
+  },
+  {
+    "p": 2,
+    "title": "Avatar status is communicated only visually",
+    "category": "Accessibility",
+    "file": "src/components/Avatar/Avatar.tsx",
+    "line": 103,
+    "evidence": "Online/offline dots and the verified badge have no accessible status text. The avatar alt describes the person, not these separately supplied states. People using assistive technology lose presence and verification information.",
+    "fix": "Expose a short status description when meaningful, and allow explicitly decorative status usage.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Button group active state is visual only",
+    "category": "Accessibility",
+    "file": "src/components/ButtonGroup/ButtonGroupItem.tsx",
+    "line": 14,
+    "evidence": "The active prop changes colors but does not expose pressed/selected state. A user navigating without vision cannot determine the chosen view or period from the component\u2019s state contract.",
+    "fix": "Define whether the group is a toggle group, single choice or navigation, then implement corresponding semantics and keyboard behavior.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Stepper status is not exposed programmatically",
+    "category": "Accessibility / progress",
+    "file": "src/components/Stepper/Stepper.tsx",
+    "line": 173,
+    "evidence": "Active/completed/disabled states are represented by color and icon styling without an accessible current-step/status description. The linear and segmented variants also lose progress information when showLabel=false because the visual bars have no value semantics.",
+    "fix": "Expose current step and status text; provide named progress semantics where the component represents measurable progress.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Read-only inputs lose the visible focus treatment",
+    "category": "Keyboard usability",
+    "file": "src/components/Input/Input.tsx",
+    "line": 141,
+    "evidence": "Source inspection shows the standard read-only branch uses a static background/border while the native input has outline-none. The usual focus-within border class is excluded. Read-only inputs remain keyboard-focusable for selection and copying, so users need a visible focus position.",
+    "fix": "Apply a consistent focus-visible treatment independently of editability; verify keyboard text selection.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Small icon targets are difficult to use by touch",
+    "category": "Responsive usability",
+    "file": "src/components/Chip/Chip.tsx",
+    "line": 49,
+    "evidence": "Chip close/filter controls are 16\u00d716px. Several close and row-action controls are 24\u201332px. These are much smaller than a comfortable 44px touch area. This is a usability finding, not an automatic WCAG failure: the 24px minimum criterion includes spacing exceptions.",
+    "fix": "Increase invisible hit areas or padding while preserving compact visuals; verify adjacent controls do not overlap.",
+    "command": "/adapt"
+  },
+  {
+    "p": 2,
+    "title": "Motion does not respect reduced-motion preferences",
+    "category": "Accessibility preference / motion",
+    "file": "src/components/Spinner/Spinner.tsx",
+    "line": 49,
+    "evidence": "Spinner uses indefinite spin/dash/juggle animations and core styles contain no reduced-motion override. Progress and collapse transitions likewise have no shared preference policy. Some essential progress motion may be exempt from a particular criterion, but the library currently offers no calmer default for users requesting it.",
+    "fix": "Provide reduced-motion variants and meaningful static loading text; retain only essential motion.",
+    "command": "/animate"
+  },
+  {
+    "p": 2,
+    "title": "Overlay placement can put content outside the viewport",
+    "category": "Responsive overlays",
+    "file": "src/components/Tooltip/Tooltip.tsx",
+    "line": 229,
+    "evidence": "A diagnostic tooltip anchored at the viewport\u2019s top edge rendered above the visible screen. Placement uses fixed absolute offsets without collision detection or fallback. DropdownMenu and Select use similar fixed anchored positioning; those implementations were source-reviewed, not separately edge-probed.",
+    "fix": "Add measured collision handling and a constrained scrollable panel where needed; test all four screen edges.",
+    "command": "/adapt"
+  },
+  {
+    "p": 2,
+    "title": "Every documentation page carries a large shared client payload",
+    "category": "Performance",
+    "file": "packages/docs/mdx-components.tsx",
+    "line": 96,
+    "evidence": "The existing production app manifest\u2019s shared layout plus documentation route references 12 unique JavaScript chunks: 6,059,477 raw bytes and 2,079,426 bytes when individually gzipped. The global MDX map eagerly references the component catalog and demos. This is an artifact-size measurement, not measured transfer time, Core Web Vitals or a Lighthouse result.",
+    "fix": "Split heavy demos, charts and illustration catalogs by page or defer them until requested. Add a documentation payload budget.",
+    "command": "/optimize"
+  },
+  {
+    "p": 2,
+    "title": "Story fixtures hide or introduce accessibility and mobile problems",
+    "category": "Quality / example design",
+    "file": "src/components/DropdownMenu/DropdownMenu.stories.tsx",
+    "line": 28,
+    "evidence": "Examples contain unnamed icon buttons, hardcoded pale/dark backgrounds and duplicated landmark names. At 390px, 48 stories overflow, many because of fixed-width wrappers (Accordion 750px, QuickSend 695px, Notifications 460px). These are fixture defects or review signals, not proof those components themselves cannot resize. They make copyable examples unreliable and contaminate theme scans.",
+    "fix": "Use fluid isolated fixtures, explicit accessible names and deliberate theme boundaries. Keep multi-variant showcase exceptions separate from default usage examples.",
+    "command": "/adapt"
+  },
+  {
+    "p": 2,
+    "title": "The normal quality gate misses the defects in this report",
+    "category": "Quality coverage",
+    "file": ".github/workflows/quality.yml",
+    "line": 23,
+    "evidence": "The unchanged normal suite passes all 281 tests despite the confirmed issues. Most stories are render examples; strict accessibility is enabled only for the interaction-regression set. CI does not compile documentation snippets, validate generated starter variants, test optional-peer consumers or initially open server-rendered portals.",
+    "fix": "Add a small set of representative acceptance checks for these contracts, expand themed accessibility coverage, and check packed consumers and generated templates.",
+    "command": "/audit"
+  },
+  {
+    "p": 2,
+    "title": "HeaderBlock is an unfinished internal prototype",
+    "category": "Internal block / navigation",
+    "file": "src/blocks/HeaderBlock.tsx",
+    "line": 11,
+    "evidence": "HeaderBlock is deliberately commented out of the blocks index, so this is not a released import regression. Its href prop is ignored (browser-probed); variant 11 hides switcher and secondary links on mobile without restoring them in the menu; menu toggles omit expanded/controls state; switcher activeIndex is used only during initialization. These are gates before exposing it as a supported block.",
+    "fix": "Keep it explicitly experimental until navigation, mobile parity, state semantics and controlled updates are implemented.",
+    "command": "/shape"
+  },
+  {
+    "p": 2,
+    "title": "Unlabeled form controls discard className",
+    "category": "Component contract",
+    "file": "src/components/FormControl/Checkbox.tsx",
+    "line": 46,
+    "evidence": "Checkbox, Radio and Toggle remove className from rest and apply it only to the optional label wrapper. When no label/description is supplied, the early return drops the caller\u2019s styles. This makes layout and focus customization depend unexpectedly on whether a label is present.",
+    "fix": "Define stable wrapper/input styling props and apply them in both labeled and compact modes.",
+    "command": "/harden"
+  },
+  {
+    "p": 2,
+    "title": "Several starter and block actions promise unavailable behavior",
+    "category": "Interaction / example copy",
+    "file": "packages/create-rayden-app/templates/vite/dashboard/typescript/src/pages/Settings.tsx",
+    "line": 58,
+    "evidence": "Dashboard Settings displays Change Avatar, Cancel and Save Changes without handlers; landing/blog CTAs and social signup defaults are similarly unwired. DatePicker Done can be shown without onDone, and Chip\u2019s filter button can appear without onDropdown. Templates may intentionally need application wiring, but the visible experience and docs do not consistently distinguish demonstration from a completed flow.",
+    "fix": "Wire local demonstration behavior where useful, hide unavailable optional actions, and clearly document the integration points instead of presenting inert controls as working flows.",
+    "command": "/clarify"
+  },
+  {
+    "p": 3,
+    "title": "Quick Send\u2019s default label contains a typo",
+    "category": "Copy polish",
+    "file": "src/blocks/QuickSendBlock.tsx",
+    "line": 33,
+    "evidence": "The default action reads \u201cSee all beneficaries\u201d. This is a small credibility issue in a reusable block.",
+    "fix": "Change the default to \u201cSee all beneficiaries\u201d and check neighboring shared labels.",
+    "command": "/polish"
+  }
+]

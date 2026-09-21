@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Badge, Button } from "@raydenui/ui";
 import type { Product } from "../data/products";
-import { formatPrice, addToCart } from "../data/products";
+import { formatPrice } from "../data/products";
 
 interface ProductCardProps {
   product: Product;

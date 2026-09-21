@@ -2,23 +2,26 @@
 
 import { useState } from "react";
 import {
-  Pagination,
-  Modal,
-  Button,
-  Tabs,
-  Tab,
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
+  ActivityItem,
+  Alert,
+  Avatar,
+  Button,
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  Icon,
+  DropdownMenuTrigger,
   FileUpload,
-  Avatar,
+  Icon,
+  MetricsCard,
+  Modal,
+  Pagination,
+  Tab,
+  Tabs,
   type FileUploadFileData,
 } from "@raydenui/ui";
 import { NotificationsBlock } from "../../../src/blocks/NotificationsBlock";
@@ -34,11 +37,20 @@ export function PaginationDemo() {
 }
 
 export function PaginationPositionsDemo() {
+  const [pages, setPages] = useState([1, 5, 10]);
   return (
-    <div className="flex flex-col gap-4 items-start">
-      <Pagination currentPage={1} totalPages={10} onPageChange={() => {}} />
-      <Pagination currentPage={5} totalPages={10} onPageChange={() => {}} />
-      <Pagination currentPage={10} totalPages={10} onPageChange={() => {}} />
+    <div className="flex w-full flex-col gap-4 items-start">
+      {pages.map((page, index) => (
+        <Pagination
+          key={index}
+          aria-label={`Page position example ${index + 1}`}
+          currentPage={page}
+          totalPages={10}
+          onPageChange={(next) =>
+            setPages((current) => current.map((value, i) => (i === index ? next : value)))
+          }
+        />
+      ))}
     </div>
   );
 }
@@ -54,16 +66,17 @@ export function ModalDemo() {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Example Modal">
-        <p className="text-grey-600">This is an example modal dialog.</p>
-        <div className="mt-4 flex justify-end gap-2">
-          <Button variant="grey" onClick={() => setIsOpen(false)}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={() => setIsOpen(false)}>
-            Confirm
-          </Button>
-        </div>
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="Example Modal"
+        primaryLabel="Confirm"
+        secondaryLabel="Cancel"
+        onPrimaryClick={() => setIsOpen(false)}
+      >
+        <p className="text-grey-600">
+          Try Tab, Shift+Tab, or Escape. Focus returns to the button when you close this dialog.
+        </p>
       </Modal>
     </>
   );
@@ -83,11 +96,10 @@ export function ModalSizesDemo() {
         onClose={() => setSize(null)}
         title={`${size?.toUpperCase()} Modal`}
         size={size || "md"}
+        primaryLabel="Close"
+        onPrimaryClick={() => setSize(null)}
       >
         <p className="text-grey-600">This is a {size} modal.</p>
-        <div className="mt-4 flex justify-end">
-          <Button onClick={() => setSize(null)}>Close</Button>
-        </div>
       </Modal>
     </>
   );
@@ -191,6 +203,7 @@ export function FileUploadRestrictedDemo() {
       files={files}
       onFilesChange={setFiles}
       accept=".pdf,.doc,.docx"
+      maxSize={10 * 1024 * 1024}
       description="PDF, DOC up to 10MB"
     />
   );
@@ -216,6 +229,9 @@ export function FileUploadCustomDemo() {
       files={files}
       onFilesChange={setFiles}
       title="Upload Images"
+      showHeader
+      accept="image/png,image/jpeg"
+      maxSize={10 * 1024 * 1024}
       description="PNG, JPG up to 10MB"
     />
   );
@@ -388,5 +404,48 @@ export function RecentTransactionsBlockDemo() {
         onSeeAll={() => console.log("View all")}
       />
     </div>
+  );
+}
+
+// MDX pages are server components, so callbacks cannot be passed to a Preview
+// directly. Interactive examples live here as client components instead.
+export function MetricsCardCtaDemo() {
+  return (
+    <MetricsCard
+      variation="1"
+      label="Total Solar Sales"
+      value="$45,823"
+      secondaryText="Jun 12th, 2023"
+      statusBadge={{ label: "Paid", variant: "success" }}
+      cta={{ label: "View Transactions", onClick: () => {} }}
+    />
+  );
+}
+
+export function ActivityItemLinkDemo() {
+  return (
+    <ActivityItem
+      avatar={<Avatar type="initials" initials="AD" size="sm" />}
+      text={
+        <>
+          <span className="font-medium text-grey-700">Ada</span> requested a review
+        </>
+      }
+      time="10 mins"
+      link={{ label: "View request", onClick: () => {} }}
+      badge="#Marketing-Design"
+    />
+  );
+}
+
+export function AlertActionDemo() {
+  return (
+    <Alert
+      state="error"
+      title="Connection Lost"
+      primaryAction={{ label: "Retry", onClick: () => {} }}
+    >
+      Unable to connect to the server. Please try again.
+    </Alert>
   );
 }

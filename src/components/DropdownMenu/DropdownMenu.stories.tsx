@@ -70,7 +70,7 @@ export const WithSectionHeaders: Story = {
     <div className="flex justify-center p-12">
       <DropdownMenu>
         <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-md border border-grey-300 bg-white px-3 py-2 text-body-sm font-semibold text-grey-700 hover:border-[#B6D8FF] focus:border-[#3D89DF] focus:outline-none transition-colors">
-          <Icon name="menu" size="md" />
+          <Icon name="align-justify" size="md" />
           <span>Menu</span>
           <Icon name="chevron-down" size="md" />
         </DropdownMenuTrigger>
@@ -162,7 +162,7 @@ export const IconOnlyTrigger: Story = {
     <div className="flex justify-center p-12">
       <DropdownMenu>
         <DropdownMenuTrigger className="inline-flex items-center justify-center rounded-md border border-grey-300 bg-white p-1 text-grey-500 hover:border-[#B6D8FF] focus:border-[#3D89DF] focus:outline-none transition-colors">
-          <Icon name="more-horizontal" size="md" />
+          <Icon name="dots-h" size="md" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuGroup>

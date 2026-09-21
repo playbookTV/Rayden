@@ -14,7 +14,7 @@ type Story = StoryObj<typeof QuickSendBlock>;
 /* ─── Default ─────────────────────────────────────────────────────── */
 export const Default: Story = {
   render: () => (
-    <div className="w-[695px] p-6">
+    <div className="w-full max-w-[695px] p-6">
       <QuickSendBlock
         onSeeAll={() => {}}
         onSelect={(id) => console.log("Selected:", id)}

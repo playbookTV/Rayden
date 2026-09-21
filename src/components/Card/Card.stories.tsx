@@ -138,7 +138,7 @@ export const HeaderWithActions: Story = {
           <>
             <Badge color="success">Active</Badge>
             <Button variant="grey" appearance="outlined" size="sm">
-              <Icon name="ellipsis-horizontal" size="sm" />
+              <Icon name="dots-h" size="sm" />
             </Button>
           </>
         }
@@ -235,7 +235,7 @@ export const UserProfileCard: Story = {
       <CardHeader
         actions={
           <Button variant="grey" appearance="outlined" size="sm">
-            <Icon name="ellipsis-horizontal" size="sm" />
+            <Icon name="dots-h" size="sm" />
           </Button>
         }
       />

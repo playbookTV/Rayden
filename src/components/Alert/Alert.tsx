@@ -38,14 +38,14 @@ const stateStyles: Record<
     border: "bg-secondary-500",
     iconBg: "bg-secondary-50",
     iconBorder: "border-secondary-75",
-    ctaBg: "bg-secondary-500",
+    ctaBg: "bg-action-info",
     ctaText: "text-white",
   },
   success: {
     border: "bg-success-600",
     iconBg: "bg-success-50",
     iconBorder: "border-success-75",
-    ctaBg: "bg-success-600",
+    ctaBg: "bg-action-success",
     ctaText: "text-white",
   },
   warning: {
@@ -59,7 +59,7 @@ const stateStyles: Record<
     border: "bg-error-500",
     iconBg: "bg-error-50",
     iconBorder: "border-error-75",
-    ctaBg: "bg-error-500",
+    ctaBg: "bg-action-danger",
     ctaText: "text-white",
   },
 };

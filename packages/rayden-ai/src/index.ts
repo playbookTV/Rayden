@@ -18,7 +18,8 @@ export * from "./rules";
 export * from "./recipes";
 
 // Version info
-export const VERSION = "0.1.4";
+import { referenceContext } from "./manifests";
+export const VERSION = referenceContext.aiVersion;
 
 // Package metadata
 export const metadata = {
@@ -28,3 +29,5 @@ export const metadata = {
   uiPackage: "@raydenui/ui",
   figmaFileKey: "tUAP8Crure0g1eewihmYUp",
 };
+
+export * from "./catalog";

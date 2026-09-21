@@ -26,8 +26,14 @@ export interface LoginBlockProps {
   submitLabel?: string;
   /** Forgot password handler */
   onForgotPassword?: () => void;
-  /** Form submit handler */
-  onSubmit?: (data: { email: string; password: string }) => void;
+  /** Form submit handler. `rememberMe` reflects the visible checkbox. */
+  onSubmit?: (data: { email: string; password: string; rememberMe: boolean }) => void;
+  /** Disables the form and shows a pending submit label. */
+  pending?: boolean;
+  /** Submit label while `pending` is true. */
+  pendingLabel?: string;
+  /** Error message shown above the submit button, e.g. a rejected sign-in. */
+  error?: string;
   /** Social login providers */
   socialProviders?: LoginBlockSocialProvider[];
   /** Sign-up link handler */
@@ -38,6 +44,8 @@ export interface LoginBlockProps {
   signUpLabel?: string;
   /** Show remember me checkbox */
   showRememberMe?: boolean;
+  /** Label for the remember-me checkbox. Avoid promising a duration the app cannot honour. */
+  rememberMeLabel?: string;
   /** Additional class names */
   className?: string;
 }
@@ -91,6 +99,10 @@ export function LoginBlock({
   signUpPrompt,
   signUpLabel,
   showRememberMe = true,
+  rememberMeLabel = "Remember me",
+  pending = false,
+  pendingLabel = "Signing in…",
+  error,
   className,
 }: LoginBlockProps) {
   const [email, setEmail] = useState("");
@@ -119,7 +131,7 @@ export function LoginBlock({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit?.({ email, password });
+    onSubmit?.({ email, password, rememberMe });
   };
 
   const isWorkEmail = variant === "work-email";
@@ -163,7 +175,7 @@ export function LoginBlock({
               className="flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 dark:hover:bg-grey-100 transition-colors"
             >
               <span className="shrink-0 size-5">{resolvedProviders[0]?.icon}</span>
-              Continue with Google
+              {`Continue with ${resolvedProviders[0]?.name ?? "Google"}`}
             </button>
           </div>
           <div className="relative my-2">
@@ -188,6 +200,10 @@ export function LoginBlock({
               label={isWorkEmail ? "Email Address" : "EMAIL ADDRESS"}
               placeholder={isWorkEmail ? "" : "Enter Email"}
               size="lg"
+              type="email"
+              autoComplete="email"
+              required
+              disabled={pending}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               trailingIcon="mail"
@@ -197,13 +213,18 @@ export function LoginBlock({
               placeholder="Enter Password"
               type={showPassword ? "text" : "password"}
               size="lg"
+              autoComplete="current-password"
+              required
+              disabled={pending}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              trailingIcon={
+              trailingAction={
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-grey-400 hover:text-grey-600"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-pressed={showPassword}
+                  className="flex size-6 items-center justify-center rounded text-grey-500 hover:text-grey-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400"
                 >
                   <Icon name={showPassword ? "eye" : "eye-slash"} size="sm" />
                 </button>
@@ -215,7 +236,7 @@ export function LoginBlock({
           {showRememberMe && !isWorkEmail && (
             <div className="flex items-center justify-between">
               <Checkbox
-                label="Remember me for 30 days"
+                label={rememberMeLabel}
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
               />
@@ -233,8 +254,20 @@ export function LoginBlock({
         </div>
 
         {/* Submit button */}
-        <Button type="submit" variant="primary" size="lg" className="w-full">
-          {resolvedSubmitLabel}
+        {error && (
+          <p role="alert" className="text-sm text-feedback-error leading-[1.45]">
+            {error}
+          </p>
+        )}
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          className="w-full"
+          disabled={pending}
+          aria-busy={pending || undefined}
+        >
+          {pending ? pendingLabel : resolvedSubmitLabel}
         </Button>
       </form>
 

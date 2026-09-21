@@ -43,12 +43,12 @@ import { Divider } from "@raydenui/ui";
 
 <Preview>
   <div className="w-full">
-    <Divider variant="with-title" title="Section Title" />
+    <Divider variant="with-title" label="Section Title" />
   </div>
 </Preview>
 
 ```tsx
-<Divider variant="with-title" title="Section Title" />
+<Divider variant="with-title" label="Section Title" />
 ```
 
 ### With Icon
@@ -71,7 +71,7 @@ import { Icon } from "@raydenui/ui";
   <div className="w-full">
     <Divider
       variant="with-button"
-      buttonText="Load More"
+      buttonLabel="Load More"
     />
   </div>
 </Preview>
@@ -79,7 +79,7 @@ import { Icon } from "@raydenui/ui";
 ```tsx
 <Divider
   variant="with-button"
-  buttonText="Load More"
+  buttonLabel="Load More"
   onButtonClick={() => loadMore()}
 />
 ```
@@ -89,9 +89,9 @@ import { Icon } from "@raydenui/ui";
 <Preview>
   <div className="flex items-center h-8 gap-4">
     <span>Item 1</span>
-    <Divider orientation="vertical" />
+    <div className="h-full w-px bg-grey-100" role="separator" aria-orientation="vertical" />
     <span>Item 2</span>
-    <Divider orientation="vertical" />
+    <div className="h-full w-px bg-grey-100" role="separator" aria-orientation="vertical" />
     <span>Item 3</span>
   </div>
 </Preview>
@@ -99,9 +99,9 @@ import { Icon } from "@raydenui/ui";
 ```tsx
 <div className="flex items-center h-8 gap-4">
   <span>Item 1</span>
-  <Divider orientation="vertical" />
+  <div className="h-full w-px bg-grey-100" role="separator" aria-orientation="vertical" />
   <span>Item 2</span>
-  <Divider orientation="vertical" />
+  <div className="h-full w-px bg-grey-100" role="separator" aria-orientation="vertical" />
   <span>Item 3</span>
 </div>
 ```

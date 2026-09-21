@@ -3,7 +3,7 @@
 @import "nextra-theme-docs/style.css";
 
 /* Enable class-based dark mode for Preview component */
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *):not(:where(.rayden-light, .rayden-light *)));
 
 :root {
   /* Override Nextra primary color with Rayden orange #F56630 */
@@ -45,7 +45,7 @@
 
 /* Override link colors with Rayden orange */
 a {
-  color: var(--rayden-primary-500);
+  color: var(--rayden-primary-700);
 }
 
 a:hover {
@@ -53,7 +53,7 @@ a:hover {
 }
 
 .dark a {
-  color: var(--rayden-primary-400);
+  color: var(--rayden-primary-100);
 }
 
 .dark a:hover {
@@ -79,5 +79,5 @@ a:hover {
 
 /* Sidebar active link */
 .nextra-sidebar-container a[data-active="true"] {
-  color: var(--rayden-primary-500);
+  color: var(--rayden-primary-700);
 }

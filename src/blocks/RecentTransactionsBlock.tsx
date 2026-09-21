@@ -90,11 +90,11 @@ export function RecentTransactionsBlock({
                       <span className="font-normal">{isOutgoing ? "to" : "from"}</span>{" "}
                       <span className="font-semibold">{tx.name}</span>
                     </span>
-                    <span className="text-xs font-medium text-grey-400">{tx.category}</span>
+                    <span className="text-xs font-medium text-grey-500">{tx.category}</span>
                   </div>
 
                   {/* Amount */}
-                  <span className="text-sm font-semibold text-black shrink-0 ml-4">
+                  <span className="text-sm font-semibold text-grey-900 shrink-0 ml-4">
                     {isOutgoing ? "-" : "+"} {tx.amount}
                   </span>
                 </div>

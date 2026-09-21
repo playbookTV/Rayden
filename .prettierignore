@@ -4,3 +4,9 @@ coverage
 storybook-static
 pnpm-lock.yaml
 *.md
+
+# Generator-owned output is checked byte-for-byte by the quality gate.
+packages/rayden-ai/src/manifests/contracts.generated.json
+packages/docs/public/ai/catalog.json
+packages/docs/public/r/
+registry.json

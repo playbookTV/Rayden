@@ -5,7 +5,7 @@ description: Contextual information popover
 
 # Tooltip
 
-Tooltips display informative text when users hover over or focus on an element.
+Tooltips display descriptive content when users hover over or focus on one child control. Focus opens immediately; `delay` applies to hover. Escape dismisses the content.
 
 ## Import
 
@@ -98,31 +98,31 @@ import { Tooltip } from "@raydenui/ui";
 ```tsx
 const [open, setOpen] = useState(false);
 
-<Tooltip
-  content="Controlled tooltip"
-  open={open}
-  onOpenChange={setOpen}
->
-  <Button onClick={() => setOpen(!open)}>
-    Click to toggle
-  </Button>
-</Tooltip>
+<Tooltip content="Controlled tooltip" open={open} onOpenChange={setOpen}>
+  <Button onClick={() => setOpen(!open)}>Click to toggle</Button>
+</Tooltip>;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `content` | `ReactNode` | — | Tooltip content (required) |
-| `placement` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Tooltip placement |
-| `delay` | `number` | `0` | Delay before showing (ms) |
-| `open` | `boolean` | — | Controlled open state |
-| `onOpenChange` | `(open: boolean) => void` | — | Open state handler |
-| `className` | `string` | — | Additional CSS classes |
+| Prop           | Type                                     | Default | Description                |
+| -------------- | ---------------------------------------- | ------- | -------------------------- |
+| `content`      | `ReactNode`                              | —       | Tooltip content (required) |
+| `placement`    | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Tooltip placement          |
+| `delay`        | `number`                                 | `0`     | Delay before showing (ms)  |
+| `open`         | `boolean`                                | —       | Controlled open state      |
+| `onOpenChange` | `(open: boolean) => void`                | —       | Open state handler         |
+| `className`    | `string`                                 | —       | Additional CSS classes     |
+
+## Standalone panels and actions
+
+Existing uses without a child remain visible panels. `position` is retained as a legacy placement option. For new trigger-based uses, prefer `placement`.
+
+An `onClose`, `primaryAction`, or `secondaryAction` makes the content an interactive popover with dialog semantics. With a child trigger, it opens on click, moves focus into the panel, and returns focus on Escape. Use this for actions; reserve ordinary tooltips for descriptions.
 
 ## Accessibility
 
 - Tooltip content is announced by screen readers
 - Supports both hover and focus triggers
 - Dismissible with Escape key
-- Uses proper ARIA attributes
+- Connects descriptive content to its trigger with `aria-describedby`. Action panels use dialog semantics.

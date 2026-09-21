@@ -391,7 +391,9 @@ export const FullFeatured: Story = {
                   Role
                 </TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="w-20" />
+                <TableHead className="w-20">
+                  <span className="sr-only">Actions</span>
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -441,7 +443,7 @@ export const FullFeatured: Story = {
                         className="flex size-8 items-center justify-center rounded-lg border border-grey-200 bg-white text-grey-500 hover:bg-grey-50"
                         aria-label={`More actions for ${user.name}`}
                       >
-                        <Icon name="more-vertical" size="sm" aria-hidden="true" />
+                        <Icon name="dots-v" size="sm" aria-hidden="true" />
                       </button>
                     </TableCell>
                   </TableRow>

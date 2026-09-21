@@ -13,6 +13,19 @@ Rayden UI includes 200+ icons with outline and solid variants in multiple sizes.
 import { Icon } from "@raydenui/ui";
 ```
 
+## Loading and server rendering
+
+For immediate rendering, including server-rendered markup, pass static icon data. Only the imported icon is retained by a tree-shaking bundler:
+
+```tsx
+import { Icon } from "@raydenui/ui";
+import { homeIcon } from "@raydenui/ui/icons";
+
+<Icon icon={homeIcon} />;
+```
+
+The convenient `name` API loads the shared icon catalog after mounting in the browser. Until it arrives, the SVG reserves its final size. The catalog is a separate chunk in bundlers that support code splitting; it is not needed for a plain Button. Use static icon data for icons that must appear in the initial HTML.
+
 ## Usage
 
 ### Basic
@@ -69,14 +82,14 @@ import { Icon } from "@raydenui/ui";
 <Preview>
   <Icon name="heart" className="text-primary-500" />
   <Icon name="check-circle" className="text-success-400" />
-  <Icon name="x-circle" className="text-error-400" />
+  <Icon name="multiply-circle" className="text-error-400" />
   <Icon name="info-circle" className="text-warning-400" />
 </Preview>
 
 ```tsx
 <Icon name="heart" className="text-primary-500" />
 <Icon name="check-circle" className="text-success-400" />
-<Icon name="x-circle" className="text-error-400" />
+<Icon name="multiply-circle" className="text-error-400" />
 ```
 
 ## Available Icons
@@ -107,14 +120,15 @@ import { Icon } from "@raydenui/ui";
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `name` | `string` | — | Icon name (required) |
-| `variant` | `"outline" \| "solid"` | `"outline"` | Icon variant |
-| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Icon size |
-| `className` | `string` | — | Additional CSS classes |
+| Prop        | Type                                   | Default     | Description                                              |
+| ----------- | -------------------------------------- | ----------- | -------------------------------------------------------- |
+| `name`      | `IconName`                             | —           | Icon name; use either `name` or `icon`                   |
+| `icon`      | `IconRecord`                           | —           | Static icon data for immediate, tree-shakeable rendering |
+| `variant`   | `"outline" \| "solid"`                 | `"outline"` | Icon variant                                             |
+| `size`      | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"`      | Icon size                                                |
+| `className` | `string`                               | —           | Additional CSS classes                                   |
 
 ## Accessibility
 
 - Icons are decorative by default (`aria-hidden="true"`)
-- Add `aria-label` for standalone icons with meaning
+- For standalone icons with meaning, use `aria-hidden={false}`, `role="img"`, and an `aria-label`.

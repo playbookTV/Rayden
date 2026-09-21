@@ -10,13 +10,10 @@ export const metadata: Metadata = {
     default: "Rayden UI",
     template: "%s - Rayden UI",
   },
-  description: "A modern React component library with 24+ components built on Tailwind CSS v4",
+  description: "A modern React component library with 33+ components built on Tailwind CSS v4",
 };
 
-const logo = (
-  // eslint-disable-next-line @next/next/no-img-element
-  <img src="/logo.svg" alt="Rayden UI" style={{ maxWidth: "20%", height: "auto" }} />
-);
+const logo = <img src="/logo.svg" alt="Rayden UI" style={{ maxWidth: "20%", height: "auto" }} />;
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const pageMap = await getPageMap();
@@ -28,7 +25,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Layout
           navbar={<Navbar logo={logo} projectLink="https://github.com/playbookTV/Rayden" />}
           pageMap={pageMap}
-          docsRepositoryBase="https://github.com/playbookTV/Rayden/tree/main/packages/docs/content"
+          sidebar={{ defaultMenuCollapseLevel: 1, autoCollapse: true }}
+          docsRepositoryBase="https://github.com/playbookTV/Rayden/tree/main/packages/docs"
           footer={
             <Footer>
               <span>MIT {new Date().getFullYear()} © Rayden UI</span>

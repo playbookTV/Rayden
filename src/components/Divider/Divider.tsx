@@ -73,7 +73,7 @@ export function Divider({
   if (variant === "with-label") {
     return (
       <div className={cn("flex items-center gap-0.5 w-full", className)} {...rest}>
-        <span className="shrink-0 pr-2 text-sm text-grey-400 bg-white dark:bg-grey-50">
+        <span className="shrink-0 pr-2 text-sm text-grey-500 bg-white dark:bg-grey-50">
           {label}
         </span>
         <DividerLine />

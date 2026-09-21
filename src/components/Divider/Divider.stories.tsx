@@ -32,7 +32,7 @@ type Story = StoryObj<typeof Divider>;
 export const Default: Story = {
   decorators: [
     (Story) => (
-      <div className="w-[640px]">
+      <div className="w-full max-w-[640px]">
         <Story />
       </div>
     ),
@@ -45,7 +45,7 @@ export const Default: Story = {
 export const WithIcon: Story = {
   decorators: [
     (Story) => (
-      <div className="w-[640px]">
+      <div className="w-full max-w-[640px]">
         <Story />
       </div>
     ),
@@ -59,7 +59,7 @@ export const WithIcon: Story = {
 export const WithLabel: Story = {
   decorators: [
     (Story) => (
-      <div className="w-[640px]">
+      <div className="w-full max-w-[640px]">
         <Story />
       </div>
     ),
@@ -73,7 +73,7 @@ export const WithLabel: Story = {
 export const WithTitle: Story = {
   decorators: [
     (Story) => (
-      <div className="w-[640px]">
+      <div className="w-full max-w-[640px]">
         <Story />
       </div>
     ),
@@ -87,7 +87,7 @@ export const WithTitle: Story = {
 export const WithButton: Story = {
   decorators: [
     (Story) => (
-      <div className="w-[640px]">
+      <div className="w-full max-w-[640px]">
         <Story />
       </div>
     ),
@@ -103,7 +103,7 @@ export const WithButton: Story = {
 export const WithTitleAndButton: Story = {
   decorators: [
     (Story) => (
-      <div className="w-[640px]">
+      <div className="w-full max-w-[640px]">
         <Story />
       </div>
     ),
@@ -119,7 +119,7 @@ export const WithTitleAndButton: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-12 w-[640px]">
+    <div className="flex flex-col gap-12 w-full max-w-[640px]">
       <Divider variant="default" />
       <Divider variant="with-icon" icon={<PlusIcon />} />
       <Divider variant="with-label" label="Continue" />

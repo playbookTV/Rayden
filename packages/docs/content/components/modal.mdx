@@ -7,6 +7,8 @@ description: Dialog overlay for focused user interactions
 
 Display modal dialogs for important interactions that require user attention.
 
+<AgentGuidance component="Modal" />
+
 ## Import
 
 ```tsx
@@ -16,6 +18,10 @@ import { Modal } from "@raydenui/ui";
 ## Usage
 
 ### Basic
+
+<Preview>
+  <ModalDemo />
+</Preview>
 
 ```tsx
 const [open, setOpen] = useState(false);
@@ -37,6 +43,10 @@ const [open, setOpen] = useState(false);
 ```
 
 ### Sizes
+
+<Preview>
+  <ModalSizesDemo />
+</Preview>
 
 ```tsx
 <Modal size="sm" title="Small Modal" open={open} onClose={onClose}>
@@ -113,25 +123,25 @@ const [open, setOpen] = useState(false);
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `open` | `boolean` | — | Whether the modal is open (required) |
-| `onClose` | `() => void` | — | Called when modal should close (required) |
-| `size` | `"sm" \| "md" \| "lg"` | `"sm"` | Modal width: sm (400px), md (500px), lg (640px) |
-| `title` | `string` | — | Title text |
-| `description` | `string` | — | Description text below the title |
-| `icon` | `ReactNode` | — | Leading icon element |
-| `showClose` | `boolean` | `true` | Show close button in header |
-| `primaryLabel` | `string` | `"Save"` | Primary action button label |
-| `onPrimaryClick` | `() => void` | — | Primary button callback |
-| `secondaryLabel` | `string` | — | Secondary action button label |
-| `onSecondaryClick` | `() => void` | — | Secondary button callback |
-| `footerOrientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Footer button layout |
-| `closeOnOverlay` | `boolean` | `true` | Close on backdrop click |
-| `closeOnEscape` | `boolean` | `true` | Close on Escape key |
-| `blur` | `boolean` | `true` | Show backdrop blur effect |
-| `children` | `ReactNode` | — | Modal body content |
-| `className` | `string` | — | Additional CSS classes |
+| Prop                | Type                         | Default        | Description                                     |
+| ------------------- | ---------------------------- | -------------- | ----------------------------------------------- |
+| `open`              | `boolean`                    | —              | Whether the modal is open (required)            |
+| `onClose`           | `() => void`                 | —              | Called when modal should close (required)       |
+| `size`              | `"sm" \| "md" \| "lg"`       | `"sm"`         | Modal width: sm (400px), md (500px), lg (640px) |
+| `title`             | `string`                     | —              | Title text                                      |
+| `description`       | `string`                     | —              | Description text below the title                |
+| `icon`              | `ReactNode`                  | —              | Leading icon element                            |
+| `showClose`         | `boolean`                    | `true`         | Show close button in header                     |
+| `primaryLabel`      | `string`                     | `"Save"`       | Primary action button label                     |
+| `onPrimaryClick`    | `() => void`                 | —              | Primary button callback                         |
+| `secondaryLabel`    | `string`                     | —              | Secondary action button label                   |
+| `onSecondaryClick`  | `() => void`                 | —              | Secondary button callback                       |
+| `footerOrientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Footer button layout                            |
+| `closeOnOverlay`    | `boolean`                    | `true`         | Close on backdrop click                         |
+| `closeOnEscape`     | `boolean`                    | `true`         | Close on Escape key                             |
+| `blur`              | `boolean`                    | `true`         | Show backdrop blur effect                       |
+| `children`          | `ReactNode`                  | —              | Modal body content                              |
+| `className`         | `string`                     | —              | Additional CSS classes                          |
 
 ## Features
 
@@ -144,8 +154,9 @@ const [open, setOpen] = useState(false);
 
 ## Accessibility
 
-- Uses `role="dialog"` and `aria-modal="true"`
+- Uses a native `<dialog>` opened with `showModal()`
 - Title linked via `aria-labelledby`
 - Description linked via `aria-describedby`
 - Close button has `aria-label="Close modal"`
-- Focus is trapped within the modal while open
+- The browser contains focus and makes the background inert while the dialog is open
+- Closing returns focus to the trigger when it is still available

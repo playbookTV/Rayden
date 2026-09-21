@@ -14,7 +14,7 @@ type Story = StoryObj<typeof NotificationsBlock>;
 /* ─── Default ─────────────────────────────────────────────────────── */
 export const Default: Story = {
   render: () => (
-    <div className="w-[460px] p-6">
+    <div className="w-full max-w-[460px] p-6">
       <NotificationsBlock
         unreadCount={7}
         items={[

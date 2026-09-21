@@ -1,0 +1,53 @@
+/* Motion is opt-in and scoped to the participating element, including React portals. */
+[data-rayden-pressable] {
+  scale: 1;
+  transition: scale var(--rayden-motion-fast, 0ms) var(--rayden-motion-ease, ease-out);
+}
+[data-rayden-pressable][data-pressed="true"] {
+  scale: var(--rayden-press-scale, 1);
+}
+[data-rayden-collapse] {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--rayden-motion-duration, 0ms) var(--rayden-motion-ease, ease-out),
+    opacity var(--rayden-motion-duration, 0ms) var(--rayden-motion-ease, ease-out);
+}
+[data-rayden-collapse][data-state="closed"] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+[data-rayden-collapse-inner] {
+  min-height: 0;
+  overflow: hidden;
+}
+/* Applies before hydration as well as when the OS preference changes. */
+@media (prefers-reduced-motion: reduce) {
+  [data-rayden-pressable],
+  [data-rayden-collapse] {
+    transition: none;
+  }
+  [data-rayden-pressable][data-pressed="true"] {
+    scale: 1;
+  }
+
+  /* Spinners animate indefinitely, which is exactly what this preference asks us to
+     stop. The indicator stays visible and its role="status" name still announces the
+     loading state, so nothing is lost by holding it still. */
+  [data-rayden-spinner] svg,
+  [data-rayden-spinner] svg * {
+    animation: none;
+  }
+
+  /* Rayden's own decorative keyframes, wherever they are used. */
+  [class*="animate-[spinner-dash"],
+  [class*="animate-[juggle"] {
+    animation: none;
+  }
+}
+
+/* Closed server-rendered disclosure content is not focusable before hydration. */
+[data-rayden-collapse][data-state="closed"] > [data-rayden-collapse-inner] {
+  visibility: hidden;
+}

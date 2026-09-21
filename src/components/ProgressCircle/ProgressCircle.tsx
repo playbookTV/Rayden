@@ -13,6 +13,8 @@ export interface ProgressCircleProps extends HTMLAttributes<HTMLDivElement> {
   variant?: ProgressCircleStyle;
   /** Show percentage text in the center */
   showText?: boolean;
+  /** Accessible name describing what is progressing, e.g. "Upload progress" */
+  label?: string;
 }
 
 const sizeConfig: Record<
@@ -37,6 +39,9 @@ export function ProgressCircle({
   variant = "default",
   showText = true,
   className,
+  label,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...rest
 }: ProgressCircleProps) {
   const clamped = clampValue(value);
@@ -59,6 +64,8 @@ export function ProgressCircle({
         aria-valuenow={clamped}
         aria-valuemin={0}
         aria-valuemax={100}
+        aria-labelledby={ariaLabelledBy}
+        aria-label={ariaLabelledBy ? undefined : (label ?? ariaLabel ?? "Progress")}
         {...rest}
       >
         <svg width={config.dimension} height={config.dimension} className="-rotate-90">
@@ -103,6 +110,8 @@ export function ProgressCircle({
       aria-valuenow={clamped}
       aria-valuemin={0}
       aria-valuemax={100}
+      aria-labelledby={ariaLabelledBy}
+      aria-label={ariaLabelledBy ? undefined : (label ?? ariaLabel ?? "Progress")}
       {...rest}
     >
       <svg width={config.dimension} height={config.dimension} className="-rotate-90">

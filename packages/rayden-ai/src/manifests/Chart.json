@@ -4,7 +4,7 @@
   "displayName": "Chart",
   "description": "Chart.js wrapper with Rayden UI theme defaults. Supports line, bar, pie, doughnut, radar, scatter, bubble, and polar-area chart types.",
   "category": "data-display",
-  "importPath": "@raydenui/ui",
+  "importPath": "@raydenui/ui/chart",
   "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
   "props": {
     "type": {
@@ -68,13 +68,22 @@
       "onDataClick"
     ],
     "commonMistakes": [
-      { "mistake": "<Chart />", "correction": "<RaydenChart /> (component is named RaydenChart)" },
+      {
+        "mistake": "<Chart />",
+        "correction": "<RaydenChart /> (component is named RaydenChart)"
+      },
       {
         "mistake": "series={[...]}",
         "correction": "data={{ labels: [...], datasets: [...] }} (use Chart.js data format)"
       },
-      { "mistake": "type='area'", "correction": "type='line' with fill: true in dataset" },
-      { "mistake": "type='polarArea'", "correction": "type='polar-area' (hyphenated)" }
+      {
+        "mistake": "type='area'",
+        "correction": "type='line' with fill: true in dataset"
+      },
+      {
+        "mistake": "type='polarArea'",
+        "correction": "type='polar-area' (hyphenated)"
+      }
     ]
   },
   "examples": [

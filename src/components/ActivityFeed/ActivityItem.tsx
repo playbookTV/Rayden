@@ -96,10 +96,10 @@ export const ActivityItem = forwardRef<HTMLDivElement, ActivityItemProps>(
             {(date || time || link || badge) && (
               <div className="flex items-start gap-1 w-full">
                 <div className="flex flex-1 items-start min-w-0">
-                  {date && <span className="text-xs text-grey-400 whitespace-nowrap">{date}</span>}
+                  {date && <span className="text-xs text-grey-500 whitespace-nowrap">{date}</span>}
                   {link && (
                     <>
-                      <span className="text-xs text-grey-400 whitespace-nowrap">・</span>
+                      <span className="text-xs text-grey-500 whitespace-nowrap">・</span>
                       {link.href ? (
                         <a
                           href={link.href}
@@ -121,15 +121,15 @@ export const ActivityItem = forwardRef<HTMLDivElement, ActivityItemProps>(
                   )}
                   {badge && (
                     <>
-                      <span className="text-xs text-grey-400 whitespace-nowrap">・</span>
-                      <span className="inline-flex items-center justify-center rounded-full bg-primary-400 px-2 text-xs font-medium text-white whitespace-nowrap">
+                      <span className="text-xs text-grey-500 whitespace-nowrap">・</span>
+                      <span className="inline-flex items-center justify-center rounded-full bg-action-primary px-2 text-xs font-medium text-white whitespace-nowrap">
                         {badge}
                       </span>
                     </>
                   )}
                 </div>
                 {time && (
-                  <span className="shrink-0 text-xs text-grey-400 whitespace-nowrap">{time}</span>
+                  <span className="shrink-0 text-xs text-grey-500 whitespace-nowrap">{time}</span>
                 )}
               </div>
             )}

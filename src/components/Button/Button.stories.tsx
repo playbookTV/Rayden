@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, within } from "storybook/test";
 import { Button } from "./Button";
 
 const meta: Meta<typeof Button> = {
@@ -146,4 +147,44 @@ export const AllVariants: Story = {
       </div>
     </div>
   ),
+};
+
+/** Guard the actual compiled theme pairs, rather than just the token values. */
+export const ReadableActionColors: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      {["rayden-light", "dark"].map((theme) => (
+        <div key={theme} className={`${theme} bg-grey-50 p-4 flex flex-wrap gap-2`}>
+          {(["primary", "grey", "destructive", "success", "warning", "info"] as const).map(
+            (variant) => (
+              <Button key={variant} variant={variant}>
+                {variant}
+              </Button>
+            )
+          )}
+        </div>
+      ))}
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const luminance = (color: string) => {
+      const values = color
+        .match(/[\d.]+/g)!
+        .slice(0, 3)
+        .map(Number)
+        .map((value) => {
+          const channel = value / 255;
+          return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+        });
+      return values[0] * 0.2126 + values[1] * 0.7152 + values[2] * 0.0722;
+    };
+    for (const button of within(canvasElement).getAllByRole("button")) {
+      const style = getComputedStyle(button);
+      const foreground = luminance(style.color);
+      const background = luminance(style.backgroundColor);
+      const contrast =
+        (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05);
+      await expect(contrast, `${button.textContent} contrast`).toBeGreaterThanOrEqual(4.5);
+    }
+  },
 };

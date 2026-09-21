@@ -5,10 +5,12 @@ export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   label?: string;
   description?: string;
   position?: "left" | "right";
+  /** Class names for the label wrapper. `className` styles the control itself. */
+  wrapperClassName?: string;
 }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ label, description, position = "left", className, ...rest }, ref) => {
+  ({ label, description, position = "left", className, wrapperClassName, ...rest }, ref) => {
     const descriptionId = useId();
     const control = (
       <div className="relative shrink-0 size-5">
@@ -20,7 +22,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
             "peer size-5 appearance-none rounded-full border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 cursor-pointer",
             "checked:border-primary-400",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200",
-            "disabled:cursor-not-allowed disabled:opacity-50"
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            className
           )}
           {...rest}
         />
@@ -33,7 +36,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     }
 
     return (
-      <label className={cn("inline-flex items-center gap-3 cursor-pointer", className)}>
+      <label className={cn("inline-flex items-center gap-3 cursor-pointer", wrapperClassName)}>
         {position === "left" && control}
         <div className="flex flex-col">
           {label && <span className="text-base font-medium text-grey-900">{label}</span>}

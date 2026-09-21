@@ -69,13 +69,13 @@ import { Badge } from "@raydenui/ui";
 ### With Dot
 
 <Preview>
-  <Badge color="success" dot>Online</Badge>
-  <Badge color="error" dot>Offline</Badge>
+  <Badge color="success" leadingIcon="radio-selected">Online</Badge>
+  <Badge color="error" leadingIcon="radio-button">Offline</Badge>
 </Preview>
 
 ```tsx
-<Badge color="success" dot>Online</Badge>
-<Badge color="error" dot>Offline</Badge>
+<Badge color="success" leadingIcon="radio-selected">Online</Badge>
+<Badge color="error" leadingIcon="radio-button">Offline</Badge>
 ```
 
 ### In Context
@@ -87,7 +87,7 @@ import { Badge } from "@raydenui/ui";
 </TableCell>
 
 // With a tab
-<Tab label="Messages" badge={<Badge color="orange">12</Badge>}>
+<Tab value="messages" badge={12}>
   Content
 </Tab>
 
@@ -104,7 +104,6 @@ import { Badge } from "@raydenui/ui";
 |------|------|---------|-------------|
 | `color` | `"orange" \| "blue" \| "success" \| "warning" \| "error" \| "neutral" \| "disabled"` | `"neutral"` | Badge color |
 | `type` | `"filled" \| "accent" \| "outline"` | `"filled"` | Visual type |
-| `dot` | `boolean` | `false` | Show dot indicator |
 | `className` | `string` | — | Additional CSS classes |
 
 ## Accessibility

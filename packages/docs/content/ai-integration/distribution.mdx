@@ -1,0 +1,53 @@
+---
+title: Registry Pilot
+description: Editable Rayden examples installed through a local shadcn-compatible registry
+---
+
+# Install editable examples
+
+The registry pilot installs setup, agent conventions, and editable compositions built on Rayden’s packaged components. It complements the AI package’s knowledge and validation tools.
+
+This is a local pilot. No public registry service or npm release was published by this work. Unreleased motion examples must be tested with the locally built UI package, even while its version number matches an older published release.
+
+<RegistryGuidance />
+
+## Prepare the local registry
+
+From the Rayden repository:
+
+```sh
+pnpm build
+pnpm --filter @raydenui/ai build
+pnpm registry:build
+pnpm run docs
+```
+
+The documentation server normally runs on port 3001. In a separate supported application, merge the namespace configuration shown above into its existing `components.json`; preserve the app’s aliases and other registries. Keep this documentation server running while inspecting or installing an item.
+
+Inspect an item before adding it:
+
+```sh
+pnpm dlx shadcn@4.21.0 view @rayden/button-actions
+pnpm dlx shadcn@4.21.0 add @rayden/button-actions
+```
+
+Use explicit `@rayden/` item addresses. Bare names such as `tabs` refer to shadcn’s own registry.
+
+## What you own
+
+Installed example files, their composition, and the stylesheet entry belong to your application. Rayden’s package supplies component internals, tokens, and behavior. Import the installed stylesheet from your app entry point; the registry does not create routes or replace application state.
+
+The installed rules file is reference material for an assistant to read. Installing it does not configure or activate an MCP client.
+
+Review upstream changes before reinstalling a customized example. Installation is not an automatic merge, and generated package metadata does not describe arbitrary local edits.
+
+## Prove the current workspace package
+
+The repository’s `registry:smoke` command runs the real shadcn CLI in a clean fixture using a fresh local UI tarball, then checks and builds the installed app. This is how the pilot verifies APIs that have not been released to npm yet.
+
+```sh
+npm pack --ignore-scripts --pack-destination /tmp
+pnpm registry:smoke --tarball /tmp/raydenui-ui-0.9.7.tgz
+```
+
+Use the actual tarball filename produced by the current build. The test reports its local-package substitution explicitly. External distribution requires a new release containing the new APIs and regenerated package pins.

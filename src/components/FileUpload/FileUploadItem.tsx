@@ -66,11 +66,11 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <span className="truncate text-body-sm font-semibold text-grey-800">{file.name}</span>
           {file.status === "error" ? (
-            <span className="text-body-xs font-medium text-error-400">
+            <span className="text-body-xs font-medium text-feedback-error">
               {file.error ?? "Failed to upload"}
             </span>
           ) : (
-            <span className="text-body-xs text-grey-400">
+            <span className="text-body-xs text-grey-600">
               {file.status === "complete" && file.uploadedAt
                 ? `${formatDate(file.uploadedAt)} \u2022 ${formatFileSize(file.size)}`
                 : formatFileSize(file.size)}
@@ -84,19 +84,25 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
             <button
               type="button"
               className="flex size-7 items-center justify-center rounded-md text-grey-500 hover:bg-grey-100 cursor-pointer"
-              aria-label="Upload file"
+              aria-label={`Remove ${file.name}`}
+              onClick={() => onRemove?.(file.id)}
             >
-              <Icon name="upload" size="md" />
+              <Icon name="multiply" size="md" />
             </button>
           )}
 
           {file.status === "uploading" && (
             <>
-              <ProgressCircle value={file.progress ?? 0} size="xs" showText />
+              <ProgressCircle
+                value={file.progress ?? 0}
+                size="xs"
+                showText
+                label={`Uploading ${file.name}`}
+              />
               <button
                 type="button"
                 onClick={() => onRemove?.(file.id)}
-                className="flex size-7 items-center justify-center rounded-md text-grey-400 hover:bg-grey-100 cursor-pointer"
+                className="flex size-7 items-center justify-center rounded-md text-grey-600 hover:bg-grey-100 cursor-pointer"
                 aria-label="Cancel upload"
               >
                 <Icon name="multiply" size="sm" />

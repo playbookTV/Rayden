@@ -26,6 +26,13 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   leadingAddon?: ReactNode;
   /** Trailing addon element (e.g. button). Renders as a separated section after the input. */
   trailingAddon?: ReactNode;
+  /**
+   * Interactive control rendered inside the field on the right, e.g. a password
+   * reveal toggle. Unlike `trailingIcon` — whose wrapper is aria-hidden because it
+   * is decorative — this slot is exposed to assistive technology, so whatever you
+   * pass must carry its own accessible name.
+   */
+  trailingAction?: ReactNode;
   /** Wrapper className */
   wrapperClassName?: string;
 }
@@ -57,6 +64,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       addonRight,
       leadingAddon,
       trailingAddon,
+      trailingAction,
       readOnly,
       disabled,
       className,
@@ -131,7 +139,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               )}
             >
               {leadingIcon && (
-                <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+                <span className="shrink-0 size-6 text-grey-500" aria-hidden="true">
                   {resolveIcon(leadingIcon, "md")}
                 </span>
               )}
@@ -145,17 +153,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 aria-required={required || undefined}
                 aria-describedby={descriptionId}
                 className={cn(
-                  "flex-1 min-w-0 bg-transparent text-sm text-grey-900 placeholder:text-grey-400 outline-none disabled:cursor-not-allowed",
+                  "flex-1 min-w-0 bg-transparent text-sm text-grey-900 placeholder:text-grey-500 outline-none disabled:cursor-not-allowed",
                   className
                 )}
                 {...rest}
               />
               {addonRight && <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>}
               {trailingIcon && (
-                <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+                <span className="shrink-0 size-6 text-grey-500" aria-hidden="true">
                   {resolveIcon(trailingIcon, "md")}
                 </span>
               )}
+              {trailingAction && <span className="shrink-0">{trailingAction}</span>}
             </div>
 
             {/* Trailing addon */}
@@ -175,7 +184,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               id={descriptionId}
               className={cn(
                 "text-sm leading-[1.45]",
-                hasError ? "text-error-400" : hasSuccess ? "text-success-400" : "text-grey-500"
+                hasError
+                  ? "text-feedback-error"
+                  : hasSuccess
+                    ? "text-feedback-success"
+                    : "text-grey-500"
               )}
             >
               {bottomText}
@@ -199,14 +212,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             inputFrameSize[size],
             addonHeight[size],
             readOnly
-              ? "bg-grey-100 border-grey-300"
+              ? // A read-only input stays in the tab order, but this branch dropped
+                // focus-within styling while the native input keeps outline-none, so
+                // focus became invisible. The addon branch always kept it.
+                "bg-grey-100 border-grey-300 focus-within:border-primary-400"
               : disabled
                 ? "bg-grey-50 border-grey-200 cursor-not-allowed"
                 : cn("bg-white dark:bg-grey-50", borderColor)
           )}
         >
           {leadingIcon && (
-            <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+            <span className="shrink-0 size-6 text-grey-500" aria-hidden="true">
               {resolveIcon(leadingIcon, "md")}
             </span>
           )}
@@ -220,24 +236,29 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-required={required || undefined}
             aria-describedby={descriptionId}
             className={cn(
-              "flex-1 min-w-0 bg-transparent text-sm text-grey-900 placeholder:text-grey-400 outline-none disabled:cursor-not-allowed",
+              "flex-1 min-w-0 bg-transparent text-sm text-grey-900 placeholder:text-grey-500 outline-none disabled:cursor-not-allowed",
               className
             )}
             {...rest}
           />
           {addonRight && <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>}
           {trailingIcon && (
-            <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+            <span className="shrink-0 size-6 text-grey-500" aria-hidden="true">
               {resolveIcon(trailingIcon, "md")}
             </span>
           )}
+          {trailingAction && <span className="shrink-0">{trailingAction}</span>}
         </div>
         {bottomText && (
           <p
             id={descriptionId}
             className={cn(
               "text-sm leading-[1.45]",
-              hasError ? "text-error-400" : hasSuccess ? "text-success-400" : "text-grey-500"
+              hasError
+                ? "text-feedback-error"
+                : hasSuccess
+                  ? "text-feedback-success"
+                  : "text-grey-500"
             )}
           >
             {bottomText}

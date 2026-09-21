@@ -10,3 +10,5 @@ export { handleGetComponents } from "./handlers/getComponents.js";
 export { handleGetComponentProps } from "./handlers/getComponentProps.js";
 export { handleGetTokens } from "./handlers/getTokens.js";
 export { handleGetLayoutRecipes } from "./handlers/getLayoutRecipes.js";
+
+export { callTool } from "./dispatch";

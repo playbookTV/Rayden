@@ -1,173 +1,200 @@
 ---
 title: ActivityFeed
-description: Activity timelines and notification feeds
+description: Timeline of user activity with avatars, content blocks and timestamps
 ---
 
 # ActivityFeed
 
-Display activity timelines and notification feeds with customizable content.
+Show a timeline of user activity — comments, uploads and status changes — built from
+`ActivityItem` rows with optional `ActivityContent` blocks.
 
 ## Import
 
 ```tsx
-import { ActivityItem, ActivityContent } from "@raydenui/ui";
+import { ActivityItem, ActivityContent, Avatar } from "@raydenui/ui";
 ```
 
 ## Usage
 
 ### Basic
 
-<Preview vertical>
-  <div className="space-y-4 w-full max-w-md">
-    <ActivityItem
-      avatar={<Avatar type="image" src="https://i.pravatar.cc/150?img=1" />}
-      timestamp="5 mins ago"
-    >
-      <ActivityContent>
-        <strong>John Doe</strong> commented on your post
-      </ActivityContent>
-    </ActivityItem>
-    <ActivityItem
-      avatar={<Avatar type="initials" initials="AS" />}
-      timestamp="1 hour ago"
-    >
-      <ActivityContent>
-        <strong>Alice Smith</strong> shared a document with you
-      </ActivityContent>
-    </ActivityItem>
-  </div>
-</Preview>
+Every row needs an `avatar` and `text`. `text` takes nodes, so names and links can be
+emphasised inline.
 
-```tsx
-<div className="space-y-4">
+<Preview>
   <ActivityItem
-    avatar={<Avatar type="image" src="/user1.jpg" />}
-    timestamp="5 mins ago"
-  >
-    <ActivityContent>
-      <strong>John Doe</strong> commented on your post
-    </ActivityContent>
-  </ActivityItem>
-  <ActivityItem
-    avatar={<Avatar type="initials" initials="AS" />}
-    timestamp="1 hour ago"
-  >
-    <ActivityContent>
-      <strong>Alice Smith</strong> shared a document with you
-    </ActivityContent>
-  </ActivityItem>
-</div>
-```
-
-### With Icons
-
-<Preview vertical>
-  <div className="space-y-4 w-full max-w-md">
-    <ActivityItem
-      icon={<Icon name="check-circle" className="text-success-400" />}
-      timestamp="2 hours ago"
-    >
-      <ActivityContent>
-        Project <strong>"Dashboard"</strong> was completed
-      </ActivityContent>
-    </ActivityItem>
-    <ActivityItem
-      icon={<Icon name="alert-circle" className="text-warning-400" />}
-      timestamp="3 hours ago"
-    >
-      <ActivityContent>
-        Build failed for <strong>main</strong> branch
-      </ActivityContent>
-    </ActivityItem>
-  </div>
-</Preview>
-
-```tsx
-<div className="space-y-4">
-  <ActivityItem
-    icon={<Icon name="check-circle" className="text-success-400" />}
-    timestamp="2 hours ago"
-  >
-    <ActivityContent>
-      Project <strong>"Dashboard"</strong> was completed
-    </ActivityContent>
-  </ActivityItem>
-  <ActivityItem
-    icon={<Icon name="alert-circle" className="text-warning-400" />}
-    timestamp="3 hours ago"
-  >
-    <ActivityContent>
-      Build failed for <strong>main</strong> branch
-    </ActivityContent>
-  </ActivityItem>
-</div>
-```
-
-### With Actions
-
-<Preview vertical>
-  <div className="space-y-4 w-full max-w-md">
-    <ActivityItem
-      avatar={<Avatar type="image" src="https://i.pravatar.cc/150?img=3" />}
-      timestamp="10 mins ago"
-      actions={
-        <div className="flex gap-2">
-          <Button size="sm" variant="primary">Accept</Button>
-          <Button size="sm" variant="grey">Decline</Button>
-        </div>
-      }
-    >
-      <ActivityContent>
-        <strong>Bob Wilson</strong> wants to join your team
-      </ActivityContent>
-    </ActivityItem>
-  </div>
+    avatar={<Avatar type="initials" initials="DA" size="sm" />}
+    text={
+      <>
+        <span className="font-medium text-grey-700">David</span> left a comment on{" "}
+        <span className="font-medium text-primary-400">Site redesign</span>
+      </>
+    }
+    date="Thurs 21, 2023"
+    time="10 mins"
+  />
 </Preview>
 
 ```tsx
 <ActivityItem
-  avatar={<Avatar type="image" src="/user.jpg" />}
-  timestamp="10 mins ago"
-  actions={
-    <div className="flex gap-2">
-      <Button size="sm" variant="primary">Accept</Button>
-      <Button size="sm" variant="grey">Decline</Button>
-    </div>
+  avatar={<Avatar type="initials" initials="DA" size="sm" />}
+  text={
+    <>
+      <span className="font-medium text-grey-700">David</span> left a comment on{" "}
+      <span className="font-medium text-primary-400">Site redesign</span>
+    </>
   }
+  date="Thurs 21, 2023"
+  time="10 mins"
+/>
+```
+
+### Unread
+
+`unread` marks a row as not yet seen.
+
+<Preview>
+  <ActivityItem
+    avatar={<Avatar type="initials" initials="MO" size="sm" />}
+    text={
+      <>
+        <span className="font-medium text-grey-700">Moyo</span> assigned you a task
+      </>
+    }
+    time="5 mins"
+    unread
+  />
+</Preview>
+
+```tsx
+<ActivityItem
+  avatar={<Avatar type="initials" initials="MO" size="sm" />}
+  text={
+    <>
+      <span className="font-medium text-grey-700">Moyo</span> assigned you a task
+    </>
+  }
+  time="5 mins"
+  unread
+/>
+```
+
+### With a link and badge
+
+`link` renders a single action in the meta row; `badge` adds a short label beside it.
+
+<Preview>
+  <ActivityItemLinkDemo />
+</Preview>
+
+```tsx
+<ActivityItem
+  avatar={<Avatar type="initials" initials="AD" size="sm" />}
+  text={
+    <>
+      <span className="font-medium text-grey-700">Ada</span> requested a review
+    </>
+  }
+  time="10 mins"
+  link={{ label: "View request", onClick: () => {} }}
+  badge="#Marketing-Design"
+/>
+```
+
+### With a content block
+
+Pass `ActivityContent` as children to attach a file, image or message block.
+
+<Preview>
+  <ActivityItem
+    avatar={<Avatar type="initials" initials="DA" size="sm" />}
+    text={
+      <>
+        <span className="font-medium text-grey-700">David</span> uploaded a file
+      </>
+    }
+    time="2 hours"
+  >
+    <ActivityContent
+      variant="file"
+      icon="file-alt"
+      title="Project brief.pdf"
+      size="13MB"
+      fileType="PDF File"
+      date="11 Sept 23"
+    />
+  </ActivityItem>
+</Preview>
+
+```tsx
+<ActivityItem
+  avatar={<Avatar type="initials" initials="DA" size="sm" />}
+  text={
+    <>
+      <span className="font-medium text-grey-700">David</span> uploaded a file
+    </>
+  }
+  time="2 hours"
 >
-  <ActivityContent>
-    <strong>Bob Wilson</strong> wants to join your team
-  </ActivityContent>
+  <ActivityContent
+    variant="file"
+    icon="file-alt"
+    title="Project brief.pdf"
+    size="13MB"
+    fileType="PDF File"
+    date="11 Sept 23"
+  />
 </ActivityItem>
 ```
 
-### Compact List
+### Timeline
 
-<Preview vertical>
-  <div className="space-y-2 w-full max-w-md">
-    <ActivityItem timestamp="Just now">
-      File uploaded successfully
-    </ActivityItem>
-    <ActivityItem timestamp="2 mins ago">
-      Settings updated
-    </ActivityItem>
-    <ActivityItem timestamp="5 mins ago">
-      New comment received
-    </ActivityItem>
+`connector` draws the vertical line between rows. Use `"top"` for the first row,
+`"middle"` for the ones between and `"last"` for the final row.
+
+<Preview>
+  <div className="flex flex-col">
+    <ActivityItem
+      avatar={<Avatar type="initials" initials="DA" size="sm" />}
+      text="Created the project"
+      time="Just now"
+      connector="top"
+    />
+    <ActivityItem
+      avatar={<Avatar type="initials" initials="MO" size="sm" />}
+      text="Added three collaborators"
+      time="2 mins"
+      connector="middle"
+    />
+    <ActivityItem
+      avatar={<Avatar type="initials" initials="AD" size="sm" />}
+      text="Published the first draft"
+      time="5 mins"
+      connector="last"
+    />
   </div>
 </Preview>
 
 ```tsx
-<div className="space-y-2">
-  <ActivityItem timestamp="Just now">
-    File uploaded successfully
-  </ActivityItem>
-  <ActivityItem timestamp="2 mins ago">
-    Settings updated
-  </ActivityItem>
-  <ActivityItem timestamp="5 mins ago">
-    New comment received
-  </ActivityItem>
+<div className="flex flex-col">
+  <ActivityItem
+    avatar={<Avatar type="initials" initials="DA" size="sm" />}
+    text="Created the project"
+    time="Just now"
+    connector="top"
+  />
+  <ActivityItem
+    avatar={<Avatar type="initials" initials="MO" size="sm" />}
+    text="Added three collaborators"
+    time="2 mins"
+    connector="middle"
+  />
+  <ActivityItem
+    avatar={<Avatar type="initials" initials="AD" size="sm" />}
+    text="Published the first draft"
+    time="5 mins"
+    connector="last"
+  />
 </div>
 ```
 
@@ -177,20 +204,32 @@ import { ActivityItem, ActivityContent } from "@raydenui/ui";
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `avatar` | `ReactNode` | — | Avatar element |
-| `icon` | `ReactNode` | — | Icon element (alternative to avatar) |
-| `timestamp` | `string` | — | Timestamp text |
-| `actions` | `ReactNode` | — | Action buttons |
-| `className` | `string` | — | Additional CSS classes |
+| `avatar` | `ReactNode` | — | Avatar element (required) |
+| `text` | `ReactNode` | — | Primary text content (required) |
+| `unread` | `boolean` | `false` | Shows the unread dot |
+| `date` | `string` | — | Date label |
+| `time` | `string` | — | Time label, right-aligned |
+| `link` | `{ label: string; href?: string; onClick?: () => void }` | — | Link button in the meta row |
+| `badge` | `string` | — | Badge text in the meta row |
+| `connector` | `"top" \| "middle" \| "last"` | — | Connector line for timeline layouts |
+| `children` | `ReactNode` | — | Content block, e.g. `ActivityContent` |
 
 ### ActivityContent
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes |
+| `variant` | `ActivityContentVariant` | — | Content variant (required) |
+| `contentStyle` | `ActivityContentStyle` | — | Visual style wrapper |
+| `icon` | `ReactNode \| IconName` | — | Leading icon, file variant |
+| `title` | `string` | — | File name |
+| `size` | `string` | — | File size |
+| `fileType` | `string` | — | File type label |
+| `date` | `string` | — | File date |
 
 ## Accessibility
 
-- Uses semantic list structure
-- Timestamps properly formatted
-- Action buttons are keyboard accessible
+- Put the actor and the action in `text` so the row reads as a sentence; do not rely on
+  the avatar alone to say who acted.
+- Give the `Avatar` an `alt` describing the person.
+- Use `link` rather than making the whole row clickable, so the action is reachable by
+  keyboard and has a name.

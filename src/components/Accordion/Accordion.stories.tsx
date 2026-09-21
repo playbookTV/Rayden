@@ -34,7 +34,7 @@ type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {
   render: (args) => (
-    <Accordion {...args} className="w-[750px]">
+    <Accordion {...args} className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger>This is an accordion title</AccordionTrigger>
         <AccordionContent>{content}</AccordionContent>
@@ -53,7 +53,7 @@ export const Default: Story = {
 
 export const Nested: Story = {
   render: () => (
-    <Accordion type="nested" className="w-[750px]">
+    <Accordion type="nested" className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger>This is an accordion title</AccordionTrigger>
         <AccordionContent>{content}</AccordionContent>
@@ -72,7 +72,7 @@ export const Nested: Story = {
 
 export const WithIcons: Story = {
   render: () => (
-    <Accordion className="w-[750px]">
+    <Accordion className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger leadingIcon={<PlusCircleIcon />}>
           This is an accordion title
@@ -97,7 +97,7 @@ export const WithIcons: Story = {
 
 export const WithNumbers: Story = {
   render: () => (
-    <Accordion className="w-[750px]">
+    <Accordion className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger leadingNumber="01">This is an accordion title</AccordionTrigger>
         <AccordionContent>{content}</AccordionContent>
@@ -116,7 +116,7 @@ export const WithNumbers: Story = {
 
 export const WithLogo: Story = {
   render: () => (
-    <Accordion className="w-[750px]">
+    <Accordion className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger leadingLogo={<LogoBadge />}>This is an accordion title</AccordionTrigger>
         <AccordionContent>{content}</AccordionContent>
@@ -135,7 +135,7 @@ export const WithLogo: Story = {
 
 export const WithBadge: Story = {
   render: () => (
-    <Accordion className="w-[750px]">
+    <Accordion className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger badge={2}>This is an accordion title</AccordionTrigger>
         <AccordionContent>{content}</AccordionContent>
@@ -158,7 +158,7 @@ export const WithBadge: Story = {
 
 export const Multiple: Story = {
   render: () => (
-    <Accordion multiple defaultValue={["1", "3"]} className="w-[750px]">
+    <Accordion multiple defaultValue={["1", "3"]} className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger>First accordion</AccordionTrigger>
         <AccordionContent>{content}</AccordionContent>
@@ -177,7 +177,7 @@ export const Multiple: Story = {
 
 export const NestedWithIcons: Story = {
   render: () => (
-    <Accordion type="nested" className="w-[750px]">
+    <Accordion type="nested" className="w-full max-w-[750px]">
       <AccordionItem value="1">
         <AccordionTrigger leadingIcon={<PlusCircleIcon />} badge={2}>
           This is an accordion title

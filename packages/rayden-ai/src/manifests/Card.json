@@ -37,9 +37,8 @@
       "description": "Enable hover shadow effect with transition"
     }
   },
-  "subComponents": [
-    {
-      "name": "CardHeader",
+  "subComponents": {
+    "CardHeader": {
       "description": "Optional header area with title, subtitle, and actions slot",
       "props": {
         "title": {
@@ -61,8 +60,7 @@
         }
       }
     },
-    {
-      "name": "CardBody",
+    "CardBody": {
       "description": "Main content area with inherited padding",
       "props": {
         "noPadding": {
@@ -72,8 +70,7 @@
         }
       }
     },
-    {
-      "name": "CardFooter",
+    "CardFooter": {
       "description": "Optional footer area for actions",
       "props": {
         "align": {
@@ -89,8 +86,7 @@
         }
       }
     },
-    {
-      "name": "CardImage",
+    "CardImage": {
       "description": "Optional image/media section with aspect ratio control",
       "props": {
         "src": {
@@ -123,7 +119,7 @@
         }
       }
     }
-  ],
+  },
   "composition": {
     "requiredStructure": "Card > [CardImage?, CardHeader?, CardBody, CardFooter?]",
     "relatedComponents": ["MetricsCard", "Accordion", "Modal"]
@@ -153,8 +149,14 @@
       "clickable"
     ],
     "commonMistakes": [
-      { "mistake": "padding='lg'", "correction": "size='lg'" },
-      { "mistake": "elevation={2}", "correction": "shadow='md' or variant='elevated'" },
+      {
+        "mistake": "padding='lg'",
+        "correction": "size='lg'"
+      },
+      {
+        "mistake": "elevation={2}",
+        "correction": "shadow='md' or variant='elevated'"
+      },
       {
         "mistake": "<Card onClick={...}>",
         "correction": "Wrap Card content in a button/link, or use hoverable + cursor-pointer className"
@@ -163,7 +165,10 @@
         "mistake": "<Card header={...} footer={...}>",
         "correction": "Use CardHeader and CardFooter sub-components"
       },
-      { "mistake": "<Card image={...}>", "correction": "Use CardImage sub-component" }
+      {
+        "mistake": "<Card image={...}>",
+        "correction": "Use CardImage sub-component"
+      }
     ]
   },
   "examples": [

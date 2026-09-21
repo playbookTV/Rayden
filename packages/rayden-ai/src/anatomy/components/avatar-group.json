@@ -6,7 +6,6 @@
   "$relationships": {
     "depends_on": ["Avatar"]
   },
-
   "anatomy": {
     "root": {
       "type": "FRAME",
@@ -52,9 +51,8 @@
       "textAlignVertical": "CENTER"
     }
   },
-
   "sizes": {
-    "XS": {
+    "SM": {
       "avatar-item.width": 24,
       "avatar-item.height": 24,
       "avatar-stack.itemSpacing": -6,
@@ -62,32 +60,23 @@
       "overflow-indicator.height": 24,
       "overflow-text.fontSize": "{typography.fontSize.xxs}"
     },
-    "SM": {
+    "MD": {
       "avatar-item.width": 32,
       "avatar-item.height": 32,
-      "avatar-stack.itemSpacing": -8,
+      "avatar-stack.itemSpacing": -6,
       "overflow-indicator.width": 32,
       "overflow-indicator.height": 32,
-      "overflow-text.fontSize": "{typography.fontSize.xs}"
-    },
-    "MD": {
-      "avatar-item.width": 40,
-      "avatar-item.height": 40,
-      "avatar-stack.itemSpacing": -10,
-      "overflow-indicator.width": 40,
-      "overflow-indicator.height": 40,
       "overflow-text.fontSize": "{typography.fontSize.sm}"
     },
     "LG": {
-      "avatar-item.width": 48,
-      "avatar-item.height": 48,
-      "avatar-stack.itemSpacing": -12,
-      "overflow-indicator.width": 48,
-      "overflow-indicator.height": 48,
+      "avatar-item.width": 40,
+      "avatar-item.height": 40,
+      "avatar-stack.itemSpacing": -11,
+      "overflow-indicator.width": 40,
+      "overflow-indicator.height": 40,
       "overflow-text.fontSize": "{typography.fontSize.base}"
     }
   },
-
   "variants": {
     "Default": {
       "Default": {
@@ -95,18 +84,18 @@
       }
     }
   },
-
   "componentProperties": [
     {
       "name": "Size",
       "type": "VARIANT",
-      "values": ["XS", "SM", "MD", "LG"],
+      "values": ["SM", "MD", "LG"],
       "default": "MD"
     },
     {
       "name": "Max Visible",
       "type": "TEXT",
-      "default": "4"
+      "default": "",
+      "description": "No maximum by default; maps to the optional max prop."
     },
     {
       "name": "Total Count",
@@ -118,5 +107,8 @@
       "type": "BOOLEAN",
       "default": true
     }
+  ],
+  "implementationNotes": [
+    "Group sizes sm/md/lg map to Avatar sizes xs/sm/md. Overflow uses another initials Avatar; overlap and typography follow Avatar.tsx."
   ]
 }

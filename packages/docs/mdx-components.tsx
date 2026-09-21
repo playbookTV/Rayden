@@ -1,5 +1,9 @@
 import { useMDXComponents as getDocsMDXComponents } from "nextra-theme-docs";
+import { ProductExample } from "./components/ProductExample";
 import { Preview } from "./components/Preview";
+import { AgentGuidance } from "./components/AgentGuidance";
+import { RegistryGuidance } from "./components/RegistryGuidance";
+import { MotionPilot } from "./components/MotionPilot";
 import {
   AccordionDemo,
   AccordionMultipleDemo,
@@ -22,7 +26,10 @@ import {
   RecentTransactionsBlockDemo,
   TabsDemo,
   TabsVariantsDemo,
-} from "./components/demos";
+  MetricsCardCtaDemo,
+  ActivityItemLinkDemo,
+  AlertActionDemo,
+} from "./components/demos-lazy";
 import {
   Accordion,
   AccordionContent,
@@ -100,6 +107,10 @@ export function useMDXComponents(components?: any) {
     ...getDocsMDXComponents(),
     // Preview component
     Preview,
+    AgentGuidance,
+    RegistryGuidance,
+    MotionPilot,
+    ProductExample,
     // UI Components (alphabetically ordered)
     Accordion,
     AccordionContent,
@@ -171,6 +182,8 @@ export function useMDXComponents(components?: any) {
     Tooltip,
     // Interactive demos (alphabetically ordered)
     AccordionDemo,
+    ActivityItemLinkDemo,
+    AlertActionDemo,
     AccordionMultipleDemo,
     DropdownMenuDemo,
     EmptyStateBlockDemo,
@@ -181,6 +194,7 @@ export function useMDXComponents(components?: any) {
     FileUploadRestrictedDemo,
     LoginBlockDemo,
     LoginBlockStandardDemo,
+    MetricsCardCtaDemo,
     ModalDemo,
     ModalSizesDemo,
     NotificationsBlockDemo,

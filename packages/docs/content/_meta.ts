@@ -5,4 +5,5 @@ export default {
   blocks: "Blocks",
   "design-tokens": "Design Tokens",
   "ai-integration": "AI Integration",
+  motion: "Motion Pilot",
 };

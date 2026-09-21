@@ -106,13 +106,13 @@ import { Select, SelectOption } from "@raydenui/ui";
 
 <Preview>
   <Select label="Status" placeholder="Select status">
-    <SelectOption value="active" status="success">
+    <SelectOption value="active" statusColor="success">
       Active
     </SelectOption>
-    <SelectOption value="pending" status="warning">
+    <SelectOption value="pending" statusColor="warning">
       Pending
     </SelectOption>
-    <SelectOption value="inactive" status="error">
+    <SelectOption value="inactive" statusColor="error">
       Inactive
     </SelectOption>
   </Select>
@@ -120,13 +120,13 @@ import { Select, SelectOption } from "@raydenui/ui";
 
 ```tsx
 <Select label="Status" placeholder="Select status">
-  <SelectOption value="active" status="success">
+  <SelectOption value="active" statusColor="success">
     Active
   </SelectOption>
-  <SelectOption value="pending" status="warning">
+  <SelectOption value="pending" statusColor="warning">
     Pending
   </SelectOption>
-  <SelectOption value="inactive" status="error">
+  <SelectOption value="inactive" statusColor="error">
     Inactive
   </SelectOption>
 </Select>
@@ -137,7 +137,7 @@ import { Select, SelectOption } from "@raydenui/ui";
 ```tsx
 const [value, setValue] = useState("");
 
-<Select label="Category" value={value} onChange={setValue}>
+<Select label="Category" value={value} onValueChange={setValue}>
   <SelectOption value="tech">Technology</SelectOption>
   <SelectOption value="design">Design</SelectOption>
   <SelectOption value="business">Business</SelectOption>

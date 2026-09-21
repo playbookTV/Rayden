@@ -25,7 +25,7 @@ import { SearchableTableBlock } from "@raydenui/ui/blocks";
     { key: "price", label: "Price", sortable: true },
     { key: "stock", label: "Stock" },
   ]}
-  data={products}
+  rows={products}
   onSearch={(query) => searchProducts(query)}
   onSort={(key, direction) => sortProducts(key, direction)}
 />
@@ -42,21 +42,10 @@ import { SearchableTableBlock } from "@raydenui/ui/blocks";
     { key: "status", label: "Status" },
     { key: "total", label: "Total", sortable: true },
   ]}
-  data={orders}
+  rows={orders}
   onSearch={(query) => searchOrders(query)}
-  filters={[
-    {
-      key: "status",
-      label: "Status",
-      options: ["Pending", "Processing", "Shipped", "Delivered"],
-    },
-    {
-      key: "date",
-      label: "Date Range",
-      options: ["Today", "This Week", "This Month", "All Time"],
-    },
-  ]}
-  onFilterChange={(filters) => applyFilters(filters)}
+  showFilter
+  onFilter={() => openFilterPanel()}
 />
 ```
 
@@ -75,12 +64,12 @@ import { SearchableTableBlock } from "@raydenui/ui/blocks";
       render: (row) => (
         <div className="flex gap-2">
           <Button size="sm" variant="text">Edit</Button>
-          <Button size="sm" variant="text" destructive>Delete</Button>
+          <Button size="sm" variant="text" variant="destructive">Delete</Button>
         </div>
       ),
     },
   ]}
-  data={users}
+  rows={users}
   onSearch={(query) => searchUsers(query)}
 />
 ```
@@ -93,13 +82,11 @@ const [page, setPage] = useState(1);
 <SearchableTableBlock
   title="Inventory"
   columns={columns}
-  data={paginatedData}
+  rows={paginatedData}
   onSearch={(query) => searchInventory(query)}
-  pagination={{
-    currentPage: page,
-    totalPages: totalPages,
-    onPageChange: setPage,
-  }}
+  page={page}
+  totalPages={totalPages}
+  onPageChange={setPage}
 />
 ```
 

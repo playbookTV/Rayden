@@ -7,7 +7,7 @@
  * Architecture:
  * - tokens.json is the ONLY hand-edited source file
  * - tokens.dtcg.json is ALWAYS generated (via scripts/generate-dtcg.ts)
- * - Use getDTCGTokens() for W3C DTCG format (Figma, Style Dictionary, etc.)
+ * - Use the tokens/dtcg JSON subpath for the generated design-token format
  */
 
 import tokensData from "./tokens.json";
@@ -25,8 +25,8 @@ export const breakpoints = tokensData.breakpoints;
 
 // Token types
 export type ColorScale = keyof typeof colors;
-export type SpacingScale = keyof typeof spacing;
-export type TypographyScale = keyof typeof typography;
+export type SpacingScale = keyof typeof spacing.scale;
+export type TypographyScale = keyof typeof typography.presets;
 export type ShadowType = keyof typeof shadows;
 
 // Helper to get a color value
@@ -49,7 +49,9 @@ export function getColorClass(scale: string, shade: string | number): string | n
 
 // Helper to get spacing value
 export function getSpacing(size: string | number): { px: string; rem: string } | null {
-  const spacingData = (spacing as Record<string, { px?: string; rem?: string }>)[String(size)];
+  const spacingData = (spacing.scale as Record<string, { px?: string; rem?: string }>)[
+    String(size)
+  ];
   if (!spacingData || typeof spacingData !== "object") return null;
   if (!("px" in spacingData) || !("rem" in spacingData)) return null;
   return { px: spacingData.px!, rem: spacingData.rem! };
@@ -57,7 +59,7 @@ export function getSpacing(size: string | number): { px: string; rem: string } |
 
 // Helper to get typography preset
 export function getTypography(preset: string): Record<string, unknown> | null {
-  const typoData = (typography as Record<string, Record<string, unknown>>)[preset];
+  const typoData = (typography.presets as Record<string, Record<string, unknown>>)[preset];
   if (!typoData || typeof typoData !== "object") return null;
   return typoData;
 }
@@ -88,26 +90,28 @@ export function getDTCGTokensPath(): string {
  * Resolve a DTCG token alias like "{color.primary.500}" to its value.
  * This is useful for Figma agents that need to resolve token references.
  */
-export function resolveDTCGAlias(
-  alias: string,
-  dtcgTokens: Record<string, unknown>
-): string | null {
-  // Remove curly braces: "{color.primary.500}" -> "color.primary.500"
-  const path = alias.replace(/^\{/, "").replace(/\}$/, "");
-  const parts = path.split(".");
-
-  let current: unknown = dtcgTokens;
-  for (const part of parts) {
-    if (typeof current !== "object" || current === null) return null;
-    current = (current as Record<string, unknown>)[part];
+export function resolveDTCGAlias(alias: string, dtcgTokens: Record<string, unknown>): unknown {
+  const seen = new Set<string>();
+  function find(object: unknown, path: string): unknown {
+    if (!object || typeof object !== "object") return undefined;
+    const record = object as Record<string, unknown>;
+    if (Object.prototype.hasOwnProperty.call(record, path)) return record[path];
+    for (const key of Object.keys(record))
+      if (path.startsWith(key + ".")) {
+        const found = find(record[key], path.slice(key.length + 1));
+        if (found !== undefined) return found;
+      }
+    return undefined;
   }
-
-  // If we found a token, return its $value
-  if (typeof current === "object" && current !== null && "$value" in current) {
-    return (current as { $value: unknown }).$value as string;
+  function resolve(reference: string): unknown {
+    if (seen.has(reference)) return null;
+    seen.add(reference);
+    const found = find(dtcgTokens, reference.replace(/^\{/, "").replace(/\}$/, ""));
+    if (!found || typeof found !== "object" || !("$value" in found)) return null;
+    const value = (found as { $value: unknown }).$value;
+    return typeof value === "string" && /^\{.+\}$/.test(value) ? resolve(value) : value;
   }
-
-  return null;
+  return resolve(alias);
 }
 
 // Generate CSS custom properties for all tokens
@@ -117,6 +121,10 @@ export function generateCSSVariables(): string {
   // Colors
   for (const [scale, shades] of Object.entries(colors)) {
     if (typeof shades !== "object" || shades === null) continue;
+    if ("hex" in shades && typeof shades.hex === "string") {
+      lines.push(`  --color-${scale}: ${shades.hex};`);
+      continue;
+    }
     for (const [shade, data] of Object.entries(shades)) {
       if (typeof data === "object" && data !== null && "hex" in data) {
         lines.push(`  --color-${scale}-${shade}: ${(data as { hex: string }).hex};`);
@@ -125,14 +133,14 @@ export function generateCSSVariables(): string {
   }
 
   // Spacing
-  for (const [size, data] of Object.entries(spacing)) {
+  for (const [size, data] of Object.entries(spacing.scale)) {
     if (typeof data === "object" && data !== null && "px" in data) {
-      lines.push(`  --spacing-${size}: ${(data as { px: string }).px};`);
+      lines.push(`  --spacing-${size.replace(/\./g, "-")}: ${(data as { px: string }).px};`);
     }
   }
 
   // Typography
-  for (const [preset, data] of Object.entries(typography)) {
+  for (const [preset, data] of Object.entries(typography.presets)) {
     if (typeof data === "object" && data !== null && "size" in data) {
       const d = data as unknown as { size: string; lineHeight: number; fontWeight: number };
       lines.push(`  --font-size-${preset}: ${d.size};`);
@@ -143,7 +151,7 @@ export function generateCSSVariables(): string {
 
   // Border radius
   for (const [size, value] of Object.entries(borderRadius)) {
-    lines.push(`  --radius-${size}: ${value};`);
+    lines.push(`  --radius-${size}: ${value.value};`);
   }
 
   lines.push("}");

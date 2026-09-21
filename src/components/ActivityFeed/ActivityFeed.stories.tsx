@@ -15,7 +15,7 @@ type Story = StoryObj<typeof ActivityItem>;
 /* ─── Single Item ─────────────────────────────────────────────────── */
 export const SingleItem: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
@@ -34,7 +34,7 @@ export const SingleItem: Story = {
 /* ─── With File Content ───────────────────────────────────────────── */
 export const WithFileContent: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
@@ -62,7 +62,7 @@ export const WithFileContent: Story = {
 /* ─── With Comment Content ────────────────────────────────────────── */
 export const WithCommentContent: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
@@ -97,7 +97,7 @@ export const WithCommentContent: Story = {
 /* ─── With CTA Content ────────────────────────────────────────────── */
 export const WithCTAContent: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="SA" size="sm" />}
         text={
@@ -122,7 +122,7 @@ export const WithCTAContent: Story = {
 /* ─── Unread State ────────────────────────────────────────────────── */
 export const UnreadState: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
@@ -142,7 +142,7 @@ export const UnreadState: Story = {
 /* ─── With Badge ──────────────────────────────────────────────────── */
 export const WithBadge: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
@@ -163,7 +163,7 @@ export const WithBadge: Story = {
 /* ─── Timeline ────────────────────────────────────────────────────── */
 export const Timeline: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
@@ -259,7 +259,7 @@ export const Timeline: Story = {
 /* ─── Content Styles ──────────────────────────────────────────────── */
 export const ContentStyles: Story = {
   render: () => (
-    <div className="w-[480px] space-y-6 p-6">
+    <div className="w-full max-w-[480px] space-y-6 p-6">
       <div>
         <p className="text-xs font-medium text-grey-400 mb-2">Card (default)</p>
         <ActivityContent

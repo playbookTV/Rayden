@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, Input, Select, Divider, Breadcrumb } from "@raydenui/ui";
+import { Breadcrumb, Button, Divider, Input, Select, SelectOption } from "@raydenui/ui";
 import { getCartItems, getCartTotal, clearCart, subscribeToCart } from "@/data/cart";
 import { formatPrice } from "@/data/products";
 
@@ -96,11 +96,10 @@ export default function Checkout() {
                 />
                 <Input placeholder="City" required />
                 <div className="grid grid-cols-2 gap-4">
-                  <Select required>
-                    <option value="">State</option>
-                    <option value="CA">California</option>
-                    <option value="NY">New York</option>
-                    <option value="TX">Texas</option>
+                  <Select placeholder="State">
+                    <SelectOption value="CA">California</SelectOption>
+                    <SelectOption value="NY">New York</SelectOption>
+                    <SelectOption value="TX">Texas</SelectOption>
                   </Select>
                   <Input placeholder="ZIP Code" required />
                 </div>

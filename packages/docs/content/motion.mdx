@@ -1,0 +1,52 @@
+---
+title: Motion Pilot
+description: Independent motion presets with reduced-motion support
+---
+
+# Motion with a purpose
+
+Rayden’s motion pilot provides Calm, Snappy, Playful, and Reduced presets. It is independent of Citrionus’s visual identity. Tabs and Modal keep their existing behavior until you opt in.
+
+This is an unreleased workspace feature. Use the locally built package; the existing published version number alone does not guarantee the motion entry point is available.
+
+<MotionPilot />
+
+<AgentGuidance component="Pressable" />
+
+## Opt in
+
+Import the normal Rayden stylesheet once, then scope motion with a provider:
+
+```tsx
+import "@raydenui/ui/styles.css";
+import { Tab, Tabs } from "@raydenui/ui";
+import { MotionProvider } from "@raydenui/ui/motion";
+
+<MotionProvider preset="calm">
+  <Tabs motion defaultValue="overview">
+    <Tab value="overview">Overview</Tab>
+    <Tab value="activity">Activity</Tab>
+  </Tabs>
+</MotionProvider>;
+```
+
+`motion={true}` uses the surrounding provider. A preset such as `motion="snappy"` chooses a local preference; `motion={false}` disables motion. Nested providers inherit values when no preset is supplied. React portals inherit their logical motion context without changing the document’s global theme.
+
+The operating system’s reduced-motion preference always constrains the selected preset. Server rendering starts conservatively with reduced motion, then adopts the browser’s preference. None of the primitives require an additional animation package.
+
+## Reusable behaviors
+
+| Export         | Use                                           | Boundary                                                                             |
+| -------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `Pressable`    | A native button with press feedback           | Keep its accessible name and standard button behavior                                |
+| `Reveal`       | Enter and exit non-interactive content        | Exiting content becomes inert; avoid hiding focused content without focus management |
+| `Collapse`     | Expand and collapse a disclosure region       | Provide a trigger with matching `aria-controls` and `aria-expanded`                  |
+| `SharedLayout` | Animate geometry changes for a stable element | Intended for local layout changes rather than arbitrary cross-page transitions       |
+
+The pilot also exports `motionPresets`, `motionRecipes`, and `getMotionRecipe`. Start with named recipes; use raw values only when a documented case needs them.
+
+## Interaction matters
+
+Tabs retain controlled state, disabled-tab handling, and keyboard selection. Modal retains native dialog behavior and focus management. Animation can be interrupted by another state change or a reduced-motion preference change.
+
+This pilot does not implement additional visual flavors, a spring editor, or Motion Studio. Those remain later roadmap work.

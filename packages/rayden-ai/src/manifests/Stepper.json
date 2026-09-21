@@ -29,9 +29,8 @@
       "description": "Indicator style inside the step circle"
     }
   },
-  "subComponents": [
-    {
-      "name": "LinearStepper",
+  "subComponents": {
+    "LinearStepper": {
       "description": "Simple linear progress bar showing step completion",
       "props": {
         "currentStep": {
@@ -51,8 +50,7 @@
         }
       }
     },
-    {
-      "name": "SegmentedStepper",
+    "SegmentedStepper": {
       "description": "Segmented progress bar with individual step segments",
       "props": {
         "currentStep": {
@@ -72,7 +70,7 @@
         }
       }
     }
-  ],
+  },
   "types": [
     {
       "name": "StepStatus",
@@ -81,10 +79,19 @@
     {
       "name": "StepItem",
       "properties": {
-        "title": { "type": "string", "required": true },
-        "description": { "type": "string" },
-        "status": { "type": "StepStatus" },
-        "icon": { "type": "ReactNode" }
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "StepStatus"
+        },
+        "icon": {
+          "type": "ReactNode"
+        }
       }
     }
   ],
@@ -110,7 +117,10 @@
       "StepIcon"
     ],
     "commonMistakes": [
-      { "mistake": "current={2}", "correction": "activeStep={2}" },
+      {
+        "mistake": "current={2}",
+        "correction": "activeStep={2}"
+      },
       {
         "mistake": "onChange",
         "correction": "Stepper is display-only; manage step state yourself"
@@ -123,7 +133,10 @@
         "mistake": "<Step><StepLabel>",
         "correction": "Use steps array prop with { title, description }"
       },
-      { "mistake": "LinearStepper step={2} of={5}", "correction": "currentStep={2} totalSteps={5}" }
+      {
+        "mistake": "LinearStepper step={2} of={5}",
+        "correction": "currentStep={2} totalSteps={5}"
+      }
     ]
   },
   "examples": [

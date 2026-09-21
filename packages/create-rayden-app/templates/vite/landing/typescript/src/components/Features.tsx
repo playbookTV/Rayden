@@ -25,7 +25,7 @@ const features = [
   {
     name: "Responsive Design",
     description: "Mobile-first approach ensuring your app looks great on all devices.",
-    icon: "monitor" as const,
+    icon: "devices" as const,
   },
   {
     name: "Easy Integration",

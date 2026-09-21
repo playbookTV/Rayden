@@ -25,27 +25,27 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 const colorStyles: Record<BadgeColor, Record<BadgeType, string>> = {
   orange: {
-    filled: "bg-primary-400 text-white",
+    filled: "bg-action-primary text-white",
     accent: "bg-primary-50 text-primary-700",
     outline: "border border-primary-700 text-primary-700",
   },
   blue: {
-    filled: "bg-secondary-400 text-white",
+    filled: "bg-action-info text-white",
     accent: "bg-secondary-50 text-secondary-700",
     outline: "border border-secondary-700 text-secondary-700",
   },
   success: {
-    filled: "bg-success-400 text-white",
+    filled: "bg-action-success text-white",
     accent: "bg-success-50 text-success-700",
     outline: "border border-success-700 text-success-700",
   },
   warning: {
     filled: "bg-warning-400 text-black",
-    accent: "bg-warning-50 text-warning-600",
-    outline: "border border-warning-600 text-warning-600",
+    accent: "bg-warning-50 text-warning-700",
+    outline: "border border-warning-700 text-warning-700",
   },
   error: {
-    filled: "bg-error-400 text-white",
+    filled: "bg-action-danger text-white",
     accent: "bg-error-50 text-error-700",
     outline: "border border-error-700 text-error-700",
   },
@@ -56,8 +56,8 @@ const colorStyles: Record<BadgeColor, Record<BadgeType, string>> = {
   },
   disabled: {
     filled: "bg-grey-300 text-grey-50",
-    accent: "bg-grey-100 text-grey-400",
-    outline: "border border-grey-400 text-grey-400",
+    accent: "bg-grey-100 text-grey-500",
+    outline: "border border-grey-400 text-grey-500",
   },
 };
 

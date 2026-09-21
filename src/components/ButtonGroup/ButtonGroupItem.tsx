@@ -6,25 +6,37 @@ import type { IconName } from "../Icon";
 export interface ButtonGroupItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leadingIcon?: ReactNode | IconName;
   trailingIcon?: ReactNode | IconName;
+  /** Selected state. Exposed as aria-pressed so it is not colour-only. */
   active?: boolean;
 }
 
 export const ButtonGroupItem = forwardRef<HTMLButtonElement, ButtonGroupItemProps>(
   (
-    { leadingIcon, trailingIcon, active = false, disabled = false, className, children, ...rest },
+    {
+      leadingIcon,
+      trailingIcon,
+      active = false,
+      disabled = false,
+      className,
+      children,
+      type = "button",
+      ...rest
+    },
     ref
   ) => {
     return (
       <button
         ref={ref}
+        type={type}
         disabled={disabled}
+        aria-pressed={active}
         className={cn(
           "inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors",
           "border-y border-r border-grey-300",
           "first:rounded-l-lg first:border-l",
           "last:rounded-r-lg",
           active
-            ? "bg-primary-400 text-white border-primary-400"
+            ? "bg-action-primary text-white border-action-primary"
             : disabled
               ? "bg-white dark:bg-grey-50 text-grey-300 cursor-not-allowed"
               : "bg-white dark:bg-grey-50 text-grey-600 hover:bg-grey-100 cursor-pointer",

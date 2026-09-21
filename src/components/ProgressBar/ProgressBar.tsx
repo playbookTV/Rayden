@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from "react";
+import { useId, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 
 export type ProgressBarSize = "sm" | "md" | "lg";
@@ -40,9 +40,27 @@ export function ProgressBar({
   showPercentage = true,
   percentagePosition = "bottom",
   className,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-describedby": ariaDescribedBy,
   ...rest
 }: ProgressBarProps) {
   const clamped = clampValue(value);
+  const generatedId = useId();
+  const labelId = label ? `${generatedId}-label` : undefined;
+  // Naming and value semantics belong on the same element as the progressbar
+  // role. Spreading them onto the wrapper left every bar unnamed, and the
+  // visible label had no id to point at.
+  const namedBy = ariaLabelledBy ?? labelId;
+  const progressAria = {
+    role: "progressbar",
+    "aria-valuenow": clamped,
+    "aria-valuemin": 0,
+    "aria-valuemax": 100,
+    "aria-labelledby": namedBy,
+    "aria-label": namedBy ? undefined : ariaLabel,
+    "aria-describedby": ariaDescribedBy,
+  } as const;
   const filledSegments = Math.round((clamped / 100) * SEGMENT_COUNT);
   const metadataItems = Array.isArray(metadata) ? metadata : metadata ? [metadata] : [];
 
@@ -51,7 +69,9 @@ export function ProgressBar({
       {(label || (showPercentage && percentagePosition === "top")) && (
         <div className="flex items-center gap-2">
           {label && (
-            <span className="flex-1 text-sm font-medium text-grey-900 leading-[1.45]">{label}</span>
+            <span id={labelId} className="flex-1 text-sm font-medium text-grey-900 leading-[1.45]">
+              {label}
+            </span>
           )}
           {showPercentage && percentagePosition === "top" && (
             <span className="text-sm font-semibold text-grey-500 leading-[1.45]">
@@ -62,13 +82,7 @@ export function ProgressBar({
       )}
 
       {type === "basic" ? (
-        <div
-          className={cn("w-full rounded-full bg-grey-200", trackHeight[size])}
-          role="progressbar"
-          aria-valuenow={clamped}
-          aria-valuemin={0}
-          aria-valuemax={100}
-        >
+        <div className={cn("w-full rounded-full bg-grey-200", trackHeight[size])} {...progressAria}>
           <div
             className={cn(
               "rounded-full bg-primary-400 transition-all duration-300",
@@ -78,13 +92,7 @@ export function ProgressBar({
           />
         </div>
       ) : (
-        <div
-          className={cn("flex gap-0.5 w-full", trackHeight[size])}
-          role="progressbar"
-          aria-valuenow={clamped}
-          aria-valuemin={0}
-          aria-valuemax={100}
-        >
+        <div className={cn("flex gap-0.5 w-full", trackHeight[size])} {...progressAria}>
           {Array.from({ length: SEGMENT_COUNT }, (_, i) => (
             <div
               key={i}
@@ -103,7 +111,7 @@ export function ProgressBar({
             <div className="flex flex-1 items-center gap-1">
               {metadataItems.map((item, i) => (
                 <span key={i} className="contents">
-                  {i > 0 && <span className="text-xs text-grey-400 leading-[1.45]">•</span>}
+                  {i > 0 && <span className="text-xs text-grey-500 leading-[1.45]">•</span>}
                   <span className="text-sm font-medium text-grey-500 leading-[1.45]">{item}</span>
                 </span>
               ))}

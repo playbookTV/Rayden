@@ -12,6 +12,7 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  optimizeDeps: { include: ["@storybook/addon-a11y/preview"] },
   test: {
     coverage: {
       provider: "v8",
@@ -32,7 +33,11 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
-            provider: playwright({}),
+            provider: playwright({
+              launchOptions: process.env.PLAYWRIGHT_EXECUTABLE_PATH
+                ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH }
+                : undefined,
+            }),
             instances: [{ browser: "chromium" }],
           },
           setupFiles: [".storybook/vitest.setup.ts"],

@@ -33,7 +33,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
           "inline-flex items-center gap-1 rounded-md border px-2 py-1 text-sm font-medium transition-colors",
           disabled
             ? "border-grey-200 bg-grey-100 text-grey-300 cursor-not-allowed"
-            : "border-grey-300 bg-white dark:bg-grey-50 text-grey-700 cursor-default focus-within:bg-[#FBF1F1] focus-within:border-primary-600",
+            : "border-grey-300 bg-white dark:bg-grey-50 text-grey-700 cursor-default focus-within:bg-primary-50 focus-within:border-primary-600",
           className
         )}
         {...rest}
@@ -46,7 +46,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
             onClick={onClose}
             disabled={disabled}
             className={cn(
-              "shrink-0 size-4 inline-flex items-center justify-center rounded-sm",
+              "shrink-0 size-4 box-content p-1 -m-1 inline-flex items-center justify-center rounded-sm",
               disabled
                 ? "cursor-not-allowed text-grey-300"
                 : "cursor-pointer text-grey-500 hover:text-grey-700"
@@ -62,7 +62,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
             onClick={onDropdown}
             disabled={disabled}
             className={cn(
-              "shrink-0 size-4 inline-flex items-center justify-center",
+              "shrink-0 size-4 box-content p-1 -m-1 inline-flex items-center justify-center",
               disabled
                 ? "cursor-not-allowed text-grey-300"
                 : "cursor-pointer text-grey-500 hover:text-grey-700"

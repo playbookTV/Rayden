@@ -71,7 +71,7 @@ export const SelectOption = forwardRef<HTMLButtonElement, SelectOptionProps>(
           "flex w-full items-center px-4 py-2 text-left text-body-sm outline-none transition-colors",
           statusColor ? "gap-2" : "gap-3",
           disabled
-            ? "bg-grey-100 text-grey-400 cursor-not-allowed"
+            ? "bg-grey-100 text-grey-500 cursor-not-allowed"
             : "text-grey-900 hover:bg-grey-50 focus:bg-grey-100 focus:font-medium",
           className
         )}

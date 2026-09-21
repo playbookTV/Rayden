@@ -115,17 +115,17 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
               {size && (
                 <>
                   <span className="size-0.5 rounded-full bg-grey-400" />
-                  <span className="text-xs text-grey-400 whitespace-nowrap">{size}</span>
+                  <span className="text-xs text-grey-500 whitespace-nowrap">{size}</span>
                 </>
               )}
             </div>
             {(fileType || date) && (
               <div className="flex items-center gap-1">
                 {fileType && (
-                  <span className="text-xs text-grey-400 whitespace-nowrap">{fileType}</span>
+                  <span className="text-xs text-grey-500 whitespace-nowrap">{fileType}</span>
                 )}
                 {fileType && date && <span className="size-0.5 rounded-full bg-grey-400" />}
-                {date && <span className="text-xs text-grey-400 whitespace-nowrap">{date}</span>}
+                {date && <span className="text-xs text-grey-500 whitespace-nowrap">{date}</span>}
               </div>
             )}
           </div>
@@ -153,7 +153,7 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
                   </span>
                 )}
                 {timestamp && (
-                  <span className="text-xs text-grey-400 whitespace-nowrap">・{timestamp}</span>
+                  <span className="text-xs text-grey-500 whitespace-nowrap">・{timestamp}</span>
                 )}
               </div>
             </div>
@@ -205,7 +205,7 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
               )}
               {replies != null && (
                 <div className="flex items-center gap-2 rounded-lg border border-grey-100 bg-white dark:bg-grey-50 px-2 py-1 h-8">
-                  <Icon name="message" size="sm" className="text-grey-400" />
+                  <Icon name="message" size="sm" className="text-grey-500" />
                   <span className="text-xs text-grey-700">
                     <span className="font-semibold">{replies} </span>
                     Replies
@@ -257,7 +257,7 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
             <button
               type="button"
               onClick={primaryAction.onClick}
-              className="inline-flex items-center justify-center rounded-lg bg-primary-500 px-4 py-2 text-body-sm font-semibold text-white"
+              className="inline-flex items-center justify-center rounded-lg bg-action-primary px-4 py-2 text-body-sm font-semibold text-white"
             >
               {primaryAction.label}
             </button>

@@ -5,7 +5,7 @@ description: Dashboard metric cards with 6 layout variations
 
 # MetricsCard
 
-Display key metrics and KPIs in dashboard cards with multiple layout options.
+Display key metrics and KPIs in dashboard cards with six layout variations.
 
 ## Import
 
@@ -17,171 +17,161 @@ import { MetricsCard } from "@raydenui/ui";
 
 ### Basic
 
+Every card needs a `label` and a `value`. `variation` selects the layout.
+
 <Preview>
   <MetricsCard
-    title="Total Revenue"
-    value="$45,231.89"
-    change="+20.1%"
-    changeType="positive"
+    variation="1"
+    label="Total Solar Sales"
+    value="$45,823"
+    secondaryText="Jun 12th, 2023"
+    statusBadge={{ label: "Paid", variant: "success" }}
   />
 </Preview>
 
 ```tsx
 <MetricsCard
-  title="Total Revenue"
-  value="$45,231.89"
-  change="+20.1%"
-  changeType="positive"
+  variation="1"
+  label="Total Solar Sales"
+  value="$45,823"
+  secondaryText="Jun 12th, 2023"
+  statusBadge={{ label: "Paid", variant: "success" }}
 />
 ```
 
-### Layout Variants
+### Layout variations
+
+Each variation arranges the same data differently:
+
+| Variation | Layout |
+|-----------|--------|
+| `"1"` | Horizontal — label, value and CTA on the left; secondary text and status badge on the right |
+| `"2"` | Vertical — icon and label, then value, then badge and description |
+| `"3"` | Vertical reversed — icon and label, then badge and description, then value |
+| `"4"` | Horizontal body with a large tinted icon |
+| `"5"` | Compact horizontal — label, value and description left; badge and CTA right |
+| `"6"` | Centered vertical |
 
 <Preview vertical>
   <MetricsCard
-    variant="default"
-    title="Users"
-    value="2,350"
-    change="+12%"
-    changeType="positive"
+    variation="2"
+    label="Total Solar Sales"
+    value="45,823"
+    icon="sun"
+    trendBadge={{ label: "10%", trend: "up" }}
+    description="Compared to last month"
   />
   <MetricsCard
-    variant="stacked"
-    title="Orders"
-    value="1,234"
-    change="-5%"
-    changeType="negative"
-  />
-  <MetricsCard
-    variant="compact"
-    title="Conversion"
-    value="3.2%"
-  />
-</Preview>
-
-```tsx
-// Default - horizontal layout
-<MetricsCard
-  variant="default"
-  title="Users"
-  value="2,350"
-  change="+12%"
-  changeType="positive"
-/>
-
-// Stacked - vertical layout
-<MetricsCard
-  variant="stacked"
-  title="Orders"
-  value="1,234"
-  change="-5%"
-  changeType="negative"
-/>
-
-// Compact - minimal spacing
-<MetricsCard
-  variant="compact"
-  title="Conversion"
-  value="3.2%"
-/>
-```
-
-### With Icon
-
-<Preview>
-  <MetricsCard
-    variant="with-icon"
-    title="Revenue"
-    value="$12,345"
-    icon={<Icon name="currency-dollar" />}
-  />
-</Preview>
-
-```tsx
-<MetricsCard
-  variant="with-icon"
-  title="Revenue"
-  value="$12,345"
-  icon={<Icon name="currency-dollar" />}
-/>
-```
-
-### With Progress
-
-<Preview>
-  <MetricsCard
-    variant="with-progress"
-    title="Storage"
-    value="75%"
-    progress={75}
-  />
-</Preview>
-
-```tsx
-<MetricsCard
-  variant="with-progress"
-  title="Storage"
-  value="75%"
-  progress={75}
-/>
-```
-
-### With Trend
-
-<Preview>
-  <MetricsCard
-    title="Active Users"
+    variation="5"
+    label="Active Users"
     value="12,543"
-    change="+8.2%"
-    changeType="positive"
-    trend="up"
-  />
-  <MetricsCard
-    title="Bounce Rate"
-    value="32.1%"
-    change="+2.4%"
-    changeType="negative"
-    trend="up"
+    trendBadge={{ label: "8.2%", trend: "up" }}
+    description="Compared to last month"
   />
 </Preview>
 
 ```tsx
 <MetricsCard
-  title="Active Users"
-  value="12,543"
-  change="+8.2%"
-  changeType="positive"
-  trend="up"
+  variation="2"
+  label="Total Solar Sales"
+  value="45,823"
+  icon="sun"
+  trendBadge={{ label: "10%", trend: "up" }}
+  description="Compared to last month"
 />
 
 <MetricsCard
-  title="Bounce Rate"
-  value="32.1%"
-  change="+2.4%"
-  changeType="negative"
-  trend="up"
+  variation="5"
+  label="Active Users"
+  value="12,543"
+  trendBadge={{ label: "8.2%", trend: "up" }}
+  description="Compared to last month"
 />
 ```
 
-### With Subtitle
+### With an icon
+
+`icon` accepts an icon name or a node. It renders in variations 2, 3, 4 and 6.
 
 <Preview>
   <MetricsCard
-    title="Total Sales"
-    subtitle="Last 30 days"
-    value="$98,765"
-    change="+15.3%"
-    changeType="positive"
+    variation="4"
+    label="Revenue"
+    value="$12,345"
+    icon="dollar"
+    trendBadge={{ label: "12%", trend: "up" }}
+    description="Compared to last month"
   />
 </Preview>
 
 ```tsx
 <MetricsCard
-  title="Total Sales"
-  subtitle="Last 30 days"
-  value="$98,765"
-  change="+15.3%"
-  changeType="positive"
+  variation="4"
+  label="Revenue"
+  value="$12,345"
+  icon="dollar"
+  trendBadge={{ label: "12%", trend: "up" }}
+  description="Compared to last month"
+/>
+```
+
+### Trend direction
+
+`trendBadge.trend` is `"up"` or `"down"` and sets the arrow and colour.
+
+<Preview vertical>
+  <MetricsCard
+    variation="6"
+    label="Active Users"
+    value="12,543"
+    icon="users"
+    trendBadge={{ label: "8.2%", trend: "up" }}
+    description="Compared to last month"
+  />
+  <MetricsCard
+    variation="6"
+    label="Bounce Rate"
+    value="32.1%"
+    icon="chart-down"
+    trendBadge={{ label: "2.4%", trend: "down" }}
+    description="Compared to last month"
+  />
+</Preview>
+
+```tsx
+<MetricsCard
+  variation="6"
+  label="Active Users"
+  value="12,543"
+  icon="users"
+  trendBadge={{ label: "8.2%", trend: "up" }}
+  description="Compared to last month"
+/>
+
+<MetricsCard
+  variation="6"
+  label="Bounce Rate"
+  value="32.1%"
+  icon="chart-down"
+  trendBadge={{ label: "2.4%", trend: "down" }}
+  description="Compared to last month"
+/>
+```
+
+### With a call to action
+
+<Preview>
+  <MetricsCardCtaDemo />
+</Preview>
+
+```tsx
+<MetricsCard
+  variation="1"
+  label="Total Solar Sales"
+  value="$45,823"
+  secondaryText="Jun 12th, 2023"
+  statusBadge={{ label: "Paid", variant: "success" }}
+  cta={{ label: "View Transactions", onClick: () => {} }}
 />
 ```
 
@@ -189,20 +179,19 @@ import { MetricsCard } from "@raydenui/ui";
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"default" \| "stacked" \| "compact" \| "with-icon" \| "with-chart" \| "with-progress"` | `"default"` | Layout variant |
-| `title` | `string` | — | Metric title (required) |
-| `subtitle` | `string` | — | Subtitle text |
+| `variation` | `"1" \| "2" \| "3" \| "4" \| "5" \| "6"` | `"1"` | Layout variation |
+| `label` | `string` | — | Metric label (required) |
 | `value` | `string \| number` | — | Metric value (required) |
-| `change` | `string` | — | Change percentage |
-| `changeType` | `"positive" \| "negative" \| "neutral"` | — | Change color |
-| `trend` | `"up" \| "down"` | — | Trend arrow direction |
-| `icon` | `ReactNode` | — | Icon (with-icon variant) |
-| `chart` | `ReactNode` | — | Chart component (with-chart variant) |
-| `progress` | `number` | — | Progress value (with-progress variant) |
+| `icon` | `ReactNode \| IconName` | — | Icon (variations 2, 3, 4, 6) |
+| `trendBadge` | `{ label: string; trend?: "up" \| "down" }` | — | Trend badge (variations 2–6) |
+| `statusBadge` | `{ label: string; variant?: "success" \| "error" \| "warning" \| "info" }` | — | Status badge (variation 1) |
+| `description` | `string` | — | Description text |
+| `secondaryText` | `string` | — | Secondary text, shown on the right in variation 1 |
+| `cta` | `{ label: string; onClick: () => void; icon?: ReactNode \| IconName }` | — | Call-to-action link |
 | `className` | `string` | — | Additional CSS classes |
 
 ## Accessibility
 
-- Uses semantic heading for title
-- Change type announced to screen readers
-- Progress has proper ARIA attributes
+- The label and value are rendered as text content, so screen readers announce both.
+- `trendBadge` and `statusBadge` render their `label` as text rather than relying on colour alone.
+- Pass a `cta` rather than wrapping the card in a click handler, so the action is reachable by keyboard.

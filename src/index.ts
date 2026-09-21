@@ -67,9 +67,8 @@ export type {
   CardImagePosition,
 } from "./components/Card";
 
-export { RaydenChart } from "./components/Chart";
-export type { RaydenChartProps, ChartType } from "./components/Chart";
-export { chartColors, chartFont, hexToRgba, createGradientFill } from "./components/Chart";
+// RaydenChart and the chart helpers are published from "@raydenui/ui/chart".
+// Keeping them out of the root keeps the optional chart.js peer optional.
 
 export { Chip } from "./components/Chip";
 export type { ChipProps } from "./components/Chip";
@@ -232,6 +231,8 @@ export type {
 } from "./components/Tooltip";
 
 // Utilities
+export { useCollisionAwareSide } from "./hooks/useCollisionAwareSide";
+export type { AnchorSide } from "./hooks/useCollisionAwareSide";
 export { cn } from "./utils/cn";
 
 // Theme

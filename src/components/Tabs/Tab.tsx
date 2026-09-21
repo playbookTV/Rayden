@@ -39,7 +39,8 @@ const segmentedPadding = {
 } as const;
 
 export function Tab({ value, icon, badge, disabled = false, children, className }: TabProps) {
-  const { activeValue, onSelect, variant, size, orientation, registerTab } = useTabsContext();
+  const { activeValue, onSelect, variant, size, orientation, registerTab, motion } =
+    useTabsContext();
   const isActive = activeValue === value;
   const buttonRef = useRef<HTMLButtonElement>(null);
   const isVertical = orientation === "vertical";
@@ -62,12 +63,14 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
           "inline-flex items-center justify-center px-1.5 rounded-full font-medium tracking-tight",
           badgeText[size],
           variant === "segmented" && isActive
-            ? "bg-primary-500 text-white"
+            ? "bg-action-primary text-white"
             : isActive
-              ? "bg-primary-50 text-primary-500 dark:bg-primary-900 dark:text-primary-400"
+              ? motion
+                ? "text-action-primary-text"
+                : "bg-primary-50 text-action-primary-text"
               : disabled
-                ? "bg-grey-200 text-grey-400 dark:bg-grey-700 dark:text-grey-500"
-                : "bg-grey-100 text-grey-500 dark:bg-grey-800 dark:text-grey-400"
+                ? "bg-grey-200 text-grey-500"
+                : "bg-grey-100 text-grey-600"
         )}
       >
         {badge}
@@ -79,20 +82,24 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
     return (
       <button
         ref={buttonRef}
+        type="button"
         role="tab"
         aria-selected={isActive}
         tabIndex={isActive ? 0 : -1}
         disabled={disabled}
         onClick={() => !disabled && onSelect(value)}
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-md overflow-hidden transition-colors cursor-pointer",
+          "inline-flex items-center gap-1.5 rounded-md overflow-hidden transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text",
+          motion && "relative z-[1]",
           segmentedPadding[size],
           textSize[size],
           isActive
-            ? "bg-primary-50 text-grey-900 dark:bg-primary-900 dark:text-grey-100"
+            ? motion
+              ? "text-grey-900"
+              : "bg-primary-50 text-grey-900"
             : disabled
-              ? "text-grey-300 cursor-not-allowed dark:text-grey-600"
-              : "text-grey-500 hover:bg-grey-50 dark:text-grey-400 dark:hover:bg-grey-800",
+              ? "text-grey-300 cursor-not-allowed"
+              : "text-grey-500 hover:bg-grey-50",
           className
         )}
       >
@@ -108,20 +115,24 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
     return (
       <button
         ref={buttonRef}
+        type="button"
         role="tab"
         aria-selected={isActive}
         tabIndex={isActive ? 0 : -1}
         disabled={disabled}
         onClick={() => !disabled && onSelect(value)}
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-full transition-colors cursor-pointer",
+          "inline-flex items-center gap-1.5 rounded-full transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text",
+          motion && "relative z-[1]",
           pillPadding[size],
           textSize[size],
           isActive
-            ? "bg-primary-50 text-primary-400 dark:bg-primary-900 dark:text-primary-300"
+            ? motion
+              ? "text-action-primary-text"
+              : "bg-primary-50 text-action-primary-text"
             : disabled
-              ? "text-grey-300 cursor-not-allowed dark:text-grey-600"
-              : "text-grey-500 hover:bg-grey-50 dark:text-grey-400 dark:hover:bg-grey-800",
+              ? "text-grey-300 cursor-not-allowed"
+              : "text-grey-500 hover:bg-grey-50",
           className
         )}
       >
@@ -136,13 +147,14 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
   return (
     <button
       ref={buttonRef}
+      type="button"
       role="tab"
       aria-selected={isActive}
       tabIndex={isActive ? 0 : -1}
       disabled={disabled}
       onClick={() => !disabled && onSelect(value)}
       className={cn(
-        "relative inline-flex cursor-pointer",
+        "relative inline-flex cursor-pointer rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text",
         isVertical ? "flex-row" : "flex-col items-center",
         disabled && "cursor-not-allowed",
         className
@@ -154,11 +166,7 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
           className={cn(
             "font-normal leading-[1.45] whitespace-nowrap transition-colors",
             textSize[size],
-            isActive
-              ? "text-grey-900 dark:text-grey-100"
-              : disabled
-                ? "text-grey-300 dark:text-grey-600"
-                : "text-grey-500 dark:text-grey-400"
+            isActive ? "text-grey-900" : disabled ? "text-grey-300" : "text-grey-500"
           )}
         >
           {children}
@@ -170,14 +178,14 @@ export function Tab({ value, icon, badge, disabled = false, children, className 
         <div
           className={cn(
             "w-0.5 self-stretch transition-colors",
-            isActive ? "bg-primary-400" : "bg-grey-100 dark:bg-grey-700"
+            isActive ? (motion ? "bg-transparent" : "bg-primary-400") : "bg-grey-100"
           )}
         />
       ) : (
         <div
           className={cn(
             "h-0.5 w-full transition-colors",
-            isActive ? "bg-primary-400" : "bg-grey-100 dark:bg-grey-700"
+            isActive ? (motion ? "bg-transparent" : "bg-primary-400") : "bg-grey-100"
           )}
         />
       )}

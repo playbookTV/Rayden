@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Badge, Select } from "@raydenui/ui";
+import { Badge, Select, SelectOption } from "@raydenui/ui";
 import { products, categories, getProductsByCategory } from "../data/products";
 import ProductCard from "../components/ProductCard";
 
@@ -48,11 +48,11 @@ export default function Products() {
         </div>
         <div className="ml-auto flex items-center gap-2">
           <span className="text-sm font-medium text-grey-700">Sort by:</span>
-          <Select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="w-40">
-            <option value="featured">Featured</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="rating">Highest Rated</option>
+          <Select value={sortBy} onValueChange={setSortBy} className="w-40">
+            <SelectOption value="featured">Featured</SelectOption>
+            <SelectOption value="price-low">Price: Low to High</SelectOption>
+            <SelectOption value="price-high">Price: High to Low</SelectOption>
+            <SelectOption value="rating">Highest Rated</SelectOption>
           </Select>
         </div>
       </div>
