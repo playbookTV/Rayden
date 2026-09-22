@@ -30,7 +30,17 @@
     },
     "navigation": {
       "description": "Navigation components",
-      "components": ["Tabs", "Breadcrumb", "Pagination", "SidebarMenu", "Stepper"]
+      "components": [
+        "Tabs",
+        "Breadcrumb",
+        "Pagination",
+        "SidebarMenu",
+        "Stepper",
+        "ApplicationShellBlock",
+        "PageHeaderBlock",
+        "WorkspaceSwitcherBlock",
+        "CommandPaletteBlock"
+      ]
     },
     "data-display": {
       "description": "Data presentation components",
@@ -366,6 +376,38 @@
       "hasSubComponents": true,
       "subComponents": ["FileUploadDropZone", "FileUploadItem"],
       "manifestFile": "FileUpload.json"
+    },
+    {
+      "name": "ApplicationShellBlock",
+      "displayName": "ApplicationShellBlock",
+      "category": "navigation",
+      "description": "Responsive application frame with navigation, workspace switcher, search and content slots.",
+      "hasSubComponents": false,
+      "manifestFile": "ApplicationShellBlock.json"
+    },
+    {
+      "name": "PageHeaderBlock",
+      "displayName": "PageHeaderBlock",
+      "category": "navigation",
+      "description": "Page title, breadcrumbs, prioritized actions and collapsible context details.",
+      "hasSubComponents": false,
+      "manifestFile": "PageHeaderBlock.json"
+    },
+    {
+      "name": "WorkspaceSwitcherBlock",
+      "displayName": "WorkspaceSwitcherBlock",
+      "category": "navigation",
+      "description": "Searchable workspace selection with current state, destination links and availability explanations.",
+      "hasSubComponents": false,
+      "manifestFile": "WorkspaceSwitcherBlock.json"
+    },
+    {
+      "name": "CommandPaletteBlock",
+      "displayName": "CommandPaletteBlock",
+      "category": "navigation",
+      "description": "Keyboard-searchable navigation and actions with optional shortcuts and explicit loading, error and empty states.",
+      "hasSubComponents": false,
+      "manifestFile": "CommandPaletteBlock.json"
     }
   ],
   "doesNotExist": [

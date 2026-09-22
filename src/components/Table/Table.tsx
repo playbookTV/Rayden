@@ -15,7 +15,12 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(({ className, ...r
     role="region"
     aria-label={rest["aria-label"] ?? "Data table"}
     tabIndex={0}
-    className="w-full min-w-0 max-w-full overflow-x-auto rounded focus-visible:outline-2 focus-visible:outline-action-primary-text"
+    // `relative` is load-bearing, not decoration. It makes this scroller the containing
+    // block for absolutely positioned descendants — above all the `sr-only` headings that
+    // label icon-only columns. Without it those resolve against the initial containing
+    // block, so their overflow widens the *document* instead of this element's own scroll
+    // area, and a correctly bounded table still drags the whole page sideways at 320px.
+    className="relative w-full min-w-0 max-w-full overflow-x-auto rounded focus-visible:outline-2 focus-visible:outline-action-primary-text"
   >
     <table ref={ref} className={cn("w-full border-collapse", className)} {...rest} />
   </div>
@@ -77,7 +82,7 @@ export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
         sortDirection === "asc" ? "ascending" : sortDirection === "desc" ? "descending" : undefined
       }
       className={cn(
-        "h-11 px-6 py-3 text-left text-body-xs font-medium text-grey-700 border-b border-grey-200",
+        "h-11 px-6 py-3 text-left text-body-xs font-medium text-on-surface-body border-b border-grey-200",
         "bg-surface hover:bg-grey-50 transition-colors",
         sortable && "cursor-pointer select-none",
         className
@@ -96,7 +101,10 @@ export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
               name={sortDirection === "asc" ? "chevron-up" : "chevron-down"}
               size="sm"
               aria-hidden="true"
-              className={cn("shrink-0", sortDirection ? "text-grey-700" : "text-grey-500")}
+              className={cn(
+                "shrink-0",
+                sortDirection ? "text-on-surface-body" : "text-on-surface-muted"
+              )}
             />
           )}
         </button>
@@ -116,7 +124,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
     <td
       ref={ref}
       className={cn(
-        "h-[72px] px-6 py-4 border-b border-grey-200 text-body-sm text-grey-900",
+        "h-[72px] px-6 py-4 border-b border-grey-200 text-body-sm text-on-surface",
         className
       )}
       {...rest}

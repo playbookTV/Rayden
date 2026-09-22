@@ -1,0 +1,65 @@
+[
+  {
+    "id": "blocks-table--default",
+    "before": 808,
+    "afterPositionedRegion": 320,
+    "hidden": [
+      {
+        "text": "Actions",
+        "rect": {
+          "x": 807.484375,
+          "y": 51,
+          "width": 1,
+          "height": 1,
+          "top": 51,
+          "right": 808.484375,
+          "bottom": 52,
+          "left": 807.484375
+        },
+        "position": "absolute"
+      }
+    ]
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "before": 837,
+    "afterPositionedRegion": 320,
+    "hidden": [
+      {
+        "text": "Actions",
+        "rect": {
+          "x": 835.84375,
+          "y": 167,
+          "width": 1,
+          "height": 1,
+          "top": 167,
+          "right": 836.84375,
+          "bottom": 168,
+          "left": 835.84375
+        },
+        "position": "absolute"
+      }
+    ]
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "before": 532,
+    "afterPositionedRegion": 320,
+    "hidden": [
+      {
+        "text": "Actions",
+        "rect": {
+          "x": 531.359375,
+          "y": 99,
+          "width": 1,
+          "height": 1,
+          "top": 99,
+          "right": 532.359375,
+          "bottom": 100,
+          "left": 531.359375
+        },
+        "position": "absolute"
+      }
+    ]
+  }
+]

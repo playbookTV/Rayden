@@ -2,7 +2,6 @@ import { useId, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { ActivityItem } from "../components/ActivityFeed/ActivityItem";
 import { ActivityContent } from "../components/ActivityFeed/ActivityContent";
-import { Avatar } from "../components/Avatar";
 import { Badge } from "../components/Badge";
 
 // ─── Types ───────────────────────────────────────────────────────────
@@ -42,6 +41,8 @@ export interface NotificationItem {
 export interface NotificationsBlockProps {
   /** Block title */
   title?: string;
+  /** Heading level for the block title, so the block fits a page's outline */
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
   /** Unread notification count */
   unreadCount?: number;
   /** Notification items */
@@ -53,25 +54,27 @@ export interface NotificationsBlockProps {
 // ─── Component ───────────────────────────────────────────────────────
 export function NotificationsBlock({
   title = "Notifications",
+  headingLevel = 3,
   unreadCount,
   items,
   className,
 }: NotificationsBlockProps) {
   const headingId = useId();
+  const Heading = `h${headingLevel}` as const;
 
   return (
     <section
       aria-labelledby={headingId}
       className={cn(
-        "bg-white dark:bg-grey-50 rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8 overflow-clip",
+        "bg-white dark:bg-grey-50 rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8",
         className
       )}
     >
       {/* Header */}
       <div className="px-6 py-1.5 flex items-center gap-2">
-        <h3 id={headingId} className="flex-1 text-lg font-semibold text-grey-700">
+        <Heading id={headingId} className="flex-1 text-lg font-semibold text-grey-700">
           {title}
-        </h3>
+        </Heading>
         {unreadCount != null && unreadCount > 0 && (
           <Badge color="success" type="accent" size="sm">
             {unreadCount} unread
@@ -79,23 +82,15 @@ export function NotificationsBlock({
         )}
       </div>
 
-      {/* Items */}
-      <div className="flex flex-col gap-4 px-6 mt-6" role="feed" aria-label="Notifications list">
-        {items.map((item, index) => {
-          const isFirst = index === 0;
-          const isLast = index === items.length - 1;
-          const hasMultiple = items.length > 1;
-
-          // Determine connector based on position in list
-          let connector: "top" | "middle" | "last" | undefined;
-          if (hasMultiple && items.length > 2) {
-            if (isFirst) connector = undefined;
-            else if (isLast) connector = undefined;
-            // We can keep items as independent (no connector lines for a simple notification list)
-          }
-
+      {/* Items — a static notification list is a list, not an ARIA feed. The feed
+          pattern additionally requires per-article accessible names, aria-posinset /
+          aria-setsize, and a focus-driven loading model that this block does not
+          implement, so native list semantics are the honest contract here. The
+          explicit role keeps the list exposed when list markers are removed. */}
+      <ul role="list" className="flex flex-col gap-4 px-6 mt-6 list-none">
+        {items.map((item) => {
           return (
-            <div key={item.id}>
+            <li key={item.id} className="min-w-0">
               <ActivityItem
                 avatar={item.avatar}
                 text={item.text}
@@ -135,10 +130,10 @@ export function NotificationsBlock({
                   />
                 )}
               </ActivityItem>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </section>
   );
 }

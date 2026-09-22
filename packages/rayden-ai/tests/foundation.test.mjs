@@ -218,13 +218,25 @@ test("token APIs resolve anatomy paths, fractional spacing, numbers, aliases and
   assert.equal(resolveDTCGAlias("{a}", { a: { $value: "{b}" }, b: { $value: "{a}" } }), null);
   const css = generateCSSVariables();
   assert.ok(css.includes("--spacing-4: 16px;"));
-  assert.ok(css.includes("--font-size-body-md: 16px;"));
+  assert.ok(css.includes("--font-size-body-md: 1rem;"));
   assert.ok(css.includes("--radius-sm: 4px;"));
   assert.ok(!css.includes("[object Object]"));
   const runtimeCSS = readFileSync(
     new URL("../../../src/styles/globals.css", import.meta.url),
     "utf8"
   );
+  for (const [name, preset] of Object.entries(tokens.typography.presets)) {
+    assert.ok(runtimeCSS.includes(`--text-${name}: ${preset.size};`), `${name} size drifted`);
+    assert.ok(
+      runtimeCSS.includes(`--text-${name}--line-height: ${preset.lineHeight};`),
+      `${name} line height drifted`
+    );
+    assert.equal(dtcg.typography.preset[name].$value.fontFamily, preset.fontFamily);
+    assert.ok(resolveDTCGAlias(preset.fontFamily, dtcg), `${name} family does not resolve`);
+  }
+  assert.equal(resolveDTCGAlias("{typography.fontFamily.heading}", dtcg)[0], "Manrope");
+  assert.equal(resolveDTCGAlias("{typography.fontFamily.sans}", dtcg)[0], "Hanken Grotesk");
+  assert.equal(resolveDTCGAlias("{typography.fontFamily.mono}", dtcg)[0], "SF Mono");
   for (const [name, definition] of Object.entries(tokens.colors.action)) {
     if (name === "description") continue;
     const hex = runtimeCSS.match(new RegExp(`--color-action-${name}:\\s*(#[a-fA-F0-9]+)`))?.[1];

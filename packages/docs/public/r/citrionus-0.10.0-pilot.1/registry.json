@@ -1,0 +1,185 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "rayden",
+  "homepage": "https://github.com/raydenui/rayden",
+  "items": [
+    {
+      "name": "setup",
+      "type": "registry:style",
+      "title": "Citrionus setup",
+      "description": "A global stylesheet entry for the complete free Citrionus default.",
+      "files": [
+        {
+          "path": "registry/citrionus/setup/rayden.css",
+          "type": "registry:file",
+          "target": "~/styles/rayden.css"
+        }
+      ],
+      "docs": "Import styles/rayden.css once from your app's global stylesheet or entry point. The installed @raydenui/ui package supplies the runtime and compiled styles. This pilot does not replace your theme provider or application configuration.",
+      "dependencies": [
+        "@raydenui/ui@0.10.0"
+      ],
+      "meta": {
+        "rayden": {
+          "schemaVersion": "1.0.0",
+          "flavor": "citrionus",
+          "uiVersion": "0.10.0",
+          "aiVersion": "0.1.4",
+          "registryVersion": "citrionus-0.10.0-pilot.1",
+          "distribution": "package-backed",
+          "status": "local-pilot",
+          "components": []
+        }
+      }
+    },
+    {
+      "name": "rules",
+      "type": "registry:file",
+      "title": "Citrionus agent guidance",
+      "description": "Versioned component guidance generated from Rayden's canonical catalog.",
+      "files": [
+        {
+          "path": "registry/citrionus/rules/RAYDEN.md",
+          "type": "registry:file",
+          "target": "~/rayden/RAYDEN.md"
+        }
+      ],
+      "docs": "Read rayden/RAYDEN.md explicitly in your assistant. It is reference material, not an automatically executed agent configuration.",
+      "dependencies": [],
+      "meta": {
+        "rayden": {
+          "schemaVersion": "1.0.0",
+          "flavor": "citrionus",
+          "uiVersion": "0.10.0",
+          "aiVersion": "0.1.4",
+          "registryVersion": "citrionus-0.10.0-pilot.1",
+          "distribution": "package-backed",
+          "status": "local-pilot",
+          "components": []
+        }
+      }
+    },
+    {
+      "name": "button-actions",
+      "type": "registry:block",
+      "title": "Save and cancel actions",
+      "description": "Editable save/cancel actions with a busy state, using package-managed Button.",
+      "registryDependencies": [
+        "@rayden/setup",
+        "@rayden/rules"
+      ],
+      "files": [
+        {
+          "path": "registry/citrionus/button-actions/button-actions.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "@raydenui/ui@0.10.0"
+      ],
+      "meta": {
+        "rayden": {
+          "schemaVersion": "1.0.0",
+          "flavor": "citrionus",
+          "uiVersion": "0.10.0",
+          "aiVersion": "0.1.4",
+          "registryVersion": "citrionus-0.10.0-pilot.1",
+          "distribution": "package-backed",
+          "status": "local-pilot",
+          "components": [
+            {
+              "name": "Button",
+              "exportNames": [
+                "Button"
+              ],
+              "importPath": "@raydenui/ui",
+              "description": "Primary interactive element for triggering actions. Supports 8 variants, 2 appearances, 2 sizes, and icon positions."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "workspace-tabs",
+      "type": "registry:block",
+      "title": "Workspace tabs",
+      "description": "Editable workspace navigation and panels using package-managed Tabs and Tab.",
+      "registryDependencies": [
+        "@rayden/setup",
+        "@rayden/rules"
+      ],
+      "files": [
+        {
+          "path": "registry/citrionus/workspace-tabs/workspace-tabs.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "@raydenui/ui@0.10.0"
+      ],
+      "meta": {
+        "rayden": {
+          "schemaVersion": "1.0.0",
+          "flavor": "citrionus",
+          "uiVersion": "0.10.0",
+          "aiVersion": "0.1.4",
+          "registryVersion": "citrionus-0.10.0-pilot.1",
+          "distribution": "package-backed",
+          "status": "local-pilot",
+          "components": [
+            {
+              "name": "Tabs",
+              "exportNames": [
+                "Tabs",
+                "Tab"
+              ],
+              "importPath": "@raydenui/ui",
+              "description": "Tabbed navigation component with line and pill variants. Compound component with Tab children."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "motion-tabs",
+      "type": "registry:block",
+      "title": "Motion tabs",
+      "description": "Editable segmented tabs with opt-in motion and reduced-motion support.",
+      "registryDependencies": [
+        "@rayden/setup",
+        "@rayden/rules"
+      ],
+      "files": [
+        {
+          "path": "registry/citrionus/motion-tabs/motion-tabs.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "@raydenui/ui@0.10.0"
+      ],
+      "meta": {
+        "rayden": {
+          "schemaVersion": "1.0.0",
+          "flavor": "citrionus",
+          "uiVersion": "0.10.0",
+          "aiVersion": "0.1.4",
+          "registryVersion": "citrionus-0.10.0-pilot.1",
+          "distribution": "package-backed",
+          "status": "local-pilot",
+          "components": [
+            {
+              "name": "Tabs",
+              "exportNames": [
+                "Tabs",
+                "Tab"
+              ],
+              "importPath": "@raydenui/ui",
+              "description": "Tabbed navigation component with line and pill variants. Compound component with Tab children."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

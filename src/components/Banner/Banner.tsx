@@ -1,7 +1,7 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 export type BannerStatus =
   | "information"
@@ -26,7 +26,7 @@ export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, "title
   /** Optional description text */
   description?: string;
   /** Optional leading icon */
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   /** Optional action button label */
   buttonLabel?: string;
   /** Called when the action button is clicked */

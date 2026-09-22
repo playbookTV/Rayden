@@ -40,8 +40,8 @@ Welcome to the Rayden UI documentation. This guide covers everything you need to
 - [Avatar](./components/Avatar.md) - User avatar with image/initials/icon
 - [ActivityFeed](./components/ActivityFeed.md) - Activity timelines and notification feeds
 - [MetricsCard](./components/MetricsCard.md) - Dashboard metric cards (6 variations)
-- [Icon](./components/Icon.md) - 200+ icons with variants
-- [EmptyStateIllustration](./components/EmptyStateIllustration.md) - 19 empty state illustrations
+- [Icon](./components/Icon.md) - Static icon data, name lookup, and outline/solid variants
+- [EmptyStateIllustration](./components/EmptyStateIllustration.md) - Empty state illustrations
 
 ### Feedback
 
@@ -57,7 +57,14 @@ Welcome to the Rayden UI documentation. This guide covers everything you need to
 
 ## Blocks
 
-Pre-built UI patterns combining multiple components:
+Import blocks from `@raydenui/ui/blocks`. They provide UI and callbacks to connect to your application's data and services.
+
+- [Current block library](../packages/docs/content/blocks/index.mdx) - Application navigation, accounts, dashboards, marketing, and commerce
+- [Application navigation](../packages/docs/content/blocks/navigation.mdx) - ApplicationShellBlock, PageHeaderBlock, WorkspaceSwitcherBlock, and CommandPaletteBlock
+- [Expanded library](../packages/docs/content/blocks/expanded-library.mdx) - Account, profile, marketing, KPI, and task blocks
+- [Commerce](../packages/docs/content/blocks/commerce.mdx) - Product browsing, cart, and checkout review
+
+Additional block guides:
 
 - [Blocks Overview](./blocks.md) - All available blocks
 - [LoginBlock](./blocks.md#loginblock) - Complete login form
@@ -70,7 +77,10 @@ Pre-built UI patterns combining multiple components:
 
 ## AI Integration
 
-- [Rayden AI Guide](./rayden-ai.md) - AI compatibility layer for reliable LLM code generation
+- [AI and MCP setup](../packages/rayden-ai/README.md) - Installation, seven MCP tools, icon discovery, and reference compatibility
+- [Rayden AI Guide](./rayden-ai.md) - Component guidance and usage validation
+- [Motion](../src/motion/README.md) - Primitives, opt-in component motion, and reduced-motion behavior
+- [Bundled fonts](../src/styles/fonts/README.md) - Optional Hanken Grotesk and Manrope webfonts
 
 ## Design System
 
@@ -117,7 +127,7 @@ src/components/<Name>/
 
 ### Key Patterns
 
-1. **forwardRef** - All components support ref forwarding
+1. **Typed component contracts** - Check each component's exported props for supported attributes and refs
 2. **cn() utility** - Class merging with clsx + tailwind-merge
 3. **TypeScript** - Full type definitions exported
 4. **Tailwind CSS v4** - Modern styling with custom tokens
@@ -126,4 +136,4 @@ src/components/<Name>/
 
 - [Rayna UI Figma](https://www.figma.com/community/file/1229854793310881425) - Design source
 - [Storybook](http://localhost:6006) - Interactive component docs
-- [GitHub Repository](https://github.com/your-org/rayden) - Source code
+- [GitHub Repository](https://github.com/playbookTV/Rayden) - Source code

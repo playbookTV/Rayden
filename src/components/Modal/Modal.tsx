@@ -1,3 +1,4 @@
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import {
   forwardRef,
   useCallback,
@@ -11,6 +12,8 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../../utils/cn";
+import { resolveIcon } from "../../utils/resolveIcon";
+import type { IconSource } from "../Icon";
 import { Button } from "../Button";
 import { useMotionPresence } from "../../motion/presence";
 import type { MotionOption } from "../../motion/presets";
@@ -34,8 +37,8 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"
   title?: string;
   /** Description text below the title */
   description?: string;
-  /** Leading icon element */
-  icon?: ReactNode;
+  /** Leading icon: registry name, static IconRecord, or ReactNode. */
+  icon?: IconSource;
   /** Show close button in header */
   showClose?: boolean;
   /** Primary action button label */
@@ -181,15 +184,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       return () => observer.disconnect();
     }, [present, mounted]);
 
-    // Lock body scroll
-    useBrowserLayoutEffect(() => {
-      if (!present) return;
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }, [present]);
+    useBodyScrollLock(present && mounted);
 
     const handleOverlayClick = useCallback(
       (e: React.MouseEvent) => {
@@ -260,7 +255,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           }}
           tabIndex={-1}
           className={cn(
-            "relative flex max-h-[calc(100dvh-2rem)] flex-col bg-white dark:bg-grey-50 rounded-xl shadow-soft-xl overflow-hidden",
+            "relative flex max-h-[calc(100dvh-2rem)] flex-col bg-surface rounded-xl shadow-soft-xl overflow-hidden",
             sizeClasses[size],
             className
           )}
@@ -272,7 +267,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
               <div className="flex flex-1 gap-4 items-start min-w-0">
                 {icon !== undefined ? (
                   <span className="shrink-0 flex items-center justify-center p-2.5 bg-primary-50 rounded-[20px]">
-                    <span className="size-4">{icon}</span>
+                    <span className="size-4">{resolveIcon(icon, "sm")}</span>
                   </span>
                 ) : title ? (
                   <span className="shrink-0 flex items-center justify-center p-2.5 bg-primary-50 rounded-[20px]">
@@ -283,13 +278,13 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   {title && (
                     <h2
                       id={titleId}
-                      className="text-xl font-semibold text-grey-700 leading-[1.2] tracking-[-0.4px]"
+                      className="text-xl font-semibold text-on-surface-body leading-[1.2] tracking-[-0.4px]"
                     >
                       {title}
                     </h2>
                   )}
                   {description && !!(title || showClose) && (
-                    <p id={descriptionId} className="text-sm text-grey-500 leading-[1.45]">
+                    <p id={descriptionId} className="text-sm text-on-surface-muted leading-[1.45]">
                       {description}
                     </p>
                   )}
@@ -311,7 +306,10 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {/* Rendered here when there is no header to hold it, so the description is
               never dropped while aria-describedby still references it. */}
           {description && !title && !showClose && (
-            <p id={descriptionId} className="px-4 pt-5 text-sm text-grey-500 leading-[1.45]">
+            <p
+              id={descriptionId}
+              className="px-4 pt-5 text-sm text-on-surface-muted leading-[1.45]"
+            >
               {description}
             </p>
           )}

@@ -6,11 +6,12 @@ import {
   useId,
   useLayoutEffect,
   useRef,
-  useState,
   type HTMLAttributes,
   type ReactElement,
   type ReactNode,
 } from "react";
+import { useControllableValue } from "../../hooks/useControllableValue";
+import { useDismissableLayer } from "../../hooks/useDismissableLayer";
 import { cn } from "../../utils/cn";
 import { useCollisionAwareSide } from "../../hooks/useCollisionAwareSide";
 
@@ -74,8 +75,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     ref
   ) => {
     const id = useId();
-    const [internalOpen, setInternalOpen] = useState(defaultOpen);
-    const open = controlledOpen ?? internalOpen;
+    const [open, changeOpen] = useControllableValue(controlledOpen, defaultOpen, onOpenChange);
     const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const wrapper = useRef<HTMLDivElement>(null);
     const panelRef = useRef<HTMLDivElement>(null);
@@ -90,23 +90,15 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const side = useCollisionAwareSide(preferredSide, open, wrapper, panelRef);
     const setOpen = (next: boolean) => {
       clearTimeout(timer.current);
-      if (controlledOpen === undefined) setInternalOpen(next);
-      onOpenChange?.(next);
+      changeOpen(next);
     };
     const close = () => {
       setOpen(false);
-      onClose?.();
       if (children && interactive)
         wrapper.current?.querySelector<HTMLElement>("button, a[href], [tabindex]")?.focus();
+      onClose?.();
     };
     useEffect(() => () => clearTimeout(timer.current), []);
-
-    // Live values the listeners need, held in a ref so their identity never drives
-    // the effect below. `children` and inline callbacks get a fresh identity on every
-    // parent render, which previously re-ran the effect — and its focus() call —
-    // while the panel was open, pulling focus out of whatever the user was typing in.
-    const latest = useRef({ controlledOpen, onOpenChange, onClose });
-    latest.current = { controlledOpen, onOpenChange, onClose };
 
     const hasPanel = !!children;
 
@@ -119,40 +111,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       wasOpen.current = open;
     }, [open, hasPanel, interactive]);
 
-    useEffect(() => {
-      if (!open || !hasPanel) return;
-      const restoreFocus = () => {
-        if (interactive)
-          wrapper.current?.querySelector<HTMLElement>("button, a[href], [tabindex]")?.focus();
-      };
-      const key = (event: KeyboardEvent) => {
-        if (event.key !== "Escape") return;
-        event.stopPropagation();
-        clearTimeout(timer.current);
-        const {
-          controlledOpen: controlled,
-          onOpenChange: change,
-          onClose: closed,
-        } = latest.current;
-        if (controlled === undefined) setInternalOpen(false);
-        change?.(false);
-        closed?.();
-        restoreFocus();
-      };
-      const outside = (event: PointerEvent) => {
-        if (!wrapper.current?.contains(event.target as Node)) {
-          const { controlledOpen: controlled, onOpenChange: change } = latest.current;
-          if (controlled === undefined) setInternalOpen(false);
-          change?.(false);
-        }
-      };
-      document.addEventListener("keydown", key);
-      document.addEventListener("pointerdown", outside);
-      return () => {
-        document.removeEventListener("keydown", key);
-        document.removeEventListener("pointerdown", outside);
-      };
-    }, [open, hasPanel, interactive]);
+    useDismissableLayer({
+      open: open && hasPanel,
+      containerRef: wrapper,
+      onDismiss: (reason) => {
+        if (reason === "escape") close();
+        else setOpen(false);
+      },
+    });
 
     const panel = (
       <div
@@ -165,7 +131,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           "flex max-w-[min(20rem,calc(100vw-2rem))] flex-col gap-4 rounded-lg border p-4 text-sm shadow-soft-sm",
           theme === "dark"
             ? "bg-tooltip-dark text-tooltip-dark-text border-tooltip-dark"
-            : "bg-surface text-grey-900 border-grey-200"
+            : "bg-surface text-on-surface border-grey-200"
         )}
       >
         <div className="flex items-start gap-3">
@@ -252,10 +218,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         onFocus={(event) => {
           rest.onFocus?.(event);
           if (children && !interactive) setOpen(true);
-        }}
-        onBlur={(event) => {
-          rest.onBlur?.(event);
-          if (children && !event.currentTarget.contains(event.relatedTarget)) setOpen(false);
         }}
       >
         {trigger}

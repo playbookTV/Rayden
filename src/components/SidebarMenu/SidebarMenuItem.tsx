@@ -12,7 +12,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../../utils/cn";
-import { Icon, type IconName } from "../Icon";
+import { Icon, type IconSource } from "../Icon";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { useSidebarMenuContext, sidebarThemeStyles } from "./SidebarMenu";
 
@@ -68,7 +68,7 @@ export interface SidebarMenuItemProps extends ButtonHTMLAttributes<HTMLButtonEle
   /** Unique identifier for this item */
   value: string;
   /** Icon displayed to the left — accepts IconName string or ReactNode */
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   /** Optional count badge displayed on the right */
   badge?: string | number;
   /** Disabled state */

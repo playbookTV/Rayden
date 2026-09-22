@@ -1,6 +1,6 @@
 # Rayden Citrionus guidance
 
-Generated for @raydenui/ui 0.9.7, @raydenui/ai 0.1.4; catalog schema 1.0.0.
+Generated for @raydenui/ui 0.10.1, @raydenui/ai 0.1.5; catalog schema 1.0.0.
 
 Citrionus is the complete free default. This registry pilot installs editable application compositions; component internals remain in @raydenui/ui. No additional flavors are supported by this pilot.
 
@@ -8,34 +8,35 @@ Read the installed package version before applying this guidance. Use Rayden AI/
 
 ## Button
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Button: Primary interactive element for triggering actions. Supports 8 variants, 2 appearances, 2 sizes, and icon positions.
 Import { Button } from "@raydenui/ui".
-Supported enum values: appearance: solid | outlined; iconPosition: none | leading | trailing | icon-only; size: sm | lg; variant: text | success | warning | primary | secondary | grey | destructive | info.
+Supported enum values: appearance: solid | outlined; as: button | a; iconPosition: none | leading | trailing | icon-only; size: sm | lg; variant: text | success | warning | primary | secondary | grey | destructive | info.
 Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
 Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
 
 ## Badge
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Badge: Status indicator or label component with multiple colors, types, and sizes.
 Import { Badge } from "@raydenui/ui".
-Supported enum values: color: disabled | success | warning | error | orange | blue | neutral; size: sm | md | lg; type: filled | accent | outline.
+Supported enum values: color: disabled | success | warning | error | orange | blue | neutral; size: sm | md | lg; type: outline | filled | accent.
 Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
 Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
 
 ## Icon
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
-Use Icon: SVG icon component with predefined icon set. Supports multiple sizes and variants.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
+Use Icon: SVG renderer for the Rayden icon set. Pass exactly one of name (dynamic registry lookup) or icon (static IconRecord data). Discover exact names and data exports through iconCatalog.
 Import { Icon } from "@raydenui/ui".
 Supported enum values: name: map | filter | at | list | copy | link | move | grid | text | next | previous | search | send | checkbox | heading | navigation | row | badge | 3d | AI-stars | AR | BTC | ETH | NFT | NFT-add | NFT-profile | NFT-remove | QR-code | VR-goggles | airplane | airpod | alarm-clock | align-center | align-justify | align-left | align-right | arrow-down | arrow-down-left | arrow-down-right | arrow-expand | arrow-left | arrow-right | arrow-shrink | arrow-up | arrow-up-left | arrow-up-right | arrow-up-split | backward | bag | ball | bank | bar-chart-h | bar-chart-v | battery | battery-charging | battery-empty | bed | beizer-curve | bell | bell-slash | bicycle | bin | bluetooth | bold | book | book-open | bookmark | bookmark-add | bookmarks | books | bot | box | box-1 | branch | brush | bug | building-1 | building-2 | building-3 | building-4 | building-5 | building-6 | bulb | bulb-slash | bus | calendar | calendar-add | calendar-alt | calendar-cross | calendar-remove | calendar-tick | call | call-add | call-cross | call-incoming | call-outgoing | call-remove | call-ringing | camera | camera-slash | candles-h | candles-v | car | card | card-add | card-cross | card-fund | card-in | card-out | card-remove | card-tick | card-withdraw | cart | cart-add | cart-check | cart-cross | cart-minus | chart | chart-down | chart-up | chat | chat-alt | chats | check | check-circle | checkbox-checked | chevron-down | chevron-h | chevron-left | chevron-right | chevron-up | chevron-v | clipboard | clock | cloud | cloud-1 | cloud-download | cloud-info | cloud-lightning | cloud-rain | cloud-slash | cloud-snowy | cloud-upload | clouds | code | code-2 | coin-stack | coin-swap | coins | coins-alt | color-picker | column | compass | conical-flask | corner | corner-down-left | corner-down-right | corner-left-down | corner-left-up | corner-right-down | corner-right-up | corner-up-left | corner-up-right | crop | cup | cursor | data | devices | dislike | division | dollar | dots-h | dots-h-circle | dots-v | dots-v-circle | download | elements | emoji | emoji-add | euro | expand | eye | eye-slash | face-id | feather | feather-AI | feather-add | file | file-alt | file-cloud | file-code | file-download | file-upload | filter-alt | fingerprint | first-aid | flag | flower | folder | folder-add | folder-cloud | folder-cross | folder-download | folder-lock | folder-move | folder-shield | folder-upload | folder-user | fork | forward | game-pad | gear-AI | gem | gift | globe | globe-alt | gps | grid-2 | hashtag | headphones | headset | health-plus | heart | heart-beat | heart-beat-wave | history | home | home-alt | image | image-add | image-check | image-circle | image-cross | image-remove | info-circle | info-hexagon | info-triangle | italics | key | keyboard | lamp | laptop | layer | lifebuoy | lightning | lightning-off | like | line-height | link-detach | list-add | lock | lock-open | loudspeaker | magic-wand | mail | mail-add | mail-check | mail-cross | mail-remove | map-alt | map-marker | media | merge | message | message-alt | messages | microphone | microphone-slash | minus | minus-circle | mobile | money | money-1 | money-2 | moon | moon-cloud | moon-stars | mouse | multiply | multiply-circle | music | music-AI | music-note | naira | navigation-alt | newspaper | paint-brush | paint-bucket | palette | paper-clip | paragraph-spacing | pause | pc | pc-lock | pc-speaker | pc-user | pencil | pencil-edit | pie-chart | pin | pin-alt | plant | plant-2 | play | playlist | plus | plus-circle | pounds | power | printer | processor | pull-request | question-circle | quote | radio-button | radio-selected | receipt | redo | refresh | repeat | repeat-once | road-sign | rocket | rocket-alt | rotate-left | rotate-right | route | save | scan | scissor | screenshot | send-AI | send-alt | server | server-alt | settings | settings-1 | settings-2 | share | share-alt | shield | shield-cross | shield-tick | ship | shower | shrink | shrink-alt | shuffle | sign-in | sign-out | signal | signal-off | sim | snooze | snowflake | sofa | speaker | star | stars | stop | stopwatch | store | strikethrough | subscript | suitcase | sun | sun-cloud | superscript | support | switch-diagonal | switch-horizontal | switch-vertical | tablet | target | taxi | terminal | thermometer | ticket | tissue | train | trophy | truck | tv | underline | undo | upload | user | user-add | user-circle | user-cross | user-group | user-heart | user-remove | user-tick | users | verified | video | video-slash | voice-note | volume | volume-low | volume-mute | volume-slash | wallet | wallet-add | wallet-check | wallet-cross | wallet-fund | wallet-remove | wallet-withdraw | water-drop | wifi | wristwatch | yen | zoom-in | zoom-out; variant: outline | solid.
+Provide exactly one of name (registry name, loaded after mount) or icon (IconRecord from @raydenui/ui/icons, immediate/SSR rendering). Variants are outline and solid. Discover exact name/export pairs in catalog.icons.entries or the public iconCatalog export. Icon slots accept names, IconRecord data, or React nodes. Label icon-only controls on the control; meaningful standalone icons need aria-hidden={false}, role="img", and aria-label.
 Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
 Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
 
 ## Divider
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Divider: Visual separator between content sections. Supports multiple variants including with icon, label, title, and button.
 Import { Divider } from "@raydenui/ui".
 Supported enum values: variant: default | with-icon | with-label | with-title | with-button | with-title-and-button.
@@ -44,17 +45,17 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Tooltip
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Tooltip: Contextual popup with additional information. Shows on hover/focus.
 Import { Tooltip } from "@raydenui/ui".
 Required props: content.
-Supported enum values: placement: top | left | right | bottom; position: top-left | top-center | top-right | bottom-left | bottom-center | bottom-right | left-top | left-center | left-bottom | right-top | right-center | right-bottom; theme: light | dark.
+Supported enum values: placement: top | bottom | left | right; position: top-left | top-center | top-right | bottom-left | bottom-center | bottom-right | left-top | left-center | left-bottom | right-top | right-center | right-bottom; theme: light | dark.
 Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
 Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
 
 ## Input
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Input: Text input field with label, helper text, leading/trailing icons, and validation states (error/success).
 Import { Input } from "@raydenui/ui".
 Supported enum values: size: xs | sm | md | lg.
@@ -63,7 +64,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Select
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Select: Dropdown select component with options. Compound component requiring SelectOption children.
 Import { Select } from "@raydenui/ui".
 Family exports: Select, SelectOption. Look up each export's own prop contract before using it.
@@ -74,7 +75,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Checkbox
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Checkbox: Checkbox input for boolean selections with optional label.
 Import { Checkbox } from "@raydenui/ui".
 Supported enum values: position: left | right.
@@ -83,7 +84,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Radio
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Radio: Radio button for single selection from a group of options.
 Import { Radio } from "@raydenui/ui".
 Supported enum values: position: left | right.
@@ -92,7 +93,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Toggle
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Toggle: Toggle switch for on/off states.
 Import { Toggle } from "@raydenui/ui".
 Supported enum values: position: left | right.
@@ -101,7 +102,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Chip
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Chip: Compact element for input or filtering. Supports input variant (with close button) and filter variant (with chevron).
 Import { Chip } from "@raydenui/ui".
 Supported enum values: variant: filter | input.
@@ -110,7 +111,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Counter
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Counter: Numeric input with increment/decrement buttons. Includes Counter for interactive input and NumberCounter for display-only badges.
 Import { Counter } from "@raydenui/ui".
 Family exports: Counter, NumberCounter. Look up each export's own prop contract before using it.
@@ -120,7 +121,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Slider
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Slider: Draggable range input for selecting numeric values. Includes single Slider and dual-handle RangeSlider for selecting value ranges.
 Import { Slider } from "@raydenui/ui".
 Family exports: Slider, RangeSlider. Look up each export's own prop contract before using it.
@@ -130,7 +131,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## DatePicker
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use DatePicker: Calendar date picker supporting single date, date range, and year selection modes. Includes min/max date constraints and optional footer with Clear/Done buttons.
 Import { DatePicker } from "@raydenui/ui".
 Supported enum values: mode: single | range | year.
@@ -139,7 +140,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Alert
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Alert: Notification component for displaying messages, alerts, and notifications. Supports toast and banner variants with multiple states.
 Import { Alert } from "@raydenui/ui".
 Supported enum values: state: information | success | warning | error; variant: banner | toast.
@@ -148,7 +149,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Banner
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Banner: Full-width notification banner for important announcements. Supports 6 status types, bold/subtle emphasis, and optional action button.
 Import { Banner } from "@raydenui/ui".
 Required props: title.
@@ -158,7 +159,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## ProgressBar
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use ProgressBar: Linear progress indicator showing completion percentage with optional label and metadata.
 Import { ProgressBar } from "@raydenui/ui".
 Supported enum values: percentagePosition: top | bottom; size: sm | md | lg; type: basic | segmented.
@@ -167,7 +168,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## ProgressCircle
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use ProgressCircle: Circular progress indicator showing completion percentage with optional center text.
 Import { ProgressCircle } from "@raydenui/ui".
 Supported enum values: size: xs | sm | md | lg | xl; variant: default | segmented.
@@ -176,7 +177,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Spinner
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Spinner: Loading indicator with 7 animation types and optional label. Supports brand and white color styles for different backgrounds.
 Import { Spinner } from "@raydenui/ui".
 Supported enum values: colorStyle: white | brand; labelPosition: after | before | above | below; size: xs | sm | md | lg | xl | 2xl | 3xl; type: bold | thin | duo-tone | buffering-thin | buffering-bold | dot | juggling.
@@ -185,7 +186,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Tabs
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Tabs: Tabbed navigation component with line and pill variants. Compound component with Tab children.
 Import { Tabs } from "@raydenui/ui".
 Family exports: Tabs, Tab. Look up each export's own prop contract before using it.
@@ -197,7 +198,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Breadcrumb
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Breadcrumb: Navigation breadcrumb trail showing current location in hierarchy.
 Import { Breadcrumb } from "@raydenui/ui".
 Required props: items.
@@ -207,7 +208,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Pagination
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Pagination: Page navigation component for navigating through paginated content.
 Import { Pagination } from "@raydenui/ui".
 Required props: currentPage, onPageChange, totalPages.
@@ -216,7 +217,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## SidebarMenu
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use SidebarMenu: Sidebar navigation menu with sections, items, and nested sub-menus. Compound component.
 Import { SidebarMenu } from "@raydenui/ui".
 Family exports: SidebarMenu, SidebarMenuItem, SidebarMenuSection, SidebarMenuSub, SidebarMenuSubItem. Look up each export's own prop contract before using it.
@@ -228,7 +229,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Stepper
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Stepper: Multi-step progress indicator for workflows. Includes Stepper for step-by-step navigation, LinearStepper for progress bars, and SegmentedStepper for segmented progress.
 Import { Stepper } from "@raydenui/ui".
 Family exports: Stepper, LinearStepper, SegmentedStepper. Look up each export's own prop contract before using it.
@@ -239,7 +240,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Table
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Table: Data table with sortable columns and row selection. Compound component requiring TableHeader, TableBody, TableRow, TableHead, and TableCell sub-components.
 Import { Table } from "@raydenui/ui".
 Family exports: Table, TableHeader, TableBody, TableRow, TableHead, TableCell. Look up each export's own prop contract before using it.
@@ -249,7 +250,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Avatar
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Avatar: User avatar displaying image, initials, or icon with optional status indicator.
 Import { Avatar } from "@raydenui/ui".
 Family exports: Avatar, AvatarGroup. Look up each export's own prop contract before using it.
@@ -260,7 +261,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## MetricsCard
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use MetricsCard: Card displaying key metrics and statistics with trend indicators and optional actions.
 Import { MetricsCard } from "@raydenui/ui".
 Required props: label, value.
@@ -270,7 +271,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## EmptyStateIllustration
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use EmptyStateIllustration: Illustration component for empty states, error pages, and placeholder content.
 Import { EmptyStateIllustration } from "@raydenui/ui".
 Required props: name.
@@ -280,7 +281,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## ActivityFeed
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use ActivityFeed: Timeline and notification feed components for displaying user activity, comments, and events. Includes ActivityItem for feed entries and ActivityContent for rich content blocks.
 Import { ActivityItem, ActivityContent } from "@raydenui/ui".
 ActivityFeed is a family name, not an importable component; use its named exports.
@@ -290,7 +291,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## RaydenChart
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use RaydenChart: Chart.js wrapper with Rayden UI theme defaults. Supports line, bar, pie, doughnut, radar, scatter, bubble, and polar-area chart types.
 Import { RaydenChart } from "@raydenui/ui/chart".
 Required props: data, type.
@@ -300,7 +301,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Accordion
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Accordion: Collapsible content panels for organizing information. Supports single/multiple open items with default or nested visual styles.
 Import { Accordion } from "@raydenui/ui".
 Family exports: Accordion, AccordionItem, AccordionTrigger, AccordionContent. Look up each export's own prop contract before using it.
@@ -310,7 +311,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Card
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Card: Flexible container component for grouping related content with optional header, body, footer, and image sections.
 Import { Card } from "@raydenui/ui".
 Family exports: Card, CardHeader, CardBody, CardFooter, CardImage. Look up each export's own prop contract before using it.
@@ -320,7 +321,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## Modal
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use Modal: Accessible dialog overlay with title, description, icon, and action buttons. Renders via portal with backdrop blur, keyboard dismiss, and focus management.
 Import { Modal } from "@raydenui/ui".
 Required props: onClose, open.
@@ -330,7 +331,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## ButtonGroup
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use ButtonGroup: Horizontal group of connected buttons with shared styling. Compound component with ButtonGroupItem children.
 Import { ButtonGroup } from "@raydenui/ui".
 Family exports: ButtonGroup, ButtonGroupItem. Look up each export's own prop contract before using it.
@@ -341,7 +342,7 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## DropdownMenu
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use DropdownMenu: Context menu or action dropdown. Compound component with trigger and content containing menu items.
 Import { DropdownMenu } from "@raydenui/ui".
 Family exports: DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator. Look up each export's own prop contract before using it.
@@ -352,11 +353,48 @@ Validate structured component usage; validation cannot establish runtime accessi
 
 ## FileUpload
 
-Build with Rayden UI's free default Citrionus flavor, using reference UI 0.9.7 and AI 0.1.4.
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
 Use FileUpload: File upload component with drag and drop support. Compound component with drop zone and file items.
 Import { FileUpload } from "@raydenui/ui".
 Family exports: FileUpload, FileUploadDropZone, FileUploadItem. Look up each export's own prop contract before using it.
 Required props: files, onFilesChange.
 Composition guidance: {"root":"FileUpload","description":"File upload with drop zone","structure":{"FileUpload":{"children":["FileUploadDropZone","FileUploadItem"]},"FileUploadDropZone":{"parent":"FileUpload"},"FileUploadItem":{"parent":"FileUpload"}}}
+Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
+Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
+
+## ApplicationShellBlock
+
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
+Use ApplicationShellBlock: Responsive application frame with navigation, workspace switcher, search and content slots.
+Import { ApplicationShellBlock } from "@raydenui/ui/blocks".
+Supported enum values: expandAt: sm | md | lg; mainScroll: page | region; navStatus: error | loading | idle; sectionHeadingLevel: h1 | h2 | h3 | h4 | h5 | h6.
+Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
+Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
+
+## PageHeaderBlock
+
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
+Use PageHeaderBlock: Page title, breadcrumbs, prioritized actions and collapsible context details.
+Import { PageHeaderBlock } from "@raydenui/ui/blocks".
+Required props: title.
+Supported enum values: headingLevel: h1 | h2 | h3 | h4 | h5 | h6; state: default | error | loading; variant: plain | surface.
+Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
+Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
+
+## WorkspaceSwitcherBlock
+
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
+Use WorkspaceSwitcherBlock: Searchable workspace selection with current state, destination links and availability explanations.
+Import { WorkspaceSwitcherBlock } from "@raydenui/ui/blocks".
+Supported enum values: status: error | loading | idle.
+Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
+Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.
+
+## CommandPaletteBlock
+
+Build with Rayden UI's free default Citrionus flavor, using reference UI 0.10.1 and AI 0.1.5.
+Use CommandPaletteBlock: Keyboard-searchable navigation and actions with optional shortcuts and explicit loading, error and empty states.
+Import { CommandPaletteBlock } from "@raydenui/ui/blocks".
+Supported enum values: filterMode: local | external; status: error | loading | idle.
 Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.
 Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.

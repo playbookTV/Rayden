@@ -188,3 +188,81 @@ export const ReadableActionColors: Story = {
     }
   },
 };
+
+/* ─── Polymorphism ──────────────────────────────────────────────── */
+
+/**
+ * A destination styled as a button. `as="a"` keeps Button's styling, focus
+ * treatment and icon composition while rendering a real anchor, so middle-click,
+ * "open in new tab" and the browser's own link affordances all work.
+ */
+export const AsAnchor: Story = {
+  render: () => (
+    <div className="flex items-center gap-4">
+      <Button as="a" href="#pricing">
+        See pricing
+      </Button>
+      <Button as="a" href="#docs" variant="secondary" icon="arrow-up" iconPosition="trailing">
+        Read the docs
+      </Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.getByRole("link", { name: "See pricing" });
+    await expect(link.tagName).toBe("A");
+    await expect(link).toHaveAttribute("href", "#pricing");
+    // Same recipe as a <button>: one shared class list, not a copy.
+    await expect(link.className).toContain("inline-flex items-center justify-center");
+  },
+};
+
+/**
+ * HTML has no disabled anchor: `disabled` is a form-control attribute and an
+ * anchor keeps navigating with it. Button drops `href` so nothing can navigate,
+ * and keeps the control discoverable with `role="link"`, `aria-disabled="true"`
+ * and `tabIndex={0}` — still perceivable and focusable, not actionable.
+ */
+export const DisabledAnchor: Story = {
+  render: () => (
+    <Button as="a" href="#pricing" disabled>
+      Unavailable in your region
+    </Button>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.getByRole("link", { name: "Unavailable in your region" });
+    await expect(link.tagName).toBe("A");
+    await expect(link).not.toHaveAttribute("href");
+    await expect(link).toHaveAttribute("aria-disabled", "true");
+    await expect(link).toHaveAttribute("tabindex", "0");
+    // Visually identical to a disabled <button>.
+    await expect(getComputedStyle(link).opacity).toBe("0.5");
+    await expect(getComputedStyle(link).cursor).toBe("not-allowed");
+  },
+};
+
+/**
+ * `asChild` merges Button's recipe onto an element the caller already owns — a
+ * router `Link`, for instance. The child's own children stay the label, so
+ * `icon` and `iconPosition` still compose around them.
+ */
+export const AsChild: Story = {
+  render: () => (
+    <Button asChild variant="secondary" icon="arrow-up" iconPosition="leading">
+      <a href="#anywhere" data-testid="slotted">
+        Slotted destination
+      </a>
+    </Button>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.getByTestId("slotted");
+    await expect(link.tagName).toBe("A");
+    await expect(link).toHaveAttribute("href", "#anywhere");
+    await expect(link.className).toContain("inline-flex");
+    await expect(link.textContent).toContain("Slotted destination");
+    // The icon composes around the slotted child's own children.
+    await expect(link.querySelector("svg")).not.toBeNull();
+  },
+};

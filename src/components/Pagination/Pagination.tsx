@@ -70,7 +70,7 @@ export function Pagination({
             type="button"
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage <= 1}
-            className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-action-primary-text border border-grey-300 bg-white dark:bg-grey-50 px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-action-primary-text border border-control-border bg-surface px-3 py-2 text-sm font-semibold text-on-surface-body cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous page"
           >
             <ChevronLeft />
@@ -88,7 +88,7 @@ export function Pagination({
             page === "..." ? (
               <span
                 key={`dots-${i}`}
-                className="flex items-center justify-center size-6 text-sm text-grey-500"
+                className="flex items-center justify-center size-6 text-sm text-on-surface-muted"
               >
                 ...
               </span>
@@ -101,7 +101,7 @@ export function Pagination({
                   "flex items-center justify-center min-w-9 h-11 px-2 rounded-md text-sm cursor-pointer",
                   page === currentPage
                     ? "border border-action-primary-text text-action-primary-text font-medium"
-                    : "text-grey-600 hover:bg-grey-100"
+                    : "text-on-surface-secondary hover:bg-grey-100"
                 )}
                 aria-label={`Page ${page}`}
                 aria-current={page === currentPage ? "page" : undefined}
@@ -113,7 +113,10 @@ export function Pagination({
         </div>
 
         {showPrevNext && (
-          <span className="rayden-pagination-compact text-sm text-grey-700" aria-live="polite">
+          <span
+            className="rayden-pagination-compact text-sm text-on-surface-body"
+            aria-live="polite"
+          >
             Page {currentPage} of {totalPages}
           </span>
         )}
@@ -122,7 +125,7 @@ export function Pagination({
             type="button"
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage >= totalPages}
-            className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-action-primary-text border border-grey-300 bg-white dark:bg-grey-50 px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-action-primary-text border border-control-border bg-surface px-3 py-2 text-sm font-semibold text-on-surface-body cursor-pointer hover:bg-grey-50 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next page"
           >
             <span className="rayden-pagination-word">Next</span>

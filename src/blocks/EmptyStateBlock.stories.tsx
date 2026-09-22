@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { EmptyStateBlock } from "./EmptyStateBlock";
 
@@ -42,6 +43,42 @@ export const NoResults: Story = {
 export const UploadPhotos: Story = {
   render: () => (
     <div className="p-10 flex items-center justify-center bg-grey-50">
+      <EmptyStateBlock
+        illustration="gallery"
+        variant="card"
+        title="Ready to add some photos?"
+        description={`Tap the button below to upload and\nshare photos with your community`}
+        action={{ label: "Upload Photos", icon: "upload" }}
+      />
+    </div>
+  ),
+};
+
+/* ─── Long action label ───────────────────────────────────────────── */
+/* The action is content-driven, so an ordinary label stays on one line and a
+   long translated label wraps deliberately instead of being clipped. */
+export const LongActionLabel: Story = {
+  render: () => (
+    <div className="p-10 flex items-center justify-center bg-grey-50">
+      <EmptyStateBlock
+        illustration="gallery"
+        variant="card"
+        title="Ready to add some photos?"
+        description={`Tap the button below to upload and\nshare photos with your community`}
+        action={{ label: "Fotos in die Gemeinschaftsgalerie hochladen", icon: "upload" }}
+      />
+    </div>
+  ),
+};
+
+/* ─── Themed surface ──────────────────────────────────────────────── */
+/* Overriding the semantic surface role must reach the card panel. */
+export const ThemedSurface: Story = {
+  render: () => (
+    <div
+      className="p-10 flex items-center justify-center bg-grey-100"
+      style={{ "--color-surface": "#f2e9da" } as CSSProperties}
+    >
       <EmptyStateBlock
         illustration="gallery"
         variant="card"

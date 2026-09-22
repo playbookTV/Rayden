@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@raydenui/ui/styles.css";
+@import "@raydenui/ui/fonts.css";
 @import "nextra-theme-docs/style.css";
 
 /* Enable class-based dark mode for Preview component */
@@ -80,4 +81,16 @@ a:hover {
 /* Sidebar active link */
 .nextra-sidebar-container a[data-active="true"] {
   color: var(--rayden-primary-700);
+}
+
+/* Nextra ships its own text defaults. Keep its navigation and code in the same
+   family system as the component previews. */
+body {
+  font-family: var(--font-sans);
+}
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+}
+:where(code, pre, kbd, samp) {
+  font-family: var(--font-mono);
 }

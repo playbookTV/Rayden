@@ -48,7 +48,13 @@ export { Breadcrumb } from "./components/Breadcrumb";
 export type { BreadcrumbProps, BreadcrumbItem, BreadcrumbSeparator } from "./components/Breadcrumb";
 
 export { Button } from "./components/Button";
-export type { ButtonProps, ButtonVariant, ButtonAppearance, ButtonSize } from "./components/Button";
+export type {
+  ButtonProps,
+  ButtonVariant,
+  ButtonAppearance,
+  ButtonSize,
+  ButtonElement,
+} from "./components/Button";
 
 export { ButtonGroup, ButtonGroupItem } from "./components/ButtonGroup";
 export type { ButtonGroupProps, ButtonGroupItemProps } from "./components/ButtonGroup";
@@ -127,8 +133,15 @@ export type {
 export { Checkbox, Radio, Toggle } from "./components/FormControl";
 export type { CheckboxProps, RadioProps, ToggleProps } from "./components/FormControl";
 
-export { Icon } from "./components/Icon";
-export type { IconProps, IconName, IconSize, IconVariant } from "./components/Icon";
+export { Icon, iconCatalog, iconNames } from "./components/Icon";
+export type {
+  IconProps,
+  IconName,
+  IconSize,
+  IconVariant,
+  IconRecord,
+  IconSource,
+} from "./components/Icon";
 
 export { Input } from "./components/Input";
 export type { InputProps, InputSize } from "./components/Input";
@@ -138,6 +151,7 @@ export type {
   MetricsCardProps,
   MetricsCardVariation,
   MetricsCardTrend,
+  MetricsCardTrendSentiment,
   MetricsCardTrendBadge,
   MetricsCardStatusBadge,
   MetricsCardCta,

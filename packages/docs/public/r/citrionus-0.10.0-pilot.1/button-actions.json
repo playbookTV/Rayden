@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-actions",
+  "type": "registry:block",
+  "title": "Save and cancel actions",
+  "description": "Editable save/cancel actions with a busy state, using package-managed Button.",
+  "registryDependencies": [
+    "@rayden/setup",
+    "@rayden/rules"
+  ],
+  "files": [
+    {
+      "path": "registry/citrionus/button-actions/button-actions.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport { Button } from \"@raydenui/ui\";\n\nexport interface ButtonActionsProps {\n  onSave: () => void;\n  onCancel: () => void;\n  saving?: boolean;\n}\n\n/** Editable application composition; Button behavior remains in the Rayden package. */\nexport function ButtonActions({ onSave, onCancel, saving = false }: ButtonActionsProps) {\n  return (\n    <div aria-label=\"Changes\" role=\"group\" style={{ display: \"flex\", gap: 12 }}>\n      <Button variant=\"secondary\" onClick={onCancel} disabled={saving}>\n        Cancel\n      </Button>\n      <Button onClick={onSave} disabled={saving} aria-busy={saving}>\n        {saving ? \"Saving…\" : \"Save changes\"}\n      </Button>\n    </div>\n  );\n}\n"
+    }
+  ],
+  "dependencies": [
+    "@raydenui/ui@0.10.0"
+  ],
+  "meta": {
+    "rayden": {
+      "schemaVersion": "1.0.0",
+      "flavor": "citrionus",
+      "uiVersion": "0.10.0",
+      "aiVersion": "0.1.4",
+      "registryVersion": "citrionus-0.10.0-pilot.1",
+      "distribution": "package-backed",
+      "status": "local-pilot",
+      "components": [
+        {
+          "name": "Button",
+          "exportNames": [
+            "Button"
+          ],
+          "importPath": "@raydenui/ui",
+          "description": "Primary interactive element for triggering actions. Supports 8 variants, 2 appearances, 2 sizes, and icon positions."
+        }
+      ]
+    }
+  }
+}

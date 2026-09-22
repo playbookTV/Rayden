@@ -1,15 +1,34 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import { Icon, type IconName } from "../Icon";
+import { Icon, type IconSource } from "../Icon";
 
 // ─── Types ───────────────────────────────────────────────────────
 export type MetricsCardVariation = "1" | "2" | "3" | "4" | "5" | "6";
+/** Which way the number moved. Direction only — it says nothing about whether that is good. */
 export type MetricsCardTrend = "up" | "down";
+/** Whether the movement is good news for this metric. Independent of direction. */
+export type MetricsCardTrendSentiment = "positive" | "negative" | "neutral";
 
 export interface MetricsCardTrendBadge {
   label: string;
+  /** Direction of movement. Drives the arrow icon. Default `"up"`. */
   trend?: MetricsCardTrend;
+  /**
+   * Whether that movement is good for this metric. Drives the badge colour.
+   *
+   * Defaults to `"positive"` for `up` and `"negative"` for `down`, which is what
+   * the badge did before this prop existed, so omitting it changes nothing. Set it
+   * when direction and sentiment disagree: falling churn is
+   * `{ trend: "down", sentiment: "positive" }`, rising cost is
+   * `{ trend: "up", sentiment: "negative" }`, and a metric that is merely moving is
+   * `"neutral"`.
+   *
+   * Direction stays carried by the arrow, so sentiment never becomes the only
+   * non-colour signal. Sentiment itself is editorial emphasis and is conveyed by
+   * colour alone; supply it in `description` when it must be read out.
+   */
+  sentiment?: MetricsCardTrendSentiment;
 }
 
 export interface MetricsCardStatusBadge {
@@ -20,7 +39,7 @@ export interface MetricsCardStatusBadge {
 export interface MetricsCardCta {
   label: string;
   onClick: () => void;
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
 }
 
 export interface MetricsCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -31,7 +50,7 @@ export interface MetricsCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Main metric value, e.g. "$45,823" */
   value: string | number;
   /** Optional icon — renders in a bordered square (v2,3,6) or large tinted square (v4) */
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   /** Trend badge with arrow icon, e.g. { label: "10%", trend: "up" } — used in v2–6 */
   trendBadge?: MetricsCardTrendBadge;
   /** Status badge, e.g. { label: "Paid", variant: "success" } — used in v1 */
@@ -46,9 +65,11 @@ export interface MetricsCardProps extends HTMLAttributes<HTMLDivElement> {
 
 // ─── Sub-components ──────────────────────────────────────────────
 
-const trendStyles: Record<MetricsCardTrend, string> = {
-  up: "bg-primary-50 text-primary-700",
-  down: "bg-error-50 text-error-700",
+const sentimentStyles: Record<MetricsCardTrendSentiment, string> = {
+  // Identical to the former `up` / `down` styles so the defaults render unchanged.
+  positive: "bg-primary-50 text-primary-700",
+  negative: "bg-error-50 text-error-700",
+  neutral: "bg-grey-100 text-grey-700",
 };
 
 const statusStyles: Record<string, string> = {
@@ -60,11 +81,12 @@ const statusStyles: Record<string, string> = {
 
 function TrendBadge({ badge }: { badge: MetricsCardTrendBadge }) {
   const trend = badge.trend ?? "up";
+  const sentiment = badge.sentiment ?? (trend === "down" ? "negative" : "positive");
   return (
     <span
       className={cn(
         "inline-flex items-center gap-1 rounded-xl px-1 text-body-xs font-medium",
-        trendStyles[trend]
+        sentimentStyles[sentiment]
       )}
     >
       <Icon name={trend === "down" ? "arrow-down" : "arrow-up"} size="xs" />
@@ -87,16 +109,16 @@ function StatusBadge({ badge }: { badge: MetricsCardStatusBadge }) {
 }
 
 /** Small bordered icon container (32×32) used in v2, v3, v6 */
-function SmallIcon({ icon }: { icon: ReactNode | IconName }) {
+function SmallIcon({ icon }: { icon: IconSource }) {
   return (
-    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-white dark:bg-grey-50">
+    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-surface">
       <span className="size-4">{resolveIcon(icon, "sm")}</span>
     </div>
   );
 }
 
 /** Large tinted icon container (48×48) used in v4 */
-function LargeIcon({ icon }: { icon: ReactNode | IconName }) {
+function LargeIcon({ icon }: { icon: IconSource }) {
   return (
     <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-action-primary-text">
       <span className="size-6">{resolveIcon(icon, "lg")}</span>
@@ -148,7 +170,7 @@ function Variation1({ label, value, secondaryText, statusBadge, cta }: MetricsCa
     <div className="flex w-full items-start justify-between p-4">
       {/* Left column */}
       <div className="flex flex-col gap-8 items-start">
-        <span className="text-body-sm font-medium text-grey-500">{label}</span>
+        <span className="text-body-sm font-medium text-on-surface-muted">{label}</span>
         <div className="flex flex-col gap-2 items-start">
           <span
             className="text-h3 font-semibold text-grey-800"
@@ -162,7 +184,7 @@ function Variation1({ label, value, secondaryText, statusBadge, cta }: MetricsCa
       {/* Right column */}
       <div className="flex flex-col items-end justify-between self-stretch">
         {secondaryText && (
-          <span className="text-body-sm font-medium text-grey-500">{secondaryText}</span>
+          <span className="text-body-sm font-medium text-on-surface-muted">{secondaryText}</span>
         )}
         {statusBadge && <StatusBadge badge={statusBadge} />}
       </div>
@@ -181,7 +203,7 @@ function Variation2({ label, value, icon, trendBadge, description, cta }: Metric
           {/* Header: icon + label */}
           <div className="flex items-center gap-3">
             {icon && <SmallIcon icon={icon} />}
-            <span className="text-body-sm font-medium text-grey-500">{label}</span>
+            <span className="text-body-sm font-medium text-on-surface-muted">{label}</span>
           </div>
           {/* Metrics */}
           <div className="flex flex-col items-start gap-3">
@@ -199,7 +221,7 @@ function Variation2({ label, value, icon, trendBadge, description, cta }: Metric
                 {trendBadge && <TrendBadge badge={trendBadge} />}
                 {description && (
                   <span
-                    className="text-body-xs font-medium text-grey-500"
+                    className="text-body-xs font-medium text-on-surface-muted"
                     style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                   >
                     {description}
@@ -226,7 +248,7 @@ function Variation3({ label, value, icon, trendBadge, description, cta }: Metric
           {/* Header: icon + label */}
           <div className="flex items-center gap-3">
             {icon && <SmallIcon icon={icon} />}
-            <span className="text-body-sm font-medium text-grey-500">{label}</span>
+            <span className="text-body-sm font-medium text-on-surface-muted">{label}</span>
           </div>
           {/* Subtext BEFORE value */}
           {(trendBadge || description) && (
@@ -234,7 +256,7 @@ function Variation3({ label, value, icon, trendBadge, description, cta }: Metric
               {trendBadge && <TrendBadge badge={trendBadge} />}
               {description && (
                 <span
-                  className="text-body-xs font-medium text-grey-500"
+                  className="text-body-xs font-medium text-on-surface-muted"
                   style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                 >
                   {description}
@@ -268,7 +290,7 @@ function Variation4({ label, value, icon, trendBadge, description, cta }: Metric
         {/* Left column */}
         <div className="flex flex-col items-start gap-4">
           <span
-            className="text-body-xs font-medium text-grey-500"
+            className="text-body-xs font-medium text-on-surface-muted"
             style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
           >
             {label}
@@ -287,7 +309,7 @@ function Variation4({ label, value, icon, trendBadge, description, cta }: Metric
                 {trendBadge && <TrendBadge badge={trendBadge} />}
                 {description && (
                   <span
-                    className="text-body-xs font-medium text-grey-500"
+                    className="text-body-xs font-medium text-on-surface-muted"
                     style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                   >
                     {description}
@@ -314,7 +336,7 @@ function Variation5({ label, value, trendBadge, description, cta }: MetricsCardP
       {/* Left column */}
       <div className="flex flex-col items-start gap-1">
         <span
-          className="text-body-xs font-medium text-grey-500"
+          className="text-body-xs font-medium text-on-surface-muted"
           style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
         >
           {label}
@@ -329,7 +351,7 @@ function Variation5({ label, value, trendBadge, description, cta }: MetricsCardP
         </span>
         {description && (
           <span
-            className="text-body-xs font-medium text-grey-500"
+            className="text-body-xs font-medium text-on-surface-muted"
             style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
           >
             {description}
@@ -356,7 +378,7 @@ function Variation6({ label, value, icon, trendBadge, description, cta }: Metric
         <div className="flex flex-col items-center gap-2">
           {icon && <SmallIcon icon={icon} />}
           <span
-            className="text-body-xs font-medium text-grey-500 text-center"
+            className="text-body-xs font-medium text-on-surface-muted text-center"
             style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
           >
             {label}
@@ -377,7 +399,7 @@ function Variation6({ label, value, icon, trendBadge, description, cta }: Metric
               {trendBadge && <TrendBadge badge={trendBadge} />}
               {description && (
                 <span
-                  className="text-body-xs font-medium text-grey-500"
+                  className="text-body-xs font-medium text-on-surface-muted"
                   style={{ fontFeatureSettings: "'cv03' 1, 'cv04' 1" }}
                 >
                   {description}
@@ -422,7 +444,7 @@ export function MetricsCard({
   return (
     <div
       className={cn(
-        "flex flex-col overflow-clip rounded-xl border border-grey-200 bg-white dark:bg-grey-50 shadow-soft-xxs",
+        "flex flex-col overflow-clip rounded-xl border border-grey-200 bg-surface shadow-soft-xxs",
         className
       )}
       {...rest}

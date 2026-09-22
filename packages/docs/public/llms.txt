@@ -2,8 +2,8 @@
 
 Citrionus is Rayden's complete free default flavor.
 
-Reference UI: 0.9.7
-AI package: 0.1.4
+Reference UI: 0.10.1
+AI package: 0.1.5
 Catalog schema: 1.0.0
 
 This is reference information. Inspect the consuming project's installed version before generating code. Future flavors are not advertised as available.
@@ -24,7 +24,7 @@ Use actual named exports and their declared import paths. Preserve state, access
 
 - Button: Button from @raydenui/ui — Primary interactive element for triggering actions. Supports 8 variants, 2 appearances, 2 sizes, and icon positions.
 - Badge: Badge from @raydenui/ui — Status indicator or label component with multiple colors, types, and sizes.
-- Icon: Icon from @raydenui/ui — SVG icon component with predefined icon set. Supports multiple sizes and variants.
+- Icon: Icon from @raydenui/ui — SVG renderer for the Rayden icon set. Pass exactly one of name (dynamic registry lookup) or icon (static IconRecord data). Discover exact names and data exports through iconCatalog.
 - Divider: Divider from @raydenui/ui — Visual separator between content sections. Supports multiple variants including with icon, label, title, and button.
 - Tooltip: Tooltip from @raydenui/ui — Contextual popup with additional information. Shows on hover/focus.
 - Input: Input from @raydenui/ui — Text input field with label, helper text, leading/trailing icons, and validation states (error/success).
@@ -58,6 +58,10 @@ Use actual named exports and their declared import paths. Preserve state, access
 - ButtonGroup: ButtonGroup, ButtonGroupItem from @raydenui/ui — Horizontal group of connected buttons with shared styling. Compound component with ButtonGroupItem children.
 - DropdownMenu: DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator from @raydenui/ui — Context menu or action dropdown. Compound component with trigger and content containing menu items.
 - FileUpload: FileUpload, FileUploadDropZone, FileUploadItem from @raydenui/ui — File upload component with drag and drop support. Compound component with drop zone and file items.
+- ApplicationShellBlock: ApplicationShellBlock from @raydenui/ui/blocks — Responsive application frame with navigation, workspace switcher, search and content slots.
+- PageHeaderBlock: PageHeaderBlock from @raydenui/ui/blocks — Page title, breadcrumbs, prioritized actions and collapsible context details.
+- WorkspaceSwitcherBlock: WorkspaceSwitcherBlock from @raydenui/ui/blocks — Searchable workspace selection with current state, destination links and availability explanations.
+- CommandPaletteBlock: CommandPaletteBlock from @raydenui/ui/blocks — Keyboard-searchable navigation and actions with optional shortcuts and explicit loading, error and empty states.
 
 ## Motion APIs
 

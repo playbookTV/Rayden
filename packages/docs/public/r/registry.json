@@ -17,15 +17,15 @@
       ],
       "docs": "Import styles/rayden.css once from your app's global stylesheet or entry point. The installed @raydenui/ui package supplies the runtime and compiled styles. This pilot does not replace your theme provider or application configuration.",
       "dependencies": [
-        "@raydenui/ui@0.9.7"
+        "@raydenui/ui@0.10.1"
       ],
       "meta": {
         "rayden": {
           "schemaVersion": "1.0.0",
           "flavor": "citrionus",
-          "uiVersion": "0.9.7",
-          "aiVersion": "0.1.4",
-          "registryVersion": "citrionus-0.9.7-pilot.1",
+          "uiVersion": "0.10.1",
+          "aiVersion": "0.1.5",
+          "registryVersion": "citrionus-0.10.1-pilot.1",
           "distribution": "package-backed",
           "status": "local-pilot",
           "components": []
@@ -50,9 +50,9 @@
         "rayden": {
           "schemaVersion": "1.0.0",
           "flavor": "citrionus",
-          "uiVersion": "0.9.7",
-          "aiVersion": "0.1.4",
-          "registryVersion": "citrionus-0.9.7-pilot.1",
+          "uiVersion": "0.10.1",
+          "aiVersion": "0.1.5",
+          "registryVersion": "citrionus-0.10.1-pilot.1",
           "distribution": "package-backed",
           "status": "local-pilot",
           "components": []
@@ -75,15 +75,15 @@
         }
       ],
       "dependencies": [
-        "@raydenui/ui@0.9.7"
+        "@raydenui/ui@0.10.1"
       ],
       "meta": {
         "rayden": {
           "schemaVersion": "1.0.0",
           "flavor": "citrionus",
-          "uiVersion": "0.9.7",
-          "aiVersion": "0.1.4",
-          "registryVersion": "citrionus-0.9.7-pilot.1",
+          "uiVersion": "0.10.1",
+          "aiVersion": "0.1.5",
+          "registryVersion": "citrionus-0.10.1-pilot.1",
           "distribution": "package-backed",
           "status": "local-pilot",
           "components": [
@@ -115,15 +115,15 @@
         }
       ],
       "dependencies": [
-        "@raydenui/ui@0.9.7"
+        "@raydenui/ui@0.10.1"
       ],
       "meta": {
         "rayden": {
           "schemaVersion": "1.0.0",
           "flavor": "citrionus",
-          "uiVersion": "0.9.7",
-          "aiVersion": "0.1.4",
-          "registryVersion": "citrionus-0.9.7-pilot.1",
+          "uiVersion": "0.10.1",
+          "aiVersion": "0.1.5",
+          "registryVersion": "citrionus-0.10.1-pilot.1",
           "distribution": "package-backed",
           "status": "local-pilot",
           "components": [
@@ -156,15 +156,15 @@
         }
       ],
       "dependencies": [
-        "@raydenui/ui@0.9.7"
+        "@raydenui/ui@0.10.1"
       ],
       "meta": {
         "rayden": {
           "schemaVersion": "1.0.0",
           "flavor": "citrionus",
-          "uiVersion": "0.9.7",
-          "aiVersion": "0.1.4",
-          "registryVersion": "citrionus-0.9.7-pilot.1",
+          "uiVersion": "0.10.1",
+          "aiVersion": "0.1.5",
+          "registryVersion": "citrionus-0.10.1-pilot.1",
           "distribution": "package-backed",
           "status": "local-pilot",
           "components": [

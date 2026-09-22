@@ -19,7 +19,12 @@ export interface EmptyStateBlockProps {
   illustration: IllustrationName;
   /** Colored or grey/monochrome illustration */
   illustrationColored?: boolean;
-  /** Custom color palette for the illustration */
+  /**
+   * Custom color palette for the illustration. This is a customisation surface,
+   * not a theme role: values are literal colors and do not follow light/dark
+   * mode. Supply mode-appropriate colors yourself, or omit to inherit the
+   * flavor's illustration palette.
+   */
   illustrationPalette?: string[];
   /** Illustration size in pixels */
   illustrationSize?: number;
@@ -29,7 +34,7 @@ export interface EmptyStateBlockProps {
   description: string;
   /** Optional primary action button */
   action?: EmptyStateBlockAction;
-  /** Visual variant: inline (no wrapper) or card (white bg + shadow) */
+  /** Visual variant: inline (no wrapper) or card (`--color-surface` panel) */
   variant?: EmptyStateBlockVariant;
   /** Additional class names */
   className?: string;
@@ -68,7 +73,10 @@ export function EmptyStateBlock({
           icon={action.icon}
           iconPosition={action.icon ? "leading" : "none"}
           onClick={action.onClick}
-          className="w-[135px]"
+          /* Content-driven width: fits the supplied label on one line, wraps
+             intentionally past a safe maximum, and keeps the one-line height
+             as a floor so a wrapped label grows instead of being clipped. */
+          className="h-auto min-h-9 w-auto max-w-64 whitespace-normal text-balance"
         >
           {action.label}
         </Button>
@@ -78,7 +86,7 @@ export function EmptyStateBlock({
 
   if (variant === "card") {
     return (
-      <div className={cn("bg-white dark:bg-grey-50 rounded-2xl p-8 inline-flex", className)}>
+      <div className={cn("bg-surface rounded-16 p-8 inline-flex max-w-full", className)}>
         {content}
       </div>
     );

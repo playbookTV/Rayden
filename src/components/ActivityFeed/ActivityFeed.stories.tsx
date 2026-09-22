@@ -21,7 +21,7 @@ export const SingleItem: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">David</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -40,7 +40,7 @@ export const WithFileContent: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">David</span> uploaded a file to{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -68,7 +68,7 @@ export const WithCommentContent: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">David</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -103,7 +103,7 @@ export const WithCTAContent: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">Sarah</span> invited you to join{" "}
-            <span className="font-medium text-primary-400">Marketing Team</span>
+            <span className="font-medium text-action-primary-text">Marketing Team</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -128,7 +128,7 @@ export const UnreadState: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">David</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -148,7 +148,7 @@ export const WithBadge: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">David</span> posted in{" "}
-            <span className="font-medium text-primary-400">#general</span>
+            <span className="font-medium text-action-primary-text">#general</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -169,7 +169,7 @@ export const Timeline: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">David</span> uploaded a file to{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -192,7 +192,7 @@ export const Timeline: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">Sarah</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Brand update</span>
+            <span className="font-medium text-action-primary-text">Brand update</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -216,7 +216,7 @@ export const Timeline: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">Michael</span> invited you to join{" "}
-            <span className="font-medium text-primary-400">Design Team</span>
+            <span className="font-medium text-action-primary-text">Design Team</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -235,7 +235,7 @@ export const Timeline: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">Jessica</span> shared a document in{" "}
-            <span className="font-medium text-primary-400">Research</span>
+            <span className="font-medium text-action-primary-text">Research</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -261,7 +261,7 @@ export const ContentStyles: Story = {
   render: () => (
     <div className="w-full max-w-[480px] space-y-6 p-6">
       <div>
-        <p className="text-xs font-medium text-grey-400 mb-2">Card (default)</p>
+        <p className="text-xs font-medium text-grey-500 mb-2">Card (default)</p>
         <ActivityContent
           variant="file"
           contentStyle="card"
@@ -273,7 +273,7 @@ export const ContentStyles: Story = {
       </div>
 
       <div>
-        <p className="text-xs font-medium text-grey-400 mb-2">Container</p>
+        <p className="text-xs font-medium text-grey-500 mb-2">Container</p>
         <ActivityContent
           variant="file"
           contentStyle="container"
@@ -285,7 +285,7 @@ export const ContentStyles: Story = {
       </div>
 
       <div>
-        <p className="text-xs font-medium text-grey-400 mb-2">Plain</p>
+        <p className="text-xs font-medium text-grey-500 mb-2">Plain</p>
         <ActivityContent
           variant="comment"
           contentStyle="plain"

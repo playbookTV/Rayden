@@ -1,14 +1,14 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 import { useSelectContext } from "./Select";
 
 export interface SelectOptionProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value"> {
   /** Unique value for this option */
   value: string;
-  /** Leading icon — accepts a ReactNode or IconName string */
-  icon?: ReactNode | IconName;
+  /** Leading icon — accepts a registry name, static IconRecord, or ReactNode */
+  icon?: IconSource;
   /** Leading avatar element (e.g., <Avatar />) */
   avatar?: ReactNode;
   /** Status dot color (CSS color string, e.g., "#04802E") */
@@ -41,7 +41,7 @@ export const SelectOption = forwardRef<HTMLButtonElement, SelectOptionProps>(
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;
       onClick?.(e);
-      ctx.onSelect(value);
+      if (!e.defaultPrevented) ctx.onSelect(value);
     };
 
     const resolvedIcon = resolveIcon(icon, "md");

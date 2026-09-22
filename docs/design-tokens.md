@@ -165,48 +165,66 @@ Defined shadows with visible edges for stronger elevation.
 
 ## Typography
 
-### Display
+Manrope gives headings a distinct voice. Hanken Grotesk carries paragraphs, navigation, buttons, form labels, and other interface text. Code uses the local Mac stack: SF Mono, SFMono-Regular, then Menlo, with platform fallbacks elsewhere.
 
-For hero sections and large headlines.
+| Role | Family utility | Default weight |
+| --- | --- | --- |
+| Display | `font-heading` (Manrope) | 700 |
+| Headings | `font-heading` (Manrope) | 600 |
+| Body | `font-sans` (Hanken Grotesk) | 400 |
+| Navigation and interface labels | `font-sans` (Hanken Grotesk) | 500 |
+| Eyebrows and metadata | `font-sans` (Hanken Grotesk) | 500 |
+| Code | `font-mono` (SF Mono / Menlo) | 400 |
 
-| Token | Size | Line Height | Letter Spacing |
-|-------|------|-------------|----------------|
-| `display-lg` | 56px | 1 | -0.04em |
-| `display-sm` | 48px | 1 | -0.04em |
+### Role scale
 
-### Headings
+Sizes use `rem` so they follow the reader's default text size. Pixel equivalents below assume a 16px root. Line heights are unitless. Each semantic `text-*` utility includes size, line height, tracking, and default weight. Display, heading, label, and code utilities also select their font family; body and caption utilities inherit the surrounding family. Use `font-sans` explicitly when placing body text inside a heading.
 
-For section headers and titles.
+| Utility | Size | At 16px root | Line height | Tracking | Weight |
+| --- | --- | --- | --- | --- | --- |
+| `text-display-lg` | 3.5rem | 56px | 1.1 | -0.03em | 700 |
+| `text-display-sm` | 3rem | 48px | 1.1 | -0.03em | 700 |
+| `text-h1` | 2.5rem | 40px | 1.2 | -0.03em | 600 |
+| `text-h2` | 2.25rem | 36px | 1.2 | -0.03em | 600 |
+| `text-h3` | 2rem | 32px | 1.2 | -0.02em | 600 |
+| `text-h4` | 1.75rem | 28px | 1.2 | -0.02em | 600 |
+| `text-h5` | 1.5rem | 24px | 1.2 | -0.02em | 600 |
+| `text-h6` | 1.25rem | 20px | 1.2 | -0.02em | 600 |
+| `text-body-lg` | 1.125rem | 18px | 1.5 | 0 | 400 |
+| `text-body-md` | 1rem | 16px | 1.5 | 0 | 400 |
+| `text-body-sm` | 0.875rem | 14px | 1.5 | 0 | 400 |
+| `text-body-xs` | 0.75rem | 12px | 1.5 | 0 | 400 |
+| `text-caption-lg` | 0.875rem | 14px | 1.5 | 0.08em | 500 |
+| `text-caption-sm` | 0.75rem | 12px | 1.5 | 0.08em | 500 |
+| `text-caption-xs` | 0.75rem | 12px | 1.5 | 0.08em | 500 |
+| `text-label-lg` | 1rem | 16px | 1.5 | 0 | 500 |
+| `text-label-md` | 0.875rem | 14px | 1.42857 | 0 | 500 |
+| `text-label-sm` | 0.75rem | 12px | 1.33333 | 0 | 500 |
+| `text-code-md` | 0.875rem | 14px | 1.6 | 0 | 400 |
+| `text-code-sm` | 0.75rem | 12px | 1.5 | 0 | 400 |
 
-| Token | Size | Line Height | Letter Spacing |
-|-------|------|-------------|----------------|
-| `h1` | 40px | 1.2 | -0.04em |
-| `h2` | 36px | 1.2 | -0.04em |
-| `h3` | 32px | 1.2 | -0.02em |
-| `h4` | 28px | 1.2 | -0.02em |
-| `h5` | 24px | 1.2 | -0.02em |
-| `h6` | 20px | 1.2 | -0.02em |
+### Applying the system
 
-### Body
+```tsx
+<section className="space-y-6">
+  <h1 className="text-h3 md:text-h1">Your workspace, connected</h1>
+  <p className="text-body-md prose-measure">
+    Keep projects, conversations, and decisions in one place.
+  </p>
+  <nav aria-label="Workspace" className="font-sans text-label-md">
+    <a href="/projects">Projects</a>
+  </nav>
+  <pre className="text-code-md overflow-x-auto"><code>npm install @raydenui/ui</code></pre>
+</section>
+```
 
-For paragraph text and general content.
-
-| Token | Size | Line Height |
-|-------|------|-------------|
-| `body-lg` | 18px | 1.45 |
-| `body-md` | 16px | 1.45 |
-| `body-sm` | 14px | 1.45 |
-| `body-xs` | 12px | 1.45 |
-
-### Captions
-
-For labels, metadata, and small text (typically uppercase).
-
-| Token | Size | Line Height | Letter Spacing |
-|-------|------|-------------|----------------|
-| `caption-lg` | 14px | 1.2 | 0.12em |
-| `caption-sm` | 12px | 1.2 | 0.12em |
-| `caption-xs` | 10px | 1.2 | 0.16em |
+- Choose heading elements for document structure, then choose their visual size with utilities. Heading tags automatically use Manrope; they do not impose a new size on existing components.
+- Use `text-h3 md:text-h1` or `text-h2 md:text-display-lg` for responsive titles. Large display sizes are for short headlines, not dense panels.
+- Use `text-body-md` for reading text and `prose-measure` to cap long paragraphs at 65 characters. `text-body-sm` is for secondary text, not the default reading size.
+- Use `text-label-md` for controls and navigation. Use `text-label-lg` for mobile inputs; do not reduce the document's root size to fit a layout.
+- Keep small labels in sentence case. Add `uppercase` to `text-caption-*` only for short eyebrows; `caption-xs` remains a compatibility alias at 12px, matching `caption-sm`.
+- Heading utilities balance line wrapping. Code blocks should scroll horizontally. Apply `tabular-nums` to changing values and table numbers.
+- `font-medium`, `font-semibold`, and `font-bold` can override a role's default weight. Manrope is upright only; use Hanken Grotesk for true italic emphasis.
 
 ---
 
@@ -272,27 +290,24 @@ The grid system adapts to different screen sizes:
 
 ## Font Family
 
-The default font stack uses Inter:
+Import the shared styles and optional self-hosted fonts once in your application:
 
 ```css
---font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+@import "tailwindcss";
+@import "@raydenui/ui/styles.css";
+@import "@raydenui/ui/fonts.css";
 ```
 
-Make sure to include Inter in your project:
+`fonts.css` ships variable WOFF2 subsets, including Hanken Grotesk's true italic, with `font-display: swap`. Browsers fetch only the subsets and styles used on the page. Both font licenses are included in the package. SF Mono and Menlo are resolved locally; Rayden does not download or redistribute them.
 
-```html
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+If you already load these families yourself, omit `fonts.css`. The styles retain system fallbacks when webfonts are unavailable. Override `--font-heading`, `--font-sans`, and `--font-mono` to customize the family roles:
+
+```css
+@theme {
+  --font-heading: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 ```
 
-Or via npm:
-
-```bash
-npm install @fontsource/inter
-```
-
-```tsx
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-```
+The JavaScript `typography` and `fontFamily` exports from `@raydenui/ui/preset`, the CSS utilities, and the AI/DTCG tokens describe the same role system.

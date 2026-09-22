@@ -45,7 +45,7 @@ export function QuickSendBlock({
           <button
             type="button"
             onClick={onSeeAll}
-            className="flex items-center gap-1.5 text-xs font-semibold text-primary-500"
+            className="flex items-center gap-1.5 rounded text-xs font-semibold text-action-primary-text cursor-pointer hover:underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text"
           >
             {seeAllLabel}
             <Icon name="chevron-right" size="xs" />
@@ -54,7 +54,7 @@ export function QuickSendBlock({
       </div>
 
       {/* Beneficiaries */}
-      <div className="bg-white dark:bg-grey-50 border border-grey-100 rounded-[10px] px-6 py-6">
+      <div className="bg-surface border border-surface-border rounded-10 px-6 py-6">
         <div className="flex gap-5 overflow-x-auto">
           {beneficiaries.map((b) => (
             <button

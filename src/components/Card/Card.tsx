@@ -80,9 +80,9 @@ function useCardContext(): CardContextValue {
 /* ─── Style Lookups ────────────────────────────────────────────────────── */
 
 const variantStyles: Record<CardVariant, string> = {
-  default: "border border-grey-200 bg-white dark:bg-grey-50",
-  outlined: "border-2 border-grey-300 bg-transparent",
-  elevated: "border border-grey-100 bg-white dark:bg-grey-50 shadow-soft-md",
+  default: "border border-grey-200 bg-surface",
+  outlined: "border-2 border-surface-border-strong bg-transparent",
+  elevated: "border border-grey-100 bg-surface shadow-soft-md",
   ghost: "border-none bg-transparent",
 };
 
@@ -191,9 +191,9 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
         {(title || subtitle || children) && (
           <div className="flex min-w-0 flex-1 flex-col">
             {title && (
-              <h3 className="text-lg font-semibold leading-[1.45] text-grey-900">{title}</h3>
+              <h3 className="text-lg font-semibold leading-[1.45] text-on-surface">{title}</h3>
             )}
-            {subtitle && <p className="text-sm leading-[1.45] text-grey-500">{subtitle}</p>}
+            {subtitle && <p className="text-sm leading-[1.45] text-on-surface-muted">{subtitle}</p>}
             {children}
           </div>
         )}

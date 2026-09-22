@@ -51,7 +51,9 @@ Tokens are referenced using curly brace syntax that resolves against `tokens.dtc
 ### Typography
 
 ```
-{typography.fontFamily.sans}     → Inter
+{typography.fontFamily.sans}     → Hanken Grotesk (body, navigation, labels)
+{typography.fontFamily.heading}  → Manrope (headings and display)
+{typography.fontFamily.mono}     → SF Mono / Menlo (code)
 {typography.fontSize.xs}         → 12px
 {typography.fontSize.sm}         → 14px
 {typography.fontSize.base}       → 16px

@@ -184,8 +184,8 @@ function DayCell({ day, state, fullDate, onClick, tabStop, onFocus }: DayCellPro
     state === "end-range" && "bg-action-primary text-white rounded-r-[10px]",
     state === "mid-range" && "bg-primary-50 text-action-primary-text",
     state === "disabled" && "text-grey-300",
-    state === "default" && "text-grey-900 hover:bg-grey-75 rounded-[10px]",
-    state === "today" && "text-grey-900 hover:bg-grey-75 rounded-[10px]",
+    state === "default" && "text-on-surface hover:bg-grey-75 rounded-[10px]",
+    state === "today" && "text-on-surface hover:bg-grey-75 rounded-[10px]",
     isInteractive && "cursor-pointer"
   );
 
@@ -351,7 +351,7 @@ function MonthGrid({
             key={i}
             role="columnheader"
             aria-label={fullDayNames[i]}
-            className="flex items-center justify-center flex-1 min-w-0 h-10 text-sm font-medium text-grey-600"
+            className="flex items-center justify-center flex-1 min-w-0 h-10 text-sm font-medium text-on-surface-secondary"
           >
             {label}
           </div>
@@ -447,7 +447,7 @@ function YearGrid({ baseYear, selectedYear, onYearClick, minYear, maxYear }: Yea
                   "w-full flex items-center justify-center py-2.5 px-1 rounded-[10px] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-action-primary-text text-sm font-medium cursor-pointer select-none",
                   year === selectedYear
                     ? "bg-action-primary text-white"
-                    : "text-grey-900 hover:bg-grey-75"
+                    : "text-on-surface hover:bg-grey-75"
                 )}
                 onClick={() => onYearClick(year)}
               >
@@ -490,9 +490,9 @@ function NavButton({
       )}
     >
       {direction === "left" ? (
-        <ChevronLeft className="size-3.5 text-grey-700" />
+        <ChevronLeft className="size-3.5 text-on-surface-body" />
       ) : (
-        <ChevronRight className="size-3.5 text-grey-700" />
+        <ChevronRight className="size-3.5 text-on-surface-body" />
       )}
     </button>
   );
@@ -675,7 +675,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               {/* Header */}
               <div className="flex items-center justify-between w-full">
                 <NavButton direction="left" onClick={goToPrevMonth} />
-                <span aria-live="polite" className="text-sm font-medium text-grey-700">
+                <span aria-live="polite" className="text-sm font-medium text-on-surface-body">
                   {monthYearLabel}
                 </span>
                 <NavButton direction="right" onClick={goToNextMonth} />
@@ -707,7 +707,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <div className="flex items-center justify-between w-full md:w-[280px]">
                 <NavButton direction="left" onClick={goToPrevMonth} />
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-grey-700">{monthYearLabel}</span>
+                  <span className="text-sm font-medium text-on-surface-body">{monthYearLabel}</span>
                 </div>
                 <NavButton direction="right" onClick={goToNextMonth} className="md:hidden" />
                 <NavButton direction="right" hidden className="hidden md:flex" />
@@ -735,7 +735,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <div className="flex items-center justify-between w-[280px]">
                 <NavButton direction="left" hidden />
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-grey-700">{secondMonthLabel}</span>
+                  <span className="text-sm font-medium text-on-surface-body">
+                    {secondMonthLabel}
+                  </span>
                 </div>
                 <NavButton direction="right" onClick={goToNextMonth} />
               </div>
@@ -758,10 +760,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         {mode === "year" && (
           <div className="flex flex-col gap-4 items-center w-full">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-grey-700">
+              <span className="text-sm font-medium text-on-surface-body">
                 {yearBase}–{yearBase + 19}
               </span>
-              <ChevronDown className="size-6 text-grey-500" />
+              <ChevronDown className="size-6 text-on-surface-muted" />
             </div>
             <YearGrid
               baseYear={yearBase}
@@ -791,7 +793,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             <button
               type="button"
               onClick={handleClear}
-              className="text-sm font-semibold text-grey-700 hover:text-grey-900 px-2 cursor-pointer"
+              className="text-sm font-semibold text-on-surface-body hover:text-on-surface px-2 cursor-pointer"
             >
               Clear
             </button>

@@ -1,0 +1,10 @@
+{
+  "$schema": "./schema.json",
+  "name": "WorkspaceSwitcherBlock",
+  "displayName": "WorkspaceSwitcherBlock",
+  "description": "Searchable workspace selection with current state, destination links and availability explanations.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui/blocks",
+  "props": {},
+  "examples": []
+}

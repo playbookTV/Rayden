@@ -1,7 +1,7 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 export type DividerVariant =
   | "default"
@@ -14,9 +14,9 @@ export type DividerVariant =
 export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   variant?: DividerVariant;
   label?: string;
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   buttonLabel?: string;
-  buttonIcon?: ReactNode | IconName;
+  buttonIcon?: IconSource;
   onButtonClick?: () => void;
 }
 
@@ -30,14 +30,14 @@ function DividerButton({
   onClick,
 }: {
   label?: string;
-  icon?: ReactNode;
+  icon?: IconSource;
   onClick?: () => void;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex items-center gap-2 rounded-lg border border-grey-300 bg-white dark:bg-grey-50 px-3 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50"
+      className="inline-flex items-center gap-2 rounded-lg border border-control-border bg-surface px-3 py-2 text-sm font-semibold text-on-surface-body cursor-pointer hover:bg-grey-50"
     >
       {icon && <span className="size-5 shrink-0">{resolveIcon(icon, "md")}</span>}
       {label && <span>{label}</span>}
@@ -63,7 +63,7 @@ export function Divider({
     return (
       <div className={cn("relative w-full", className)} {...rest}>
         <DividerLine />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-grey-50 px-1 py-0.5 flex items-center justify-center">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface px-1 py-0.5 flex items-center justify-center">
           <span className="size-6">{resolveIcon(icon, "lg")}</span>
         </div>
       </div>
@@ -73,9 +73,7 @@ export function Divider({
   if (variant === "with-label") {
     return (
       <div className={cn("flex items-center gap-0.5 w-full", className)} {...rest}>
-        <span className="shrink-0 pr-2 text-sm text-grey-500 bg-white dark:bg-grey-50">
-          {label}
-        </span>
+        <span className="shrink-0 pr-2 text-sm text-on-surface-muted bg-surface">{label}</span>
         <DividerLine />
       </div>
     );
@@ -85,8 +83,8 @@ export function Divider({
     return (
       <div className={cn("relative w-full", className)} {...rest}>
         <DividerLine />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-grey-50 px-2">
-          <span className="text-lg text-grey-900 whitespace-nowrap">{label}</span>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface px-2">
+          <span className="text-lg text-on-surface whitespace-nowrap">{label}</span>
         </div>
       </div>
     );
@@ -106,8 +104,8 @@ export function Divider({
   // with-title-and-button
   return (
     <div className={cn("flex items-center w-full", className)} {...rest}>
-      <div className="shrink-0 bg-white dark:bg-grey-50 px-2">
-        <span className="text-lg text-grey-900 whitespace-nowrap">{label}</span>
+      <div className="shrink-0 bg-surface px-2">
+        <span className="text-lg text-on-surface whitespace-nowrap">{label}</span>
       </div>
       <DividerLine />
       <div className="shrink-0">

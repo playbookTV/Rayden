@@ -56,7 +56,7 @@ Modal animates only its panel. The native dialog stays modal through exit, retai
 focus and background inertness until its final close. Escape/backdrop policies and
 controlled `onClose` semantics are unchanged. Reopening during exit cancels dismissal;
 unmount cancels animation, closes the dialog, restores its trigger and releases scroll
-locking. Backdrop motion and nested modal scroll-lock coordination are not added here.
+locking. Scroll locks are shared across open modals and released only after the last modal closes. Backdrop motion is not added here.
 
 ## Metadata and verification
 

@@ -59,6 +59,7 @@ interface SpacingValue {
 }
 
 interface TypographyPreset {
+  fontFamily: string;
   size: string;
   lineHeight: number;
   letterSpacing: string;
@@ -228,7 +229,7 @@ function convertTypography(typography: SourceTokens["typography"]): DTCGGroup {
     (group.preset as DTCGGroup)[name] = {
       $type: "typography",
       $value: {
-        fontFamily: "{typography.fontFamily.sans}",
+        fontFamily: preset.fontFamily,
         fontSize: preset.size,
         fontWeight: preset.fontWeight,
         lineHeight: preset.lineHeight,

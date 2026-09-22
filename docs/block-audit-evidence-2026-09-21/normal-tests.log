@@ -1,0 +1,11 @@
+(node:93028) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+ RUN  v4.1.0 /Users/leslieisah/app-dev/Rayden
+
+
+ Test Files  8 passed (8)
+      Tests  23 passed (23)
+   Start at  23:09:52
+   Duration  14.93s (transform 0ms, setup 10.91s, import 2.47s, tests 6.39s, environment 0ms)
+

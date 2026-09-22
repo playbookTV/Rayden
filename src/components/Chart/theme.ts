@@ -44,7 +44,7 @@ export const chartColors = {
 
 /** Default font for Chart.js */
 export const chartFont = {
-  family: "'Inter', ui-sans-serif, system-ui, sans-serif",
+  family: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif",
   size: 12,
   weight: "normal" as const,
 };

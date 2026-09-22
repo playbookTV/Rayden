@@ -54,7 +54,12 @@ function describe(type: ts.Type): any {
   if (type.flags & ts.TypeFlags.Object) return { type: "object" };
   return { type: "unassessed" };
 }
-for (const entry of ["src/index.ts", "src/chart.ts", "src/motion/index.ts"]) {
+for (const entry of [
+  "src/index.ts",
+  "src/chart.ts",
+  "src/motion/index.ts",
+  "src/blocks/index.ts",
+]) {
   const source = program.getSourceFile(resolve(root, entry))!;
   for (const statement of source.statements) {
     if (
@@ -65,10 +70,22 @@ for (const entry of ["src/index.ts", "src/chart.ts", "src/motion/index.ts"]) {
     )
       continue;
     const module = (statement.moduleSpecifier as ts.StringLiteral)?.text;
-    if (!module?.startsWith("./components/") && entry !== "src/motion/index.ts") continue;
+    if (
+      !module?.startsWith("./components/") &&
+      entry !== "src/motion/index.ts" &&
+      entry !== "src/blocks/index.ts"
+    )
+      continue;
     for (const specifier of statement.exportClause.elements) {
       if (specifier.isTypeOnly) continue;
       const name = specifier.name.text;
+      // Block families join the curated AI catalog incrementally. Public package
+      // availability remains governed by the complete blocks barrel.
+      if (
+        entry === "src/blocks/index.ts" &&
+        !registry.components.some((item: { name: string }) => item.name === name)
+      )
+        continue;
       const symbol = checker.getSymbolAtLocation(specifier.name)!;
       const target = checker.getAliasedSymbol(symbol);
       const type = checker.getTypeOfSymbolAtLocation(target, target.valueDeclaration ?? source);
@@ -110,14 +127,20 @@ for (const entry of ["src/index.ts", "src/chart.ts", "src/motion/index.ts"]) {
       exports[name] = {
         name,
         importPath:
-          entry === "src/motion/index.ts"
-            ? "@raydenui/ui/motion"
-            : entry.endsWith("chart.ts")
-              ? "@raydenui/ui/chart"
-              : "@raydenui/ui",
+          entry === "src/blocks/index.ts"
+            ? "@raydenui/ui/blocks"
+            : entry === "src/motion/index.ts"
+              ? "@raydenui/ui/motion"
+              : entry.endsWith("chart.ts")
+                ? "@raydenui/ui/chart"
+                : "@raydenui/ui",
         sourceModule: module.replace(
           "./",
-          entry === "src/motion/index.ts" ? "src/motion/" : "src/"
+          entry === "src/blocks/index.ts"
+            ? "src/blocks/"
+            : entry === "src/motion/index.ts"
+              ? "src/motion/"
+              : "src/"
         ),
         props,
         inheritedProps,

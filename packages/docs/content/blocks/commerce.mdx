@@ -1,0 +1,117 @@
+---
+title: Commerce blocks
+description: Product discovery, product detail, shopping cart, and checkout review
+---
+
+# Commerce blocks
+
+Four blocks cover discovery through order review. **Design Review** provides a switcher for each block, its layout, light/dark appearance, phone-width container, and ready/pending/error/empty states. Open **Blocks / Commerce / All New Blocks** in Storybook to see all four, or **Full Journey** to try the connected demo shop. Dark Gallery, Custom Theme, Narrow Container, and state stories show other supported contexts.
+
+```tsx
+import {
+  ProductCollectionBlock,
+  ProductDetailBlock,
+  ShoppingCartBlock,
+  CheckoutReviewBlock,
+  type CommerceProduct,
+  type CommerceCartItem,
+} from "@raydenui/ui/blocks";
+```
+
+## Product collection
+
+The collection filters and sorts its supplied products locally. Use `href` for navigation or `onSelectProduct` for an in-page detail view. Add-to-cart controls appear only when `onAddToCart` is supplied. Products with configurable options should open their detail view first.
+
+```tsx
+const products: CommerceProduct[] = [
+  { id: "cup", name: "Everyday ceramic cup", category: "Objects", price: 2400, stock: 12 },
+];
+
+<ProductCollectionBlock products={products} currency="GBP" locale="en-GB" />;
+```
+
+Supply `status="loading"` or `status="error"`, an `errorMessage`, and optionally `onRetry` for remote loading. Search with no matches and an empty product list have distinct empty states. `pendingProductIds` disables quick-add buttons while the host processes requests.
+
+### Collection layouts
+
+Use `layout="grid"` (the default) for image-led browsing or `layout="list"` for a compact catalogue. Grid cards become two columns when the container has at least 300px available, with four columns from 880px. Images are native links when a product has `href`, or labelled buttons when `onSelectProduct` is supplied. Product names are semantic subheadings. Quick-add buttons use a quieter outlined style.
+
+## Product detail
+
+`onAddToCart` receives `{ product, option, quantity }`. Options have stable IDs, labels, and optional stock limits. Changing products resets the local selection. Stock updates clamp the requested quantity; unavailable options cannot be selected.
+
+```tsx
+<ProductDetailBlock
+  product={products[0]}
+  optionLabel="Glaze"
+  options={[
+    { id: "clay", label: "Clay", stock: 12 },
+    { id: "chalk", label: "Chalk", stock: 0 },
+  ]}
+  onAddToCart={({ product, option, quantity }) => addItem(product, option, quantity)}
+  deliveryNote="Delivery costs are calculated for your address at checkout."
+/>
+```
+
+Supply `images` as an ordered array of `{ src, alt }` objects for a gallery with labelled thumbnail buttons. The product image remains the fallback. Use `layout="stacked"` for a narrow or quick-view context; the default `split` places product information beside the image when space permits. Gallery selection resets when the product changes.
+
+The host owns the add operation. Pass `pending`, `errorMessage`, and `successMessage` from its result. This block does not assume an order or cart update succeeded.
+
+## Controlled cart
+
+```tsx
+const [items, setItems] = useState<CommerceCartItem[]>([{ ...products[0], quantity: 1 }]);
+
+<ShoppingCartBlock
+  items={items}
+  onQuantityChange={(id, quantity) =>
+    setItems((current) => current.map((item) => (item.id === id ? { ...item, quantity } : item)))
+  }
+  onRemoveItem={(id) => setItems((current) => current.filter((item) => item.id !== id))}
+  onCheckout={() => setStep("review")}
+  shipping={500}
+  tax={0}
+  totalsNote="Prices include tax. Delivery shown for the selected address."
+/>;
+```
+
+Use unique line IDs for product variants. `stock` is the maximum allowed quantity for that line. Checkout is disabled when quantities exceed availability. Omit callbacks to render a read-only summary. Empty carts can offer `onContinueShopping`.
+
+Use `layout="stacked"` to keep the summary below the items at any width. The **Cart Drawer** story composes this layout with Rayden’s existing Modal, retaining native focus containment, Escape dismissal, and focus restoration. It is a composition of the same cart block, not another block in the count.
+
+## Checkout review
+
+```tsx
+<CheckoutReviewBlock
+  items={items}
+  deliveryAddress={["Alex Morgan", "24 Willow Lane", "London, N1 4AB"]}
+  deliveryMethod="Standard delivery · 3–5 working days"
+  paymentSummary="Visa ending in 4242"
+  shipping={500}
+  onEditCart={() => setStep("cart")}
+  onConfirm={submitOrder}
+  pending={submitting}
+  errorMessage={orderError}
+  confirmation={
+    confirmedOrder
+      ? {
+          title: "Order confirmed",
+          description: "We’ll email you when it’s on its way.",
+          reference: confirmedOrder.reference,
+        }
+      : undefined
+  }
+/>
+```
+
+Provide `onEditDelivery` and `onEditPayment` if the host offers these screens. `paymentSummary` is display text for an already tokenized payment method, not a payment input. Confirmation appears only when explicitly supplied by the host. The Storybook journey labels its simulated success as a demo and never sends payment or order requests.
+
+## Amounts and validation
+
+All prices, shipping, tax, and discounts are non-negative integers in the selected ISO currency’s minor unit. GBP 2400 displays as £24.00; JPY 2400 displays as ¥2,400. Every item in one block must use the same currency. The default is GBP with `en-GB` formatting; pass both for other markets. Quantities must be positive integers, product and line IDs unique, and stock a non-negative integer.
+
+Totals are `subtotal + shipping + tax - discount`, floored at zero. Shipping and tax default to zero; provide amounts calculated by your application and use `totalsNote` to explain estimates, included tax, or final charges. Discounts should not exceed the order value. The host must validate prices, stock, addresses, shipping, and payment on the server before accepting an order.
+
+## Responsive and theme contracts
+
+Layouts respond to their container, including a narrow sidebar inside a wide page. All four accept `headingLevel` (default `h2`), `className`, `currency`, and `locale`. Controls use native buttons, search, selects, and radio inputs with visible labels, keyboard focus, and 44px minimum heights. Surface, border, text, and action colors use Rayden’s semantic CSS variables. Product imagery remains the supplied image in every theme.

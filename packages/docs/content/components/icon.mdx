@@ -1,134 +1,86 @@
 ---
 title: Icon
-description: 200+ icons with outline and solid variants
+description: SVG icon component, shared icon slots, and searchable name/export catalog
 ---
 
 # Icon
 
-Rayden UI includes 200+ icons with outline and solid variants in multiple sizes.
+`Icon` is Rayden's SVG-rendering component. Individual exports such as `heartIcon` are **icon data**, not React components. Each registered icon has `outline` and `solid` variants.
 
-## Import
-
-```tsx
-import { Icon } from "@raydenui/ui";
-```
-
-## Loading and server rendering
-
-For immediate rendering, including server-rendered markup, pass static icon data. Only the imported icon is retained by a tree-shaking bundler:
+## Import and render
 
 ```tsx
-import { Icon } from "@raydenui/ui";
-import { homeIcon } from "@raydenui/ui/icons";
+import { Icon, iconCatalog, iconNames } from "@raydenui/ui";
+import type { IconProps, IconName, IconRecord, IconSource, IconSize, IconVariant } from "@raydenui/ui";
+import { heartIcon } from "@raydenui/ui/icons";
 
-<Icon icon={homeIcon} />;
+// Direct data: immediate rendering, including server-rendered HTML.
+<Icon icon={heartIcon} variant="solid" size="lg" />;
+
+// Registry name: convenient lookup, loaded after mounting in the browser.
+<Icon name="heart" variant="outline" size={24} />;
 ```
 
-The convenient `name` API loads the shared icon catalog after mounting in the browser. Until it arrives, the SVG reserves its final size. The catalog is a separate chunk in bundlers that support code splitting; it is not needed for a plain Button. Use static icon data for icons that must appear in the initial HTML.
+Pass exactly one of `name` or `icon`. A name is a registry key such as `arrow-down`; a data export is its exact JavaScript identifier such as `arrowDownIcon`. Existing acronym and numeric names retain their original spelling; use the catalog instead of guessing an export name. Do not render data as `<heartIcon />` or pass a string to `icon`.
 
-## Usage
+The name API reserves the SVG's size while the registry loads. A bundler with code splitting can load that registry separately. For initial HTML and tree shaking, import individual data records. Do not import the combined `icons` registry unless you need the whole collection.
 
-### Basic
+## Discover the icons
 
-<Preview>
-  <Icon name="home" />
-  <Icon name="user" />
-  <Icon name="settings" />
-  <Icon name="bell" />
-  <Icon name="mail" />
-</Preview>
+`iconCatalog` is generated from the real registry and contains every `{ name, exportName }` pair, without SVG artwork. `iconNames` is the corresponding readonly list of names. Both are available from the root package and `@raydenui/ui/icons`.
 
 ```tsx
-<Icon name="home" />
+const matches = iconCatalog.filter(({ name, exportName }) =>
+  `${name} ${exportName}`.toLowerCase().includes("arrow")
+);
+// Example entry: { name: "arrow-down", exportName: "arrowDownIcon" }
 ```
 
-### Variants
+Open **Components → Icon → Gallery** in Storybook to search by name or export and compare outline/solid artwork. AI clients can find the same generated mapping at `catalog.icons.entries` in `/ai/catalog.json`.
 
-<Preview>
-  <Icon name="heart" variant="outline" />
-  <Icon name="heart" variant="solid" />
-  <Icon name="star" variant="outline" />
-  <Icon name="star" variant="solid" />
-</Preview>
+## Shared icon slots
+
+Icon slots on Button, Input, SelectOption, DropdownMenuItem, Modal and other components using `IconSource` accept the same three forms: a registry name, static `IconRecord`, or a custom React node.
 
 ```tsx
-// Outline (default)
-<Icon name="home" variant="outline" />
+import { Button, Input, Icon } from "@raydenui/ui";
+import { checkIcon, searchIcon, heartIcon } from "@raydenui/ui/icons";
 
-// Solid
-<Icon name="home" variant="solid" />
+<Button icon="check" iconPosition="leading">Save</Button>;
+<Button icon={checkIcon} iconPosition="leading">Save</Button>;
+<Input label="Search" leadingIcon={searchIcon} />;
+<Button icon={<Icon icon={heartIcon} variant="solid" />} iconPosition="leading">
+  Favorite
+</Button>;
 ```
 
-### Sizes
-
-<Preview>
-  <Icon name="home" size="xs" />
-  <Icon name="home" size="sm" />
-  <Icon name="home" size="md" />
-  <Icon name="home" size="lg" />
-  <Icon name="home" size="xl" />
-</Preview>
-
-```tsx
-<Icon name="home" size="xs" /> {/* 12px */}
-<Icon name="home" size="sm" /> {/* 16px */}
-<Icon name="home" size="md" /> {/* 20px */}
-<Icon name="home" size="lg" /> {/* 24px */}
-<Icon name="home" size="xl" /> {/* 32px */}
-```
-
-### Custom Color
-
-<Preview>
-  <Icon name="heart" className="text-primary-500" />
-  <Icon name="check-circle" className="text-success-400" />
-  <Icon name="multiply-circle" className="text-error-400" />
-  <Icon name="info-circle" className="text-warning-400" />
-</Preview>
-
-```tsx
-<Icon name="heart" className="text-primary-500" />
-<Icon name="check-circle" className="text-success-400" />
-<Icon name="multiply-circle" className="text-error-400" />
-```
-
-## Available Icons
-
-### Navigation
-
-- `home`, `home-alt`, `x`, `chevron-left`, `chevron-right`, `chevron-up`, `chevron-down`
-- `arrow-left`, `arrow-right`, `arrow-up`, `arrow-down`
-- `link`, `link-detach`, `log-out`
-
-### Actions
-
-- `plus`, `minus`, `pencil`, `pencil-edit`, `bin`, `copy`, `download`, `upload`
-- `search`, `filter`, `settings`, `settings-1`, `settings-2`
-
-### Status
-
-- `check`, `check-circle`, `x-circle`, `info-circle`
-- `bell`, `star`, `heart`, `bookmark`
-
-### Content
-
-- `file`, `folder`, `image`, `calendar`, `clock`, `map-marker`, `globe`, `mail`
-
-### Users
-
-- `user`, `users`, `user-add`, `user-cross`, `user-circle`
+Names and direct records use the slot's default size and the outline variant. Pass an `Icon` element for a solid variant, custom size, or custom SVG attributes. Custom nodes retain their own props. Slot names describe placement (`leadingIcon`, `trailingIcon`) or purpose (`icon`); they use the same value convention.
 
 ## Props
 
-| Prop        | Type                                   | Default     | Description                                              |
-| ----------- | -------------------------------------- | ----------- | -------------------------------------------------------- |
-| `name`      | `IconName`                             | —           | Icon name; use either `name` or `icon`                   |
-| `icon`      | `IconRecord`                           | —           | Static icon data for immediate, tree-shakeable rendering |
-| `variant`   | `"outline" \| "solid"`                 | `"outline"` | Icon variant                                             |
-| `size`      | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"`      | Icon size                                                |
-| `className` | `string`                               | —           | Additional CSS classes                                   |
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `name` | `IconName` | — | Exact registry name; mutually exclusive with `icon` |
+| `icon` | `IconRecord` | — | Imported SVG data; mutually exclusive with `name` |
+| `variant` | `"outline" \| "solid"` | `"outline"` | Artwork variant; `line` is not supported |
+| `size` | `IconSize \| number` | `"md"` | Preset or custom pixel size |
+| `color` | `string` | `"currentColor"` | CSS color; inherits text color by default |
+| `className` | `string` | — | Additional classes, including semantic text colors |
+
+Preset sizes are `xs` = 12px, `sm` = 16px, `md` = 20px, `lg` = 24px, and `xl` = 32px. Use `size={40}` or `size={48}` for larger sizes; `2xl` and `3xl` are not preset names. Native SVG attributes and refs are forwarded.
 
 ## Accessibility
 
-- Icons are decorative by default (`aria-hidden="true"`)
-- For standalone icons with meaning, use `aria-hidden={false}`, `role="img"`, and an `aria-label`.
+Icons are decorative by default (`aria-hidden="true"`). Label the action on its button or link:
+
+```tsx
+<Button icon="multiply" iconPosition="icon-only" aria-label="Close dialog" />
+```
+
+For a standalone icon that communicates meaning, explicitly expose and name it:
+
+```tsx
+<Icon icon={checkIcon} aria-hidden={false} role="img" aria-label="Completed" />
+```
+
+An `aria-label` alone does not override the default `aria-hidden`. Use a real button or link for interactive icons.

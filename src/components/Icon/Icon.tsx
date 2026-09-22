@@ -1,8 +1,11 @@
-import { type SVGAttributes, forwardRef, useEffect, useState } from "react";
+import { type SVGAttributes, type ReactNode, forwardRef, useEffect, useState } from "react";
 import { cn } from "../../utils/cn";
 import type { IconName, IconVariant, IconRecord } from "./icons";
 
 export type { IconName, IconVariant, IconRecord } from "./icons";
+
+/** Shared icon-slot contract: registry name, static SVG data, or a custom React node. */
+export type IconSource = IconName | IconRecord | ReactNode;
 
 export type IconSize = "xs" | "sm" | "md" | "lg" | "xl";
 

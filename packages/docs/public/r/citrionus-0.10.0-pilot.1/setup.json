@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "setup",
+  "type": "registry:style",
+  "title": "Citrionus setup",
+  "description": "A global stylesheet entry for the complete free Citrionus default.",
+  "files": [
+    {
+      "path": "registry/citrionus/setup/rayden.css",
+      "type": "registry:file",
+      "target": "~/styles/rayden.css",
+      "content": "/* Import this once from your application's global stylesheet or entry point. */\n@import \"@raydenui/ui/styles.css\";\n"
+    }
+  ],
+  "docs": "Import styles/rayden.css once from your app's global stylesheet or entry point. The installed @raydenui/ui package supplies the runtime and compiled styles. This pilot does not replace your theme provider or application configuration.",
+  "dependencies": [
+    "@raydenui/ui@0.10.0"
+  ],
+  "meta": {
+    "rayden": {
+      "schemaVersion": "1.0.0",
+      "flavor": "citrionus",
+      "uiVersion": "0.10.0",
+      "aiVersion": "0.1.4",
+      "registryVersion": "citrionus-0.10.0-pilot.1",
+      "distribution": "package-backed",
+      "status": "local-pilot",
+      "components": []
+    }
+  }
+}

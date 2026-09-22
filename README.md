@@ -6,91 +6,166 @@
 
 # Rayden UI
 
-A modern, accessible React component library built with Tailwind CSS v4.
-Pixel-perfect components from the [Rayna UI](https://www.raynaui.com/) design system.
+React components, page blocks, icons, and design tokens for building product interfaces. Rayden's default **Citrionus** flavor is built with Tailwind CSS v4 and includes TypeScript definitions, light and dark themes, and opt-in motion.
 
 [![npm version](https://img.shields.io/npm/v/@raydenui/ui.svg)](https://www.npmjs.com/package/@raydenui/ui)
 [![npm downloads](https://img.shields.io/npm/dm/@raydenui/ui.svg)](https://www.npmjs.com/package/@raydenui/ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Documentation](https://img.shields.io/badge/docs-rayden--docs.vercel.app-F56630)](https://rayden-docs.vercel.app)
-[![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://69b6d5e6cb6bbc778afec0ee-tcxvxzrkrt.chromatic.com/)
 
-## Quick Start
+[Documentation](https://rayden-docs.vercel.app) · [Storybook](https://main--69b6d5d8527b4eddb882e0a7.chromatic.com) · [Source](https://github.com/playbookTV/Rayden)
 
-The fastest way to get started is with `create-rayden-app`:
+## Quick start
 
-```bash
-npx create-rayden-app my-app
-cd my-app
-npm install
-npm run dev
-```
-
-### Templates
-
-| Template | Description |
-|----------|-------------|
-| `blank` | Empty project, Rayden UI configured |
-| `minimal` | Demo of core components |
-| `landing` | Hero, features, pricing, CTA |
-| `dashboard` | Sidebar, tables, metrics |
-| `ecommerce` | Products, cart, checkout |
-| `blog` | Articles, categories, posts |
-
-### CLI Options
-
-```bash
-npx create-rayden-app my-app -f vite -t landing --ts --pm pnpm
-```
-
-| Flag | Options |
-|------|---------|
-| `-f, --framework` | `vite` (recommended), `nextjs` |
-| `-t, --template` | `blank`, `minimal`, `landing`, `dashboard`, `ecommerce`, `blog` |
-| `--ts` / `--js` | TypeScript (default) or JavaScript |
-| `--pm` | `npm`, `pnpm`, `yarn` |
-
-### Manual Installation
+In an existing React application:
 
 ```bash
 npm install @raydenui/ui
 ```
 
-## Usage
+React and React DOM 18 or later are required. Import the component stylesheet once in your app entry point or root layout. The optional font stylesheet serves bundled Hanken Grotesk and Manrope webfonts from your app.
 
 ```tsx
 import "@raydenui/ui/styles.css";
-import { Button, Input, Badge } from "@raydenui/ui";
+import "@raydenui/ui/fonts.css";
+import { Badge, Button, Input, ThemeProvider } from "@raydenui/ui";
 
-function App() {
+export default function App() {
   return (
-    <div className="flex flex-col gap-4 p-8">
-      <Input label="Email" placeholder="you@example.com" />
-      <Button variant="primary" size="lg">Subscribe</Button>
-      <Badge color="success">Active</Badge>
-    </div>
+    <ThemeProvider defaultTheme="system">
+      <main style={{ display: "grid", gap: 16, maxWidth: 400, padding: 24 }}>
+        <Input label="Email" type="email" placeholder="you@example.com" />
+        <Button variant="primary" size="lg">Subscribe</Button>
+        <Badge color="success">Active</Badge>
+      </main>
+    </ThemeProvider>
   );
 }
 ```
 
-## Components (33+)
+The package includes compiled component CSS. Configure Tailwind CSS v4 in your own app if you also want to generate utility classes for your layouts. In Next.js App Router, put interactive examples and providers in a client component with `"use client"`; import global styles from the root layout.
 
-**Forms & Inputs**: Button, ButtonGroup, Input, Select, FormControl, Chip, FileUpload, Counter, Slider, DatePicker
+### Start a new project
 
-**Navigation**: Tabs, Breadcrumb, Pagination, SidebarMenu, DropdownMenu, Stepper
+```bash
+npx create-rayden-app@latest my-app
+```
 
-**Data Display**: Table, Avatar, ActivityFeed, MetricsCard, Icon, EmptyStateIllustration, Chart
+Choose Vite or Next.js, TypeScript or JavaScript, and one of six starter templates: `blank`, `minimal`, `landing`, `dashboard`, `ecommerce`, or `blog`. Follow the CLI's printed next steps; it can install dependencies during setup.
 
-**Feedback**: Alert, Badge, Banner, ProgressBar, ProgressCircle, Spinner, Tooltip
+For an explicit setup with npm:
 
-**Layout**: Accordion, Divider, Modal
+```bash
+npx create-rayden-app@latest my-app -f vite -t minimal --ts --pm npm --install
+cd my-app
+npm run dev
+```
 
-## Resources
+## Package imports
 
-- [Documentation](https://rayden-docs.vercel.app) — Full component API and guides
-- [Storybook](https://main--69b6d5d8527b4eddb882e0a7.chromatic.com) — Interactive component explorer
-- [create-rayden-app](https://www.npmjs.com/package/create-rayden-app) — CLI scaffolding with 6 templates
-- [@raydenui/ai](https://www.npmjs.com/package/@raydenui/ai) — MCP server for AI-assisted development
+| Import | What it provides |
+| --- | --- |
+| `@raydenui/ui` | Components, theme providers and hooks, icon discovery, and utilities |
+| `@raydenui/ui/blocks` | Ready-made application, account, marketing, and commerce blocks |
+| `@raydenui/ui/icons` | Named static icon data such as `heartIcon` |
+| `@raydenui/ui/chart` | `RaydenChart` and chart helpers |
+| `@raydenui/ui/motion` | Motion primitives, presets, and recipes |
+| `@raydenui/ui/preset` | Programmatic design tokens and the Tailwind preset |
+| `@raydenui/ui/styles.css` | Compiled component styles and theme variables |
+| `@raydenui/ui/fonts.css` | Optional bundled webfonts |
+
+Charts require the optional `chart.js` and `react-chartjs-2` peers. The `useRaydenInput`, `useRaydenSelect`, and other form integration hooks require `react-hook-form`. Install these only when using the corresponding features:
+
+```bash
+npm install chart.js react-chartjs-2
+# For React Hook Form integration:
+npm install react-hook-form
+```
+
+## Components and blocks
+
+- **Forms:** Button, ButtonGroup, Input, Select, Checkbox, Radio, Toggle, Chip, FileUpload, Counter, Slider, and DatePicker.
+- **Navigation:** Tabs, Breadcrumb, Pagination, SidebarMenu, DropdownMenu, and Stepper.
+- **Display and feedback:** Card, Table, Avatar, ActivityItem, ActivityContent, MetricsCard, Icon, EmptyStateIllustration, Alert, Badge, Banner, ProgressBar, ProgressCircle, Spinner, and Tooltip.
+- **Layout:** Accordion, Divider, and Modal. Charts are available as `RaydenChart` from the chart subpath.
+
+Import page blocks separately:
+
+```tsx
+import { PageHeaderBlock } from "@raydenui/ui/blocks";
+
+export function OverviewHeader() {
+  return (
+    <PageHeaderBlock
+      title="Overview"
+      description="A snapshot of your workspace activity."
+    />
+  );
+}
+```
+
+The block library includes application shells, page headers, workspace switching, command palettes, login and account creation, profile settings, KPI overviews, task lists, tables, notifications, marketing sections, product browsing, carts, and checkout review. Blocks provide UI; connect their props and callbacks to your own data and services.
+
+## Icons
+
+Use a static data import for immediate rendering, including server rendering:
+
+```tsx
+import { Button, Icon } from "@raydenui/ui";
+import { heartIcon } from "@raydenui/ui/icons";
+
+export function FavoriteButton() {
+  return <Button icon={heartIcon} iconPosition="leading">Favorite</Button>;
+}
+
+export function FavoriteIcon() {
+  return <Icon icon={heartIcon} variant="solid" size={24} />;
+}
+```
+
+`<Icon name="heart" />` supports dynamic name lookup and loads the icon registry after mounting. Pass either `name` or `icon`. Both `outline` and `solid` variants are available. The `iconCatalog` export lists exact registry names and static export names without SVG artwork.
+
+Icons are decorative by default. Label icon-only controls on the control itself; a meaningful standalone icon needs `aria-hidden={false}`, `role="img"`, and an `aria-label`.
+
+## Theme and motion
+
+`ThemeProvider` supports `light`, `dark`, and `system`. Use `useTheme()` to read or change the selected theme.
+
+```tsx
+import { MotionProvider, Pressable } from "@raydenui/ui/motion";
+
+export function MotionExample() {
+  return (
+    <MotionProvider preset="snappy">
+      <Pressable>Continue</Pressable>
+    </MotionProvider>
+  );
+}
+```
+
+Motion presets are `calm`, `snappy`, `playful`, and `reduced`. `Reveal`, `Collapse`, and `SharedLayout` provide additional primitives. Tabs and Modal require an explicit `motion` prop to animate. System reduced-motion preferences take precedence.
+
+## AI and MCP
+
+[`@raydenui/ai`](https://www.npmjs.com/package/@raydenui/ai) supplies component contracts, token references, icon discovery, usage validation, and the Rayden MCP server. The MCP server ships in that package; it does not require a separate MCP package.
+
+For an MCP client that launches stdio servers, use command `npx` with arguments `-y` and `@raydenui/ai@latest`. To inspect the server from a terminal:
+
+```bash
+npx -y @raydenui/ai@latest --help
+```
+
+See the [AI package README](https://github.com/playbookTV/Rayden/tree/main/packages/rayden-ai#readme) for configuration and programmatic usage. The AI catalog identifies its reference UI version and supported components; it does not inspect your installed project automatically.
+
+## Development
+
+From a checkout with Node.js and pnpm installed:
+
+```bash
+pnpm install
+pnpm storybook
+```
+
+Use `pnpm typecheck`, `pnpm exec vitest run`, and `pnpm build` to check the UI. `pnpm check:pilots` validates the matching AI/MCP package and generated guidance after the UI build. Browser tests require a Playwright Chromium installation. See [CONTRIBUTING.md](https://github.com/playbookTV/Rayden/blob/main/CONTRIBUTING.md) for contributor setup.
 
 ## Contributors
 

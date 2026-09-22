@@ -1,3 +1,7 @@
+import ApplicationShellBlockManifest from "./ApplicationShellBlock.json";
+import PageHeaderBlockManifest from "./PageHeaderBlock.json";
+import WorkspaceSwitcherBlockManifest from "./WorkspaceSwitcherBlock.json";
+import CommandPaletteBlockManifest from "./CommandPaletteBlock.json";
 /** Public component knowledge. Export mappings and prop contracts are generated from UI source. */
 import registry from "./components.json";
 import schemaDefinition from "./schema.json";
@@ -110,6 +114,11 @@ export interface ResolvedManifest {
   assumptions: string[];
 }
 const authoredManifests = {
+  ApplicationShellBlock: ApplicationShellBlockManifest,
+  PageHeaderBlock: PageHeaderBlockManifest,
+  WorkspaceSwitcherBlock: WorkspaceSwitcherBlockManifest,
+  CommandPaletteBlock: CommandPaletteBlockManifest,
+
   Button: m0,
   Badge: m1,
   Icon: m2,

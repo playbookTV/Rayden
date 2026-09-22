@@ -1,0 +1,7440 @@
+[
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Support Us",
+        "width": 66.59375,
+        "height": 16
+      },
+      {
+        "label": "Solutions",
+        "width": 83.203125,
+        "height": 20
+      },
+      {
+        "label": "How it works",
+        "width": 86.734375,
+        "height": 20
+      },
+      {
+        "label": "About",
+        "width": 60.84375,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Support Us",
+        "width": 66.59375,
+        "height": 16
+      },
+      {
+        "label": "Solutions",
+        "width": 83.203125,
+        "height": 20
+      },
+      {
+        "label": "How it works",
+        "width": 86.734375,
+        "height": 20
+      },
+      {
+        "label": "About",
+        "width": 60.84375,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Support Us",
+        "width": 66.59375,
+        "height": 16
+      },
+      {
+        "label": "Solutions",
+        "width": 83.203125,
+        "height": 20
+      },
+      {
+        "label": "How it works",
+        "width": 86.734375,
+        "height": 20
+      },
+      {
+        "label": "About",
+        "width": 60.84375,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Support Us",
+        "width": 66.59375,
+        "height": 16
+      },
+      {
+        "label": "Solutions",
+        "width": 83.203125,
+        "height": 20
+      },
+      {
+        "label": "How it works",
+        "width": 86.734375,
+        "height": 20
+      },
+      {
+        "label": "About",
+        "width": 60.84375,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Support Us",
+        "width": 66.59375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Support Us",
+        "width": 66.59375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Use Cases",
+        "width": 70.984375,
+        "height": 20
+      },
+      {
+        "label": "Pricing",
+        "width": 47.25,
+        "height": 20
+      },
+      {
+        "label": "Partners",
+        "width": 57.65625,
+        "height": 20
+      },
+      {
+        "label": "Affiliates",
+        "width": 60.4375,
+        "height": 20
+      },
+      {
+        "label": "Customers",
+        "width": 73.640625,
+        "height": 20
+      },
+      {
+        "label": "Blog",
+        "width": 30.28125,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 90.828125,
+        "height": 20
+      },
+      {
+        "label": "Login",
+        "width": 36.9375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".text-primary-400.text-sm.font-semibold"],
+            "html": "<button type=\"button\" class=\"text-sm font-semibold whitespace-nowrap text-primary-400\">Login</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Use Cases",
+        "width": 70.984375,
+        "height": 20
+      },
+      {
+        "label": "Pricing",
+        "width": 47.25,
+        "height": 20
+      },
+      {
+        "label": "Partners",
+        "width": 57.65625,
+        "height": 20
+      },
+      {
+        "label": "Affiliates",
+        "width": 60.4375,
+        "height": 20
+      },
+      {
+        "label": "Customers",
+        "width": 73.640625,
+        "height": 20
+      },
+      {
+        "label": "Blog",
+        "width": 30.28125,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 90.828125,
+        "height": 20
+      },
+      {
+        "label": "Login",
+        "width": 36.9375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 953,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Use Cases",
+        "width": 70.984375,
+        "height": 20
+      },
+      {
+        "label": "Pricing",
+        "width": 47.25,
+        "height": 20
+      },
+      {
+        "label": "Partners",
+        "width": 57.65625,
+        "height": 20
+      },
+      {
+        "label": "Affiliates",
+        "width": 60.4375,
+        "height": 20
+      },
+      {
+        "label": "Customers",
+        "width": 73.640625,
+        "height": 20
+      },
+      {
+        "label": "Blog",
+        "width": 30.28125,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 90.828125,
+        "height": 20
+      },
+      {
+        "label": "Login",
+        "width": 36.9375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 953,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Use Cases",
+        "width": 70.984375,
+        "height": 20
+      },
+      {
+        "label": "Pricing",
+        "width": 47.25,
+        "height": 20
+      },
+      {
+        "label": "Partners",
+        "width": 57.65625,
+        "height": 20
+      },
+      {
+        "label": "Affiliates",
+        "width": 60.4375,
+        "height": 20
+      },
+      {
+        "label": "Customers",
+        "width": 73.640625,
+        "height": 20
+      },
+      {
+        "label": "Blog",
+        "width": 30.28125,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 90.828125,
+        "height": 20
+      },
+      {
+        "label": "Login",
+        "width": 36.9375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 939,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 939,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 939,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".text-xl"],
+            "html": "<span class=\"text-xl font-bold whitespace-nowrap text-white\"><span class=\"text-primary-400\">R</span> rayna UI</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.04 (foreground color: #ffffff, background color: #f9fafb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 939,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".text-xl"],
+            "html": "<span class=\"text-xl font-bold whitespace-nowrap text-white\"><span class=\"text-primary-400\">R</span> rayna UI</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.04 (foreground color: #ffffff, background color: #f9fafb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".bg-primary-50"],
+            "html": "<button type=\"button\" class=\"px-6 py-4 font-semibold text-base text-primary-400 bg-primary-50 rounded-2xl whitespace-nowrap\">Sign In</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.69 (foreground color: #f56630, background color: #ffece5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 881,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".bg-primary-50"],
+            "html": "<button type=\"button\" class=\"px-6 py-4 font-semibold text-base text-primary-400 bg-primary-50 rounded-2xl whitespace-nowrap\">Sign In</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #f56630, background color: #711e00, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 881,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".text-sm.text-primary-400.font-semibold"],
+            "html": "<button type=\"button\" class=\"text-sm font-semibold whitespace-nowrap text-primary-400\">Register</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Solutions",
+        "width": 63.203125,
+        "height": 20
+      },
+      {
+        "label": "Investments",
+        "width": 82.890625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      },
+      {
+        "label": "Log in",
+        "width": 40.5,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Solutions",
+        "width": 63.203125,
+        "height": 20
+      },
+      {
+        "label": "Investments",
+        "width": 82.890625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      },
+      {
+        "label": "Log in",
+        "width": 40.5,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Solutions",
+        "width": 63.203125,
+        "height": 20
+      },
+      {
+        "label": "Investments",
+        "width": 82.890625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      },
+      {
+        "label": "Log in",
+        "width": 40.5,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".text-primary-400.text-sm.font-semibold"],
+            "html": "<button type=\"button\" class=\"text-sm font-semibold whitespace-nowrap text-primary-400\">Log in</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Solutions",
+        "width": 63.203125,
+        "height": 20
+      },
+      {
+        "label": "Investments",
+        "width": 82.890625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      },
+      {
+        "label": "Log in",
+        "width": 40.5,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Find talent",
+        "width": 71.625,
+        "height": 20
+      },
+      {
+        "label": "For designers",
+        "width": 92.296875,
+        "height": 20
+      },
+      {
+        "label": "Inspiration",
+        "width": 71.921875,
+        "height": 20
+      },
+      {
+        "label": "Learn Design",
+        "width": 88.296875,
+        "height": 20
+      },
+      {
+        "label": "Go Pro",
+        "width": 45.390625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Find talent",
+        "width": 71.625,
+        "height": 20
+      },
+      {
+        "label": "For designers",
+        "width": 92.296875,
+        "height": 20
+      },
+      {
+        "label": "Inspiration",
+        "width": 71.921875,
+        "height": 20
+      },
+      {
+        "label": "Learn Design",
+        "width": 88.296875,
+        "height": 20
+      },
+      {
+        "label": "Go Pro",
+        "width": 45.390625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".md\\:block > .gap-6 > .gap-2.transition-colors.text-grey-400:nth-child(1)"
+            ],
+            "html": "<button type=\"button\" class=\"flex items-center gap-2 font-semibold whitespace-nowrap transition-colors text-sm text-grey-400 hover:text-grey-50\">Find talent</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.46 (foreground color: #98a2b3, background color: #f9fafb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".md\\:block > .gap-6 > .gap-2.transition-colors.text-grey-400:nth-child(2)"
+            ],
+            "html": "<button type=\"button\" class=\"flex items-center gap-2 font-semibold whitespace-nowrap transition-colors text-sm text-grey-400 hover:text-grey-50\">For designers</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.46 (foreground color: #98a2b3, background color: #f9fafb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".gap-2.transition-colors.text-grey-400:nth-child(3)"],
+            "html": "<button type=\"button\" class=\"flex items-center gap-2 font-semibold whitespace-nowrap transition-colors text-sm text-grey-400 hover:text-grey-50\">Inspiration</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.46 (foreground color: #98a2b3, background color: #f9fafb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".gap-2.transition-colors.text-grey-400:nth-child(4)"],
+            "html": "<button type=\"button\" class=\"flex items-center gap-2 font-semibold whitespace-nowrap transition-colors text-sm text-grey-400 hover:text-grey-50\">Learn Design</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.46 (foreground color: #98a2b3, background color: #f9fafb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".gap-2.transition-colors.text-grey-400:nth-child(5)"],
+            "html": "<button type=\"button\" class=\"flex items-center gap-2 font-semibold whitespace-nowrap transition-colors text-sm text-grey-400 hover:text-grey-50\">Go Pro</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.46 (foreground color: #98a2b3, background color: #f9fafb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".text-xl"],
+            "html": "<span class=\"text-xl font-bold whitespace-nowrap text-white\"><span class=\"text-primary-400\">R</span> rayna UI</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.04 (foreground color: #ffffff, background color: #f9fafb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+          },
+          {
+            "target": [
+              ".md\\:flex > .gap-6:nth-child(1) > .gap-2.transition-colors.text-grey-400:nth-child(1)"
+            ],
+            "html": "<button type=\"button\" class=\"flex items-center gap-2 font-semibold whitespace-nowrap transition-colors text-sm text-grey-400 hover:text-grey-50\">Meet Rayna</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.46 (foreground color: #98a2b3, background color: #f9fafb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              ".md\\:flex > .gap-6:nth-child(1) > .gap-2.transition-colors.text-grey-400:nth-child(2)"
+            ],
+            "html": "<button type=\"button\" class=\"flex items-center gap-2 font-semibold whitespace-nowrap transition-colors text-sm text-grey-400 hover:text-grey-50\">Resources</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.46 (foreground color: #98a2b3, background color: #f9fafb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 1051,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Find talent",
+        "width": 71.625,
+        "height": 20
+      },
+      {
+        "label": "For designers",
+        "width": 92.296875,
+        "height": 20
+      },
+      {
+        "label": "Inspiration",
+        "width": 71.921875,
+        "height": 20
+      },
+      {
+        "label": "Learn Design",
+        "width": 88.296875,
+        "height": 20
+      },
+      {
+        "label": "Go Pro",
+        "width": 45.390625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 1051,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Find talent",
+        "width": 71.625,
+        "height": 20
+      },
+      {
+        "label": "For designers",
+        "width": 92.296875,
+        "height": 20
+      },
+      {
+        "label": "Inspiration",
+        "width": 71.921875,
+        "height": 20
+      },
+      {
+        "label": "Learn Design",
+        "width": 88.296875,
+        "height": 20
+      },
+      {
+        "label": "Go Pro",
+        "width": 45.390625,
+        "height": 20
+      },
+      {
+        "label": "Meet Rayna",
+        "width": 78.96875,
+        "height": 20
+      },
+      {
+        "label": "Resources",
+        "width": 70.828125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".text-xl"],
+            "html": "<span class=\"text-xl font-bold whitespace-nowrap text-white\"><span class=\"text-primary-400\">R</span> rayna UI</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.04 (foreground color: #ffffff, background color: #f9fafb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 313,
+        "height": 20
+      },
+      {
+        "label": "Sign in",
+        "width": 45.640625,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".text-primary-400.text-sm.font-semibold"],
+            "html": "<button type=\"button\" class=\"text-sm font-semibold whitespace-nowrap text-primary-400\">Sign in</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 925,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 313,
+        "height": 20
+      },
+      {
+        "label": "Sign in",
+        "width": 45.640625,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 313,
+        "height": 20
+      },
+      {
+        "label": "Sign in",
+        "width": 45.640625,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 925,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 313,
+        "height": 20
+      },
+      {
+        "label": "Sign in",
+        "width": 45.640625,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".rounded-l-lg"],
+            "html": "<button type=\"button\" class=\"px-4 py-2.5 text-sm whitespace-nowrap rounded-l-lg bg-white border border-grey-200 font-semibold text-info-500\">Personal</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.99 (foreground color: #0086c9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".rounded-r-lg"],
+            "html": "<button type=\"button\" class=\"px-4 py-2.5 text-sm whitespace-nowrap rounded-r-lg bg-grey-200 font-medium text-grey-400\">Business</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.01 (foreground color: #98a2b3, background color: #475367, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 915,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".rounded-l-lg"],
+            "html": "<button type=\"button\" class=\"px-4 py-2.5 text-sm whitespace-nowrap rounded-l-lg bg-white border border-grey-200 font-semibold text-info-500\">Personal</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.99 (foreground color: #0086c9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".rounded-r-lg"],
+            "html": "<button type=\"button\" class=\"px-4 py-2.5 text-sm whitespace-nowrap rounded-r-lg bg-grey-200 font-medium text-grey-400\">Business</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.07 (foreground color: #98a2b3, background color: #e4e7ec, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".text-primary-400.text-sm.font-semibold"],
+            "html": "<button type=\"button\" class=\"text-sm font-semibold whitespace-nowrap text-primary-400\">Register</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 915,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Register",
+        "width": 56.34375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Privacy Policy",
+        "width": 94.09375,
+        "height": 20
+      },
+      {
+        "label": "Terms of Use",
+        "width": 88.703125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".bg-primary-50"],
+            "html": "<button type=\"button\" class=\"px-4 py-2 text-sm font-semibold rounded-lg whitespace-nowrap bg-primary-50 text-primary-400\">Personal</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.69 (foreground color: #f56630, background color: #ffece5, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".py-2.text-grey-400.px-4"],
+            "html": "<button type=\"button\" class=\"px-4 py-2 text-sm font-semibold rounded-lg whitespace-nowrap text-grey-400\">Business</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".hover\\:text-grey-600.text-grey-400.text-sm:nth-child(1)"],
+            "html": "<button type=\"button\" class=\"text-sm font-semibold text-grey-400 hover:text-grey-600 whitespace-nowrap\">Privacy Policy</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".hover\\:text-grey-600.text-grey-400.text-sm:nth-child(2)"],
+            "html": "<button type=\"button\" class=\"text-sm font-semibold text-grey-400 hover:text-grey-600 whitespace-nowrap\">Terms of Use</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Privacy Policy",
+        "width": 94.09375,
+        "height": 20
+      },
+      {
+        "label": "Terms of Use",
+        "width": 88.703125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Privacy Policy",
+        "width": 94.09375,
+        "height": 20
+      },
+      {
+        "label": "Terms of Use",
+        "width": 88.703125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".bg-primary-50"],
+            "html": "<button type=\"button\" class=\"px-4 py-2 text-sm font-semibold rounded-lg whitespace-nowrap bg-primary-50 text-primary-400\">Personal</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #f56630, background color: #711e00, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".text-primary-600"],
+            "html": "<button type=\"button\" class=\"px-6 py-4 font-semibold text-base text-primary-600 bg-white border-[1.5px] border-primary-600 rounded-lg whitespace-nowrap\">Login</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.14 (foreground color: #fa9874, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "Privacy Policy",
+        "width": 94.09375,
+        "height": 20
+      },
+      {
+        "label": "Terms of Use",
+        "width": 88.703125,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 187.765625,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 260.8125,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Forgot Password?",
+        "width": 118.046875,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 166,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 166,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 333,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000.1875,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000.1875,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 166,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 166,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Create Account",
+        "width": 102.359375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--card",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 333,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000.1875,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000.1875,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "checkbox",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ["h2"],
+            "html": "<h2 class=\"text-[28px] font-semibold text-grey-900 leading-[1.2] tracking-[-0.56px]\">Sign in with your work email</h2>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.01 (foreground color: #f9fafb, background color: #fff7f4, font size: 21.0pt (28px), font weight: normal). Expected contrast ratio of 3:1"
+          },
+          {
+            "target": ["p"],
+            "html": "<p class=\"text-base text-grey-500\">Use your work email to sign in to your team workspace</p>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.39 (foreground color: #d0d5dd, background color: #fff7f4, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": ["label[for=\"_r_h_\"]"],
+            "html": "<label for=\"_r_h_\" class=\"text-sm font-medium text-grey-900 leading-[1.45]\">Email Address</label>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.01 (foreground color: #f9fafb, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": ["label[for=\"_r_i_\"]"],
+            "html": "<label for=\"_r_i_\" class=\"text-sm font-medium text-grey-900 leading-[1.45]\">PASSWORD</label>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.01 (foreground color: #f9fafb, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".gap-1.justify-center.items-center > span"],
+            "html": "<span class=\"text-sm text-grey-500\">Don't have an account?</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.39 (foreground color: #d0d5dd, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".text-primary-600"],
+            "html": "<button type=\"button\" class=\"text-sm font-medium text-primary-600\">Sign up</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.02 (foreground color: #fa9874, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ["h2"],
+            "html": "<h2 class=\"text-[28px] font-semibold text-grey-900 leading-[1.2] tracking-[-0.56px]\">Sign in with your work email</h2>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.01 (foreground color: #f9fafb, background color: #fff7f4, font size: 21.0pt (28px), font weight: normal). Expected contrast ratio of 3:1"
+          },
+          {
+            "target": ["p"],
+            "html": "<p class=\"text-base text-grey-500\">Use your work email to sign in to your team workspace</p>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.39 (foreground color: #d0d5dd, background color: #fff7f4, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": ["label[for=\"_r_h_\"]"],
+            "html": "<label for=\"_r_h_\" class=\"text-sm font-medium text-grey-900 leading-[1.45]\">Email Address</label>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.01 (foreground color: #f9fafb, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": ["label[for=\"_r_i_\"]"],
+            "html": "<label for=\"_r_i_\" class=\"text-sm font-medium text-grey-900 leading-[1.45]\">PASSWORD</label>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.01 (foreground color: #f9fafb, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".gap-1.justify-center.items-center > span"],
+            "html": "<span class=\"text-sm text-grey-500\">Don't have an account?</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.39 (foreground color: #d0d5dd, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [".text-primary-600"],
+            "html": "<button type=\"button\" class=\"text-sm font-medium text-primary-600\">Sign up</button>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.02 (foreground color: #fa9874, background color: #fff7f4, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "email",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "password",
+        "width": 154,
+        "height": 20
+      },
+      {
+        "label": "Sign up",
+        "width": 49.6875,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "div:nth-child(1) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(2) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(2) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .w-full.gap-1.items-start > .min-w-0.flex-1.items-start > a"
+            ],
+            "html": "<a href=\"#\" class=\"text-xs font-medium text-primary-400 underline whitespace-nowrap\">Marketing Design</a>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(3) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(4) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(4) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .w-full.gap-1.items-start > .min-w-0.flex-1.items-start > a"
+            ],
+            "html": "<a href=\"#\" class=\"text-xs font-medium text-primary-400 underline whitespace-nowrap\">Marketing Design</a>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(5) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(5) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .w-full.gap-1.items-start > .min-w-0.flex-1.items-start > a"
+            ],
+            "html": "<a href=\"#\" class=\"text-xs font-medium text-primary-400 underline whitespace-nowrap\">Marketing Design</a>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SECTION",
+        "class": "bg-white dark:bg-grey-50 rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8 overflow-clip",
+        "width": 240,
+        "scrollWidth": 282,
+        "overflow": "clip"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "div:nth-child(1) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(2) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(2) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .w-full.gap-1.items-start > .min-w-0.flex-1.items-start > a"
+            ],
+            "html": "<a href=\"#\" class=\"text-xs font-medium text-primary-400 underline whitespace-nowrap\">Marketing Design</a>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(3) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(4) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(4) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .w-full.gap-1.items-start > .min-w-0.flex-1.items-start > a"
+            ],
+            "html": "<a href=\"#\" class=\"text-xs font-medium text-primary-400 underline whitespace-nowrap\">Marketing Design</a>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(5) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .justify-between.w-full.items-center > .min-w-0.flex-1.gap-1 > .leading-5.text-grey-600.text-body-sm > .text-primary-400.font-medium"
+            ],
+            "html": "<span class=\"font-medium text-primary-400\">Site redesign</span>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "target": [
+              "div:nth-child(5) > article > .gap-3.min-w-0.flex-1 > .w-full.flex-col.gap-1 > .w-full.gap-1.items-start > .min-w-0.flex-1.items-start > a"
+            ],
+            "html": "<a href=\"#\" class=\"text-xs font-medium text-primary-400 underline whitespace-nowrap\">Marketing Design</a>",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.07 (foreground color: #f56630, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-notifications--default",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SECTION",
+        "class": "bg-white dark:bg-grey-50 rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8 overflow-clip",
+        "width": 240,
+        "scrollWidth": 282,
+        "overflow": "clip"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 53,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      },
+      {
+        "label": "Marketing Design",
+        "width": 101.171875,
+        "height": 16
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "SECTION",
+        "role": null,
+        "label": null
+      },
+      {
+        "tag": "DIV",
+        "role": "feed",
+        "label": "Notifications list"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 597,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 597,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 597,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".gap-1\\.5"],
+            "html": "<button type=\"button\" class=\"flex items-center gap-1.5 text-xs font-semibold text-primary-500\">",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.68 (foreground color: #eb5017, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 597,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 260,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 190,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 260,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".gap-1\\.5"],
+            "html": "<button type=\"button\" class=\"flex items-center gap-1.5 text-xs font-semibold text-primary-500\">",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.68 (foreground color: #eb5017, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 320,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "class": "flex gap-5 overflow-x-auto",
+        "width": 190,
+        "scrollWidth": 652,
+        "overflow": "auto"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-xs font-semibold text-grey-900 whitespace-nowrap max-w-[80px] truncate",
+        "width": 80,
+        "scrollWidth": 83,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all beneficiaries",
+        "width": 136.53125,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".gap-1\\.5"],
+            "html": "<button type=\"button\" class=\"flex items-center gap-1.5 text-xs font-semibold text-primary-500\">",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.68 (foreground color: #eb5017, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "text-sm text-grey-900 truncate",
+        "width": 132,
+        "scrollWidth": 140,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 337,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "text-sm text-grey-900 truncate",
+        "width": 110,
+        "scrollWidth": 115,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-sm text-grey-900 truncate",
+        "width": 127,
+        "scrollWidth": 140,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 390,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "text-sm text-grey-900 truncate",
+        "width": 132,
+        "scrollWidth": 140,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [".gap-1\\.5"],
+            "html": "<button type=\"button\" class=\"flex items-center gap-1.5 text-xs font-semibold text-primary-500\">",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.68 (foreground color: #eb5017, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 337,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "text-sm text-grey-900 truncate",
+        "width": 110,
+        "scrollWidth": 115,
+        "overflow": "hidden"
+      },
+      {
+        "tag": "SPAN",
+        "class": "text-sm text-grey-900 truncate",
+        "width": 127,
+        "scrollWidth": 140,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "See all",
+        "width": 56.984375,
+        "height": 16
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 846,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 846,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1000,
+      "top": 0,
+      "right": 768,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 657,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 622,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 657,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1000,
+      "top": 0,
+      "right": 390,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 622,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1000,
+      "top": 0,
+      "right": 320,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "text",
+        "width": 198,
+        "height": 20
+      },
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olamide Akintan",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Alison David",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Megan Willow",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Janelle Levi",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select King Fisher",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Olivia Mahun",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Vivian Kalu",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Douglas Smith",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Kenneth Tarry",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 2028,
+      "top": 0,
+      "right": 768,
+      "bottom": 2028,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 768,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 2028,
+      "top": 0,
+      "right": 768,
+      "bottom": 2028,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 505,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 2028,
+      "top": 0,
+      "right": 390,
+      "bottom": 2028,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 470,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 2028,
+      "top": 0,
+      "right": 320,
+      "bottom": 2028,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 505,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 2028,
+      "top": 0,
+      "right": 390,
+      "bottom": 2028,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 470,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 2028,
+      "top": 0,
+      "right": 320,
+      "bottom": 2028,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Filter",
+        "width": 48.4375,
+        "height": 20
+      }
+    ],
+    "landmarks": [],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "dark",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "light",
+    "width": 1440,
+    "viewport": 1440,
+    "document": 1440,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 1000,
+      "top": 0,
+      "right": 1440,
+      "bottom": 1000,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "dark",
+    "width": 768,
+    "viewport": 768,
+    "document": 832,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1007,
+      "top": 0,
+      "right": 768,
+      "bottom": 1007,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "light",
+    "width": 768,
+    "viewport": 768,
+    "document": 832,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 1007,
+      "top": 0,
+      "right": 768,
+      "bottom": 1007,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "light",
+    "width": 390,
+    "viewport": 390,
+    "document": 643,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1007,
+      "top": 0,
+      "right": 390,
+      "bottom": 1007,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "dark",
+    "width": 390,
+    "viewport": 390,
+    "document": 643,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 1007,
+      "top": 0,
+      "right": 390,
+      "bottom": 1007,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "light",
+    "width": 320,
+    "viewport": 320,
+    "document": 608,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1007,
+      "top": 0,
+      "right": 320,
+      "bottom": 1007,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  },
+  {
+    "id": "blocks-table--default",
+    "theme": "dark",
+    "width": 320,
+    "viewport": 320,
+    "document": 608,
+    "root": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 1007,
+      "top": 0,
+      "right": 320,
+      "bottom": 1007,
+      "left": 0
+    },
+    "scrollAreas": [
+      {
+        "tag": "SPAN",
+        "class": "sr-only",
+        "width": 1,
+        "scrollWidth": 56,
+        "overflow": "hidden"
+      }
+    ],
+    "smallTargets": [
+      {
+        "label": "Select all rows",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Emery Torff",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Maren Dokidis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Cooper Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Marcus Dias",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Ahmad Stanton",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Giana Carder",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Tiana Curtis",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Omar Siphron",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Angel Rhiel Madsen",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Select Lindsey Calzoni",
+        "width": 20,
+        "height": 20
+      }
+    ],
+    "landmarks": [
+      {
+        "tag": "NAV",
+        "role": null,
+        "label": "Pagination"
+      }
+    ],
+    "violations": []
+  }
+]

@@ -109,8 +109,8 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
           state === "dragging"
             ? "border-2 border-dashed border-primary-400 bg-primary-50/10"
             : state === "uploading" || state === "success" || state === "error"
-              ? "border border-grey-200 bg-white dark:bg-grey-50"
-              : "border-2 border-dashed border-grey-300 bg-white dark:bg-grey-50",
+              ? "border border-grey-200 bg-surface"
+              : "border-2 border-dashed border-control-border bg-surface",
           className
         )}
         onDragEnter={handleDragEnter}
@@ -137,10 +137,12 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
           <div className="flex flex-col items-center gap-4">
             <UploadStateIcon state="default" size={56} aria-hidden="true" />
             <div className="flex flex-col items-center gap-1">
-              <p className="text-body-sm font-medium text-grey-600">
-                Click to upload <span className="text-grey-600">or drag and drop</span>
+              <p className="text-body-sm font-medium text-on-surface-secondary">
+                Click to upload <span className="text-on-surface-secondary">or drag and drop</span>
               </p>
-              {description && <p className="text-body-xs text-grey-600">{description}</p>}
+              {description && (
+                <p className="text-body-xs text-on-surface-secondary">{description}</p>
+              )}
             </div>
             <Button
               type="button"
@@ -164,11 +166,11 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
             <FileTypeIcon type={getFileType(uploadingFile.name)} aria-hidden="true" />
             <div className="flex w-full max-w-xs flex-col gap-2">
               <div className="flex items-center justify-between">
-                <span className="text-body-sm font-medium text-grey-700 truncate">
+                <span className="text-body-sm font-medium text-on-surface-body truncate">
                   {uploadingFile.name}
                 </span>
                 <span
-                  className="text-body-xs font-medium text-grey-500 ml-2 shrink-0"
+                  className="text-body-xs font-medium text-on-surface-muted ml-2 shrink-0"
                   aria-label={`Upload progress: ${Math.round(uploadingFile.progress)} percent`}
                 >
                   {Math.round(uploadingFile.progress)}%
@@ -209,7 +211,9 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
             <UploadStateIcon state="error" size={56} aria-hidden="true" />
             <div className="flex flex-col items-center gap-1">
               <p className="text-body-sm font-semibold text-grey-800">Failed to Upload</p>
-              {errorMessage && <p className="text-body-xs text-grey-600">{errorMessage}</p>}
+              {errorMessage && (
+                <p className="text-body-xs text-on-surface-secondary">{errorMessage}</p>
+              )}
             </div>
             <button
               type="button"

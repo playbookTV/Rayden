@@ -196,7 +196,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
               <button
                 type="button"
                 onClick={onClose}
-                className="flex size-7 items-center justify-center rounded-md text-grey-500 hover:bg-grey-100 cursor-pointer"
+                className="flex size-7 items-center justify-center rounded-md text-on-surface-muted hover:bg-grey-100 cursor-pointer"
                 aria-label="Close"
               >
                 <Icon name="multiply" size="md" />

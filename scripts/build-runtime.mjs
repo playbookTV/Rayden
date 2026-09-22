@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile, mkdir, stat, rm } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir, stat, rm, cp } from "node:fs/promises";
 import path from "node:path";
 import ts from "typescript";
 import { createRequire } from "node:module";
@@ -98,3 +98,7 @@ for (const [format, extension] of [
     outfile: `dist/icons.${extension}`,
   });
 }
+
+// Optional self-hosted typefaces are shipped beside their CSS entry.
+await cp("src/styles/fonts.css", "dist/fonts.css");
+await cp("src/styles/fonts", "dist/fonts", { recursive: true });

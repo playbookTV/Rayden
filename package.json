@@ -1,6 +1,6 @@
 {
   "name": "@raydenui/ui",
-  "version": "0.9.7",
+  "version": "0.10.1",
   "description": "A modern React UI component library",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -61,13 +61,14 @@
         "default": "./dist/icons.cjs"
       }
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./fonts.css": "./dist/fonts.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "node scripts/build-runtime.mjs --clean && tsup && node scripts/build-runtime.mjs && npx @tailwindcss/cli -i src/styles/globals.css -o dist/styles.css --minify",
+    "build": "node scripts/generate-icon-catalog.mjs && node scripts/build-runtime.mjs --clean && tsup && node scripts/build-runtime.mjs && npx @tailwindcss/cli -i src/styles/globals.css -o dist/styles.css --minify",
     "dev": "node scripts/dev.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
@@ -82,6 +83,10 @@
     "docs": "pnpm --filter @raydenui/docs dev",
     "docs:build": "pnpm --filter @raydenui/docs build",
     "docs:start": "pnpm --filter @raydenui/docs start",
+    "website": "pnpm --filter @raydenui/website dev",
+    "website:check": "pnpm --filter @raydenui/website check",
+    "icons:build": "node scripts/generate-icon-catalog.mjs",
+    "check:icons": "node scripts/generate-icon-catalog.mjs --check && node scripts/check-icons.mjs",
     "check:bundle": "node scripts/check-bundle.mjs",
     "check:docs": "node scripts/check-docs-contracts.mjs",
     "registry:build": "node scripts/registry-build.mjs",

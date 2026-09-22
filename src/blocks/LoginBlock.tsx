@@ -24,11 +24,25 @@ export interface LoginBlockProps {
   subtitle?: string;
   /** Submit button label */
   submitLabel?: string;
-  /** Forgot password handler */
+  /**
+   * Password recovery handler. Rendered in every variant that supplies it,
+   * independently of `showRememberMe`.
+   */
   onForgotPassword?: () => void;
   /** Form submit handler. `rememberMe` reflects the visible checkbox. */
   onSubmit?: (data: { email: string; password: string; rememberMe: boolean }) => void;
-  /** Disables the form and shows a pending submit label. */
+  /**
+   * Authentication is in flight.
+   *
+   * While true the block disables every control that could change the
+   * credentials being verified, change remembered-session intent, or start a
+   * competing authentication route: email, password, remember-me, password
+   * recovery, each social provider, submit, and sign-up. Repeat submits are
+   * also ignored, so pressing Enter cannot queue a second request.
+   *
+   * The password visibility toggle stays enabled: it only changes how the
+   * already-entered value is displayed.
+   */
   pending?: boolean;
   /** Submit label while `pending` is true. */
   pendingLabel?: string;
@@ -131,13 +145,22 @@ export function LoginBlock({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    // Guard duplicate submission: `disabled` does not stop an implicit
+    // Enter-key submit in every browser, and the form may still be reachable
+    // while a request is in flight.
+    if (pending) return;
     onSubmit?.({ email, password, rememberMe });
   };
 
   const isWorkEmail = variant === "work-email";
   const isCard = variant === "card";
 
-  // Social buttons rendered as a section
+  // Social providers start a competing authentication route, so they follow the
+  // pending contract. Provider artwork stays literal brand colour; only the
+  // surrounding interface chrome is themeable.
+  const providerButtonClass =
+    "flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-surface-border-strong bg-surface p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 dark:hover:bg-grey-100 transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text";
+
   const socialSection = resolvedProviders.length > 0 && (
     <div className="flex flex-col gap-3">
       {resolvedProviders.map((provider) => (
@@ -145,7 +168,8 @@ export function LoginBlock({
           key={provider.name}
           type="button"
           onClick={provider.onClick}
-          className="flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 dark:hover:bg-grey-100 transition-colors"
+          disabled={pending}
+          className={providerButtonClass}
         >
           <span className="shrink-0 size-5">{provider.icon}</span>
           Continue with {provider.name}
@@ -154,39 +178,50 @@ export function LoginBlock({
     </div>
   );
 
+  // Password recovery is independent of the remember-me option so every variant
+  // that supplies a handler can offer it.
+  const forgotPasswordAction = onForgotPassword && (
+    <button
+      type="button"
+      onClick={onForgotPassword}
+      disabled={pending}
+      className="rounded text-sm font-medium text-action-primary-text cursor-pointer hover:underline underline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text"
+    >
+      Forgot Password?
+    </button>
+  );
+
+  const showRememberMeRow = showRememberMe && !isWorkEmail;
+
   const formContent = (
     <>
       {/* Header */}
       <div className="flex flex-col items-center gap-2 text-center">
-        <h2 className="text-[28px] font-semibold text-grey-900 leading-[1.2] tracking-[-0.56px]">
-          {resolvedTitle}
-        </h2>
+        <h2 className="text-h4 font-semibold text-grey-900">{resolvedTitle}</h2>
         <p className="text-base text-grey-500">{resolvedSubtitle}</p>
       </div>
 
       {/* Work email: social first, then divider, then form */}
       {isWorkEmail && socialSection && (
-        <>
-          <div className="mt-10">
-            {/* Only Google for work email variant */}
-            <button
-              type="button"
-              onClick={resolvedProviders[0]?.onClick}
-              className="flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 dark:hover:bg-grey-100 transition-colors"
-            >
-              <span className="shrink-0 size-5">{resolvedProviders[0]?.icon}</span>
-              {`Continue with ${resolvedProviders[0]?.name ?? "Google"}`}
-            </button>
+        <div className="mt-10 flex w-full flex-col gap-4">
+          {/* Only Google for work email variant */}
+          <button
+            type="button"
+            onClick={resolvedProviders[0]?.onClick}
+            disabled={pending}
+            className={providerButtonClass}
+          >
+            <span className="shrink-0 size-5">{resolvedProviders[0]?.icon}</span>
+            {`Continue with ${resolvedProviders[0]?.name ?? "Google"}`}
+          </button>
+          {/* Laid out in flow rather than an opaque label over a rule, so the
+                separator reads correctly on any page background. */}
+          <div className="flex items-center gap-3">
+            <div className="h-px flex-1 bg-surface-border" />
+            <span className="text-sm text-grey-500">OR</span>
+            <div className="h-px flex-1 bg-surface-border" />
           </div>
-          <div className="relative my-2">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-grey-100" />
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-white dark:bg-grey-50 px-2 text-sm text-grey-500">OR</span>
-            </div>
-          </div>
-        </>
+        </div>
       )}
 
       {/* Form fields */}
@@ -232,23 +267,24 @@ export function LoginBlock({
             />
           </div>
 
-          {/* Remember me + Forgot password */}
-          {showRememberMe && !isWorkEmail && (
-            <div className="flex items-center justify-between">
-              <Checkbox
-                label={rememberMeLabel}
-                checked={rememberMe}
-                onChange={() => setRememberMe(!rememberMe)}
-              />
-              {onForgotPassword && (
-                <button
-                  type="button"
-                  onClick={onForgotPassword}
-                  className="text-sm font-medium text-primary-600"
-                >
-                  Forgot Password?
-                </button>
+          {/* Remember me and/or password recovery. Either can appear alone. */}
+          {(showRememberMeRow || forgotPasswordAction) && (
+            <div
+              className={cn(
+                "flex items-center gap-4",
+                showRememberMeRow ? "justify-between" : "justify-end"
               )}
+            >
+              {showRememberMeRow && (
+                <Checkbox
+                  label={rememberMeLabel}
+                  checked={rememberMe}
+                  disabled={pending}
+                  onChange={() => setRememberMe(!rememberMe)}
+                  wrapperClassName={cn(pending && "cursor-not-allowed opacity-50")}
+                />
+              )}
+              {forgotPasswordAction}
             </div>
           )}
         </div>
@@ -282,7 +318,12 @@ export function LoginBlock({
       {/* Sign up link */}
       <div className="flex items-center justify-center gap-1">
         <span className="text-sm text-grey-500">{resolvedSignUpPrompt}</span>
-        <button type="button" onClick={onSignUp} className="text-sm font-medium text-primary-600">
+        <button
+          type="button"
+          onClick={onSignUp}
+          disabled={pending}
+          className="rounded text-sm font-medium text-action-primary-text cursor-pointer hover:underline underline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text"
+        >
           {resolvedSignUpLabel}
         </button>
       </div>
@@ -294,7 +335,7 @@ export function LoginBlock({
     return (
       <div
         className={cn(
-          "bg-white dark:bg-grey-50 border border-grey-300 rounded-[10px] px-7 py-8 w-full max-w-[432px]",
+          "bg-surface border border-surface-border-strong rounded-10 px-7 py-8 w-full max-w-[432px]",
           className
         )}
       >

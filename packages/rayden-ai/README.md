@@ -1,12 +1,45 @@
 # @raydenui/ai
 
-Reference knowledge and MCP tools for Rayden UI's complete, free default flavor, **Citrionus**. Public component names and prop contracts are derived from the UI source. Authored design guidance, examples, token data, and Figma anatomy remain explicit reference material.
+Component contracts, design-token references, icon discovery, and MCP tools for Rayden UI's default **Citrionus** flavor. This package includes both the JavaScript API and the **Rayden MCP server**. Public prop contracts are derived from UI source; design guidance, examples, tokens, and Figma anatomy are maintained reference material.
 
-## Running the MCP server
+[![npm version](https://img.shields.io/npm/v/@raydenui/ai.svg)](https://www.npmjs.com/package/@raydenui/ai)
 
-For a released package, use `npx @raydenui/ai`. For this checkout, build the AI package and run `node packages/rayden-ai/dist/mcp/server.js` from the repository root. Local changes are not available through npm until a release is published.
+[UI package](https://www.npmjs.com/package/@raydenui/ui) · [Documentation](https://rayden-docs.vercel.app) · [Source](https://github.com/playbookTV/Rayden/tree/main/packages/rayden-ai)
 
-The server uses stdio. `--help` lists its tools and `--version` prints its package version. Add the executable to your MCP client's configuration using that client's setup instructions; this package does not modify client configuration.
+## Connect an AI assistant through MCP
+
+Use a client that can launch local **stdio** MCP servers. Configure:
+
+- **Command:** `npx`
+- **Arguments:** `-y`, `@raydenui/ai@latest`
+
+For clients that use an `mcpServers` JSON configuration, the entry looks like this:
+
+```json
+{
+  "mcpServers": {
+    "rayden": {
+      "command": "npx",
+      "args": ["-y", "@raydenui/ai@latest"]
+    }
+  }
+}
+```
+
+Your client determines where this configuration belongs. Node.js and npm must be available to the client. `-y` allows npm to install the package without an interactive prompt. Use an exact package version instead of `latest` when you need a pinned reference.
+
+Verify the executable from a terminal:
+
+```bash
+npx -y @raydenui/ai@latest --help
+npx -y @raydenui/ai@latest --version
+```
+
+Without these flags, the process starts the MCP server and waits for protocol messages on stdin. It is not an HTTP server or a browser page. No Rayden API key is required, and no separate MCP package is needed.
+
+A useful first request to your assistant is: “Use the Rayden MCP tools to discover the available components, inspect Button's props, and validate your proposed usage before writing the UI.”
+
+## MCP tools
 
 | Tool | Inputs and result |
 | --- | --- |
@@ -22,13 +55,17 @@ Component categories include `primitives`, `inputs`, `feedback`, `navigation`, `
 
 Every response identifies the reference flavor and UI/AI versions. The server does not inspect the consumer's installed packages. Unsupported requested flavors or versions return an explicit error; future flavor support is not implied.
 
-## Programmatic usage
+## Use the JavaScript API
+
+Install the reference package alongside the UI library:
+
+```bash
+npm install @raydenui/ai @raydenui/ui
+```
 
 ```ts
 import { getCatalog, getComponentGuidance, validateComponentUsage } from '@raydenui/ai';
-import { getManifest, getComponentNames, manifests } from '@raydenui/ai/manifests';
-import { tokens, getSpacing, getTypography } from '@raydenui/ai/tokens';
-import { recipes } from '@raydenui/ai/recipes';
+import { getManifest, getComponentNames } from '@raydenui/ai/manifests';
 
 const catalog = getCatalog();
 const guidance = getComponentGuidance('Button');
@@ -43,6 +80,21 @@ console.log(catalog.flavor, guidance?.prompt, button?.props, names, result);
 Each catalog entry includes `name`, `exportNames`, `importPath`, `category`, `description`, `props`, `inheritedProps`, `subComponents`, and `prompt`. Subcomponents have their own contracts. Motion APIs are described separately under `catalog.motion`, including the `@raydenui/ui/motion` import path, actual presets and recipes, and primitive contracts.
 
 Validation checks required props, supported names, enums, primitive types, inherited HTML attributes, and immediate composition constraints. Complex React values, array/object internals, ancestor structure, runtime accessibility, and callback behavior are reported in `notAssessed`. JSON clients can represent a dynamic value as `{ "$expression": "state.size" }`; this is not a validated value. `valid: true` means no demonstrated errors in assessed checks, not complete certification.
+
+## Icon and version discovery
+
+```ts
+import { getCatalog } from "@raydenui/ai";
+
+const catalog = getCatalog();
+console.log(catalog.uiVersion, catalog.aiVersion);
+console.log(catalog.icons.entries.find((entry) => entry.name === "heart"));
+// { name: "heart", exportName: "heartIcon" }
+```
+
+Use `catalog.icons.entries` for exact icon names and static data exports, and `getComponentGuidance("Icon")` for rendering and accessibility guidance. Static icon data comes from `@raydenui/ui/icons`; the renderer comes from `@raydenui/ui`.
+
+The catalog is a versioned reference snapshot. Check `uiVersion` against your app's UI package before applying its guidance. The `get_catalog` MCP tool can require an exact `uiVersion`; unsupported values return an error. Discover supported component and block contracts through `get_components` or `catalog.components` rather than assuming every UI block has authored AI guidance.
 
 ## Figma and tokens
 
@@ -67,9 +119,22 @@ AI `src/tokens/tokens.json` generates the packaged DTCG JSON at `@raydenui/ai/to
 
 The AI/DTCG token snapshot describes default/light values. It does **not** encode the full runtime dark-mode override system. Anatomy reference resolution is now checked with no accepted missing tokens; this does not certify all visual values or every Figma/runtime variant. Update the relevant maintained source before regenerating derived files.
 
+## Working from this repository
+
+Build the UI and verify the AI package from the repository root:
+
+```bash
+pnpm install
+pnpm build
+pnpm check:pilots
+node packages/rayden-ai/dist/mcp/server.js --help
+```
+
+For an MCP client using this checkout, use command `node` with the absolute path to `packages/rayden-ai/dist/mcp/server.js`. Rebuild after source changes. The npm command runs the published package, not your checkout.
+
 ## Maintenance and verification
 
-Run these commands inside `packages/rayden-ai`:
+When updating contracts or guidance, run these commands inside `packages/rayden-ai` after building the UI:
 
 ```sh
 npm run generate-manifests
@@ -84,3 +149,7 @@ npm test
 `generate-manifests` now generates `src/manifests/contracts.generated.json` from the actual public UI exports and TypeScript prop types. It does not invent authored descriptions or runtime defaults. `generate-catalog` writes `../docs/public/ai/catalog.json`. Both generated outputs have stale-file checks. Update authored descriptions/examples deliberately when changing behavior, then regenerate and review the diff.
 
 The checks cover export mapping completeness, authored manifest structure, contradictory aliases/exclusions, token references, built ESM/CommonJS exports, packed asset paths, and a real stdio MCP client/server session. Examples are authored JSX fragments that can require surrounding imports, state, or dependencies; all examples are not certified end-to-end applications.
+
+## License
+
+MIT.

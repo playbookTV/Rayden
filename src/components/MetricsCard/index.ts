@@ -3,6 +3,7 @@ export type {
   MetricsCardProps,
   MetricsCardVariation,
   MetricsCardTrend,
+  MetricsCardTrendSentiment,
   MetricsCardTrendBadge,
   MetricsCardStatusBadge,
   MetricsCardCta,

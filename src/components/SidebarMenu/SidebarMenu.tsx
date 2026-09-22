@@ -30,15 +30,15 @@ export const sidebarThemeStyles: Record<
   }
 > = {
   light: {
-    container: "bg-white dark:bg-grey-50",
-    defaultText: "text-grey-700",
-    defaultIcon: "text-grey-500",
+    container: "bg-surface",
+    defaultText: "text-on-surface-body",
+    defaultIcon: "text-on-surface-muted",
     selectedBg: "bg-primary-50",
-    selectedText: "text-grey-900",
+    selectedText: "text-on-surface",
     selectedBorder: "border-l-2 border-primary-400",
-    selectedIcon: "text-grey-900",
+    selectedIcon: "text-on-surface",
     hoverBg: "hover:bg-grey-50 dark:hover:bg-grey-100",
-    sectionTitle: "text-grey-500",
+    sectionTitle: "text-on-surface-muted",
     divider: "border-grey-100",
     badgeDefault: "bg-grey-100 text-grey-700",
     badgeSelected: "bg-primary-50 text-action-primary-text",

@@ -8,6 +8,7 @@ import {
 } from "./manifests";
 import { getCompositionRules } from "./rules";
 import generated from "./manifests/contracts.generated.json";
+import iconCatalog from "./manifests/icons.generated.json";
 
 export const capabilities = {
   componentDiscovery: true,
@@ -47,6 +48,9 @@ export function getComponentGuidance(name: string) {
       : "",
     required.length ? `Required props: ${required.join(", ")}.` : "",
     enums.length ? `Supported enum values: ${enums.join("; ")}.` : "",
+    resolved === "Icon"
+      ? 'Provide exactly one of name (registry name, loaded after mount) or icon (IconRecord from @raydenui/ui/icons, immediate/SSR rendering). Variants are outline and solid. Discover exact name/export pairs in catalog.icons.entries or the public iconCatalog export. Icon slots accept names, IconRecord data, or React nodes. Label icon-only controls on the control; meaningful standalone icons need aria-hidden={false}, role="img", and aria-label.'
+      : "",
     composition ? `Composition guidance: ${JSON.stringify(composition)}` : "",
     "Preserve accessible labels, keyboard interaction, and reduced-motion preferences. Check the actual installed UI version before applying this reference.",
     "Validate structured component usage; validation cannot establish runtime accessibility, callback behavior, or correctness of arbitrary React code.",
@@ -60,6 +64,13 @@ export function getCatalog() {
   return {
     ...referenceContext,
     capabilities,
+    icons: {
+      component: "Icon",
+      componentImportPath: "@raydenui/ui",
+      dataImportPath: "@raydenui/ui/icons",
+      variants: ["outline", "solid"],
+      entries: iconCatalog,
+    },
     motion: {
       ...generated.motion,
       exports: Object.fromEntries(

@@ -45,7 +45,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           aria-checked={indeterminate ? "mixed" : undefined}
           aria-describedby={description ? descriptionId : undefined}
           className={cn(
-            "peer size-5 appearance-none rounded border-[1.5px] border-grey-300 bg-white dark:bg-grey-50 cursor-pointer",
+            "peer size-5 appearance-none rounded border-[1.5px] border-control-border bg-surface cursor-pointer",
             "checked:bg-primary-400 checked:border-primary-400",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200",
             "disabled:cursor-not-allowed disabled:opacity-50",
@@ -77,9 +77,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <label className={cn("inline-flex items-center gap-3 cursor-pointer", wrapperClassName)}>
         {position === "left" && control}
         <div className="flex flex-col">
-          {label && <span className="text-base font-medium text-grey-900">{label}</span>}
+          {label && <span className="text-base font-medium text-on-surface">{label}</span>}
           {description && (
-            <span id={descriptionId} className="text-sm text-grey-500">
+            <span id={descriptionId} className="text-sm text-on-surface-muted">
               {description}
             </span>
           )}

@@ -1,0 +1,10 @@
+{
+  "$schema": "./schema.json",
+  "name": "CommandPaletteBlock",
+  "displayName": "CommandPaletteBlock",
+  "description": "Keyboard-searchable navigation and actions with optional shortcuts and explicit loading, error and empty states.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui/blocks",
+  "props": {},
+  "examples": []
+}

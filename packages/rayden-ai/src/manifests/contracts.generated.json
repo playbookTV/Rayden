@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "flavor": "citrionus",
-  "uiVersion": "0.9.7",
-  "aiVersion": "0.1.4",
+  "uiVersion": "0.10.1",
+  "aiVersion": "0.1.5",
   "families": [
     {
       "name": "Button",
@@ -324,6 +324,38 @@
         "FileUploadItem"
       ],
       "importPath": "@raydenui/ui"
+    },
+    {
+      "name": "ApplicationShellBlock",
+      "manifestFile": "ApplicationShellBlock.json",
+      "exportNames": [
+        "ApplicationShellBlock"
+      ],
+      "importPath": "@raydenui/ui/blocks"
+    },
+    {
+      "name": "PageHeaderBlock",
+      "manifestFile": "PageHeaderBlock.json",
+      "exportNames": [
+        "PageHeaderBlock"
+      ],
+      "importPath": "@raydenui/ui/blocks"
+    },
+    {
+      "name": "WorkspaceSwitcherBlock",
+      "manifestFile": "WorkspaceSwitcherBlock.json",
+      "exportNames": [
+        "WorkspaceSwitcherBlock"
+      ],
+      "importPath": "@raydenui/ui/blocks"
+    },
+    {
+      "name": "CommandPaletteBlock",
+      "manifestFile": "CommandPaletteBlock.json",
+      "exportNames": [
+        "CommandPaletteBlock"
+      ],
+      "importPath": "@raydenui/ui/blocks"
     }
   ],
   "exports": {
@@ -1553,9 +1585,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": "Leading icon (left side)"
         },
@@ -3553,9 +3588,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": "Leading icon for file variant"
         },
@@ -4216,9 +4254,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -4870,11 +4911,14 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
-          "description": "Custom icon (for type=\"icon\"). Accepts ReactNode or IconName."
+          "description": "Custom icon (for type=\"icon\"). Accepts a registry name, static IconRecord, or ReactNode."
         },
         "initials": {
           "type": "string",
@@ -6119,9 +6163,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -6168,18 +6215,21 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
         "type": {
           "type": "enum",
           "values": [
+            "outline",
             "filled",
-            "accent",
-            "outline"
+            "accent"
           ],
           "typeText": "BadgeType | undefined",
           "required": false,
@@ -6803,9 +6853,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": "Optional leading icon"
         },
@@ -8004,6 +8057,22 @@
           "required": false,
           "description": ""
         },
+        "as": {
+          "type": "enum",
+          "values": [
+            "button",
+            "a"
+          ],
+          "typeText": "ButtonElement | undefined",
+          "required": false,
+          "description": "Element to render. `\"button\"` (default) is unchanged. `\"a\"` renders an anchor\nwith the same styling, focus treatment and icon composition, so a destination\nthat should look like a button no longer has to be hand-rolled.\n\nIgnored when `asChild` is set."
+        },
+        "asChild": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Render the single child element instead of Button's own element, merging\nButton's className onto it. Use it for a router `Link` or any component that\nalready renders the element you need. The child's own children become the\nlabel, so `icon` / `iconPosition` still apply around them."
+        },
         "icon": {
           "type": "union",
           "alternatives": [
@@ -8036,9 +8105,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -8153,6 +8225,7 @@
         "defaultValue",
         "dir",
         "disabled",
+        "download",
         "draggable",
         "enterKeyHint",
         "exportparts",
@@ -8163,6 +8236,8 @@
         "formNoValidate",
         "formTarget",
         "hidden",
+        "href",
+        "hrefLang",
         "id",
         "inert",
         "inlist",
@@ -8346,6 +8421,7 @@
         "onWheel",
         "onWheelCapture",
         "part",
+        "ping",
         "popover",
         "popoverTarget",
         "popoverTargetAction",
@@ -8353,6 +8429,7 @@
         "property",
         "radioGroup",
         "ref",
+        "referrerPolicy",
         "rel",
         "resource",
         "results",
@@ -8365,6 +8442,7 @@
         "suppressContentEditableWarning",
         "suppressHydrationWarning",
         "tabIndex",
+        "target",
         "title",
         "translate",
         "type",
@@ -8450,6 +8528,8 @@
         "formNoValidate": "p13",
         "formTarget": "p0",
         "hidden": "p13",
+        "href": "p0",
+        "hrefLang": "p0",
         "id": "p0",
         "inert": "p13",
         "inputMode": "p16",
@@ -8631,12 +8711,14 @@
         "onWheel": "p17",
         "onWheelCapture": "p17",
         "part": "p0",
+        "ping": "p0",
         "popover": "p18",
         "popoverTarget": "p0",
         "popoverTargetAction": "p19",
         "prefix": "p0",
         "property": "p0",
         "radioGroup": "p0",
+        "referrerPolicy": "p22",
         "rel": "p0",
         "resource": "p0",
         "results": "p4",
@@ -8649,7 +8731,7 @@
         "tabIndex": "p4",
         "title": "p0",
         "translate": "p20",
-        "type": "p22",
+        "type": "p23",
         "typeof": "p0",
         "unselectable": "p21",
         "vocab": "p0"
@@ -8751,9 +8833,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -8789,9 +8874,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         }
@@ -9364,7 +9452,7 @@
         "tabIndex": "p4",
         "title": "p0",
         "translate": "p20",
-        "type": "p22",
+        "type": "p23",
         "typeof": "p0",
         "unselectable": "p21",
         "vocab": "p0"
@@ -11242,12 +11330,12 @@
         "align": {
           "type": "enum",
           "values": [
-            "left",
             "center",
+            "left",
             "right",
             "between"
           ],
-          "typeText": "\"left\" | \"center\" | \"right\" | \"between\" | undefined",
+          "typeText": "\"center\" | \"left\" | \"right\" | \"between\" | undefined",
           "required": false,
           "description": "Footer content alignment"
         },
@@ -11852,8 +11940,8 @@
           "type": "enum",
           "values": [
             "top",
-            "full",
-            "bottom"
+            "bottom",
+            "full"
           ],
           "typeText": "CardImagePosition | undefined",
           "required": false,
@@ -12217,15 +12305,15 @@
         "content": "p0",
         "contentEditable": "p14",
         "contextMenu": "p0",
-        "crossOrigin": "p23",
+        "crossOrigin": "p24",
         "datatype": "p0",
-        "decoding": "p24",
+        "decoding": "p25",
         "defaultChecked": "p13",
         "dir": "p0",
         "draggable": "p1",
         "enterKeyHint": "p15",
         "exportparts": "p0",
-        "fetchPriority": "p25",
+        "fetchPriority": "p26",
         "hidden": "p13",
         "id": "p0",
         "inert": "p13",
@@ -12237,7 +12325,7 @@
         "itemScope": "p13",
         "itemType": "p0",
         "lang": "p0",
-        "loading": "p26",
+        "loading": "p27",
         "nonce": "p0",
         "onAbort": "p17",
         "onAbortCapture": "p17",
@@ -12414,7 +12502,7 @@
         "prefix": "p0",
         "property": "p0",
         "radioGroup": "p0",
-        "referrerPolicy": "p27",
+        "referrerPolicy": "p22",
         "rel": "p0",
         "resource": "p0",
         "results": "p4",
@@ -12479,9 +12567,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -14973,9 +15064,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -15017,9 +15111,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -16794,7 +16891,7 @@
         "tabIndex": "p4",
         "title": "p0",
         "translate": "p20",
-        "type": "p22",
+        "type": "p23",
         "typeof": "p0",
         "unselectable": "p21",
         "vocab": "p0"
@@ -16808,10 +16905,10 @@
         "align": {
           "type": "enum",
           "values": [
-            "start",
-            "end"
+            "end",
+            "start"
           ],
-          "typeText": "\"start\" | \"end\" | undefined",
+          "typeText": "\"end\" | \"start\" | undefined",
           "required": false,
           "description": "Alignment relative to trigger"
         },
@@ -18556,11 +18653,14 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
-          "description": "Leading icon — accepts a ReactNode or an IconName string"
+          "description": "Leading icon — accepts a registry name, static IconRecord, or ReactNode"
         },
         "onSelect": {
           "type": "function",
@@ -19145,7 +19245,7 @@
         "tabIndex": "p4",
         "title": "p0",
         "translate": "p20",
-        "type": "p22",
+        "type": "p23",
         "typeof": "p0",
         "unselectable": "p21",
         "vocab": "p0"
@@ -25152,7 +25252,7 @@
         "className": "p0",
         "clipPath": "p0",
         "colorInterpolationFilters": "p33",
-        "crossOrigin": "p23",
+        "crossOrigin": "p24",
         "d": "p0",
         "dominantBaseline": "p34",
         "externalResourcesRequired": "p1",
@@ -25492,9 +25592,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": "Icon on the left side of the input"
         },
@@ -25635,9 +25738,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": "Icon on the right side of the input"
         },
@@ -26302,9 +26408,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": "Optional icon — renders in a bordered square (v2,3,6) or large tinted square (v4)"
         },
@@ -27024,11 +27133,14 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "ReactNode",
+          "typeText": "IconSource",
           "required": false,
-          "description": "Leading icon element"
+          "description": "Leading icon: registry name, static IconRecord, or ReactNode."
         },
         "motion": {
           "type": "enum",
@@ -30221,11 +30333,14 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
-          "description": "Leading icon — accepts a ReactNode or IconName string"
+          "description": "Leading icon — accepts a registry name, static IconRecord, or ReactNode"
         },
         "statusColor": {
           "type": "string",
@@ -30805,7 +30920,7 @@
         "tabIndex": "p4",
         "title": "p0",
         "translate": "p20",
-        "type": "p22",
+        "type": "p23",
         "typeof": "p0",
         "unselectable": "p21",
         "vocab": "p0"
@@ -31540,9 +31655,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": "Icon displayed to the left — accepts IconName string or ReactNode"
         },
@@ -32123,7 +32241,7 @@
         "tabIndex": "p4",
         "title": "p0",
         "translate": "p20",
-        "type": "p22",
+        "type": "p23",
         "typeof": "p0",
         "unselectable": "p21",
         "vocab": "p0"
@@ -32792,7 +32910,7 @@
         "tabIndex": "p4",
         "title": "p0",
         "translate": "p20",
-        "type": "p22",
+        "type": "p23",
         "typeof": "p0",
         "unselectable": "p21",
         "vocab": "p0"
@@ -40689,9 +40807,12 @@
             },
             {
               "type": "object"
+            },
+            {
+              "type": "object"
             }
           ],
-          "typeText": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined",
+          "typeText": "IconSource",
           "required": false,
           "description": ""
         },
@@ -40788,11 +40909,11 @@
           "type": "enum",
           "values": [
             "top",
+            "bottom",
             "left",
-            "right",
-            "bottom"
+            "right"
           ],
-          "typeText": "\"top\" | \"left\" | \"right\" | \"bottom\" | undefined",
+          "typeText": "\"top\" | \"bottom\" | \"left\" | \"right\" | undefined",
           "required": false,
           "description": ""
         },
@@ -42009,6 +42130,1103 @@
         "unselectable": "p21",
         "vocab": "p0"
       }
+    },
+    "ApplicationShellBlock": {
+      "name": "ApplicationShellBlock",
+      "importPath": "@raydenui/ui/blocks",
+      "sourceModule": "src/blocks/ApplicationShellBlock",
+      "props": {
+        "actions": {
+          "type": "array",
+          "typeText": "AppShellAction[] | undefined",
+          "required": false,
+          "description": "Trailing top-bar controls, e.g. notifications or help."
+        },
+        "actionsLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the trailing control group."
+        },
+        "brand": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Wordmark or logo. Rendered in the sidebar when expanded, in the top bar when collapsed."
+        },
+        "brandHref": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Destination behind the brand. Without it the brand is not a control."
+        },
+        "children": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Workspace content."
+        },
+        "className": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Lands on the container root, outside the top bar and workspace padding."
+        },
+        "closeMenuLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Label for the collapsed navigation toggle when open."
+        },
+        "expandAt": {
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "typeText": "AppShellExpandTier | undefined",
+          "required": false,
+          "description": "Which container width the sidebar appears at. Read from the shell's own\nwidth, never the viewport."
+        },
+        "mainLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the workspace landmark."
+        },
+        "mainScroll": {
+          "type": "enum",
+          "values": [
+            "page",
+            "region"
+          ],
+          "typeText": "AppShellMainScroll | undefined",
+          "required": false,
+          "description": "`\"page\"` (default) lets the document scroll, so the shell has exactly one\nscroll region and an overlay above it cannot fight a second one. `\"region\"`\ngives the workspace its own scrollbar and needs a bounded height on the\nshell — pass it through `className`, e.g. `h-[100dvh]`."
+        },
+        "navEmptyMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Shown when `navSections` carries no items and the status is idle. It has\nno default: without it a shell with no destinations renders no navigation\nrail at all, rather than an empty one. Supply it to state why the rail is\nempty instead of leaving the reader to guess."
+        },
+        "navErrorMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "navLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the primary navigation landmark."
+        },
+        "navLoadingMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "navSections": {
+          "type": "array",
+          "typeText": "AppShellNavSection[] | undefined",
+          "required": false,
+          "description": ""
+        },
+        "navStatus": {
+          "type": "enum",
+          "values": [
+            "error",
+            "loading",
+            "idle"
+          ],
+          "typeText": "AppShellNavStatus | undefined",
+          "required": false,
+          "description": ""
+        },
+        "onBrandClick": {
+          "type": "function",
+          "typeText": "(() => void) | undefined",
+          "required": false,
+          "description": ""
+        },
+        "onRetryNav": {
+          "type": "function",
+          "typeText": "(() => void) | undefined",
+          "required": false,
+          "description": "The retry control is omitted entirely when no handler is supplied."
+        },
+        "openMenuLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Label for the collapsed navigation toggle when closed."
+        },
+        "search": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Search field. A single instance lives in the top bar at every width; on a\nnarrow shell it wraps onto its own row rather than disappearing."
+        },
+        "sectionHeadingLevel": {
+          "type": "enum",
+          "values": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "typeText": "AppShellHeadingLevel | undefined",
+          "required": false,
+          "description": "Heading element for section labels."
+        },
+        "sidebarFooter": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Content under the navigation. Rendered in both the sidebar and the\ncollapsed panel, so keep it stateless or controlled by the consumer."
+        },
+        "skipLinkLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "skipNavLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the landmark holding the skip link."
+        },
+        "stickyTopBar": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Keeps the top bar in view while the workspace scrolls."
+        },
+        "switcher": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Workspace switcher. A single instance, in the top bar at every width, so it\nis never dropped from the collapsed arrangement."
+        }
+      },
+      "inheritedProps": [],
+      "inheritedPropTypes": {}
+    },
+    "PageHeaderBlock": {
+      "name": "PageHeaderBlock",
+      "importPath": "@raydenui/ui/blocks",
+      "sourceModule": "src/blocks/PageHeaderBlock",
+      "props": {
+        "actions": {
+          "type": "array",
+          "typeText": "PageHeaderAction[] | undefined",
+          "required": false,
+          "description": ""
+        },
+        "actionsLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the action group."
+        },
+        "backAction": {
+          "type": "object",
+          "typeText": "PageHeaderBackAction | undefined",
+          "required": false,
+          "description": ""
+        },
+        "breadcrumbCollapseLabel": {
+          "type": "function",
+          "typeText": "((hiddenCount: number) => string) | undefined",
+          "required": false,
+          "description": "Spoken label for the same toggle once the trail is expanded."
+        },
+        "breadcrumbExpandLabel": {
+          "type": "function",
+          "typeText": "((hiddenCount: number) => string) | undefined",
+          "required": false,
+          "description": "Spoken label for the expand toggle. Receives the number of hidden levels."
+        },
+        "breadcrumbLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the breadcrumb landmark."
+        },
+        "breadcrumbs": {
+          "type": "array",
+          "typeText": "PageHeaderBreadcrumb[] | undefined",
+          "required": false,
+          "description": ""
+        },
+        "children": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Content under the header row, e.g. a tab bar or a filter row."
+        },
+        "className": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Lands on the container root, outside the padded surface."
+        },
+        "collapseMetaOnSmallScreens": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Reveal metadata on demand below 640px of container width."
+        },
+        "description": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": ""
+        },
+        "errorDescription": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "errorTitle": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "eyebrow": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Small label above the title. Not a heading."
+        },
+        "headingLevel": {
+          "type": "enum",
+          "values": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "typeText": "PageHeaderHeadingLevel | undefined",
+          "required": false,
+          "description": "Heading element for {@link title}. A page header usually owns the page's\nonly `h1`; drop it to `h2` when the shell already provides one."
+        },
+        "loadingMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "maxInlineActions": {
+          "type": "number",
+          "typeText": "number | undefined",
+          "required": false,
+          "description": "How many actions stay inline before the remaining secondary ones move into\nthe overflow disclosure. Primary actions are never moved."
+        },
+        "maxVisibleBreadcrumbs": {
+          "type": "number",
+          "typeText": "number | undefined",
+          "required": false,
+          "description": "Trail length before the middle collapses behind a disclosure. The first and\nthe last two crumbs always stay visible."
+        },
+        "meta": {
+          "type": "array",
+          "typeText": "PageHeaderMetaItem[] | undefined",
+          "required": false,
+          "description": ""
+        },
+        "metaLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the meta list."
+        },
+        "onRetry": {
+          "type": "function",
+          "typeText": "(() => void) | undefined",
+          "required": false,
+          "description": "The retry control is omitted entirely when no handler is supplied."
+        },
+        "overflowLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "state": {
+          "type": "enum",
+          "values": [
+            "default",
+            "error",
+            "loading"
+          ],
+          "typeText": "PageHeaderState | undefined",
+          "required": false,
+          "description": ""
+        },
+        "status": {
+          "type": "object",
+          "typeText": "PageHeaderStatus | undefined",
+          "required": false,
+          "description": ""
+        },
+        "title": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": true,
+          "description": "Required: a page header without a title is not a page header."
+        },
+        "variant": {
+          "type": "enum",
+          "values": [
+            "plain",
+            "surface"
+          ],
+          "typeText": "\"plain\" | \"surface\" | undefined",
+          "required": false,
+          "description": "Surface includes padding and a background; plain fits an existing page gutter."
+        }
+      },
+      "inheritedProps": [],
+      "inheritedPropTypes": {}
+    },
+    "WorkspaceSwitcherBlock": {
+      "name": "WorkspaceSwitcherBlock",
+      "importPath": "@raydenui/ui/blocks",
+      "sourceModule": "src/blocks/WorkspaceSwitcherBlock",
+      "props": {
+        "className": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Lands on the container root, outside the popover surface."
+        },
+        "current": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "unassessed"
+            }
+          ],
+          "typeText": "WorkspaceSwitcherItem | undefined",
+          "required": false,
+          "description": "The workspace the application is currently showing."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Uncontrolled default."
+        },
+        "emptyDescription": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "emptyTitle": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Shown when the viewer belongs to no workspace at all."
+        },
+        "errorMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "filterLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "filterPlaceholder": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "filterThreshold": {
+          "type": "number",
+          "typeText": "number | undefined",
+          "required": false,
+          "description": "Below this many workspaces the filter field is not rendered, because a\nfilter over three entries is noise."
+        },
+        "footerActions": {
+          "type": "array",
+          "typeText": "WorkspaceSwitcherFooterAction[] | undefined",
+          "required": false,
+          "description": "\"Create workspace\" / \"Join workspace\". Rendered only when supplied."
+        },
+        "loadingMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "noMatchesDescription": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "noMatchesTitle": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Shown when the filter matches nothing — a different situation from empty."
+        },
+        "onOpenChange": {
+          "type": "function",
+          "typeText": "((open: boolean) => void) | undefined",
+          "required": false,
+          "description": ""
+        },
+        "onRetry": {
+          "type": "function",
+          "typeText": "(() => void) | undefined",
+          "required": false,
+          "description": "The retry control is omitted entirely when no handler is supplied."
+        },
+        "onSelect": {
+          "type": "function",
+          "typeText": "((id: string) => void) | undefined",
+          "required": false,
+          "description": "Required whenever a workspace without an `href` can be chosen: a switcher\nthat cannot switch is an inert control."
+        },
+        "open": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Controlled open state. Pair with {@link onOpenChange}."
+        },
+        "panelLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the popover."
+        },
+        "placeholder": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Shown on the trigger when no workspace is selected."
+        },
+        "resultCountLabel": {
+          "type": "function",
+          "typeText": "((count: number) => string) | undefined",
+          "required": false,
+          "description": "Announced result count. Receives the number of matching workspaces."
+        },
+        "status": {
+          "type": "enum",
+          "values": [
+            "error",
+            "loading",
+            "idle"
+          ],
+          "typeText": "WorkspaceSwitcherStatus | undefined",
+          "required": false,
+          "description": ""
+        },
+        "triggerHint": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Small label above the current name on the trigger, e.g. \"Workspace\"."
+        },
+        "triggerLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the trigger."
+        },
+        "unavailableMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Explanation for entries with neither a destination nor a selection handler."
+        },
+        "workspaces": {
+          "type": "array",
+          "typeText": "WorkspaceSwitcherItem[] | undefined",
+          "required": false,
+          "description": "Everything the viewer may switch to, including {@link current}."
+        }
+      },
+      "inheritedProps": [],
+      "inheritedPropTypes": {}
+    },
+    "CommandPaletteBlock": {
+      "name": "CommandPaletteBlock",
+      "importPath": "@raydenui/ui/blocks",
+      "sourceModule": "src/blocks/CommandPaletteBlock",
+      "props": {
+        "className": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Lands on the container root that holds the trigger."
+        },
+        "closeLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Uncontrolled default."
+        },
+        "dialogLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Accessible name for the dialog."
+        },
+        "emptySourceDescription": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "emptySourceTitle": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Shown when the palette has no entries configured at all."
+        },
+        "errorDescription": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "errorTitle": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "filterMode": {
+          "type": "enum",
+          "values": [
+            "local",
+            "external"
+          ],
+          "typeText": "CommandPaletteFilterMode | undefined",
+          "required": false,
+          "description": "`\"local\"` filters {@link items} in the browser. `\"external\"` renders\n{@link items} untouched, for an application that searches remotely."
+        },
+        "footer": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "unassessed"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "ReactNode",
+          "required": false,
+          "description": "Extra content along the bottom of the dialog, e.g. keyboard legends."
+        },
+        "groups": {
+          "type": "array",
+          "typeText": "CommandPaletteGroup[] | undefined",
+          "required": false,
+          "description": ""
+        },
+        "items": {
+          "type": "array",
+          "typeText": "CommandPaletteItem[] | undefined",
+          "required": false,
+          "description": "Everything the palette can offer for the current query."
+        },
+        "loadingMessage": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "lockScroll": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Freezes the page behind the overlay so the shell's workspace and the\npalette do not both scroll."
+        },
+        "noResultsDescription": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "noResultsTitle": {
+          "type": "function",
+          "typeText": "((query: string) => string) | undefined",
+          "required": false,
+          "description": "Shown when the query matches nothing. Distinct from the prompt."
+        },
+        "onOpenChange": {
+          "type": "function",
+          "typeText": "((open: boolean) => void) | undefined",
+          "required": false,
+          "description": ""
+        },
+        "onQueryChange": {
+          "type": "function",
+          "typeText": "((query: string) => void) | undefined",
+          "required": false,
+          "description": ""
+        },
+        "onRetry": {
+          "type": "function",
+          "typeText": "(() => void) | undefined",
+          "required": false,
+          "description": "The retry control is omitted entirely when no handler is supplied."
+        },
+        "onSelect": {
+          "type": "function",
+          "typeText": "((item: CommandPaletteItem) => void) | undefined",
+          "required": false,
+          "description": "Fires for every activation, including a destination followed by its href."
+        },
+        "open": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Controlled open state. Pair with {@link onOpenChange}."
+        },
+        "promptDescription": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "promptTitle": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Shown before anything has been typed and nothing else can be offered."
+        },
+        "resultCountLabel": {
+          "type": "function",
+          "typeText": "((count: number) => string) | undefined",
+          "required": false,
+          "description": "Announced and displayed result count."
+        },
+        "searchHint": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Hint under the field, associated with it."
+        },
+        "searchLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        "shortcut": {
+          "type": "union",
+          "alternatives": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "typeText": "CommandPaletteShortcut | null | undefined",
+          "required": false,
+          "description": "Keyboard opener. `null` registers no document listener."
+        },
+        "showAllWhenEmpty": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "With no suggestions and an empty query the palette prompts for a query\nrather than listing everything. Set this to list {@link items} instead."
+        },
+        "showTrigger": {
+          "type": "boolean",
+          "typeText": "boolean | undefined",
+          "required": false,
+          "description": "Renders the block's own opening control."
+        },
+        "status": {
+          "type": "enum",
+          "values": [
+            "error",
+            "loading",
+            "idle"
+          ],
+          "typeText": "CommandPaletteStatus | undefined",
+          "required": false,
+          "description": ""
+        },
+        "suggestions": {
+          "type": "array",
+          "typeText": "CommandPaletteItem[] | undefined",
+          "required": false,
+          "description": "Shown while the query is empty, e.g. recent destinations."
+        },
+        "suggestionsLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Heading above {@link suggestions}."
+        },
+        "triggerClassName": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": "Extra classes for the built-in trigger."
+        },
+        "triggerLabel": {
+          "type": "string",
+          "typeText": "string | undefined",
+          "required": false,
+          "description": ""
+        }
+      },
+      "inheritedProps": [],
+      "inheritedPropTypes": {}
     }
   },
   "platformTypes": {
@@ -42211,45 +43429,6 @@
     "p22": {
       "type": "enum",
       "values": [
-        "button",
-        "submit",
-        "reset"
-      ]
-    },
-    "p23": {
-      "type": "enum",
-      "values": [
-        "",
-        "anonymous",
-        "use-credentials"
-      ]
-    },
-    "p24": {
-      "type": "enum",
-      "values": [
-        "auto",
-        "async",
-        "sync"
-      ]
-    },
-    "p25": {
-      "type": "enum",
-      "values": [
-        "auto",
-        "high",
-        "low"
-      ]
-    },
-    "p26": {
-      "type": "enum",
-      "values": [
-        "eager",
-        "lazy"
-      ]
-    },
-    "p27": {
-      "type": "enum",
-      "values": [
         "",
         "no-referrer",
         "no-referrer-when-downgrade",
@@ -42259,6 +43438,45 @@
         "strict-origin",
         "strict-origin-when-cross-origin",
         "unsafe-url"
+      ]
+    },
+    "p23": {
+      "type": "enum",
+      "values": [
+        "button",
+        "submit",
+        "reset"
+      ]
+    },
+    "p24": {
+      "type": "enum",
+      "values": [
+        "",
+        "anonymous",
+        "use-credentials"
+      ]
+    },
+    "p25": {
+      "type": "enum",
+      "values": [
+        "auto",
+        "async",
+        "sync"
+      ]
+    },
+    "p26": {
+      "type": "enum",
+      "values": [
+        "auto",
+        "high",
+        "low"
+      ]
+    },
+    "p27": {
+      "type": "enum",
+      "values": [
+        "eager",
+        "lazy"
       ]
     },
     "p28": {
@@ -42379,15 +43597,15 @@
       "values": [
         "inherit",
         "middle",
-        "start",
-        "end"
+        "end",
+        "start"
       ]
     },
     "p40": {
       "type": "enum",
       "values": [
-        "left",
         "center",
+        "left",
         "right",
         "justify",
         "char"
@@ -43189,7 +44407,7 @@
           "tabIndex": "p4",
           "title": "p0",
           "translate": "p20",
-          "type": "p22",
+          "type": "p23",
           "typeof": "p0",
           "unselectable": "p21",
           "vocab": "p0"

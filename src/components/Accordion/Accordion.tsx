@@ -12,7 +12,7 @@ import {
 } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 /* ─── Types ────────────────────────────────────────────────────────────── */
 
@@ -40,7 +40,7 @@ export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
 
 export interface AccordionTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   /** Leading icon (left side) */
-  leadingIcon?: ReactNode | IconName;
+  leadingIcon?: IconSource;
   /** Leading number badge */
   leadingNumber?: string;
   /** Leading logo element */

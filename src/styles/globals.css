@@ -2,7 +2,14 @@
 @import "./motion.css";
 
 /* Enable class-based dark mode (responds to .dark class instead of prefers-color-scheme) */
-@custom-variant dark (&:where(.dark, .dark *):not(:where(.rayden-light, .rayden-light *)));
+/*
+ * `dark:` applies inside a globally dark document (.dark) and inside an explicit
+ * dark island (.rayden-dark) placed in a light one, and never inside an explicit
+ * light island (.rayden-light). A .rayden-dark nested inside a .rayden-light is a
+ * deliberate exclusion: the light island wins for `dark:` utilities, while the
+ * custom properties on .rayden-dark still resolve to their dark values.
+ */
+@custom-variant dark (&:where(.dark, .dark *, .rayden-dark, .rayden-dark *):not(:where(.rayden-light, .rayden-light *)));
 
 @source "../components";
 
@@ -10,6 +17,42 @@
   --color-tooltip-dark: #101928;
   --color-tooltip-dark-text: #f9fafb;
   --color-surface: #ffffff;
+  /* Page ground behind --color-surface panels. Light enough that grey-500 body
+     text stays at AA on it; follows the active mode. */
+  --color-surface-muted: #fff7f4;
+  /* Edges paired with --color-surface. Override these alongside the surface so a
+     custom theme keeps a coherent card boundary. Defaults match grey-100/grey-300. */
+  --color-surface-border: #f0f2f5;
+  --color-surface-border-strong: #d0d5dd;
+  /* ── Foregrounds paired with --color-surface ──────────────────────────────
+     --color-surface and this family are ONE UNIT: override them together, along
+     with --color-surface-muted for the page ground behind the panels. A surface
+     role with no foreground partner forces text to rely on the grey ramp happening
+     to suit the surface, which fails as soon as a consumer picks a mid-tone or
+     inverted ground. Components now follow --color-surface, so a half override —
+     a new surface with the inherited foregrounds — produces unreadable text rather
+     than being silently ignored as it used to be.
+     Each default is the grey-ramp value the components already used, referenced
+     rather than copied so an existing grey-ramp override keeps working; the
+     literal fallback is that same value. Ordered strongest to weakest. */
+  --color-on-surface: var(--color-grey-900, #101928);
+  --color-on-surface-body: var(--color-grey-700, #344054);
+  --color-on-surface-secondary: var(--color-grey-600, #475367);
+  --color-on-surface-muted: var(--color-grey-500, #667185);
+  --color-on-surface-subtle: var(--color-grey-400, #98a2b3);
+  /* ── Control boundaries ───────────────────────────────────────────────────
+     The resting edge of an interactive control (input, select, checkbox, radio,
+     chip, counter, secondary button). WCAG 1.4.11 asks 3:1 against both adjacent
+     grounds and axe does not test it, so this is a deliberate, separately
+     revertible token rather than a reuse of --color-surface-border-strong.
+     Light #667185 measures 4.92:1 on #ffffff and 4.65:1 on --color-surface-muted
+     (#fff7f4). The previous value #d0d5dd measured 1.47:1 and 1.39:1.
+     REVERT: set --color-control-border back to #d0d5dd here and in .rayden-light.
+     The dark scopes are already compliant and are unchanged by that revert. */
+  --color-control-border: #667185;
+  /* A disabled or read-only control is exempt from 1.4.11; this keeps its former
+     weight so a disabled field still reads as inactive. */
+  --color-control-border-disabled: #d0d5dd;
   --color-feedback-success: #036b26;
   --color-feedback-error: #ba110b;
   /* Action colors keep normal-sized labels readable in either theme. */
@@ -120,7 +163,10 @@
   --color-office-brown-900: #3e3838;
 
   /* Font */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: Manrope, ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* ── Shadows: Soft ── */
   --shadow-soft-xxs: 0px 1.5px 4px -1px rgba(16, 25, 40, 0.07);
@@ -195,74 +241,230 @@
   --breakpoint-md: 600px;
   --breakpoint-lg: 1136px;
 
-  /* ── Typography: Display ── */
-  --text-display-lg: 56px;
-  --text-display-lg--line-height: 1;
-  --text-display-lg--letter-spacing: -0.04em;
+  /* Typography roles. Sizes are rem; line heights are unitless. */
+  --text-display-lg: 3.5rem;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-lg--font-weight: 700;
 
-  --text-display-sm: 48px;
-  --text-display-sm--line-height: 1;
-  --text-display-sm--letter-spacing: -0.04em;
+  --text-display-sm: 3rem;
+  --text-display-sm--line-height: 1.1;
+  --text-display-sm--letter-spacing: -0.03em;
+  --text-display-sm--font-weight: 700;
 
-  /* ── Typography: Headings ── */
-  --text-h1: 40px;
+  --text-h1: 2.5rem;
   --text-h1--line-height: 1.2;
-  --text-h1--letter-spacing: -0.04em;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h1--font-weight: 600;
 
-  --text-h2: 36px;
+  --text-h2: 2.25rem;
   --text-h2--line-height: 1.2;
-  --text-h2--letter-spacing: -0.04em;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h2--font-weight: 600;
 
-  --text-h3: 32px;
+  --text-h3: 2rem;
   --text-h3--line-height: 1.2;
   --text-h3--letter-spacing: -0.02em;
+  --text-h3--font-weight: 600;
 
-  --text-h4: 28px;
+  --text-h4: 1.75rem;
   --text-h4--line-height: 1.2;
   --text-h4--letter-spacing: -0.02em;
+  --text-h4--font-weight: 600;
 
-  --text-h5: 24px;
+  --text-h5: 1.5rem;
   --text-h5--line-height: 1.2;
   --text-h5--letter-spacing: -0.02em;
+  --text-h5--font-weight: 600;
 
-  --text-h6: 20px;
+  --text-h6: 1.25rem;
   --text-h6--line-height: 1.2;
   --text-h6--letter-spacing: -0.02em;
+  --text-h6--font-weight: 600;
 
-  /* ── Typography: Body ── */
-  --text-body-lg: 18px;
-  --text-body-lg--line-height: 1.45;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.5;
+  --text-body-lg--letter-spacing: 0;
+  --text-body-lg--font-weight: 400;
 
-  --text-body-md: 16px;
-  --text-body-md--line-height: 1.45;
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.5;
+  --text-body-md--letter-spacing: 0;
+  --text-body-md--font-weight: 400;
 
-  --text-body-sm: 14px;
-  --text-body-sm--line-height: 1.45;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+  --text-body-sm--letter-spacing: 0;
+  --text-body-sm--font-weight: 400;
 
-  --text-body-xs: 12px;
-  --text-body-xs--line-height: 1.45;
+  --text-body-xs: 0.75rem;
+  --text-body-xs--line-height: 1.5;
+  --text-body-xs--letter-spacing: 0;
+  --text-body-xs--font-weight: 400;
 
-  /* ── Typography: Captions (uppercase) ── */
-  --text-caption-lg: 14px;
-  --text-caption-lg--line-height: 1.2;
-  --text-caption-lg--letter-spacing: 0.12em;
+  --text-caption-lg: 0.875rem;
+  --text-caption-lg--line-height: 1.5;
+  --text-caption-lg--letter-spacing: 0.08em;
+  --text-caption-lg--font-weight: 500;
 
-  --text-caption-sm: 12px;
-  --text-caption-sm--line-height: 1.2;
-  --text-caption-sm--letter-spacing: 0.12em;
+  --text-caption-sm: 0.75rem;
+  --text-caption-sm--line-height: 1.5;
+  --text-caption-sm--letter-spacing: 0.08em;
+  --text-caption-sm--font-weight: 500;
 
-  --text-caption-xs: 10px;
-  --text-caption-xs--line-height: 1.2;
-  --text-caption-xs--letter-spacing: 0.16em;
+  --text-caption-xs: 0.75rem;
+  --text-caption-xs--line-height: 1.5;
+  --text-caption-xs--letter-spacing: 0.08em;
+  --text-caption-xs--font-weight: 500;
+
+  --text-label-lg: 1rem;
+  --text-label-lg--line-height: 1.5;
+  --text-label-lg--letter-spacing: 0;
+  --text-label-lg--font-weight: 500;
+
+  --text-label-md: 0.875rem;
+  --text-label-md--line-height: 1.428571;
+  --text-label-md--letter-spacing: 0;
+  --text-label-md--font-weight: 500;
+
+  --text-label-sm: 0.75rem;
+  --text-label-sm--line-height: 1.333333;
+  --text-label-sm--letter-spacing: 0;
+  --text-label-sm--font-weight: 500;
+
+  --text-code-md: 0.875rem;
+  --text-code-md--line-height: 1.6;
+  --text-code-md--letter-spacing: 0;
+  --text-code-md--font-weight: 400;
+
+  --text-code-sm: 0.75rem;
+  --text-code-sm--line-height: 1.5;
+  --text-code-sm--letter-spacing: 0;
+  --text-code-sm--font-weight: 400;
+}
+
+/* Keep document semantics independent from visual size. Utilities can override
+   these low-specificity defaults, including a consumer's custom font family. */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-heading);
+    font-synthesis: none;
+    text-wrap: balance;
+  }
+
+  :where(button, input, select, textarea, optgroup) {
+    font-family: var(--font-sans);
+  }
+
+  :where(code, pre, kbd, samp) {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Role utilities compose with text-* size utilities and responsive variants. */
+@utility text-display-lg {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-display-sm {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-h1 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-h2 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-h3 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-h4 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-h5 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-h6 {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+@utility text-label-lg {
+  font-family: var(--font-sans);
+}
+
+@utility text-label-md {
+  font-family: var(--font-sans);
+}
+
+@utility text-label-sm {
+  font-family: var(--font-sans);
+}
+
+@utility text-code-md {
+  font-family: var(--font-mono);
+}
+
+@utility text-code-sm {
+  font-family: var(--font-mono);
+}
+
+@utility prose-measure {
+  max-inline-size: 65ch;
+  overflow-wrap: break-word;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
    Dark Mode Overrides
-   Add .dark class to <html> or root element to enable dark mode
+   Add .dark to <html> or the root element to put the whole document in dark mode.
+   Add .rayden-dark to a subtree to make an explicit dark island inside a light
+   document — the mirror of .rayden-light. Both share this block so they cannot
+   drift apart, and both are matched by the `dark:` variant declared at the top of
+   this file. A component that paints `bg-surface` with `text-on-surface` inherits
+   the whole pair from either scope; hand-inlining a variable block on a subtree is
+   no longer necessary.
    ══════════════════════════════════════════════════════════════════════════ */
 
-.dark {
+.dark,
+.rayden-dark {
   --color-surface: #101928;
+  --color-surface-muted: #1d2739;
+  --color-surface-border: #344054;
+  --color-surface-border-strong: #667185;
+  /* Paired foregrounds. Same roles as @theme, resolved against this scope's ramp. */
+  --color-on-surface: var(--color-grey-900, #f9fafb);
+  --color-on-surface-body: var(--color-grey-700, #f0f2f5);
+  --color-on-surface-secondary: var(--color-grey-600, #e4e7ec);
+  --color-on-surface-muted: var(--color-grey-500, #d0d5dd);
+  --color-on-surface-subtle: var(--color-grey-400, #98a2b3);
+  /* Already 3.57:1 on --color-surface and 3.04:1 on --color-surface-muted, so the
+     1.4.11 repair changes nothing here. Value equals this scope's grey-300. */
+  --color-control-border: #667185;
+  --color-control-border-disabled: #667185;
   --color-feedback-success: #91d6a8;
   --color-feedback-error: #eb9b98;
   color-scheme: dark;
@@ -394,9 +596,21 @@
   }
 }
 
-/* Explicit light islands inside a dark document. Keep these paired with .dark. */
+/* Explicit light islands inside a dark document. Mirror of .rayden-dark above. */
 .rayden-light {
   --color-surface: #ffffff;
+  --color-surface-muted: #fff7f4;
+  --color-surface-border: #f0f2f5;
+  --color-surface-border-strong: #d0d5dd;
+  /* Paired foregrounds. Same roles as @theme, resolved against this scope's ramp. */
+  --color-on-surface: var(--color-grey-900, #101928);
+  --color-on-surface-body: var(--color-grey-700, #344054);
+  --color-on-surface-secondary: var(--color-grey-600, #475367);
+  --color-on-surface-muted: var(--color-grey-500, #667185);
+  --color-on-surface-subtle: var(--color-grey-400, #98a2b3);
+  /* REVERT of the 1.4.11 control-boundary change: #d0d5dd here and in @theme. */
+  --color-control-border: #667185;
+  --color-control-border-disabled: #d0d5dd;
   --color-feedback-success: #036b26;
   --color-feedback-error: #ba110b;
   color-scheme: light;

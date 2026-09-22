@@ -2,7 +2,7 @@ import { forwardRef, type ReactNode, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { Icon } from "../Icon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 export type ActivityContentVariant = "file" | "comment" | "cta";
 export type ActivityContentStyle = "plain" | "card" | "container";
@@ -25,7 +25,7 @@ export interface ActivityContentProps extends HTMLAttributes<HTMLDivElement> {
 
   // ─── File variant props ─────────────────────────────────
   /** Leading icon for file variant */
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   /** File name */
   title?: string;
   /** File size (e.g., "13MB") */
@@ -63,7 +63,7 @@ export interface ActivityContentProps extends HTMLAttributes<HTMLDivElement> {
 // ─── Style wrapper classes ────────────────────────────────
 const styleClasses: Record<ActivityContentStyle, string> = {
   plain: "",
-  card: "bg-white dark:bg-grey-50 rounded-lg p-2 shadow-[0px_2px_5px_-2px_rgba(16,25,40,0.06),0px_2px_7px_0px_rgba(16,25,40,0.05),0px_0px_0px_1px_rgba(16,25,40,0.05)]",
+  card: "bg-surface rounded-lg p-2 shadow-[0px_2px_5px_-2px_rgba(16,25,40,0.06),0px_2px_7px_0px_rgba(16,25,40,0.05),0px_0px_0px_1px_rgba(16,25,40,0.05)]",
   container: "bg-grey-50 border border-grey-100 rounded-lg p-3",
 };
 
@@ -100,7 +100,7 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
       return (
         <div
           ref={ref}
-          className={cn("flex items-center gap-2", styleClasses[contentStyle], className)}
+          className={cn("flex min-w-0 items-center gap-2", styleClasses[contentStyle], className)}
           {...rest}
         >
           {/* File icon */}
@@ -108,24 +108,38 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
             <span className="size-4">{resolveIcon(icon ?? "file", "sm")}</span>
           </div>
 
-          {/* File details */}
-          <div className="flex flex-col items-start">
-            <div className="flex items-center gap-1">
-              <span className="text-xs font-semibold text-grey-700 whitespace-nowrap">{title}</span>
+          {/* File details — separators travel with the value they precede so a
+              wrapped line never begins with a lone dot. */}
+          <div className="flex min-w-0 flex-col items-start">
+            <div className="flex min-w-0 flex-wrap items-baseline gap-x-1">
+              <span className="min-w-0 text-xs font-semibold text-on-surface-body break-words">
+                {title}
+              </span>
               {size && (
-                <>
-                  <span className="size-0.5 rounded-full bg-grey-400" />
-                  <span className="text-xs text-grey-500 whitespace-nowrap">{size}</span>
-                </>
+                <span className="inline-flex max-w-full items-center gap-1">
+                  <span className="size-0.5 shrink-0 rounded-full bg-grey-400" aria-hidden="true" />
+                  <span className="text-xs text-on-surface-muted whitespace-nowrap">{size}</span>
+                </span>
               )}
             </div>
             {(fileType || date) && (
-              <div className="flex items-center gap-1">
+              <div className="flex min-w-0 flex-wrap items-baseline gap-x-1">
                 {fileType && (
-                  <span className="text-xs text-grey-500 whitespace-nowrap">{fileType}</span>
+                  <span className="text-xs text-on-surface-muted whitespace-nowrap">
+                    {fileType}
+                  </span>
                 )}
-                {fileType && date && <span className="size-0.5 rounded-full bg-grey-400" />}
-                {date && <span className="text-xs text-grey-500 whitespace-nowrap">{date}</span>}
+                {date && (
+                  <span className="inline-flex max-w-full items-center gap-1">
+                    {fileType && (
+                      <span
+                        className="size-0.5 shrink-0 rounded-full bg-grey-400"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="text-xs text-on-surface-muted whitespace-nowrap">{date}</span>
+                  </span>
+                )}
               </div>
             )}
           </div>
@@ -135,55 +149,56 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
 
     // ─── Comment variant ──────────────────────────────────
     if (variant === "comment") {
-      const wrapperStyle =
-        contentStyle === "plain"
-          ? "flex gap-2 items-start"
-          : cn("flex flex-col gap-2", styleClasses[contentStyle]);
-
       const commentContent = (
         <>
           {/* Author row */}
           {(avatar || author) && (
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex min-w-0 items-center gap-2 w-full">
               {avatar && <div className="shrink-0 size-5">{avatar}</div>}
-              <div className="flex items-center">
+              <div className="flex min-w-0 flex-wrap items-baseline">
                 {author && (
-                  <span className="text-body-sm font-medium text-grey-700 whitespace-nowrap">
+                  <span className="min-w-0 text-body-sm font-medium text-on-surface-body break-words">
                     {author}
                   </span>
                 )}
                 {timestamp && (
-                  <span className="text-xs text-grey-500 whitespace-nowrap">・{timestamp}</span>
+                  <span className="min-w-0 text-xs text-on-surface-muted break-words">
+                    ・{timestamp}
+                  </span>
                 )}
               </div>
             </div>
           )}
 
           {/* Comment body */}
-          {comment && <p className="text-body-sm text-grey-600 leading-5">{comment}</p>}
+          {comment && (
+            <p className="w-full text-body-sm text-on-surface-secondary leading-5 break-words">
+              {comment}
+            </p>
+          )}
 
           {/* File attachments */}
           {attachments && attachments.length > 0 && (
-            <div className="flex items-start gap-2">
+            <div className="flex min-w-0 flex-wrap items-start gap-2">
               {attachments.slice(0, 2).map((file) => (
                 <div
                   key={`${file.name}.${file.extension}`}
-                  className="flex items-center gap-2 rounded-lg border border-grey-100 bg-white dark:bg-grey-50 pl-1 pr-2 py-1"
+                  className="flex min-w-0 max-w-full items-center gap-2 rounded-lg border border-grey-100 bg-surface pl-1 pr-2 py-1"
                 >
                   <div className="flex shrink-0 items-center justify-center size-6 rounded bg-primary-50 border border-primary-50">
                     <span className="size-3">
                       <Icon name="file" size="xs" />
                     </span>
                   </div>
-                  <span className="text-xs text-grey-700 whitespace-nowrap">
+                  <span className="min-w-0 truncate text-xs text-on-surface-body">
                     <span className="font-semibold">{file.name}</span>
-                    <span className="text-grey-500">.{file.extension}</span>
+                    <span className="text-on-surface-muted">.{file.extension}</span>
                   </span>
                 </div>
               ))}
               {attachments.length > 2 && (
-                <div className="flex items-center justify-center size-8 rounded-lg border border-grey-100 bg-white dark:bg-grey-50 px-2 py-1">
-                  <span className="text-xs font-semibold text-grey-700">
+                <div className="flex items-center justify-center size-8 rounded-lg border border-grey-100 bg-surface px-2 py-1">
+                  <span className="text-xs font-semibold text-on-surface-body">
                     +{attachments.length - 2}
                   </span>
                 </div>
@@ -193,20 +208,20 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
 
           {/* Reactions + Replies */}
           {(reactions != null || replies != null) && (
-            <div className="flex items-start gap-2">
+            <div className="flex flex-wrap items-start gap-2">
               {reactions != null && (
-                <div className="flex items-center gap-2 rounded-lg border border-grey-100 bg-white dark:bg-grey-50 px-2 py-1">
-                  <span className="text-xs text-grey-700">🤝🔥</span>
-                  <span className="text-xs text-grey-700">
+                <div className="flex items-center gap-2 rounded-lg border border-grey-100 bg-surface px-2 py-1">
+                  <span className="text-xs text-on-surface-body">🤝🔥</span>
+                  <span className="text-xs text-on-surface-body">
                     <span className="font-semibold">{reactions} </span>
                     Reactions
                   </span>
                 </div>
               )}
               {replies != null && (
-                <div className="flex items-center gap-2 rounded-lg border border-grey-100 bg-white dark:bg-grey-50 px-2 py-1 h-8">
-                  <Icon name="message" size="sm" className="text-grey-500" />
-                  <span className="text-xs text-grey-700">
+                <div className="flex items-center gap-2 rounded-lg border border-grey-100 bg-surface px-2 py-1 h-8">
+                  <Icon name="message" size="sm" className="text-on-surface-muted" />
+                  <span className="text-xs text-on-surface-body">
                     <span className="font-semibold">{replies} </span>
                     Replies
                   </span>
@@ -220,7 +235,7 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
             <button
               type="button"
               onClick={onReply}
-              className="inline-flex items-center justify-center rounded-lg border border-grey-300 bg-white dark:bg-grey-50 px-3 py-1 text-xs font-semibold text-grey-700"
+              className="inline-flex items-center justify-center rounded-lg border border-control-border bg-surface px-3 py-1 text-xs font-semibold text-on-surface-body"
             >
               Reply
             </button>
@@ -252,7 +267,7 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
     // ─── CTA variant ──────────────────────────────────────
     if (variant === "cta") {
       return (
-        <div ref={ref} className={cn("flex items-start gap-3", className)} {...rest}>
+        <div ref={ref} className={cn("flex flex-wrap items-start gap-3", className)} {...rest}>
           {primaryAction && (
             <button
               type="button"
@@ -266,7 +281,7 @@ export const ActivityContent = forwardRef<HTMLDivElement, ActivityContentProps>(
             <button
               type="button"
               onClick={secondaryAction.onClick}
-              className="inline-flex items-center justify-center rounded-lg border border-grey-300 bg-white dark:bg-grey-50 px-4 py-2 text-body-sm font-semibold text-grey-700"
+              className="inline-flex items-center justify-center rounded-lg border border-control-border bg-surface px-4 py-2 text-body-sm font-semibold text-on-surface-body"
             >
               {secondaryAction.label}
             </button>

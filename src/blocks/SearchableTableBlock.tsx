@@ -5,6 +5,7 @@ import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../components/Table";
 import type { SortDirection } from "../components/Table";
+import { useTableSelection } from "../components/Table/useTableSelection";
 import { Checkbox } from "../components/FormControl";
 import { Pagination } from "../components/Pagination";
 
@@ -49,17 +50,30 @@ export interface SearchableTableBlockProps {
   onSearchClick?: () => void;
   /** Title-variant toolbar: sort action. The button renders only when supplied. */
   onSortClick?: () => void;
-  /** Show filter button */
+  /**
+   * Hide the filter button. It appears whenever `onFilter` is supplied; setting this
+   * `true` without a handler does not bring it back, because the block does not render a
+   * control that has nowhere to go.
+   */
   showFilter?: boolean;
-  /** Filter click handler */
+  /** Filter click handler. Required for the filter button to appear. */
   onFilter?: () => void;
-  /** Show date selector button */
+  /**
+   * Hide the date selector. It appears whenever `onDateSelect` is supplied; setting this
+   * `true` without a handler does not bring it back.
+   */
   showDateSelector?: boolean;
-  /** Date selector click handler */
+  /** Date selector click handler. Required for the date selector to appear. */
   onDateSelect?: () => void;
   /** Enable row selection checkboxes */
   selectable?: boolean;
-  /** Selection change handler */
+  /**
+   * Controlled selection. Supply it to own selection yourself — the only way to keep a
+   * selection across pages, or across a filter you apply outside the block, since the
+   * block otherwise drops ids that leave `rows`. See `useTableSelection`.
+   */
+  selectedIds?: string[];
+  /** Fired on user interaction with the full resulting selection. */
   onSelectionChange?: (ids: string[]) => void;
   /** Row kebab menu action handler */
   onRowAction?: (rowId: string) => void;
@@ -101,11 +115,12 @@ export function SearchableTableBlock({
   onSort,
   onSearchClick,
   onSortClick,
-  showFilter = true,
+  showFilter,
   onFilter,
-  showDateSelector = false,
+  showDateSelector,
   onDateSelect,
   selectable = false,
+  selectedIds,
   onSelectionChange,
   onRowAction,
   page,
@@ -116,7 +131,6 @@ export function SearchableTableBlock({
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
   // ─── Handlers ────────────────────────────────────────────────────
   const handleSearch = (value: string) => {
@@ -168,21 +182,20 @@ export function SearchableTableBlock({
           return sortDirection === "asc" ? result : -result;
         });
 
-  const allSelected = visibleRows.length > 0 && visibleRows.every((row) => selectedIds.has(row.id));
+  // `dataIds` is the whole data set and `scopeIds` only the rows on screen, so locally
+  // filtering or sorting keeps a hidden row's selection while the header still reports
+  // the visible rows. Rows the consumer removes from `rows` are dropped.
+  const selection = useTableSelection({
+    dataIds: rows.map((row) => row.id),
+    scopeIds: visibleRows.map((row) => row.id),
+    selectedIds,
+    onSelectionChange,
+  });
 
-  const toggleAll = () => {
-    const next = allSelected ? new Set<string>() : new Set(visibleRows.map((r) => r.id));
-    setSelectedIds(next);
-    onSelectionChange?.([...next]);
-  };
-
-  const toggleRow = (id: string) => {
-    const next = new Set(selectedIds);
-    if (next.has(id)) next.delete(id);
-    else next.add(id);
-    setSelectedIds(next);
-    onSelectionChange?.([...next]);
-  };
+  // Every visible control needs somewhere to go: a toolbar button with no handler is
+  // dead, so presence of the handler is what makes it available.
+  const filterAvailable = Boolean(onFilter) && showFilter !== false;
+  const dateSelectorAvailable = Boolean(onDateSelect) && showDateSelector !== false;
 
   // ─── Toolbar ─────────────────────────────────────────────────────
   const toolbar = title ? (
@@ -200,7 +213,7 @@ export function SearchableTableBlock({
             <span>Search</span>
           </button>
         )}
-        {showFilter && (
+        {filterAvailable && (
           <button
             type="button"
             onClick={onFilter}
@@ -234,7 +247,7 @@ export function SearchableTableBlock({
           onChange={(e) => handleSearch(e.target.value)}
           wrapperClassName="w-full min-w-0 sm:w-[260px]"
         />
-        {showFilter && (
+        {filterAvailable && (
           <Button
             variant="grey"
             appearance="outlined"
@@ -247,7 +260,7 @@ export function SearchableTableBlock({
           </Button>
         )}
       </div>
-      {showDateSelector && (
+      {dateSelectorAvailable && (
         <Button
           variant="grey"
           appearance="outlined"
@@ -273,9 +286,9 @@ export function SearchableTableBlock({
             {selectable && (
               <TableHead className="w-[52px]">
                 <Checkbox
-                  checked={allSelected}
-                  indeterminate={!allSelected && visibleRows.some((row) => selectedIds.has(row.id))}
-                  onChange={toggleAll}
+                  checked={selection.allSelected}
+                  indeterminate={selection.someSelected}
+                  onChange={selection.toggleAll}
                   aria-label="Select all rows"
                 />
               </TableHead>
@@ -302,12 +315,12 @@ export function SearchableTableBlock({
           {visibleRows.map((row) => {
             const rowLabel = columns[0] ? String(row[columns[0].key] ?? row.id) : row.id;
             return (
-              <TableRow key={row.id} selected={selectedIds.has(row.id)}>
+              <TableRow key={row.id} selected={selection.isSelected(row.id)}>
                 {selectable && (
                   <TableCell>
                     <Checkbox
-                      checked={selectedIds.has(row.id)}
-                      onChange={() => toggleRow(row.id)}
+                      checked={selection.isSelected(row.id)}
+                      onChange={() => selection.toggleRow(row.id)}
                       aria-label={`Select ${rowLabel}`}
                     />
                   </TableCell>

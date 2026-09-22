@@ -1,0 +1,87 @@
+---
+title: Application and marketing blocks
+description: Nine additional public blocks for application and marketing interfaces
+---
+
+# Application and marketing blocks
+
+These nine existing blocks are now exported, including their prop and data types, through `@raydenui/ui/blocks`.
+
+| Block | Main inputs | Interactive Storybook group |
+| --- | --- | --- |
+| HeaderBlock | `variant`, `links`, `actions`, `switcher` | Blocks / Header |
+| CreateAccountBlock | Form values, field errors, submission callback | Blocks / CreateAccount |
+| KpiOverviewBlock | `period`, `metrics`, optional period selection | Blocks / KpiOverview |
+| ProfileSettingsBlock | Profile values, timezone options, save callback | Blocks / ProfileSettings |
+| TaskListBlock | Tasks, assignees, completion and filtering callbacks | Blocks / TaskList |
+| ProductHeroBlock | Heading, copy, media, link or action CTAs | Blocks / ProductHero |
+| FeatureOverviewBlock | Feature items and optional CTAs | Blocks / FeatureOverview |
+| PricingPlansBlock | Plans, billing period, limits, availability | Blocks / PricingPlans |
+| SiteFooterBlock | Brand, grouped links, social links, locale control | Blocks / SiteFooter |
+
+## Header selection
+
+Set `active: true` on the current navigation link to show its selected state and expose `aria-current="page"`. Action items accept `href` for navigation or `onClick` for application behavior. The mobile menu preserves both and closes after an action is selected.
+
+```tsx
+<HeaderBlock
+  variant={2}
+  logo={<a href="/">Rayden</a>}
+  links={[
+    { label: "Overview", href: "/overview", active: true },
+    { label: "Resources", href: "/resources" },
+  ]}
+  actions={[
+    { label: "Log in", href: "/login", variant: "text" },
+    { label: "Get started", href: "/signup", variant: "primary" },
+  ]}
+/>
+```
+
+Header rows share a maximum width of 1440px and collapse according to their container width. Centered-logo variants reserve equal space on both sides of the logo; the mobile menu takes over when that balanced layout no longer fits.
+
+Use `defaultActiveIndex` for an uncontrolled switcher. For controlled selection, provide both `activeIndex` and `onChange`; the selected item remains the value supplied by your application.
+
+```tsx
+import { useState } from "react";
+import { HeaderBlock } from "@raydenui/ui/blocks";
+
+function WorkspaceHeader() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  return (
+    <HeaderBlock
+      variant={10}
+      logo={<span>Acme</span>}
+      switcher={{ tabs: ["Personal", "Team"], activeIndex, onChange: setActiveIndex }}
+      links={[{ label: "Overview", href: "/overview" }]}
+    />
+  );
+}
+```
+
+## KPI overview without chart dependencies
+
+Sparklines use SVG and include a visually hidden data table. Importing blocks does not require `chart.js` or `react-chartjs-2`. The separate `@raydenui/ui/chart` entry remains available for richer charts.
+
+```tsx
+import { KpiOverviewBlock } from "@raydenui/ui/blocks";
+
+<KpiOverviewBlock
+  headingLevel="h2"
+  period={{ label: "September 2026", comparisonLabel: "August 2026" }}
+  metrics={[{
+    id: "orders",
+    label: "Orders",
+    value: "1,240",
+    comparisonValue: "1,100",
+    change: { label: "+12.7%", direction: "up", sentiment: "positive" },
+    trend: { labels: ["Week 1", "Week 2", "Week 3", "Week 4"], values: [240, 290, 330, 380] },
+  }]}
+/>
+```
+
+## Preview and theming
+
+Run Storybook with `pnpm storybook`. The Application surface and Marketing Landing composition stories show these blocks together. Use the theme toolbar to switch light and dark modes. Blocks use Rayden’s semantic CSS variables and accept `className`; choose heading levels to fit the containing page.
+
+Forms and destructive or transactional actions remain owned by the application. Connect callbacks to your validation and services, then supply pending, error, and success states from the actual result.

@@ -10,16 +10,22 @@ const OPPOSITE: Record<AnchorSide, AnchorSide> = {
 };
 
 /** Does the panel fit between the trigger and the viewport edge on this side? */
-function fits(side: AnchorSide, trigger: DOMRect, panel: DOMRect, margin: number): boolean {
+function fits(
+  side: AnchorSide,
+  trigger: DOMRect,
+  panel: DOMRect,
+  margin: number,
+  viewport: Window
+): boolean {
   switch (side) {
     case "top":
       return trigger.top - panel.height - margin >= 0;
     case "bottom":
-      return trigger.bottom + panel.height + margin <= window.innerHeight;
+      return trigger.bottom + panel.height + margin <= viewport.innerHeight;
     case "left":
       return trigger.left - panel.width - margin >= 0;
     case "right":
-      return trigger.right + panel.width + margin <= window.innerWidth;
+      return trigger.right + panel.width + margin <= viewport.innerWidth;
   }
 }
 
@@ -46,10 +52,12 @@ export function useCollisionAwareSide(
   const measure = useCallback(() => {
     const trigger = triggerRef.current?.getBoundingClientRect();
     const panel = panelRef.current?.getBoundingClientRect();
-    if (!trigger || !panel || panel.height === 0) return;
+    const viewport = triggerRef.current?.ownerDocument.defaultView;
+    if (!trigger || !panel || !viewport || panel.height === 0) return;
     const opposite = OPPOSITE[preferred];
     setSide(
-      !fits(preferred, trigger, panel, margin) && fits(opposite, trigger, panel, margin)
+      !fits(preferred, trigger, panel, margin, viewport) &&
+        fits(opposite, trigger, panel, margin, viewport)
         ? opposite
         : preferred
     );
@@ -60,14 +68,20 @@ export function useCollisionAwareSide(
       setSide(preferred);
       return;
     }
+    const viewport = triggerRef.current?.ownerDocument.defaultView;
+    if (!viewport) return;
     measure();
-    window.addEventListener("scroll", measure, true);
-    window.addEventListener("resize", measure);
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(measure);
+    if (triggerRef.current) observer?.observe(triggerRef.current);
+    if (panelRef.current) observer?.observe(panelRef.current);
+    viewport.addEventListener("scroll", measure, true);
+    viewport.addEventListener("resize", measure);
     return () => {
-      window.removeEventListener("scroll", measure, true);
-      window.removeEventListener("resize", measure);
+      observer?.disconnect();
+      viewport.removeEventListener("scroll", measure, true);
+      viewport.removeEventListener("resize", measure);
     };
-  }, [open, preferred, measure]);
+  }, [open, preferred, measure, triggerRef, panelRef]);
 
   return side;
 }

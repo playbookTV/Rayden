@@ -81,4 +81,10 @@ Examples:
 - `{color.primary.500}` → #EB5017
 - `{spacing.4}` → 16px
 - `{radius.md}` → 6px
-- `{typography.fontFamily.sans}` → Inter
+- `{typography.fontFamily.sans}` → Hanken Grotesk
+
+## Icon conventions
+
+`Icon` is the React component. `heartIcon` and other named exports from `@raydenui/ui/icons` are SVG data records. Render data as `<Icon icon={heartIcon} />`, or use `<Icon name="heart" />` for a registry lookup after mount. Pass exactly one source. Use `outline` (default) or `solid`, never `line`.
+
+Use the generated `iconCatalog`/`iconNames` exports or `catalog.icons.entries` to discover exact name/export pairs; preserve existing acronym and numeric spellings. Icon slots typed as `IconSource` accept a name, static `IconRecord`, or custom React node. For solid or custom-sized slot icons, pass an `<Icon>` element. Sizes are `xs`, `sm`, `md`, `lg`, `xl`, or a number. Label icon-only controls on the control; meaningful standalone SVGs need `aria-hidden={false}`, `role="img"`, and `aria-label`.

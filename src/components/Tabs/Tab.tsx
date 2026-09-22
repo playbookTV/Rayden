@@ -1,12 +1,12 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 import { useTabsContext } from "./Tabs";
 
 export interface TabProps {
   value: string;
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   badge?: number | string;
   disabled?: boolean;
   children: ReactNode;

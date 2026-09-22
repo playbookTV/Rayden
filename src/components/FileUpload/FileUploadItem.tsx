@@ -58,7 +58,7 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
         {...rest}
       >
         {/* File icon */}
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-white dark:bg-grey-50">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-grey-200 bg-surface">
           <FileTypeIcon type={fileType} />
         </div>
 
@@ -70,7 +70,7 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
               {file.error ?? "Failed to upload"}
             </span>
           ) : (
-            <span className="text-body-xs text-grey-600">
+            <span className="text-body-xs text-on-surface-secondary">
               {file.status === "complete" && file.uploadedAt
                 ? `${formatDate(file.uploadedAt)} \u2022 ${formatFileSize(file.size)}`
                 : formatFileSize(file.size)}
@@ -83,7 +83,7 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
           {file.status === "pending" && (
             <button
               type="button"
-              className="flex size-7 items-center justify-center rounded-md text-grey-500 hover:bg-grey-100 cursor-pointer"
+              className="flex size-7 items-center justify-center rounded-md text-on-surface-muted hover:bg-grey-100 cursor-pointer"
               aria-label={`Remove ${file.name}`}
               onClick={() => onRemove?.(file.id)}
             >
@@ -102,7 +102,7 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
               <button
                 type="button"
                 onClick={() => onRemove?.(file.id)}
-                className="flex size-7 items-center justify-center rounded-md text-grey-600 hover:bg-grey-100 cursor-pointer"
+                className="flex size-7 items-center justify-center rounded-md text-on-surface-secondary hover:bg-grey-100 cursor-pointer"
                 aria-label="Cancel upload"
               >
                 <Icon name="multiply" size="sm" />
@@ -115,7 +115,7 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
               <button
                 type="button"
                 onClick={() => onRemove?.(file.id)}
-                className="flex size-7 items-center justify-center rounded-md text-grey-600 hover:bg-grey-100 cursor-pointer"
+                className="flex size-7 items-center justify-center rounded-md text-on-surface-secondary hover:bg-grey-100 cursor-pointer"
                 aria-label="Delete file"
               >
                 <Icon name="bin" size="md" />
@@ -123,7 +123,7 @@ export const FileUploadItem = forwardRef<HTMLDivElement, FileUploadItemProps>(
               <button
                 type="button"
                 onClick={() => onDownload?.(file.id)}
-                className="flex size-7 items-center justify-center rounded-md text-grey-600 hover:bg-grey-100 cursor-pointer"
+                className="flex size-7 items-center justify-center rounded-md text-on-surface-secondary hover:bg-grey-100 cursor-pointer"
                 aria-label="Download file"
               >
                 <Icon name="download" size="md" />

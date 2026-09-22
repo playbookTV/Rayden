@@ -1,15 +1,8 @@
-import {
-  Children,
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
+import { Children, cloneElement, forwardRef, isValidElement, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { Icon } from "../Icon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 /* ─── Types ─── */
 
@@ -35,8 +28,8 @@ export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   alt?: string;
   /** Initials text (for type="initials"). */
   initials?: string;
-  /** Custom icon (for type="icon"). Accepts ReactNode or IconName. @default "user" */
-  icon?: ReactNode | IconName;
+  /** Custom icon (for type="icon"). Accepts a registry name, static IconRecord, or ReactNode. @default "user" */
+  icon?: IconSource;
 }
 
 /* ─── Size Tokens ─── */

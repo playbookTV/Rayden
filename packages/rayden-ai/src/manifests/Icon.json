@@ -2,76 +2,87 @@
   "$schema": "./schema.json",
   "name": "Icon",
   "displayName": "Icon",
-  "description": "SVG icon component with predefined icon set. Supports multiple sizes and variants.",
+  "description": "SVG renderer for the Rayden icon set. Pass exactly one of name (dynamic registry lookup) or icon (static IconRecord data). Discover exact names and data exports through iconCatalog.",
   "category": "primitives",
   "importPath": "@raydenui/ui",
   "figmaFileKey": "tUAP8Crure0g1eewihmYUp",
   "props": {
     "name": {
       "type": "IconName",
-      "required": true,
-      "description": "Name of the icon from the icon set"
+      "required": false,
+      "description": "Exact registry name; use name or icon, never both. Name lookup loads after mounting."
     },
     "size": {
-      "type": "enum",
-      "values": ["xs", "sm", "md", "lg", "xl"],
+      "type": "union",
+      "values": ["IconSize", "number"],
       "default": "md",
-      "description": "Icon size"
+      "description": "xs=12, sm=16, md=20, lg=24, xl=32; or a custom pixel number."
     },
     "variant": {
       "type": "enum",
-      "values": ["line", "solid"],
-      "default": "line",
+      "values": ["outline", "solid"],
+      "default": "outline",
       "description": "Icon style variant"
     },
     "className": {
       "type": "string",
       "description": "Additional CSS classes for styling (use for color)"
+    },
+    "icon": {
+      "type": "object",
+      "description": "Static icon data from @raydenui/ui/icons. Use instead of name for immediate and server rendering."
+    },
+    "color": {
+      "type": "string",
+      "default": "currentColor",
+      "description": "CSS color value. Omit to inherit text color; semantic styling can use className."
     }
   },
   "sizes": ["xs", "sm", "md", "lg", "xl"],
   "accessibility": {
-    "screenReaderNotes": "Icons are decorative by default. Add aria-label when icon conveys meaning alone."
+    "screenReaderNotes": "Decorative by default. Label an icon-only button on the button. A meaningful standalone icon requires aria-hidden={false}, role=\"img\", and aria-label."
   },
   "antiHallucination": {
     "aliases": ["SVGIcon", "IconComponent"],
     "doesNotExist": [
-      "icon (use name)",
-      "type (use name)",
-      "color (use className with text-* class)",
-      "fill",
-      "stroke",
-      "onClick (wrap in button for interactive icons)"
+      "variant=\"line\" (use outline)",
+      "size=\"2xl\" or \"3xl\" (use numeric pixel sizes)"
     ],
     "commonMistakes": [
-      { "mistake": "icon='settings'", "correction": "name='settings'" },
-      { "mistake": "color='primary'", "correction": "className='text-primary-500'" },
       {
-        "mistake": "<Icon onClick={...}>",
-        "correction": "Wrap in Button with iconPosition='icon-only' for interactive icons"
+        "mistake": "<heartIcon />",
+        "correction": "heartIcon is data: <Icon icon={heartIcon} />"
+      },
+      {
+        "mistake": "<Icon icon=\"heart\" />",
+        "correction": "Use name=\"heart\" for registry strings, or icon={heartIcon} for data."
+      },
+      {
+        "mistake": "variant=\"line\"",
+        "correction": "variant=\"outline\""
+      },
+      {
+        "mistake": "<Icon aria-label=\"Favorite\" />",
+        "correction": "Provide name or icon. For meaningful standalone graphics also set aria-hidden={false} and role=\"img\"."
       }
     ]
   },
   "examples": [
     {
-      "title": "Basic Icon",
-      "code": "<Icon name=\"settings\" />"
+      "title": "Registry name",
+      "code": "<Icon name=\"heart\" variant=\"outline\" />"
     },
     {
-      "title": "With Size",
-      "code": "<Icon name=\"user\" size=\"lg\" />"
+      "title": "Static data (immediate rendering)",
+      "code": "import { Icon } from \"@raydenui/ui\";\nimport { heartIcon } from \"@raydenui/ui/icons\";\n<Icon icon={heartIcon} variant=\"solid\" />"
     },
     {
-      "title": "Solid Variant",
-      "code": "<Icon name=\"heart\" variant=\"solid\" />"
+      "title": "Custom size and color",
+      "code": "<Icon name=\"check\" size={40} color=\"currentColor\" />"
     },
     {
-      "title": "With Color",
-      "code": "<Icon name=\"check\" className=\"text-success-500\" />"
-    },
-    {
-      "title": "Small Icon",
-      "code": "<Icon name=\"x\" size=\"sm\" className=\"text-grey-500\" />"
+      "title": "Icon-only action",
+      "code": "<Button icon=\"multiply\" iconPosition=\"icon-only\" aria-label=\"Close\" />"
     }
   ]
 }

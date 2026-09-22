@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { cn } from "../utils/cn";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../components/Table";
+import { useTableSelection } from "../components/Table/useTableSelection";
 import { Checkbox } from "../components/FormControl";
 import { Avatar } from "../components/Avatar";
 import { Badge } from "../components/Badge";
@@ -23,14 +23,25 @@ export interface TableBlockRow {
 export interface TableBlockProps {
   /** Table rows */
   rows: TableBlockRow[];
-  /** Current page (1-indexed) */
-  page?: number;
-  /** Total pages */
-  totalPages?: number;
-  /** Page change handler */
-  onPageChange?: (page: number) => void;
-  /** Row action handler (kebab menu) */
+  /**
+   * Controlled selection. Supply it to own selection yourself — the only way to keep a
+   * selection across pages, since the block otherwise drops ids that leave `rows`.
+   * See the reconciliation contract on `useTableSelection`.
+   */
+  selectedIds?: string[];
+  /** Fired on user interaction with the full resulting selection. */
+  onSelectionChange?: (ids: string[]) => void;
+  /**
+   * Row action handler (kebab menu). The actions column renders only when supplied —
+   * the block does not show a control that has nowhere to go.
+   */
   onRowAction?: (rowId: string) => void;
+  /** Current page (1-indexed). Pagination needs `page`, `totalPages` and `onPageChange` together. */
+  page?: number;
+  /** Total pages. Pagination needs `page`, `totalPages` and `onPageChange` together. */
+  totalPages?: number;
+  /** Page change handler. Pagination needs `page`, `totalPages` and `onPageChange` together. */
+  onPageChange?: (page: number) => void;
   /** Additional class names */
   className?: string;
 }
@@ -38,33 +49,20 @@ export interface TableBlockProps {
 // ─── Component ───────────────────────────────────────────────────────
 export function TableBlock({
   rows,
-  page = 3,
-  totalPages = 6,
-  onPageChange,
+  selectedIds,
+  onSelectionChange,
   onRowAction,
+  page,
+  totalPages,
+  onPageChange,
   className,
 }: TableBlockProps) {
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const rowIds = rows.map((row) => row.id);
+  const selection = useTableSelection({ dataIds: rowIds, selectedIds, onSelectionChange });
 
-  const allSelected = rows.length > 0 && selectedIds.size === rows.length;
-  const someSelected = selectedIds.size > 0 && !allSelected;
-
-  const toggleAll = () => {
-    if (allSelected) {
-      setSelectedIds(new Set());
-    } else {
-      setSelectedIds(new Set(rows.map((r) => r.id)));
-    }
-  };
-
-  const toggleRow = (id: string) => {
-    setSelectedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
+  // Every visible control needs somewhere to go. Pagination without a page handler is a
+  // row of buttons that silently do nothing, so it is omitted rather than rendered dead.
+  const showPagination = page != null && totalPages != null && onPageChange != null;
 
   return (
     <div className={cn("flex flex-col", className)}>
@@ -74,8 +72,9 @@ export function TableBlock({
             <TableHead className="w-[287px]">
               <div className="flex items-center gap-3">
                 <Checkbox
-                  checked={allSelected || someSelected}
-                  onChange={toggleAll}
+                  checked={selection.allSelected}
+                  indeterminate={selection.someSelected}
+                  onChange={selection.toggleAll}
                   aria-label="Select all rows"
                 />
                 <span>Name</span>
@@ -85,19 +84,21 @@ export function TableBlock({
             <TableHead>Payment Type</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead className="w-[67px]">
-              <span className="sr-only">Actions</span>
-            </TableHead>
+            {onRowAction && (
+              <TableHead className="w-[67px]">
+                <span className="sr-only">Actions</span>
+              </TableHead>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id} selected={selectedIds.has(row.id)}>
+            <TableRow key={row.id} selected={selection.isSelected(row.id)}>
               <TableCell>
                 <div className="flex items-center gap-3">
                   <Checkbox
-                    checked={selectedIds.has(row.id)}
-                    onChange={() => toggleRow(row.id)}
+                    checked={selection.isSelected(row.id)}
+                    onChange={() => selection.toggleRow(row.id)}
                     aria-label={`Select ${row.name}`}
                   />
                   <Avatar type="initials" initials={row.initials} size="sm" />
@@ -129,31 +130,30 @@ export function TableBlock({
                   {row.status}
                 </Badge>
               </TableCell>
-              <TableCell>
-                <button
-                  type="button"
-                  onClick={() => onRowAction?.(row.id)}
-                  aria-label={`Actions for ${row.name}`}
-                  className="flex items-center justify-center size-8 rounded-md hover:bg-grey-50 text-grey-500"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <circle cx="8" cy="3" r="1.5" fill="currentColor" />
-                    <circle cx="8" cy="8" r="1.5" fill="currentColor" />
-                    <circle cx="8" cy="13" r="1.5" fill="currentColor" />
-                  </svg>
-                </button>
-              </TableCell>
+              {onRowAction && (
+                <TableCell>
+                  <button
+                    type="button"
+                    onClick={() => onRowAction(row.id)}
+                    aria-label={`Actions for ${row.name}`}
+                    className="flex items-center justify-center size-8 rounded-md hover:bg-grey-50 text-grey-500"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <circle cx="8" cy="3" r="1.5" fill="currentColor" />
+                      <circle cx="8" cy="8" r="1.5" fill="currentColor" />
+                      <circle cx="8" cy="13" r="1.5" fill="currentColor" />
+                    </svg>
+                  </button>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>
       </Table>
 
-      {/* Pagination */}
-      <Pagination
-        totalPages={totalPages}
-        currentPage={page}
-        onPageChange={(p) => onPageChange?.(p)}
-      />
+      {showPagination && (
+        <Pagination totalPages={totalPages} currentPage={page} onPageChange={onPageChange} />
+      )}
     </div>
   );
 }

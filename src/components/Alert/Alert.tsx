@@ -1,8 +1,8 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { Icon } from "../Icon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 export type AlertVariant = "toast" | "banner";
 export type AlertState = "information" | "success" | "warning" | "error";
@@ -17,7 +17,7 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   state?: AlertState;
   title?: string;
   description?: string;
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   showIcon?: boolean;
   onClose?: () => void;
   primaryAction?: AlertAction;
@@ -82,7 +82,7 @@ export function Alert({
 
   return (
     <div
-      className={cn("flex items-start overflow-hidden rounded bg-white dark:bg-grey-50", className)}
+      className={cn("flex items-start overflow-hidden rounded bg-surface", className)}
       role="alert"
       {...rest}
     >
@@ -114,8 +114,8 @@ export function Alert({
         {isBanner ? (
           <div className="flex flex-1 flex-col gap-4 justify-center">
             <div className="flex flex-col gap-1">
-              {title && <p className="text-base font-semibold text-grey-900">{title}</p>}
-              {description && <p className="text-sm text-grey-600">{description}</p>}
+              {title && <p className="text-base font-semibold text-on-surface">{title}</p>}
+              {description && <p className="text-sm text-on-surface-secondary">{description}</p>}
             </div>
             {(primaryAction || secondaryAction) && (
               <div className="flex flex-wrap items-center gap-2">
@@ -136,7 +136,7 @@ export function Alert({
                   <button
                     type="button"
                     onClick={secondaryAction.onClick}
-                    className="inline-flex items-center justify-center rounded-lg border border-grey-300 bg-white dark:bg-grey-50 px-4 py-2 text-sm font-semibold text-grey-700 cursor-pointer hover:bg-grey-50"
+                    className="inline-flex items-center justify-center rounded-lg border border-control-border bg-surface px-4 py-2 text-sm font-semibold text-on-surface-body cursor-pointer hover:bg-grey-50"
                   >
                     {secondaryAction.label}
                   </button>
@@ -146,8 +146,8 @@ export function Alert({
           </div>
         ) : (
           <div className="flex flex-1 flex-col gap-0.5 self-stretch text-sm">
-            {title && <p className="font-semibold text-grey-900">{title}</p>}
-            {description && <p className="text-grey-600">{description}</p>}
+            {title && <p className="font-semibold text-on-surface">{title}</p>}
+            {description && <p className="text-on-surface-secondary">{description}</p>}
           </div>
         )}
 
@@ -160,7 +160,7 @@ export function Alert({
             <button
               type="button"
               onClick={onClose}
-              className="shrink-0 inline-flex items-center justify-center text-grey-500 hover:text-grey-700 cursor-pointer"
+              className="shrink-0 inline-flex items-center justify-center text-on-surface-muted hover:text-on-surface-body cursor-pointer"
               aria-label="Close"
             >
               <Icon name="multiply" size="md" />
