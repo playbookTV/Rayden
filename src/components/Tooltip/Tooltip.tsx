@@ -4,6 +4,7 @@ import {
   isValidElement,
   useEffect,
   useId,
+  useLayoutEffect,
   useRef,
   useState,
   type HTMLAttributes,
@@ -12,6 +13,8 @@ import {
 } from "react";
 import { cn } from "../../utils/cn";
 import { useCollisionAwareSide } from "../../hooks/useCollisionAwareSide";
+
+const useBrowserLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 export type TooltipPosition =
   | "top-left"
@@ -109,7 +112,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     // Focus the panel only on the closed -> open transition, never on a rerender.
     const wasOpen = useRef(false);
-    useEffect(() => {
+    useBrowserLayoutEffect(() => {
       if (open && !wasOpen.current && hasPanel && interactive) {
         panelRef.current?.focus();
       }

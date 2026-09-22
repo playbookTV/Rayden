@@ -122,7 +122,7 @@ export const KeyboardAndPresence: Story = {
     ).toBeVisible();
     const trigger = canvas.getByRole("button", { name: "Open motion dialog" });
     await userEvent.click(trigger);
-    const dialog = within(document.body).getByRole("dialog", { name: "Motion settings" });
+    const dialog = await within(document.body).findByRole("dialog", { name: "Motion settings" });
     await expect(within(dialog).getByLabelText("Portal preset")).toHaveTextContent(
       canvas.getByLabelText("Effective preset").textContent!
     );
@@ -135,7 +135,7 @@ export const KeyboardAndPresence: Story = {
     await waitFor(() => expect(dialog).not.toBeInTheDocument());
     await expect(trigger).toHaveFocus();
     await userEvent.click(trigger);
-    const reopened = within(document.body).getByRole("dialog", { name: "Motion settings" });
+    const reopened = await within(document.body).findByRole("dialog", { name: "Motion settings" });
     fireEvent.click(reopened);
     await waitFor(() => expect(reopened).not.toBeInTheDocument());
     await expect(trigger).toHaveFocus();
@@ -147,7 +147,7 @@ export const KeyboardAndPresence: Story = {
     await expect(region).not.toHaveAttribute("inert");
     canvas.getByRole("textbox", { name: "Optional note" }).focus();
     fireEvent.click(disclosure);
-    await expect(disclosure).toHaveFocus();
+    await waitFor(() => expect(disclosure).toHaveFocus());
     await expect(region).toHaveAttribute("inert");
     const reveal = canvas.getByTestId("reveal");
     await userEvent.click(canvas.getByRole("button", { name: "Toggle reveal" }));
@@ -242,7 +242,7 @@ export const LiveReducedMotionPreference: Story = {
       // Mount after installing the mock so every subscriber observes the same media query.
       await userEvent.click(canvas.getByRole("button", { name: "Mount preference pilot" }));
       await userEvent.click(canvas.getByRole("button", { name: "Open motion dialog" }));
-      const dialog = within(document.body).getByRole("dialog", { name: "Motion settings" });
+      const dialog = await within(document.body).findByRole("dialog", { name: "Motion settings" });
       reduce = true;
       listeners.forEach((listener) => listener(new Event("change")));
       await waitFor(() => expect(dialog).toHaveAttribute("data-rayden-motion", "reduced"));
@@ -266,13 +266,13 @@ export const PressAndLayout: Story = {
     const trigger = canvas.getByRole("button", { name: "Move marker" });
     trigger.focus();
     fireEvent.keyDown(trigger, { key: " " });
-    await expect(trigger).toHaveAttribute("data-pressed", "true");
+    await waitFor(() => expect(trigger).toHaveAttribute("data-pressed", "true"));
     trigger.blur();
     await waitFor(() => expect(trigger).toHaveAttribute("data-pressed", "false"));
     fireEvent.pointerDown(trigger, { button: 0 });
-    await expect(trigger).toHaveAttribute("data-pressed", "true");
+    await waitFor(() => expect(trigger).toHaveAttribute("data-pressed", "true"));
     fireEvent.pointerCancel(trigger);
-    await expect(trigger).toHaveAttribute("data-pressed", "false");
+    await waitFor(() => expect(trigger).toHaveAttribute("data-pressed", "false"));
     const marker = canvas.getByTestId("layout-marker");
     await userEvent.click(trigger);
     await expect(marker.style.left).toBe("180px");
@@ -303,7 +303,7 @@ export const UnmountCleanup: Story = {
     const originalOverflow = document.body.style.overflow;
     const trigger = canvas.getByRole("button", { name: "Open lifecycle dialog" });
     await userEvent.click(trigger);
-    const dialog = within(document.body).getByRole("dialog", { name: "Lifecycle dialog" });
+    const dialog = await within(document.body).findByRole("dialog", { name: "Lifecycle dialog" });
     const animations = dialog.getAnimations({ subtree: true });
     // Programmatic route changes may unmount an open modal despite the background being inert.
     fireEvent.click(canvas.getByRole("button", { name: "Simulate route change" }));

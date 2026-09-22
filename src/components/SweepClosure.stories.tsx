@@ -109,15 +109,16 @@ export const OpenModalFollowsATeardownThemeChange: Story = {
     const [dark, setDark] = useState(false);
     return (
       <div className={dark ? "dark" : "rayden-light"}>
-        <Button onClick={() => setDark(true)}>Switch to dark</Button>
-        <Modal open onClose={() => {}} title="Still themed" />
+        <Modal open onClose={() => {}} title="Still themed">
+          <Button onClick={() => setDark(true)}>Switch to dark</Button>
+        </Modal>
       </div>
     );
   },
-  play: async ({ canvasElement }) => {
-    const dialog = document.querySelector("dialog")!;
+  play: async () => {
+    const dialog = await within(document.body).findByRole("dialog", { name: "Still themed" });
     expect(dialog.classList.contains("rayden-light")).toBe(true);
-    await userEvent.click(within(canvasElement).getByRole("button", { name: "Switch to dark" }));
+    await userEvent.click(within(dialog).getByRole("button", { name: "Switch to dark" }));
     // The portal copied its theme once on open, so it kept the stale one.
     await waitFor(() => {
       expect(dialog.classList.contains("dark")).toBe(true);

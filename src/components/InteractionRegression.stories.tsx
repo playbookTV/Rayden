@@ -499,7 +499,9 @@ export const TypingInPopoverKeepsFocus: Story = {
     );
   },
   play: async ({ canvasElement }) => {
-    const input = within(canvasElement).getByTestId("note") as HTMLInputElement;
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("dialog")).toHaveFocus();
+    const input = canvas.getByTestId("note") as HTMLInputElement;
     input.focus();
     // The focus effect depended on `children` and callback identities, so each keystroke
     // rerendered the parent, re-ran the effect and pulled focus back to the panel.
@@ -649,21 +651,20 @@ export const ModalKeepsItsDescriptionWithoutAHeader: Story = {
     <Modal open onClose={() => {}} description="Deep-linked explanation" showClose={false} />
   ),
   play: async () => {
-    const dialog = document.querySelector("dialog")!;
+    const dialog = await within(document.body).findByRole("dialog", { name: "Dialog" });
     // The description lived inside the header, so a title-less modal dropped it while
     // aria-describedby still pointed at its id.
-    const describedBy = dialog
-      .querySelector("[aria-describedby]")
-      ?.getAttribute("aria-describedby");
+    const describedBy = dialog.getAttribute("aria-describedby");
     expect(dialog.textContent).toContain("Deep-linked explanation");
-    if (describedBy) expect(document.getElementById(describedBy)).not.toBeNull();
+    expect(describedBy).toBeTruthy();
+    expect(document.getElementById(describedBy!)).toHaveTextContent("Deep-linked explanation");
   },
 };
 
 export const ModalOmitsUnconfiguredActions: Story = {
   render: () => <Modal open onClose={() => {}} title="Confirm" secondaryLabel="Back" />,
   play: async () => {
-    const dialog = document.querySelector("dialog")!;
+    const dialog = await within(document.body).findByRole("dialog", { name: "Confirm" });
     // Accessible name, not text content: the close button is icon-only but named.
     const names = [...dialog.querySelectorAll("button")].map(
       (b) => b.getAttribute("aria-label") ?? b.textContent?.trim() ?? ""
