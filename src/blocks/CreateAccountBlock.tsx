@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "../utils/cn";
+import { isValidEmail } from "../utils/isValidEmail";
 import { Alert } from "../components/Alert";
 import { Button } from "../components/Button";
 import { Checkbox } from "../components/FormControl";
@@ -137,10 +138,6 @@ export const defaultCreateAccountPasswordRules: CreateAccountPasswordRule[] = [
   { id: "number", label: "At least one number", test: (v) => /\d/.test(v) },
 ];
 
-// Deliberately permissive: the authority on a deliverable address is the
-// consuming application, not a regular expression.
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 const emptyValues: Omit<CreateAccountValues, "consent"> = {
   firstName: "",
   lastName: "",
@@ -208,7 +205,7 @@ export function CreateAccountBlock({
     if (!values.firstName.trim()) next.firstName = "Enter your first name.";
     if (!values.lastName.trim()) next.lastName = "Enter your last name.";
     if (!values.email.trim()) next.email = "Enter your email address.";
-    else if (!EMAIL_PATTERN.test(values.email.trim()))
+    else if (!isValidEmail(values.email.trim()))
       next.email = "Enter an email address such as name@example.com.";
     if (!values.password) next.password = "Choose a password.";
     else if (ruleResults.some((rule) => !rule.met))

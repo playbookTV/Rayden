@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "../utils/cn";
+import { isValidEmail } from "../utils/isValidEmail";
 import { Alert } from "../components/Alert";
 import { Avatar } from "../components/Avatar";
 import { Button } from "../components/Button";
@@ -123,8 +124,6 @@ export interface ProfileSettingsBlockProps {
 
 /* ─── Defaults ───────────────────────────────────────────────────────── */
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 const defaultLabels: Record<ProfileSettingsFieldName, string> = {
   firstName: "First name",
   lastName: "Last name",
@@ -216,7 +215,7 @@ export function ProfileSettingsBlock({
     if (!draft.firstName.trim()) next.firstName = "Enter a first name.";
     if (!draft.lastName.trim()) next.lastName = "Enter a last name.";
     if (!draft.email.trim()) next.email = "Enter an email address.";
-    else if (!EMAIL_PATTERN.test(draft.email.trim()))
+    else if (!isValidEmail(draft.email.trim()))
       next.email = "Enter an email address such as name@example.com.";
     if (draft.bio.length > bioMaxLength)
       next.bio = `Shorten this to ${bioMaxLength} characters or fewer.`;
