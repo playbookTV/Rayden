@@ -12,34 +12,25 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <MetricsCard
-          variation={1}
-          title="Total Revenue"
+          variation="1"
+          label="Total Revenue"
           value="$45,231.89"
-          trend={{
-            direction: "up",
-            value: "20.1%",
-            label: "vs last month",
-          }}
+          trendBadge={{ label: "20.1%", trend: "up" }}
+          description="vs last month"
         />
         <MetricsCard
-          variation={1}
-          title="Active Users"
+          variation="1"
+          label="Active Users"
           value="2,350"
-          trend={{
-            direction: "up",
-            value: "10.5%",
-            label: "vs last month",
-          }}
+          trendBadge={{ label: "10.5%", trend: "up" }}
+          description="vs last month"
         />
         <MetricsCard
-          variation={1}
-          title="Pending Orders"
+          variation="1"
+          label="Pending Orders"
           value="12"
-          trend={{
-            direction: "down",
-            value: "5.2%",
-            label: "vs last month",
-          }}
+          trendBadge={{ label: "5.2%", trend: "down" }}
+          description="vs last month"
         />
       </div>
 

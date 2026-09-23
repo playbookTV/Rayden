@@ -63,7 +63,7 @@ import { LoginBlock } from "@raydenui/ui/blocks";
 <LoginBlock
   variant="card"
   socialProviders={["google", "github", "apple"]}
-  onSocialLogin={(provider) => handleSocialAuth(provider)}
+  socialProviders={[{ name: "Google", icon: <Icon name="globe" /> }]}
   onSubmit={(data) => signIn(data.email, data.password)}
 />
 ```

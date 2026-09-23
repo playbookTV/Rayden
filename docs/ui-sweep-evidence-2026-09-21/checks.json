@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-21",
+  "stories": 294,
+  "storyFiles": 44,
+  "normalTestsPassed": 294,
+  "scanRecords": 1176,
+  "docsRoutes": 49,
+  "docsViewports": [
+    [1280, 900],
+    [390, 844]
+  ],
+  "docsPageOverflow": 0,
+  "search": "Accordion returned results",
+  "build": "pass",
+  "docsBuild": "pass",
+  "typecheck": "pass",
+  "isolatedConsumer": {
+    "rootImportWithoutChartPeers": true,
+    "blocksImport": true,
+    "initiallyOpenModalSSR": "no throw, empty output"
+  },
+  "scatterSSR": {
+    "canvas": true,
+    "table": false,
+    "pointData": false
+  },
+  "starterToggleSSR": {
+    "role": "switch",
+    "hasAccessibleName": false
+  },
+  "storyTypecheck": {
+    "file": "src/components/AccessibilityRegression.stories.tsx",
+    "line": 65,
+    "diagnostics": [2353, 2353, 2353]
+  },
+  "scope": "Current working-tree snapshot; normal CI tests separate from deliberately failing diagnostic record emitters."
+}

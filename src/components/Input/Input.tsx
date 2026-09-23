@@ -1,7 +1,7 @@
 import { forwardRef, useId, type InputHTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 export type InputSize = "xs" | "sm" | "md" | "lg";
 
@@ -17,15 +17,22 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   /** Success message or boolean. Overrides helperText styling. */
   success?: string | boolean;
   /** Icon on the left side of the input */
-  leadingIcon?: ReactNode | IconName;
+  leadingIcon?: IconSource;
   /** Icon on the right side of the input */
-  trailingIcon?: ReactNode | IconName;
+  trailingIcon?: IconSource;
   /** Text addon on the right side */
   addonRight?: string;
   /** Leading addon element (e.g. dropdown, button). Renders as a separated section before the input. */
   leadingAddon?: ReactNode;
   /** Trailing addon element (e.g. button). Renders as a separated section after the input. */
   trailingAddon?: ReactNode;
+  /**
+   * Interactive control rendered inside the field on the right, e.g. a password
+   * reveal toggle. Unlike `trailingIcon` — whose wrapper is aria-hidden because it
+   * is decorative — this slot is exposed to assistive technology, so whatever you
+   * pass must carry its own accessible name.
+   */
+  trailingAction?: ReactNode;
   /** Wrapper className */
   wrapperClassName?: string;
 }
@@ -57,6 +64,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       addonRight,
       leadingAddon,
       trailingAddon,
+      trailingAction,
       readOnly,
       disabled,
       className,
@@ -90,16 +98,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       ? "border-error-400 focus-within:border-error-400"
       : hasSuccess
         ? "border-success-400 focus-within:border-success-400"
-        : "border-grey-300 hover:border-primary-100 focus-within:border-primary-400";
+        : "border-control-border hover:border-primary-100 focus-within:border-primary-400";
 
-    const inputBg = readOnly ? "bg-grey-100" : disabled ? "bg-grey-50" : "bg-white dark:bg-grey-50";
+    const inputBg = readOnly ? "bg-grey-100" : disabled ? "bg-grey-50" : "bg-surface";
 
     // When addons are present, the container is a flex row with no border — addons and input have their own borders
     if (hasAddon) {
       return (
         <div className={cn("flex flex-col gap-1 w-full", wrapperClassName)}>
           {label && (
-            <label htmlFor={inputId} className="text-sm font-medium text-grey-900 leading-[1.45]">
+            <label htmlFor={inputId} className="text-sm font-medium text-on-surface leading-[1.45]">
               {label}
             </label>
           )}
@@ -108,7 +116,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {leadingAddon && (
               <div
                 className={cn(
-                  "flex items-center gap-1 px-3 py-2 bg-grey-50 border border-r-0 border-grey-300 rounded-l-lg overflow-hidden shrink-0",
+                  "flex items-center gap-1 px-3 py-2 bg-grey-50 border border-r-0 border-control-border rounded-l-lg overflow-hidden shrink-0",
                   "text-sm font-medium text-grey-700"
                 )}
               >
@@ -131,7 +139,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               )}
             >
               {leadingIcon && (
-                <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+                <span className="shrink-0 size-6 text-on-surface-muted" aria-hidden="true">
                   {resolveIcon(leadingIcon, "md")}
                 </span>
               )}
@@ -145,24 +153,27 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 aria-required={required || undefined}
                 aria-describedby={descriptionId}
                 className={cn(
-                  "flex-1 min-w-0 bg-transparent text-sm text-grey-900 placeholder:text-grey-400 outline-none disabled:cursor-not-allowed",
+                  "flex-1 min-w-0 bg-transparent text-sm text-on-surface placeholder:text-on-surface-muted outline-none disabled:cursor-not-allowed",
                   className
                 )}
                 {...rest}
               />
-              {addonRight && <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>}
+              {addonRight && (
+                <span className="shrink-0 text-sm text-on-surface-muted">{addonRight}</span>
+              )}
               {trailingIcon && (
-                <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+                <span className="shrink-0 size-6 text-on-surface-muted" aria-hidden="true">
                   {resolveIcon(trailingIcon, "md")}
                 </span>
               )}
+              {trailingAction && <span className="shrink-0">{trailingAction}</span>}
             </div>
 
             {/* Trailing addon */}
             {trailingAddon && (
               <div
                 className={cn(
-                  "flex items-center gap-1 px-3 py-2 bg-grey-50 border border-l-0 border-grey-300 rounded-r-lg overflow-hidden shrink-0",
+                  "flex items-center gap-1 px-3 py-2 bg-grey-50 border border-l-0 border-control-border rounded-r-lg overflow-hidden shrink-0",
                   "text-sm font-medium text-grey-700"
                 )}
               >
@@ -175,7 +186,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               id={descriptionId}
               className={cn(
                 "text-sm leading-[1.45]",
-                hasError ? "text-error-400" : hasSuccess ? "text-success-400" : "text-grey-500"
+                hasError
+                  ? "text-feedback-error"
+                  : hasSuccess
+                    ? "text-feedback-success"
+                    : "text-on-surface-muted"
               )}
             >
               {bottomText}
@@ -189,7 +204,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn("flex flex-col gap-1 w-full", wrapperClassName)}>
         {label && (
-          <label htmlFor={inputId} className="text-sm font-medium text-grey-900 leading-[1.45]">
+          <label htmlFor={inputId} className="text-sm font-medium text-on-surface leading-[1.45]">
             {label}
           </label>
         )}
@@ -199,14 +214,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             inputFrameSize[size],
             addonHeight[size],
             readOnly
-              ? "bg-grey-100 border-grey-300"
+              ? // A read-only input stays in the tab order, but this branch dropped
+                // focus-within styling while the native input keeps outline-none, so
+                // focus became invisible. The addon branch always kept it.
+                "bg-grey-100 border-control-border focus-within:border-primary-400"
               : disabled
                 ? "bg-grey-50 border-grey-200 cursor-not-allowed"
-                : cn("bg-white dark:bg-grey-50", borderColor)
+                : cn("bg-surface", borderColor)
           )}
         >
           {leadingIcon && (
-            <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+            <span className="shrink-0 size-6 text-on-surface-muted" aria-hidden="true">
               {resolveIcon(leadingIcon, "md")}
             </span>
           )}
@@ -220,24 +238,31 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-required={required || undefined}
             aria-describedby={descriptionId}
             className={cn(
-              "flex-1 min-w-0 bg-transparent text-sm text-grey-900 placeholder:text-grey-400 outline-none disabled:cursor-not-allowed",
+              "flex-1 min-w-0 bg-transparent text-sm text-on-surface placeholder:text-on-surface-muted outline-none disabled:cursor-not-allowed",
               className
             )}
             {...rest}
           />
-          {addonRight && <span className="shrink-0 text-sm text-grey-500">{addonRight}</span>}
+          {addonRight && (
+            <span className="shrink-0 text-sm text-on-surface-muted">{addonRight}</span>
+          )}
           {trailingIcon && (
-            <span className="shrink-0 size-6 text-grey-400" aria-hidden="true">
+            <span className="shrink-0 size-6 text-on-surface-muted" aria-hidden="true">
               {resolveIcon(trailingIcon, "md")}
             </span>
           )}
+          {trailingAction && <span className="shrink-0">{trailingAction}</span>}
         </div>
         {bottomText && (
           <p
             id={descriptionId}
             className={cn(
               "text-sm leading-[1.45]",
-              hasError ? "text-error-400" : hasSuccess ? "text-success-400" : "text-grey-500"
+              hasError
+                ? "text-feedback-error"
+                : hasSuccess
+                  ? "text-feedback-success"
+                  : "text-on-surface-muted"
             )}
           >
             {bottomText}

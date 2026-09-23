@@ -36,6 +36,9 @@ interface SourceTokens {
   typography: {
     fontFamily: Record<string, string[]>;
     presets: Record<string, TypographyPreset>;
+    fontSize: Record<string, string>;
+    fontWeight: Record<string, number>;
+    lineHeight: Record<string, number>;
   };
   shadows: Record<string, Record<string, ShadowValue>>;
   borderRadius: Record<string, BorderRadiusValue>;
@@ -56,6 +59,7 @@ interface SpacingValue {
 }
 
 interface TypographyPreset {
+  fontFamily: string;
   size: string;
   lineHeight: number;
   letterSpacing: string;
@@ -136,6 +140,13 @@ function convertColors(colors: Record<string, ColorScale>): DTCGGroup {
   };
 
   for (const [scaleName, scale] of Object.entries(colors)) {
+    if (typeof scale.hex === "string") {
+      group[scaleName] = {
+        $value: scale.hex,
+        $description: typeof scale.usage === "string" ? scale.usage : undefined,
+      } as DTCGToken;
+      continue;
+    }
     const scaleGroup: DTCGGroup = {};
 
     if (scale.description) {
@@ -198,6 +209,19 @@ function convertTypography(typography: SourceTokens["typography"]): DTCGGroup {
     } as DTCGToken;
   }
 
+  for (const [name, type] of [
+    ["fontSize", "dimension"],
+    ["fontWeight", "fontWeight"],
+    ["lineHeight", "number"],
+  ] as const) {
+    group[name] = {
+      $type: type,
+      ...Object.fromEntries(
+        Object.entries(typography[name]).map(([key, value]) => [key, { $value: value }])
+      ),
+    } as DTCGGroup;
+  }
+
   // Typography presets as composite tokens
   group.preset = {} as DTCGGroup;
 
@@ -205,7 +229,7 @@ function convertTypography(typography: SourceTokens["typography"]): DTCGGroup {
     (group.preset as DTCGGroup)[name] = {
       $type: "typography",
       $value: {
-        fontFamily: "{typography.fontFamily.sans}",
+        fontFamily: preset.fontFamily,
         fontSize: preset.size,
         fontWeight: preset.fontWeight,
         lineHeight: preset.lineHeight,
@@ -329,6 +353,11 @@ function main() {
   // Write output
   const output = JSON.stringify(dtcg, null, 2);
   writeFileSync(OUTPUT_PATH, output);
+  writeFileSync(join(DIST_DIR, "tokens.json"), sourceContent);
+  writeFileSync(
+    join(DIST_DIR, "dtcg.d.ts"),
+    "declare const tokens: Record<string, unknown>;\nexport default tokens;\n"
+  );
 
   console.log(`Generated: ${OUTPUT_PATH}`);
   console.log(`Token groups: color, spacing, typography, shadow, radius, blur, breakpoint`);

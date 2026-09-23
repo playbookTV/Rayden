@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState, type HTMLAttributes } from "react";
+import { forwardRef, useCallback, useEffect, useState, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 
 /* ─── Types ────────────────────────────────────────────────────────────── */
@@ -116,7 +116,13 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
     },
     ref
   ) => {
-    const [uncontrolled, setUncontrolled] = useState(defaultValue);
+    // Only update() used to clamp, so min=5 still displayed 0 until first use.
+    const clamp = useCallback((n: number) => Math.min(max, Math.max(min, n)), [min, max]);
+    const [uncontrolled, setUncontrolled] = useState(() => clamp(defaultValue));
+    // Keep an uncontrolled value inside bounds when the bounds themselves change.
+    useEffect(() => {
+      if (controlledValue === undefined) setUncontrolled((prev) => clamp(prev));
+    }, [clamp, controlledValue]);
     const val = controlledValue ?? uncontrolled;
 
     const update = useCallback(
@@ -135,7 +141,7 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
       <div
         ref={ref}
         className={cn(
-          "inline-flex items-center border border-grey-300 overflow-hidden",
+          "inline-flex items-center border border-control-border overflow-hidden",
           containerShape[shape][size],
           disabled && "opacity-50",
           className
@@ -148,7 +154,7 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
           disabled={disabled || !canDecrement}
           onClick={() => update(val - step)}
           className={cn(
-            "flex items-center justify-center p-2.5 text-grey-900 cursor-pointer transition-colors hover:bg-grey-100",
+            "flex items-center justify-center p-2.5 text-on-surface cursor-pointer transition-colors hover:bg-grey-100",
             buttonSize[size],
             (disabled || !canDecrement) && "text-grey-300 cursor-not-allowed hover:bg-transparent"
           )}
@@ -160,7 +166,10 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
         {/* Value */}
         <div className="flex items-center justify-center shrink-0">
           <span
-            className={cn("font-medium text-grey-900 text-center leading-[1.45]", valueText[size])}
+            className={cn(
+              "font-medium text-on-surface text-center leading-[1.45]",
+              valueText[size]
+            )}
           >
             {val}
           </span>
@@ -172,7 +181,7 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
           disabled={disabled || !canIncrement}
           onClick={() => update(val + step)}
           className={cn(
-            "flex items-center justify-center p-2.5 text-grey-900 cursor-pointer transition-colors hover:bg-grey-100",
+            "flex items-center justify-center p-2.5 text-on-surface cursor-pointer transition-colors hover:bg-grey-100",
             buttonSize[size],
             (disabled || !canIncrement) && "text-grey-300 cursor-not-allowed hover:bg-transparent"
           )}
@@ -195,10 +204,10 @@ const ncSize: Record<NumberCounterSize, { container: string; text: string }> = {
 };
 
 const ncColor: Record<NumberCounterColor, { bg: string; text: string }> = {
-  orange: { bg: "bg-primary-400", text: "text-white" },
+  orange: { bg: "bg-action-primary", text: "text-white" },
   red: { bg: "bg-error-400", text: "text-white" },
   grey: { bg: "bg-grey-300", text: "text-white" },
-  white: { bg: "bg-white dark:bg-grey-50", text: "text-grey-600" },
+  white: { bg: "bg-surface", text: "text-on-surface-secondary" },
 };
 
 export const NumberCounter = forwardRef<HTMLDivElement, NumberCounterProps>(

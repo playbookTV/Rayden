@@ -9,8 +9,8 @@ export interface UseRaydenInputOptions<
 }
 
 export type UseRaydenInputReturn<TName extends string = string> = UseFormRegisterReturn<TName> & {
+  /** Validation message for the field, if any. Maps to Input's `error` prop. */
   error?: string;
-  hasError: boolean;
 };
 
 /**
@@ -41,12 +41,14 @@ export function useRaydenInput<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({ form, name }: UseRaydenInputOptions<TFieldValues, TName>): UseRaydenInputReturn<TName> {
   const registerProps = form.register(name);
-  const error = form.formState.errors[name];
-  const errorMessage = error?.message as string | undefined;
+  // `name` is a FieldPath, so it may be "profile.email" or "items.0.qty". React Hook
+  // Form stores errors as a nested object mirroring the data, so errors[name] misses
+  // every nested field. getFieldState resolves the path; passing formState keeps the
+  // proxy subscription that makes it re-render.
+  const { error } = form.getFieldState(name, form.formState);
 
   return {
     ...registerProps,
-    error: errorMessage,
-    hasError: !!error,
+    error: error?.message as string | undefined,
   };
 }

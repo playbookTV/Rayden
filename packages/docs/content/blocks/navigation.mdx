@@ -1,0 +1,106 @@
+---
+title: Navigation & shells
+description: Compose a responsive application frame with workspace switching and command search
+---
+
+# Navigation & shells
+
+These four blocks are exported with their TypeScript types from `@raydenui/ui/blocks`. They use the existing theme tokens and adapt to the width of their container.
+
+```tsx
+import { useState } from "react";
+import {
+  ApplicationShellBlock,
+  PageHeaderBlock,
+  WorkspaceSwitcherBlock,
+  CommandPaletteBlock,
+} from "@raydenui/ui/blocks";
+
+const workspaces = [
+  { id: "studio", name: "Design studio", initials: "DS" },
+  { id: "product", name: "Product team", initials: "PT" },
+];
+
+export function Workspace() {
+  const [workspaceId, setWorkspaceId] = useState("studio");
+  return (
+    <ApplicationShellBlock
+      brand="Acme"
+      brandHref="/"
+      navSections={[
+        {
+          id: "workspace",
+          label: "Workspace",
+          items: [
+            { id: "overview", label: "Overview", href: "/overview", current: true },
+            { id: "projects", label: "Projects", href: "/projects" },
+          ],
+        },
+      ]}
+      switcher={
+        <WorkspaceSwitcherBlock
+          current={workspaces.find((item) => item.id === workspaceId)}
+          workspaces={workspaces}
+          onSelect={setWorkspaceId}
+        />
+      }
+      search={
+        <CommandPaletteBlock
+          items={[
+            { id: "overview", label: "Overview", href: "/overview" },
+            { id: "projects", label: "Projects", href: "/projects" },
+          ]}
+          shortcut={{ key: "k", modifier: "mod", hint: "⌘K" }}
+        />
+      }
+    >
+      <PageHeaderBlock
+        title="Overview"
+        variant="plain"
+        description="A clear view of your current work."
+        meta={[{ id: "workspace", label: "Workspace", value: workspaceId }]}
+        actions={[
+          { id: "projects", label: "View projects", href: "/projects", priority: "primary" },
+        ]}
+      />
+      <section aria-label="Current work" className="py-6">
+        Your application content
+      </section>
+    </ApplicationShellBlock>
+  );
+}
+```
+
+## Application Shell
+
+`navSections` groups real destination links, actions, and permission-blocked entries. Each entry supplies an `href`, `onClick`, or `unavailableReason`. Keep the current destination in sync with the application router.
+
+The `search` and `switcher` slots each keep one mounted instance at every width. When both navigation and workspace switching are present, the collapsed navigation panel contains the brand and the top bar prioritizes the workspace and tools. Search wraps beneath them on small containers.
+
+`expandAt` chooses the sidebar threshold: `"sm"` (720px), `"md"` (900px, default), or `"lg"` (1080px). `mainScroll="page"` uses document scrolling. Use `mainScroll="region"` with a bounded shell height for a separately scrolling workspace. `navStatus` supports `"idle"`, `"loading"`, and `"error"`; supply `onRetryNav` for recovery.
+
+## Page Header
+
+`title` is required; `headingLevel` defaults to `"h1"`. Use one page-level heading and distinct section headings in composed content.
+
+`variant="surface"` (default) includes a background and horizontal padding. Use `variant="plain"` inside an existing page gutter instead of relying on negative margins. Metadata is behind the `metaLabel` disclosure below 640px by default; set `collapseMetaOnSmallScreens={false}` to keep it expanded at every width.
+
+Actions have `"primary"`, `"secondary"`, or `"overflow"` priority. Primary actions always remain inline; `maxInlineActions` limits the remaining inline actions. Long breadcrumb trails collapse behind a reversible disclosure. `state` supports `"default"`, `"loading"`, and `"error"` with an optional `onRetry`.
+
+## Workspace Switcher
+
+Supply `current`, `workspaces`, and `onSelect` for application-controlled selection. Entries with `href` remain real links. Without either a link or `onSelect`, the entry is unavailable and explains why; customize the explanation through `unavailableMessage`.
+
+The non-modal popover supports filtering, arrow keys, Home/End, Enter and Escape. Escape restores trigger focus. `filterThreshold` defaults to six entries. Loading, error, no-workspace and no-search-match states have separate copy. `open`/`onOpenChange` support controlled visibility; `defaultOpen` supports an initial uncontrolled state.
+
+## Command Palette
+
+Items supply a real `href`, `onSelect`, or `unavailableReason`. Group them with `groups` and `groupId`. The default state prompts for a query; provide `suggestions` to show recent destinations before typing. The overlay dims both light and dark pages; override `--color-overlay` to customize its backdrop.
+
+Shortcuts are opt-in. A `"mod"` modifier accepts Control or Command. A `"none"` shortcut ignores editable fields, composition events and modified keystrokes so it never steals ordinary typing. The dialog supports keyboard selection, Escape, focus restoration and scroll locking.
+
+`status` supports loading and error presentation; the consuming application owns fetching, permissions and action results. These blocks do not authenticate users or persist workspace changes.
+
+## Preview
+
+The Storybook **Blocks / Compositions / Application Chrome** group combines all four blocks with overview, tasks, supplier and profile content. Individual stories cover dark/custom themes, narrow containers and interaction states. Demo data and callbacks are illustrative; connect your own application logic.

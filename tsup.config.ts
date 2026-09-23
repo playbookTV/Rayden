@@ -5,9 +5,12 @@ export default defineConfig({
     index: "src/index.ts",
     preset: "src/preset.ts",
     icons: "src/icons.ts",
+    blocks: "src/blocks/index.ts",
+    chart: "src/chart.ts",
+    motion: "src/motion/index.ts",
   },
   format: ["esm", "cjs"],
-  dts: true,
+  dts: { only: true },
   sourcemap: false,
   clean: true,
   external: [
@@ -19,6 +22,4 @@ export default defineConfig({
     "react-chartjs-2",
     "chart.js/auto",
   ],
-  treeshake: true,
-  splitting: false,
 });

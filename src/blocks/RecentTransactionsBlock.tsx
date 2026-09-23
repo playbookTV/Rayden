@@ -49,7 +49,7 @@ export function RecentTransactionsBlock({
           <button
             type="button"
             onClick={onSeeAll}
-            className="flex items-center gap-1.5 text-xs font-semibold text-primary-500"
+            className="flex items-center gap-1.5 rounded text-xs font-semibold text-action-primary-text cursor-pointer hover:underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text"
           >
             {seeAllLabel}
             <Icon name="chevron-right" size="xs" />
@@ -58,7 +58,7 @@ export function RecentTransactionsBlock({
       </div>
 
       {/* Transaction list */}
-      <div className="bg-white dark:bg-grey-50 border border-grey-100 rounded-[10px] px-5 py-6">
+      <div className="bg-surface border border-surface-border rounded-10 px-5 py-6">
         <div className="flex flex-col gap-5">
           {transactions.map((tx) => {
             const isOutgoing = tx.direction === "outgoing";
@@ -90,11 +90,11 @@ export function RecentTransactionsBlock({
                       <span className="font-normal">{isOutgoing ? "to" : "from"}</span>{" "}
                       <span className="font-semibold">{tx.name}</span>
                     </span>
-                    <span className="text-xs font-medium text-grey-400">{tx.category}</span>
+                    <span className="text-xs font-medium text-grey-500">{tx.category}</span>
                   </div>
 
                   {/* Amount */}
-                  <span className="text-sm font-semibold text-black shrink-0 ml-4">
+                  <span className="text-sm font-semibold text-grey-900 shrink-0 ml-4">
                     {isOutgoing ? "-" : "+"} {tx.amount}
                   </span>
                 </div>

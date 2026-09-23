@@ -1,116 +1,202 @@
 ---
 title: SidebarMenu
-description: Collapsible sidebar navigation with sections and themes
+description: Vertical navigation with sections, nested items, badges and four themes
 ---
 
 # SidebarMenu
 
-A collapsible sidebar navigation component with support for sections, submenus, icons, and light/dark themes.
+Vertical application navigation with sections, nested items, badges, four colour themes
+and a collapsed icon-only mode.
 
 ## Import
 
 ```tsx
-import { SidebarMenu, SidebarMenuSection, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubItem } from "@raydenui/ui";
+import {
+  SidebarMenu,
+  SidebarMenuSection,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+} from "@raydenui/ui";
 ```
 
 ## Usage
 
 ### Basic
 
-```tsx
-<SidebarMenu>
-  <SidebarMenuItem icon={<HomeIcon />} href="/">
-    Dashboard
-  </SidebarMenuItem>
-  <SidebarMenuItem icon={<UsersIcon />} href="/users">
-    Users
-  </SidebarMenuItem>
-  <SidebarMenuItem icon={<CogIcon />} href="/settings">
-    Settings
-  </SidebarMenuItem>
-</SidebarMenu>
-```
+Selection is by `value`, not `href`: each item carries a unique `value` and the menu
+reports the active one through `onValueChange`. Wire that to your own router.
 
-### With Sections
+<Preview>
+  <SidebarMenu defaultValue="dashboard" className="w-[260px]">
+    <SidebarMenuSection>
+      <SidebarMenuItem value="dashboard" icon="grid">
+        Dashboard
+      </SidebarMenuItem>
+      <SidebarMenuItem value="transactions" icon="wallet">
+        Transactions
+      </SidebarMenuItem>
+      <SidebarMenuItem value="settings" icon="settings">
+        Settings
+      </SidebarMenuItem>
+    </SidebarMenuSection>
+  </SidebarMenu>
+</Preview>
 
 ```tsx
-<SidebarMenu>
-  <SidebarMenuSection title="Main">
-    <SidebarMenuItem icon={<HomeIcon />} href="/">
+<SidebarMenu defaultValue="dashboard" className="w-[260px]">
+  <SidebarMenuSection>
+    <SidebarMenuItem value="dashboard" icon="grid">
       Dashboard
     </SidebarMenuItem>
-    <SidebarMenuItem icon={<ChartBarIcon />} href="/analytics">
-      Analytics
+    <SidebarMenuItem value="transactions" icon="wallet">
+      Transactions
     </SidebarMenuItem>
-  </SidebarMenuSection>
-
-  <SidebarMenuSection title="Management">
-    <SidebarMenuItem icon={<UsersIcon />} href="/users">
-      Users
-    </SidebarMenuItem>
-    <SidebarMenuItem icon={<FolderIcon />} href="/projects">
-      Projects
+    <SidebarMenuItem value="settings" icon="settings">
+      Settings
     </SidebarMenuItem>
   </SidebarMenuSection>
 </SidebarMenu>
 ```
 
-### With Submenus
+### Routing
+
+`SidebarMenuItem` renders a `<button>`, so pass navigation through `onValueChange`:
 
 ```tsx
-<SidebarMenu>
-  <SidebarMenuItem icon={<HomeIcon />} href="/">
-    Dashboard
-  </SidebarMenuItem>
-  <SidebarMenuSub icon={<CogIcon />} label="Settings">
-    <SidebarMenuSubItem href="/settings/profile">Profile</SidebarMenuSubItem>
-    <SidebarMenuSubItem href="/settings/security">Security</SidebarMenuSubItem>
-    <SidebarMenuSubItem href="/settings/notifications">Notifications</SidebarMenuSubItem>
-  </SidebarMenuSub>
+const navigate = useNavigate();
+const routes = { dashboard: "/", transactions: "/transactions" };
+
+<SidebarMenu value={active} onValueChange={(value) => navigate(routes[value])}>
+  {/* … */}
 </SidebarMenu>
 ```
 
-### With Badges
+### Sections
+
+`SidebarMenuSection` groups items under an optional `title`.
+
+<Preview>
+  <SidebarMenu defaultValue="dashboard" className="w-[260px]">
+    <SidebarMenuSection title="MAIN MENU" showDivider>
+      <SidebarMenuItem value="dashboard" icon="grid">
+        Dashboard
+      </SidebarMenuItem>
+      <SidebarMenuItem value="reports" icon="chart" badge={5}>
+        Reports
+      </SidebarMenuItem>
+    </SidebarMenuSection>
+    <SidebarMenuSection title="ACCOUNT">
+      <SidebarMenuItem value="settings" icon="settings">
+        Settings
+      </SidebarMenuItem>
+    </SidebarMenuSection>
+  </SidebarMenu>
+</Preview>
 
 ```tsx
-<SidebarMenu>
-  <SidebarMenuItem icon={<InboxIcon />} badge={5} href="/inbox">
-    Inbox
-  </SidebarMenuItem>
-  <SidebarMenuItem icon={<BellIcon />} badge="New" href="/notifications">
-    Notifications
-  </SidebarMenuItem>
+<SidebarMenu defaultValue="dashboard" className="w-[260px]">
+  <SidebarMenuSection title="MAIN MENU" showDivider>
+    <SidebarMenuItem value="dashboard" icon="grid">
+      Dashboard
+    </SidebarMenuItem>
+    <SidebarMenuItem value="reports" icon="chart" badge={5}>
+      Reports
+    </SidebarMenuItem>
+  </SidebarMenuSection>
+  <SidebarMenuSection title="ACCOUNT">
+    <SidebarMenuItem value="settings" icon="settings">
+      Settings
+    </SidebarMenuItem>
+  </SidebarMenuSection>
 </SidebarMenu>
 ```
 
-### Collapsible
+### Nested items
+
+Nest a `SidebarMenuSub` inside a `SidebarMenuItem`. The parent supplies the icon and
+label; `SidebarMenuSub` itself takes only children.
+
+<Preview>
+  <SidebarMenu defaultValue="invoices" className="w-[260px]">
+    <SidebarMenuSection>
+      <SidebarMenuItem value="finance" icon="bank">
+        Finance
+        <SidebarMenuSub>
+          <SidebarMenuSubItem value="invoices">Invoices</SidebarMenuSubItem>
+          <SidebarMenuSubItem value="payouts">Payouts</SidebarMenuSubItem>
+        </SidebarMenuSub>
+      </SidebarMenuItem>
+    </SidebarMenuSection>
+  </SidebarMenu>
+</Preview>
 
 ```tsx
-const [collapsed, setCollapsed] = useState(false);
-
-<SidebarMenu collapsed={collapsed}>
-  <SidebarMenuItem icon={<HomeIcon />} href="/">
-    Dashboard
-  </SidebarMenuItem>
-  {/* Icons only shown when collapsed */}
+<SidebarMenu defaultValue="invoices" className="w-[260px]">
+  <SidebarMenuSection>
+    <SidebarMenuItem value="finance" icon="bank">
+      Finance
+      <SidebarMenuSub>
+        <SidebarMenuSubItem value="invoices">Invoices</SidebarMenuSubItem>
+        <SidebarMenuSubItem value="payouts">Payouts</SidebarMenuSubItem>
+      </SidebarMenuSub>
+    </SidebarMenuItem>
+  </SidebarMenuSection>
 </SidebarMenu>
-
-<button onClick={() => setCollapsed(!collapsed)}>
-  Toggle Sidebar
-</button>
 ```
 
 ### Themes
 
-```tsx
-// Light theme (default)
-<SidebarMenu theme="light">
-  {/* ... */}
-</SidebarMenu>
+`theme` accepts `"light"`, `"blue"`, `"dark-blue"` and `"dark-grey"`.
 
-// Dark theme
-<SidebarMenu theme="dark">
-  {/* ... */}
+<Preview vertical>
+  <SidebarMenu defaultValue="dashboard" theme="dark-blue" className="w-[260px]">
+    <SidebarMenuSection>
+      <SidebarMenuItem value="dashboard" icon="grid">
+        Dashboard
+      </SidebarMenuItem>
+      <SidebarMenuItem value="reports" icon="chart">
+        Reports
+      </SidebarMenuItem>
+    </SidebarMenuSection>
+  </SidebarMenu>
+</Preview>
+
+```tsx
+<SidebarMenu defaultValue="dashboard" theme="dark-blue" className="w-[260px]">
+  {/* … */}
+</SidebarMenu>
+```
+
+### Collapsed
+
+`collapsed` switches to an 82px icon-only rail. Items whose children are not a plain
+string need an explicit `label` so the icon button still has an accessible name;
+expandable items open their children in a flyout.
+
+<Preview>
+  <SidebarMenu defaultValue="dashboard" collapsed>
+    <SidebarMenuSection showDivider={false}>
+      <SidebarMenuItem value="dashboard" icon="grid" label="Dashboard">
+        Dashboard
+      </SidebarMenuItem>
+      <SidebarMenuItem value="reports" icon="chart" label="Reports">
+        Reports
+      </SidebarMenuItem>
+    </SidebarMenuSection>
+  </SidebarMenu>
+</Preview>
+
+```tsx
+<SidebarMenu defaultValue="dashboard" collapsed>
+  <SidebarMenuSection showDivider={false}>
+    <SidebarMenuItem value="dashboard" icon="grid" label="Dashboard">
+      Dashboard
+    </SidebarMenuItem>
+    <SidebarMenuItem value="reports" icon="chart" label="Reports">
+      Reports
+    </SidebarMenuItem>
+  </SidebarMenuSection>
 </SidebarMenu>
 ```
 
@@ -120,40 +206,42 @@ const [collapsed, setCollapsed] = useState(false);
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `collapsed` | `boolean` | `false` | Collapsed state |
-| `theme` | `"light" \| "dark"` | `"light"` | Color theme |
-| `className` | `string` | — | Additional CSS classes |
+| `value` | `string` | — | Controlled active item value |
+| `defaultValue` | `string` | — | Uncontrolled default active item |
+| `onValueChange` | `(value: string) => void` | — | Called when the active item changes |
+| `collapsed` | `boolean` | `false` | Icon-only mode, 82px wide |
+| `theme` | `"light" \| "blue" \| "dark-blue" \| "dark-grey"` | `"light"` | Colour theme |
 
 ### SidebarMenuSection
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `title` | `string` | — | Section title |
-| `className` | `string` | — | Additional CSS classes |
+| `showDivider` | `boolean` | — | Show a divider below the section |
 
 ### SidebarMenuItem
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `icon` | `ReactNode` | — | Leading icon |
-| `href` | `string` | — | Link URL |
-| `active` | `boolean` | `false` | Active state |
-| `badge` | `number \| string` | — | Badge content |
-| `onClick` | `() => void` | — | Click handler |
-| `className` | `string` | — | Additional CSS classes |
+| `value` | `string` | — | Unique identifier (required) |
+| `icon` | `ReactNode \| IconName` | — | Leading icon |
+| `badge` | `string \| number` | — | Count badge on the right |
+| `label` | `string` | — | Accessible name when collapsed. Required when children are not a string |
+| `disabled` | `boolean` | `false` | Disabled state |
 
 ### SidebarMenuSub
 
+Takes only `children`. Nest it inside a `SidebarMenuItem`, which supplies the icon and label.
+
+### SidebarMenuSubItem
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `icon` | `ReactNode` | — | Leading icon |
-| `label` | `string` | — | Submenu label (required) |
-| `defaultOpen` | `boolean` | `false` | Initially expanded |
-| `className` | `string` | — | Additional CSS classes |
+| `value` | `string` | — | Unique identifier (required) |
 
 ## Accessibility
 
-- Uses semantic `<nav>` element
-- Keyboard navigation support
-- Expandable sections with proper ARIA
-- Active items properly indicated
+- Items are buttons in a `menu`; navigate with Tab and activate with Enter or Space.
+- When `collapsed`, give every item a `label` — an icon alone has no accessible name.
+- Expandable items expose `aria-expanded` and `aria-haspopup`, and open a flyout when
+  collapsed so nested destinations stay reachable.

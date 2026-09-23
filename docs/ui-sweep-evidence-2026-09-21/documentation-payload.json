@@ -1,0 +1,57 @@
+[
+  {
+    "path": "/_next/static/chunks/e2f4d823-9d763a4f56d647ad.js",
+    "bytes": 159428,
+    "gzip": 51738
+  },
+  {
+    "path": "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+    "bytes": 112594,
+    "gzip": 39373
+  },
+  {
+    "path": "/_next/static/chunks/ac9907b5-9af1c0a49c74c568.js",
+    "bytes": 6011,
+    "gzip": 2581
+  },
+  {
+    "path": "/_next/static/chunks/app/layout-772d07f0dd03a10a.js",
+    "bytes": 1468,
+    "gzip": 324
+  },
+  {
+    "path": "/_next/static/chunks/812-f4428508a0c37d25.js",
+    "bytes": 293947,
+    "gzip": 103254
+  },
+  {
+    "path": "/_next/static/chunks/bd374a37-98e8224cde6918d1.js",
+    "bytes": 173019,
+    "gzip": 54229
+  },
+  {
+    "path": "/_next/static/chunks/356-13766e0c93b90e54.js",
+    "bytes": 172482,
+    "gzip": 45969
+  },
+  {
+    "path": "/_next/static/chunks/webpack-bc124ba590d6b48f.js",
+    "bytes": 3483,
+    "gzip": 1762
+  },
+  {
+    "path": "/_next/static/chunks/main-app-7ef3686492f9a6e0.js",
+    "bytes": 556,
+    "gzip": 228
+  },
+  {
+    "path": "/_next/static/chunks/828-beb9ca5ed5100ce6.js",
+    "bytes": 5059195,
+    "gzip": 1779621
+  },
+  {
+    "path": "/_next/static/chunks/905-3dc065a114101c68.js",
+    "bytes": 50768,
+    "gzip": 16497
+  }
+]

@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import BlogSidebar from "@/components/BlogSidebar";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: "Rayden Blog",
@@ -21,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+      <body className="antialiased">
         <div className="min-h-screen bg-grey-50">
           <Header />
           <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

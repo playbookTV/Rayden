@@ -6,7 +6,6 @@
   "$relationships": {
     "depends_on": ["Icon", "Badge", "Chart"]
   },
-
   "anatomy": {
     "root": {
       "type": "FRAME",
@@ -91,9 +90,9 @@
     "metric-value": {
       "type": "TEXT",
       "fontFamily": "{typography.fontFamily.sans}",
-      "fontWeight": "{typography.fontWeight.bold}",
-      "fontSize": "{typography.fontSize.3xl}",
-      "fill": "{color.grey.900}"
+      "fontWeight": "{typography.fontWeight.semibold}",
+      "fontSize": 32,
+      "fill": "{color.grey.800}"
     },
     "change-indicator": {
       "type": "FRAME",
@@ -153,7 +152,6 @@
       "defaultVisible": false
     }
   },
-
   "variants": {
     "Layout1": {
       "Default": {
@@ -198,7 +196,6 @@
       }
     }
   },
-
   "componentProperties": [
     {
       "name": "Layout",
@@ -232,5 +229,8 @@
       "type": "BOOLEAN",
       "default": true
     }
+  ],
+  "implementationNotes": [
+    "Base metric value matches the 32px text-h3 preset and font-semibold in MetricsCard.tsx. The Centered variation uses text-h4; consult runtime variant behavior."
   ]
 }

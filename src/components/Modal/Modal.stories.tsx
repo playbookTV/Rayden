@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
 import { Modal } from "./Modal";
 
 const meta: Meta<typeof Modal> = {
@@ -23,7 +24,7 @@ function DefaultModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-primary-400 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+        className="bg-action-primary text-white px-4 py-2 rounded-lg text-sm font-semibold"
       >
         Open Modal
       </button>
@@ -51,7 +52,7 @@ function VerticalFooterModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-primary-400 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+        className="bg-action-primary text-white px-4 py-2 rounded-lg text-sm font-semibold"
       >
         Open Vertical Modal
       </button>
@@ -79,7 +80,7 @@ function LargeModalDemo() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-primary-400 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+        className="bg-action-primary text-white px-4 py-2 rounded-lg text-sm font-semibold"
       >
         Open Large Modal
       </button>
@@ -112,7 +113,7 @@ function PrimaryOnlyModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-primary-400 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+        className="bg-action-primary text-white px-4 py-2 rounded-lg text-sm font-semibold"
       >
         Open Modal
       </button>
@@ -134,7 +135,7 @@ function NoBlurModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-primary-400 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+        className="bg-action-primary text-white px-4 py-2 rounded-lg text-sm font-semibold"
       >
         Open (No Blur)
       </button>
@@ -171,7 +172,7 @@ function CustomIconModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-primary-400 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+        className="bg-action-primary text-white px-4 py-2 rounded-lg text-sm font-semibold"
       >
         Open Warning Modal
       </button>
@@ -211,4 +212,68 @@ export const NoBlur: Story = {
 
 export const CustomIcon: Story = {
   render: () => <CustomIconModal />,
+};
+
+export const FocusManagement: Story = {
+  render: () => <DefaultModal />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Open Modal" });
+    await userEvent.click(trigger);
+    const dialog = await within(document.body).findByRole("dialog", { name: "Title" });
+    await expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    for (let index = 0; index < 5; index++) {
+      await userEvent.tab();
+      await expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    }
+    await userEvent.tab({ shift: true });
+    await expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    await userEvent.click(within(dialog).getByRole("button", { name: "Cancel" }));
+    await waitFor(() => expect(trigger).toHaveFocus());
+    await waitFor(() => expect(dialog).not.toBeInTheDocument());
+
+    await userEvent.click(trigger);
+    const reopened = await within(document.body).findByRole("dialog", { name: "Title" });
+    fireEvent(reopened, new Event("cancel", { cancelable: true }));
+    await waitFor(() => expect(reopened).not.toBeInTheDocument());
+    await waitFor(() => expect(trigger).toHaveFocus());
+
+    await userEvent.click(trigger);
+    const backdrop = await within(document.body).findByRole("dialog", { name: "Title" });
+    fireEvent.click(backdrop);
+    await waitFor(() => expect(backdrop).not.toBeInTheDocument());
+    await waitFor(() => expect(trigger).toHaveFocus());
+  },
+};
+
+function DismissalPolicyDemo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open protected dialog</button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Keep your work"
+        closeOnEscape={false}
+        closeOnOverlay={false}
+        primaryLabel="Done"
+        onPrimaryClick={() => setOpen(false)}
+      />
+    </>
+  );
+}
+
+export const DismissalPolicy: Story = {
+  render: () => <DismissalPolicyDemo />,
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole("button", { name: "Open protected dialog" });
+    await userEvent.click(trigger);
+    const dialog = await within(document.body).findByRole("dialog", { name: "Keep your work" });
+    fireEvent(dialog, new Event("cancel", { cancelable: true }));
+    fireEvent.click(dialog);
+    await expect(dialog).toBeVisible();
+    await userEvent.click(within(dialog).getByRole("button", { name: "Done" }));
+    await waitFor(() => expect(trigger).toHaveFocus());
+  },
 };

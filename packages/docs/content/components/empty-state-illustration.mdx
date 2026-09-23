@@ -1,11 +1,11 @@
 ---
 title: EmptyStateIllustration
-description: 19 empty state illustrations with custom palette support
+description: Illustrations for empty states, onboarding and zero-data screens
 ---
 
 # EmptyStateIllustration
 
-Display contextual illustrations for empty states with 19 pre-built variants and custom color support.
+Ready-made SVG illustrations for empty states, onboarding and zero-data screens.
 
 ## Import
 
@@ -17,106 +17,122 @@ import { EmptyStateIllustration } from "@raydenui/ui";
 
 ### Basic
 
+`name` is required and selects the illustration.
+
 <Preview>
-  <EmptyStateIllustration variant="no-data" />
+  <EmptyStateIllustration name="inbox" />
 </Preview>
 
 ```tsx
-<EmptyStateIllustration variant="no-data" />
+<EmptyStateIllustration name="inbox" />
 ```
 
-### Common Variants
+### Available illustrations
 
-<Preview>
-  <EmptyStateIllustration variant="no-data" />
-  <EmptyStateIllustration variant="no-results" />
-  <EmptyStateIllustration variant="empty-folder" />
-  <EmptyStateIllustration variant="empty-inbox" />
+<Preview vertical>
+  <EmptyStateIllustration name="inbox" size={120} />
+  <EmptyStateIllustration name="search" size={120} />
+  <EmptyStateIllustration name="file-manager" size={120} />
+  <EmptyStateIllustration name="notifications" size={120} />
+</Preview>
+
+`calendar`, `chat`, `contacts`, `dashboard`, `favorites`, `file-manager`, `forms`,
+`gallery`, `inbox`, `invoice`, `notifications`, `product-catalog`, `project-list`,
+`search`, `shopping-cart`, `subscriptions`, `survey`, `task-templates`, `team`.
+
+```tsx
+<EmptyStateIllustration name="inbox" size={120} />
+<EmptyStateIllustration name="search" size={120} />
+<EmptyStateIllustration name="file-manager" size={120} />
+<EmptyStateIllustration name="notifications" size={120} />
+```
+
+### Size
+
+`size` is a number in pixels, applied to both width and height. It defaults to `150`,
+the native SVG size.
+
+<Preview vertical>
+  <EmptyStateIllustration name="gallery" size={96} />
+  <EmptyStateIllustration name="gallery" size={150} />
+  <EmptyStateIllustration name="gallery" size={220} />
 </Preview>
 
 ```tsx
-// Data states
-<EmptyStateIllustration variant="no-data" />
-<EmptyStateIllustration variant="no-results" />
-<EmptyStateIllustration variant="empty-folder" />
-<EmptyStateIllustration variant="empty-inbox" />
+<EmptyStateIllustration name="gallery" size={96} />
+<EmptyStateIllustration name="gallery" size={150} />
+<EmptyStateIllustration name="gallery" size={220} />
 ```
 
-### Status States
+### Monochrome
 
-<Preview>
-  <EmptyStateIllustration variant="success" />
-  <EmptyStateIllustration variant="error" />
-  <EmptyStateIllustration variant="warning" />
+Set `colored={false}` for the grey variant, useful on busy or tinted backgrounds.
+
+<Preview vertical>
+  <EmptyStateIllustration name="team" />
+  <EmptyStateIllustration name="team" colored={false} />
 </Preview>
 
 ```tsx
-<EmptyStateIllustration variant="success" />
-<EmptyStateIllustration variant="error" />
-<EmptyStateIllustration variant="warning" />
+<EmptyStateIllustration name="team" />
+<EmptyStateIllustration name="team" colored={false} />
 ```
 
-### Network States
+### Custom palette
 
-<Preview>
-  <EmptyStateIllustration variant="no-connection" />
-  <EmptyStateIllustration variant="offline" />
-</Preview>
-
-```tsx
-<EmptyStateIllustration variant="no-connection" />
-<EmptyStateIllustration variant="offline" />
-```
-
-### Custom Colors
+`palette` replaces the default primary palette on coloured illustrations. Provide 11
+hex colours, lightest to darkest. It is ignored when `colored` is `false`.
 
 <Preview>
   <EmptyStateIllustration
-    variant="no-data"
-    primaryColor="#F56630"
-    secondaryColor="#FCB59A"
+    name="dashboard"
+    palette={[
+      "#e3effc",
+      "#c6ddf7",
+      "#b6d8ff",
+      "#80bbff",
+      "#3d89df",
+      "#1671d9",
+      "#0d5eba",
+      "#034592",
+      "#04326b",
+      "#012657",
+      "#001633",
+    ]}
   />
 </Preview>
 
 ```tsx
 <EmptyStateIllustration
-  variant="no-data"
-  primaryColor="#F56630"
-  secondaryColor="#FCB59A"
+  name="dashboard"
+  palette={[
+    "#e3effc", "#c6ddf7", "#b6d8ff", "#80bbff", "#3d89df", "#1671d9",
+    "#0d5eba", "#034592", "#04326b", "#012657", "#001633",
+  ]}
 />
 ```
 
-### Sizes
+### In an empty state
 
 <Preview>
-  <EmptyStateIllustration variant="no-data" size="sm" />
-  <EmptyStateIllustration variant="no-data" size="md" />
-  <EmptyStateIllustration variant="no-data" size="lg" />
-</Preview>
-
-```tsx
-<EmptyStateIllustration variant="no-data" size="sm" /> {/* 120px */}
-<EmptyStateIllustration variant="no-data" size="md" /> {/* 200px */}
-<EmptyStateIllustration variant="no-data" size="lg" /> {/* 280px */}
-```
-
-### With Content
-
-<Preview>
-  <div className="flex flex-col items-center gap-4 p-8">
-    <EmptyStateIllustration variant="no-data" size="lg" />
-    <h3 className="text-lg font-semibold text-grey-800">No data yet</h3>
-    <span className="text-grey-500">Get started by adding your first item</span>
-    <Button variant="primary">Add Item</Button>
+  <div className="flex flex-col items-center gap-4 text-center">
+    <EmptyStateIllustration name="search" size={140} />
+    <div>
+      <h3 className="text-lg font-semibold text-grey-900">No results found</h3>
+      <p className="text-sm text-grey-500">Try a different search term or clear your filters.</p>
+    </div>
+    <Button>Clear filters</Button>
   </div>
 </Preview>
 
 ```tsx
-<div className="flex flex-col items-center gap-4 p-8">
-  <EmptyStateIllustration variant="no-data" size="lg" />
-  <h3 className="text-lg font-semibold text-grey-800">No data yet</h3>
-  <p className="text-grey-500">Get started by adding your first item</p>
-  <Button variant="primary">Add Item</Button>
+<div className="flex flex-col items-center gap-4 text-center">
+  <EmptyStateIllustration name="search" size={140} />
+  <div>
+    <h3 className="text-lg font-semibold text-grey-900">No results found</h3>
+    <p className="text-sm text-grey-500">Try a different search term or clear your filters.</p>
+  </div>
+  <Button>Clear filters</Button>
 </div>
 ```
 
@@ -124,37 +140,14 @@ import { EmptyStateIllustration } from "@raydenui/ui";
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `EmptyStateVariant` | `"no-data"` | Illustration variant |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Illustration size |
-| `primaryColor` | `string` | `"#F56630"` | Primary color |
-| `secondaryColor` | `string` | `"#FCB59A"` | Secondary color |
+| `name` | `IllustrationName` | — | Which illustration to display (required) |
+| `colored` | `boolean` | `true` | Coloured or grey/monochrome variant |
+| `palette` | `string[]` | — | 11 hex colours, lightest → darkest. Ignored when `colored` is `false` |
+| `size` | `number` | `150` | Width and height in pixels |
 | `className` | `string` | — | Additional CSS classes |
-
-## Variants
-
-| Variant | Use Case |
-|---------|----------|
-| `no-data` | Empty tables, lists |
-| `no-results` | Search with no matches |
-| `empty-folder` | Empty directories |
-| `empty-inbox` | Empty email inbox |
-| `success` | Completed actions |
-| `error` | Failed operations |
-| `warning` | Warning states |
-| `no-connection` | Network errors |
-| `offline` | Offline mode |
-| `no-notifications` | Empty notification list |
-| `no-messages` | Empty chat/messages |
-| `no-tasks` | Empty task list |
-| `no-projects` | Empty project list |
-| `no-users` | No team members |
-| `no-teams` | No teams |
-| `empty-cart` | Empty shopping cart |
-| `no-orders` | No order history |
-| `maintenance` | Site maintenance |
-| `coming-soon` | Upcoming features |
 
 ## Accessibility
 
-- Illustrations are decorative (`role="img"`)
-- Use with text content for context
+- The illustration is decorative, so it is hidden from assistive technology. Put the
+  meaning in adjacent text — a heading and a short explanation — rather than in the image.
+- Pair it with an action so an empty state tells the reader what to do next.

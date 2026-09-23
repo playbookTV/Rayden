@@ -56,7 +56,7 @@ import { Chip } from "@raydenui/ui";
 
 <Preview>
   <Chip variant="input">Default</Chip>
-  <Chip variant="input" focused>Focused</Chip>
+  <Chip variant="input">Selected</Chip>
   <Chip variant="input" disabled>Disabled</Chip>
 </Preview>
 
@@ -65,7 +65,7 @@ import { Chip } from "@raydenui/ui";
 <Chip variant="input">Default</Chip>
 
 // Focused
-<Chip variant="input" focused>Focused</Chip>
+<Chip variant="input">Selected</Chip>
 
 // Disabled
 <Chip variant="input" disabled>Disabled</Chip>
@@ -74,13 +74,13 @@ import { Chip } from "@raydenui/ui";
 ### With Avatar
 
 <Preview>
-  <Chip variant="input" avatar="https://i.pravatar.cc/150?img=1">
+  <Chip variant="input" icon="user-circle">
     John Doe
   </Chip>
 </Preview>
 
 ```tsx
-<Chip variant="input" avatar="/avatars/user.jpg" onClose={() => {}}>
+<Chip variant="input" icon="user-circle" onClose={() => {}}>
   John Doe
 </Chip>
 ```
@@ -90,9 +90,7 @@ import { Chip } from "@raydenui/ui";
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `variant` | `"input" \| "filter"` | `"input"` | Chip variant |
-| `focused` | `boolean` | `false` | Focused state |
 | `disabled` | `boolean` | `false` | Disables the chip |
-| `avatar` | `string` | — | Avatar image URL |
 | `onClose` | `() => void` | — | Close button handler (input variant) |
 | `onClick` | `() => void` | — | Click handler (filter variant) |
 | `className` | `string` | — | Additional CSS classes |

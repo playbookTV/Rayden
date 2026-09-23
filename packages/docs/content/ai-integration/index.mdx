@@ -1,417 +1,84 @@
 ---
 title: AI Integration
-description: AI compatibility layer for reliable LLM code generation with Rayden UI
+description: Verified Citrionus component guidance for people and coding agents
 ---
 
-# @raydenui/ai
+# Build with Rayden AI
 
-AI compatibility layer for Rayden UI — enables LLMs to reliably generate UI code without hallucinating components, props, or patterns that don't exist.
+Citrionus is Rayden’s complete free default flavor. Rayden AI connects its component catalog, public APIs, and usage guidance to coding agents. The same generated catalog powers this page, the MCP server, and the registry pilot.
 
-## Overview
+<AgentGuidance />
 
-`@raydenui/ai` provides:
+## Start with the project
 
-- **Component Manifests** — Machine-readable JSON schemas for every Rayden UI component
-- **Component Anatomy** — Figma layer structures for building components in Figma
-- **Design Tokens** — Color, typography, spacing, and shadow tokens in JSON and W3C DTCG formats
-- **Composition Rules** — Rules for correctly nesting compound components
-- **Layout Recipes** — Pre-defined patterns for common UI layouts
-- **MCP Server** — Model Context Protocol server for AI tool integration
-- **Skills** — Claude Code skills for specialized workflows
+Ask your agent to inspect the installed Rayden version, discover the supported components, and retrieve their props before generating code. Catalog versions identify the reference build; they do not prove which version your project has installed.
 
-## Installation
+The work on this page is a local development pilot. Build the current workspace to try the new catalog and validation tools. Published releases may not yet contain them.
 
 ```bash
-pnpm add @raydenui/ai
+pnpm --filter @raydenui/ai build
+node packages/rayden-ai/dist/mcp/server.js
 ```
 
-## Quick Start
+The server uses standard input/output. Configure your MCP client to start that built server using an absolute path appropriate to your checkout. The command above is for testing from the repository root, not a hosted endpoint.
 
-### Using RAYDEN_RULES.md
+## MCP tools
 
-The simplest way to integrate with AI is to include the rules file in your context:
+| Tool                       | Purpose                                               |
+| -------------------------- | ----------------------------------------------------- |
+| `get_components`           | Discover component families, exports, and categories  |
+| `get_component_props`      | Retrieve supported props and component guidance       |
+| `get_tokens`               | Read design tokens by category                        |
+| `get_layout_recipes`       | Retrieve composition examples                         |
+| `get_catalog`              | Inspect Citrionus reference versions and capabilities |
+| `get_component_guidance`   | Get a component-specific implementation prompt        |
+| `validate_component_usage` | Check a structured component usage description        |
 
-```tsx
-import rules from "@raydenui/ai/RAYDEN_RULES.md";
+Unknown components and invalid inputs receive explicit errors. Exact exported component names take precedence over aliases. For example, Spinner must resolve to Spinner rather than ProgressCircle.
 
-// Include in AI system prompt
-const systemPrompt = `You are a UI generator using Rayden UI.\n\n${rules}`;
-```
+Validation reports what it can establish from static data. It does not replace TypeScript, interaction tests, or an accessibility review. Dynamic values and runtime-dependent behavior can be reported as not assessed.
 
-### Programmatic Access
+## Programmatic usage
 
-```tsx
-import { manifests, tokens, recipes, rules } from "@raydenui/ai";
+From a project using the locally built AI package:
 
-// Get all component manifests
-const allComponents = manifests.getAll();
-
-// Get specific component props
-const buttonProps = manifests.getComponent("Button");
-
-// Get design tokens
-const colorTokens = tokens.colors;
-const shadowTokens = tokens.shadows;
-
-// Get layout recipes
-const formRecipe = recipes.get("form-layout");
-```
-
-## MCP Server
-
-The package includes an MCP (Model Context Protocol) server for AI tool integration:
-
-### Starting the Server
-
-```bash
-npx rayden-ai-mcp
-```
-
-### Available Tools
-
-| Tool                | Description                                     |
-| ------------------- | ----------------------------------------------- |
-| `getComponents`     | List all available components with descriptions |
-| `getComponentProps` | Get detailed props for a specific component     |
-| `getTokens`         | Get design tokens (colors, typography, etc.)    |
-| `getLayoutRecipes`  | Get pre-defined layout patterns                 |
-
-### Claude Desktop Integration
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "rayden-ai": {
-      "command": "npx",
-      "args": ["@raydenui/ai"]
-    }
-  }
-}
-```
-
-### Claude Code Integration
-
-Add to your project's `.mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "rayden-ai": {
-      "command": "npx",
-      "args": ["@raydenui/ai"]
-    }
-  }
-}
-```
-
-## Component Manifests
-
-Each component has a JSON manifest with:
-
-```json
-{
-  "name": "Button",
-  "description": "Primary action trigger with variants, appearances, sizes, icons",
-  "props": {
-    "variant": {
-      "type": "string",
-      "enum": ["primary", "secondary", "grey", "destructive", "text", "success", "warning", "info"],
-      "default": "primary",
-      "description": "Visual variant of the button"
-    },
-    "size": {
-      "type": "string",
-      "enum": ["sm", "lg"],
-      "default": "sm",
-      "description": "Button size (no 'md' - only sm and lg)"
-    },
-    "icon": {
-      "type": "ReactNode | IconName",
-      "description": "Icon to display"
-    },
-    "iconPosition": {
-      "type": "string",
-      "enum": ["leading", "trailing", "icon-only", "none"],
-      "default": "none",
-      "description": "Position of the icon"
-    }
-  },
-  "examples": [
-    "<Button variant=\"primary\">Click me</Button>",
-    "<Button icon=\"plus\" iconPosition=\"leading\">Add Item</Button>"
-  ],
-  "commonMistakes": [
-    { "wrong": "color=\"primary\"", "correct": "variant=\"primary\"" },
-    { "wrong": "size=\"md\"", "correct": "size=\"sm\" (only sm and lg exist)" }
-  ]
-}
-```
-
-## Design Tokens
-
-Tokens are exported in JSON format:
-
-```json
-{
-  "colors": {
-    "primary": {
-      "50": "#FFECE5",
-      "100": "#FCB59A",
-      "400": "#F56630",
-      "500": "#EB5017",
-      "600": "#CC400C",
-      "700": "#AD3307"
-    },
-    "grey": {
-      "50": "#F9FAFB",
-      "100": "#F0F2F5",
-      "200": "#E4E7EC",
-      "300": "#D0D5DD",
-      "400": "#98A2B3",
-      "500": "#667185",
-      "600": "#475367",
-      "700": "#344054",
-      "800": "#1D2739",
-      "900": "#101928"
-    }
-  },
-  "shadows": {
-    "soft": {
-      "xxs": "0px 1px 2px 0px rgba(16, 25, 40, 0.06)",
-      "xs": "0px 2px 4px -2px rgba(16, 25, 40, 0.06)",
-      "sm": "0px 4px 6px -2px rgba(16, 25, 40, 0.05)",
-      "md": "0px 6px 8px -2px rgba(16, 25, 40, 0.05)",
-      "lg": "0px 8px 10px -2px rgba(16, 25, 40, 0.05)"
-    }
-  },
-  "typography": {
-    "display-lg": { "fontSize": "56px", "lineHeight": "1.2" },
-    "h1": { "fontSize": "40px", "lineHeight": "1.2" },
-    "body-md": { "fontSize": "16px", "lineHeight": "1.5" }
-  }
-}
-```
-
-## Composition Rules
-
-Rules for correctly nesting compound components:
-
-```json
-{
-  "Table": {
-    "structure": "Table > TableHeader/TableBody > TableRow > TableHead/TableCell",
-    "rules": [
-      "TableHeader must be direct child of Table",
-      "TableRow must be inside TableHeader or TableBody",
-      "TableHead goes in TableHeader rows, TableCell in TableBody rows"
-    ]
-  },
-  "DropdownMenu": {
-    "structure": "DropdownMenu > DropdownMenuTrigger + DropdownMenuContent > DropdownMenuItem",
-    "rules": [
-      "DropdownMenuTrigger wraps the trigger element",
-      "DropdownMenuContent contains menu items",
-      "Use DropdownMenuSeparator between groups"
-    ]
-  }
-}
-```
-
-## Layout Recipes
-
-Pre-defined patterns for common layouts:
-
-```tsx
-import { recipes } from "@raydenui/ai";
-
-const formRecipe = recipes.get("form-layout");
-// Returns:
-// {
-//   name: "form-layout",
-//   description: "Standard form with labeled inputs",
-//   template: `
-//     <form className="space-y-4 max-w-md">
-//       <Input label="..." />
-//       <Input label="..." />
-//       <Button variant="primary" className="w-full">Submit</Button>
-//     </form>
-//   `
-// }
-```
-
-## Component Anatomy (Figma)
-
-For building Rayden UI components in Figma using `use_figma`, use the anatomy module:
-
-```tsx
+```ts
 import {
-  getAnatomy,
-  getAvailableComponents,
-  getComponentsByCategory,
-  registry
-} from "@raydenui/ai/anatomy";
+  getCatalog,
+  getComponentGuidance,
+  getManifest,
+  validateComponentUsage,
+} from "@raydenui/ai";
 
-// Get Figma layer structure for a component
-const buttonAnatomy = getAnatomy("Button");
-// Returns: { name, figmaName, anatomy, variants, componentProperties }
-
-// List all components with anatomy specs
-const components = getAvailableComponents();
-
-// Get components by category
-const formComponents = getComponentsByCategory("Forms & Inputs");
-
-// Get all variant combinations for a component
-import { getVariantCombinations } from "@raydenui/ai/anatomy";
-const buttonVariants = getVariantCombinations("Button");
-// Returns: [{ Variant: "Primary", Appearance: "Solid", Size: "SM", State: "Default" }, ...]
+const catalog = getCatalog();
+const button = getManifest("Button");
+const guidance = getComponentGuidance("Button");
+const result = validateComponentUsage("Button", { size: "giant" });
 ```
 
-## W3C DTCG Tokens
+Component families are not always importable components. The catalog records the actual export names and import paths, including the separate chart entry point. Use those mappings rather than turning a family name into an import.
 
-Tokens are also available in W3C Design Tokens Community Group format:
+## Installation and editable examples
 
-```tsx
-import dtcgTokens from "@raydenui/ai/tokens/dtcg";
+The [distribution pilot](/ai-integration/distribution) adds shadcn-compatible setup, rules, and editable example files. Rayden’s npm package supplies component behavior; you own and can edit the installed example source. The registry and Rayden MCP serve different purposes: installation and component knowledge.
 
-// Tokens follow the DTCG spec with $value, $type, $description
-console.log(dtcgTokens.color.primary["500"]);
-// { $value: "#EB5017", $type: "color", $description: "Primary brand color" }
-```
+## Motion guidance
 
-## Skills (Claude Code)
+The [motion pilot](/motion) provides independent Calm, Snappy, Playful, and Reduced presets. Tabs and Modal opt in explicitly. A requested preset never overrides an operating-system request for reduced motion.
 
-Skills provide specialized workflows for Claude Code. Include the skill in your context for guided assistance.
+## Machine-readable resources
 
-### rayden-use Skill
+- [Component catalog](/ai/catalog.json): generated metadata and prompts.
+- [Concise agent index](/llms.txt): identity, imports, and conventions.
+- [Full component guidance](/llms-full.txt): per-component implementation prompts.
+- [Registry catalog](/r/registry.json): package-backed installation items.
 
-Build and maintain Rayden UI components directly in Figma:
+These resources are built from maintained source information. Generated-file checks catch drift before release.
 
-```tsx
-import skill from "@raydenui/ai/skills/rayden-use";
+## Figma and design specifications
 
-// The skill provides instructions for:
-// - Building new components in Figma from anatomy specs
-// - Adding variants to existing components
-// - Syncing React components to Figma
-// - Composing screens using Rayden components
-// - Auditing files for design system compliance
-```
+The AI package also contains component anatomy, token data, and the `rayden-use` skill. These describe the design system; they do not themselves write to Figma. A connected Figma tool is required for design actions. Availability of an anatomy specification is not a guarantee that every design variant matches the runtime component.
 
-## Exports
+## Update the guidance
 
-| Export | Description |
-|--------|-------------|
-| `@raydenui/ai` | Main entry with manifests, tokens, recipes, rules |
-| `@raydenui/ai/manifests` | Component prop definitions |
-| `@raydenui/ai/tokens` | Design tokens (JSON) |
-| `@raydenui/ai/tokens/dtcg` | W3C DTCG format tokens |
-| `@raydenui/ai/anatomy` | Figma layer structures |
-| `@raydenui/ai/recipes` | Layout patterns |
-| `@raydenui/ai/rules` | Composition rules |
-| `@raydenui/ai/mcp` | MCP server handlers |
-| `@raydenui/ai/RAYDEN_RULES.md` | Human-readable rules file |
-| `@raydenui/ai/skills/rayden-use` | Figma component building skill |
-
-```tsx
-// Main export
-import { manifests, tokens, recipes, rules } from "@raydenui/ai";
-
-// Individual exports
-import { getComponent, getAllComponents } from "@raydenui/ai/manifests";
-import { colors, shadows, typography } from "@raydenui/ai/tokens";
-import { getAnatomy, getAvailableComponents } from "@raydenui/ai/anatomy";
-import { getRecipe, getAllRecipes } from "@raydenui/ai/recipes";
-import { compositionRules, aliases } from "@raydenui/ai/rules";
-import { createServer } from "@raydenui/ai/mcp";
-```
-
-## Use Cases
-
-### AI Code Generation
-
-```tsx
-// In your AI prompt engineering
-const context = `
-You are generating React code using Rayden UI.
-
-Available components:
-${JSON.stringify(manifests.getAll())}
-
-Design tokens:
-${JSON.stringify(tokens)}
-
-Rules:
-${rules.compositionRules}
-`;
-```
-
-### IDE Extensions
-
-```tsx
-// Provide autocomplete suggestions
-import { manifests } from "@raydenui/ai";
-
-function getPropsForComponent(componentName: string) {
-  return manifests.getComponent(componentName)?.props;
-}
-```
-
-### Documentation Generation
-
-```tsx
-// Generate docs from manifests
-import { manifests } from "@raydenui/ai";
-
-for (const component of manifests.getAll()) {
-  console.log(`## ${component.name}`);
-  console.log(component.description);
-  console.log("### Props");
-  for (const [name, prop] of Object.entries(component.props)) {
-    console.log(`- \`${name}\`: ${prop.type}`);
-  }
-}
-```
-
-## Package Structure
-
-```
-@raydenui/ai/
-├── dist/
-│   ├── index.js          # Main exports
-│   ├── manifests/        # Component manifests
-│   ├── anatomy/          # Figma layer structures
-│   ├── tokens/           # Design tokens (JSON + DTCG)
-│   ├── recipes/          # Layout patterns
-│   ├── rules/            # Composition rules
-│   └── mcp/              # MCP server
-├── skills/
-│   └── rayden-use/       # Figma component building skill
-├── references/           # Documentation for skills
-├── RAYDEN_RULES.md       # Human-readable rules file
-└── package.json
-```
-
-## Configuration
-
-The package exposes an `ai` field in package.json for discovery:
-
-```json
-{
-  "ai": {
-    "type": "design-system",
-    "rulesFile": "RAYDEN_RULES.md",
-    "manifestsDir": "dist/manifests",
-    "tokensFile": "dist/tokens/tokens.json",
-    "tokensDTCGFile": "dist/tokens/tokens.dtcg.json",
-    "anatomyDir": "dist/anatomy",
-    "skillsDir": "skills",
-    "referencesDir": "references",
-    "mcpServer": "dist/mcp/server.js"
-  }
-}
-```
-
-This allows AI tools to automatically discover and use Rayden UI's capabilities.
+When a public component API changes, regenerate the AI data and connected guidance, then run their consistency checks. Preserve authored design intent while deriving export names and prop contracts from the actual source.

@@ -1,135 +1,81 @@
 # Icon
 
-A comprehensive icon component with 200+ icons in both outline and solid variants.
+`Icon` is Rayden's SVG-rendering component. Individual exports such as `heartIcon` are **icon data**, not React components. Each registered icon has `outline` and `solid` variants.
 
-## Import
-
-```tsx
-import { Icon } from "@raydenui/ui";
-import type { IconProps, IconName, IconSize, IconVariant } from "@raydenui/ui";
-```
-
-## Usage
-
-### Basic Usage
+## Import and render
 
 ```tsx
-<Icon name="home" />
-<Icon name="user" />
-<Icon name="settings" />
+import { Icon, iconCatalog, iconNames } from "@raydenui/ui";
+import type { IconProps, IconName, IconRecord, IconSource, IconSize, IconVariant } from "@raydenui/ui";
+import { heartIcon } from "@raydenui/ui/icons";
+
+// Direct data: immediate rendering, including server-rendered HTML.
+<Icon icon={heartIcon} variant="solid" size="lg" />;
+
+// Registry name: convenient lookup, loaded after mounting in the browser.
+<Icon name="heart" variant="outline" size={24} />;
 ```
 
-### Sizes
+Pass exactly one of `name` or `icon`. A name is a registry key such as `arrow-down`; a data export is its exact JavaScript identifier such as `arrowDownIcon`. Existing acronym and numeric names retain their original spelling; use the catalog instead of guessing an export name. Do not render data as `<heartIcon />` or pass a string to `icon`.
 
-Icons support preset sizes or custom pixel values:
+The name API reserves the SVG's size while the registry loads. A bundler with code splitting can load that registry separately. For initial HTML and tree shaking, import individual data records. Do not import the combined `icons` registry unless you need the whole collection.
+
+## Discover the icons
+
+`iconCatalog` is generated from the real registry and contains every `{ name, exportName }` pair, without SVG artwork. `iconNames` is the corresponding readonly list of names. Both are available from the root package and `@raydenui/ui/icons`.
 
 ```tsx
-<Icon name="star" size="xs" />  {/* 12px */}
-<Icon name="star" size="sm" />  {/* 16px */}
-<Icon name="star" size="md" />  {/* 20px - default */}
-<Icon name="star" size="lg" />  {/* 24px */}
-<Icon name="star" size="xl" />  {/* 32px */}
-
-{/* Custom size in pixels */}
-<Icon name="star" size={48} />
+const matches = iconCatalog.filter(({ name, exportName }) =>
+  `${name} ${exportName}`.toLowerCase().includes("arrow")
+);
+// Example entry: { name: "arrow-down", exportName: "arrowDownIcon" }
 ```
 
-### Variants
+Open **Components → Icon → Gallery** in Storybook to search by name or export and compare outline/solid artwork. AI clients can find the same generated mapping at `catalog.icons.entries` in `/ai/catalog.json`.
 
-Each icon has an outline (default) and solid variant:
+## Shared icon slots
+
+Icon slots on Button, Input, SelectOption, DropdownMenuItem, Modal and other components using `IconSource` accept the same three forms: a registry name, static `IconRecord`, or a custom React node.
 
 ```tsx
-<Icon name="heart" variant="outline" />
-<Icon name="heart" variant="solid" />
+import { Button, Input, Icon } from "@raydenui/ui";
+import { checkIcon, searchIcon, heartIcon } from "@raydenui/ui/icons";
+
+<Button icon="check" iconPosition="leading">Save</Button>;
+<Button icon={checkIcon} iconPosition="leading">Save</Button>;
+<Input label="Search" leadingIcon={searchIcon} />;
+<Button icon={<Icon icon={heartIcon} variant="solid" />} iconPosition="leading">
+  Favorite
+</Button>;
 ```
 
-### Custom Color
+Names and direct records use the slot's default size and the outline variant. Pass an `Icon` element for a solid variant, custom size, or custom SVG attributes. Custom nodes retain their own props. Slot names describe placement (`leadingIcon`, `trailingIcon`) or purpose (`icon`); they use the same value convention.
 
-Icons inherit the current text color by default. Override with the `color` prop:
+## Props
 
-```tsx
-<Icon name="check" color="#0F973D" />
-<Icon name="multiply" color="#D42620" />
+| Prop | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `name` | `IconName` | — | Exact registry name; mutually exclusive with `icon` |
+| `icon` | `IconRecord` | — | Imported SVG data; mutually exclusive with `name` |
+| `variant` | `"outline" \| "solid"` | `"outline"` | Artwork variant; `line` is not supported |
+| `size` | `IconSize \| number` | `"md"` | Preset or custom pixel size |
+| `color` | `string` | `"currentColor"` | CSS color; inherits text color by default |
+| `className` | `string` | — | Additional classes, including semantic text colors |
 
-{/* Or use Tailwind classes */}
-<Icon name="bell" className="text-primary-400" />
-```
-
-### In Buttons and Inputs
-
-Many Rayden UI components accept icon names directly:
-
-```tsx
-<Button icon="plus" iconPosition="leading">
-  Add Item
-</Button>
-
-<Input leadingIcon="search" placeholder="Search..." />
-
-<Tab value="home" icon="home">Home</Tab>
-```
-
-## API Reference
-
-### IconProps
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `name` | `IconName` | — | Icon name from the registry (required) |
-| `size` | `IconSize \| number` | `"md"` | Preset size or pixel value |
-| `color` | `string` | `"currentColor"` | SVG color via CSS `color` |
-| `variant` | `IconVariant` | `"outline"` | `"outline"` or `"solid"` |
-| `className` | `string` | — | Additional CSS classes |
-
-### IconSize
-
-```ts
-type IconSize = "xs" | "sm" | "md" | "lg" | "xl";
-```
-
-| Size | Pixels |
-|------|--------|
-| `xs` | 12px |
-| `sm` | 16px |
-| `md` | 20px |
-| `lg` | 24px |
-| `xl` | 32px |
-
-### IconVariant
-
-```ts
-type IconVariant = "outline" | "solid";
-```
-
-## Available Icons
-
-The library includes 200+ icons organized by category:
-
-**Navigation:** `home`, `arrow-left`, `arrow-right`, `arrow-up`, `arrow-down`, `chevron-left`, `chevron-right`, `chevron-up`, `chevron-down`, `menu`, `more-horizontal`, `more-vertical`
-
-**Actions:** `plus`, `minus`, `multiply`, `check`, `edit`, `trash`, `copy`, `download`, `upload`, `search`, `filter`, `refresh`
-
-**Communication:** `mail`, `phone`, `message`, `bell`, `send`, `inbox`
-
-**Media:** `image`, `video`, `music`, `camera`, `play`, `pause`, `stop`
-
-**Files:** `file`, `folder`, `document`, `archive`, `attachment`
-
-**Users:** `user`, `users`, `user-plus`, `user-minus`
-
-**Status:** `info`, `warning`, `error`, `success`, `help`
-
-**UI:** `settings`, `calendar`, `clock`, `star`, `heart`, `bookmark`, `lock`, `unlock`, `eye`, `eye-off`
-
-See Storybook for the complete icon gallery.
+Preset sizes are `xs` = 12px, `sm` = 16px, `md` = 20px, `lg` = 24px, and `xl` = 32px. Use `size={40}` or `size={48}` for larger sizes; `2xl` and `3xl` are not preset names. Native SVG attributes and refs are forwarded.
 
 ## Accessibility
 
-- Icons have `aria-hidden="true"` by default since they're decorative
-- When using icons alone (without text), provide an accessible label via `aria-label`
+Icons are decorative by default (`aria-hidden="true"`). Label the action on its button or link:
 
 ```tsx
-<button aria-label="Close dialog">
-  <Icon name="multiply" />
-</button>
+<Button icon="multiply" iconPosition="icon-only" aria-label="Close dialog" />
 ```
+
+For a standalone icon that communicates meaning, explicitly expose and name it:
+
+```tsx
+<Icon icon={checkIcon} aria-hidden={false} role="img" aria-label="Completed" />
+```
+
+An `aria-label` alone does not override the default `aria-hidden`. Use a real button or link for interactive icons.

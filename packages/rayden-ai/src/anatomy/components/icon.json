@@ -2,8 +2,7 @@
   "$schema": "../schema.json",
   "name": "Icon",
   "figmaName": "Icon",
-  "description": "Scalable icon component with 200+ icons in outline and solid variants.",
-
+  "description": "SVG icon renderer with outline and solid artwork. Runtime preset sizes are xs, sm, md, lg, xl; larger sizes use numeric pixels.",
   "anatomy": {
     "root": {
       "type": "FRAME",
@@ -18,7 +17,6 @@
       "fill": "{color.grey.600}"
     }
   },
-
   "sizes": {
     "XS": {
       "root.width": 12,
@@ -39,17 +37,8 @@
     "XL": {
       "root.width": 32,
       "root.height": 32
-    },
-    "2XL": {
-      "root.width": 40,
-      "root.height": 40
-    },
-    "3XL": {
-      "root.width": 48,
-      "root.height": 48
     }
   },
-
   "variants": {
     "Outline": {
       "Default": {
@@ -65,13 +54,12 @@
       }
     }
   },
-
   "componentProperties": [
     {
       "name": "Size",
       "type": "VARIANT",
-      "values": ["XS", "SM", "MD", "LG", "XL", "2XL", "3XL"],
-      "default": "LG"
+      "values": ["XS", "SM", "MD", "LG", "XL"],
+      "default": "MD"
     },
     {
       "name": "Style",

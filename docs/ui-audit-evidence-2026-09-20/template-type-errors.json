@@ -1,0 +1,98 @@
+[
+  {
+    "file": "packages/create-rayden-app/templates/vite/landing/typescript/src/components/Features.tsx",
+    "line": 57,
+    "code": 2322,
+    "message": "Type '\"code\" | \"download\" | \"grid\" | \"moon\" | \"palette\" | \"monitor\"' is not assignable to type 'IconName | undefined'.   Type '\"monitor\"' is not assignable to type 'IconName | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/vite/dashboard/typescript/src/pages/Dashboard.tsx",
+    "line": 13,
+    "code": 2322,
+    "message": "Type 'number' is not assignable to type 'MetricsCardVariation | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/vite/dashboard/typescript/src/pages/Dashboard.tsx",
+    "line": 23,
+    "code": 2322,
+    "message": "Type 'number' is not assignable to type 'MetricsCardVariation | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/vite/dashboard/typescript/src/pages/Dashboard.tsx",
+    "line": 33,
+    "code": 2322,
+    "message": "Type 'number' is not assignable to type 'MetricsCardVariation | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/vite/dashboard/typescript/src/pages/Settings.tsx",
+    "line": 40,
+    "code": 2322,
+    "message": "Type 'Dispatch<SetStateAction<boolean>>' is not assignable to type 'ChangeEventHandler<HTMLInputElement, HTMLInputElement>'.   Types of parameters 'value' and 'event' are incompatible.     Type 'ChangeEvent<HTMLInputElement, HTMLInputElement>' is not assignable to type 'SetStateAction<boolean>'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/vite/dashboard/typescript/src/pages/Settings.tsx",
+    "line": 47,
+    "code": 2322,
+    "message": "Type 'Dispatch<SetStateAction<boolean>>' is not assignable to type 'ChangeEventHandler<HTMLInputElement, HTMLInputElement>'.   Types of parameters 'value' and 'event' are incompatible.     Type 'ChangeEvent<HTMLInputElement, HTMLInputElement>' is not assignable to type 'SetStateAction<boolean>'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/vite/ecommerce/typescript/src/pages/Checkout.tsx",
+    "line": 81,
+    "code": 2322,
+    "message": "Type '{ children: Element[]; required: true; }' is not assignable to type 'IntrinsicAttributes & SelectProps & RefAttributes<HTMLDivElement>'.   Property 'required' does not exist on type 'IntrinsicAttributes & SelectProps & RefAttributes<HTMLDivElement>'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/vite/ecommerce/typescript/src/pages/Products.tsx",
+    "line": 51,
+    "code": 2339,
+    "message": "Property 'value' does not exist on type 'EventTarget & HTMLDivElement'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/landing/typescript/components/Features.tsx",
+    "line": 59,
+    "code": 2322,
+    "message": "Type '\"code\" | \"download\" | \"grid\" | \"moon\" | \"palette\" | \"monitor\"' is not assignable to type 'IconName | undefined'.   Type '\"monitor\"' is not assignable to type 'IconName | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/dashboard/typescript/app/dashboard/page.tsx",
+    "line": 13,
+    "code": 2322,
+    "message": "Type 'number' is not assignable to type 'MetricsCardVariation | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/dashboard/typescript/app/dashboard/page.tsx",
+    "line": 23,
+    "code": 2322,
+    "message": "Type 'number' is not assignable to type 'MetricsCardVariation | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/dashboard/typescript/app/dashboard/page.tsx",
+    "line": 33,
+    "code": 2322,
+    "message": "Type 'number' is not assignable to type 'MetricsCardVariation | undefined'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/dashboard/typescript/app/settings/page.tsx",
+    "line": 42,
+    "code": 2322,
+    "message": "Type 'Dispatch<SetStateAction<boolean>>' is not assignable to type 'ChangeEventHandler<HTMLInputElement, HTMLInputElement>'.   Types of parameters 'value' and 'event' are incompatible.     Type 'ChangeEvent<HTMLInputElement, HTMLInputElement>' is not assignable to type 'SetStateAction<boolean>'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/dashboard/typescript/app/settings/page.tsx",
+    "line": 49,
+    "code": 2322,
+    "message": "Type 'Dispatch<SetStateAction<boolean>>' is not assignable to type 'ChangeEventHandler<HTMLInputElement, HTMLInputElement>'.   Types of parameters 'value' and 'event' are incompatible.     Type 'ChangeEvent<HTMLInputElement, HTMLInputElement>' is not assignable to type 'SetStateAction<boolean>'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/ecommerce/typescript/app/checkout/page.tsx",
+    "line": 84,
+    "code": 2322,
+    "message": "Type '{ children: Element[]; required: true; }' is not assignable to type 'IntrinsicAttributes & SelectProps & RefAttributes<HTMLDivElement>'.   Property 'required' does not exist on type 'IntrinsicAttributes & SelectProps & RefAttributes<HTMLDivElement>'."
+  },
+  {
+    "file": "packages/create-rayden-app/templates/nextjs/ecommerce/typescript/app/products/page.tsx",
+    "line": 53,
+    "code": 2339,
+    "message": "Property 'value' does not exist on type 'EventTarget & HTMLDivElement'."
+  }
+]

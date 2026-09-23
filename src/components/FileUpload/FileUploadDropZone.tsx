@@ -16,6 +16,7 @@ export interface FileUploadDropZoneProps extends HTMLAttributes<HTMLDivElement> 
   accept?: string;
   /** Allow multiple files */
   multiple?: boolean;
+  disabled?: boolean;
   /** File info for uploading state */
   uploadingFile?: { name: string; type: string; progress: number };
   /** Error message for error state */
@@ -36,6 +37,7 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
       description,
       accept,
       multiple = false,
+      disabled = false,
       uploadingFile,
       errorMessage,
       onFilesSelected,
@@ -56,7 +58,9 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
         ? "dragging"
         : (controlledState ?? "default");
 
-    const handleBrowse = () => inputRef.current?.click();
+    const handleBrowse = () => {
+      if (!disabled) inputRef.current?.click();
+    };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files.length > 0) {
@@ -88,11 +92,11 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
         e.preventDefault();
         e.stopPropagation();
         setDragCounter(0);
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        if (!disabled && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
           onFilesSelected?.(e.dataTransfer.files);
         }
       },
-      [onFilesSelected]
+      [onFilesSelected, disabled]
     );
 
     return (
@@ -101,12 +105,12 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
         role="region"
         aria-label="File upload dropzone"
         className={cn(
-          "flex flex-col items-center justify-center rounded-xl p-8 transition-colors",
+          "flex flex-col items-center justify-center rounded-xl p-4 sm:p-8 transition-colors",
           state === "dragging"
             ? "border-2 border-dashed border-primary-400 bg-primary-50/10"
             : state === "uploading" || state === "success" || state === "error"
-              ? "border border-grey-200 bg-white dark:bg-grey-50"
-              : "border-2 border-dashed border-grey-300 bg-white dark:bg-grey-50",
+              ? "border border-grey-200 bg-surface"
+              : "border-2 border-dashed border-control-border bg-surface",
           className
         )}
         onDragEnter={handleDragEnter}
@@ -121,6 +125,7 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
           type="file"
           accept={accept}
           multiple={multiple}
+          disabled={disabled}
           onChange={handleFileChange}
           className="sr-only"
           tabIndex={-1}
@@ -132,12 +137,20 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
           <div className="flex flex-col items-center gap-4">
             <UploadStateIcon state="default" size={56} aria-hidden="true" />
             <div className="flex flex-col items-center gap-1">
-              <p className="text-body-sm font-medium text-grey-600">
-                Click to upload <span className="text-grey-400">or drag and drop</span>
+              <p className="text-body-sm font-medium text-on-surface-secondary">
+                Click to upload <span className="text-on-surface-secondary">or drag and drop</span>
               </p>
-              {description && <p className="text-body-xs text-grey-400">{description}</p>}
+              {description && (
+                <p className="text-body-xs text-on-surface-secondary">{description}</p>
+              )}
             </div>
-            <Button variant="primary" size="sm" onClick={handleBrowse}>
+            <Button
+              type="button"
+              disabled={disabled}
+              variant="primary"
+              size="sm"
+              onClick={handleBrowse}
+            >
               Browse Files
             </Button>
           </div>
@@ -153,17 +166,22 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
             <FileTypeIcon type={getFileType(uploadingFile.name)} aria-hidden="true" />
             <div className="flex w-full max-w-xs flex-col gap-2">
               <div className="flex items-center justify-between">
-                <span className="text-body-sm font-medium text-grey-700 truncate">
+                <span className="text-body-sm font-medium text-on-surface-body truncate">
                   {uploadingFile.name}
                 </span>
                 <span
-                  className="text-body-xs font-medium text-grey-500 ml-2 shrink-0"
+                  className="text-body-xs font-medium text-on-surface-muted ml-2 shrink-0"
                   aria-label={`Upload progress: ${Math.round(uploadingFile.progress)} percent`}
                 >
                   {Math.round(uploadingFile.progress)}%
                 </span>
               </div>
-              <ProgressBar value={uploadingFile.progress} size="sm" showPercentage={false} />
+              <ProgressBar
+                value={uploadingFile.progress}
+                size="sm"
+                showPercentage={false}
+                aria-label={`Uploading ${uploadingFile.name}`}
+              />
             </div>
           </div>
         )}
@@ -193,7 +211,9 @@ export const FileUploadDropZone = forwardRef<HTMLDivElement, FileUploadDropZoneP
             <UploadStateIcon state="error" size={56} aria-hidden="true" />
             <div className="flex flex-col items-center gap-1">
               <p className="text-body-sm font-semibold text-grey-800">Failed to Upload</p>
-              {errorMessage && <p className="text-body-xs text-grey-400">{errorMessage}</p>}
+              {errorMessage && (
+                <p className="text-body-xs text-on-surface-secondary">{errorMessage}</p>
+              )}
             </div>
             <button
               type="button"

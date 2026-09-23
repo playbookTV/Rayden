@@ -5,6 +5,7 @@ import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../components/Table";
 import type { SortDirection } from "../components/Table";
+import { useTableSelection } from "../components/Table/useTableSelection";
 import { Checkbox } from "../components/FormControl";
 import { Pagination } from "../components/Pagination";
 
@@ -33,19 +34,46 @@ export interface SearchableTableBlockProps {
   rows: SearchableTableRow[];
   /** Search input placeholder */
   searchPlaceholder?: string;
-  /** Called when search value changes */
+  /**
+   * Called when the search value changes. Supplying this puts search under your
+   * control: the block stops filtering `rows` itself and renders exactly what you
+   * pass. Omit it and the block filters `rows` locally.
+   */
   onSearch?: (query: string) => void;
-  /** Show filter button */
+  /**
+   * Called when a sortable header is activated. Supplying this puts ordering under
+   * your control: the block only renders the indicator and expects you to reorder
+   * `rows`. Omit it and the block sorts `rows` locally.
+   */
+  onSort?: (key: string, direction: SortDirection) => void;
+  /** Title-variant toolbar: search action. The button renders only when supplied. */
+  onSearchClick?: () => void;
+  /** Title-variant toolbar: sort action. The button renders only when supplied. */
+  onSortClick?: () => void;
+  /**
+   * Hide the filter button. It appears whenever `onFilter` is supplied; setting this
+   * `true` without a handler does not bring it back, because the block does not render a
+   * control that has nowhere to go.
+   */
   showFilter?: boolean;
-  /** Filter click handler */
+  /** Filter click handler. Required for the filter button to appear. */
   onFilter?: () => void;
-  /** Show date selector button */
+  /**
+   * Hide the date selector. It appears whenever `onDateSelect` is supplied; setting this
+   * `true` without a handler does not bring it back.
+   */
   showDateSelector?: boolean;
-  /** Date selector click handler */
+  /** Date selector click handler. Required for the date selector to appear. */
   onDateSelect?: () => void;
   /** Enable row selection checkboxes */
   selectable?: boolean;
-  /** Selection change handler */
+  /**
+   * Controlled selection. Supply it to own selection yourself — the only way to keep a
+   * selection across pages, or across a filter you apply outside the block, since the
+   * block otherwise drops ids that leave `rows`. See `useTableSelection`.
+   */
+  selectedIds?: string[];
+  /** Fired on user interaction with the full resulting selection. */
   onSelectionChange?: (ids: string[]) => void;
   /** Row kebab menu action handler */
   onRowAction?: (rowId: string) => void;
@@ -66,7 +94,7 @@ function KebabButton({ onClick, rowLabel }: { onClick?: () => void; rowLabel?: s
       type="button"
       onClick={onClick}
       aria-label={rowLabel ? `More actions for ${rowLabel}` : "More actions"}
-      className="flex items-center justify-center size-8 rounded-md hover:bg-grey-50 text-grey-400"
+      className="flex items-center justify-center size-8 rounded-md hover:bg-grey-50 text-grey-500"
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <circle cx="8" cy="3" r="1.5" fill="currentColor" />
@@ -84,11 +112,15 @@ export function SearchableTableBlock({
   rows,
   searchPlaceholder = "Search here...",
   onSearch,
-  showFilter = true,
+  onSort,
+  onSearchClick,
+  onSortClick,
+  showFilter,
   onFilter,
-  showDateSelector = false,
+  showDateSelector,
   onDateSelect,
   selectable = false,
+  selectedIds,
   onSelectionChange,
   onRowAction,
   page,
@@ -99,7 +131,6 @@ export function SearchableTableBlock({
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
   // ─── Handlers ────────────────────────────────────────────────────
   const handleSearch = (value: string) => {
@@ -108,48 +139,81 @@ export function SearchableTableBlock({
   };
 
   const handleSort = (key: string) => {
+    let nextKey: string | null = key;
+    let nextDirection: SortDirection;
     if (sortKey === key) {
-      const next: SortDirection =
-        sortDirection === "asc" ? "desc" : sortDirection === "desc" ? null : "asc";
-      setSortDirection(next);
-      if (next === null) setSortKey(null);
+      nextDirection = sortDirection === "asc" ? "desc" : sortDirection === "desc" ? null : "asc";
+      if (nextDirection === null) nextKey = null;
     } else {
-      setSortKey(key);
-      setSortDirection("asc");
+      nextDirection = "asc";
     }
+    setSortKey(nextKey);
+    setSortDirection(nextDirection);
+    onSort?.(key, nextDirection);
   };
 
-  const allSelected = rows.length > 0 && selectedIds.size === rows.length;
+  // Previously the indicator moved but the rows never did, so the table announced an
+  // order it was not in. Unless the consumer takes control via onSearch / onSort, do
+  // the filtering and ordering here so indicator and content always agree.
+  const searched =
+    onSearch || !searchQuery
+      ? rows
+      : rows.filter((row) =>
+          columns.some((col) =>
+            String(row[col.key] ?? "")
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+          )
+        );
 
-  const toggleAll = () => {
-    const next = allSelected ? new Set<string>() : new Set(rows.map((r) => r.id));
-    setSelectedIds(next);
-    onSelectionChange?.([...next]);
-  };
+  const visibleRows =
+    onSort || !sortKey || !sortDirection
+      ? searched
+      : [...searched].sort((a, b) => {
+          const left = a[sortKey];
+          const right = b[sortKey];
+          if (left == null && right == null) return 0;
+          if (left == null) return 1;
+          if (right == null) return -1;
+          const result =
+            typeof left === "number" && typeof right === "number"
+              ? left - right
+              : String(left).localeCompare(String(right), undefined, { numeric: true });
+          return sortDirection === "asc" ? result : -result;
+        });
 
-  const toggleRow = (id: string) => {
-    const next = new Set(selectedIds);
-    if (next.has(id)) next.delete(id);
-    else next.add(id);
-    setSelectedIds(next);
-    onSelectionChange?.([...next]);
-  };
+  // `dataIds` is the whole data set and `scopeIds` only the rows on screen, so locally
+  // filtering or sorting keeps a hidden row's selection while the header still reports
+  // the visible rows. Rows the consumer removes from `rows` are dropped.
+  const selection = useTableSelection({
+    dataIds: rows.map((row) => row.id),
+    scopeIds: visibleRows.map((row) => row.id),
+    selectedIds,
+    onSelectionChange,
+  });
+
+  // Every visible control needs somewhere to go: a toolbar button with no handler is
+  // dead, so presence of the handler is what makes it available.
+  const filterAvailable = Boolean(onFilter) && showFilter !== false;
+  const dateSelectorAvailable = Boolean(onDateSelect) && showDateSelector !== false;
 
   // ─── Toolbar ─────────────────────────────────────────────────────
   const toolbar = title ? (
     /* Title variant toolbar */
-    <div className="flex items-center justify-between pb-5">
-      <h3 className="text-xl font-semibold text-grey-900">{title}</h3>
-      <div className="flex items-center gap-4">
-        <button
-          type="button"
-          onClick={() => {}}
-          className="flex items-center gap-1 text-sm text-grey-500 hover:text-grey-700"
-        >
-          <Icon name="search" size="xs" />
-          <span>Search</span>
-        </button>
-        {showFilter && (
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pb-5">
+      <h3 className="min-w-0 text-xl font-semibold text-grey-900">{title}</h3>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        {onSearchClick && (
+          <button
+            type="button"
+            onClick={onSearchClick}
+            className="flex items-center gap-1 text-sm text-grey-500 hover:text-grey-700"
+          >
+            <Icon name="search" size="xs" />
+            <span>Search</span>
+          </button>
+        )}
+        {filterAvailable && (
           <button
             type="button"
             onClick={onFilter}
@@ -159,29 +223,31 @@ export function SearchableTableBlock({
             <span>Filter</span>
           </button>
         )}
-        <button
-          type="button"
-          onClick={() => {}}
-          className="flex items-center gap-1 text-sm text-grey-500 hover:text-grey-700"
-        >
-          <Icon name="chevron-v" size="xs" />
-          <span>Sort</span>
-        </button>
+        {onSortClick && (
+          <button
+            type="button"
+            onClick={onSortClick}
+            className="flex items-center gap-1 text-sm text-grey-500 hover:text-grey-700"
+          >
+            <Icon name="chevron-v" size="xs" />
+            <span>Sort</span>
+          </button>
+        )}
       </div>
     </div>
   ) : (
     /* Search variant toolbar */
-    <div className="flex items-center justify-between p-4 gap-3">
-      <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center justify-between gap-3 p-4">
+      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
         <Input
           size="sm"
           placeholder={searchPlaceholder}
           leadingIcon="search"
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
-          wrapperClassName="w-[260px]"
+          wrapperClassName="w-full min-w-0 sm:w-[260px]"
         />
-        {showFilter && (
+        {filterAvailable && (
           <Button
             variant="grey"
             appearance="outlined"
@@ -194,7 +260,7 @@ export function SearchableTableBlock({
           </Button>
         )}
       </div>
-      {showDateSelector && (
+      {dateSelectorAvailable && (
         <Button
           variant="grey"
           appearance="outlined"
@@ -220,8 +286,9 @@ export function SearchableTableBlock({
             {selectable && (
               <TableHead className="w-[52px]">
                 <Checkbox
-                  checked={allSelected || selectedIds.size > 0}
-                  onChange={toggleAll}
+                  checked={selection.allSelected}
+                  indeterminate={selection.someSelected}
+                  onChange={selection.toggleAll}
                   aria-label="Select all rows"
                 />
               </TableHead>
@@ -237,19 +304,23 @@ export function SearchableTableBlock({
                 {col.label}
               </TableHead>
             ))}
-            {onRowAction && <TableHead className="w-[60px]" />}
+            {onRowAction && (
+              <TableHead className="w-[60px]">
+                <span className="sr-only">Actions</span>
+              </TableHead>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row) => {
+          {visibleRows.map((row) => {
             const rowLabel = columns[0] ? String(row[columns[0].key] ?? row.id) : row.id;
             return (
-              <TableRow key={row.id} selected={selectedIds.has(row.id)}>
+              <TableRow key={row.id} selected={selection.isSelected(row.id)}>
                 {selectable && (
                   <TableCell>
                     <Checkbox
-                      checked={selectedIds.has(row.id)}
-                      onChange={() => toggleRow(row.id)}
+                      checked={selection.isSelected(row.id)}
+                      onChange={() => selection.toggleRow(row.id)}
                       aria-label={`Select ${rowLabel}`}
                     />
                   </TableCell>

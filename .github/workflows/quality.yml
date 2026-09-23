@@ -1,0 +1,44 @@
+name: Component quality
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm typecheck
+      - run: pnpm exec vitest run
+      - run: pnpm build
+      - run: pnpm check:pilots
+      - run: pnpm check:bundle
+      - run: pnpm check:docs
+      - run: pnpm check:consumer
+      - run: pnpm docs:build
+      - run: pnpm check:docs-payload
+      - name: Verify installed registry blocks
+        run: |
+          package_tarball=$(npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP" --silent)
+          pnpm registry:smoke --tarball "$RUNNER_TEMP/$package_tarball"
+      - name: Verify connected guidance in a browser
+        run: |
+          pnpm --filter @raydenui/docs exec next start --port 3001 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:3001/ai-integration > /dev/null; then break; fi
+            sleep 1
+          done
+          pnpm check:guidance:browser

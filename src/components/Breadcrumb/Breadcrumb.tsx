@@ -1,7 +1,7 @@
-import { type HTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 export type BreadcrumbSeparator = "chevron" | "double-chevron" | "slash";
 
@@ -9,7 +9,7 @@ export interface BreadcrumbItem {
   /** Display label (use "..." for truncated items) */
   label: string;
   href?: string;
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   disabled?: boolean;
   active?: boolean;
 }

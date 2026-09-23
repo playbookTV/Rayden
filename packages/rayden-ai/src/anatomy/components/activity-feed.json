@@ -6,7 +6,6 @@
   "$relationships": {
     "depends_on": ["Avatar", "Icon", "Badge"]
   },
-
   "anatomy": {
     "root": {
       "type": "FRAME",
@@ -130,47 +129,15 @@
       "defaultVisible": false
     }
   },
-
   "variants": {
     "Default": {
       "Default": {
         "indicator-icon.fill": "{color.grey.100}",
         "icon.fill": "{color.grey.500}"
       }
-    },
-    "Success": {
-      "Default": {
-        "indicator-icon.fill": "{color.success.100}",
-        "icon.fill": "{color.success.600}"
-      }
-    },
-    "Warning": {
-      "Default": {
-        "indicator-icon.fill": "{color.warning.100}",
-        "icon.fill": "{color.warning.600}"
-      }
-    },
-    "Error": {
-      "Default": {
-        "indicator-icon.fill": "{color.error.100}",
-        "icon.fill": "{color.error.600}"
-      }
-    },
-    "Info": {
-      "Default": {
-        "indicator-icon.fill": "{color.info.100}",
-        "icon.fill": "{color.info.600}"
-      }
     }
   },
-
   "componentProperties": [
-    {
-      "name": "Type",
-      "type": "VARIANT",
-      "values": ["Default", "Success", "Warning", "Error", "Info"],
-      "default": "Default"
-    },
     {
       "name": "Show Avatar",
       "type": "BOOLEAN",
@@ -186,5 +153,10 @@
       "type": "BOOLEAN",
       "default": true
     }
+  ],
+  "implementationNotes": [
+    "ActivityFeed is a design family; the public exports are ActivityItem and ActivityContent.",
+    "The former Success/Warning/Error/Info status variants had no matching runtime prop and have been removed. Custom avatar/icon content is supplied through the supported slots.",
+    "Show Avatar/Body/Connector are Figma visibility controls; consult the canonical export contract for React props."
   ]
 }

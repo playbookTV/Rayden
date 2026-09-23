@@ -85,7 +85,7 @@ export const FileItemStates: StoryObj = {
     ];
 
     return (
-      <div className="flex w-[450px] flex-col rounded-lg border border-grey-200 px-4">
+      <div className="flex w-full max-w-[450px] flex-col rounded-lg border border-grey-200 px-4">
         {files.map((file) => (
           <FileUploadItem
             key={file.id}
@@ -106,9 +106,9 @@ export const SingleFileUpload: StoryObj = {
     const SingleUpload = () => {
       const [files, setFiles] = useState<FileUploadFileData[]>([]);
 
-      const handleUpload = (file: File) => {
+      const handleUpload = (file: File, item: FileUploadFileData) => {
         const newFile: FileUploadFileData = {
-          id: crypto.randomUUID(),
+          id: item.id,
           name: file.name,
           size: file.size,
           type: file.type,
@@ -138,7 +138,7 @@ export const SingleFileUpload: StoryObj = {
       };
 
       return (
-        <div className="w-[400px]">
+        <div className="w-full max-w-[400px]">
           <FileUpload
             files={files}
             onFilesChange={setFiles}
@@ -185,16 +185,16 @@ export const MultipleFileUpload: StoryObj = {
         },
       ]);
 
-      const handleUpload = (file: File) => {
+      const handleUpload = (file: File, item: FileUploadFileData) => {
         const newFile: FileUploadFileData = {
-          id: crypto.randomUUID(),
+          id: item.id,
           name: file.name,
           size: file.size,
           type: file.type,
           status: "uploading",
           progress: 0,
         };
-        setFiles((prev) => [...prev, newFile]);
+        setFiles((prev) => prev.map((f) => (f.id === item.id ? newFile : f)));
 
         // Simulate upload
         let progress = 0;
@@ -220,7 +220,7 @@ export const MultipleFileUpload: StoryObj = {
       };
 
       return (
-        <div className="w-[500px]">
+        <div className="w-full max-w-[500px]">
           <FileUpload
             multiple
             showHeader

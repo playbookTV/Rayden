@@ -1,0 +1,779 @@
+[
+  {
+    "file": "packages/docs/content/blocks/index.mdx",
+    "line": 69,
+    "tag": "TableBlock",
+    "prop": "title",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/index.mdx",
+    "line": 70,
+    "tag": "TableBlock",
+    "prop": "columns",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/login-block.mdx",
+    "line": 66,
+    "tag": "LoginBlock",
+    "prop": "onSocialLogin",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 28,
+    "tag": "SearchableTableBlock",
+    "prop": "data",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 30,
+    "tag": "SearchableTableBlock",
+    "prop": "onSort",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 45,
+    "tag": "SearchableTableBlock",
+    "prop": "data",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 47,
+    "tag": "SearchableTableBlock",
+    "prop": "filters",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 59,
+    "tag": "SearchableTableBlock",
+    "prop": "onFilterChange",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 83,
+    "tag": "SearchableTableBlock",
+    "prop": "data",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 78,
+    "tag": "Button",
+    "prop": "destructive",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 96,
+    "tag": "SearchableTableBlock",
+    "prop": "data",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/searchable-table-block.mdx",
+    "line": 98,
+    "tag": "SearchableTableBlock",
+    "prop": "pagination",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 20,
+    "tag": "TableBlock",
+    "prop": "title",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 21,
+    "tag": "TableBlock",
+    "prop": "description",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 22,
+    "tag": "TableBlock",
+    "prop": "columns",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 37,
+    "tag": "TableBlock",
+    "prop": "onRowClick",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 47,
+    "tag": "TableBlock",
+    "prop": "title",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 48,
+    "tag": "TableBlock",
+    "prop": "columns",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 53,
+    "tag": "TableBlock",
+    "prop": "pagination",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 65,
+    "tag": "TableBlock",
+    "prop": "title",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 66,
+    "tag": "TableBlock",
+    "prop": "description",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/blocks/table-block.mdx",
+    "line": 67,
+    "tag": "TableBlock",
+    "prop": "columns",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 45,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 53,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 88,
+    "tag": "ActivityItem",
+    "prop": "icon",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 89,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 96,
+    "tag": "ActivityItem",
+    "prop": "icon",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 97,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 96,
+    "tag": "Icon",
+    "prop": "name",
+    "value": "alert-circle",
+    "allowed": "IconName | undefined",
+    "issue": "unsupported value"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 130,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 131,
+    "tag": "ActivityItem",
+    "prop": "actions",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 162,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 165,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/activity-feed.mdx",
+    "line": 168,
+    "tag": "ActivityItem",
+    "prop": "timestamp",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/alert.mdx",
+    "line": 101,
+    "tag": "Alert",
+    "prop": "actions",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/alert.mdx",
+    "line": 119,
+    "tag": "Alert",
+    "prop": "onDismiss",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/avatar.mdx",
+    "line": 82,
+    "tag": "Avatar",
+    "prop": "status",
+    "value": "busy",
+    "allowed": "AvatarStatus | undefined",
+    "issue": "unsupported value"
+  },
+  {
+    "file": "packages/docs/content/components/avatar.mdx",
+    "line": 83,
+    "tag": "Avatar",
+    "prop": "status",
+    "value": "away",
+    "allowed": "AvatarStatus | undefined",
+    "issue": "unsupported value"
+  },
+  {
+    "file": "packages/docs/content/components/badge.mdx",
+    "line": 77,
+    "tag": "Badge",
+    "prop": "dot",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/badge.mdx",
+    "line": 78,
+    "tag": "Badge",
+    "prop": "dot",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/badge.mdx",
+    "line": 90,
+    "tag": "Tab",
+    "prop": "label",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/button-group.mdx",
+    "line": 77,
+    "tag": "ButtonGroupItem",
+    "prop": "icon",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/button-group.mdx",
+    "line": 80,
+    "tag": "ButtonGroupItem",
+    "prop": "icon",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/card.mdx",
+    "line": 138,
+    "tag": "Icon",
+    "prop": "name",
+    "value": "dots-horizontal",
+    "allowed": "IconName | undefined",
+    "issue": "unsupported value"
+  },
+  {
+    "file": "packages/docs/content/components/chip.mdx",
+    "line": 68,
+    "tag": "Chip",
+    "prop": "focused",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/chip.mdx",
+    "line": 83,
+    "tag": "Chip",
+    "prop": "avatar",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/divider.mdx",
+    "line": 82,
+    "tag": "Divider",
+    "prop": "buttonText",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/divider.mdx",
+    "line": 102,
+    "tag": "Divider",
+    "prop": "orientation",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/divider.mdx",
+    "line": 104,
+    "tag": "Divider",
+    "prop": "orientation",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 25,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 39,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 40,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 41,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 42,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 54,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 55,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 56,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 67,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 68,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 83,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 84,
+    "tag": "EmptyStateIllustration",
+    "prop": "primaryColor",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 85,
+    "tag": "EmptyStateIllustration",
+    "prop": "secondaryColor",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 98,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 99,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 100,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/empty-state-illustration.mdx",
+    "line": 116,
+    "tag": "EmptyStateIllustration",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/icon.mdx",
+    "line": 92,
+    "tag": "Icon",
+    "prop": "name",
+    "value": "x-circle",
+    "allowed": "IconName | undefined",
+    "issue": "unsupported value"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 33,
+    "tag": "MetricsCard",
+    "prop": "change",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 34,
+    "tag": "MetricsCard",
+    "prop": "changeType",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 65,
+    "tag": "MetricsCard",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 68,
+    "tag": "MetricsCard",
+    "prop": "change",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 69,
+    "tag": "MetricsCard",
+    "prop": "changeType",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 74,
+    "tag": "MetricsCard",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 77,
+    "tag": "MetricsCard",
+    "prop": "change",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 78,
+    "tag": "MetricsCard",
+    "prop": "changeType",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 83,
+    "tag": "MetricsCard",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 102,
+    "tag": "MetricsCard",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 105,
+    "tag": "Icon",
+    "prop": "name",
+    "value": "currency-dollar",
+    "allowed": "IconName | undefined",
+    "issue": "unsupported value"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 122,
+    "tag": "MetricsCard",
+    "prop": "variant",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 125,
+    "tag": "MetricsCard",
+    "prop": "progress",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 152,
+    "tag": "MetricsCard",
+    "prop": "change",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 153,
+    "tag": "MetricsCard",
+    "prop": "changeType",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 154,
+    "tag": "MetricsCard",
+    "prop": "trend",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 160,
+    "tag": "MetricsCard",
+    "prop": "change",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 161,
+    "tag": "MetricsCard",
+    "prop": "changeType",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 162,
+    "tag": "MetricsCard",
+    "prop": "trend",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 181,
+    "tag": "MetricsCard",
+    "prop": "subtitle",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 183,
+    "tag": "MetricsCard",
+    "prop": "change",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/metrics-card.mdx",
+    "line": 184,
+    "tag": "MetricsCard",
+    "prop": "changeType",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/select.mdx",
+    "line": 123,
+    "tag": "SelectOption",
+    "prop": "status",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/select.mdx",
+    "line": 126,
+    "tag": "SelectOption",
+    "prop": "status",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/select.mdx",
+    "line": 129,
+    "tag": "SelectOption",
+    "prop": "status",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 22,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 25,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 28,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 39,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 42,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 48,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 51,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 62,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 65,
+    "tag": "SidebarMenuSub",
+    "prop": "icon",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 65,
+    "tag": "SidebarMenuSub",
+    "prop": "label",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 66,
+    "tag": "SidebarMenuSubItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 67,
+    "tag": "SidebarMenuSubItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 68,
+    "tag": "SidebarMenuSubItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 77,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 80,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 92,
+    "tag": "SidebarMenuItem",
+    "prop": "href",
+    "issue": "unsupported prop"
+  },
+  {
+    "file": "packages/docs/content/components/sidebar-menu.mdx",
+    "line": 112,
+    "tag": "SidebarMenu",
+    "prop": "theme",
+    "value": "dark",
+    "allowed": "SidebarMenuTheme | undefined",
+    "issue": "unsupported value"
+  }
+]

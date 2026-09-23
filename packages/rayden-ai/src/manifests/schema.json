@@ -8,7 +8,7 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "Exact component name as exported from @raydenui/ui"
+      "description": "Canonical component or family identity; use generated exportNames and importPath for actual imports."
     },
     "displayName": {
       "type": "string",
@@ -20,7 +20,15 @@
     },
     "category": {
       "type": "string",
-      "enum": ["primitives", "inputs", "feedback", "navigation", "data-display", "composite"],
+      "enum": [
+        "primitives",
+        "inputs",
+        "feedback",
+        "navigation",
+        "data-display",
+        "composite",
+        "layout"
+      ],
       "description": "Component category for organization"
     },
     "importPath": {
@@ -44,7 +52,9 @@
     },
     "sizes": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Available size values if component has size prop"
     },
     "slots": {
@@ -79,7 +89,9 @@
     },
     "examples": {
       "type": "array",
-      "items": { "$ref": "#/definitions/example" },
+      "items": {
+        "$ref": "#/definitions/example"
+      },
       "description": "Usage examples with code"
     }
   },
@@ -100,7 +112,8 @@
             "union",
             "object",
             "IconName",
-            "array"
+            "array",
+            "Date"
           ],
           "description": "Prop type"
         },
@@ -143,7 +156,9 @@
         },
         "accepts": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Component names that can fill this slot"
         }
       }
@@ -162,7 +177,9 @@
         },
         "accepts": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Specific component names accepted as children"
         },
         "description": {
@@ -198,27 +215,37 @@
       "properties": {
         "mustBeChildOf": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Parent components this must be a child of"
         },
         "mustContain": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Components that must be children"
         },
         "canContain": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Components that can be children"
         },
         "relatedComponents": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Related components commonly used together"
         },
         "exclusiveWith": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Components that should not be used together"
         }
       }
@@ -232,7 +259,9 @@
         },
         "requiredAriaProps": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Required ARIA attributes"
         },
         "keyboardNav": {
@@ -240,8 +269,12 @@
           "items": {
             "type": "object",
             "properties": {
-              "key": { "type": "string" },
-              "action": { "type": "string" }
+              "key": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              }
             }
           },
           "description": "Keyboard navigation patterns"
@@ -261,17 +294,23 @@
       "properties": {
         "aliases": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Alternative names users might use for this component"
         },
         "notTheSameAs": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Components this is often confused with"
         },
         "doesNotExist": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Props/variants that DO NOT exist on this component"
         },
         "commonMistakes": {
@@ -279,8 +318,12 @@
           "items": {
             "type": "object",
             "properties": {
-              "mistake": { "type": "string" },
-              "correction": { "type": "string" }
+              "mistake": {
+                "type": "string"
+              },
+              "correction": {
+                "type": "string"
+              }
             }
           },
           "description": "Common mistakes and their corrections"

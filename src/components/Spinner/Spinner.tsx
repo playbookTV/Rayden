@@ -291,6 +291,7 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
         ref={ref}
         role="status"
         aria-label={label || "Loading"}
+        data-rayden-spinner=""
         className={cn(
           "inline-flex items-center gap-2",
           isVertical && "flex-col",

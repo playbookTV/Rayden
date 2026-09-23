@@ -13,8 +13,20 @@ import {
 } from "../../tokens/index.js";
 import type { GetTokensInput } from "../types.js";
 
-export function handleGetTokens(input: GetTokensInput) {
-  const { category } = input;
+import { categoryError } from "../response";
+import { referenceContext } from "../../manifests";
+
+export function handleGetTokens(input: GetTokensInput = {}) {
+  const error = categoryError(input?.category, [
+    "colors",
+    "spacing",
+    "typography",
+    "shadows",
+    "borderRadius",
+    "breakpoints",
+  ]);
+  if (error) return error;
+  const { category } = input ?? {};
 
   let response: unknown;
 
@@ -101,11 +113,11 @@ export function handleGetTokens(input: GetTokensInput) {
         note: 'Use get_tokens with category="colors" for full color data',
       },
       spacing: {
-        sizes: Object.keys(spacing),
+        sizes: Object.keys(spacing.scale),
         note: 'Use get_tokens with category="spacing" for full spacing data',
       },
       typography: {
-        presets: Object.keys(typography),
+        presets: Object.keys(typography.presets),
         note: 'Use get_tokens with category="typography" for full typography data',
       },
       shadows: {
@@ -122,7 +134,16 @@ export function handleGetTokens(input: GetTokensInput) {
     content: [
       {
         type: "text" as const,
-        text: JSON.stringify(response, null, 2),
+        text: JSON.stringify(
+          {
+            ...(response as object),
+            ...referenceContext,
+            limitation:
+              "Authored token reference; full parity with runtime CSS and anatomy is not certified.",
+          },
+          null,
+          2
+        ),
       },
     ],
   };

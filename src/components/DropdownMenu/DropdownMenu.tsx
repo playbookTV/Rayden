@@ -1,25 +1,29 @@
 import {
   createContext,
-  useCallback,
   useContext,
-  useEffect,
   useRef,
-  useState,
   forwardRef,
   type ReactNode,
   type HTMLAttributes,
   type ButtonHTMLAttributes,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { useControllableValue } from "../../hooks/useControllableValue";
+import { usePopupList } from "../../hooks/usePopupList";
 import { cn } from "../../utils/cn";
+import { useCollisionAwareSide } from "../../hooks/useCollisionAwareSide";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 // ─── Context ──────────────────────────────────────────────────────
 interface DropdownMenuContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
+  contentRef: React.RefObject<HTMLDivElement | null>;
+  close: (restoreFocus?: boolean) => void;
+  onTriggerKeyDown: (event: ReactKeyboardEvent<HTMLButtonElement>) => void;
+  onListKeyDown: (event: ReactKeyboardEvent<HTMLDivElement>) => void;
 }
 
 const DropdownMenuContext = createContext<DropdownMenuContextValue | null>(null);
@@ -46,55 +50,39 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
     { open: controlledOpen, defaultOpen = false, onOpenChange, children, className, ...rest },
     ref
   ) => {
-    const [internalOpen, setInternalOpen] = useState(defaultOpen);
-    const open = controlledOpen ?? internalOpen;
+    const [open, setOpen] = useControllableValue(controlledOpen, defaultOpen, onOpenChange);
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
-
-    const setOpen = useCallback(
-      (value: boolean) => {
-        if (controlledOpen === undefined) setInternalOpen(value);
-        onOpenChange?.(value);
-      },
-      [controlledOpen, onOpenChange]
-    );
-
-    // Click-outside handler
-    useEffect(() => {
-      if (!open) return;
-      const handleMouseDown = (e: MouseEvent) => {
-        const container = containerRef.current;
-        if (container && !container.contains(e.target as Node)) {
-          setOpen(false);
-        }
-      };
-      document.addEventListener("mousedown", handleMouseDown);
-      return () => document.removeEventListener("mousedown", handleMouseDown);
-    }, [open, setOpen]);
-
-    // Escape key handler
-    useEffect(() => {
-      if (!open) return;
-      const handleKeyDown = (e: globalThis.KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setOpen(false);
-          triggerRef.current?.focus();
-        }
-      };
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
-    }, [open, setOpen]);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const { close, onTriggerKeyDown, onListKeyDown } = usePopupList({
+      open,
+      setOpen,
+      containerRef,
+      triggerRef,
+      listRef: contentRef,
+      role: "menuitem",
+    });
 
     return (
-      <DropdownMenuContext.Provider value={{ open, setOpen, triggerRef }}>
+      <DropdownMenuContext.Provider
+        value={{
+          open,
+          setOpen,
+          triggerRef,
+          contentRef,
+          close,
+          onTriggerKeyDown,
+          onListKeyDown,
+        }}
+      >
         <div
           ref={(node) => {
             (containerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
             if (typeof ref === "function") ref(node);
             else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
           }}
-          className={cn("relative inline-flex", className)}
           {...rest}
+          className={cn("relative inline-flex", className)}
         >
           {children}
         </div>
@@ -105,11 +93,11 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
 DropdownMenu.displayName = "DropdownMenu";
 
 // ─── DropdownMenuTrigger ──────────────────────────────────────────
-export interface DropdownMenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export type DropdownMenuTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const DropdownMenuTrigger = forwardRef<HTMLButtonElement, DropdownMenuTriggerProps>(
-  ({ onClick, children, className, ...rest }, ref) => {
-    const { open, setOpen, triggerRef } = useDropdownMenuContext();
+  ({ onClick, onKeyDown, children, className, ...rest }, ref) => {
+    const { open, setOpen, triggerRef, onTriggerKeyDown } = useDropdownMenuContext();
 
     return (
       <button
@@ -121,9 +109,13 @@ export const DropdownMenuTrigger = forwardRef<HTMLButtonElement, DropdownMenuTri
         type="button"
         aria-expanded={open}
         aria-haspopup="menu"
+        onKeyDown={(event) => {
+          onKeyDown?.(event);
+          onTriggerKeyDown(event);
+        }}
         onClick={(e) => {
-          setOpen(!open);
           onClick?.(e);
+          if (!e.defaultPrevented) setOpen(!open);
         }}
         className={className}
         {...rest}
@@ -145,58 +137,9 @@ export interface DropdownMenuContentProps extends HTMLAttributes<HTMLDivElement>
 
 export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
   ({ align = "end", sideOffset = 4, children, className, onKeyDown, ...rest }, ref) => {
-    const { open, setOpen, triggerRef } = useDropdownMenuContext();
-    const contentRef = useRef<HTMLDivElement>(null);
-
-    // Focus first item on open
-    useEffect(() => {
-      if (!open) return;
-      // Small delay to ensure content is rendered
-      const timer = setTimeout(() => {
-        const first = contentRef.current?.querySelector<HTMLButtonElement>(
-          '[role="menuitem"]:not([disabled])'
-        );
-        first?.focus();
-      }, 0);
-      return () => clearTimeout(timer);
-    }, [open]);
-
-    const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
-      onKeyDown?.(e);
-      const items = Array.from(
-        contentRef.current?.querySelectorAll<HTMLButtonElement>(
-          '[role="menuitem"]:not([disabled])'
-        ) ?? []
-      );
-      if (!items.length) return;
-
-      const currentIndex = items.findIndex((item) => item === document.activeElement);
-
-      switch (e.key) {
-        case "ArrowDown": {
-          e.preventDefault();
-          const next = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
-          items[next]?.focus();
-          break;
-        }
-        case "ArrowUp": {
-          e.preventDefault();
-          const prev = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
-          items[prev]?.focus();
-          break;
-        }
-        case "Home": {
-          e.preventDefault();
-          items[0]?.focus();
-          break;
-        }
-        case "End": {
-          e.preventDefault();
-          items[items.length - 1]?.focus();
-          break;
-        }
-      }
-    };
+    const { open, triggerRef, contentRef, onListKeyDown } = useDropdownMenuContext();
+    // The menu always opened downward, so near the bottom edge it ran off-screen.
+    const menuSide = useCollisionAwareSide("bottom", open, triggerRef, contentRef);
 
     if (!open) return null;
 
@@ -209,15 +152,19 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
         }}
         role="menu"
         aria-orientation="vertical"
-        onKeyDown={handleKeyDown}
+        onKeyDown={(event) => {
+          onKeyDown?.(event);
+          onListKeyDown(event);
+        }}
         className={cn(
-          "absolute top-full z-50 min-w-[200px] overflow-hidden rounded-lg bg-white dark:bg-grey-50 py-1",
+          "absolute z-50 min-w-[200px] overflow-hidden rounded-lg bg-surface py-1",
           "shadow-lg ring-1 ring-black/5",
           "animate-in fade-in-0 zoom-in-95",
+          menuSide === "top" ? "bottom-full" : "top-full",
           align === "end" ? "right-0" : "left-0",
           className
         )}
-        style={{ marginTop: sideOffset }}
+        style={menuSide === "top" ? { marginBottom: sideOffset } : { marginTop: sideOffset }}
         {...rest}
       >
         {children}
@@ -228,7 +175,7 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
 DropdownMenuContent.displayName = "DropdownMenuContent";
 
 // ─── DropdownMenuGroup ────────────────────────────────────────────
-export interface DropdownMenuGroupProps extends HTMLAttributes<HTMLDivElement> {}
+export type DropdownMenuGroupProps = HTMLAttributes<HTMLDivElement>;
 
 export const DropdownMenuGroup = forwardRef<HTMLDivElement, DropdownMenuGroupProps>(
   ({ className, ...rest }, ref) => (
@@ -246,8 +193,8 @@ export interface DropdownMenuLabelProps extends HTMLAttributes<HTMLDivElement> {
 export const DropdownMenuLabel = forwardRef<HTMLDivElement, DropdownMenuLabelProps>(
   ({ description, children, className, ...rest }, ref) => (
     <div ref={ref} className={cn("px-4 py-2", className)} {...rest}>
-      <p className="text-body-sm font-semibold text-grey-900">{children}</p>
-      {description && <p className="text-body-sm text-grey-500">{description}</p>}
+      <p className="text-body-sm font-semibold text-on-surface">{children}</p>
+      {description && <p className="text-body-sm text-on-surface-muted">{description}</p>}
     </div>
   )
 );
@@ -258,8 +205,8 @@ export interface DropdownMenuItemProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "onSelect"
 > {
-  /** Leading icon — accepts a ReactNode or an IconName string */
-  icon?: ReactNode | IconName;
+  /** Leading icon — accepts a registry name, static IconRecord, or ReactNode */
+  icon?: IconSource;
   /** Keyboard shortcut label (e.g. "⌘C") */
   shortcut?: string;
   /** Whether this item is selected (shows check indicator) */
@@ -288,15 +235,14 @@ export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemPr
     },
     ref
   ) => {
-    const { setOpen, triggerRef } = useDropdownMenuContext();
+    const { close } = useDropdownMenuContext();
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;
       onClick?.(e);
+      if (e.defaultPrevented) return;
+      close(true);
       onSelect?.();
-      setOpen(false);
-      // Return focus to trigger after closing
-      setTimeout(() => triggerRef.current?.focus(), 0);
     };
 
     const resolvedIcon = resolveIcon(icon, "md");
@@ -312,10 +258,10 @@ export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemPr
         className={cn(
           "flex w-full items-center gap-1 px-4 py-2 text-left text-body-sm outline-none transition-colors",
           disabled
-            ? "bg-grey-100 text-grey-400 cursor-not-allowed"
+            ? "bg-grey-100 text-grey-500 cursor-not-allowed"
             : destructive
               ? "text-error-500 hover:bg-error-50 focus:bg-error-100"
-              : "text-grey-900 hover:bg-grey-50 focus:bg-grey-100",
+              : "text-on-surface hover:bg-grey-50 focus:bg-grey-100",
           className
         )}
         {...rest}
@@ -354,7 +300,7 @@ export const DropdownMenuItem = forwardRef<HTMLButtonElement, DropdownMenuItemPr
 DropdownMenuItem.displayName = "DropdownMenuItem";
 
 // ─── DropdownMenuSeparator ────────────────────────────────────────
-export interface DropdownMenuSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
+export type DropdownMenuSeparatorProps = HTMLAttributes<HTMLDivElement>;
 
 export const DropdownMenuSeparator = forwardRef<HTMLDivElement, DropdownMenuSeparatorProps>(
   ({ className, ...rest }, ref) => (

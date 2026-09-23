@@ -48,7 +48,11 @@ import { Checkbox, Radio, Toggle } from "@raydenui/ui";
 ```tsx
 const [checked, setChecked] = useState(false);
 
-<Checkbox label="Subscribe to newsletter" checked={checked} onChange={setChecked} />;
+<Checkbox
+  label="Subscribe to newsletter"
+  checked={checked}
+  onChange={(e) => setChecked(e.target.checked)}
+/>;
 ```
 
 ### Checkbox Props
@@ -58,7 +62,7 @@ const [checked, setChecked] = useState(false);
 | `label`       | `string`                     | —       | Checkbox label              |
 | `description` | `string`                     | —       | Additional description text |
 | `checked`     | `boolean`                    | `false` | Controlled checked state    |
-| `onChange`    | `(checked: boolean) => void` | —       | Change handler              |
+| `onChange`    | `ChangeEventHandler<HTMLInputElement>` | — | Native change handler; read `e.target.checked` |
 | `disabled`    | `boolean`                    | `false` | Disables the checkbox       |
 
 ## Radio
@@ -131,7 +135,7 @@ const [value, setValue] = useState("option1");
 | `label`       | `string`     | —       | Radio label                 |
 | `description` | `string`     | —       | Additional description text |
 | `checked`     | `boolean`    | `false` | Controlled checked state    |
-| `onChange`    | `() => void` | —       | Change handler              |
+| `onChange`    | `ChangeEventHandler<HTMLInputElement>` | — | Native change handler |
 | `disabled`    | `boolean`    | `false` | Disables the radio          |
 
 ## Toggle
@@ -169,7 +173,11 @@ const [value, setValue] = useState("option1");
 ```tsx
 const [enabled, setEnabled] = useState(false);
 
-<Toggle label="Notifications" checked={enabled} onChange={setEnabled} />;
+<Toggle
+  label="Notifications"
+  checked={enabled}
+  onChange={(e) => setEnabled(e.target.checked)}
+/>;
 ```
 
 ### Toggle Props
@@ -179,7 +187,7 @@ const [enabled, setEnabled] = useState(false);
 | `label`       | `string`                     | —       | Toggle label                |
 | `description` | `string`                     | —       | Additional description text |
 | `checked`     | `boolean`                    | `false` | Controlled checked state    |
-| `onChange`    | `(checked: boolean) => void` | —       | Change handler              |
+| `onChange`    | `ChangeEventHandler<HTMLInputElement>` | — | Native change handler; read `e.target.checked` |
 | `disabled`    | `boolean`                    | `false` | Disables the toggle         |
 
 ## Accessibility

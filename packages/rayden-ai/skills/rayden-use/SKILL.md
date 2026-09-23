@@ -1,307 +1,45 @@
 ---
 name: rayden-use
-version: 1.0.0
-description: Build and maintain Rayden UI components in Figma
-author: Ovalay Studios
-rayden-ui-version: ">=0.2.0"
-references:
-  - ../../references/naming-conventions.md
-  - ../../references/token-usage.md
-  - ../../references/layout-rules.md
-  - ../../references/component-properties.md
+description: Build or review Rayden UI component designs in Figma using the packaged Citrionus anatomy and token references. Use for Rayden code-to-design work, not implementing an existing Figma design as application code.
+metadata:
+  version: "1.1.0"
+  author: Ovalay Studios
 ---
 
-# Rayden Figma Skill
+# Rayden Figma skill
 
-Build, extend, and maintain Rayden UI components directly in Figma using the `use_figma` MCP tool. This skill operates in **Mode C** — working entirely from bundled manifest files without requiring a connected Figma library.
+Use the bundled Citrionus reference data to build or review local Figma components. Rayden AI supplies knowledge; it does not supply a Figma connection or permission to edit a file.
 
-## When to Use This Skill
+Confirm the target file and use the available Figma tool's own setup, access checks, and required skill instructions. Do not assume a particular MCP tool prefix, subscription plan, or connected library. Work within the user's requested component and file scope.
 
-Use this skill when:
-- Building new Rayden UI components in Figma from scratch
-- Adding variants or states to existing components
-- Syncing a new `@raydenui/ui` React component to Figma
-- Composing screens using Rayden components
-- Auditing a file for Rayden design system compliance
+## Load the matching reference
 
-Do NOT use this skill when:
-- Implementing designs FROM Figma (use `get_design_context` instead)
-- Working with non-Rayden design systems
-- Creating freeform illustrations or graphics
+Paths below are relative to the installed `@raydenui/ai` package root, two directories above this skill:
 
-## Prerequisites
+- `dist/manifests/components.json`: canonical catalog, exact export names, reference versions, and capabilities.
+- `dist/anatomy/components.json`: Figma anatomy registry.
+- `dist/anatomy/components/<slug>.json`: the selected component's anatomy.
+- `dist/tokens/tokens.dtcg.json`: generated design-token values.
 
-1. **Figma MCP connected**: Verify with `mcp__claude_ai_Figma__whoami`
-2. **Write access**: User must have Dev or Full seat on a paid Figma plan
-3. **Target file open**: Have the Figma file key ready
+Read only the anatomy and references relevant to the requested work. The same data is available programmatically through `@raydenui/ai/anatomy` and the canonical guidance APIs.
 
-## Operating Mode
+Check the catalog's UI release and flavor against the intended implementation. Figma property labels and visibility switches are design controls; they are not automatically React props. Read `implementationNotes` in an anatomy specification before translating its variants. `ActivityFeed` is a family, not a runtime export; its React components are `ActivityItem` and `ActivityContent`.
 
-This skill uses **Mode C (Manifest-only)**:
-- All component specs come from `anatomy/components/*.json`
-- All tokens come from `tokens/tokens.dtcg.json`
-- No live Figma library connection required
-- Creates local components (can be swapped to library instances later)
+## Build and verify
 
-## Workflow
+1. Resolve the selected anatomy's token references. A missing reference is an unresolved design dependency; report it instead of silently substituting a different color, size, or font.
+2. Select the variants requested by the user and supported by the current component. Do not generate every combination by default or invent universal Variant/Size/State props.
+3. Use the target tool's documented Figma APIs. Preserve editable text and useful layout relationships. Auto layout is appropriate for normal flow; overlays and intentionally positioned elements may require absolute positioning.
+4. Load the declared font before creating or changing text. If unavailable, report the mismatch and use an explicitly agreed substitute rather than claiming font parity.
+5. Inspect the resulting design and its structure. Verify the selected variants, typography, spacing, token values, and component property bindings. Do not describe reference-based output as proven runtime parity without comparing the actual rendered UI.
 
-Follow these steps for every component build task:
+Anatomy is authored reference material. Token resolution is checked in the package pipeline, but dark-mode parity, every interaction, and complete Figma/runtime visual equivalence are not certified by that check. Use runtime props and behavior as authority when a legacy anatomy suggestion conflicts with the implementation.
 
-### Step 1: Load Manifest Files
+## Focused references
 
-Read the required files:
-```
-1. anatomy/components.json — component registry
-2. anatomy/components/[name].json — component anatomy spec
-3. tokens/tokens.dtcg.json — design tokens (or use existing from context)
-```
+- [Naming conventions](../../references/naming-conventions.md): component and variant naming patterns; adapt to the component's real property set.
+- [Token usage](../../references/token-usage.md): token resolution and mapping.
+- [Layout rules](../../references/layout-rules.md): layout patterns; use only those appropriate to the requested component.
+- [Component properties](../../references/component-properties.md): Figma property mechanics, not a mandatory list of props for every component.
 
-### Step 2: Resolve Tokens
-
-Convert all token references to concrete values:
-```
-{color.primary.500} → #EB5017
-{spacing.4} → 16px
-{radius.lg} → 8px
-```
-
-### Step 3: Determine Variants to Build
-
-Read the component registry to get all variant combinations:
-```json
-{
-  "variants": ["Primary", "Secondary", ...],
-  "appearances": ["Solid", "Outlined"],
-  "sizes": ["SM", "LG"],
-  "states": ["Default", "Hover", "Focus", "Disabled"]
-}
-```
-
-Calculate total combinations. For Button: 8 × 2 × 2 × 4 = 128 variants.
-
-### Step 4: Create Component Set
-
-Use `use_figma` to create the component set structure:
-
-```javascript
-// Create parent component set frame
-const componentSet = figma.createFrame();
-componentSet.name = "Button";
-componentSet.layoutMode = "HORIZONTAL";
-componentSet.layoutWrap = "WRAP";
-componentSet.itemSpacing = 20;
-componentSet.paddingTop = 40;
-componentSet.paddingBottom = 40;
-componentSet.paddingLeft = 40;
-componentSet.paddingRight = 40;
-```
-
-### Step 5: Build Each Variant
-
-For each combination, create a component:
-
-```javascript
-// Create variant component
-const variant = figma.createComponent();
-variant.name = "Variant=Primary, Appearance=Solid, Size=SM, State=Default";
-
-// Apply anatomy structure
-variant.layoutMode = "HORIZONTAL";
-variant.primaryAxisAlignItems = "CENTER";
-variant.counterAxisAlignItems = "CENTER";
-variant.itemSpacing = 8; // resolved from {spacing.2}
-variant.paddingLeft = 16;
-variant.paddingRight = 16;
-variant.paddingTop = 8;
-variant.paddingBottom = 8;
-variant.cornerRadius = 8;
-
-// Apply variant-specific fills
-variant.fills = [{ type: "SOLID", color: hexToRgb("#EB5017") }];
-
-// Create label text
-const label = figma.createText();
-await figma.loadFontAsync({ family: "Inter", style: "SemiBold" });
-label.characters = "Button";
-label.fontSize = 14;
-label.fills = [{ type: "SOLID", color: hexToRgb("#F9FAFB") }];
-variant.appendChild(label);
-```
-
-### Step 6: Create Component Properties
-
-Add component properties to the set:
-
-```javascript
-// After creating all variants, combine into set
-const set = figma.combineAsVariants(variants, componentSet);
-
-// Add text property for label
-set.addComponentProperty("Label", "TEXT", "Button");
-
-// Add boolean for icon visibility
-set.addComponentProperty("Show Icon Leading", "BOOLEAN", false);
-```
-
-### Step 7: Validate Output
-
-Take a screenshot and verify:
-- All variants are present
-- Naming follows `ComponentName/Variant/State` pattern
-- Colors match token values
-- Spacing is consistent
-- Auto layout is applied
-
-## Naming Conventions
-
-**CRITICAL**: All component names must follow this exact pattern:
-
-```
-Variant=Primary, Appearance=Solid, Size=SM, State=Default
-```
-
-For the Figma component set, use comma-separated property=value pairs.
-
-For visual reference in designs:
-```
-Button/Primary/Solid/SM/Default
-```
-
-See: `references/naming-conventions.md`
-
-## Token Resolution
-
-All visual values must come from tokens. Never use hardcoded values.
-
-```javascript
-// CORRECT: Use resolved token value
-variant.cornerRadius = 8; // from {radius.lg}
-
-// INCORRECT: Hardcoded value without token reference
-variant.cornerRadius = 8; // magic number
-```
-
-See: `references/token-usage.md`
-
-## Layout Rules
-
-Every frame must use auto layout. Never use absolute positioning.
-
-```javascript
-// CORRECT: Auto layout
-frame.layoutMode = "HORIZONTAL";
-frame.itemSpacing = 8;
-
-// INCORRECT: Absolute positioning
-child.x = 16;
-child.y = 8;
-```
-
-See: `references/layout-rules.md`
-
-## Component Properties
-
-Standard properties every component should have:
-
-| Property | Type | Purpose |
-|----------|------|---------|
-| Variant | VARIANT | Visual style |
-| Size | VARIANT | Dimensions |
-| State | VARIANT | Interaction state |
-| Label | TEXT | Editable text |
-| Show Icon | BOOLEAN | Toggle icon visibility |
-| Icon | INSTANCE_SWAP | Icon selection |
-
-See: `references/component-properties.md`
-
-## Helper Functions
-
-Include these in your `use_figma` code:
-
-```javascript
-// Convert hex to Figma RGB
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1, 3), 16) / 255;
-  const g = parseInt(hex.slice(3, 5), 16) / 255;
-  const b = parseInt(hex.slice(5, 7), 16) / 255;
-  return { r, g, b };
-}
-
-// Load Inter font (required for text)
-async function loadFonts() {
-  await figma.loadFontAsync({ family: "Inter", style: "Regular" });
-  await figma.loadFontAsync({ family: "Inter", style: "Medium" });
-  await figma.loadFontAsync({ family: "Inter", style: "SemiBold" });
-  await figma.loadFontAsync({ family: "Inter", style: "Bold" });
-}
-```
-
-## Example Prompts
-
-### Build a component from scratch
-```
-"Use the rayden-use skill to build a Button component in this file: [figma-url]"
-```
-
-### Add variants to existing component
-```
-"Add Info and Warning variants to the existing Button component in: [figma-url]"
-```
-
-### Sync from React to Figma
-```
-"I've added a Tooltip component to @raydenui/ui. Build the matching Figma component."
-```
-
-### Compose a screen
-```
-"Build a login form using Rayden Input and Button components"
-```
-
-### Audit for compliance
-```
-"Check if the Button in this file uses Rayden tokens: [figma-url]"
-```
-
-## Error Handling
-
-### Font not found
-```javascript
-// Always try/catch font loading
-try {
-  await figma.loadFontAsync({ family: "Inter", style: "SemiBold" });
-} catch {
-  // Fall back to available font
-  await figma.loadFontAsync({ family: "Roboto", style: "Medium" });
-}
-```
-
-### Token not found
-If a token reference cannot be resolved, log a warning and use a fallback:
-```
-Warning: Token {color.primary.600} not found, using {color.primary.500}
-```
-
-### Permission denied
-If `use_figma` fails with permission error:
-1. Verify user has Dev or Full Figma seat
-2. Check file is not view-only
-3. Confirm MCP connection with `whoami`
-
-## Files Reference
-
-| File | Purpose |
-|------|---------|
-| `anatomy/components.json` | Component registry |
-| `anatomy/components/*.json` | Individual anatomy specs |
-| `tokens/tokens.dtcg.json` | W3C DTCG tokens |
-| `references/naming-conventions.md` | Naming rules |
-| `references/token-usage.md` | Token patterns |
-| `references/layout-rules.md` | Auto layout rules |
-| `references/component-properties.md` | Property types |
-
-## Version History
-
-| Version | Changes |
-|---------|---------|
-| 1.0.0 | Initial release — Mode C support, 4 component anatomies |
+If access or tools are unavailable, explain the specific missing capability. Do not install integrations, modify unrelated files, or imply that Rayden's MCP server itself can write to Figma.

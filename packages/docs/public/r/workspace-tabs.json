@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "workspace-tabs",
+  "type": "registry:block",
+  "title": "Workspace tabs",
+  "description": "Editable workspace navigation and panels using package-managed Tabs and Tab.",
+  "registryDependencies": [
+    "@rayden/setup",
+    "@rayden/rules"
+  ],
+  "files": [
+    {
+      "path": "registry/citrionus/workspace-tabs/workspace-tabs.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { Tab, Tabs } from \"@raydenui/ui\";\n\nconst panels = {\n  overview: { label: \"Overview\", text: \"Your workspace overview goes here.\" },\n  activity: { label: \"Activity\", text: \"Your recent activity goes here.\" },\n} as const;\n\n/** Own and edit this composition. Tabs and Tab remain package-managed. */\nexport function WorkspaceTabs() {\n  const [value, setValue] = useState<keyof typeof panels>(\"overview\");\n  const panel = panels[value];\n\n  return (\n    <section aria-label=\"Workspace\">\n      <Tabs\n        variant=\"line\"\n        size=\"md\"\n        value={value}\n        onValueChange={(next) => {\n          if (next === \"overview\" || next === \"activity\") setValue(next);\n        }}\n      >\n        <Tab value=\"overview\">Overview</Tab>\n        <Tab value=\"activity\">Activity</Tab>\n      </Tabs>\n      <div role=\"tabpanel\" aria-label={panel.label} tabIndex={0} style={{ paddingBlock: 24 }}>\n        <p>{panel.text}</p>\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ],
+  "dependencies": [
+    "@raydenui/ui@0.10.1"
+  ],
+  "meta": {
+    "rayden": {
+      "schemaVersion": "1.0.0",
+      "flavor": "citrionus",
+      "uiVersion": "0.10.1",
+      "aiVersion": "0.1.5",
+      "registryVersion": "citrionus-0.10.1-pilot.1",
+      "distribution": "package-backed",
+      "status": "local-pilot",
+      "components": [
+        {
+          "name": "Tabs",
+          "exportNames": [
+            "Tabs",
+            "Tab"
+          ],
+          "importPath": "@raydenui/ui",
+          "description": "Tabbed navigation component with line and pill variants. Compound component with Tab children."
+        }
+      ]
+    }
+  }
+}

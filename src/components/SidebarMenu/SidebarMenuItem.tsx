@@ -1,13 +1,18 @@
 import {
   forwardRef,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
   useState,
   Children,
   isValidElement,
   type ReactNode,
   type ButtonHTMLAttributes,
 } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "../../utils/cn";
-import { Icon, type IconName } from "../Icon";
+import { Icon, type IconSource } from "../Icon";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { useSidebarMenuContext, sidebarThemeStyles } from "./SidebarMenu";
 
@@ -63,16 +68,21 @@ export interface SidebarMenuItemProps extends ButtonHTMLAttributes<HTMLButtonEle
   /** Unique identifier for this item */
   value: string;
   /** Icon displayed to the left — accepts IconName string or ReactNode */
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   /** Optional count badge displayed on the right */
   badge?: string | number;
   /** Disabled state */
   disabled?: boolean;
+  /**
+   * Accessible name used when the sidebar is collapsed to icons. Required when
+   * `children` is not a plain string, since a ReactNode cannot become a name.
+   */
+  label?: string;
   children: ReactNode;
 }
 
 export const SidebarMenuItem = forwardRef<HTMLButtonElement, SidebarMenuItemProps>(
-  ({ value, icon, badge, disabled = false, children, className, ...rest }, ref) => {
+  ({ value, icon, badge, disabled = false, label, children, className, ...rest }, ref) => {
     const { activeValue, onSelect, collapsed, theme } = useSidebarMenuContext();
     const ts = sidebarThemeStyles[theme];
     const isActive = activeValue === value;
@@ -121,28 +131,104 @@ export const SidebarMenuItem = forwardRef<HTMLButtonElement, SidebarMenuItemProp
 
     const resolvedIcon = resolveIcon(icon, "md");
 
-    // Collapsed mode: icon only
+    // The collapsed rail scrolls (overflow-y-auto), which also clips horizontally, so
+    // an absolutely positioned flyout is cut off. Render it in a portal anchored to the
+    // trigger instead, and close it on outside pointer or Escape.
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const flyoutRef = useRef<HTMLDivElement>(null);
+    const [mounted, setMounted] = useState(false);
+    const [anchor, setAnchor] = useState<{ top: number; left: number } | null>(null);
+    useEffect(() => setMounted(true), []);
+
+    const place = useCallback(() => {
+      const rect = triggerRef.current?.getBoundingClientRect();
+      if (rect) setAnchor({ top: rect.top, left: rect.right + 8 });
+    }, []);
+
+    useLayoutEffect(() => {
+      if (!collapsed || !open || !isExpandable) return;
+      place();
+      const onScroll = () => place();
+      window.addEventListener("scroll", onScroll, true);
+      window.addEventListener("resize", onScroll);
+      const onPointer = (event: PointerEvent) => {
+        const target = event.target as Node;
+        if (!triggerRef.current?.contains(target) && !flyoutRef.current?.contains(target))
+          setOpen(false);
+      };
+      const onKey = (event: KeyboardEvent) => {
+        if (event.key !== "Escape") return;
+        setOpen(false);
+        triggerRef.current?.focus();
+      };
+      document.addEventListener("pointerdown", onPointer);
+      document.addEventListener("keydown", onKey);
+      return () => {
+        window.removeEventListener("scroll", onScroll, true);
+        window.removeEventListener("resize", onScroll);
+        document.removeEventListener("pointerdown", onPointer);
+        document.removeEventListener("keydown", onKey);
+      };
+    }, [collapsed, open, isExpandable, place]);
+
+    // A collapsed item shows only an icon, so it needs an explicit name: an
+    // element child such as <span>Home</span> cannot serve as one.
+    const compactName = label ?? (typeof labelContent === "string" ? labelContent : undefined);
+
+    // Collapsed mode: icon only, with nested destinations reachable via a flyout
+    // rather than being dropped entirely.
     if (collapsed) {
       return (
-        <button
-          ref={ref}
-          type="button"
-          role="menuitem"
-          disabled={disabled}
-          onClick={() => {
-            if (!disabled && !isExpandable) onSelect(value);
-          }}
-          aria-label={typeof labelContent === "string" ? labelContent : undefined}
-          className={cn(
-            "flex size-11 cursor-pointer items-center justify-center rounded transition-colors",
-            highlighted ? cn(ts.selectedBg, ts.selectedIcon) : cn(ts.defaultIcon, ts.hoverBg),
-            disabled && "pointer-events-none opacity-50",
-            className
-          )}
-          {...rest}
-        >
-          {resolvedIcon}
-        </button>
+        <div className="relative">
+          <button
+            ref={(node) => {
+              triggerRef.current = node;
+              if (typeof ref === "function") ref(node);
+              else if (ref) ref.current = node;
+            }}
+            type="button"
+            role="menuitem"
+            disabled={disabled}
+            onClick={handleClick}
+            aria-label={compactName}
+            aria-expanded={isExpandable ? open : undefined}
+            aria-haspopup={isExpandable ? "menu" : undefined}
+            className={cn(
+              "flex size-11 cursor-pointer items-center justify-center rounded transition-colors",
+              highlighted ? cn(ts.selectedBg, ts.selectedIcon) : cn(ts.defaultIcon, ts.hoverBg),
+              disabled && "pointer-events-none opacity-50",
+              className
+            )}
+            {...rest}
+          >
+            {resolvedIcon}
+          </button>
+          {isExpandable &&
+            open &&
+            mounted &&
+            anchor &&
+            createPortal(
+              <div
+                ref={flyoutRef}
+                role="menu"
+                aria-label={compactName}
+                style={{ top: anchor.top, left: anchor.left }}
+                className={cn(
+                  "fixed z-50 min-w-[200px] rounded-lg p-2 shadow-soft-sm",
+                  "border border-black/10 dark:border-white/15",
+                  ts.container
+                )}
+              >
+                {compactName && (
+                  <p className={cn("px-3 pb-1 text-body-xs font-medium", ts.defaultText)}>
+                    {compactName}
+                  </p>
+                )}
+                {subMenuContent}
+              </div>,
+              document.body
+            )}
+        </div>
       );
     }
 

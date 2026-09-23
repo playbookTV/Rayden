@@ -1,12 +1,12 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { Icon } from "../Icon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "input" | "filter";
-  icon?: ReactNode | IconName;
+  icon?: IconSource;
   disabled?: boolean;
   onClose?: () => void;
   onDropdown?: () => void;
@@ -33,7 +33,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
           "inline-flex items-center gap-1 rounded-md border px-2 py-1 text-sm font-medium transition-colors",
           disabled
             ? "border-grey-200 bg-grey-100 text-grey-300 cursor-not-allowed"
-            : "border-grey-300 bg-white dark:bg-grey-50 text-grey-700 cursor-default focus-within:bg-[#FBF1F1] focus-within:border-primary-600",
+            : "border-control-border bg-surface text-on-surface-body cursor-default focus-within:bg-primary-50 focus-within:border-primary-600",
           className
         )}
         {...rest}
@@ -46,10 +46,10 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
             onClick={onClose}
             disabled={disabled}
             className={cn(
-              "shrink-0 size-4 inline-flex items-center justify-center rounded-sm",
+              "shrink-0 size-4 box-content p-1 -m-1 inline-flex items-center justify-center rounded-sm",
               disabled
                 ? "cursor-not-allowed text-grey-300"
-                : "cursor-pointer text-grey-500 hover:text-grey-700"
+                : "cursor-pointer text-on-surface-muted hover:text-on-surface-body"
             )}
             aria-label="Remove"
           >
@@ -62,10 +62,10 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
             onClick={onDropdown}
             disabled={disabled}
             className={cn(
-              "shrink-0 size-4 inline-flex items-center justify-center",
+              "shrink-0 size-4 box-content p-1 -m-1 inline-flex items-center justify-center",
               disabled
                 ? "cursor-not-allowed text-grey-300"
-                : "cursor-pointer text-grey-500 hover:text-grey-700"
+                : "cursor-pointer text-on-surface-muted hover:text-on-surface-body"
             )}
             aria-label="Open filter"
           >

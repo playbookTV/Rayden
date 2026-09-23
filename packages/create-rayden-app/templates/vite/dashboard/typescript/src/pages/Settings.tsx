@@ -17,7 +17,12 @@ export default function Settings() {
           <h2 className="text-lg font-semibold text-grey-900 mb-4">Profile</h2>
           <div className="flex items-center gap-4 mb-6">
             <Avatar size="lg" initials="JD" />
-            <Button variant="secondary" appearance="outlined" size="sm">
+            <Button
+              variant="secondary"
+              appearance="outlined"
+              size="sm"
+              onClick={() => alert("Connect this to your upload flow.")}
+            >
               Change Avatar
             </Button>
           </div>
@@ -34,17 +39,29 @@ export default function Settings() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-grey-900">Email Notifications</p>
+                <p id="email-notifications-label" className="font-medium text-grey-900">
+                  Email Notifications
+                </p>
                 <p className="text-sm text-grey-500">Receive email updates about your account</p>
               </div>
-              <Toggle checked={emailNotifications} onChange={setEmailNotifications} />
+              <Toggle
+                checked={emailNotifications}
+                onChange={(e) => setEmailNotifications(e.target.checked)}
+                aria-labelledby="email-notifications-label"
+              />
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-grey-900">Marketing Emails</p>
+                <p id="marketing-emails-label" className="font-medium text-grey-900">
+                  Marketing Emails
+                </p>
                 <p className="text-sm text-grey-500">Receive news and promotional offers</p>
               </div>
-              <Toggle checked={marketingEmails} onChange={setMarketingEmails} />
+              <Toggle
+                checked={marketingEmails}
+                onChange={(e) => setMarketingEmails(e.target.checked)}
+                aria-labelledby="marketing-emails-label"
+              />
             </div>
           </div>
         </div>
@@ -52,10 +69,19 @@ export default function Settings() {
         <hr className="border-grey-200" />
 
         <div className="flex justify-end gap-3">
-          <Button variant="secondary" appearance="outlined">
+          <Button
+            variant="secondary"
+            appearance="outlined"
+            onClick={() => {
+              setEmailNotifications(true);
+              setMarketingEmails(false);
+            }}
+          >
             Cancel
           </Button>
-          <Button variant="primary">Save Changes</Button>
+          <Button variant="primary" onClick={() => alert("Saved. Persist these to your API.")}>
+            Save Changes
+          </Button>
         </div>
       </div>
     </div>

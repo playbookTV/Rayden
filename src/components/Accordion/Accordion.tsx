@@ -3,14 +3,16 @@ import {
   forwardRef,
   useCallback,
   useContext,
+  useEffect,
   useId,
+  useRef,
   useState,
   type HTMLAttributes,
   type ReactNode,
 } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 /* ─── Types ────────────────────────────────────────────────────────────── */
 
@@ -38,7 +40,7 @@ export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
 
 export interface AccordionTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   /** Leading icon (left side) */
-  leadingIcon?: ReactNode | IconName;
+  leadingIcon?: IconSource;
   /** Leading number badge */
   leadingNumber?: string;
   /** Leading logo element */
@@ -191,11 +193,14 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
       hideChevron = false,
       className,
       children,
+      onClick,
       ...rest
     },
     ref
   ) => {
     const { toggle } = useAccordionContext();
+    // The internal handler is composed AFTER {...rest} so a consumer onClick
+    // cannot replace the toggle; calling preventDefault() cancels it.
     const { value, isOpen, disabled, triggerId, contentId } = useAccordionItemContext();
 
     return (
@@ -206,7 +211,6 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
         disabled={disabled}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        onClick={() => toggle(value)}
         className={cn(
           "flex items-center gap-3 px-4 py-6 w-full text-left transition-colors",
           !isOpen && !disabled && "hover:bg-grey-50 dark:hover:bg-grey-100",
@@ -214,9 +218,13 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
           className
         )}
         {...rest}
+        onClick={(event) => {
+          onClick?.(event);
+          if (!event.defaultPrevented) toggle(value);
+        }}
       >
         {leadingNumber && (
-          <span className="shrink-0 flex items-center justify-center bg-grey-700 text-white text-base font-medium leading-[1.48] rounded-xl px-2 py-1 min-w-[37px]">
+          <span className="shrink-0 flex items-center justify-center bg-grey-700 text-grey-50 text-base font-medium leading-[1.48] rounded-xl px-2 py-1 min-w-[37px]">
             {leadingNumber}
           </span>
         )}
@@ -230,7 +238,7 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
         </span>
 
         {badge != null && (
-          <span className="shrink-0 bg-primary-50 text-primary-400 text-sm font-medium rounded-full px-3 py-2 leading-[1.45]">
+          <span className="shrink-0 bg-primary-50 text-action-primary-text text-sm font-medium rounded-full px-3 py-2 leading-[1.45]">
             {badge}
           </span>
         )}
@@ -254,13 +262,34 @@ AccordionTrigger.displayName = "AccordionTrigger";
 export const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ className, children, ...rest }, ref) => {
     const { isOpen, triggerId, contentId } = useAccordionItemContext();
+    const regionRef = useRef<HTMLDivElement>(null);
+    const wasOpen = useRef(isOpen);
+
+    // Collapsing is a grid-rows transition, which hides the panel visually but
+    // leaves its descendants focusable and in the accessibility tree. `inert`
+    // closes that gap; if focus was already inside when the panel closed, send
+    // it back to the trigger rather than dropping it on the document.
+    useEffect(() => {
+      if (wasOpen.current && !isOpen) {
+        const node = regionRef.current;
+        if (node && node.contains(document.activeElement)) {
+          document.getElementById(triggerId)?.focus();
+        }
+      }
+      wasOpen.current = isOpen;
+    }, [isOpen, triggerId]);
 
     return (
       <div
-        ref={ref}
+        ref={(node) => {
+          regionRef.current = node;
+          if (typeof ref === "function") ref(node);
+          else if (ref) ref.current = node;
+        }}
         id={contentId}
         role="region"
         aria-labelledby={triggerId}
+        inert={!isOpen}
         className={cn(
           "grid transition-[grid-template-rows] duration-200 ease-out",
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"

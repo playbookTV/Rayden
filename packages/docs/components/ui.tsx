@@ -1,5 +1,7 @@
 "use client";
 
+import dynamic from "next/dynamic";
+
 // Re-export all Rayden UI components as client components
 export {
   // Forms & Inputs
@@ -53,10 +55,6 @@ export {
   ActivityContent,
   MetricsCard,
   Icon,
-  EmptyStateIllustration,
-  RaydenChart,
-  chartColors,
-  hexToRgba,
 
   // Feedback
   Alert,
@@ -80,3 +78,15 @@ export {
   CardFooter,
   CardImage,
 } from "@raydenui/ui";
+
+// Charts ship from their own subpath so the optional chart.js peer stays optional.
+export { chartColors, hexToRgba, createGradientFill } from "@raydenui/ui/chart";
+
+// Code-split the two heaviest modules so only the pages that use them pay for them.
+export const EmptyStateIllustration = dynamic(
+  () => import("@raydenui/ui").then((m) => m.EmptyStateIllustration),
+  { ssr: false }
+);
+export const RaydenChart = dynamic(() => import("@raydenui/ui/chart").then((m) => m.RaydenChart), {
+  ssr: false,
+});

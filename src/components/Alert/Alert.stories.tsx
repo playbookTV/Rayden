@@ -93,7 +93,7 @@ export const AllToasts: Story = {
 
 export const AllBanners: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 w-[568px]">
+    <div className="flex flex-col gap-4 w-full max-w-[568px]">
       <Alert
         variant="banner"
         state="information"

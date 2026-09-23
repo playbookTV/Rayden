@@ -22,11 +22,7 @@ import { Pagination } from "@raydenui/ui";
 </Preview>
 
 ```tsx
-<Pagination
-  currentPage={1}
-  totalPages={10}
-  onPageChange={(page) => setPage(page)}
-/>
+<Pagination currentPage={1} totalPages={10} onPageChange={(page) => setPage(page)} />
 ```
 
 ### Different Page Positions
@@ -55,24 +51,23 @@ import { Pagination } from "@raydenui/ui";
 ```tsx
 const [page, setPage] = useState(1);
 
-<Pagination
-  currentPage={page}
-  totalPages={10}
-  onPageChange={setPage}
-/>
+<Pagination currentPage={page} totalPages={10} onPageChange={setPage} />;
 ```
+
+## Narrow containers
+
+Below 480px of available width, pagination displays “Page x of y” with previous and next buttons. Wider containers show individual page buttons. With `showPrevNext={false}`, the numbers wrap instead. Give separate pagination controls distinct `aria-label` values when a page contains more than one.
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `currentPage` | `number` | — | Current active page (required) |
-| `totalPages` | `number` | — | Total number of pages (required) |
-| `onPageChange` | `(page: number) => void` | — | Page change handler (required) |
-| `siblingCount` | `number` | `1` | Pages shown on each side of current |
-| `boundaryCount` | `number` | `1` | Pages shown at start/end |
-| `showPrevNext` | `boolean` | `true` | Show prev/next buttons |
-| `className` | `string` | — | Additional CSS classes |
+| Prop           | Type                     | Default | Description                         |
+| -------------- | ------------------------ | ------- | ----------------------------------- |
+| `currentPage`  | `number`                 | —       | Current active page (required)      |
+| `totalPages`   | `number`                 | —       | Total number of pages (required)    |
+| `onPageChange` | `(page: number) => void` | —       | Page change handler (required)      |
+| `siblingCount` | `number`                 | `1`     | Pages shown on each side of current |
+| `showPrevNext` | `boolean`                | `true`  | Show prev/next buttons              |
+| `className`    | `string`                 | —       | Additional CSS classes              |
 
 ## Accessibility
 

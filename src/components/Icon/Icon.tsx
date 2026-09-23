@@ -1,8 +1,11 @@
-import { type SVGAttributes, forwardRef } from "react";
+import { type SVGAttributes, type ReactNode, forwardRef, useEffect, useState } from "react";
 import { cn } from "../../utils/cn";
-import { icons, type IconName, type IconVariant, type IconRecord } from "./icons";
+import type { IconName, IconVariant, IconRecord } from "./icons";
 
 export type { IconName, IconVariant, IconRecord } from "./icons";
+
+/** Shared icon-slot contract: registry name, static SVG data, or a custom React node. */
+export type IconSource = IconName | IconRecord | ReactNode;
 
 export type IconSize = "xs" | "sm" | "md" | "lg" | "xl";
 
@@ -49,12 +52,20 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
     } & typeof rest;
 
     // Support both name-based (dynamic) and icon-based (tree-shakeable) usage
-    const iconRecord = icon ?? (name ? icons[name] : null);
+    const [loaded, setLoaded] = useState<{ name: IconName; record: IconRecord } | null>(null);
+    useEffect(() => {
+      if (!name || icon) return;
+      let active = true;
+      // Name lookup is optional: the registry stays outside the initial component bundle.
+      void import("./icons").then(({ icons }) => {
+        if (active && icons[name]) setLoaded({ name, record: icons[name] });
+      });
+      return () => {
+        active = false;
+      };
+    }, [name, icon]);
+    const iconRecord = icon ?? (loaded?.name === name ? loaded?.record : null);
     const iconData = iconRecord?.[variant];
-
-    if (!iconData) {
-      return null;
-    }
 
     const px = typeof size === "number" ? size : sizeMap[size];
 
@@ -62,14 +73,14 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
       <svg
         ref={ref}
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={iconData.viewBox}
+        viewBox={iconData?.viewBox ?? "0 0 24 24"}
         width={px}
         height={px}
         fill="none"
         className={cn("shrink-0", className)}
         style={{ color, ...style }}
         aria-hidden="true"
-        dangerouslySetInnerHTML={{ __html: iconData.paths }}
+        dangerouslySetInnerHTML={{ __html: iconData?.paths ?? "" }}
         {...svgProps}
       />
     );

@@ -1,0 +1,72 @@
+# Rayden UI — Citrionus
+
+Citrionus is Rayden's complete free default flavor.
+
+Reference UI: 0.10.1
+AI package: 0.1.5
+Catalog schema: 1.0.0
+
+This is reference information. Inspect the consuming project's installed version before generating code. Future flavors are not advertised as available.
+
+## Read next
+
+- /ai-integration: AI package, MCP, and copyable component guidance.
+- /ai/catalog.json: Canonical structured component catalog, props, and prompts.
+- /ai-integration/distribution: Local registry pilot and editable-source boundaries.
+- /motion: Opt-in motion pilot, presets, and reduced-motion behavior.
+- /r/registry.json: Registry pilot catalog; use the documented local setup.
+
+## Conventions
+
+Use actual named exports and their declared import paths. Preserve state, accessibility, styling tokens, and application logic. Resolve exact component names before aliases. Report unknown components or unsupported versions. Keep operating-system reduced-motion preferences effective. Do not assume registry endpoints or unreleased APIs are published.
+
+## Components
+
+- Button: Button from @raydenui/ui — Primary interactive element for triggering actions. Supports 8 variants, 2 appearances, 2 sizes, and icon positions.
+- Badge: Badge from @raydenui/ui — Status indicator or label component with multiple colors, types, and sizes.
+- Icon: Icon from @raydenui/ui — SVG renderer for the Rayden icon set. Pass exactly one of name (dynamic registry lookup) or icon (static IconRecord data). Discover exact names and data exports through iconCatalog.
+- Divider: Divider from @raydenui/ui — Visual separator between content sections. Supports multiple variants including with icon, label, title, and button.
+- Tooltip: Tooltip from @raydenui/ui — Contextual popup with additional information. Shows on hover/focus.
+- Input: Input from @raydenui/ui — Text input field with label, helper text, leading/trailing icons, and validation states (error/success).
+- Select: Select, SelectOption from @raydenui/ui — Dropdown select component with options. Compound component requiring SelectOption children.
+- Checkbox: Checkbox from @raydenui/ui — Checkbox input for boolean selections with optional label.
+- Radio: Radio from @raydenui/ui — Radio button for single selection from a group of options.
+- Toggle: Toggle from @raydenui/ui — Toggle switch for on/off states.
+- Chip: Chip from @raydenui/ui — Compact element for input or filtering. Supports input variant (with close button) and filter variant (with chevron).
+- Counter: Counter, NumberCounter from @raydenui/ui — Numeric input with increment/decrement buttons. Includes Counter for interactive input and NumberCounter for display-only badges.
+- Slider: Slider, RangeSlider from @raydenui/ui — Draggable range input for selecting numeric values. Includes single Slider and dual-handle RangeSlider for selecting value ranges.
+- DatePicker: DatePicker from @raydenui/ui — Calendar date picker supporting single date, date range, and year selection modes. Includes min/max date constraints and optional footer with Clear/Done buttons.
+- Alert: Alert from @raydenui/ui — Notification component for displaying messages, alerts, and notifications. Supports toast and banner variants with multiple states.
+- Banner: Banner from @raydenui/ui — Full-width notification banner for important announcements. Supports 6 status types, bold/subtle emphasis, and optional action button.
+- ProgressBar: ProgressBar from @raydenui/ui — Linear progress indicator showing completion percentage with optional label and metadata.
+- ProgressCircle: ProgressCircle from @raydenui/ui — Circular progress indicator showing completion percentage with optional center text.
+- Spinner: Spinner from @raydenui/ui — Loading indicator with 7 animation types and optional label. Supports brand and white color styles for different backgrounds.
+- Tabs: Tabs, Tab from @raydenui/ui — Tabbed navigation component with line and pill variants. Compound component with Tab children.
+- Breadcrumb: Breadcrumb from @raydenui/ui — Navigation breadcrumb trail showing current location in hierarchy.
+- Pagination: Pagination from @raydenui/ui — Page navigation component for navigating through paginated content.
+- SidebarMenu: SidebarMenu, SidebarMenuItem, SidebarMenuSection, SidebarMenuSub, SidebarMenuSubItem from @raydenui/ui — Sidebar navigation menu with sections, items, and nested sub-menus. Compound component.
+- Stepper: Stepper, LinearStepper, SegmentedStepper from @raydenui/ui — Multi-step progress indicator for workflows. Includes Stepper for step-by-step navigation, LinearStepper for progress bars, and SegmentedStepper for segmented progress.
+- Table: Table, TableHeader, TableBody, TableRow, TableHead, TableCell from @raydenui/ui — Data table with sortable columns and row selection. Compound component requiring TableHeader, TableBody, TableRow, TableHead, and TableCell sub-components.
+- Avatar: Avatar, AvatarGroup from @raydenui/ui — User avatar displaying image, initials, or icon with optional status indicator.
+- MetricsCard: MetricsCard from @raydenui/ui — Card displaying key metrics and statistics with trend indicators and optional actions.
+- EmptyStateIllustration: EmptyStateIllustration from @raydenui/ui — Illustration component for empty states, error pages, and placeholder content.
+- ActivityFeed: ActivityItem, ActivityContent from @raydenui/ui — Timeline and notification feed components for displaying user activity, comments, and events. Includes ActivityItem for feed entries and ActivityContent for rich content blocks.
+- RaydenChart: RaydenChart from @raydenui/ui/chart — Chart.js wrapper with Rayden UI theme defaults. Supports line, bar, pie, doughnut, radar, scatter, bubble, and polar-area chart types.
+- Accordion: Accordion, AccordionItem, AccordionTrigger, AccordionContent from @raydenui/ui — Collapsible content panels for organizing information. Supports single/multiple open items with default or nested visual styles.
+- Card: Card, CardHeader, CardBody, CardFooter, CardImage from @raydenui/ui — Flexible container component for grouping related content with optional header, body, footer, and image sections.
+- Modal: Modal from @raydenui/ui — Accessible dialog overlay with title, description, icon, and action buttons. Renders via portal with backdrop blur, keyboard dismiss, and focus management.
+- ButtonGroup: ButtonGroup, ButtonGroupItem from @raydenui/ui — Horizontal group of connected buttons with shared styling. Compound component with ButtonGroupItem children.
+- DropdownMenu: DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator from @raydenui/ui — Context menu or action dropdown. Compound component with trigger and content containing menu items.
+- FileUpload: FileUpload, FileUploadDropZone, FileUploadItem from @raydenui/ui — File upload component with drag and drop support. Compound component with drop zone and file items.
+- ApplicationShellBlock: ApplicationShellBlock from @raydenui/ui/blocks — Responsive application frame with navigation, workspace switcher, search and content slots.
+- PageHeaderBlock: PageHeaderBlock from @raydenui/ui/blocks — Page title, breadcrumbs, prioritized actions and collapsible context details.
+- WorkspaceSwitcherBlock: WorkspaceSwitcherBlock from @raydenui/ui/blocks — Searchable workspace selection with current state, destination links and availability explanations.
+- CommandPaletteBlock: CommandPaletteBlock from @raydenui/ui/blocks — Keyboard-searchable navigation and actions with optional shortcuts and explicit loading, error and empty states.
+
+## Motion APIs
+
+- MotionProvider from @raydenui/ui/motion
+- Pressable from @raydenui/ui/motion
+- Reveal from @raydenui/ui/motion
+- Collapse from @raydenui/ui/motion
+- SharedLayout from @raydenui/ui/motion

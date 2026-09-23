@@ -1,0 +1,10 @@
+{
+  "$schema": "./schema.json",
+  "name": "ApplicationShellBlock",
+  "displayName": "ApplicationShellBlock",
+  "description": "Responsive application frame with navigation, workspace switcher, search and content slots.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui/blocks",
+  "props": {},
+  "examples": []
+}

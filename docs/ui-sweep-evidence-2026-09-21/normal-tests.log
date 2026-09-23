@@ -1,0 +1,12 @@
+(node:50068) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+ RUN  v4.1.0 /Users/leslieisah/app-dev/Rayden
+
+4:54:50 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+ Test Files  44 passed (44)
+      Tests  294 passed (294)
+   Start at  16:54:49
+   Duration  113.61s (transform 0ms, setup 114.43s, import 156.12s, tests 205.37s, environment 0ms)
+

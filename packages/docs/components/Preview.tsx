@@ -53,57 +53,32 @@ export function Preview({ children, vertical = false, className = "" }: PreviewP
   // Resolve the actual theme based on mode
   const resolvedDark = bgMode === "auto" ? docIsDark : bgMode === "dark";
 
-  const bgClasses = resolvedDark ? "bg-grey-900" : "bg-white";
-
   return (
-    <div className="my-6 overflow-hidden rounded-lg border border-grey-200 dark:border-grey-700">
-      {/* Toolbar */}
-      <div className="flex items-center justify-between border-b border-grey-200 bg-grey-50 px-4 py-2 dark:border-grey-700 dark:bg-grey-800">
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={() => setBgMode("auto")}
-            className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
-              bgMode === "auto"
-                ? "bg-white text-grey-900 shadow-sm dark:bg-grey-700 dark:text-white"
-                : "text-grey-500 hover:text-grey-700 dark:text-grey-400 dark:hover:text-grey-200"
-            }`}
-          >
-            Auto
-          </button>
-          <button
-            type="button"
-            onClick={() => setBgMode("light")}
-            className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
-              bgMode === "light"
-                ? "bg-white text-grey-900 shadow-sm dark:bg-grey-700 dark:text-white"
-                : "text-grey-500 hover:text-grey-700 dark:text-grey-400 dark:hover:text-grey-200"
-            }`}
-          >
-            Light
-          </button>
-          <button
-            type="button"
-            onClick={() => setBgMode("dark")}
-            className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
-              bgMode === "dark"
-                ? "bg-white text-grey-900 shadow-sm dark:bg-grey-700 dark:text-white"
-                : "text-grey-500 hover:text-grey-700 dark:text-grey-400 dark:hover:text-grey-200"
-            }`}
-          >
-            Dark
-          </button>
+    <div className="my-6 rounded-lg border border-grey-200 not-prose">
+      <div className="flex items-center justify-between gap-3 rounded-t-lg border-b border-grey-200 bg-grey-50 px-3 py-2">
+        <span className="text-xs font-medium text-grey-600">Preview</span>
+        <div role="group" aria-label="Preview theme" className="flex gap-1">
+          {(["auto", "light", "dark"] as const).map((mode) => (
+            <button
+              key={mode}
+              type="button"
+              aria-pressed={bgMode === mode}
+              onClick={() => setBgMode(mode)}
+              className={`rounded px-3 py-1.5 text-sm font-medium capitalize transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text ${
+                bgMode === mode ? "bg-grey-200 text-grey-900" : "text-grey-600 hover:bg-grey-100"
+              }`}
+            >
+              {mode}
+            </button>
+          ))}
         </div>
       </div>
-
-      {/* Preview Canvas */}
       <div
-        className={`${bgClasses} ${resolvedDark ? "dark" : ""} min-h-[400px] p-6 transition-colors flex items-center justify-center not-prose ${className}`}
+        data-preview-theme={resolvedDark ? "dark" : "light"}
+        className={`${resolvedDark ? "dark" : "rayden-light"} rounded-b-lg bg-grey-50 text-grey-900 min-h-32 p-6 flex items-center justify-center ${className}`}
       >
         <div
-          className={`flex flex-wrap items-center justify-center gap-4 ${
-            vertical ? "flex-col" : ""
-          }`}
+          className={`flex w-full min-w-0 max-w-full flex-wrap items-center justify-center gap-4 ${vertical ? "flex-col" : ""}`}
         >
           {children}
         </div>

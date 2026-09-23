@@ -9,7 +9,7 @@
   "props": {
     "value": {
       "type": "number",
-      "description": "Current value (0–100 by default)"
+      "description": "Current value (0\u2013100 by default)"
     },
     "onChange": {
       "type": "function",
@@ -56,9 +56,8 @@
       "description": "Disabled state"
     }
   },
-  "subComponents": [
-    {
-      "name": "RangeSlider",
+  "subComponents": {
+    "RangeSlider": {
       "description": "Dual-handle slider for selecting a value range",
       "props": {
         "value": {
@@ -106,13 +105,18 @@
         }
       }
     }
-  ],
+  },
   "composition": {
     "relatedComponents": ["Input", "Counter", "ProgressBar"]
   },
   "accessibility": {
     "role": "slider",
-    "keyboardNav": [{ "key": "Click/Drag", "action": "Set slider value" }],
+    "keyboardNav": [
+      {
+        "key": "Click/Drag",
+        "action": "Set slider value"
+      }
+    ],
     "screenReaderNotes": "Has aria-valuenow, aria-valuemin, aria-valuemax attributes"
   },
   "antiHallucination": {
@@ -131,13 +135,22 @@
       "onChangeCommitted"
     ],
     "commonMistakes": [
-      { "mistake": "marks={[0, 25, 50, 75, 100]}", "correction": "Marks/ticks not supported" },
+      {
+        "mistake": "marks={[0, 25, 50, 75, 100]}",
+        "correction": "Marks/ticks not supported"
+      },
       {
         "mistake": "orientation='vertical'",
         "correction": "Only horizontal orientation is supported"
       },
-      { "mistake": "tooltip", "correction": "Use showPercentage for value display" },
-      { "mistake": "defaultValue", "correction": "Component is controlled-only; use value prop" }
+      {
+        "mistake": "tooltip",
+        "correction": "Use showPercentage for value display"
+      },
+      {
+        "mistake": "defaultValue",
+        "correction": "Component is controlled-only; use value prop"
+      }
     ]
   },
   "examples": [

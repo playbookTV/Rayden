@@ -1,6 +1,6 @@
 {
   "name": "@raydenui/ai",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "AI compatibility layer for Rayden UI - enables LLMs to reliably generate UI without hallucination",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -63,12 +63,15 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup && tsx scripts/generate-dtcg.ts",
+    "build": "tsup && node --import tsx scripts/generate-dtcg.ts && node --import tsx scripts/copy-assets.ts",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "generate-dtcg": "tsx scripts/generate-dtcg.ts",
-    "generate-manifests": "tsx scripts/generate-manifests.ts",
-    "validate-manifests": "tsx scripts/validate-manifests.ts"
+    "generate-dtcg": "node --import tsx scripts/generate-dtcg.ts",
+    "generate-manifests": "node --import tsx scripts/generate-contracts.ts",
+    "validate-manifests": "node --import tsx scripts/validate-manifests.ts",
+    "generate-catalog": "node --import tsx scripts/generate-catalog.ts",
+    "check-generated": "node --import tsx scripts/generate-contracts.ts --check && node --import tsx scripts/generate-catalog.ts --check",
+    "test": "node --test tests/*.test.mjs"
   },
   "keywords": [
     "ai",

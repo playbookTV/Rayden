@@ -1,0 +1,602 @@
+[
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--no-tasks",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--no-results",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-emptystate--upload-photos",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-announcement",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--standard",
+    "width": 768,
+    "document": 953,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--pill-nav",
+    "width": 768,
+    "document": 939,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--dark-pill-nav",
+    "width": 768,
+    "document": 939,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--rounded-buttons",
+    "width": 768,
+    "document": 881,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-language",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--centered-logo",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--dark-background",
+    "width": 768,
+    "document": 1051,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-search",
+    "width": 768,
+    "document": 925,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--with-switcher",
+    "width": 768,
+    "document": 915,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-header--double-row",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--standard",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--card",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--card",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--card",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-login--work-email",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-notifications--default",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": [
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 236.796875,
+        "overlap": true
+      },
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 236.796875,
+        "overlap": true
+      },
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 236.796875,
+        "overlap": true
+      }
+    ]
+  },
+  {
+    "id": "blocks-notifications--default",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": [
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 306.796875,
+        "overlap": false
+      },
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 306.796875,
+        "overlap": false
+      },
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 306.796875,
+        "overlap": false
+      }
+    ]
+  },
+  {
+    "id": "blocks-notifications--default",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": [
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 684.796875,
+        "overlap": false
+      },
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 684.796875,
+        "overlap": false
+      },
+      {
+        "link": "Marketing Design",
+        "right": 281.765625,
+        "timeLeft": 684.796875,
+        "overlap": false
+      }
+    ]
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 238,
+        "scrollWidth": 652
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 308,
+        "scrollWidth": 652
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-quicksend--default",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "width": 320,
+    "document": 320,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "width": 390,
+    "document": 390,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-recenttransactions--default",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "width": 320,
+    "document": 837,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 288,
+        "scrollWidth": 877
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "width": 390,
+    "document": 837,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 358,
+        "scrollWidth": 877
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-searchabletable--with-search",
+    "width": 768,
+    "document": 837,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 736,
+        "scrollWidth": 877
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "width": 320,
+    "document": 532,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 288,
+        "scrollWidth": 572
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "width": 390,
+    "document": 532,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 358,
+        "scrollWidth": 572
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-searchabletable--with-title",
+    "width": 768,
+    "document": 768,
+    "scrollAreas": [],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-table--default",
+    "width": 320,
+    "document": 808,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 288,
+        "scrollWidth": 848
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-table--default",
+    "width": 390,
+    "document": 808,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 358,
+        "scrollWidth": 848
+      }
+    ],
+    "overlappingMetadata": []
+  },
+  {
+    "id": "blocks-table--default",
+    "width": 768,
+    "document": 808,
+    "scrollAreas": [
+      {
+        "tag": "DIV",
+        "width": 736,
+        "scrollWidth": 848
+      }
+    ],
+    "overlappingMetadata": []
+  }
+]

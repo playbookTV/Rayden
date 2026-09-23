@@ -1,16 +1,20 @@
 ---
 title: Blocks
-description: Pre-built, production-ready UI patterns that combine multiple Rayden UI components
+description: Reusable application, marketing, commerce, and finance patterns
 ---
 
 # Blocks
 
-Pre-built, production-ready UI blocks that combine multiple Rayden UI components into common patterns. Blocks are designed to be dropped into your application with minimal configuration.
+24 reusable blocks for application UI, marketing, commerce, and finance. Import components and their TypeScript types from `@raydenui/ui/blocks`. The library is expanding toward the approved 100-block plan across 12 categories.
 
 ## Import
 
 ```tsx
 import {
+  ApplicationShellBlock,
+  PageHeaderBlock,
+  WorkspaceSwitcherBlock,
+  CommandPaletteBlock,
   NotificationsBlock,
   LoginBlock,
   TableBlock,
@@ -18,6 +22,19 @@ import {
   RecentTransactionsBlock,
   EmptyStateBlock,
   SearchableTableBlock,
+  HeaderBlock,
+  CreateAccountBlock,
+  KpiOverviewBlock,
+  ProfileSettingsBlock,
+  TaskListBlock,
+  ProductHeroBlock,
+  FeatureOverviewBlock,
+  PricingPlansBlock,
+  SiteFooterBlock,
+  ProductCollectionBlock,
+  ProductDetailBlock,
+  ShoppingCartBlock,
+  CheckoutReviewBlock,
 } from "@raydenui/ui/blocks";
 ```
 
@@ -29,15 +46,43 @@ import { LoginBlock } from "@raydenui/ui/blocks";
 
 ## Available Blocks
 
-| Block | Description |
-| ----- | ----------- |
-| [NotificationsBlock](/blocks/notifications-block) | Notification list with read/unread states |
-| [LoginBlock](/blocks/login-block) | Authentication form with social providers |
-| [TableBlock](/blocks/table-block) | Data table with header and pagination |
-| [QuickSendBlock](/blocks/quick-send-block) | Quick money transfer interface |
-| [RecentTransactionsBlock](/blocks/recent-transactions-block) | Transaction history list |
-| [EmptyStateBlock](/blocks/empty-state-block) | Empty state with illustration and CTA |
-| [SearchableTableBlock](/blocks/searchable-table-block) | Table with search and filters |
+| Block                                                        | Description                               |
+| ------------------------------------------------------------ | ----------------------------------------- |
+| [NotificationsBlock](/blocks/notifications-block)            | Notification list with read/unread states |
+| [LoginBlock](/blocks/login-block)                            | Authentication form with social providers |
+| [TableBlock](/blocks/table-block)                            | Data table with header and pagination     |
+| [QuickSendBlock](/blocks/quick-send-block)                   | Quick money transfer interface            |
+| [RecentTransactionsBlock](/blocks/recent-transactions-block) | Transaction history list                  |
+| [EmptyStateBlock](/blocks/empty-state-block)                 | Empty state with illustration and CTA     |
+| [SearchableTableBlock](/blocks/searchable-table-block)       | Table with search and filters             |
+
+### Application and marketing additions
+
+| Category       | Blocks                                                    |
+| -------------- | --------------------------------------------------------- |
+| Navigation     | HeaderBlock, SiteFooterBlock                              |
+| Authentication | CreateAccountBlock                                        |
+| Dashboards     | KpiOverviewBlock                                          |
+| Forms          | ProfileSettingsBlock                                      |
+| Collaboration  | TaskListBlock                                             |
+| Marketing      | ProductHeroBlock, FeatureOverviewBlock, PricingPlansBlock |
+
+See [application and marketing blocks](/blocks/expanded-library) for their contracts and examples.
+
+### Navigation and shells
+
+ApplicationShellBlock, PageHeaderBlock, WorkspaceSwitcherBlock and CommandPaletteBlock compose into a responsive application frame. See [navigation blocks](/blocks/navigation) for public contracts and examples.
+
+### Commerce batch
+
+| Block                  | Purpose                                                             |
+| ---------------------- | ------------------------------------------------------------------- |
+| ProductCollectionBlock | Search, category filters, sorting, and product actions              |
+| ProductDetailBlock     | Product options, stock limits, quantities, and add-to-cart callback |
+| ShoppingCartBlock      | Controlled cart items, quantities, removal, and totals              |
+| CheckoutReviewBlock    | Delivery, payment summary, order review, and confirmation states    |
+
+See [commerce blocks](/blocks/commerce) for a complete integration example.
 
 ## Quick Examples
 
@@ -64,12 +109,7 @@ import { LoginBlock } from "@raydenui/ui/blocks";
 Blocks accept a `className` prop for custom styling:
 
 ```tsx
-<TableBlock
-  className="rounded-xl shadow-soft-lg"
-  title="Users"
-  columns={...}
-  rows={...}
-/>
+<TableBlock className="rounded-xl shadow-soft-lg" rows={rows} />
 ```
 
 For deeper customization, consider using the individual components directly from `@raydenui/ui`.

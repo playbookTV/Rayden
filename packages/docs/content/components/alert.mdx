@@ -81,28 +81,14 @@ import { Alert } from "@raydenui/ui";
 ### With Actions
 
 <Preview>
-  <Alert
-    state="error"
-    title="Connection Lost"
-    actions={
-      <Button size="sm" variant="destructive" appearance="outlined">
-        Retry
-      </Button>
-    }
-  >
-    Unable to connect to the server. Please try again.
-  </Alert>
+  <AlertActionDemo />
 </Preview>
 
 ```tsx
 <Alert
   state="error"
   title="Connection Lost"
-  actions={
-    <Button size="sm" variant="destructive" appearance="outlined">
-      Retry
-    </Button>
-  }
+  primaryAction={{ label: "Retry", onClick: () => {} }}
 >
   Unable to connect to the server. Please try again.
 </Alert>
@@ -116,7 +102,7 @@ const [show, setShow] = useState(true);
 {show && (
   <Alert
     state="information"
-    onDismiss={() => setShow(false)}
+    onClose={() => setShow(false)}
   >
     New features are available!
   </Alert>
@@ -131,7 +117,6 @@ const [show, setShow] = useState(true);
 | `state` | `"information" \| "success" \| "warning" \| "error"` | `"information"` | Alert state/color |
 | `title` | `string` | — | Alert title |
 | `icon` | `ReactNode` | — | Custom icon |
-| `actions` | `ReactNode` | — | Action buttons |
 | `onDismiss` | `() => void` | — | Dismiss handler (shows close button) |
 | `className` | `string` | — | Additional CSS classes |
 

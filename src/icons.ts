@@ -9,3 +9,4 @@
  * <Icon icon={arrowDownIcon} />
  */
 export * from "./components/Icon/icons";
+export { iconCatalog, iconNames } from "./components/Icon/catalog";

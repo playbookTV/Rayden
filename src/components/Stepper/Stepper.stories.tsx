@@ -67,7 +67,7 @@ export const VerticalWithNumbers: Story = {
 
 export const AllSteps: Story = {
   render: () => (
-    <div className="flex flex-col gap-12 w-full max-w-[800px]">
+    <div className="flex flex-col gap-12 w-full max-w-full max-w-[800px]">
       <Stepper steps={sampleSteps} activeStep={0} indicator="dot" />
       <Stepper steps={sampleSteps} activeStep={1} indicator="dot" />
       <Stepper steps={sampleSteps} activeStep={2} indicator="dot" />

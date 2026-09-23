@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "motion-tabs",
+  "type": "registry:block",
+  "title": "Motion tabs",
+  "description": "Editable segmented tabs with opt-in motion and reduced-motion support.",
+  "registryDependencies": [
+    "@rayden/setup",
+    "@rayden/rules"
+  ],
+  "files": [
+    {
+      "path": "registry/citrionus/motion-tabs/motion-tabs.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport { Tab, Tabs } from \"@raydenui/ui\";\nimport { MotionProvider } from \"@raydenui/ui/motion\";\n\n/** Motion is opt-in. The provider respects the user's reduced-motion preference. */\nexport function MotionTabs() {\n  return (\n    <MotionProvider preset=\"snappy\">\n      <Tabs motion variant=\"segmented\" defaultValue=\"week\">\n        <Tab value=\"week\">This week</Tab>\n        <Tab value=\"month\">This month</Tab>\n        <Tab value=\"year\">This year</Tab>\n      </Tabs>\n    </MotionProvider>\n  );\n}\n"
+    }
+  ],
+  "dependencies": [
+    "@raydenui/ui@0.9.7"
+  ],
+  "meta": {
+    "rayden": {
+      "schemaVersion": "1.0.0",
+      "flavor": "citrionus",
+      "uiVersion": "0.9.7",
+      "aiVersion": "0.1.4",
+      "registryVersion": "citrionus-0.9.7-pilot.1",
+      "distribution": "package-backed",
+      "status": "local-pilot",
+      "components": [
+        {
+          "name": "Tabs",
+          "exportNames": [
+            "Tabs",
+            "Tab"
+          ],
+          "importPath": "@raydenui/ui",
+          "description": "Tabbed navigation component with line and pill variants. Compound component with Tab children."
+        }
+      ]
+    }
+  }
+}

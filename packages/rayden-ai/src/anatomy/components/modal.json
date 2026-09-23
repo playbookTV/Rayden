@@ -46,7 +46,7 @@
     },
     "title": {
       "type": "TEXT",
-      "fontFamily": "{typography.fontFamily.sans}",
+      "fontFamily": "{typography.fontFamily.heading}",
       "fontWeight": "{typography.fontWeight.semibold}",
       "fontSize": "{typography.fontSize.lg}",
       "fill": "{color.grey.900}"

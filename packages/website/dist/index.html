@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101011" />
+    <title>Rayden UI — Make the interface worth opening.</title>
+    <meta
+      name="description"
+      content="Thoughtfully crafted React components, flexible design tokens, and project starters. Build your next interface with Rayden UI."
+    />
+    <link rel="icon" href="/assets/rayden-mark.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/assets/manrope-600.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <svg
+      class="icon-defs"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M6 18 18 6M6 6h12v12" />
+        </symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24">
+          <rect x="8" y="8" width="12" height="12" rx="3" />
+          <path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4L19 6" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m16 16 5 5" />
+        </symbol>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="2" />
+          <rect x="14" y="3" width="7" height="7" rx="2" />
+          <rect x="3" y="14" width="7" height="7" rx="2" />
+          <rect x="14" y="14" width="7" height="7" rx="2" />
+        </symbol>
+        <symbol id="i-sliders" viewBox="0 0 24 24">
+          <path d="M4 7h7m5 0h4M4 17h3m5 0h8" />
+          <circle cx="13" cy="7" r="3" />
+          <circle cx="9" cy="17" r="3" />
+        </symbol>
+        <symbol id="i-code" viewBox="0 0 24 24">
+          <path d="m7 7-5 5 5 5m10-10 5 5-5 5M14 3l-4 18" />
+        </symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14" />
+        </symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24">
+          <path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z" />
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+          <path d="M20 14.3A8.5 8.5 0 0 1 9.7 4a8.5 8.5 0 1 0 10.3 10.3Z" />
+        </symbol>
+        <symbol id="i-git" viewBox="0 0 24 24">
+          <path
+            d="M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 0 0-1-2.7c3.4-.4 7-1.7 7-7.3a5.6 5.6 0 0 0-1.5-3.9A5.2 5.2 0 0 0 19.4.3S18.1-.1 15 1.8a13.4 13.4 0 0 0-6 0C5.9-.1 4.6.3 4.6.3a5.2 5.2 0 0 0-.1 3.8A5.6 5.6 0 0 0 3 8c0 5.6 3.6 6.9 7 7.3A3.5 3.5 0 0 0 9 18v4"
+            transform="translate(1 1) scale(.9)"
+          />
+        </symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M6 18 18 6" />
+        </symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 8h16M4 16h16" />
+        </symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24">
+          <path d="m9 5 7 7-7 7" />
+        </symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"
+          />
+        </symbol>
+      </defs>
+    </svg>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="nav-shell">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="brand" href="#" aria-label="Rayden UI home"
+          ><img
+            src="/assets/rayden-mark.svg"
+            alt=""
+            width="34"
+            height="34"
+          />rayden<span>ui</span></a
+        >
+        <div class="nav-links">
+          <a href="#components">Components</a><a href="#templates">Starters</a
+          ><a href="#ai">For AI</a
+          ><a href="https://rayden-docs.vercel.app/"
+            >Documentation<svg class="icon small"><use href="#i-up" /></svg
+          ></a>
+        </div>
+        <div class="nav-actions">
+          <button
+            class="icon-button search-open"
+            aria-label="Search documentation"
+          >
+            <svg class="icon"><use href="#i-search" /></svg
+            ><kbd>⌘ K</kbd></button
+          ><a
+            class="icon-button github"
+            href="https://github.com/playbookTV/Rayden"
+            aria-label="Rayden on GitHub"
+            ><svg class="icon"><use href="#i-git" /></svg></a
+          ><a
+            class="button nav-cta"
+            href="https://rayden-docs.vercel.app/getting-started"
+            >Get started<svg class="icon small"><use href="#i-arrow" /></svg></a
+          ><button
+            class="icon-button menu-toggle"
+            aria-controls="mobile-nav"
+            aria-expanded="false"
+            aria-label="Open navigation"
+          >
+            <svg class="icon"><use href="#i-menu" /></svg>
+          </button>
+        </div>
+      </nav>
+      <div id="mobile-nav" hidden>
+        <a href="#components">Components</a><a href="#templates">Starters</a
+        ><a href="#ai">For AI</a
+        ><a href="https://rayden-docs.vercel.app/">Documentation</a>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero container">
+        <a class="release" href="https://github.com/playbookTV/Rayden/releases"
+          ><span>OPEN SOURCE</span>A little less setup. A lot more
+          possibility.<svg class="icon small"><use href="#i-arrow" /></svg
+        ></a>
+        <h1>Make the interface<br /><span>worth opening.</span></h1>
+        <p class="hero-description">
+          Considered components. Expressive details. All yours.<br />A React
+          library for the things you can’t wait to build.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#components"
+            >Explore the components<svg class="icon">
+              <use href="#i-arrow" /></svg></a
+          ><a
+            class="button secondary"
+            href="https://rayden-docs.vercel.app/getting-started"
+            >Start building<svg class="icon"><use href="#i-code" /></svg
+          ></a>
+        </div>
+        <button class="install-inline" data-copy="npm install @raydenui/ui">
+          <span class="prompt-symbol">$</span
+          ><code>npm install @raydenui/ui</code
+          ><svg class="icon small"><use href="#i-copy" /></svg
+          ><span class="sr-only">Copy install command</span>
+        </button>
+      </section>
+      <section
+        class="showcase-section"
+        id="components"
+        aria-labelledby="playground-title"
+      >
+        <div class="showcase-halo" aria-hidden="true"></div>
+        <div class="container showcase" data-accent="orange">
+          <div class="showcase-toolbar">
+            <div class="showcase-title">
+              <span class="tiny-cross">+</span>
+              <h2 id="playground-title">A few of the possibilities</h2>
+              <span class="live-tag">Interactive previews</span>
+            </div>
+            <div class="preview-tools">
+              <button
+                class="icon-button preview-theme"
+                aria-label="Switch previews to light theme"
+                aria-pressed="false"
+              >
+                <svg class="icon small"><use href="#i-moon" /></svg></button
+              ><button class="text-button" id="view-code">
+                <svg class="icon small"><use href="#i-code" /></svg>View code
+              </button>
+            </div>
+          </div>
+          <div class="showcase-grid">
+            <div class="showcase-column">
+              <article class="bezel analytics-demo" data-category="data">
+                <div class="demo-card analytics-card">
+                  <div class="card-heading">
+                    <span>Project activity</span>
+                    <div class="segment" aria-label="Activity period">
+                      <button
+                        class="active"
+                        data-period="week"
+                        aria-pressed="true"
+                      >
+                        Week</button
+                      ><button data-period="month" aria-pressed="false">
+                        Month
+                      </button>
+                    </div>
+                  </div>
+                  <div class="metric-line">
+                    <strong id="activity-total">1,284</strong
+                    ><span class="metric-trend"
+                      ><svg class="icon small"><use href="#i-up" /></svg
+                      ><span id="activity-change">18.6%</span></span
+                    >
+                  </div>
+                  <p class="muted compact">Component interactions</p>
+                  <div class="chart-wrap">
+                    <div class="chart-grid" aria-hidden="true">
+                      <span>1.5k</span><span>1k</span><span>500</span>
+                    </div>
+                    <svg
+                      class="activity-chart"
+                      viewBox="0 0 300 115"
+                      preserveAspectRatio="none"
+                      role="img"
+                      aria-label="Demo interactions increased throughout the week"
+                    >
+                      <defs>
+                        <linearGradient
+                          id="chart-fill"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="0"
+                            stop-color="currentColor"
+                            stop-opacity=".25"
+                          />
+                          <stop
+                            offset="1"
+                            stop-color="currentColor"
+                            stop-opacity="0"
+                          />
+                        </linearGradient>
+                      </defs>
+                      <path
+                        id="chart-area"
+                        d="M0 104C20 104 22 84 45 86S72 109 96 74S122 85 145 57S173 72 191 40S220 68 240 28S273 43 300 7V115H0Z"
+                        fill="url(#chart-fill)"
+                      />
+                      <path
+                        id="chart-line"
+                        d="M0 104C20 104 22 84 45 86S72 109 96 74S122 85 145 57S173 72 191 40S220 68 240 28S273 43 300 7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        vector-effect="non-scaling-stroke"
+                      />
+                    </svg>
+                  </div>
+                  <div class="chart-labels">
+                    <span>Mon</span><span>Tue</span><span>Wed</span
+                    ><span>Thu</span><span>Fri</span><span>Sat</span
+                    ><span>Sun</span>
+                  </div>
+                  <div class="card-bottom">
+                    <span><i class="legend-dot"></i>Engagement</span
+                    ><span>Demo data</span>
+                  </div>
+                </div>
+              </article>
+              <article class="bezel command-demo" data-category="inputs">
+                <div class="demo-card command-card">
+                  <label class="command-input"
+                    ><svg class="icon"><use href="#i-search" /></svg
+                    ><input
+                      id="inline-search"
+                      placeholder="What do you want to build?"
+                      aria-label="Filter component links"
+                    /><kbd>⌘ K</kbd></label
+                  >
+                  <div class="command-content">
+                    <p class="eyebrow">JUMP INTO THE DETAILS</p>
+                    <div id="inline-results">
+                      <a
+                        href="https://rayden-docs.vercel.app/components/button"
+                        data-search="buttons actions"
+                        ><span class="command-icon"
+                          ><svg class="icon"><use href="#i-grid" /></svg></span
+                        ><span
+                          >Buttons & actions<small
+                            >The start of every interaction</small
+                          ></span
+                        ><svg class="icon small command-arrow">
+                          <use href="#i-chevron" /></svg></a
+                      ><a
+                        href="https://rayden-docs.vercel.app/components/input"
+                        data-search="inputs forms"
+                        ><span class="command-icon"
+                          ><svg class="icon">
+                            <use href="#i-sliders" /></svg></span
+                        ><span
+                          >Inputs & forms<small
+                            >Every detail, considered</small
+                          ></span
+                        ><svg class="icon small command-arrow">
+                          <use href="#i-chevron" /></svg></a
+                      ><a
+                        href="https://rayden-docs.vercel.app/components/activity-feed"
+                        data-search="feedback activity"
+                        ><span class="command-icon"
+                          ><svg class="icon"><use href="#i-bell" /></svg></span
+                        ><span
+                          >Activity & feedback<small
+                            >Keep everyone in the loop</small
+                          ></span
+                        ><svg class="icon small command-arrow">
+                          <use href="#i-chevron" /></svg
+                      ></a>
+                    </div>
+                    <p id="inline-empty" hidden>
+                      No components found. Try “buttons”.
+                    </p>
+                  </div>
+                  <div class="command-footer">
+                    <span>Find your next building block</span
+                    ><svg class="icon small"><use href="#i-arrow" /></svg>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="showcase-column centerpiece">
+              <article class="bezel art-demo" data-category="feedback">
+                <div class="demo-card art-card">
+                  <div
+                    class="art-image"
+                    role="img"
+                    aria-label="Abstract folded copper and smoked glass"
+                  ></div>
+                  <div class="art-top">
+                    <span class="art-label"
+                      ><svg class="icon small"><use href="#i-spark" /></svg>ROOM
+                      FOR YOUR IDEAS</span
+                    ><button
+                      class="icon-button favorite"
+                      aria-label="Save this visual"
+                      aria-pressed="false"
+                    >
+                      <svg class="icon"><use href="#i-heart" /></svg>
+                    </button>
+                  </div>
+                  <div class="art-caption">
+                    <p>Less friction.<br />More feeling.</p>
+                    <span>Good interfaces make room for both.</span>
+                  </div>
+                  <div class="project-float">
+                    <div class="project-icon">
+                      <svg class="icon"><use href="#i-grid" /></svg>
+                    </div>
+                    <div>
+                      <strong>Project Aurora</strong
+                      ><span id="project-status">Bringing it all together</span>
+                    </div>
+                    <button
+                      class="project-advance"
+                      aria-label="Advance demo project progress"
+                    >
+                      <svg viewBox="0 0 40 40" aria-hidden="true">
+                        <circle class="ring-track" cx="20" cy="20" r="16" />
+                        <circle
+                          id="progress-ring"
+                          cx="20"
+                          cy="20"
+                          r="16"
+                        /></svg
+                      ><span id="progress-label">72</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+              <article class="bezel actions-demo" data-category="inputs">
+                <div class="demo-card actions-card">
+                  <div class="card-heading">
+                    <span>The little things add up.</span
+                    ><svg class="icon small muted"><use href="#i-spark" /></svg>
+                  </div>
+                  <div class="button-playground">
+                    <button class="demo-primary save-demo">
+                      <svg class="icon small"><use href="#i-plus" /></svg
+                      ><span>Create something</span></button
+                    ><button
+                      class="demo-outline reset-demo"
+                      aria-label="Reset preview"
+                    >
+                      <svg class="icon small">
+                        <use href="#i-sliders" />
+                      </svg></button
+                    ><button
+                      class="demo-round favorite"
+                      aria-label="Favorite component"
+                      aria-pressed="false"
+                    >
+                      <svg class="icon small"><use href="#i-heart" /></svg>
+                    </button>
+                  </div>
+                  <div class="chips">
+                    <span class="chip"><i></i>In progress</span
+                    ><span class="chip neutral"
+                      ><svg class="icon small"><use href="#i-check" /></svg
+                      >Ready to ship</span
+                    ><span class="chip">⌘ K</span>
+                  </div>
+                  <div class="micro-bottom">
+                    <span>Hover. Press. Make it yours.</span
+                    ><a
+                      href="https://rayden-docs.vercel.app/components/button"
+                      aria-label="Read button documentation"
+                      ><svg class="icon small"><use href="#i-up" /></svg
+                    ></a>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="showcase-column">
+              <article class="bezel calendar-demo" data-category="data">
+                <div class="demo-card calendar-card">
+                  <div class="card-heading">
+                    <span id="calendar-title">September 2026</span>
+                    <div class="calendar-nav">
+                      <button
+                        class="icon-button previous-month"
+                        aria-label="Previous month"
+                      >
+                        <svg class="icon small">
+                          <use href="#i-chevron" />
+                        </svg></button
+                      ><button
+                        class="icon-button next-month"
+                        aria-label="Next month"
+                      >
+                        <svg class="icon small"><use href="#i-chevron" /></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="weekdays" aria-hidden="true">
+                    <span>M</span><span>T</span><span>W</span><span>T</span
+                    ><span>F</span><span>S</span><span>S</span>
+                  </div>
+                  <div
+                    class="calendar-days"
+                    role="group"
+                    aria-label="Choose a date"
+                  ></div>
+                  <div class="calendar-selection">
+                    <span class="calendar-date-icon"
+                      ><strong id="chosen-day">22</strong></span
+                    >
+                    <div>
+                      <strong>Make time for the good stuff.</strong
+                      ><span id="chosen-date">Tuesday, September 22</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="bezel theme-demo" data-category="inputs">
+                <div class="demo-card theme-card">
+                  <div class="card-heading">
+                    <span>Your look. Your rules.</span
+                    ><svg class="icon small muted">
+                      <use href="#i-sliders" />
+                    </svg>
+                  </div>
+                  <div class="setting-row">
+                    <label>Accent</label>
+                    <div
+                      class="swatches"
+                      role="group"
+                      aria-label="Preview accent color"
+                    >
+                      <button
+                        class="swatch active"
+                        data-accent="orange"
+                        aria-label="Copper"
+                        aria-pressed="true"
+                      ></button
+                      ><button
+                        class="swatch"
+                        data-accent="blue"
+                        aria-label="Blue"
+                        aria-pressed="false"
+                      ></button
+                      ><button
+                        class="swatch"
+                        data-accent="green"
+                        aria-label="Green"
+                        aria-pressed="false"
+                      ></button
+                      ><button
+                        class="swatch"
+                        data-accent="pink"
+                        aria-label="Pink"
+                        aria-pressed="false"
+                      ></button>
+                    </div>
+                  </div>
+                  <div class="setting-row">
+                    <label for="radius">Corner radius</label>
+                    <div class="range-wrap">
+                      <input
+                        id="radius"
+                        type="range"
+                        min="4"
+                        max="24"
+                        value="16"
+                      /><output for="radius" id="radius-value">16</output>
+                    </div>
+                  </div>
+                  <div class="setting-row">
+                    <span id="motion-label">Motion</span
+                    ><button
+                      class="switch"
+                      role="switch"
+                      aria-checked="true"
+                      aria-labelledby="motion-label"
+                      id="motion-switch"
+                    >
+                      <span></span>
+                    </button>
+                  </div>
+                  <div class="theme-foot">
+                    <span>Small changes. Whole new feel.</span
+                    ><button class="text-button" id="save-theme">
+                      Save<svg class="icon small"><use href="#i-check" /></svg>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="gallery-foot">
+            <div class="filter-group" role="group" aria-label="Filter previews">
+              <button class="active" data-filter="all" aria-pressed="true">
+                All previews</button
+              ><button data-filter="inputs" aria-pressed="false">Inputs</button
+              ><button data-filter="data" aria-pressed="false">Data</button
+              ><button data-filter="feedback" aria-pressed="false">
+                Feedback
+              </button>
+            </div>
+            <a class="text-link" href="https://rayden-docs.vercel.app/"
+              >Find your building blocks<svg class="icon small">
+                <use href="#i-arrow" /></svg
+            ></a>
+          </div>
+        </div>
+      </section>
+      <section class="foundation container">
+        <p>Fits right into your workflow.</p>
+        <div class="stack-list">
+          <span><span class="react-symbol">⚛</span>React</span
+          ><span><span class="ts-symbol">TS</span>TypeScript</span
+          ><span><span class="tailwind-symbol">≈</span>Tailwind CSS</span
+          ><span><span class="next-symbol">N</span>Next.js</span
+          ><span class="vite-word">Vite</span>
+        </div>
+        <div class="foundation-notes">
+          <span>MIT licensed</span><i></i><span>Customize every detail</span
+          ><i></i><span>Built for React</span>
+        </div>
+      </section>
+      <section class="details-section container" id="craft">
+        <div class="section-intro">
+          <div>
+            <p class="eyebrow accent">A FOUNDATION WITH CHARACTER</p>
+            <h2>Looks considered.<br />Feels like yours.</h2>
+          </div>
+          <p>
+            The everyday essentials, with the details already thought through.
+            Start with a coherent system. Take it somewhere new.
+          </p>
+        </div>
+        <div class="detail-grid">
+          <article>
+            <div class="detail-visual token-visual">
+              <span class="token-pill">--color-primary</span>
+              <div class="token-colors">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <span class="token-caption">One token. A whole system.</span>
+            </div>
+            <h3>A system, not a starting-over.</h3>
+            <p>
+              Shared design tokens bring your colors, spacing, and type together
+              across every component.
+            </p>
+            <a
+              class="text-link"
+              href="https://rayden-docs.vercel.app/design-tokens"
+              >Explore the tokens<svg class="icon small">
+                <use href="#i-up" /></svg
+            ></a>
+          </article>
+          <article>
+            <div class="detail-visual code-visual">
+              <span class="code-tab"><i></i>your-next-idea.tsx</span>
+              <pre><span class="syntax-purple">import</span> { <span class="syntax-white">Button</span> } <span class="syntax-purple">from</span> <span class="syntax-green">'@raydenui/ui'</span>;
+
+<span class="syntax-gray">// The beginning of something good.</span>
+&lt;<span class="syntax-orange">Button</span> variant=<span class="syntax-green">"primary"</span>&gt;
+  <span class="syntax-white">Make it happen</span>
+&lt;/<span class="syntax-orange">Button</span>&gt;</pre>
+            </div>
+            <h3>Familiar tools. A faster start.</h3>
+            <p>
+              Typed React APIs and Tailwind styling keep you in your flow, from
+              first import to final detail.
+            </p>
+            <a
+              class="text-link"
+              href="https://rayden-docs.vercel.app/getting-started"
+              >Meet the library<svg class="icon small"><use href="#i-up" /></svg
+            ></a>
+          </article>
+          <article>
+            <div class="detail-visual activity-visual">
+              <div class="activity-event">
+                <span class="avatar peach">JL</span>
+                <div>
+                  <strong>Jules updated Button</strong
+                  ><span>Added the finishing touches</span>
+                </div>
+                <span class="event-time">2m</span>
+              </div>
+              <div class="activity-event">
+                <span class="avatar purple">AM</span>
+                <div>
+                  <strong>Alex left a note</strong
+                  ><span>“That’s the one.”</span>
+                </div>
+                <span class="event-time">5m</span>
+              </div>
+              <button class="activity-read">
+                <svg class="icon small"><use href="#i-check" /></svg
+                ><span>Mark all as read</span>
+              </button>
+            </div>
+            <h3>Made for real interfaces.</h3>
+            <p>
+              Compose inputs, feedback, and data display into experiences that
+              feel connected.
+            </p>
+            <a
+              class="text-link"
+              href="https://rayden-docs.vercel.app/components/activity-feed"
+              >Explore activity feed<svg class="icon small">
+                <use href="#i-up" /></svg
+            ></a>
+          </article>
+        </div>
+      </section>
+      <section class="starter-section" id="templates">
+        <div class="container">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow accent">FROM FIRST IDEA TO FIRST COMMIT</p>
+              <h2>Skip the blank canvas.</h2>
+            </div>
+            <p>
+              Give your next project a head start.<br />Choose a starter. Keep
+              building.
+            </p>
+          </div>
+          <div class="starter-layout">
+            <div class="starter-controls">
+              <div
+                class="starter-options"
+                role="group"
+                aria-label="Starter template"
+              >
+                <button
+                  data-template="dashboard"
+                  class="active"
+                  aria-pressed="true"
+                >
+                  <span class="starter-number">01</span
+                  ><span
+                    >Dashboard<small
+                      >A place for the bigger picture.</small
+                    ></span
+                  ><svg class="icon"><use href="#i-up" /></svg></button
+                ><button data-template="landing" aria-pressed="false">
+                  <span class="starter-number">02</span
+                  ><span
+                    >Landing page<small
+                      >Give your idea a front door.</small
+                    ></span
+                  ><svg class="icon"><use href="#i-up" /></svg></button
+                ><button data-template="ecommerce" aria-pressed="false">
+                  <span class="starter-number">03</span
+                  ><span
+                    >E-commerce<small
+                      >Make your products the story.</small
+                    ></span
+                  ><svg class="icon"><use href="#i-up" /></svg></button
+                ><button data-template="blog" aria-pressed="false">
+                  <span class="starter-number">04</span
+                  ><span>Blog<small>Good ideas deserve a home.</small></span
+                  ><svg class="icon"><use href="#i-up" /></svg>
+                </button>
+              </div>
+              <div class="framework-select">
+                <span>Your framework</span>
+                <div class="segment" role="group" aria-label="Framework">
+                  <button
+                    class="active"
+                    data-framework="vite"
+                    aria-pressed="true"
+                  >
+                    Vite</button
+                  ><button data-framework="nextjs" aria-pressed="false">
+                    Next.js
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="starter-preview">
+              <div class="browser-bar">
+                <div class="window-dots"><i></i><i></i><i></i></div>
+                <span id="starter-location">your-next-idea / dashboard</span
+                ><svg class="icon small"><use href="#i-up" /></svg>
+              </div>
+              <div class="starter-canvas" id="starter-canvas"></div>
+              <div class="starter-preview-label">
+                <span>Layout concept</span
+                ><a
+                  href="https://rayden-docs.vercel.app/getting-started/create-rayden-app"
+                  >Meet the starters<svg class="icon small">
+                    <use href="#i-arrow" /></svg
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="starter-terminal">
+            <span class="terminal-label">CREATE YOUR PROJECT</span>
+            <div>
+              <span class="prompt-symbol">$</span
+              ><code id="starter-command"
+                >npx create-rayden-app my-app -f vite -t dashboard --ts</code
+              >
+            </div>
+            <button
+              class="icon-button"
+              data-copy-id="starter-command"
+              aria-label="Copy starter command"
+            >
+              <svg class="icon"><use href="#i-copy" /></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="ai-section container" id="ai">
+        <div class="ai-copy">
+          <p class="eyebrow accent">MEET YOUR NEW COLLABORATOR</p>
+          <h2>Built for you.<br />Ready for your AI.</h2>
+          <p>
+            Give your coding assistant the same context you have. Rayden’s AI
+            companion brings component manifests, design tokens, and composition
+            recipes into the conversation.
+          </p>
+          <a
+            class="button secondary"
+            href="https://rayden-docs.vercel.app/ai-integration"
+            >Explore the AI companion<svg class="icon">
+              <use href="#i-arrow" /></svg
+          ></a>
+        </div>
+        <div class="ai-panel">
+          <div class="ai-panel-heading">
+            <svg class="icon"><use href="#i-spark" /></svg
+            ><span>One shared language.</span><span class="protocol">MCP</span>
+          </div>
+          <div class="ai-prompt">
+            <span class="avatar">Y</span>
+            <p>Build a settings page that feels like the rest of my app.</p>
+          </div>
+          <div class="ai-recipe">
+            <div class="recipe-title">
+              <img
+                src="/assets/rayden-mark.svg"
+                width="27"
+                height="27"
+                alt=""
+              /><span>Rayden context</span
+              ><span class="recipe-badge">Available to your agent</span>
+            </div>
+            <div class="recipe-row">
+              <svg class="icon small"><use href="#i-check" /></svg
+              ><span>Component manifests</span><span>Props & variants</span>
+            </div>
+            <div class="recipe-row">
+              <svg class="icon small"><use href="#i-check" /></svg
+              ><span>Design tokens</span><span>Your visual system</span>
+            </div>
+            <div class="recipe-row">
+              <svg class="icon small"><use href="#i-check" /></svg
+              ><span>Composition recipes</span><span>Patterns that fit</span>
+            </div>
+          </div>
+          <div class="ai-panel-foot">
+            <code>@raydenui/ai</code><span>Less guesswork. More context.</span>
+          </div>
+        </div>
+      </section>
+      <section class="faq-section container">
+        <div>
+          <p class="eyebrow">BEFORE YOU DIVE IN</p>
+          <h2>A few good<br />questions.</h2>
+          <a
+            class="text-link"
+            href="https://github.com/playbookTV/Rayden/issues"
+            >Ask us on GitHub<svg class="icon small"><use href="#i-up" /></svg
+          ></a>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>
+              Can I use Rayden in a commercial project?<svg class="icon">
+                <use href="#i-plus" />
+              </svg>
+            </summary>
+            <p>
+              Yes. Rayden is open source and MIT licensed. Use it in personal or
+              commercial projects, following the license terms.
+            </p>
+          </details>
+          <details>
+            <summary>
+              What do I need to get started?<svg class="icon">
+                <use href="#i-plus" />
+              </svg>
+            </summary>
+            <p>
+              A React project with Tailwind CSS v4. Install @raydenui/ui and
+              follow the setup guide, or use create-rayden-app to start a new
+              Vite or Next.js project.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Can I make it match my brand?<svg class="icon">
+                <use href="#i-plus" />
+              </svg>
+            </summary>
+            <p>
+              Yes. Customize shared design tokens and style components with
+              Tailwind. Colors, typography, spacing, and component variants give
+              you room to build your own visual language.
+            </p>
+          </details>
+          <details>
+            <summary>
+              How does the AI companion work?<svg class="icon">
+                <use href="#i-plus" />
+              </svg>
+            </summary>
+            <p>
+              @raydenui/ai provides an MCP server with structured information
+              about Rayden components, tokens, and recipes. Connect it to a
+              compatible coding assistant using the AI integration guide.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section class="closing container">
+        <div class="closing-light" aria-hidden="true"></div>
+        <img src="/assets/rayden-mark.svg" alt="" width="58" height="58" />
+        <p class="eyebrow">THE NEXT GOOD IDEA IS YOURS.</p>
+        <h2>Give it a great interface.</h2>
+        <div class="hero-actions">
+          <a
+            class="button primary"
+            href="https://rayden-docs.vercel.app/getting-started"
+            >Start building with Rayden<svg class="icon">
+              <use href="#i-arrow" /></svg></a
+          ><a class="text-link" href="https://github.com/playbookTV/Rayden"
+            ><svg class="icon"><use href="#i-git" /></svg>Explore the source</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="container">
+      <div class="footer-top">
+        <a class="brand" href="#"
+          ><img
+            src="/assets/rayden-mark.svg"
+            alt=""
+            width="30"
+            height="30"
+          />rayden<span>ui</span></a
+        >
+        <p>Thoughtful tools for what comes next.</p>
+        <div>
+          <a href="https://rayden-docs.vercel.app/">Docs</a
+          ><a href="https://github.com/playbookTV/Rayden">GitHub</a
+          ><a href="https://github.com/playbookTV/Rayden/blob/main/LICENSE"
+            >License</a
+          >
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Rayden UI</span
+        ><span>Open source. Open possibilities.</span
+        ><a href="#">Back to top ↑</a>
+      </div>
+    </footer>
+    <dialog
+      class="search-dialog"
+      id="search-dialog"
+      aria-labelledby="search-title"
+    >
+      <div class="dialog-head">
+        <h2 id="search-title">Find your building block</h2>
+        <button class="icon-button dialog-close" aria-label="Close search">
+          <svg class="icon"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <label class="dialog-search"
+        ><svg class="icon"><use href="#i-search" /></svg
+        ><input
+          id="global-search"
+          placeholder="Search Rayden documentation…"
+          aria-label="Search Rayden documentation"
+      /></label>
+      <div id="global-results"></div>
+      <p class="dialog-hint">Esc to close · Enter to open a selected link</p>
+    </dialog>
+    <dialog class="code-dialog" id="code-dialog" aria-labelledby="code-title">
+      <div class="dialog-head">
+        <h2 id="code-title">Start with one component.</h2>
+        <button class="icon-button dialog-close" aria-label="Close code">
+          <svg class="icon"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <pre id="component-code">
+import { Button } from '@raydenui/ui';
+import '@raydenui/ui/styles.css';
+
+export default function App() {
+  return (
+    &lt;Button variant="primary"&gt;
+      Make it happen
+    &lt;/Button&gt;
+  );
+}</pre
+      >
+      <div class="dialog-actions">
+        <a href="https://rayden-docs.vercel.app/components/button"
+          >Read the docs ↗</a
+        ><button class="button primary" data-copy-id="component-code">
+          Copy code<svg class="icon small"><use href="#i-copy" /></svg>
+        </button>
+      </div>
+    </dialog>
+    <div class="toast" role="status" hidden>
+      <svg class="icon small"><use href="#i-check" /></svg>
+      <p></p>
+    </div>
+  </body>
+</html>

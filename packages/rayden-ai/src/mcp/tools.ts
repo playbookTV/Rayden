@@ -17,7 +17,15 @@ export const tools: ToolDefinition[] = [
         category: {
           type: "string",
           description: "Filter by component category",
-          enum: ["primitives", "inputs", "feedback", "navigation", "data-display", "composite"],
+          enum: [
+            "primitives",
+            "inputs",
+            "feedback",
+            "navigation",
+            "data-display",
+            "layout",
+            "composite",
+          ],
         },
       },
     },
@@ -61,8 +69,8 @@ export const tools: ToolDefinition[] = [
     name: "get_layout_recipes",
     description:
       "Get pre-built layout recipes and patterns using Rayden UI components. " +
-      "Recipes include complete code examples for common UI patterns like pricing pages, " +
-      "dashboards, forms, and empty states. Filter by category to find relevant recipes.",
+      "Recipes include authored examples for common UI patterns like pricing pages, " +
+      "dashboards, forms, and empty states. Some are JSX fragments requiring imports, state, and dependencies. Filter by category to find relevant recipes.",
     inputSchema: {
       type: "object",
       properties: {
@@ -72,6 +80,39 @@ export const tools: ToolDefinition[] = [
           enum: ["marketing", "dashboard", "forms", "content"],
         },
       },
+    },
+  },
+  {
+    name: "get_catalog",
+    description:
+      "Get Citrionus reference identity, compatibility, capabilities, and the canonical component catalog with usage prompts.",
+    inputSchema: {
+      type: "object",
+      properties: { flavor: { type: "string" }, uiVersion: { type: "string" } },
+    },
+  },
+  {
+    name: "get_component_guidance",
+    description:
+      "Get actual imports, source-derived props, composition guidance, and a copyable usage prompt for a component or family.",
+    inputSchema: {
+      type: "object",
+      properties: { component: { type: "string" } },
+      required: ["component"],
+    },
+  },
+  {
+    name: "validate_component_usage",
+    description:
+      "Validate a structured component usage. Returns errors, warnings, and notAssessed limitations; this does not parse React code. For dynamic values use {$expression: 'expression'}.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        component: { type: "string" },
+        props: { type: "object" },
+        children: { type: "array", items: { type: "string" } },
+      },
+      required: ["component", "props"],
     },
   },
 ];

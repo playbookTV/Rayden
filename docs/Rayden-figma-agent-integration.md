@@ -130,7 +130,7 @@ Every value in a component spec is a token alias in the form `{group.key}`. The 
   },
   "typography": {
     "fontFamily": {
-      "sans": { "$type": "fontFamily", "$value": "Inter" }
+      "sans": { "$type": "fontFamily", "$value": "Hanken Grotesk" }
     },
     "fontSize": {
       "$type": "dimension",

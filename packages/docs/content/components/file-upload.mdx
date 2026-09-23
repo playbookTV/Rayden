@@ -1,37 +1,35 @@
 ---
 title: FileUpload
-description: Drag-and-drop file upload with progress tracking
+description: File selection, validation, and upload progress
 ---
 
 # FileUpload
 
-A drag-and-drop file upload component with progress indicators and file type restrictions.
+Select files by browsing or dropping them. Rayden validates file type, size, and count, then updates your controlled list. Your app owns the actual upload and its progress.
 
 ## Import
 
 ```tsx
-import { FileUpload } from "@raydenui/ui";
+import { FileUpload, type FileUploadFileData } from "@raydenui/ui";
 ```
 
-## Usage
-
-### Basic
+## Basic selection
 
 <Preview>
   <FileUploadDemo />
 </Preview>
 
+The demos keep selected files in this page. They do not send them to a server.
+
 ```tsx
 const [files, setFiles] = useState<FileUploadFileData[]>([]);
 
-<FileUpload
-  files={files}
-  onFilesChange={setFiles}
-  onUpload={(file) => handleUpload(file)}
-/>
+<FileUpload files={files} onFilesChange={setFiles} />;
 ```
 
-### With File Type Restrictions
+Accepted files enter the list with `status: "pending"`. Selection and removal call `onFilesChange`. If you supply `onUpload`, it receives each accepted browser File and its corresponding list item **after** the list update; update that item's status rather than adding it again.
+
+## Restrict file types and size
 
 <Preview>
   <FileUploadRestrictedDemo />
@@ -42,87 +40,86 @@ const [files, setFiles] = useState<FileUploadFileData[]>([]);
   files={files}
   onFilesChange={setFiles}
   accept=".pdf,.doc,.docx"
+  maxSize={10 * 1024 * 1024}
   description="PDF, DOC up to 10MB"
 />
 ```
 
-### Multiple Files
+Type, size, and count rejection messages appear next to the drop zone and are announced to assistive technology. `onError` optionally receives each message. The same checks apply to file browsing and drag-and-drop.
+
+## Multiple files
 
 <Preview>
   <FileUploadMultipleDemo />
 </Preview>
 
 ```tsx
-<FileUpload
-  files={files}
-  onFilesChange={setFiles}
-  multiple
-  maxFiles={5}
-/>
+<FileUpload files={files} onFilesChange={setFiles} multiple maxFiles={5} />
 ```
 
-### Custom Styling
+## Images
 
 <Preview>
   <FileUploadCustomDemo />
 </Preview>
 
+## Connect an upload
+
 ```tsx
+const [files, setFiles] = useState<FileUploadFileData[]>([]);
+
+function updateFile(id: string, changes: Partial<FileUploadFileData>) {
+  setFiles((current) => current.map((item) => (item.id === id ? { ...item, ...changes } : item)));
+}
+
 <FileUpload
   files={files}
   onFilesChange={setFiles}
-  title="Upload Images"
-  description="PNG, JPG up to 10MB"
-/>
-```
-
-### With Progress
-
-```tsx
-const [progress, setProgress] = useState(0);
-
-<FileUpload
-  progress={progress}
-  uploading={progress > 0 && progress < 100}
-  onUpload={async (files) => {
-    for (let i = 0; i <= 100; i += 10) {
-      setProgress(i);
-      await delay(100);
+  onUpload={async (file, item) => {
+    updateFile(item.id, { status: "uploading", progress: 0 });
+    try {
+      const body = new FormData();
+      body.append("file", file);
+      const response = await fetch("/api/upload", { method: "POST", body });
+      if (!response.ok) throw new Error("Upload failed. Please try again.");
+      updateFile(item.id, { status: "complete", progress: 100, uploadedAt: new Date() });
+    } catch (error) {
+      updateFile(item.id, {
+        status: "error",
+        error: error instanceof Error ? error.message : "Upload failed. Please try again.",
+      });
     }
   }}
-/>
+/>;
 ```
 
-### With Max File Size
-
-```tsx
-<FileUpload
-  maxSize={5 * 1024 * 1024} // 5MB
-  onUpload={(files) => handleUpload(files)}
-  onError={(error) => showError(error)}
-/>
-```
+Implement `/api/upload` in your app. For incremental progress, update the item's `progress` from your upload client's progress callback. Keep your browser File objects or upload jobs keyed by the item ID if you implement retry or cancellation. Validate uploads again on the server.
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `onUpload` | `(files: File[]) => void` | — | Upload handler |
-| `onError` | `(error: string) => void` | — | Error handler |
-| `accept` | `string` | — | Accepted file types |
-| `maxSize` | `number` | — | Max file size in bytes |
-| `multiple` | `boolean` | `false` | Allow multiple files |
-| `maxFiles` | `number` | — | Max number of files |
-| `progress` | `number` | — | Upload progress (0-100) |
-| `uploading` | `boolean` | `false` | Upload in progress state |
-| `title` | `string` | `"Upload file"` | Title text |
-| `description` | `string` | — | Description text |
-| `icon` | `ReactNode` | — | Custom icon |
-| `disabled` | `boolean` | `false` | Disables the upload |
-| `className` | `string` | — | Additional CSS classes |
+| Prop            | Type                                             | Default              | Description                               |
+| --------------- | ------------------------------------------------ | -------------------- | ----------------------------------------- |
+| `files`         | `FileUploadFileData[]`                           | Required             | Controlled file list                      |
+| `onFilesChange` | `(files: FileUploadFileData[]) => void`          | Required             | Selection and removal updates             |
+| `onUpload`      | `(file: File, item: FileUploadFileData) => void` | —                    | Start an upload for an accepted item      |
+| `onError`       | `(message: string) => void`                      | —                    | File validation rejection                 |
+| `onRemove`      | `(id: string) => void`                           | —                    | Cleanup/cancel a removed upload           |
+| `onRetry`       | `(id: string) => void`                           | —                    | Retry an errored upload                   |
+| `onDownload`    | `(id: string) => void`                           | —                    | Download a completed item                 |
+| `accept`        | `string`                                         | —                    | Extensions, MIME types, or MIME wildcards |
+| `maxSize`       | `number`                                         | —                    | Maximum bytes per file                    |
+| `multiple`      | `boolean`                                        | `false`              | Allow multiple files                      |
+| `maxFiles`      | `number`                                         | —                    | Maximum list length                       |
+| `disabled`      | `boolean`                                        | `false`              | Disable browsing and dropping new files   |
+| `title`         | `string`                                         | `"Upload Documents"` | Header title                              |
+| `showHeader`    | `boolean`                                        | `false`              | Show header                               |
+| `onClose`       | `() => void`                                     | —                    | Header close action                       |
+| `description`   | `string`                                         | —                    | Guidance inside the drop zone             |
+| `className`     | `string`                                         | —                    | Additional wrapper classes                |
 
 ## Accessibility
 
-- Keyboard accessible file selection
-- Drag and drop with visual feedback
-- Progress announced to screen readers
+- Browse Files is a keyboard-operable button.
+- Validation messages use an alert region.
+- Upload progress and completion have live status announcements.
+- Removal controls identify pending files by name.

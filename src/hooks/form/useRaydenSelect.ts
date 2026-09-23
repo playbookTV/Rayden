@@ -11,8 +11,8 @@ export interface UseRaydenSelectOptions<
 export interface UseRaydenSelectReturn {
   value: string;
   onValueChange: (value: string) => void;
+  /** Validation message for the field, if any. Maps to Select's `error` prop. */
   error?: string;
-  hasError: boolean;
 }
 
 /**
@@ -45,8 +45,8 @@ export function useRaydenSelect<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({ form, name }: UseRaydenSelectOptions<TFieldValues, TName>): UseRaydenSelectReturn {
   const value = form.watch(name) as string;
-  const error = form.formState.errors[name];
-  const errorMessage = error?.message as string | undefined;
+  // See useRaydenInput: a flat errors[name] lookup cannot see nested field paths.
+  const { error } = form.getFieldState(name, form.formState);
 
   const onValueChange = (newValue: string) => {
     form.setValue(name, newValue as TFieldValues[TName], {
@@ -59,7 +59,6 @@ export function useRaydenSelect<
   return {
     value: value ?? "",
     onValueChange,
-    error: errorMessage,
-    hasError: !!error,
+    error: error?.message as string | undefined,
   };
 }

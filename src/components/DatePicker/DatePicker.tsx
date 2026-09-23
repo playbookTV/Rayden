@@ -1,17 +1,31 @@
-import { forwardRef, useCallback, useMemo, useState, type HTMLAttributes } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type HTMLAttributes,
+} from "react";
 import { cn } from "../../utils/cn";
 
 /* ─── Types ────────────────────────────────────────────────────────────── */
 
 export type DatePickerMode = "single" | "range" | "year";
 
-export interface DatePickerProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface DatePickerProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onChange" | "defaultValue"
+> {
   /** Picker mode */
   mode?: DatePickerMode;
   /** Selected date (single/year mode) */
   value?: Date | null;
+  /** Initial date for uncontrolled usage. */
+  defaultValue?: Date | null;
   /** Selected range (range mode) */
   rangeValue?: [Date | null, Date | null];
+  defaultRangeValue?: [Date | null, Date | null];
   /** Called when a single date is selected */
   onChange?: (date: Date | null) => void;
   /** Called when a date range is selected */
@@ -77,9 +91,13 @@ function isBetween(date: Date, start: Date | null, end: Date | null) {
   return t > s && t < e;
 }
 
+function dayTime(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+}
+
 function isDateDisabled(date: Date, minDate?: Date, maxDate?: Date) {
-  if (minDate && date < minDate) return true;
-  if (maxDate && date > maxDate) return true;
+  if (minDate && dayTime(date) < dayTime(minDate)) return true;
+  if (maxDate && dayTime(date) > dayTime(maxDate)) return true;
   return false;
 }
 
@@ -152,20 +170,22 @@ interface DayCellProps {
   state: DayCellState;
   fullDate: Date;
   onClick?: () => void;
+  tabStop: boolean;
+  onFocus: () => void;
 }
 
-function DayCell({ day, state, fullDate, onClick }: DayCellProps) {
+function DayCell({ day, state, fullDate, onClick, tabStop, onFocus }: DayCellProps) {
   const isInteractive = state !== "disabled";
 
   const cellClasses = cn(
-    "flex items-center justify-center w-10 h-10 text-sm font-medium relative select-none",
-    state === "selected" && "bg-primary-400 text-white rounded-[10px]",
-    state === "start-range" && "bg-primary-400 text-white rounded-l-[10px]",
-    state === "end-range" && "bg-primary-400 text-white rounded-r-[10px]",
-    state === "mid-range" && "bg-primary-50 text-primary-400",
+    "flex items-center justify-center w-full min-w-0 h-10 text-sm font-medium relative select-none",
+    state === "selected" && "bg-action-primary text-white rounded-[10px]",
+    state === "start-range" && "bg-action-primary text-white rounded-l-[10px]",
+    state === "end-range" && "bg-action-primary text-white rounded-r-[10px]",
+    state === "mid-range" && "bg-primary-50 text-action-primary-text",
     state === "disabled" && "text-grey-300",
-    state === "default" && "text-grey-900 hover:bg-grey-75 rounded-[10px]",
-    state === "today" && "text-grey-900 hover:bg-grey-75 rounded-[10px]",
+    state === "default" && "text-on-surface hover:bg-grey-75 rounded-[10px]",
+    state === "today" && "text-on-surface hover:bg-grey-75 rounded-[10px]",
     isInteractive && "cursor-pointer"
   );
 
@@ -190,26 +210,39 @@ function DayCell({ day, state, fullDate, onClick }: DayCellProps) {
               : "";
 
   return (
-    <button
-      type="button"
-      className={cellClasses}
-      onClick={isInteractive ? onClick : undefined}
-      disabled={!isInteractive}
-      tabIndex={isInteractive ? 0 : -1}
-      aria-label={`${stateLabel}${dateLabel}`}
-      aria-current={state === "today" ? "date" : undefined}
-      aria-pressed={
-        state === "selected" || state === "start-range" || state === "end-range" ? true : undefined
-      }
+    <div
+      role="gridcell"
+      className="flex-1 min-w-0"
+      aria-selected={state === "selected" || state.endsWith("range")}
     >
-      {day}
-      {state === "today" && (
-        <span
-          className="absolute bottom-[5px] left-1/2 -translate-x-1/2 size-1 rounded-full bg-primary-400"
-          aria-hidden="true"
-        />
-      )}
-    </button>
+      <button
+        type="button"
+        data-day={dayTime(fullDate)}
+        onFocus={onFocus}
+        className={cn(
+          cellClasses,
+          "focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-action-primary-text"
+        )}
+        onClick={isInteractive ? onClick : undefined}
+        disabled={!isInteractive}
+        tabIndex={isInteractive && tabStop ? 0 : -1}
+        aria-label={`${stateLabel}${dateLabel}`}
+        aria-current={state === "today" ? "date" : undefined}
+        aria-pressed={
+          state === "selected" || state === "start-range" || state === "end-range"
+            ? true
+            : undefined
+        }
+      >
+        {day}
+        {state === "today" && (
+          <span
+            className="absolute bottom-[5px] left-1/2 -translate-x-1/2 size-1 rounded-full bg-primary-400"
+            aria-hidden="true"
+          />
+        )}
+      </button>
+    </div>
   );
 }
 
@@ -225,6 +258,8 @@ interface MonthGridProps {
   minDate?: Date;
   maxDate?: Date;
   onDayClick: (date: Date) => void;
+  focusedDate: Date;
+  onDayFocus: (date: Date) => void;
 }
 
 function MonthGrid({
@@ -237,6 +272,8 @@ function MonthGrid({
   minDate,
   maxDate,
   onDayClick,
+  focusedDate,
+  onDayFocus,
 }: MonthGridProps) {
   const daysInMonth = getDaysInMonth(year, month);
   const firstDay = getFirstDayOfWeek(year, month);
@@ -292,6 +329,9 @@ function MonthGrid({
     rows.pop();
   }
 
+  const tabDate =
+    cells.find((cell) => cell.state !== "disabled" && isSameDay(cell.date, focusedDate))?.date ??
+    cells.find((cell) => cell.state !== "disabled")?.date;
   const fullDayNames = [
     "Monday",
     "Tuesday",
@@ -303,7 +343,7 @@ function MonthGrid({
   ];
 
   return (
-    <div className="flex flex-col" role="grid" aria-label="Calendar">
+    <div className="flex flex-col" role="grid" aria-label={`${MONTH_NAMES[month]} ${year}`}>
       {/* Day headers */}
       <div className="flex h-10 items-center" role="row">
         {DAY_LABELS.map((label, i) => (
@@ -311,7 +351,7 @@ function MonthGrid({
             key={i}
             role="columnheader"
             aria-label={fullDayNames[i]}
-            className="flex items-center justify-center w-10 h-10 text-sm font-medium text-grey-400"
+            className="flex items-center justify-center flex-1 min-w-0 h-10 text-sm font-medium text-on-surface-secondary"
           >
             {label}
           </div>
@@ -327,6 +367,8 @@ function MonthGrid({
               state={cell.state}
               fullDate={cell.date}
               onClick={() => onDayClick(cell.date)}
+              tabStop={isSameDay(cell.date, tabDate)}
+              onFocus={() => onDayFocus(cell.date)}
             />
           ))}
         </div>
@@ -341,9 +383,15 @@ interface YearGridProps {
   baseYear: number;
   selectedYear?: number;
   onYearClick: (year: number) => void;
+  minYear?: number;
+  maxYear?: number;
 }
 
-function YearGrid({ baseYear, selectedYear, onYearClick }: YearGridProps) {
+function YearGrid({ baseYear, selectedYear, onYearClick, minYear, maxYear }: YearGridProps) {
+  const [focusedYear, setFocusedYear] = useState(selectedYear ?? baseYear);
+  const firstYear = Math.max(baseYear, minYear ?? baseYear);
+  const lastYear = Math.min(baseYear + 19, maxYear ?? baseYear + 19);
+  const tabYear = Math.min(lastYear, Math.max(firstYear, focusedYear));
   const years: number[] = [];
   for (let i = 0; i < 20; i++) {
     years.push(baseYear + i);
@@ -355,25 +403,57 @@ function YearGrid({ baseYear, selectedYear, onYearClick }: YearGridProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2 w-full" role="grid" aria-label="Year selection">
+    <div
+      className="flex flex-col gap-2 w-full"
+      role="grid"
+      aria-label="Year selection"
+      onKeyDown={(event) => {
+        const target = event.target as HTMLButtonElement;
+        if (!target.dataset.year) return;
+        const current = Number(target.dataset.year);
+        const delta = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 4, ArrowUp: -4 }[event.key];
+        const next =
+          event.key === "Home"
+            ? firstYear
+            : event.key === "End"
+              ? lastYear
+              : delta !== undefined
+                ? Math.min(lastYear, Math.max(firstYear, current + delta))
+                : null;
+        if (next === null) return;
+        event.preventDefault();
+        setFocusedYear(next);
+        event.currentTarget.querySelector<HTMLButtonElement>(`[data-year="${next}"]`)?.focus();
+      }}
+    >
       {rows.map((row, ri) => (
         <div key={ri} className="flex gap-4 h-10 items-center w-full" role="row">
           {row.map((year) => (
-            <button
+            <div
               key={year}
-              type="button"
-              aria-label={year === selectedYear ? `${year}, selected` : String(year)}
-              aria-pressed={year === selectedYear || undefined}
-              className={cn(
-                "flex-1 flex items-center justify-center py-2.5 px-4 rounded-[10px] text-sm font-medium cursor-pointer select-none",
-                year === selectedYear
-                  ? "bg-primary-400 text-white"
-                  : "text-grey-900 hover:bg-grey-75"
-              )}
-              onClick={() => onYearClick(year)}
+              role="gridcell"
+              className="flex-1 min-w-0"
+              aria-selected={year === selectedYear}
             >
-              {year}
-            </button>
+              <button
+                type="button"
+                data-year={year}
+                tabIndex={year === tabYear ? 0 : -1}
+                onFocus={() => setFocusedYear(year)}
+                disabled={year < firstYear || year > lastYear}
+                aria-label={year === selectedYear ? `${year}, selected` : String(year)}
+                aria-pressed={year === selectedYear || undefined}
+                className={cn(
+                  "w-full flex items-center justify-center py-2.5 px-1 rounded-[10px] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-action-primary-text text-sm font-medium cursor-pointer select-none",
+                  year === selectedYear
+                    ? "bg-action-primary text-white"
+                    : "text-on-surface hover:bg-grey-75"
+                )}
+                onClick={() => onYearClick(year)}
+              >
+                {year}
+              </button>
+            </div>
           ))}
         </div>
       ))}
@@ -385,11 +465,13 @@ function YearGrid({ baseYear, selectedYear, onYearClick }: YearGridProps) {
 
 function NavButton({
   direction,
+  label,
   onClick,
   hidden,
   className,
 }: {
   direction: "left" | "right";
+  label?: string;
   onClick?: () => void;
   hidden?: boolean;
   className?: string;
@@ -398,7 +480,7 @@ function NavButton({
     <button
       type="button"
       onClick={onClick}
-      aria-label={direction === "left" ? "Previous month" : "Next month"}
+      aria-label={label ?? (direction === "left" ? "Previous month" : "Next month")}
       aria-hidden={hidden || undefined}
       tabIndex={hidden ? -1 : undefined}
       className={cn(
@@ -408,9 +490,9 @@ function NavButton({
       )}
     >
       {direction === "left" ? (
-        <ChevronLeft className="size-3.5 text-grey-700" />
+        <ChevronLeft className="size-3.5 text-on-surface-body" />
       ) : (
-        <ChevronRight className="size-3.5 text-grey-700" />
+        <ChevronRight className="size-3.5 text-on-surface-body" />
       )}
     </button>
   );
@@ -423,7 +505,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     {
       mode = "single",
       value,
+      defaultValue = null,
       rangeValue,
+      defaultRangeValue = [null, null],
       onChange,
       onRangeChange,
       showFooter = false,
@@ -437,73 +521,124 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     ref
   ) => {
     const now = new Date();
-    const initialDate = value ?? rangeValue?.[0] ?? now;
+    const [internalDate, setInternalDate] = useState<Date | null>(defaultValue);
+    const [internalRange, setInternalRange] =
+      useState<[Date | null, Date | null]>(defaultRangeValue);
+    const selectedDate = value === undefined ? internalDate : value;
+    const [rangeStart, rangeEnd] = rangeValue === undefined ? internalRange : rangeValue;
+    const candidate = selectedDate ?? rangeStart ?? now;
+    const initialDate =
+      minDate && dayTime(candidate) < dayTime(minDate)
+        ? minDate
+        : maxDate && dayTime(candidate) > dayTime(maxDate)
+          ? maxDate
+          : candidate;
+    const [focusedDate, setFocusedDate] = useState(initialDate);
+    const calendarRef = useRef<HTMLDivElement>(null);
+    const focusRequested = useRef(false);
+    useEffect(() => {
+      if (!focusRequested.current) return;
+      calendarRef.current
+        ?.querySelector<HTMLButtonElement>(`[data-day="${dayTime(focusedDate)}"]:not(:disabled)`)
+        ?.focus();
+      focusRequested.current = false;
+    }, [focusedDate]);
 
     const [viewMonth, setViewMonth] = useState(initialDate.getMonth());
     const [viewYear, setViewYear] = useState(initialDate.getFullYear());
     const [yearBase, setYearBase] = useState(Math.floor(initialDate.getFullYear() / 20) * 20);
 
-    // Range selection state
-    const [rangeStart, setRangeStart] = useState<Date | null>(rangeValue?.[0] ?? null);
-    const [rangeEnd, setRangeEnd] = useState<Date | null>(rangeValue?.[1] ?? null);
-
     const goToPrevMonth = useCallback(() => {
-      setViewMonth((m) => {
-        if (m === 0) {
-          setViewYear((y) => y - 1);
-          return 11;
-        }
-        return m - 1;
-      });
-    }, []);
+      const previous = new Date(viewYear, viewMonth - 1, 1);
+      setViewMonth(previous.getMonth());
+      setViewYear(previous.getFullYear());
+    }, [viewMonth, viewYear]);
 
     const goToNextMonth = useCallback(() => {
-      setViewMonth((m) => {
-        if (m === 11) {
-          setViewYear((y) => y + 1);
-          return 0;
-        }
-        return m + 1;
-      });
-    }, []);
+      const next = new Date(viewYear, viewMonth + 1, 1);
+      setViewMonth(next.getMonth());
+      setViewYear(next.getFullYear());
+    }, [viewMonth, viewYear]);
 
-    const handleDayClick = useCallback(
-      (date: Date) => {
-        if (mode === "single") {
-          onChange?.(date);
-        } else if (mode === "range") {
-          if (!rangeStart || (rangeStart && rangeEnd)) {
-            setRangeStart(date);
-            setRangeEnd(null);
-            onRangeChange?.([date, null]);
-          } else {
-            setRangeEnd(date);
-            onRangeChange?.([rangeStart, date]);
-          }
-        }
-      },
-      [mode, onChange, onRangeChange, rangeStart, rangeEnd]
-    );
-
-    const handleYearClick = useCallback(
-      (year: number) => {
-        const newDate = new Date(year, value?.getMonth() ?? 0, 1);
-        onChange?.(newDate);
-        setViewYear(year);
-      },
-      [onChange, value]
-    );
-
-    const handleClear = useCallback(() => {
-      if (mode === "range") {
-        setRangeStart(null);
-        setRangeEnd(null);
-        onRangeChange?.([null, null]);
-      } else {
-        onChange?.(null);
+    const selectDate = (date: Date | null) => {
+      if (value === undefined) setInternalDate(date);
+      onChange?.(date);
+    };
+    const selectRange = (range: [Date | null, Date | null]) => {
+      if (rangeValue === undefined) setInternalRange(range);
+      onRangeChange?.(range);
+    };
+    const handleDayClick = (date: Date) => {
+      if (isDateDisabled(date, minDate, maxDate)) return;
+      if (mode === "single") selectDate(date);
+      else if (mode === "range") {
+        if (!rangeStart || rangeEnd) selectRange([date, null]);
+        else selectRange(date < rangeStart ? [date, rangeStart] : [rangeStart, date]);
       }
+    };
+    const handleYearClick = (year: number) => {
+      let date = new Date(year, selectedDate?.getMonth() ?? 0, 1);
+      if (minDate && date < minDate) date = minDate;
+      if (maxDate && date > maxDate) date = maxDate;
+      selectDate(date);
+      setViewYear(year);
+    };
+    const handleClear = () => {
+      if (mode === "range") selectRange([null, null]);
+      else selectDate(null);
       onClear?.();
-    }, [mode, onChange, onRangeChange, onClear]);
+    };
+    const handleCalendarKey = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      const target = event.target as HTMLElement;
+      if (!target.dataset.day) return;
+      const date = new Date(Number(target.dataset.day));
+      const next = new Date(date);
+      const weekday = (date.getDay() + 6) % 7;
+      switch (event.key) {
+        case "ArrowRight":
+          next.setDate(date.getDate() + 1);
+          break;
+        case "ArrowLeft":
+          next.setDate(date.getDate() - 1);
+          break;
+        case "ArrowDown":
+          next.setDate(date.getDate() + 7);
+          break;
+        case "ArrowUp":
+          next.setDate(date.getDate() - 7);
+          break;
+        case "Home":
+          next.setDate(date.getDate() - weekday);
+          break;
+        case "End":
+          next.setDate(date.getDate() + 6 - weekday);
+          break;
+        case "PageUp":
+        case "PageDown": {
+          const month =
+            date.getMonth() + (event.key === "PageUp" ? -1 : 1) * (event.shiftKey ? 12 : 1);
+          next.setDate(1);
+          next.setMonth(month);
+          next.setDate(
+            Math.min(date.getDate(), getDaysInMonth(next.getFullYear(), next.getMonth()))
+          );
+          break;
+        }
+        default:
+          return;
+      }
+      event.preventDefault();
+      const bounded =
+        minDate && dayTime(next) < dayTime(minDate)
+          ? new Date(dayTime(minDate))
+          : maxDate && dayTime(next) > dayTime(maxDate)
+            ? new Date(dayTime(maxDate))
+            : next;
+      focusRequested.current = true;
+      setViewMonth(bounded.getMonth());
+      setViewYear(bounded.getFullYear());
+      setFocusedDate(bounded);
+    };
 
     // Second month for range mode
     const secondMonth = useMemo(() => {
@@ -516,14 +651,22 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     return (
       <div
-        ref={ref}
+        {...rest}
+        ref={(node) => {
+          calendarRef.current = node;
+          if (typeof ref === "function") ref(node);
+          else if (ref) ref.current = node;
+        }}
+        onKeyDown={(event) => {
+          rest.onKeyDown?.(event);
+          if (!event.defaultPrevented) handleCalendarKey(event);
+        }}
         className={cn(
-          "bg-white dark:bg-grey-50 border border-grey-75 rounded-2xl p-5 shadow-soft-xs",
+          "bg-surface border border-grey-75 rounded-2xl p-5 shadow-soft-xs",
           "flex flex-col gap-6",
           mode !== "range" && "w-full max-w-[340px]",
           className
         )}
-        {...rest}
       >
         {/* ── Single Date / Range Header + Grid ── */}
         {mode === "single" && (
@@ -532,13 +675,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               {/* Header */}
               <div className="flex items-center justify-between w-full">
                 <NavButton direction="left" onClick={goToPrevMonth} />
-                <button
-                  type="button"
-                  className="flex items-center gap-2 text-sm font-medium text-grey-700 cursor-default"
-                >
+                <span aria-live="polite" className="text-sm font-medium text-on-surface-body">
                   {monthYearLabel}
-                  <ChevronDown className="size-6 text-grey-500" />
-                </button>
+                </span>
                 <NavButton direction="right" onClick={goToNextMonth} />
               </div>
 
@@ -546,10 +685,16 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <MonthGrid
                 year={viewYear}
                 month={viewMonth}
-                selectedDate={value}
+                selectedDate={selectedDate}
                 minDate={minDate}
                 maxDate={maxDate}
                 onDayClick={handleDayClick}
+                focusedDate={
+                  focusedDate.getMonth() === viewMonth && focusedDate.getFullYear() === viewYear
+                    ? focusedDate
+                    : new Date(viewYear, viewMonth, 1)
+                }
+                onDayFocus={setFocusedDate}
               />
             </div>
           </>
@@ -562,8 +707,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <div className="flex items-center justify-between w-full md:w-[280px]">
                 <NavButton direction="left" onClick={goToPrevMonth} />
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-grey-700">{monthYearLabel}</span>
-                  <ChevronDown className="size-6 text-grey-500" />
+                  <span className="text-sm font-medium text-on-surface-body">{monthYearLabel}</span>
                 </div>
                 <NavButton direction="right" onClick={goToNextMonth} className="md:hidden" />
                 <NavButton direction="right" hidden className="hidden md:flex" />
@@ -577,6 +721,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 minDate={minDate}
                 maxDate={maxDate}
                 onDayClick={handleDayClick}
+                focusedDate={
+                  focusedDate.getMonth() === viewMonth && focusedDate.getFullYear() === viewYear
+                    ? focusedDate
+                    : new Date(viewYear, viewMonth, 1)
+                }
+                onDayFocus={setFocusedDate}
               />
             </div>
 
@@ -585,8 +735,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <div className="flex items-center justify-between w-[280px]">
                 <NavButton direction="left" hidden />
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-grey-700">{secondMonthLabel}</span>
-                  <ChevronDown className="size-6 text-grey-500" />
+                  <span className="text-sm font-medium text-on-surface-body">
+                    {secondMonthLabel}
+                  </span>
                 </div>
                 <NavButton direction="right" onClick={goToNextMonth} />
               </div>
@@ -599,6 +750,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 minDate={minDate}
                 maxDate={maxDate}
                 onDayClick={handleDayClick}
+                focusedDate={focusedDate}
+                onDayFocus={setFocusedDate}
               />
             </div>
           </div>
@@ -607,19 +760,29 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         {mode === "year" && (
           <div className="flex flex-col gap-4 items-center w-full">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-grey-700">
+              <span className="text-sm font-medium text-on-surface-body">
                 {yearBase}–{yearBase + 19}
               </span>
-              <ChevronDown className="size-6 text-grey-500" />
+              <ChevronDown className="size-6 text-on-surface-muted" />
             </div>
             <YearGrid
               baseYear={yearBase}
-              selectedYear={value?.getFullYear()}
+              selectedYear={selectedDate?.getFullYear()}
               onYearClick={handleYearClick}
+              minYear={minDate?.getFullYear()}
+              maxYear={maxDate?.getFullYear()}
             />
             <div className="flex items-center gap-4 mt-2">
-              <NavButton direction="left" onClick={() => setYearBase((b) => b - 20)} />
-              <NavButton direction="right" onClick={() => setYearBase((b) => b + 20)} />
+              <NavButton
+                direction="left"
+                label="Previous 20 years"
+                onClick={() => setYearBase((b) => b - 20)}
+              />
+              <NavButton
+                direction="right"
+                label="Next 20 years"
+                onClick={() => setYearBase((b) => b + 20)}
+              />
             </div>
           </div>
         )}
@@ -630,14 +793,14 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             <button
               type="button"
               onClick={handleClear}
-              className="text-sm font-semibold text-grey-400 hover:text-grey-600 px-2 cursor-pointer"
+              className="text-sm font-semibold text-on-surface-body hover:text-on-surface px-2 cursor-pointer"
             >
               Clear
             </button>
             <button
               type="button"
               onClick={onDone}
-              className="bg-primary-400 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-primary-500 cursor-pointer"
+              className="bg-action-primary text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-action-primary-hover cursor-pointer"
             >
               Done
             </button>

@@ -10,15 +10,12 @@ A composable data table with support for sorting, row selection, and customizabl
 ## Import
 
 ```tsx
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from "@raydenui/ui";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@raydenui/ui";
 ```
+
+## Keyboard and narrow containers
+
+Sortable column headings contain buttons: focus one with Tab and press Enter or Space to request sorting. The table sits inside a keyboard-focusable scrolling region, so wide data stays inside its container. Pass an `aria-label` to name both the table and its region.
 
 ## Usage
 
@@ -105,7 +102,7 @@ const [sortDirection, setSortDirection] = useState("asc");
       </TableRow>
     ))}
   </TableBody>
-</Table>
+</Table>;
 ```
 
 ### With Row Selection
@@ -117,10 +114,7 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
   <TableHeader>
     <TableRow>
       <TableHead>
-        <Checkbox
-          checked={selectedRows.length === data.length}
-          onChange={() => toggleAll()}
-        />
+        <Checkbox checked={selectedRows.length === data.length} onChange={() => toggleAll()} />
       </TableHead>
       <TableHead>Name</TableHead>
       <TableHead>Email</TableHead>
@@ -130,17 +124,14 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
     {data.map((row) => (
       <TableRow key={row.id} selected={selectedRows.includes(row.id)}>
         <TableCell>
-          <Checkbox
-            checked={selectedRows.includes(row.id)}
-            onChange={() => toggleRow(row.id)}
-          />
+          <Checkbox checked={selectedRows.includes(row.id)} onChange={() => toggleRow(row.id)} />
         </TableCell>
         <TableCell>{row.name}</TableCell>
         <TableCell>{row.email}</TableCell>
       </TableRow>
     ))}
   </TableBody>
-</Table>
+</Table>;
 ```
 
 ### With Avatars and Badges
@@ -159,8 +150,8 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
           <div className="flex items-center gap-3">
             <Avatar type="image" src="https://i.pravatar.cc/150?img=1" size="sm" />
             <div>
-              <span className="block font-medium text-grey-900 dark:text-grey-100">John Doe</span>
-              <span className="block text-sm text-grey-500 dark:text-grey-400">john@example.com</span>
+              <span className="block font-medium text-grey-900">John Doe</span>
+              <span className="block text-sm text-grey-500">john@example.com</span>
             </div>
           </div>
         </TableCell>
@@ -173,8 +164,8 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
           <div className="flex items-center gap-3">
             <Avatar type="image" src="https://i.pravatar.cc/150?img=2" size="sm" />
             <div>
-              <span className="block font-medium text-grey-900 dark:text-grey-100">Jane Smith</span>
-              <span className="block text-sm text-grey-500 dark:text-grey-400">jane@example.com</span>
+              <span className="block font-medium text-grey-900">Jane Smith</span>
+              <span className="block text-sm text-grey-500">jane@example.com</span>
             </div>
           </div>
         </TableCell>
@@ -200,8 +191,8 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
         <div className="flex items-center gap-3">
           <Avatar type="image" src="/avatar.jpg" size="sm" />
           <div>
-            <p className="font-medium text-grey-900 dark:text-grey-100">John Doe</p>
-            <p className="text-sm text-grey-500 dark:text-grey-400">john@example.com</p>
+            <p className="font-medium text-grey-900">John Doe</p>
+            <p className="text-sm text-grey-500">john@example.com</p>
           </div>
         </div>
       </TableCell>
@@ -217,32 +208,32 @@ const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
 ### Table
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes |
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | —       | Additional CSS classes |
 
 ### TableHead
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sortable` | `boolean` | `false` | Enable sorting |
-| `sortDirection` | `"asc" \| "desc"` | — | Current sort direction |
-| `onSort` | `() => void` | — | Sort handler |
-| `className` | `string` | — | Additional CSS classes |
+| Prop            | Type              | Default | Description            |
+| --------------- | ----------------- | ------- | ---------------------- |
+| `sortable`      | `boolean`         | `false` | Enable sorting         |
+| `sortDirection` | `"asc" \| "desc"` | —       | Current sort direction |
+| `onSort`        | `() => void`      | —       | Sort handler           |
+| `className`     | `string`          | —       | Additional CSS classes |
 
 ### TableRow
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `selected` | `boolean` | `false` | Selected state |
-| `onClick` | `() => void` | — | Click handler |
-| `className` | `string` | — | Additional CSS classes |
+| Prop        | Type         | Default | Description            |
+| ----------- | ------------ | ------- | ---------------------- |
+| `selected`  | `boolean`    | `false` | Selected state         |
+| `onClick`   | `() => void` | —       | Click handler          |
+| `className` | `string`     | —       | Additional CSS classes |
 
 ### TableCell
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes |
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | —       | Additional CSS classes |
 
 ## Accessibility
 

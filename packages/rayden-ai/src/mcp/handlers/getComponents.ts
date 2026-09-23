@@ -1,54 +1,17 @@
-/**
- * Handler for get_components tool
- */
-
-import { components } from "../../manifests/index.js";
-import type { GetComponentsInput, ComponentSummary } from "../types.js";
-
+import { components, referenceContext } from "../../manifests";
+import type { GetComponentsInput } from "../types";
+import { categoryError, success } from "../response";
 export function handleGetComponents(input: GetComponentsInput) {
-  const { category } = input;
-
-  let componentList: ComponentSummary[];
-
-  if (category) {
-    // Filter by category
-    componentList = components.components
-      .filter((c) => c.category === category)
-      .map((c) => ({
-        name: c.name,
-        displayName: c.displayName,
-        description: c.description,
-        category: c.category,
-        hasSubComponents: c.hasSubComponents ?? false,
-      }));
-  } else {
-    // Return all components
-    componentList = components.components.map((c) => ({
-      name: c.name,
-      displayName: c.displayName,
-      description: c.description,
-      category: c.category,
-      hasSubComponents: c.hasSubComponents ?? false,
-    }));
-  }
-
-  // Also include list of components that DON'T exist
-  const doesNotExist = components.doesNotExist;
-
-  const response = {
-    totalComponents: componentList.length,
-    components: componentList,
+  const error = categoryError(input?.category, Object.keys(components.categories));
+  if (error) return error;
+  const list = components.components.filter(
+    (c) => !input?.category || c.category === input.category
+  );
+  return success({
+    ...referenceContext,
+    totalComponents: list.length,
+    components: list,
     categories: components.categories,
-    doesNotExist: doesNotExist,
-    note: "Use get_component_props to get detailed props for a specific component",
-  };
-
-  return {
-    content: [
-      {
-        type: "text" as const,
-        text: JSON.stringify(response, null, 2),
-      },
-    ],
-  };
+    note: "Entries describe component families; use exportNames and importPath for real imports. Look up each export for its own props.",
+  });
 }

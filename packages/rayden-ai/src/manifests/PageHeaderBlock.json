@@ -1,0 +1,10 @@
+{
+  "$schema": "./schema.json",
+  "name": "PageHeaderBlock",
+  "displayName": "PageHeaderBlock",
+  "description": "Page title, breadcrumbs, prioritized actions and collapsible context details.",
+  "category": "navigation",
+  "importPath": "@raydenui/ui/blocks",
+  "props": {},
+  "examples": []
+}

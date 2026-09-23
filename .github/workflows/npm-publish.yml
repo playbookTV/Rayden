@@ -30,9 +30,12 @@ jobs:
 
       - run: pnpm typecheck
 
-      - run: pnpm test
+      - run: pnpm exec vitest run
 
       - run: pnpm build
+
+      # This workflow publishes only the UI package; validate its matching AI metadata too.
+      - run: pnpm check:pilots
 
       - run: pnpm publish --access public --provenance --no-git-checks
         env:

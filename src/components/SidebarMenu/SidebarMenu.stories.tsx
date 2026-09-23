@@ -28,7 +28,7 @@ export const Default: Story = {
           <SidebarMenu value={active} onValueChange={setActive} className="h-full shadow-soft-xs">
             {/* Search */}
             <div className="mb-3 px-2">
-              <Input size="sm" placeholder="Search" icon="search" />
+              <Input size="sm" placeholder="Search" leadingIcon="search" />
             </div>
 
             {/* Main Menu */}
@@ -72,6 +72,7 @@ export const Default: Story = {
               </div>
               <button
                 type="button"
+                aria-label="Sign out"
                 className="flex size-8 cursor-pointer items-center justify-center rounded-md text-grey-400 hover:bg-grey-100"
               >
                 <Icon name="sign-out" size="md" />
@@ -229,6 +230,7 @@ const ThemeSidebar = ({ theme }: { theme: SidebarMenuTheme }) => {
         </div>
         <button
           type="button"
+          aria-label="Sign out"
           className={
             theme === "light"
               ? "flex size-8 cursor-pointer items-center justify-center rounded-md text-grey-400 hover:bg-grey-100"
@@ -284,6 +286,8 @@ export const CollapsibleToggle: Story = {
             <button
               type="button"
               onClick={() => setCollapsed((c) => !c)}
+              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-expanded={!collapsed}
               className="mb-2 flex cursor-pointer items-center justify-center self-end rounded-md p-2 text-grey-400 hover:bg-grey-100"
             >
               <Icon name={collapsed ? "chevron-right" : "chevron-left"} size="md" />

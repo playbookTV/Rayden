@@ -6,7 +6,6 @@
   "$relationships": {
     "depends_on": ["Icon", "Button"]
   },
-
   "anatomy": {
     "root": {
       "type": "FRAME",
@@ -15,14 +14,14 @@
       "itemSpacing": "{spacing.3}",
       "paddingHorizontal": "{spacing.4}",
       "paddingVertical": "{spacing.3}",
-      "fill": "{color.info.50}",
+      "fill": "{color.secondary.50}",
       "children": ["banner-icon", "banner-content", "banner-actions", "dismiss-button"]
     },
     "banner-icon": {
       "type": "INSTANCE",
       "swapProperty": "Banner Icon",
       "size": 20,
-      "fill": "{color.info.600}",
+      "fill": "{color.grey.900}",
       "optional": true,
       "defaultVisible": true
     },
@@ -38,7 +37,7 @@
       "fontFamily": "{typography.fontFamily.sans}",
       "fontWeight": "{typography.fontWeight.semibold}",
       "fontSize": "{typography.fontSize.sm}",
-      "fill": "{color.info.800}",
+      "fill": "{color.grey.900}",
       "optional": true,
       "defaultVisible": false
     },
@@ -47,7 +46,7 @@
       "fontFamily": "{typography.fontFamily.sans}",
       "fontWeight": "{typography.fontWeight.regular}",
       "fontSize": "{typography.fontSize.sm}",
-      "fill": "{color.info.700}"
+      "fill": "{color.grey.600}"
     },
     "banner-actions": {
       "type": "FRAME",
@@ -69,94 +68,92 @@
       "defaultVisible": true
     }
   },
-
   "variants": {
     "Information": {
       "Bold": {
-        "root.fill": "{color.info.500}",
+        "root.fill": "{color.action.info}",
         "banner-icon.fill": "{color.white}",
         "banner-title.fill": "{color.white}",
-        "banner-description.fill": "{color.info.100}"
+        "banner-description.fill": "{color.white}"
       },
       "Subtle": {
-        "root.fill": "{color.info.50}",
-        "banner-icon.fill": "{color.info.600}",
-        "banner-title.fill": "{color.info.800}",
-        "banner-description.fill": "{color.info.700}"
+        "root.fill": "{color.secondary.50}",
+        "banner-icon.fill": "{color.grey.900}",
+        "banner-title.fill": "{color.grey.900}",
+        "banner-description.fill": "{color.grey.600}"
       }
     },
     "Success": {
       "Bold": {
-        "root.fill": "{color.success.500}",
+        "root.fill": "{color.action.success}",
         "banner-icon.fill": "{color.white}",
         "banner-title.fill": "{color.white}",
-        "banner-description.fill": "{color.success.100}"
+        "banner-description.fill": "{color.white}"
       },
       "Subtle": {
         "root.fill": "{color.success.50}",
-        "banner-icon.fill": "{color.success.600}",
-        "banner-title.fill": "{color.success.800}",
-        "banner-description.fill": "{color.success.700}"
+        "banner-icon.fill": "{color.grey.900}",
+        "banner-title.fill": "{color.grey.900}",
+        "banner-description.fill": "{color.grey.600}"
       }
     },
     "Warning": {
       "Bold": {
-        "root.fill": "{color.warning.500}",
+        "root.fill": "{color.action.warning}",
         "banner-icon.fill": "{color.white}",
         "banner-title.fill": "{color.white}",
-        "banner-description.fill": "{color.warning.100}"
+        "banner-description.fill": "{color.white}"
       },
       "Subtle": {
         "root.fill": "{color.warning.50}",
-        "banner-icon.fill": "{color.warning.600}",
-        "banner-title.fill": "{color.warning.800}",
-        "banner-description.fill": "{color.warning.700}"
+        "banner-icon.fill": "{color.grey.900}",
+        "banner-title.fill": "{color.grey.900}",
+        "banner-description.fill": "{color.grey.600}"
       }
     },
     "Error": {
       "Bold": {
-        "root.fill": "{color.error.500}",
+        "root.fill": "{color.action.danger}",
         "banner-icon.fill": "{color.white}",
         "banner-title.fill": "{color.white}",
-        "banner-description.fill": "{color.error.100}"
+        "banner-description.fill": "{color.white}"
       },
       "Subtle": {
         "root.fill": "{color.error.50}",
-        "banner-icon.fill": "{color.error.600}",
-        "banner-title.fill": "{color.error.800}",
-        "banner-description.fill": "{color.error.700}"
+        "banner-icon.fill": "{color.grey.900}",
+        "banner-title.fill": "{color.grey.900}",
+        "banner-description.fill": "{color.grey.600}"
       }
     },
     "Feature": {
       "Bold": {
-        "root.fill": "{color.primary.500}",
+        "root.fill": "{color.grey.900}",
         "banner-icon.fill": "{color.white}",
         "banner-title.fill": "{color.white}",
-        "banner-description.fill": "{color.primary.100}"
+        "banner-description.fill": "{color.white}"
       },
       "Subtle": {
-        "root.fill": "{color.primary.50}",
-        "banner-icon.fill": "{color.primary.600}",
-        "banner-title.fill": "{color.primary.800}",
-        "banner-description.fill": "{color.primary.700}"
+        "root.fill": "{color.grey.50}",
+        "banner-icon.fill": "{color.grey.900}",
+        "banner-title.fill": "{color.grey.900}",
+        "banner-description.fill": "{color.grey.600}"
       }
     },
     "Opportunity": {
       "Bold": {
-        "root.fill": "{color.grey.900}",
+        "root.fill": "#475ccc",
         "banner-icon.fill": "{color.white}",
         "banner-title.fill": "{color.white}",
-        "banner-description.fill": "{color.grey.300}"
+        "banner-description.fill": "{color.white}"
       },
       "Subtle": {
-        "root.fill": "{color.grey.100}",
-        "banner-icon.fill": "{color.grey.600}",
+        "root.fill": "{color.secondary.50}",
+        "banner-icon.fill": "{color.grey.900}",
         "banner-title.fill": "{color.grey.900}",
-        "banner-description.fill": "{color.grey.700}"
+        "banner-description.fill": "{color.grey.600}"
       }
     }
   },
-
   "componentProperties": [
     {
       "name": "Status",
@@ -200,5 +197,9 @@
       "type": "BOOLEAN",
       "default": true
     }
+  ],
+  "implementationNotes": [
+    "Status colors reconciled to src/components/Banner/Banner.tsx statusColors, including semantic action backgrounds.",
+    "Figma property labels map to lowercase React status/emphasis values; use generated props for the exact API."
   ]
 }

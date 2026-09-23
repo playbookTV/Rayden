@@ -67,6 +67,13 @@ function CheckIcon({ className }: { className?: string }) {
 
 /* ─── Step Indicator Circle ────────────────────────────────────────────── */
 
+const statusText: Record<StepStatus, string> = {
+  completed: "Completed",
+  active: "Current step",
+  incomplete: "Not started",
+  disabled: "Unavailable",
+};
+
 function StepCircle({
   status,
   indicator,
@@ -86,12 +93,13 @@ function StepCircle({
     <div
       className={cn(
         "shrink-0 flex items-center justify-center rounded-full size-6 border transition-colors",
-        isCompleted && "bg-primary-400 border-primary-400 text-white",
-        isActive && "bg-primary-50 border-primary-400 text-primary-400",
-        !isCompleted && !isActive && !isDisabled && "bg-white dark:bg-grey-50 border-grey-300",
+        isCompleted && "bg-action-primary border-action-primary text-white",
+        isActive && "bg-primary-50 border-primary-400 text-action-primary-text",
+        !isCompleted && !isActive && !isDisabled && "bg-surface border-grey-300",
         isDisabled && "bg-grey-100 border-grey-200 text-grey-300"
       )}
     >
+      <span className="sr-only">{statusText[status]}</span>
       {isCompleted ? (
         (icon ?? <CheckIcon className="size-3.5" />)
       ) : indicator === "dot" ? (
@@ -109,7 +117,7 @@ function StepCircle({
         <span
           className={cn(
             "text-xs font-medium",
-            isActive ? "text-primary-400" : isDisabled ? "text-grey-300" : "text-grey-500"
+            isActive ? "text-primary-400" : isDisabled ? "text-grey-300" : "text-on-surface-muted"
           )}
         >
           {stepNumber}
@@ -196,16 +204,18 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                     className={cn(
                       "text-sm font-medium leading-[1.45]",
                       status === "active"
-                        ? "text-grey-900"
+                        ? "text-on-surface"
                         : status === "disabled"
                           ? "text-grey-300"
-                          : "text-grey-600"
+                          : "text-on-surface-secondary"
                     )}
                   >
                     {step.title}
                   </span>
                   {step.description && (
-                    <span className="text-xs text-grey-500 leading-[1.45]">{step.description}</span>
+                    <span className="text-xs text-on-surface-muted leading-[1.45]">
+                      {step.description}
+                    </span>
                   )}
                 </div>
               </div>
@@ -241,16 +251,16 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                   className={cn(
                     "text-xs font-medium leading-[1.45] tracking-tight",
                     status === "active"
-                      ? "text-grey-700"
+                      ? "text-on-surface-body"
                       : status === "disabled"
                         ? "text-grey-300"
-                        : "text-grey-600"
+                        : "text-on-surface-secondary"
                   )}
                 >
                   {step.title}
                 </span>
                 {step.description && (
-                  <span className="text-xs text-grey-500 leading-[1.45] truncate">
+                  <span className="text-xs text-on-surface-muted leading-[1.45] truncate">
                     {step.description}
                   </span>
                 )}
@@ -273,11 +283,19 @@ export const LinearStepper = forwardRef<HTMLDivElement, LinearStepperProps>(
       <div ref={ref} className={cn("flex flex-col gap-2 w-full", className)} {...rest}>
         {showLabel && (
           <p className="text-sm font-semibold leading-[1.45]">
-            <span className="text-grey-900">{currentStep}</span>
-            <span className="text-grey-400"> / {totalSteps} complete</span>
+            <span className="text-on-surface">{currentStep}</span>
+            <span className="text-on-surface-muted"> / {totalSteps} complete</span>
           </p>
         )}
-        <div className="bg-grey-200 rounded-full p-1 w-full overflow-hidden">
+        <div
+          className="bg-grey-200 rounded-full p-1 w-full overflow-hidden"
+          role="progressbar"
+          aria-valuenow={currentStep}
+          aria-valuemin={0}
+          aria-valuemax={totalSteps}
+          aria-valuetext={`Step ${currentStep} of ${totalSteps}`}
+          aria-label="Progress"
+        >
           <div
             className="h-2 bg-primary-400 rounded-[10px] transition-all duration-300"
             style={{ width: `${pct}%` }}
@@ -297,11 +315,19 @@ export const SegmentedStepper = forwardRef<HTMLDivElement, SegmentedStepperProps
       <div ref={ref} className={cn("flex flex-col gap-2 w-full", className)} {...rest}>
         {showLabel && (
           <p className="text-sm font-semibold leading-[1.45]">
-            <span className="text-grey-900">{currentStep}</span>
-            <span className="text-grey-400"> / {totalSteps} complete</span>
+            <span className="text-on-surface">{currentStep}</span>
+            <span className="text-on-surface-muted"> / {totalSteps} complete</span>
           </p>
         )}
-        <div className="bg-grey-200 rounded-full p-1 w-full overflow-hidden">
+        <div
+          className="bg-grey-200 rounded-full p-1 w-full overflow-hidden"
+          role="progressbar"
+          aria-valuenow={currentStep}
+          aria-valuemin={0}
+          aria-valuemax={totalSteps}
+          aria-valuetext={`Step ${currentStep} of ${totalSteps}`}
+          aria-label="Progress"
+        >
           <div className="flex gap-1 h-2 w-full">
             {Array.from({ length: totalSteps }, (_, i) => (
               <div

@@ -292,7 +292,7 @@ export const WithBothAddons: Story = {
       size="md"
       leadingAddon={<DropdownAddon label="https://" />}
       trailingAddon={<DropdownAddon label=".com" />}
-      className="w-[500px]"
+      className="w-full max-w-[500px]"
     />
   ),
 };

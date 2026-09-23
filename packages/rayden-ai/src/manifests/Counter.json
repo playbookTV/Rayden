@@ -53,9 +53,8 @@
       "description": "Disabled state"
     }
   },
-  "subComponents": [
-    {
-      "name": "NumberCounter",
+  "subComponents": {
+    "NumberCounter": {
       "description": "Display-only numeric badge (not interactive)",
       "props": {
         "value": {
@@ -78,12 +77,17 @@
         }
       }
     }
-  ],
+  },
   "composition": {
     "relatedComponents": ["Input", "Slider"]
   },
   "accessibility": {
-    "keyboardNav": [{ "key": "Click +/-", "action": "Increment/decrement value" }],
+    "keyboardNav": [
+      {
+        "key": "Click +/-",
+        "action": "Increment/decrement value"
+      }
+    ],
     "screenReaderNotes": "Buttons have aria-label 'Increase' and 'Decrease'"
   },
   "antiHallucination": {
@@ -103,7 +107,10 @@
         "mistake": "onIncrement/onDecrement",
         "correction": "Use onChange which fires with the new value"
       },
-      { "mistake": "variant='outline'", "correction": "No variant prop — styling is fixed" },
+      {
+        "mistake": "variant='outline'",
+        "correction": "No variant prop \u2014 styling is fixed"
+      },
       {
         "mistake": "NumberCounter onChange",
         "correction": "NumberCounter is display-only, use Counter for input"

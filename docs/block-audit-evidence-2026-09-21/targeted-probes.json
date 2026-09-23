@@ -1,0 +1,272 @@
+{
+  "tablePartialSelection": {
+    "checked": true,
+    "indeterminate": false
+  },
+  "tableReplacedRows": [
+    {
+      "label": "Select all rows",
+      "checked": true,
+      "indeterminate": false
+    },
+    {
+      "label": "Select Clara",
+      "checked": false,
+      "indeterminate": false
+    },
+    {
+      "label": "Select David",
+      "checked": false,
+      "indeterminate": false
+    }
+  ],
+  "headerMobile": {
+    "links": [],
+    "buttons": [
+      {
+        "text": "",
+        "controls": "_r_5_",
+        "controlsExists": false
+      },
+      {
+        "text": "Products",
+        "controls": null,
+        "controlsExists": false
+      },
+      {
+        "text": "Pricing",
+        "controls": null,
+        "controlsExists": false
+      },
+      {
+        "text": "About",
+        "controls": null,
+        "controlsExists": false
+      }
+    ],
+    "navCount": 0
+  },
+  "headerMobileSearch": [
+    {
+      "visible": false,
+      "display": "none"
+    }
+  ],
+  "headerDoubleRowVisibleText": "Rayden\nProducts\nPricing",
+  "loginPending": [
+    {
+      "name": "email",
+      "disabled": true
+    },
+    {
+      "name": "password",
+      "disabled": true
+    },
+    {
+      "name": "Show password",
+      "disabled": false
+    },
+    {
+      "name": "checkbox",
+      "disabled": false
+    },
+    {
+      "name": "Signing in…",
+      "disabled": true
+    },
+    {
+      "name": "Continue with Google",
+      "disabled": false
+    },
+    {
+      "name": "Continue with Twitter",
+      "disabled": false
+    },
+    {
+      "name": "Create Account",
+      "disabled": false
+    }
+  ],
+  "customSurface": {
+    "before": "rgb(255, 255, 255)",
+    "after": "rgb(255, 255, 255)",
+    "expected": "rgb(242, 233, 218)"
+  },
+  "isolatedWidths": [
+    {
+      "name": "LoginBlock",
+      "width": 320,
+      "viewport": 320,
+      "scrollWidth": 320,
+      "rootWidth": 320
+    },
+    {
+      "name": "LoginBlock",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "LoginBlock",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "rootWidth": 768
+    },
+    {
+      "name": "LoginBlock",
+      "width": 390,
+      "textScale": 2,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "EmptyStateBlock",
+      "width": 320,
+      "viewport": 320,
+      "scrollWidth": 320,
+      "rootWidth": 320
+    },
+    {
+      "name": "EmptyStateBlock",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "EmptyStateBlock",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "rootWidth": 768
+    },
+    {
+      "name": "EmptyStateBlock",
+      "width": 390,
+      "textScale": 2,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "RecentTransactionsBlock",
+      "width": 320,
+      "viewport": 320,
+      "scrollWidth": 320,
+      "rootWidth": 320
+    },
+    {
+      "name": "RecentTransactionsBlock",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "RecentTransactionsBlock",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "rootWidth": 768
+    },
+    {
+      "name": "RecentTransactionsBlock",
+      "width": 390,
+      "textScale": 2,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "QuickSendBlock",
+      "width": 320,
+      "viewport": 320,
+      "scrollWidth": 320,
+      "rootWidth": 320
+    },
+    {
+      "name": "QuickSendBlock",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "QuickSendBlock",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "rootWidth": 768
+    },
+    {
+      "name": "QuickSendBlock",
+      "width": 390,
+      "textScale": 2,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "SearchableTableBlock",
+      "width": 320,
+      "viewport": 320,
+      "scrollWidth": 320,
+      "rootWidth": 320
+    },
+    {
+      "name": "SearchableTableBlock",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    },
+    {
+      "name": "SearchableTableBlock",
+      "width": 768,
+      "viewport": 768,
+      "scrollWidth": 768,
+      "rootWidth": 768
+    },
+    {
+      "name": "SearchableTableBlock",
+      "width": 390,
+      "textScale": 2,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "rootWidth": 390
+    }
+  ],
+  "notificationClipping": {
+    "link": {
+      "x": 180.59375,
+      "y": 120,
+      "width": 101.171875,
+      "height": 16,
+      "top": 120,
+      "right": 281.765625,
+      "bottom": 136,
+      "left": 180.59375
+    },
+    "clippingAncestors": [
+      {
+        "class": "bg-white dark:bg-grey-50 rounded-xl shadow-[0px_3px_2px_-2px_rgba(0,0,0,0.06),0px_5px_3px_-2px_rgba(0,0,0,0.02)] pt-4 pb-8 overflow-clip",
+        "right": 374
+      }
+    ]
+  },
+  "searchableFilteredSelection": [
+    {
+      "label": "Select all rows",
+      "checked": false,
+      "indeterminate": false
+    },
+    {
+      "label": "Select Bob",
+      "checked": false,
+      "indeterminate": false
+    }
+  ]
+}

@@ -15,13 +15,13 @@ type Story = StoryObj<typeof ActivityItem>;
 /* ─── Single Item ─────────────────────────────────────────────────── */
 export const SingleItem: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
             <span className="font-medium text-grey-700">David</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -34,13 +34,13 @@ export const SingleItem: Story = {
 /* ─── With File Content ───────────────────────────────────────────── */
 export const WithFileContent: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
             <span className="font-medium text-grey-700">David</span> uploaded a file to{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -62,13 +62,13 @@ export const WithFileContent: Story = {
 /* ─── With Comment Content ────────────────────────────────────────── */
 export const WithCommentContent: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
             <span className="font-medium text-grey-700">David</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -97,13 +97,13 @@ export const WithCommentContent: Story = {
 /* ─── With CTA Content ────────────────────────────────────────────── */
 export const WithCTAContent: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="SA" size="sm" />}
         text={
           <>
             <span className="font-medium text-grey-700">Sarah</span> invited you to join{" "}
-            <span className="font-medium text-primary-400">Marketing Team</span>
+            <span className="font-medium text-action-primary-text">Marketing Team</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -122,13 +122,13 @@ export const WithCTAContent: Story = {
 /* ─── Unread State ────────────────────────────────────────────────── */
 export const UnreadState: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
             <span className="font-medium text-grey-700">David</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -142,13 +142,13 @@ export const UnreadState: Story = {
 /* ─── With Badge ──────────────────────────────────────────────────── */
 export const WithBadge: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
             <span className="font-medium text-grey-700">David</span> posted in{" "}
-            <span className="font-medium text-primary-400">#general</span>
+            <span className="font-medium text-action-primary-text">#general</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -163,13 +163,13 @@ export const WithBadge: Story = {
 /* ─── Timeline ────────────────────────────────────────────────────── */
 export const Timeline: Story = {
   render: () => (
-    <div className="w-[480px] p-6">
+    <div className="w-full max-w-[480px] p-6">
       <ActivityItem
         avatar={<Avatar type="initials" initials="DA" size="sm" />}
         text={
           <>
             <span className="font-medium text-grey-700">David</span> uploaded a file to{" "}
-            <span className="font-medium text-primary-400">Site redesign</span>
+            <span className="font-medium text-action-primary-text">Site redesign</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -192,7 +192,7 @@ export const Timeline: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">Sarah</span> left a comment on{" "}
-            <span className="font-medium text-primary-400">Brand update</span>
+            <span className="font-medium text-action-primary-text">Brand update</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -216,7 +216,7 @@ export const Timeline: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">Michael</span> invited you to join{" "}
-            <span className="font-medium text-primary-400">Design Team</span>
+            <span className="font-medium text-action-primary-text">Design Team</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -235,7 +235,7 @@ export const Timeline: Story = {
         text={
           <>
             <span className="font-medium text-grey-700">Jessica</span> shared a document in{" "}
-            <span className="font-medium text-primary-400">Research</span>
+            <span className="font-medium text-action-primary-text">Research</span>
           </>
         }
         date="Thurs 21, 2023"
@@ -259,9 +259,9 @@ export const Timeline: Story = {
 /* ─── Content Styles ──────────────────────────────────────────────── */
 export const ContentStyles: Story = {
   render: () => (
-    <div className="w-[480px] space-y-6 p-6">
+    <div className="w-full max-w-[480px] space-y-6 p-6">
       <div>
-        <p className="text-xs font-medium text-grey-400 mb-2">Card (default)</p>
+        <p className="text-xs font-medium text-grey-500 mb-2">Card (default)</p>
         <ActivityContent
           variant="file"
           contentStyle="card"
@@ -273,7 +273,7 @@ export const ContentStyles: Story = {
       </div>
 
       <div>
-        <p className="text-xs font-medium text-grey-400 mb-2">Container</p>
+        <p className="text-xs font-medium text-grey-500 mb-2">Container</p>
         <ActivityContent
           variant="file"
           contentStyle="container"
@@ -285,7 +285,7 @@ export const ContentStyles: Story = {
       </div>
 
       <div>
-        <p className="text-xs font-medium text-grey-400 mb-2">Plain</p>
+        <p className="text-xs font-medium text-grey-500 mb-2">Plain</p>
         <ActivityContent
           variant="comment"
           contentStyle="plain"

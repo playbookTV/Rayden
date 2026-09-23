@@ -1,0 +1,40 @@
+[
+  {
+    "name": "sidebar-flyout",
+    "nav": {
+      "left": 0,
+      "right": 82,
+      "width": 82,
+      "scrollWidth": 271,
+      "overflowX": "auto"
+    },
+    "sub": {
+      "left": 80,
+      "right": 262,
+      "width": 182
+    },
+    "hitInside": false,
+    "hit": "DIV"
+  },
+  {
+    "name": "banner-mobile",
+    "width": 390,
+    "descriptionDisplay": "block",
+    "descriptionRects": 1
+  },
+  {
+    "name": "modal-description-footer",
+    "describedBy": "_r_1_",
+    "descriptionExists": false,
+    "buttons": ["Back", ""]
+  },
+  {
+    "name": "selection-filter",
+    "partial": {
+      "checked": true,
+      "indeterminate": false
+    },
+    "filteredAllChecked": true,
+    "visibleRowChecked": false
+  }
+]

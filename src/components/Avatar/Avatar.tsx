@@ -1,15 +1,8 @@
-import {
-  Children,
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
+import { Children, cloneElement, forwardRef, isValidElement, type HTMLAttributes } from "react";
 import { cn } from "../../utils/cn";
 import { resolveIcon } from "../../utils/resolveIcon";
 import { Icon } from "../Icon";
-import type { IconName } from "../Icon";
+import type { IconSource } from "../Icon";
 
 /* ─── Types ─── */
 
@@ -24,14 +17,19 @@ export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   size?: AvatarSize;
   /** Status indicator shown at bottom-right. @default "none" */
   status?: AvatarStatus;
+  /**
+   * Text announced for the status dot or verified badge. Defaults to the status
+   * name; pass an empty string when the status is purely decorative.
+   */
+  statusLabel?: string;
   /** Image URL (for type="image"). */
   src?: string;
   /** Alt text (for type="image"). */
   alt?: string;
   /** Initials text (for type="initials"). */
   initials?: string;
-  /** Custom icon (for type="icon"). Accepts ReactNode or IconName. @default "user" */
-  icon?: ReactNode | IconName;
+  /** Custom icon (for type="icon"). Accepts a registry name, static IconRecord, or ReactNode. @default "user" */
+  icon?: IconSource;
 }
 
 /* ─── Size Tokens ─── */
@@ -100,13 +98,30 @@ function VerifiedBadge({ className }: { className?: string }) {
 
 /* ─── Status Indicator ─── */
 
-function StatusIndicator({ status, size }: { status: AvatarStatus; size: AvatarSize }) {
+const statusText: Record<Exclude<AvatarStatus, "none">, string> = {
+  online: "Online",
+  offline: "Offline",
+  verified: "Verified",
+};
+
+function StatusIndicator({
+  status,
+  size,
+  statusLabel,
+}: {
+  status: AvatarStatus;
+  size: AvatarSize;
+  statusLabel?: string;
+}) {
   if (status === "none") return null;
+  // An empty string means the caller has declared the status decorative.
+  const text = statusLabel ?? statusText[status];
 
   if (status === "verified") {
     return (
       <div className="absolute bottom-0 right-0">
         <VerifiedBadge className={verifiedBadgeSize[size]} />
+        {text && <span className="sr-only">{text}</span>}
       </div>
     );
   }
@@ -118,7 +133,9 @@ function StatusIndicator({ status, size }: { status: AvatarStatus; size: AvatarS
         statusDotSize[size],
         status === "online" ? "bg-success-600" : "bg-grey-300"
       )}
-    />
+    >
+      {text && <span className="sr-only">{text}</span>}
+    </div>
   );
 }
 
@@ -130,6 +147,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       type = "image",
       size = "md",
       status = "none",
+      statusLabel,
       src,
       alt = "",
       initials,
@@ -178,7 +196,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         )}
 
         {/* Status indicator */}
-        <StatusIndicator status={status} size={size} />
+        <StatusIndicator status={status} size={size} statusLabel={statusLabel} />
       </div>
     );
   }
