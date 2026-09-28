@@ -4,17 +4,61 @@
 import { useState } from &quot;react&quot;;
 import { ProductCollectionBlock, type CommerceProduct } from &quot;@raydenui/ui/blocks&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
-const cover = (color: string) =&gt; &quot;data:image/svg+xml,&quot; + encodeURIComponent(`&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 400 320&quot;&gt;&lt;rect width=&quot;400&quot; height=&quot;320&quot; fill=&quot;#e8e1d7&quot;/&gt;&lt;rect x=&quot;128&quot; y=&quot;46&quot; width=&quot;150&quot; height=&quot;232&quot; rx=&quot;7&quot; fill=&quot;${color}&quot;/&gt;&lt;path d=&quot;M145 46v232&quot; stroke=&quot;#ffffff30&quot; stroke-width=&quot;2&quot;/&gt;&lt;path d=&quot;M257 46v232&quot; stroke=&quot;#bda480&quot; stroke-width=&quot;5&quot;/&gt;&lt;path d=&quot;M169 98h64M169 110h40&quot; stroke=&quot;#e8d8ba&quot; stroke-width=&quot;2&quot;/&gt;&lt;/svg&gt;`);
+const cover = (color: string) =&gt;
+  &quot;data:image/svg+xml,&quot; +
+  encodeURIComponent(
+    `&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 400 320&quot;&gt;&lt;rect width=&quot;400&quot; height=&quot;320&quot; fill=&quot;#e8e1d7&quot;/&gt;&lt;rect x=&quot;128&quot; y=&quot;46&quot; width=&quot;150&quot; height=&quot;232&quot; rx=&quot;7&quot; fill=&quot;${color}&quot;/&gt;&lt;path d=&quot;M145 46v232&quot; stroke=&quot;#ffffff30&quot; stroke-width=&quot;2&quot;/&gt;&lt;path d=&quot;M257 46v232&quot; stroke=&quot;#bda480&quot; stroke-width=&quot;5&quot;/&gt;&lt;path d=&quot;M169 98h64M169 110h40&quot; stroke=&quot;#e8d8ba&quot; stroke-width=&quot;2&quot;/&gt;&lt;/svg&gt;`
+  );
 const products: CommerceProduct[] = [
-  { id: &quot;graphite&quot;, name: &quot;The everyday notebook&quot;, description: &quot;Graphite · 160 pages&quot;, price: 1800, image: { src: cover(&quot;#33342f&quot;), alt: &quot;Graphite notebook&quot; } },
-  { id: &quot;clay&quot;, name: &quot;A book for bright ideas&quot;, description: &quot;Clay · 160 pages&quot;, price: 1800, image: { src: cover(&quot;#a96d50&quot;), alt: &quot;Clay notebook&quot; } },
-  { id: &quot;olive&quot;, name: &quot;Room to think&quot;, description: &quot;Olive · 240 pages&quot;, price: 2400, image: { src: cover(&quot;#666b50&quot;), alt: &quot;Olive notebook&quot; } },
+  {
+    id: &quot;graphite&quot;,
+    name: &quot;The everyday notebook&quot;,
+    description: &quot;Graphite · 160 pages&quot;,
+    price: 1800,
+    image: { src: cover(&quot;#33342f&quot;), alt: &quot;Graphite notebook&quot; },
+  },
+  {
+    id: &quot;clay&quot;,
+    name: &quot;A book for bright ideas&quot;,
+    description: &quot;Clay · 160 pages&quot;,
+    price: 1800,
+    image: { src: cover(&quot;#a96d50&quot;), alt: &quot;Clay notebook&quot; },
+  },
+  {
+    id: &quot;olive&quot;,
+    name: &quot;Room to think&quot;,
+    description: &quot;Olive · 240 pages&quot;,
+    price: 2400,
+    image: { src: cover(&quot;#666b50&quot;), alt: &quot;Olive notebook&quot; },
+  },
 ];
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState(&quot;Choose a notebook or add one to the demo bag.&quot;);
   const [recovered, setRecovered] = useState(false);
-  return &lt;div style={{ width: &quot;100%&quot; }}&gt;&lt;ProductCollectionBlock title=&quot;Good things begin on paper.&quot; description=&quot;A fictional stationery collection. No purchases are made.&quot; products={state === &quot;empty&quot; ? [] : products} layout={state === &quot;list&quot; ? &quot;list&quot; : &quot;grid&quot;} onSelectProduct={product =&gt; setMessage(`${product.name}: ${product.description}. Demo product selected.`)} onAddToCart={product =&gt; { setCount(count + 1); setMessage(`${product.name} added to the demo bag.`); }} status={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;ready&quot;} onRetry={() =&gt; setRecovered(true)} currency=&quot;GBP&quot; /&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;{count} items in the demo bag. {message}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;100%&quot; }}&gt;
+      &lt;ProductCollectionBlock
+        title=&quot;Good things begin on paper.&quot;
+        description=&quot;A fictional stationery collection. No purchases are made.&quot;
+        products={state === &quot;empty&quot; ? [] : products}
+        layout={state === &quot;list&quot; ? &quot;list&quot; : &quot;grid&quot;}
+        onSelectProduct={(product) =&gt;
+          setMessage(`${product.name}: ${product.description}. Demo product selected.`)
+        }
+        onAddToCart={(product) =&gt; {
+          setCount(count + 1);
+          setMessage(`${product.name} added to the demo bag.`);
+        }}
+        status={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;ready&quot;}
+        onRetry={() =&gt; setRecovered(true)}
+        currency=&quot;GBP&quot;
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        {count} items in the demo bag. {message}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A fictional stationery collection rendered as a grid or list. Selecting a product shows its details; quick-add increments a local demo bag count without creating an order.</p><h2>Try it</h2><p>Select a notebook or add it to the demo bag. Compare grid and list views, then try empty and error states.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

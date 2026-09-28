@@ -4,7 +4,11 @@
 import { useState, useSyncExternalStore } from &quot;react&quot;;
 import { Stepper, Button } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
-const steps = [{ title: &quot;Your idea&quot;, description: &quot;Give the work a starting point.&quot; }, { title: &quot;Your team&quot;, description: &quot;Choose who will help shape it.&quot; }, { title: &quot;Ready to begin&quot;, description: &quot;Review the plan and move forward.&quot; }];
+const steps = [
+  { title: &quot;Your idea&quot;, description: &quot;Give the work a starting point.&quot; },
+  { title: &quot;Your team&quot;, description: &quot;Choose who will help shape it.&quot; },
+  { title: &quot;Ready to begin&quot;, description: &quot;Review the plan and move forward.&quot; },
+];
 const compactQuery = &quot;(max-width: 560px)&quot;;
 function subscribeToSize(update: () =&gt; void) {
   const query = window.matchMedia(compactQuery);
@@ -16,7 +20,46 @@ export default function Example({ state = &quot;default&quot; }: { state?: strin
   const compact = useSyncExternalStore(subscribeToSize, isCompact, () =&gt; false);
   const [step, setStep] = useState(0);
   const [complete, setComplete] = useState(false);
-  return &lt;div style={{ width: &quot;min(100%, 760px)&quot;, display: &quot;grid&quot;, gap: 32 }}&gt;&lt;Stepper steps={complete ? steps.map(item =&gt; ({ ...item, status: &quot;completed&quot; as const })) : steps} activeStep={complete ? undefined : step} orientation={state === &quot;vertical&quot; || compact ? &quot;vertical&quot; : &quot;horizontal&quot;} indicator=&quot;number&quot; /&gt;&lt;div&gt;&lt;h2 style={{ fontSize: 24 }}&gt;{complete ? &quot;The demo plan is ready.&quot; : steps[step].title}&lt;/h2&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 16 }}&gt;{complete ? &quot;No workspace was created. This is a local step-by-step preview.&quot; : steps[step].description}&lt;/p&gt;&lt;/div&gt;&lt;div style={{ display: &quot;flex&quot;, gap: 12 }}&gt;{complete ? &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; { setStep(0); setComplete(false); }}&gt;Start again&lt;/Button&gt; : &lt;&gt;&lt;Button variant=&quot;secondary&quot; disabled={step === 0} onClick={() =&gt; setStep(step - 1)}&gt;Back&lt;/Button&gt;&lt;Button onClick={() =&gt; step === 2 ? setComplete(true) : setStep(step + 1)}&gt;{step === 2 ? &quot;Finish demo&quot; : &quot;Continue&quot;}&lt;/Button&gt;&lt;/&gt;}&lt;/div&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 760px)&quot;, display: &quot;grid&quot;, gap: 32 }}&gt;
+      &lt;Stepper
+        steps={complete ? steps.map((item) =&gt; ({ ...item, status: &quot;completed&quot; as const })) : steps}
+        activeStep={complete ? undefined : step}
+        orientation={state === &quot;vertical&quot; || compact ? &quot;vertical&quot; : &quot;horizontal&quot;}
+        indicator=&quot;number&quot;
+      /&gt;
+      &lt;div&gt;
+        &lt;h2 style={{ fontSize: 24 }}&gt;{complete ? &quot;The demo plan is ready.&quot; : steps[step].title}&lt;/h2&gt;
+        &lt;p role=&quot;status&quot; style={{ marginTop: 16 }}&gt;
+          {complete
+            ? &quot;No workspace was created. This is a local step-by-step preview.&quot;
+            : steps[step].description}
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div style={{ display: &quot;flex&quot;, gap: 12 }}&gt;
+        {complete ? (
+          &lt;Button
+            variant=&quot;secondary&quot;
+            onClick={() =&gt; {
+              setStep(0);
+              setComplete(false);
+            }}
+          &gt;
+            Start again
+          &lt;/Button&gt;
+        ) : (
+          &lt;&gt;
+            &lt;Button variant=&quot;secondary&quot; disabled={step === 0} onClick={() =&gt; setStep(step - 1)}&gt;
+              Back
+            &lt;/Button&gt;
+            &lt;Button onClick={() =&gt; (step === 2 ? setComplete(true) : setStep(step + 1))}&gt;
+              {step === 2 ? &quot;Finish demo&quot; : &quot;Continue&quot;}
+            &lt;/Button&gt;
+          &lt;/&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled stepper presents a three-stage project setup. Continue and Back update the active stage; finishing shows a local demonstration result and a restart action. Small screens automatically use the vertical orientation.</p><h2>Try it</h2><p>Move through all three stages, go back, finish and restart. Compare horizontal and vertical layouts.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

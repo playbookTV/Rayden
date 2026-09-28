@@ -3,19 +3,86 @@
 <div class="preview-workbench"><div class="preview-toolbar"><div class="library-switch" role="group" aria-label="Example view"><button type="button" data-view="preview" aria-pressed="true" aria-controls="preview-panel">Preview</button><button type="button" data-view="code" aria-pressed="false" aria-controls="code-panel">Code</button></div><div class="preview-options" id="preview-options"><label>State<select id="preview-state"><option value="default">Default</option><option value="loading">Loading</option></select></label><label>Theme<select id="preview-theme"><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Viewport<select id="preview-viewport"><option value="desktop">Fit</option><option value="tablet">Tablet</option><option value="mobile">Mobile</option></select></label><button class="preview-reset" id="preview-reset" type="button">↺ Reset preview</button></div></div><div id="preview-panel"><div class="preview-failure" id="preview-failure" role="alert" hidden>The preview couldn’t load. Try Reset preview, or open Code to use the example.</div><div class="preview-surface"><div class="preview-loading" id="preview-loading" role="status">Loading the real component…</div><div class="preview-frame-wrap" id="preview-frame-wrap" data-viewport="desktop"><iframe id="live-preview" title="Interactive Application shell example" height="650" sandbox="allow-scripts allow-same-origin" data-example="application-shell"></iframe></div></div><noscript><p>Enable JavaScript to interact with this example. The full source is available below.</p></noscript></div><div class="preview-code" id="code-panel"><button class="showcase-button" data-copy-target="example-code">Copy code</button><pre tabindex="0" aria-label="Application shell example source"><code id="example-code">&quot;use client&quot;;
 import { useState } from &quot;react&quot;;
 import { ApplicationShellBlock } from &quot;@raydenui/ui/blocks&quot;;
-import { Button, Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from &quot;@raydenui/ui&quot;;
+import {
+  Button,
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [active, setActive] = useState(&quot;Overview&quot;);
   const [count, setCount] = useState(3);
-  return &lt;ApplicationShellBlock brand={&lt;strong&gt;Form &amp; Field&lt;/strong&gt;} navSections={[{ id: &quot;workspace&quot;, label: &quot;Workspace&quot;, items: [&quot;Overview&quot;, &quot;Projects&quot;, &quot;Team&quot;, &quot;Settings&quot;].map(label =&gt; ({ id: label, label, current: label === active, onClick: () =&gt; setActive(label) })) }]} navStatus={state === &quot;loading&quot; ? &quot;loading&quot; : &quot;idle&quot;} sidebarFooter={&lt;small&gt;Demo workspace · Personal&lt;/small&gt;} expandAt=&quot;sm&quot; stickyTopBar={false}&gt;
-    &lt;div style={{ padding: &quot;16px 0&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
-      &lt;div&gt;&lt;p style={{ marginBottom: 8 }}&gt;YOUR WORKSPACE&lt;/p&gt;&lt;h2 style={{ fontSize: 30, letterSpacing: &quot;-.04em&quot; }}&gt;{active === &quot;Overview&quot; ? &quot;A little room to do great work.&quot; : active}&lt;/h2&gt;&lt;/div&gt;
-      &lt;div style={{ display: &quot;flex&quot;, justifyContent: &quot;space-between&quot;, gap: 20, flexWrap: &quot;wrap&quot;, alignItems: &quot;center&quot; }}&gt;&lt;p role=&quot;status&quot;&gt;{count} projects in this demo workspace.&lt;/p&gt;&lt;Button onClick={() =&gt; setCount(count + 1)}&gt;New project&lt;/Button&gt;&lt;/div&gt;
-      &lt;div style={{ overflowX: &quot;auto&quot; }}&gt;&lt;Table aria-label=&quot;Workspace projects&quot;&gt;&lt;TableHeader&gt;&lt;TableRow&gt;&lt;TableHead&gt;Project&lt;/TableHead&gt;&lt;TableHead&gt;Status&lt;/TableHead&gt;&lt;/TableRow&gt;&lt;/TableHeader&gt;&lt;TableBody&gt;&lt;TableRow&gt;&lt;TableCell&gt;Brand refresh&lt;/TableCell&gt;&lt;TableCell&gt;In progress&lt;/TableCell&gt;&lt;/TableRow&gt;&lt;TableRow&gt;&lt;TableCell&gt;Website launch&lt;/TableCell&gt;&lt;TableCell&gt;In review&lt;/TableCell&gt;&lt;/TableRow&gt;&lt;TableRow&gt;&lt;TableCell&gt;Customer portal&lt;/TableCell&gt;&lt;TableCell&gt;Planned&lt;/TableCell&gt;&lt;/TableRow&gt;&lt;/TableBody&gt;&lt;/Table&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/ApplicationShellBlock&gt;;
+  return (
+    &lt;ApplicationShellBlock
+      brand={&lt;strong&gt;Form &amp; Field&lt;/strong&gt;}
+      navSections={[
+        {
+          id: &quot;workspace&quot;,
+          label: &quot;Workspace&quot;,
+          items: [&quot;Overview&quot;, &quot;Projects&quot;, &quot;Team&quot;, &quot;Settings&quot;].map((label) =&gt; ({
+            id: label,
+            label,
+            current: label === active,
+            onClick: () =&gt; setActive(label),
+          })),
+        },
+      ]}
+      navStatus={state === &quot;loading&quot; ? &quot;loading&quot; : &quot;idle&quot;}
+      sidebarFooter={&lt;small&gt;Demo workspace · Personal&lt;/small&gt;}
+      expandAt=&quot;sm&quot;
+      stickyTopBar={false}
+    &gt;
+      &lt;div style={{ padding: &quot;16px 0&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+        &lt;div&gt;
+          &lt;p style={{ marginBottom: 8 }}&gt;YOUR WORKSPACE&lt;/p&gt;
+          &lt;h2 style={{ fontSize: 30, letterSpacing: &quot;-.04em&quot; }}&gt;
+            {active === &quot;Overview&quot; ? &quot;A little room to do great work.&quot; : active}
+          &lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div
+          style={{
+            display: &quot;flex&quot;,
+            justifyContent: &quot;space-between&quot;,
+            gap: 20,
+            flexWrap: &quot;wrap&quot;,
+            alignItems: &quot;center&quot;,
+          }}
+        &gt;
+          &lt;p role=&quot;status&quot;&gt;{count} projects in this demo workspace.&lt;/p&gt;
+          &lt;Button onClick={() =&gt; setCount(count + 1)}&gt;New project&lt;/Button&gt;
+        &lt;/div&gt;
+        &lt;div style={{ overflowX: &quot;auto&quot; }}&gt;
+          &lt;Table aria-label=&quot;Workspace projects&quot;&gt;
+            &lt;TableHeader&gt;
+              &lt;TableRow&gt;
+                &lt;TableHead&gt;Project&lt;/TableHead&gt;
+                &lt;TableHead&gt;Status&lt;/TableHead&gt;
+              &lt;/TableRow&gt;
+            &lt;/TableHeader&gt;
+            &lt;TableBody&gt;
+              &lt;TableRow&gt;
+                &lt;TableCell&gt;Brand refresh&lt;/TableCell&gt;
+                &lt;TableCell&gt;In progress&lt;/TableCell&gt;
+              &lt;/TableRow&gt;
+              &lt;TableRow&gt;
+                &lt;TableCell&gt;Website launch&lt;/TableCell&gt;
+                &lt;TableCell&gt;In review&lt;/TableCell&gt;
+              &lt;/TableRow&gt;
+              &lt;TableRow&gt;
+                &lt;TableCell&gt;Customer portal&lt;/TableCell&gt;
+                &lt;TableCell&gt;Planned&lt;/TableCell&gt;
+              &lt;/TableRow&gt;
+            &lt;/TableBody&gt;
+          &lt;/Table&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/ApplicationShellBlock&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Compose a sidebar, top bar, and main workspace without tying the interface to a particular router. This example switches local navigation state and adds to a demo project count.</p><h2>Try it</h2><p>Switch between Overview and Projects, then add a demo project. Use the mobile viewport to try the navigation menu.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a><a href="/components/table">Table</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

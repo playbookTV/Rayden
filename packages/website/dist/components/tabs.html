@@ -7,15 +7,32 @@ import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [value, setValue] = useState(&quot;overview&quot;);
-  const content: Record&lt;string, string&gt; = { overview: &quot;Everything you need to start your next project.&quot;, activity: &quot;Avery updated the project brief. Sam added a new task.&quot;, settings: &quot;Your workspace preferences live here.&quot; };
-  return &lt;div style={{ width: &quot;min(100%, 480px)&quot; }}&gt;
-    &lt;Tabs variant={state === &quot;line&quot; ? &quot;line&quot; : &quot;segmented&quot;} value={value} onValueChange={setValue}&gt;
-      &lt;Tab value=&quot;overview&quot;&gt;Overview&lt;/Tab&gt;&lt;Tab value=&quot;activity&quot;&gt;Activity&lt;/Tab&gt;&lt;Tab value=&quot;settings&quot;&gt;Settings&lt;/Tab&gt;
-    &lt;/Tabs&gt;
-    &lt;div role=&quot;region&quot; aria-label={`${value} content`} style={{ padding: &quot;32px 8px&quot;, minHeight: 140 }}&gt;
-      &lt;h2 style={{ fontSize: 22, marginBottom: 12, textTransform: &quot;capitalize&quot; }}&gt;{value}&lt;/h2&gt;&lt;p&gt;{content[value]}&lt;/p&gt;
+  const content: Record&lt;string, string&gt; = {
+    overview: &quot;Everything you need to start your next project.&quot;,
+    activity: &quot;Avery updated the project brief. Sam added a new task.&quot;,
+    settings: &quot;Your workspace preferences live here.&quot;,
+  };
+  return (
+    &lt;div style={{ width: &quot;min(100%, 480px)&quot; }}&gt;
+      &lt;Tabs
+        variant={state === &quot;line&quot; ? &quot;line&quot; : &quot;segmented&quot;}
+        value={value}
+        onValueChange={setValue}
+      &gt;
+        &lt;Tab value=&quot;overview&quot;&gt;Overview&lt;/Tab&gt;
+        &lt;Tab value=&quot;activity&quot;&gt;Activity&lt;/Tab&gt;
+        &lt;Tab value=&quot;settings&quot;&gt;Settings&lt;/Tab&gt;
+      &lt;/Tabs&gt;
+      &lt;div
+        role=&quot;region&quot;
+        aria-label={`${value} content`}
+        style={{ padding: &quot;32px 8px&quot;, minHeight: 140 }}
+      &gt;
+        &lt;h2 style={{ fontSize: 22, marginBottom: 12, textTransform: &quot;capitalize&quot; }}&gt;{value}&lt;/h2&gt;
+        &lt;p&gt;{content[value]}&lt;/p&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
-  &lt;/div&gt;;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Controlled Tabs and Tab children organise related workspace sections. The consuming example owns the content region and updates it when the selected value changes.</p><h2>Try it</h2><p>Switch to Activity or Settings, then compare the segmented and line appearances.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

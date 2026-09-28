@@ -6,7 +6,32 @@ import { Radio } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [delivery, setDelivery] = useState(&quot;weekly&quot;);
-  return &lt;fieldset style={{ width: &quot;min(100%, 400px)&quot;, display: &quot;grid&quot;, gap: 24 }}&gt;&lt;legend style={{ fontSize: 24, marginBottom: 24 }}&gt;A rhythm that works for you.&lt;/legend&gt;{[{ value: &quot;daily&quot;, label: &quot;Daily digest&quot;, description: &quot;A short update each morning.&quot; }, { value: &quot;weekly&quot;, label: &quot;Weekly roundup&quot;, description: &quot;The highlights, every Friday.&quot; }, { value: &quot;off&quot;, label: &quot;Only the essentials&quot;, description: &quot;Account and security messages.&quot; }].map(option =&gt; &lt;Radio key={option.value} name=&quot;delivery&quot; value={option.value} label={option.label} description={option.description} checked={delivery === option.value} disabled={state === &quot;disabled&quot;} onChange={() =&gt; setDelivery(option.value)} /&gt;)}&lt;p role=&quot;status&quot;&gt;Selected: {delivery}. This demo sends no messages.&lt;/p&gt;&lt;/fieldset&gt;;
+  return (
+    &lt;fieldset style={{ width: &quot;min(100%, 400px)&quot;, display: &quot;grid&quot;, gap: 24 }}&gt;
+      &lt;legend style={{ fontSize: 24, marginBottom: 24 }}&gt;A rhythm that works for you.&lt;/legend&gt;
+      {[
+        { value: &quot;daily&quot;, label: &quot;Daily digest&quot;, description: &quot;A short update each morning.&quot; },
+        { value: &quot;weekly&quot;, label: &quot;Weekly roundup&quot;, description: &quot;The highlights, every Friday.&quot; },
+        {
+          value: &quot;off&quot;,
+          label: &quot;Only the essentials&quot;,
+          description: &quot;Account and security messages.&quot;,
+        },
+      ].map((option) =&gt; (
+        &lt;Radio
+          key={option.value}
+          name=&quot;delivery&quot;
+          value={option.value}
+          label={option.label}
+          description={option.description}
+          checked={delivery === option.value}
+          disabled={state === &quot;disabled&quot;}
+          onChange={() =&gt; setDelivery(option.value)}
+        /&gt;
+      ))}
+      &lt;p role=&quot;status&quot;&gt;Selected: {delivery}. This demo sends no messages.&lt;/p&gt;
+    &lt;/fieldset&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A labelled radio group controls one delivery preference at a time. Native grouped inputs support keyboard navigation; this demo sends no messages.</p><h2>Try it</h2><p>Choose Daily digest or Only the essentials. Use the arrow keys within the group.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

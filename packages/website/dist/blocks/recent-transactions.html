@@ -5,15 +5,57 @@ import { useState } from &quot;react&quot;;
 import { RecentTransactionsBlock, type Transaction } from &quot;@raydenui/ui/blocks&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 const transactions: Transaction[] = [
-  { id: &quot;invoice&quot;, direction: &quot;incoming&quot;, name: &quot;Northline Studio&quot;, category: &quot;Demo invoice&quot;, amount: &quot;£1,200.00&quot; },
-  { id: &quot;supplies&quot;, direction: &quot;outgoing&quot;, name: &quot;Paper &amp; Practice&quot;, category: &quot;Demo supplies&quot;, amount: &quot;£84.00&quot; },
-  { id: &quot;software&quot;, direction: &quot;outgoing&quot;, name: &quot;Studio tools&quot;, category: &quot;Demo subscription&quot;, amount: &quot;£29.00&quot; },
-  { id: &quot;workshop&quot;, direction: &quot;incoming&quot;, name: &quot;Community workshop&quot;, category: &quot;Demo booking&quot;, amount: &quot;£320.00&quot; },
+  {
+    id: &quot;invoice&quot;,
+    direction: &quot;incoming&quot;,
+    name: &quot;Northline Studio&quot;,
+    category: &quot;Demo invoice&quot;,
+    amount: &quot;£1,200.00&quot;,
+  },
+  {
+    id: &quot;supplies&quot;,
+    direction: &quot;outgoing&quot;,
+    name: &quot;Paper &amp; Practice&quot;,
+    category: &quot;Demo supplies&quot;,
+    amount: &quot;£84.00&quot;,
+  },
+  {
+    id: &quot;software&quot;,
+    direction: &quot;outgoing&quot;,
+    name: &quot;Studio tools&quot;,
+    category: &quot;Demo subscription&quot;,
+    amount: &quot;£29.00&quot;,
+  },
+  {
+    id: &quot;workshop&quot;,
+    direction: &quot;incoming&quot;,
+    name: &quot;Community workshop&quot;,
+    category: &quot;Demo booking&quot;,
+    amount: &quot;£320.00&quot;,
+  },
 ];
 export default function Example() {
   const [expanded, setExpanded] = useState(false);
   const [selected, setSelected] = useState&lt;Transaction&gt;();
-  return &lt;div style={{ width: &quot;min(100%, 640px)&quot; }}&gt;&lt;RecentTransactionsBlock title=&quot;The studio ledger&quot; transactions={expanded ? transactions : transactions.slice(0, 3)} seeAllLabel={expanded ? &quot;Show recent&quot; : &quot;See all activity&quot;} onSeeAll={() =&gt; setExpanded(!expanded)} onTransactionClick={id =&gt; setSelected(transactions.find(transaction =&gt; transaction.id === id))} /&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;{selected ? `${selected.name}: ${selected.amount} · ${selected.category}.` : &quot;Select a row for its demo details.&quot;}&lt;/p&gt;&lt;p style={{ marginTop: 12 }}&gt;Fictional records. This preview cannot move money.&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 640px)&quot; }}&gt;
+      &lt;RecentTransactionsBlock
+        title=&quot;The studio ledger&quot;
+        transactions={expanded ? transactions : transactions.slice(0, 3)}
+        seeAllLabel={expanded ? &quot;Show recent&quot; : &quot;See all activity&quot;}
+        onSeeAll={() =&gt; setExpanded(!expanded)}
+        onTransactionClick={(id) =&gt;
+          setSelected(transactions.find((transaction) =&gt; transaction.id === id))
+        }
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        {selected
+          ? `${selected.name}: ${selected.amount} · ${selected.category}.`
+          : &quot;Select a row for its demo details.&quot;}
+      &lt;/p&gt;
+      &lt;p style={{ marginTop: 12 }}&gt;Fictional records. This preview cannot move money.&lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A compact list of fictional incoming and outgoing records. Selecting a row reports its details, while See all expands the local collection. No banking service is connected.</p><h2>Try it</h2><p>Select a transaction, view all activity, then return to the recent list.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

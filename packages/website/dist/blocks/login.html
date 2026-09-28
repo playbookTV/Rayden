@@ -7,10 +7,28 @@ import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [message, setMessage] = useState(&quot;&quot;);
-  return &lt;div style={{ width: &quot;min(100%, 440px)&quot;, margin: &quot;auto&quot; }}&gt;
-    &lt;LoginBlock variant=&quot;card&quot; title=&quot;Welcome back.&quot; subtitle=&quot;Use a demo email and password. Nothing is sent.&quot; socialProviders={[]} onSignUp={() =&gt; setMessage(&quot;Sign-up preview only. No account has been created.&quot;)} submitLabel=&quot;Try sign in&quot; showRememberMe onSubmit={() =&gt; setMessage(&quot;Demo submitted. No account was accessed and no credentials were sent.&quot;)} onForgotPassword={() =&gt; setMessage(&quot;Recovery is a demo action. No email has been sent.&quot;)} error={state === &quot;error&quot; ? &quot;Example error: check your email and password.&quot; : undefined} pending={state === &quot;pending&quot;} /&gt;
-    &lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;{message}&lt;/p&gt;
-  &lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 440px)&quot;, margin: &quot;auto&quot; }}&gt;
+      &lt;LoginBlock
+        variant=&quot;card&quot;
+        title=&quot;Welcome back.&quot;
+        subtitle=&quot;Use a demo email and password. Nothing is sent.&quot;
+        socialProviders={[]}
+        onSignUp={() =&gt; setMessage(&quot;Sign-up preview only. No account has been created.&quot;)}
+        submitLabel=&quot;Try sign in&quot;
+        showRememberMe
+        onSubmit={() =&gt;
+          setMessage(&quot;Demo submitted. No account was accessed and no credentials were sent.&quot;)
+        }
+        onForgotPassword={() =&gt; setMessage(&quot;Recovery is a demo action. No email has been sent.&quot;)}
+        error={state === &quot;error&quot; ? &quot;Example error: check your email and password.&quot; : undefined}
+        pending={state === &quot;pending&quot;}
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;
+        {message}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>An authentication interface that exposes submission and recovery callbacks to your application. The showcase does not authenticate users or send credentials; use example values only.</p><h2>Try it</h2><p>Enter a demo email and password and submit the form. Try the password visibility toggle, error state, and pending state.</p><h2>Built with</h2><div class="detail-built"><a href="/components/input">Input</a><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -4,13 +4,63 @@
 import { useState } from &quot;react&quot;;
 import { CheckoutReviewBlock } from &quot;@raydenui/ui/blocks&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
-const notebookImage = &quot;data:image/svg+xml,&quot; + encodeURIComponent(&#x27;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 160 200&quot;&gt;&lt;rect width=&quot;160&quot; height=&quot;200&quot; fill=&quot;#e8e1d7&quot;/&gt;&lt;rect x=&quot;38&quot; y=&quot;28&quot; width=&quot;92&quot; height=&quot;146&quot; rx=&quot;5&quot; fill=&quot;#292824&quot;/&gt;&lt;path d=&quot;M49 29v144&quot; stroke=&quot;#5b5850&quot; stroke-width=&quot;2&quot;/&gt;&lt;path d=&quot;M117 29v144&quot; stroke=&quot;#ba7044&quot; stroke-width=&quot;4&quot;/&gt;&lt;path d=&quot;M67 65h34M67 73h23&quot; stroke=&quot;#c6b99f&quot;/&gt;&lt;/svg&gt;&#x27;);
+const notebookImage =
+  &quot;data:image/svg+xml,&quot; +
+  encodeURIComponent(
+    &#x27;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 160 200&quot;&gt;&lt;rect width=&quot;160&quot; height=&quot;200&quot; fill=&quot;#e8e1d7&quot;/&gt;&lt;rect x=&quot;38&quot; y=&quot;28&quot; width=&quot;92&quot; height=&quot;146&quot; rx=&quot;5&quot; fill=&quot;#292824&quot;/&gt;&lt;path d=&quot;M49 29v144&quot; stroke=&quot;#5b5850&quot; stroke-width=&quot;2&quot;/&gt;&lt;path d=&quot;M117 29v144&quot; stroke=&quot;#ba7044&quot; stroke-width=&quot;4&quot;/&gt;&lt;path d=&quot;M67 65h34M67 73h23&quot; stroke=&quot;#c6b99f&quot;/&gt;&lt;/svg&gt;&#x27;
+  );
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [delivery, setDelivery] = useState(false);
   const [payment, setPayment] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [confirmed, setConfirmed] = useState(false);
-  return &lt;div style={{ width: &quot;100%&quot; }}&gt;&lt;CheckoutReviewBlock title=&quot;One last look.&quot; description=&quot;A checkout review for a fictional order. No payment is collected.&quot; items={[{ id: &quot;notebook&quot;, name: &quot;The everyday notebook&quot;, image: { src: notebookImage, alt: &quot;Graphite notebook&quot; }, price: 1800, quantity, variant: &quot;Graphite&quot; }]} deliveryAddress={[&quot;Avery Morgan (demo)&quot;, &quot;Example studio address&quot;, &quot;London, United Kingdom&quot;]} deliveryMethod={delivery ? &quot;Studio collection · free&quot; : &quot;Standard delivery · demo estimate&quot;} paymentSummary={payment ? &quot;Pay on collection · demonstration only&quot; : &quot;Demo card ending in 4242&quot;} shipping={delivery ? 0 : 400} currency=&quot;GBP&quot; onEditDelivery={() =&gt; setDelivery(!delivery)} onEditPayment={() =&gt; setPayment(!payment)} onEditCart={() =&gt; setQuantity(quantity === 1 ? 2 : 1)} onConfirm={() =&gt; setConfirmed(true)} confirmLabel=&quot;Confirm demo order&quot; pending={state === &quot;pending&quot;} errorMessage={state === &quot;error&quot; ? &quot;Example error: confirmation is unavailable.&quot; : undefined} confirmation={confirmed ? { title: &quot;Demo review complete.&quot;, description: &quot;No order was placed and no payment was taken.&quot;, reference: &quot;DEMO-204&quot; } : undefined} totalsNote=&quot;Illustrative totals only.&quot; terms=&quot;The edit actions switch local demo options. They do not change an actual order.&quot; /&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;100%&quot; }}&gt;
+      &lt;CheckoutReviewBlock
+        title=&quot;One last look.&quot;
+        description=&quot;A checkout review for a fictional order. No payment is collected.&quot;
+        items={[
+          {
+            id: &quot;notebook&quot;,
+            name: &quot;The everyday notebook&quot;,
+            image: { src: notebookImage, alt: &quot;Graphite notebook&quot; },
+            price: 1800,
+            quantity,
+            variant: &quot;Graphite&quot;,
+          },
+        ]}
+        deliveryAddress={[
+          &quot;Avery Morgan (demo)&quot;,
+          &quot;Example studio address&quot;,
+          &quot;London, United Kingdom&quot;,
+        ]}
+        deliveryMethod={delivery ? &quot;Studio collection · free&quot; : &quot;Standard delivery · demo estimate&quot;}
+        paymentSummary={
+          payment ? &quot;Pay on collection · demonstration only&quot; : &quot;Demo card ending in 4242&quot;
+        }
+        shipping={delivery ? 0 : 400}
+        currency=&quot;GBP&quot;
+        onEditDelivery={() =&gt; setDelivery(!delivery)}
+        onEditPayment={() =&gt; setPayment(!payment)}
+        onEditCart={() =&gt; setQuantity(quantity === 1 ? 2 : 1)}
+        onConfirm={() =&gt; setConfirmed(true)}
+        confirmLabel=&quot;Confirm demo order&quot;
+        pending={state === &quot;pending&quot;}
+        errorMessage={state === &quot;error&quot; ? &quot;Example error: confirmation is unavailable.&quot; : undefined}
+        confirmation={
+          confirmed
+            ? {
+                title: &quot;Demo review complete.&quot;,
+                description: &quot;No order was placed and no payment was taken.&quot;,
+                reference: &quot;DEMO-204&quot;,
+              }
+            : undefined
+        }
+        totalsNote=&quot;Illustrative totals only.&quot;
+        terms=&quot;The edit actions switch local demo options. They do not change an actual order.&quot;
+      /&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A fictional order review with delivery, payment summary, line items and totals. Edit controls cycle local demo choices; confirming only shows a demonstration result and does not place an order.</p><h2>Try it</h2><p>Edit the delivery option, payment summary or cart quantity, then confirm the demo. Compare pending and error states.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

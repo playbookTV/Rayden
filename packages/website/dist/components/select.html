@@ -7,14 +7,24 @@ import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [role, setRole] = useState(&quot;designer&quot;);
-  return &lt;div style={{ width: &quot;min(100%, 360px)&quot;, minHeight: 300 }}&gt;
-    &lt;Select label=&quot;Your role&quot; value={role} onValueChange={setRole} disabled={state === &quot;disabled&quot;} helperText=&quot;Choose the role that fits your day.&quot;&gt;
-      &lt;SelectOption value=&quot;designer&quot;&gt;Designer&lt;/SelectOption&gt;
-      &lt;SelectOption value=&quot;developer&quot;&gt;Developer&lt;/SelectOption&gt;
-      &lt;SelectOption value=&quot;product&quot;&gt;Product manager&lt;/SelectOption&gt;
-    &lt;/Select&gt;
-    &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;Selected role: {role}&lt;/p&gt;
-  &lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 360px)&quot;, minHeight: 300 }}&gt;
+      &lt;Select
+        label=&quot;Your role&quot;
+        value={role}
+        onValueChange={setRole}
+        disabled={state === &quot;disabled&quot;}
+        helperText=&quot;Choose the role that fits your day.&quot;
+      &gt;
+        &lt;SelectOption value=&quot;designer&quot;&gt;Designer&lt;/SelectOption&gt;
+        &lt;SelectOption value=&quot;developer&quot;&gt;Developer&lt;/SelectOption&gt;
+        &lt;SelectOption value=&quot;product&quot;&gt;Product manager&lt;/SelectOption&gt;
+      &lt;/Select&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        Selected role: {role}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled Select with SelectOption children keeps the chosen role in React state. Use the keyboard or pointer to open the list and choose a supported value.</p><h2>Try it</h2><p>Choose Developer or Product manager. The selected role updates below the field.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

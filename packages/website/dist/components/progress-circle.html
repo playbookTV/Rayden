@@ -6,7 +6,28 @@ import { ProgressCircle, Button } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [value, setValue] = useState(50);
-  return &lt;div style={{ display: &quot;grid&quot;, justifyItems: &quot;center&quot;, gap: 28, textAlign: &quot;center&quot; }}&gt;&lt;h2 style={{ fontSize: 24 }}&gt;Your workspace, taking shape.&lt;/h2&gt;&lt;ProgressCircle value={value} size=&quot;xl&quot; variant={state === &quot;segmented&quot; ? &quot;segmented&quot; : &quot;default&quot;} label=&quot;Workspace setup progress&quot; /&gt;&lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot;, justifyContent: &quot;center&quot; }}&gt;&lt;Button onClick={() =&gt; setValue(Math.min(100, value + 25))} disabled={value === 100}&gt;Complete a setup step&lt;/Button&gt;&lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setValue(0)}&gt;Restart&lt;/Button&gt;&lt;/div&gt;&lt;p role=&quot;status&quot;&gt;{value === 100 ? &quot;Demo setup complete.&quot; : `${value / 25} of 4 demo setup steps complete.`}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ display: &quot;grid&quot;, justifyItems: &quot;center&quot;, gap: 28, textAlign: &quot;center&quot; }}&gt;
+      &lt;h2 style={{ fontSize: 24 }}&gt;Your workspace, taking shape.&lt;/h2&gt;
+      &lt;ProgressCircle
+        value={value}
+        size=&quot;xl&quot;
+        variant={state === &quot;segmented&quot; ? &quot;segmented&quot; : &quot;default&quot;}
+        label=&quot;Workspace setup progress&quot;
+      /&gt;
+      &lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot;, justifyContent: &quot;center&quot; }}&gt;
+        &lt;Button onClick={() =&gt; setValue(Math.min(100, value + 25))} disabled={value === 100}&gt;
+          Complete a setup step
+        &lt;/Button&gt;
+        &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setValue(0)}&gt;
+          Restart
+        &lt;/Button&gt;
+      &lt;/div&gt;
+      &lt;p role=&quot;status&quot;&gt;
+        {value === 100 ? &quot;Demo setup complete.&quot; : `${value / 25} of 4 demo setup steps complete.`}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A circular indicator reflects a four-step demo setup. Completing a step updates the accessible value and the visible percentage; Restart returns progress to zero.</p><h2>Try it</h2><p>Complete the remaining steps, restart, and compare the segmented appearance.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

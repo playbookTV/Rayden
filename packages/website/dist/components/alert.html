@@ -7,8 +7,39 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [visible, setVisible] = useState(true);
   const [message, setMessage] = useState(&quot;&quot;);
-  const tone: AlertState = state === &quot;default&quot; ? &quot;information&quot; : state as AlertState;
-  return &lt;div style={{ width: &quot;min(100%, 640px)&quot; }}&gt;{visible ? &lt;Alert variant=&quot;banner&quot; state={tone} title={tone === &quot;error&quot; ? &quot;This demo draft could not sync.&quot; : tone === &quot;warning&quot; ? &quot;Your demo draft is still local.&quot; : tone === &quot;success&quot; ? &quot;Your demo draft is ready.&quot; : &quot;A little progress is worth saving.&quot;} description=&quot;Try an action or dismiss this message. Nothing is sent outside the preview.&quot; onClose={() =&gt; setVisible(false)} primaryAction={{ label: &quot;Review draft&quot;, onClick: () =&gt; setMessage(&quot;Draft selected for review in this demo.&quot;) }} /&gt; : &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setVisible(true)}&gt;Show message again&lt;/Button&gt;}&lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;{message}&lt;/p&gt;&lt;/div&gt;;
+  const tone: AlertState = state === &quot;default&quot; ? &quot;information&quot; : (state as AlertState);
+  return (
+    &lt;div style={{ width: &quot;min(100%, 640px)&quot; }}&gt;
+      {visible ? (
+        &lt;Alert
+          variant=&quot;banner&quot;
+          state={tone}
+          title={
+            tone === &quot;error&quot;
+              ? &quot;This demo draft could not sync.&quot;
+              : tone === &quot;warning&quot;
+                ? &quot;Your demo draft is still local.&quot;
+                : tone === &quot;success&quot;
+                  ? &quot;Your demo draft is ready.&quot;
+                  : &quot;A little progress is worth saving.&quot;
+          }
+          description=&quot;Try an action or dismiss this message. Nothing is sent outside the preview.&quot;
+          onClose={() =&gt; setVisible(false)}
+          primaryAction={{
+            label: &quot;Review draft&quot;,
+            onClick: () =&gt; setMessage(&quot;Draft selected for review in this demo.&quot;),
+          }}
+        /&gt;
+      ) : (
+        &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setVisible(true)}&gt;
+          Show message again
+        &lt;/Button&gt;
+      )}
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        {message}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A banner alert demonstrates information, success, warning and error tones. The review action reports local feedback, and a dismissed message can be restored.</p><h2>Try it</h2><p>Review the draft, dismiss the message, and show it again. Compare all four tones.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

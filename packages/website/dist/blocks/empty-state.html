@@ -7,7 +7,30 @@ import { Button } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [created, setCreated] = useState(false);
-  return &lt;div style={{ width: &quot;min(100%, 620px)&quot; }}&gt;{created ? &lt;div&gt;&lt;h2 style={{ fontSize: 24 }}&gt;Your first project is ready.&lt;/h2&gt;&lt;p role=&quot;status&quot; style={{ margin: &quot;16px 0 24px&quot; }}&gt;A demo project has been created in this preview.&lt;/p&gt;&lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setCreated(false)}&gt;Show empty state again&lt;/Button&gt;&lt;/div&gt; : &lt;EmptyStateBlock illustration=&quot;project-list&quot; illustrationColored={state !== &quot;monochrome&quot;} title=&quot;Your next idea belongs here.&quot; description=&quot;Start a project, give it a name, and make a little progress.&quot; variant={state === &quot;inline&quot; ? &quot;inline&quot; : &quot;card&quot;} action={{ label: &quot;Create your first project&quot;, onClick: () =&gt; setCreated(true) }} /&gt;}&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 620px)&quot; }}&gt;
+      {created ? (
+        &lt;div&gt;
+          &lt;h2 style={{ fontSize: 24 }}&gt;Your first project is ready.&lt;/h2&gt;
+          &lt;p role=&quot;status&quot; style={{ margin: &quot;16px 0 24px&quot; }}&gt;
+            A demo project has been created in this preview.
+          &lt;/p&gt;
+          &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setCreated(false)}&gt;
+            Show empty state again
+          &lt;/Button&gt;
+        &lt;/div&gt;
+      ) : (
+        &lt;EmptyStateBlock
+          illustration=&quot;project-list&quot;
+          illustrationColored={state !== &quot;monochrome&quot;}
+          title=&quot;Your next idea belongs here.&quot;
+          description=&quot;Start a project, give it a name, and make a little progress.&quot;
+          variant={state === &quot;inline&quot; ? &quot;inline&quot; : &quot;card&quot;}
+          action={{ label: &quot;Create your first project&quot;, onClick: () =&gt; setCreated(true) }}
+        /&gt;
+      )}
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A composed empty state with a library illustration, explanatory copy and a working action. Creating the first demo project replaces the empty state with a confirmation.</p><h2>Try it</h2><p>Create your first project, then return to the empty state. Compare the inline and monochrome appearances.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -6,7 +6,26 @@ import { Counter } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [quantity, setQuantity] = useState(2);
-  return &lt;div style={{ width: &quot;min(100%, 380px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;h2 style={{ fontSize: 24 }}&gt;A little more, a little less.&lt;/h2&gt;&lt;p&gt;Notebook quantity · between 1 and 5&lt;/p&gt;&lt;div&gt;&lt;Counter value={quantity} onChange={setQuantity} min={1} max={5} shape={state === &quot;pill&quot; ? &quot;pill&quot; : &quot;rounded&quot;} disabled={state === &quot;disabled&quot;} aria-label=&quot;Notebook quantity&quot; /&gt;&lt;/div&gt;&lt;p role=&quot;status&quot;&gt;{quantity} notebooks · £{quantity * 18}.00 illustrative total.&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 380px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;h2 style={{ fontSize: 24 }}&gt;A little more, a little less.&lt;/h2&gt;
+      &lt;p&gt;Notebook quantity · between 1 and 5&lt;/p&gt;
+      &lt;div&gt;
+        &lt;Counter
+          value={quantity}
+          onChange={setQuantity}
+          min={1}
+          max={5}
+          shape={state === &quot;pill&quot; ? &quot;pill&quot; : &quot;rounded&quot;}
+          disabled={state === &quot;disabled&quot;}
+          aria-label=&quot;Notebook quantity&quot;
+        /&gt;
+      &lt;/div&gt;
+      &lt;p role=&quot;status&quot;&gt;
+        {quantity} notebooks · £{quantity * 18}.00 illustrative total.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled counter selects one to five notebooks and updates an illustrative total. Minimum and maximum limits prevent invalid values.</p><h2>Try it</h2><p>Increase the quantity to its limit and decrease it again. Compare pill and disabled appearances.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

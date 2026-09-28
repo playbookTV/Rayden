@@ -4,10 +4,33 @@
 import { useState } from &quot;react&quot;;
 import { Badge, Button } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
-const stages = [{ label: &quot;Draft&quot;, color: &quot;neutral&quot; }, { label: &quot;In review&quot;, color: &quot;warning&quot; }, { label: &quot;Approved&quot;, color: &quot;success&quot; }] as const;
+const stages = [
+  { label: &quot;Draft&quot;, color: &quot;neutral&quot; },
+  { label: &quot;In review&quot;, color: &quot;warning&quot; },
+  { label: &quot;Approved&quot;, color: &quot;success&quot; },
+] as const;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [stage, setStage] = useState(0);
-  return &lt;div style={{ width: &quot;min(100%, 460px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;h2 style={{ fontSize: 24 }}&gt;Give status a little clarity.&lt;/h2&gt;&lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot; }}&gt;{stages.map(item =&gt; &lt;Badge key={item.label} color={item.color} type={state === &quot;outline&quot; ? &quot;outline&quot; : state === &quot;filled&quot; ? &quot;filled&quot; : &quot;accent&quot;}&gt;{item.label}&lt;/Badge&gt;)}&lt;/div&gt;&lt;p role=&quot;status&quot;&gt;Demo project status: {stages[stage].label}&lt;/p&gt;&lt;div&gt;&lt;Button onClick={() =&gt; setStage((stage + 1) % stages.length)}&gt;Move to next status&lt;/Button&gt;&lt;/div&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 460px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;h2 style={{ fontSize: 24 }}&gt;Give status a little clarity.&lt;/h2&gt;
+      &lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot; }}&gt;
+        {stages.map((item) =&gt; (
+          &lt;Badge
+            key={item.label}
+            color={item.color}
+            type={state === &quot;outline&quot; ? &quot;outline&quot; : state === &quot;filled&quot; ? &quot;filled&quot; : &quot;accent&quot;}
+          &gt;
+            {item.label}
+          &lt;/Badge&gt;
+        ))}
+      &lt;/div&gt;
+      &lt;p role=&quot;status&quot;&gt;Demo project status: {stages[stage].label}&lt;/p&gt;
+      &lt;div&gt;
+        &lt;Button onClick={() =&gt; setStage((stage + 1) % stages.length)}&gt;Move to next status&lt;/Button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Semantic status badges compare draft, review and approval labels across accent, outline and filled appearances. A demo action cycles the current project status.</p><h2>Try it</h2><p>Move the demo project through its statuses and compare the badge appearances.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

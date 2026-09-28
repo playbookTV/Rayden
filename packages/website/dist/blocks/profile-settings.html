@@ -5,11 +5,34 @@ import { useState } from &quot;react&quot;;
 import { ProfileSettingsBlock, type ProfileSettingsValues } from &quot;@raydenui/ui/blocks&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 
-const initial: ProfileSettingsValues = { firstName: &quot;Avery&quot;, lastName: &quot;Morgan&quot;, email: &quot;avery@example.com&quot;, jobTitle: &quot;Product designer&quot;, timeZone: &quot;Europe/London&quot;, bio: &quot;Making thoughtful things for the web.&quot; };
+const initial: ProfileSettingsValues = {
+  firstName: &quot;Avery&quot;,
+  lastName: &quot;Morgan&quot;,
+  email: &quot;avery@example.com&quot;,
+  jobTitle: &quot;Product designer&quot;,
+  timeZone: &quot;Europe/London&quot;,
+  bio: &quot;Making thoughtful things for the web.&quot;,
+};
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [value, setValue] = useState(initial);
   const [saved, setSaved] = useState(false);
-  return &lt;ProfileSettingsBlock title=&quot;Your profile&quot; description=&quot;A little about you. Changes stay in this demo.&quot; value={value} onSave={next =&gt; { setValue(next); setSaved(true); }} onCancel={() =&gt; setSaved(false)} status={state === &quot;loading&quot; ? &quot;loading&quot; : state === &quot;error&quot; ? &quot;error&quot; : saved ? &quot;success&quot; : &quot;idle&quot;} errorMessage=&quot;Example error: your changes could not be saved.&quot; successMessage=&quot;Saved in this preview only. Reloading resets the profile.&quot; /&gt;;
+  return (
+    &lt;ProfileSettingsBlock
+      title=&quot;Your profile&quot;
+      description=&quot;A little about you. Changes stay in this demo.&quot;
+      value={value}
+      onSave={(next) =&gt; {
+        setValue(next);
+        setSaved(true);
+      }}
+      onCancel={() =&gt; setSaved(false)}
+      status={
+        state === &quot;loading&quot; ? &quot;loading&quot; : state === &quot;error&quot; ? &quot;error&quot; : saved ? &quot;success&quot; : &quot;idle&quot;
+      }
+      errorMessage=&quot;Example error: your changes could not be saved.&quot;
+      successMessage=&quot;Saved in this preview only. Reloading resets the profile.&quot;
+    /&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Start a profile editor with labelled fields, draft tracking, cancellation, and feedback. Changes here are saved only to local React state and disappear when the preview resets.</p><h2>Try it</h2><p>Edit the first name, save it, then try the error and loading states. Cancel restores the current demo profile.</p><h2>Built with</h2><div class="detail-built"><a href="/components/input">Input</a><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -7,7 +7,28 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [focus, setFocus] = useState(true);
   const [sounds, setSounds] = useState(false);
-  return &lt;div style={{ width: &quot;min(100%, 420px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;h2 style={{ fontSize: 24 }}&gt;A calmer workspace.&lt;/h2&gt;&lt;Toggle label=&quot;Focus mode&quot; description=&quot;Keep nonessential notifications quiet.&quot; checked={focus} onChange={event =&gt; setFocus(event.target.checked)} disabled={state === &quot;disabled&quot;} /&gt;&lt;Toggle label=&quot;Interface sounds&quot; description=&quot;A little feedback for everyday actions.&quot; checked={sounds} onChange={event =&gt; setSounds(event.target.checked)} disabled={state === &quot;disabled&quot;} /&gt;&lt;p role=&quot;status&quot;&gt;Focus mode {focus ? &quot;on&quot; : &quot;off&quot;}. Sounds {sounds ? &quot;on&quot; : &quot;off&quot;}. Demo preferences only.&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 420px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;h2 style={{ fontSize: 24 }}&gt;A calmer workspace.&lt;/h2&gt;
+      &lt;Toggle
+        label=&quot;Focus mode&quot;
+        description=&quot;Keep nonessential notifications quiet.&quot;
+        checked={focus}
+        onChange={(event) =&gt; setFocus(event.target.checked)}
+        disabled={state === &quot;disabled&quot;}
+      /&gt;
+      &lt;Toggle
+        label=&quot;Interface sounds&quot;
+        description=&quot;A little feedback for everyday actions.&quot;
+        checked={sounds}
+        onChange={(event) =&gt; setSounds(event.target.checked)}
+        disabled={state === &quot;disabled&quot;}
+      /&gt;
+      &lt;p role=&quot;status&quot;&gt;
+        Focus mode {focus ? &quot;on&quot; : &quot;off&quot;}. Sounds {sounds ? &quot;on&quot; : &quot;off&quot;}. Demo preferences only.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Two controlled toggles demonstrate independent workspace preferences. The summary updates as the controls change, without changing settings outside the preview.</p><h2>Try it</h2><p>Turn focus mode off and interface sounds on, then compare the disabled controls.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

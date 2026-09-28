@@ -7,7 +7,31 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [visible, setVisible] = useState(true);
   const [message, setMessage] = useState(&quot;&quot;);
-  return &lt;div style={{ width: &quot;100%&quot; }}&gt;{visible ? &lt;Banner title=&quot;A little more room for your ideas.&quot; description=&quot;Explore a new demo workspace layout.&quot; status={state === &quot;warning&quot; ? &quot;warning&quot; : &quot;feature&quot;} emphasis={state === &quot;bold&quot; ? &quot;bold&quot; : &quot;subtle&quot;} size=&quot;lg&quot; buttonLabel=&quot;Explore the update&quot; onButtonClick={() =&gt; setMessage(&quot;Demo update opened. Your real workspace has not changed.&quot;)} onDismiss={() =&gt; setVisible(false)} /&gt; : &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setVisible(true)}&gt;Show announcement&lt;/Button&gt;}&lt;p role=&quot;status&quot; style={{ marginTop: 28 }}&gt;{message}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;100%&quot; }}&gt;
+      {visible ? (
+        &lt;Banner
+          title=&quot;A little more room for your ideas.&quot;
+          description=&quot;Explore a new demo workspace layout.&quot;
+          status={state === &quot;warning&quot; ? &quot;warning&quot; : &quot;feature&quot;}
+          emphasis={state === &quot;bold&quot; ? &quot;bold&quot; : &quot;subtle&quot;}
+          size=&quot;lg&quot;
+          buttonLabel=&quot;Explore the update&quot;
+          onButtonClick={() =&gt;
+            setMessage(&quot;Demo update opened. Your real workspace has not changed.&quot;)
+          }
+          onDismiss={() =&gt; setVisible(false)}
+        /&gt;
+      ) : (
+        &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setVisible(true)}&gt;
+          Show announcement
+        &lt;/Button&gt;
+      )}
+      &lt;p role=&quot;status&quot; style={{ marginTop: 28 }}&gt;
+        {message}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A banner presents a fictional update with an action and a functioning dismissal control. Restoring the announcement makes the interaction repeatable.</p><h2>Try it</h2><p>Explore the update, dismiss it and show it again. Compare bold and warning appearances.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

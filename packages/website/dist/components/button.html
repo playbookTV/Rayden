@@ -7,17 +7,35 @@ import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [count, setCount] = useState(0);
-  return &lt;div style={{ display: &quot;grid&quot;, gap: 28, maxWidth: 420 }}&gt;
-    &lt;div style={{ display: &quot;flex&quot;, flexWrap: &quot;wrap&quot;, gap: 12 }}&gt;
-      &lt;Button variant=&quot;primary&quot; disabled={state === &quot;disabled&quot;} onClick={() =&gt; setCount(count + 1)}&gt;Create project&lt;/Button&gt;
-      &lt;Button variant=&quot;secondary&quot; disabled={state === &quot;disabled&quot;} onClick={() =&gt; setCount(0)}&gt;Reset count&lt;/Button&gt;
+  return (
+    &lt;div style={{ display: &quot;grid&quot;, gap: 28, maxWidth: 420 }}&gt;
+      &lt;div style={{ display: &quot;flex&quot;, flexWrap: &quot;wrap&quot;, gap: 12 }}&gt;
+        &lt;Button
+          variant=&quot;primary&quot;
+          disabled={state === &quot;disabled&quot;}
+          onClick={() =&gt; setCount(count + 1)}
+        &gt;
+          Create project
+        &lt;/Button&gt;
+        &lt;Button variant=&quot;secondary&quot; disabled={state === &quot;disabled&quot;} onClick={() =&gt; setCount(0)}&gt;
+          Reset count
+        &lt;/Button&gt;
+      &lt;/div&gt;
+      &lt;div style={{ display: &quot;flex&quot;, flexWrap: &quot;wrap&quot;, gap: 12 }}&gt;
+        &lt;Button variant=&quot;grey&quot; onClick={() =&gt; setCount(count + 1)}&gt;
+          Save draft
+        &lt;/Button&gt;
+        &lt;Button variant=&quot;text&quot; onClick={() =&gt; setCount(count + 1)}&gt;
+          Learn more
+        &lt;/Button&gt;
+      &lt;/div&gt;
+      &lt;p role=&quot;status&quot;&gt;
+        {count
+          ? `${count} demo actions triggered.`
+          : &quot;Try a button. Every action stays in this preview.&quot;}
+      &lt;/p&gt;
     &lt;/div&gt;
-    &lt;div style={{ display: &quot;flex&quot;, flexWrap: &quot;wrap&quot;, gap: 12 }}&gt;
-      &lt;Button variant=&quot;grey&quot; onClick={() =&gt; setCount(count + 1)}&gt;Save draft&lt;/Button&gt;
-      &lt;Button variant=&quot;text&quot; onClick={() =&gt; setCount(count + 1)}&gt;Learn more&lt;/Button&gt;
-    &lt;/div&gt;
-    &lt;p role=&quot;status&quot;&gt;{count ? `${count} demo actions triggered.` : &quot;Try a button. Every action stays in this preview.&quot;}&lt;/p&gt;
-  &lt;/div&gt;;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Buttons communicate the next action through supported variants and states. This example uses primary, secondary, grey, and text variants with real local click handlers.</p><h2>Try it</h2><p>Trigger an action and watch the local count. In the disabled state, the first two buttons are unavailable.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -7,7 +7,41 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [expanded, setExpanded] = useState(false);
   const [online, setOnline] = useState(true);
-  return &lt;div style={{ width: &quot;min(100%, 440px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;div style={{ display: &quot;flex&quot;, alignItems: &quot;center&quot;, gap: 16 }}&gt;&lt;Avatar type={state === &quot;icon&quot; ? &quot;icon&quot; : &quot;initials&quot;} initials=&quot;AM&quot; size=&quot;xl&quot; status={online ? &quot;online&quot; : &quot;offline&quot;} statusLabel={online ? &quot;Avery is available&quot; : &quot;Avery is away&quot;} /&gt;&lt;div&gt;&lt;h2 style={{ fontSize: 22 }}&gt;Avery Morgan&lt;/h2&gt;&lt;p&gt;Product designer · demo profile&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;AvatarGroup max={expanded ? 4 : 2} size=&quot;lg&quot;&gt;{[&quot;AM&quot;, &quot;SR&quot;, &quot;JL&quot;, &quot;CB&quot;].map(initials =&gt; &lt;Avatar key={initials} type=&quot;initials&quot; initials={initials} aria-label={`Demo collaborator ${initials}`} /&gt;)}&lt;/AvatarGroup&gt;&lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot; }}&gt;&lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setExpanded(!expanded)}&gt;{expanded ? &quot;Show fewer&quot; : &quot;Show all collaborators&quot;}&lt;/Button&gt;&lt;Button variant=&quot;text&quot; onClick={() =&gt; setOnline(!online)}&gt;{online ? &quot;Set away&quot; : &quot;Set available&quot;}&lt;/Button&gt;&lt;/div&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 440px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;div style={{ display: &quot;flex&quot;, alignItems: &quot;center&quot;, gap: 16 }}&gt;
+        &lt;Avatar
+          type={state === &quot;icon&quot; ? &quot;icon&quot; : &quot;initials&quot;}
+          initials=&quot;AM&quot;
+          size=&quot;xl&quot;
+          status={online ? &quot;online&quot; : &quot;offline&quot;}
+          statusLabel={online ? &quot;Avery is available&quot; : &quot;Avery is away&quot;}
+        /&gt;
+        &lt;div&gt;
+          &lt;h2 style={{ fontSize: 22 }}&gt;Avery Morgan&lt;/h2&gt;
+          &lt;p&gt;Product designer · demo profile&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;AvatarGroup max={expanded ? 4 : 2} size=&quot;lg&quot;&gt;
+        {[&quot;AM&quot;, &quot;SR&quot;, &quot;JL&quot;, &quot;CB&quot;].map((initials) =&gt; (
+          &lt;Avatar
+            key={initials}
+            type=&quot;initials&quot;
+            initials={initials}
+            aria-label={`Demo collaborator ${initials}`}
+          /&gt;
+        ))}
+      &lt;/AvatarGroup&gt;
+      &lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot; }}&gt;
+        &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setExpanded(!expanded)}&gt;
+          {expanded ? &quot;Show fewer&quot; : &quot;Show all collaborators&quot;}
+        &lt;/Button&gt;
+        &lt;Button variant=&quot;text&quot; onClick={() =&gt; setOnline(!online)}&gt;
+          {online ? &quot;Set away&quot; : &quot;Set available&quot;}
+        &lt;/Button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Initials and icon avatars demonstrate availability indicators and a grouped collaborator list with overflow. The example owns the local availability and expansion controls.</p><h2>Try it</h2><p>Show all collaborators, set Avery away, and compare the icon appearance.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

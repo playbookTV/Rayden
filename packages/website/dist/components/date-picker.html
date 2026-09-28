@@ -7,10 +7,17 @@ import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example() {
   const [date, setDate] = useState&lt;Date | null&gt;(new Date(2026, 8, 24));
-  return &lt;div style={{ width: &quot;min(100%, 360px)&quot; }}&gt;
-    &lt;DatePicker value={date} onChange={setDate} showFooter onClear={() =&gt; setDate(null)} /&gt;
-    &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;Selected: {date ? date.toLocaleDateString(&quot;en-GB&quot;, { day: &quot;numeric&quot;, month: &quot;long&quot;, year: &quot;numeric&quot; }) : &quot;No date&quot;}&lt;/p&gt;
-  &lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 360px)&quot; }}&gt;
+      &lt;DatePicker value={date} onChange={setDate} showFooter onClear={() =&gt; setDate(null)} /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        Selected:{&quot; &quot;}
+        {date
+          ? date.toLocaleDateString(&quot;en-GB&quot;, { day: &quot;numeric&quot;, month: &quot;long&quot;, year: &quot;numeric&quot; })
+          : &quot;No date&quot;}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled DatePicker starts on a fixed demo date and reports the selected day. The package also documents range and year modes; this example focuses on a single-date interaction.</p><h2>Try it</h2><p>Choose another day, move between months, or clear the selection. The text below reports the selected date.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -7,7 +7,39 @@ import &quot;@raydenui/ui/styles.css&quot;;
 const locations = [&quot;Workspace&quot;, &quot;Projects&quot;, &quot;Northline&quot;];
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [current, setCurrent] = useState(2);
-  return &lt;div style={{ width: &quot;min(100%, 640px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;Breadcrumb separator={state === &quot;slash&quot; ? &quot;slash&quot; : &quot;chevron&quot;} hasBorders={state === &quot;bordered&quot;} items={locations.slice(0, current + 1).map((label, index) =&gt; ({ label, active: index === current, href: index &lt; current ? `#breadcrumb-${index}` : undefined }))} onClick={event =&gt; { const anchor = (event.target as HTMLElement).closest(&quot;a&quot;); if (anchor) { event.preventDefault(); setCurrent(Number(anchor.hash.replace(&quot;#breadcrumb-&quot;, &quot;&quot;))); } }} /&gt;&lt;section id={`breadcrumb-${current}`}&gt;&lt;h2 style={{ fontSize: 28 }}&gt;{locations[current]}&lt;/h2&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 16 }}&gt;You are viewing the {locations[current].toLowerCase()} demo.&lt;/p&gt;&lt;/section&gt;&lt;div&gt;&lt;Button variant=&quot;secondary&quot; disabled={current === 2} onClick={() =&gt; setCurrent(2)}&gt;Open Northline project&lt;/Button&gt;&lt;/div&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 640px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;Breadcrumb
+        separator={state === &quot;slash&quot; ? &quot;slash&quot; : &quot;chevron&quot;}
+        hasBorders={state === &quot;bordered&quot;}
+        items={locations
+          .slice(0, current + 1)
+          .map((label, index) =&gt; ({
+            label,
+            active: index === current,
+            href: index &lt; current ? `#breadcrumb-${index}` : undefined,
+          }))}
+        onClick={(event) =&gt; {
+          const anchor = (event.target as HTMLElement).closest(&quot;a&quot;);
+          if (anchor) {
+            event.preventDefault();
+            setCurrent(Number(anchor.hash.replace(&quot;#breadcrumb-&quot;, &quot;&quot;)));
+          }
+        }}
+      /&gt;
+      &lt;section id={`breadcrumb-${current}`}&gt;
+        &lt;h2 style={{ fontSize: 28 }}&gt;{locations[current]}&lt;/h2&gt;
+        &lt;p role=&quot;status&quot; style={{ marginTop: 16 }}&gt;
+          You are viewing the {locations[current].toLowerCase()} demo.
+        &lt;/p&gt;
+      &lt;/section&gt;
+      &lt;div&gt;
+        &lt;Button variant=&quot;secondary&quot; disabled={current === 2} onClick={() =&gt; setCurrent(2)}&gt;
+          Open Northline project
+        &lt;/Button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A short breadcrumb trail represents local workspace, project and detail views. Following a parent updates the demo trail and content; the final item remains the current location.</p><h2>Try it</h2><p>Choose Projects or Workspace, then reopen the Northline project. Compare slash separators and borders.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

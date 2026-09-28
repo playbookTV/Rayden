@@ -7,11 +7,64 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [selected, setSelected] = useState(&quot;&quot;);
   const [recovered, setRecovered] = useState(false);
-  return &lt;div style={{ width: &quot;100%&quot; }}&gt;&lt;FeatureOverviewBlock eyebrow=&quot;SPACE TO DO YOUR BEST WORK&quot; title=&quot;Less juggling. More making.&quot; description=&quot;Three connected parts of a fictional team workspace.&quot; variant={state === &quot;plain&quot; ? &quot;plain&quot; : &quot;card&quot;} columns={3} features={[
-    { id: &quot;plan&quot;, title: &quot;Make a clear plan&quot;, description: &quot;Turn a loose idea into a small set of achievable steps.&quot;, icon: &quot;calendar&quot;, cta: { label: &quot;Explore planning&quot;, onClick: () =&gt; setSelected(&quot;Planning: organise milestones and choose the next step.&quot;) } },
-    { id: &quot;collaborate&quot;, title: &quot;Keep everyone close&quot;, description: &quot;Share context, ask a question, and keep feedback in one place.&quot;, icon: &quot;users&quot;, cta: { label: &quot;Explore collaboration&quot;, onClick: () =&gt; setSelected(&quot;Collaboration: collect feedback alongside the work.&quot;) } },
-    { id: &quot;deliver&quot;, title: &quot;Finish with confidence&quot;, description: &quot;See what is ready and what still needs a little attention.&quot;, icon: &quot;check-circle&quot;, cta: { label: &quot;Explore delivery&quot;, onClick: () =&gt; setSelected(&quot;Delivery: review the checklist before handing work over.&quot;) } },
-  ]} state={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot; || state === &quot;empty&quot;) ? state : &quot;default&quot;} onRetry={() =&gt; setRecovered(true)} emptyState={{ title: &quot;No features to show yet.&quot;, description: &quot;Restore the demo capabilities to keep exploring.&quot;, cta: { label: &quot;Show demo features&quot;, onClick: () =&gt; setRecovered(true) } }} /&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;{selected || &quot;Choose a feature to see its demo details.&quot;}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;100%&quot; }}&gt;
+      &lt;FeatureOverviewBlock
+        eyebrow=&quot;SPACE TO DO YOUR BEST WORK&quot;
+        title=&quot;Less juggling. More making.&quot;
+        description=&quot;Three connected parts of a fictional team workspace.&quot;
+        variant={state === &quot;plain&quot; ? &quot;plain&quot; : &quot;card&quot;}
+        columns={3}
+        features={[
+          {
+            id: &quot;plan&quot;,
+            title: &quot;Make a clear plan&quot;,
+            description: &quot;Turn a loose idea into a small set of achievable steps.&quot;,
+            icon: &quot;calendar&quot;,
+            cta: {
+              label: &quot;Explore planning&quot;,
+              onClick: () =&gt; setSelected(&quot;Planning: organise milestones and choose the next step.&quot;),
+            },
+          },
+          {
+            id: &quot;collaborate&quot;,
+            title: &quot;Keep everyone close&quot;,
+            description: &quot;Share context, ask a question, and keep feedback in one place.&quot;,
+            icon: &quot;users&quot;,
+            cta: {
+              label: &quot;Explore collaboration&quot;,
+              onClick: () =&gt; setSelected(&quot;Collaboration: collect feedback alongside the work.&quot;),
+            },
+          },
+          {
+            id: &quot;deliver&quot;,
+            title: &quot;Finish with confidence&quot;,
+            description: &quot;See what is ready and what still needs a little attention.&quot;,
+            icon: &quot;check-circle&quot;,
+            cta: {
+              label: &quot;Explore delivery&quot;,
+              onClick: () =&gt;
+                setSelected(&quot;Delivery: review the checklist before handing work over.&quot;),
+            },
+          },
+        ]}
+        state={
+          !recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot; || state === &quot;empty&quot;)
+            ? state
+            : &quot;default&quot;
+        }
+        onRetry={() =&gt; setRecovered(true)}
+        emptyState={{
+          title: &quot;No features to show yet.&quot;,
+          description: &quot;Restore the demo capabilities to keep exploring.&quot;,
+          cta: { label: &quot;Show demo features&quot;, onClick: () =&gt; setRecovered(true) },
+        }}
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        {selected || &quot;Choose a feature to see its demo details.&quot;}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A feature section with real follow-up actions, two visual treatments and explicit recovery states. Each action reveals the local explanation for its capability.</p><h2>Try it</h2><p>Explore a feature, compare plain and card layouts, or restore the demo from its empty state.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -7,12 +7,33 @@ import &quot;@raydenui/ui/styles.css&quot;;
 const workspaces: WorkspaceSwitcherItem[] = [
   { id: &quot;studio&quot;, name: &quot;Form &amp; Field&quot;, detail: &quot;Design studio · 8 members&quot;, initials: &quot;FF&quot; },
   { id: &quot;personal&quot;, name: &quot;Personal space&quot;, detail: &quot;Your next good idea&quot;, initials: &quot;AM&quot; },
-  { id: &quot;archive&quot;, name: &quot;Client archive&quot;, detail: &quot;Previous collaborations&quot;, initials: &quot;CA&quot;, unavailableReason: &quot;Ask the owner for access.&quot; },
+  {
+    id: &quot;archive&quot;,
+    name: &quot;Client archive&quot;,
+    detail: &quot;Previous collaborations&quot;,
+    initials: &quot;CA&quot;,
+    unavailableReason: &quot;Ask the owner for access.&quot;,
+  },
 ];
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [current, setCurrent] = useState(workspaces[0]);
   const [recovered, setRecovered] = useState(false);
-  return &lt;div style={{ width: &quot;min(100%, 380px)&quot;, minHeight: 420 }}&gt;&lt;WorkspaceSwitcherBlock current={current} workspaces={state === &quot;empty&quot; ? [] : workspaces} onSelect={id =&gt; setCurrent(workspaces.find(workspace =&gt; workspace.id === id)!)} defaultOpen={state !== &quot;default&quot;} filterThreshold={1} status={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;idle&quot;} onRetry={() =&gt; setRecovered(true)} /&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;Current workspace: {current.name}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 380px)&quot;, minHeight: 420 }}&gt;
+      &lt;WorkspaceSwitcherBlock
+        current={current}
+        workspaces={state === &quot;empty&quot; ? [] : workspaces}
+        onSelect={(id) =&gt; setCurrent(workspaces.find((workspace) =&gt; workspace.id === id)!)}
+        defaultOpen={state !== &quot;default&quot;}
+        filterThreshold={1}
+        status={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;idle&quot;}
+        onRetry={() =&gt; setRecovered(true)}
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        Current workspace: {current.name}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>An interactive workspace selector with search and an unavailable entry that explains the access restriction. Switching only updates the local demonstration.</p><h2>Try it</h2><p>Open the switcher, filter for Personal and choose it. Compare the unavailable, loading and empty experiences.</p><h2>Built with</h2><div class="detail-built"><a href="/components/input">Input</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -8,11 +8,27 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [open, setOpen] = useState(state === &quot;open&quot;);
   const [message, setMessage] = useState(&quot;No project changes have been made.&quot;);
-  return &lt;div&gt;
-    &lt;Button onClick={() =&gt; setOpen(true)}&gt;Archive project&lt;/Button&gt;
-    &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;{message}&lt;/p&gt;
-    &lt;Modal open={open} onClose={() =&gt; setOpen(false)} title=&quot;Archive this project?&quot; description=&quot;This is an interactive demo. Nothing outside this preview will change.&quot; primaryLabel=&quot;Archive demo&quot; onPrimaryClick={() =&gt; { setMessage(&quot;Demo project archived.&quot;); setOpen(false); }} secondaryLabel=&quot;Keep project&quot; onSecondaryClick={() =&gt; setOpen(false)} /&gt;
-  &lt;/div&gt;;
+  return (
+    &lt;div&gt;
+      &lt;Button onClick={() =&gt; setOpen(true)}&gt;Archive project&lt;/Button&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        {message}
+      &lt;/p&gt;
+      &lt;Modal
+        open={open}
+        onClose={() =&gt; setOpen(false)}
+        title=&quot;Archive this project?&quot;
+        description=&quot;This is an interactive demo. Nothing outside this preview will change.&quot;
+        primaryLabel=&quot;Archive demo&quot;
+        onPrimaryClick={() =&gt; {
+          setMessage(&quot;Demo project archived.&quot;);
+          setOpen(false);
+        }}
+        secondaryLabel=&quot;Keep project&quot;
+        onSecondaryClick={() =&gt; setOpen(false)}
+      /&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled confirmation dialog combines a title, explanatory copy, and primary and secondary actions. This example lets you cancel or archive a fictional project without affecting real data.</p><h2>Try it</h2><p>Open the confirmation, use Keep project or Escape, then try Archive demo. Reset starts the example again.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -2,22 +2,42 @@
 <main id="main" class="explore-container" data-detail="dropdown-menu"><nav class="detail-breadcrumb" aria-label="Breadcrumb"><a data-back href="/explore?type=components">← Explore components</a><span>/</span><span aria-current="page">Dropdown menu</span></nav><div class="detail-heading"><div><p class="library-kicker">ACTIONS · COMPONENT</p><h1>Dropdown menu</h1><p class="detail-description">Keep contextual project actions close at hand.</p><div class="detail-meta"><span>@raydenui/ui 0.10.1</span><span>React + TypeScript</span></div></div><div class="detail-actions"><button class="showcase-button" data-copy-target="example-code" data-ai-prompt="Use @raydenui/ui@0.10.1 to build an interface based on this Dropdown menu example. Import DropdownMenu from @raydenui/ui. Preserve real supported props and the explicit demo behaviour. If Rayden MCP is available, check its reference UI version first and use only guidance it actually supports; do not assume it has a contract for every block. Review the following complete example, adapt it to my project, and run the build and interaction checks.">Copy for AI ↗</button><a class="showcase-button primary" href="https://rayden-docs.vercel.app/components/dropdown-menu">Documentation ↗</a></div></div>
 <div class="preview-workbench"><div class="preview-toolbar"><div class="library-switch" role="group" aria-label="Example view"><button type="button" data-view="preview" aria-pressed="true" aria-controls="preview-panel">Preview</button><button type="button" data-view="code" aria-pressed="false" aria-controls="code-panel">Code</button></div><div class="preview-options" id="preview-options"><label>State<select id="preview-state"><option value="default">Default</option><option value="open">Open</option></select></label><label>Theme<select id="preview-theme"><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Viewport<select id="preview-viewport"><option value="desktop">Fit</option><option value="tablet">Tablet</option><option value="mobile">Mobile</option></select></label><button class="preview-reset" id="preview-reset" type="button">↺ Reset preview</button></div></div><div id="preview-panel"><div class="preview-failure" id="preview-failure" role="alert" hidden>The preview couldn’t load. Try Reset preview, or open Code to use the example.</div><div class="preview-surface"><div class="preview-loading" id="preview-loading" role="status">Loading the real component…</div><div class="preview-frame-wrap" id="preview-frame-wrap" data-viewport="desktop"><iframe id="live-preview" title="Interactive Dropdown menu example" height="480" sandbox="allow-scripts allow-same-origin" data-example="dropdown-menu"></iframe></div></div><noscript><p>Enable JavaScript to interact with this example. The full source is available below.</p></noscript></div><div class="preview-code" id="code-panel"><button class="showcase-button" data-copy-target="example-code">Copy code</button><pre tabindex="0" aria-label="Dropdown menu example source"><code id="example-code">&quot;use client&quot;;
 import { useState } from &quot;react&quot;;
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel } from &quot;@raydenui/ui&quot;;
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+} from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [action, setAction] = useState(&quot;Choose a project action.&quot;);
-  return &lt;div style={{ minHeight: 320, width: 300 }}&gt;
-    &lt;DropdownMenu defaultOpen={state === &quot;open&quot;}&gt;
-      &lt;DropdownMenuTrigger&gt;Project actions ↓&lt;/DropdownMenuTrigger&gt;
-      &lt;DropdownMenuContent&gt;&lt;DropdownMenuLabel&gt;Workspace project&lt;/DropdownMenuLabel&gt;
-        &lt;DropdownMenuItem onSelect={() =&gt; setAction(&quot;Demo project duplicated.&quot;)}&gt;Duplicate project&lt;/DropdownMenuItem&gt;
-        &lt;DropdownMenuItem onSelect={() =&gt; setAction(&quot;Demo link prepared.&quot;)}&gt;Share project&lt;/DropdownMenuItem&gt;
-        &lt;DropdownMenuItem destructive onSelect={() =&gt; setAction(&quot;Demo project archived. Reset to start again.&quot;)}&gt;Archive project&lt;/DropdownMenuItem&gt;
-      &lt;/DropdownMenuContent&gt;
-    &lt;/DropdownMenu&gt;
-    &lt;p role=&quot;status&quot; style={{ marginTop: 220 }}&gt;{action}&lt;/p&gt;
-  &lt;/div&gt;;
+  return (
+    &lt;div style={{ minHeight: 320, width: 300 }}&gt;
+      &lt;DropdownMenu defaultOpen={state === &quot;open&quot;}&gt;
+        &lt;DropdownMenuTrigger&gt;Project actions ↓&lt;/DropdownMenuTrigger&gt;
+        &lt;DropdownMenuContent&gt;
+          &lt;DropdownMenuLabel&gt;Workspace project&lt;/DropdownMenuLabel&gt;
+          &lt;DropdownMenuItem onSelect={() =&gt; setAction(&quot;Demo project duplicated.&quot;)}&gt;
+            Duplicate project
+          &lt;/DropdownMenuItem&gt;
+          &lt;DropdownMenuItem onSelect={() =&gt; setAction(&quot;Demo link prepared.&quot;)}&gt;
+            Share project
+          &lt;/DropdownMenuItem&gt;
+          &lt;DropdownMenuItem
+            destructive
+            onSelect={() =&gt; setAction(&quot;Demo project archived. Reset to start again.&quot;)}
+          &gt;
+            Archive project
+          &lt;/DropdownMenuItem&gt;
+        &lt;/DropdownMenuContent&gt;
+      &lt;/DropdownMenu&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 220 }}&gt;
+        {action}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Compose a trigger, content, label, and menu items for contextual actions. The actions in this example update a local message; no project is changed outside the preview.</p><h2>Try it</h2><p>Open Project actions, choose Duplicate project, then reopen it and try keyboard navigation or Escape.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

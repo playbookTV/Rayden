@@ -7,11 +7,25 @@ import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [name, setName] = useState(&quot;Avery Morgan&quot;);
-  return &lt;div style={{ display: &quot;grid&quot;, gap: 24, width: &quot;min(100%, 400px)&quot; }}&gt;
-    &lt;Input label=&quot;Full name&quot; value={name} onChange={e =&gt; setName(e.target.value)} helperText=&quot;The name shown on your profile.&quot; disabled={state === &quot;disabled&quot;} /&gt;
-    &lt;Input label=&quot;Work email&quot; type=&quot;email&quot; placeholder=&quot;you@example.com&quot; error={state === &quot;error&quot; ? &quot;Enter a valid email address.&quot; : undefined} helperText=&quot;Use a demo address in this preview.&quot; /&gt;
-    &lt;p role=&quot;status&quot;&gt;Profile preview: {name || &quot;Your name&quot;}&lt;/p&gt;
-  &lt;/div&gt;;
+  return (
+    &lt;div style={{ display: &quot;grid&quot;, gap: 24, width: &quot;min(100%, 400px)&quot; }}&gt;
+      &lt;Input
+        label=&quot;Full name&quot;
+        value={name}
+        onChange={(e) =&gt; setName(e.target.value)}
+        helperText=&quot;The name shown on your profile.&quot;
+        disabled={state === &quot;disabled&quot;}
+      /&gt;
+      &lt;Input
+        label=&quot;Work email&quot;
+        type=&quot;email&quot;
+        placeholder=&quot;you@example.com&quot;
+        error={state === &quot;error&quot; ? &quot;Enter a valid email address.&quot; : undefined}
+        helperText=&quot;Use a demo address in this preview.&quot;
+      /&gt;
+      &lt;p role=&quot;status&quot;&gt;Profile preview: {name || &quot;Your name&quot;}&lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled text input and an email field demonstrate labels, supporting text, disabled state, and errors. Native input attributes remain available for your application’s form behaviour.</p><h2>Try it</h2><p>Change the full name and watch the profile text update. Switch to the error state to inspect the email feedback.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

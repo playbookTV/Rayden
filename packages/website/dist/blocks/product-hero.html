@@ -9,7 +9,61 @@ export default function Example({ state = &quot;default&quot; }: { state?: strin
   const [progress, setProgress] = useState(60);
   const [message, setMessage] = useState(&quot;&quot;);
   const [recovered, setRecovered] = useState(false);
-  return &lt;div style={{ width: &quot;100%&quot; }}&gt;&lt;ProductHeroBlock eyebrow=&quot;FORM &amp; FIELD&quot; eyebrowBadge=&quot;Demo workspace&quot; headline=&quot;Bring good work into focus.&quot; description=&quot;A little structure for your ideas, your team, and the things you want to make.&quot; primaryCta={{ label: &quot;Try the workspace&quot;, onClick: () =&gt; setMessage(&quot;Demo workspace opened. No account was created.&quot;) }} secondaryCta={{ label: &quot;See how it works&quot;, onClick: () =&gt; setMessage(&quot;Complete a step in the example project to see its progress change.&quot;) }} note=&quot;An illustrative product hero built with real Rayden components.&quot; align={state === &quot;centered&quot; ? &quot;center&quot; : &quot;start&quot;} mediaSlot={state === &quot;centered&quot; ? undefined : &lt;Card variant=&quot;outlined&quot;&gt;&lt;CardHeader title=&quot;The next chapter&quot; subtitle=&quot;A demo project, moving forward.&quot; bordered /&gt;&lt;CardBody&gt;&lt;div style={{ display: &quot;grid&quot;, gap: 24 }}&gt;&lt;ProgressBar value={progress} label=&quot;Project checklist&quot; metadata={`${progress / 20} of 5 steps complete`} showPercentage /&gt;&lt;p&gt;Small steps. A clearer path to done.&lt;/p&gt;&lt;Button variant=&quot;secondary&quot; disabled={progress === 100} onClick={() =&gt; setProgress(Math.min(100, progress + 20))}&gt;Complete a project step&lt;/Button&gt;&lt;/div&gt;&lt;/CardBody&gt;&lt;/Card&gt;} state={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;default&quot;} onRetry={() =&gt; setRecovered(true)} /&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;{message}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;100%&quot; }}&gt;
+      &lt;ProductHeroBlock
+        eyebrow=&quot;FORM &amp; FIELD&quot;
+        eyebrowBadge=&quot;Demo workspace&quot;
+        headline=&quot;Bring good work into focus.&quot;
+        description=&quot;A little structure for your ideas, your team, and the things you want to make.&quot;
+        primaryCta={{
+          label: &quot;Try the workspace&quot;,
+          onClick: () =&gt; setMessage(&quot;Demo workspace opened. No account was created.&quot;),
+        }}
+        secondaryCta={{
+          label: &quot;See how it works&quot;,
+          onClick: () =&gt;
+            setMessage(&quot;Complete a step in the example project to see its progress change.&quot;),
+        }}
+        note=&quot;An illustrative product hero built with real Rayden components.&quot;
+        align={state === &quot;centered&quot; ? &quot;center&quot; : &quot;start&quot;}
+        mediaSlot={
+          state === &quot;centered&quot; ? undefined : (
+            &lt;Card variant=&quot;outlined&quot;&gt;
+              &lt;CardHeader
+                title=&quot;The next chapter&quot;
+                subtitle=&quot;A demo project, moving forward.&quot;
+                bordered
+              /&gt;
+              &lt;CardBody&gt;
+                &lt;div style={{ display: &quot;grid&quot;, gap: 24 }}&gt;
+                  &lt;ProgressBar
+                    value={progress}
+                    label=&quot;Project checklist&quot;
+                    metadata={`${progress / 20} of 5 steps complete`}
+                    showPercentage
+                  /&gt;
+                  &lt;p&gt;Small steps. A clearer path to done.&lt;/p&gt;
+                  &lt;Button
+                    variant=&quot;secondary&quot;
+                    disabled={progress === 100}
+                    onClick={() =&gt; setProgress(Math.min(100, progress + 20))}
+                  &gt;
+                    Complete a project step
+                  &lt;/Button&gt;
+                &lt;/div&gt;
+              &lt;/CardBody&gt;
+            &lt;/Card&gt;
+          )
+        }
+        state={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;default&quot;}
+        onRetry={() =&gt; setRecovered(true)}
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        {message}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A product introduction with primary and secondary actions, plus a live project card built from Rayden components. The centred variant presents a focused text-only hero.</p><h2>Try it</h2><p>Try both calls to action and complete a project step. Compare the centred, loading and error states.</p><h2>Built with</h2><div class="detail-built"><a href="/components/card">Card</a><a href="/components/button">Button</a><a href="/components/progress-bar">ProgressBar</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

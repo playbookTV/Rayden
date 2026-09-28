@@ -9,11 +9,65 @@ export default function Example({ state = &quot;default&quot; }: { state?: strin
   const [selected, setSelected] = useState(&quot;&quot;);
   const [recovered, setRecovered] = useState(false);
   const weekly = period === &quot;week&quot;;
-  return &lt;div style={{ width: &quot;100%&quot; }}&gt;&lt;KpiOverviewBlock title=&quot;The shape of your progress.&quot; description=&quot;Illustrative workspace activity, with a clear comparison period.&quot; period={{ label: weekly ? &quot;18–24 September 2026&quot; : &quot;September 2026&quot;, comparisonLabel: weekly ? &quot;11–17 September 2026&quot; : &quot;August 2026&quot; }} periodOptions={[{ id: &quot;week&quot;, label: &quot;This week&quot; }, { id: &quot;month&quot;, label: &quot;This month&quot; }]} selectedPeriodId={period} onPeriodChange={setPeriod} metrics={state === &quot;empty&quot; ? [] : [
-    { id: &quot;projects&quot;, label: &quot;Projects completed&quot;, value: weekly ? &quot;12&quot; : &quot;46&quot;, comparisonValue: weekly ? &quot;9&quot; : &quot;38&quot;, change: { label: weekly ? &quot;+3&quot; : &quot;+8&quot;, direction: &quot;up&quot;, sentiment: &quot;positive&quot; }, description: &quot;Finished and handed over.&quot; },
-    { id: &quot;reviews&quot;, label: &quot;Reviews awaiting feedback&quot;, value: weekly ? &quot;4&quot; : &quot;7&quot;, comparisonValue: weekly ? &quot;6&quot; : &quot;10&quot;, change: { label: weekly ? &quot;−2&quot; : &quot;−3&quot;, direction: &quot;down&quot;, sentiment: &quot;positive&quot; }, description: &quot;A shorter queue for the team.&quot; },
-    { id: &quot;contributors&quot;, label: &quot;Active contributors&quot;, value: weekly ? &quot;18&quot; : &quot;24&quot;, comparisonValue: weekly ? &quot;16&quot; : &quot;22&quot;, change: { label: &quot;+2&quot;, direction: &quot;up&quot;, sentiment: &quot;neutral&quot; }, description: &quot;People moving work forward.&quot; },
-  ]} onSelectMetric={setSelected} status={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;idle&quot;} errorMessage=&quot;Example error: reporting is unavailable.&quot; onRetry={() =&gt; setRecovered(true)} footer={&lt;p role=&quot;status&quot;&gt;{selected ? `Selected metric: ${selected}. Demo data only.` : &quot;Select a metric to inspect the demo selection.&quot;}&lt;/p&gt;} /&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;100%&quot; }}&gt;
+      &lt;KpiOverviewBlock
+        title=&quot;The shape of your progress.&quot;
+        description=&quot;Illustrative workspace activity, with a clear comparison period.&quot;
+        period={{
+          label: weekly ? &quot;18–24 September 2026&quot; : &quot;September 2026&quot;,
+          comparisonLabel: weekly ? &quot;11–17 September 2026&quot; : &quot;August 2026&quot;,
+        }}
+        periodOptions={[
+          { id: &quot;week&quot;, label: &quot;This week&quot; },
+          { id: &quot;month&quot;, label: &quot;This month&quot; },
+        ]}
+        selectedPeriodId={period}
+        onPeriodChange={setPeriod}
+        metrics={
+          state === &quot;empty&quot;
+            ? []
+            : [
+                {
+                  id: &quot;projects&quot;,
+                  label: &quot;Projects completed&quot;,
+                  value: weekly ? &quot;12&quot; : &quot;46&quot;,
+                  comparisonValue: weekly ? &quot;9&quot; : &quot;38&quot;,
+                  change: { label: weekly ? &quot;+3&quot; : &quot;+8&quot;, direction: &quot;up&quot;, sentiment: &quot;positive&quot; },
+                  description: &quot;Finished and handed over.&quot;,
+                },
+                {
+                  id: &quot;reviews&quot;,
+                  label: &quot;Reviews awaiting feedback&quot;,
+                  value: weekly ? &quot;4&quot; : &quot;7&quot;,
+                  comparisonValue: weekly ? &quot;6&quot; : &quot;10&quot;,
+                  change: { label: weekly ? &quot;−2&quot; : &quot;−3&quot;, direction: &quot;down&quot;, sentiment: &quot;positive&quot; },
+                  description: &quot;A shorter queue for the team.&quot;,
+                },
+                {
+                  id: &quot;contributors&quot;,
+                  label: &quot;Active contributors&quot;,
+                  value: weekly ? &quot;18&quot; : &quot;24&quot;,
+                  comparisonValue: weekly ? &quot;16&quot; : &quot;22&quot;,
+                  change: { label: &quot;+2&quot;, direction: &quot;up&quot;, sentiment: &quot;neutral&quot; },
+                  description: &quot;People moving work forward.&quot;,
+                },
+              ]
+        }
+        onSelectMetric={setSelected}
+        status={!recovered &amp;&amp; (state === &quot;loading&quot; || state === &quot;error&quot;) ? state : &quot;idle&quot;}
+        errorMessage=&quot;Example error: reporting is unavailable.&quot;
+        onRetry={() =&gt; setRecovered(true)}
+        footer={
+          &lt;p role=&quot;status&quot;&gt;
+            {selected
+              ? `Selected metric: ${selected}. Demo data only.`
+              : &quot;Select a metric to inspect the demo selection.&quot;}
+          &lt;/p&gt;
+        }
+      /&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A reporting summary with explicit periods, comparisons and metric selection. Every value is illustrative; switching periods swaps the local demonstration dataset.</p><h2>Try it</h2><p>Switch the reporting period and select a metric. Try the loading, error and empty states.</p><h2>Built with</h2><div class="detail-built"><a href="/components/select">Select</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -6,7 +6,23 @@ import { Slider } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [value, setValue] = useState(60);
-  return &lt;div style={{ width: &quot;min(100%, 440px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;h2 style={{ fontSize: 24 }}&gt;Find the right balance.&lt;/h2&gt;&lt;Slider label=&quot;Preview intensity&quot; value={value} onChange={setValue} min={0} max={100} step={5} showPercentage disabled={state === &quot;disabled&quot;} metadata=&quot;Use the arrow keys for precise adjustments.&quot; /&gt;&lt;p role=&quot;status&quot;&gt;Intensity: {value}%&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 440px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;h2 style={{ fontSize: 24 }}&gt;Find the right balance.&lt;/h2&gt;
+      &lt;Slider
+        label=&quot;Preview intensity&quot;
+        value={value}
+        onChange={setValue}
+        min={0}
+        max={100}
+        step={5}
+        showPercentage
+        disabled={state === &quot;disabled&quot;}
+        metadata=&quot;Use the arrow keys for precise adjustments.&quot;
+      /&gt;
+      &lt;p role=&quot;status&quot;&gt;Intensity: {value}%&lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled slider adjusts an illustrative intensity value from zero to one hundred in steps of five. The visible summary follows its actual value.</p><h2>Try it</h2><p>Drag the thumb or focus it and use the arrow keys. Compare its disabled appearance.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

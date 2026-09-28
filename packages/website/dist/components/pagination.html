@@ -4,10 +4,38 @@
 import { useState } from &quot;react&quot;;
 import { Pagination } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
-const projects = [&quot;Northline identity&quot;, &quot;Studio journal&quot;, &quot;Customer interviews&quot;, &quot;Website refresh&quot;, &quot;Onboarding flow&quot;, &quot;Design principles&quot;, &quot;Member directory&quot;, &quot;Autumn campaign&quot;, &quot;Product handbook&quot;];
+const projects = [
+  &quot;Northline identity&quot;,
+  &quot;Studio journal&quot;,
+  &quot;Customer interviews&quot;,
+  &quot;Website refresh&quot;,
+  &quot;Onboarding flow&quot;,
+  &quot;Design principles&quot;,
+  &quot;Member directory&quot;,
+  &quot;Autumn campaign&quot;,
+  &quot;Product handbook&quot;,
+];
 export default function Example() {
   const [page, setPage] = useState(1);
-  return &lt;div style={{ width: &quot;min(100%, 540px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;h2 style={{ fontSize: 24 }}&gt;A few projects at a time.&lt;/h2&gt;&lt;ul style={{ display: &quot;grid&quot;, gap: 18 }}&gt;{projects.slice((page - 1) * 3, page * 3).map(project =&gt; &lt;li key={project} style={{ paddingBottom: 18, borderBottom: &quot;1px solid var(--color-surface-border)&quot; }}&gt;{project}&lt;/li&gt;)}&lt;/ul&gt;&lt;Pagination currentPage={page} totalPages={3} onPageChange={setPage} /&gt;&lt;p role=&quot;status&quot;&gt;Page {page} of 3 · showing projects {(page - 1) * 3 + 1}–{page * 3}.&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 540px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;h2 style={{ fontSize: 24 }}&gt;A few projects at a time.&lt;/h2&gt;
+      &lt;ul style={{ display: &quot;grid&quot;, gap: 18 }}&gt;
+        {projects.slice((page - 1) * 3, page * 3).map((project) =&gt; (
+          &lt;li
+            key={project}
+            style={{ paddingBottom: 18, borderBottom: &quot;1px solid var(--color-surface-border)&quot; }}
+          &gt;
+            {project}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+      &lt;Pagination currentPage={page} totalPages={3} onPageChange={setPage} /&gt;
+      &lt;p role=&quot;status&quot;&gt;
+        Page {page} of 3 · showing projects {(page - 1) * 3 + 1}–{page * 3}.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled paginator moves through nine demo projects in groups of three. Page buttons update both the visible records and the result summary.</p><h2>Try it</h2><p>Move to the next page, select page three, and return to the first page.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

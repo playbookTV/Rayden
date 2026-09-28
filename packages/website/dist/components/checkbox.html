@@ -7,7 +7,34 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [channels, setChannels] = useState([&quot;Product updates&quot;]);
   const names = [&quot;Product updates&quot;, &quot;Design notes&quot;, &quot;Community news&quot;];
-  return &lt;div style={{ width: &quot;min(100%, 400px)&quot;, display: &quot;grid&quot;, gap: 24 }}&gt;&lt;h2 style={{ fontSize: 24 }}&gt;Make your inbox yours.&lt;/h2&gt;&lt;Checkbox label=&quot;Select all updates&quot; checked={channels.length === 3} indeterminate={channels.length &gt; 0 &amp;&amp; channels.length &lt; 3} disabled={state === &quot;disabled&quot;} onChange={event =&gt; setChannels(event.target.checked ? names : [])} /&gt;{names.map(name =&gt; &lt;Checkbox key={name} label={name} checked={channels.includes(name)} disabled={state === &quot;disabled&quot;} onChange={event =&gt; setChannels(event.target.checked ? [...channels, name] : channels.filter(channel =&gt; channel !== name))} /&gt;)}&lt;p role=&quot;status&quot;&gt;{channels.length} update types selected. Preferences stay in this demo.&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 400px)&quot;, display: &quot;grid&quot;, gap: 24 }}&gt;
+      &lt;h2 style={{ fontSize: 24 }}&gt;Make your inbox yours.&lt;/h2&gt;
+      &lt;Checkbox
+        label=&quot;Select all updates&quot;
+        checked={channels.length === 3}
+        indeterminate={channels.length &gt; 0 &amp;&amp; channels.length &lt; 3}
+        disabled={state === &quot;disabled&quot;}
+        onChange={(event) =&gt; setChannels(event.target.checked ? names : [])}
+      /&gt;
+      {names.map((name) =&gt; (
+        &lt;Checkbox
+          key={name}
+          label={name}
+          checked={channels.includes(name)}
+          disabled={state === &quot;disabled&quot;}
+          onChange={(event) =&gt;
+            setChannels(
+              event.target.checked
+                ? [...channels, name]
+                : channels.filter((channel) =&gt; channel !== name)
+            )
+          }
+        /&gt;
+      ))}
+      &lt;p role=&quot;status&quot;&gt;{channels.length} update types selected. Preferences stay in this demo.&lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Controlled checkboxes demonstrate independent choices and an indeterminate select-all control. The selected count reflects the actual local preference state.</p><h2>Try it</h2><p>Choose individual update types or toggle Select all updates. Compare the disabled state.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

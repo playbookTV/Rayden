@@ -5,15 +5,63 @@ import { useState } from &quot;react&quot;;
 import { ShoppingCartBlock, type CommerceCartItem } from &quot;@raydenui/ui/blocks&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 
-const productImage = (drawing: string) =&gt; &quot;data:image/svg+xml,&quot; + encodeURIComponent(`&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 160 200&quot;&gt;&lt;rect width=&quot;160&quot; height=&quot;200&quot; fill=&quot;#e8e1d7&quot;/&gt;${drawing}&lt;/svg&gt;`);
-const notebookImage = productImage(&#x27;&lt;rect x=&quot;38&quot; y=&quot;28&quot; width=&quot;92&quot; height=&quot;146&quot; rx=&quot;5&quot; fill=&quot;#292824&quot;/&gt;&lt;path d=&quot;M49 29v144&quot; stroke=&quot;#5b5850&quot; stroke-width=&quot;2&quot;/&gt;&lt;path d=&quot;M117 29v144&quot; stroke=&quot;#ba7044&quot; stroke-width=&quot;4&quot;/&gt;&lt;path d=&quot;M67 65h34M67 73h23&quot; stroke=&quot;#c6b99f&quot;/&gt;&#x27;);
-const pencilImage = productImage(&#x27;&lt;g transform=&quot;rotate(18 80 100)&quot;&gt;&lt;path d=&quot;M53 38h12v115l-6 18-6-18z&quot; fill=&quot;#b8794e&quot;/&gt;&lt;path d=&quot;M75 24h12v129l-6 18-6-18z&quot; fill=&quot;#d4a477&quot;/&gt;&lt;path d=&quot;M97 45h12v108l-6 18-6-18z&quot; fill=&quot;#45443f&quot;/&gt;&lt;path d=&quot;m56 162 3 9 3-9m16 0 3 9 3-9m16 0 3 9 3-9&quot; fill=&quot;#292824&quot;/&gt;&lt;/g&gt;&#x27;);
+const productImage = (drawing: string) =&gt;
+  &quot;data:image/svg+xml,&quot; +
+  encodeURIComponent(
+    `&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 160 200&quot;&gt;&lt;rect width=&quot;160&quot; height=&quot;200&quot; fill=&quot;#e8e1d7&quot;/&gt;${drawing}&lt;/svg&gt;`
+  );
+const notebookImage = productImage(
+  &#x27;&lt;rect x=&quot;38&quot; y=&quot;28&quot; width=&quot;92&quot; height=&quot;146&quot; rx=&quot;5&quot; fill=&quot;#292824&quot;/&gt;&lt;path d=&quot;M49 29v144&quot; stroke=&quot;#5b5850&quot; stroke-width=&quot;2&quot;/&gt;&lt;path d=&quot;M117 29v144&quot; stroke=&quot;#ba7044&quot; stroke-width=&quot;4&quot;/&gt;&lt;path d=&quot;M67 65h34M67 73h23&quot; stroke=&quot;#c6b99f&quot;/&gt;&#x27;
+);
+const pencilImage = productImage(
+  &#x27;&lt;g transform=&quot;rotate(18 80 100)&quot;&gt;&lt;path d=&quot;M53 38h12v115l-6 18-6-18z&quot; fill=&quot;#b8794e&quot;/&gt;&lt;path d=&quot;M75 24h12v129l-6 18-6-18z&quot; fill=&quot;#d4a477&quot;/&gt;&lt;path d=&quot;M97 45h12v108l-6 18-6-18z&quot; fill=&quot;#45443f&quot;/&gt;&lt;path d=&quot;m56 162 3 9 3-9m16 0 3 9 3-9m16 0 3 9 3-9&quot; fill=&quot;#292824&quot;/&gt;&lt;/g&gt;&#x27;
+);
 
-const initial: CommerceCartItem[] = [{ id: &quot;notebook&quot;, name: &quot;Studio notebook&quot;, image: { src: notebookImage, alt: &quot;Graphite notebook with a copper elastic band&quot; }, description: &quot;A place for the next idea.&quot;, price: 1800, quantity: 1, variant: &quot;Graphite&quot;, stock: 5 }, { id: &quot;pencils&quot;, name: &quot;Sketching pencils&quot;, image: { src: pencilImage, alt: &quot;Three drawing pencils&quot; }, description: &quot;A set of three essentials.&quot;, price: 900, quantity: 2, stock: 8 }];
+const initial: CommerceCartItem[] = [
+  {
+    id: &quot;notebook&quot;,
+    name: &quot;Studio notebook&quot;,
+    image: { src: notebookImage, alt: &quot;Graphite notebook with a copper elastic band&quot; },
+    description: &quot;A place for the next idea.&quot;,
+    price: 1800,
+    quantity: 1,
+    variant: &quot;Graphite&quot;,
+    stock: 5,
+  },
+  {
+    id: &quot;pencils&quot;,
+    name: &quot;Sketching pencils&quot;,
+    image: { src: pencilImage, alt: &quot;Three drawing pencils&quot; },
+    description: &quot;A set of three essentials.&quot;,
+    price: 900,
+    quantity: 2,
+    stock: 8,
+  },
+];
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [items, setItems] = useState(state === &quot;empty&quot; ? [] : initial);
   const [message, setMessage] = useState(&quot;&quot;);
-  return &lt;div&gt;&lt;ShoppingCartBlock title=&quot;Your bag&quot; description=&quot;Thoughtful essentials for your workspace. Demo products only.&quot; items={items} currency=&quot;GBP&quot; shipping={400} totalsNote=&quot;Illustrative totals. No payment will be taken.&quot; onQuantityChange={(id, quantity) =&gt; setItems(items.map(item =&gt; item.id === id ? { ...item, quantity } : item))} onRemoveItem={id =&gt; setItems(items.filter(item =&gt; item.id !== id))} onContinueShopping={() =&gt; setItems(initial)} onCheckout={() =&gt; setMessage(&quot;Checkout preview only. No order has been placed.&quot;)} /&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;{message}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div&gt;
+      &lt;ShoppingCartBlock
+        title=&quot;Your bag&quot;
+        description=&quot;Thoughtful essentials for your workspace. Demo products only.&quot;
+        items={items}
+        currency=&quot;GBP&quot;
+        shipping={400}
+        totalsNote=&quot;Illustrative totals. No payment will be taken.&quot;
+        onQuantityChange={(id, quantity) =&gt;
+          setItems(items.map((item) =&gt; (item.id === id ? { ...item, quantity } : item)))
+        }
+        onRemoveItem={(id) =&gt; setItems(items.filter((item) =&gt; item.id !== id))}
+        onContinueShopping={() =&gt; setItems(initial)}
+        onCheckout={() =&gt; setMessage(&quot;Checkout preview only. No order has been placed.&quot;)}
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;
+        {message}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A cart interface using prices in minor currency units and controlled line items. This example recalculates demo totals when quantities change; checkout does not create an order or take payment.</p><h2>Try it</h2><p>Change a quantity, remove an item, and try the empty cart. Continue shopping restores the demo products; the empty cart offers Explore the collection.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

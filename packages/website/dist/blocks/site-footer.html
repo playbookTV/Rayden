@@ -7,12 +7,66 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example() {
   const [language, setLanguage] = useState(&quot;en&quot;);
   const [destination, setDestination] = useState(&quot;Choose a footer destination.&quot;);
-  const link = (id: string, label: string) =&gt; ({ id, label, href: &quot;#footer-demo-destination&quot;, onClick: () =&gt; setDestination(`${label} selected in this demo.`) });
-  return &lt;div style={{ width: &quot;100%&quot; }}&gt;&lt;SiteFooterBlock label=&quot;Form and Field demo footer&quot; brand={{ name: &quot;Form &amp; Field&quot;, description: &quot;A little structure. A lot of possibility.&quot; }} groups={[
-    { id: &quot;product&quot;, title: &quot;Product&quot;, links: [link(&quot;workspace&quot;, &quot;Workspace&quot;), link(&quot;projects&quot;, &quot;Projects&quot;), link(&quot;updates&quot;, &quot;What is new&quot;)] },
-    { id: &quot;resources&quot;, title: &quot;Resources&quot;, links: [link(&quot;guides&quot;, &quot;Guides&quot;), link(&quot;examples&quot;, &quot;Examples&quot;), link(&quot;support&quot;, &quot;Support&quot;)] },
-    { id: &quot;studio&quot;, title: &quot;Studio&quot;, links: [link(&quot;about&quot;, &quot;About us&quot;), link(&quot;journal&quot;, &quot;Journal&quot;)] },
-  ]} localeControls={[{ id: &quot;language&quot;, label: &quot;Demo language&quot;, value: language, options: [{ value: &quot;en&quot;, label: &quot;English&quot; }, { value: &quot;fr&quot;, label: &quot;Français&quot; }], onChange: setLanguage, hint: &quot;Changes the demo preference only.&quot; }]} copyright=&quot;© 2026 Form &amp; Field. A fictional studio.&quot; /&gt;&lt;div id=&quot;footer-demo-destination&quot; role=&quot;status&quot; style={{ marginTop: 32 }}&gt;&lt;p&gt;{destination}&lt;/p&gt;&lt;p&gt;Selected language: {language === &quot;en&quot; ? &quot;English&quot; : &quot;Français&quot;}. This example does not translate the page.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;;
+  const link = (id: string, label: string) =&gt; ({
+    id,
+    label,
+    href: &quot;#footer-demo-destination&quot;,
+    onClick: () =&gt; setDestination(`${label} selected in this demo.`),
+  });
+  return (
+    &lt;div style={{ width: &quot;100%&quot; }}&gt;
+      &lt;SiteFooterBlock
+        label=&quot;Form and Field demo footer&quot;
+        brand={{ name: &quot;Form &amp; Field&quot;, description: &quot;A little structure. A lot of possibility.&quot; }}
+        groups={[
+          {
+            id: &quot;product&quot;,
+            title: &quot;Product&quot;,
+            links: [
+              link(&quot;workspace&quot;, &quot;Workspace&quot;),
+              link(&quot;projects&quot;, &quot;Projects&quot;),
+              link(&quot;updates&quot;, &quot;What is new&quot;),
+            ],
+          },
+          {
+            id: &quot;resources&quot;,
+            title: &quot;Resources&quot;,
+            links: [
+              link(&quot;guides&quot;, &quot;Guides&quot;),
+              link(&quot;examples&quot;, &quot;Examples&quot;),
+              link(&quot;support&quot;, &quot;Support&quot;),
+            ],
+          },
+          {
+            id: &quot;studio&quot;,
+            title: &quot;Studio&quot;,
+            links: [link(&quot;about&quot;, &quot;About us&quot;), link(&quot;journal&quot;, &quot;Journal&quot;)],
+          },
+        ]}
+        localeControls={[
+          {
+            id: &quot;language&quot;,
+            label: &quot;Demo language&quot;,
+            value: language,
+            options: [
+              { value: &quot;en&quot;, label: &quot;English&quot; },
+              { value: &quot;fr&quot;, label: &quot;Français&quot; },
+            ],
+            onChange: setLanguage,
+            hint: &quot;Changes the demo preference only.&quot;,
+          },
+        ]}
+        copyright=&quot;© 2026 Form &amp; Field. A fictional studio.&quot;
+      /&gt;
+      &lt;div id=&quot;footer-demo-destination&quot; role=&quot;status&quot; style={{ marginTop: 32 }}&gt;
+        &lt;p&gt;{destination}&lt;/p&gt;
+        &lt;p&gt;
+          Selected language: {language === &quot;en&quot; ? &quot;English&quot; : &quot;Français&quot;}. This example does not
+          translate the page.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A complete footer for a fictional studio, with grouped native links and a controlled language preference. Destinations lead to a local demo region; choosing a language updates the preference without translating the page.</p><h2>Try it</h2><p>Choose a footer link and change the demo language to Français. The result appears below the footer.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

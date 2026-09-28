@@ -7,11 +7,47 @@ import &quot;@raydenui/ui/styles.css&quot;;
 
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [ascending, setAscending] = useState(true);
-  const rows = state === &quot;empty&quot; ? [] : [{ name: &quot;Design system&quot;, owner: &quot;Avery&quot;, status: &quot;In progress&quot; }, { name: &quot;Marketing site&quot;, owner: &quot;Sam&quot;, status: &quot;In review&quot; }, { name: &quot;Customer portal&quot;, owner: &quot;Jordan&quot;, status: &quot;Planned&quot; }].sort((a, b) =&gt; ascending ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
-  return &lt;div style={{ width: &quot;100%&quot;, overflowX: &quot;auto&quot; }}&gt;&lt;Table aria-label=&quot;Projects&quot;&gt;
-    &lt;TableHeader&gt;&lt;TableRow&gt;&lt;TableHead sortable sortDirection={ascending ? &quot;asc&quot; : &quot;desc&quot;} onSort={() =&gt; setAscending(!ascending)}&gt;Project&lt;/TableHead&gt;&lt;TableHead&gt;Owner&lt;/TableHead&gt;&lt;TableHead&gt;Status&lt;/TableHead&gt;&lt;/TableRow&gt;&lt;/TableHeader&gt;
-    &lt;TableBody&gt;{rows.map(row =&gt; &lt;TableRow key={row.name}&gt;&lt;TableCell&gt;{row.name}&lt;/TableCell&gt;&lt;TableCell&gt;{row.owner}&lt;/TableCell&gt;&lt;TableCell&gt;{row.status}&lt;/TableCell&gt;&lt;/TableRow&gt;)}{!rows.length &amp;&amp; &lt;TableRow&gt;&lt;TableCell colSpan={3}&gt;No projects yet. Create one to get started.&lt;/TableCell&gt;&lt;/TableRow&gt;}&lt;/TableBody&gt;
-  &lt;/Table&gt;&lt;/div&gt;;
+  const rows =
+    state === &quot;empty&quot;
+      ? []
+      : [
+          { name: &quot;Design system&quot;, owner: &quot;Avery&quot;, status: &quot;In progress&quot; },
+          { name: &quot;Marketing site&quot;, owner: &quot;Sam&quot;, status: &quot;In review&quot; },
+          { name: &quot;Customer portal&quot;, owner: &quot;Jordan&quot;, status: &quot;Planned&quot; },
+        ].sort((a, b) =&gt; (ascending ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)));
+  return (
+    &lt;div style={{ width: &quot;100%&quot;, overflowX: &quot;auto&quot; }}&gt;
+      &lt;Table aria-label=&quot;Projects&quot;&gt;
+        &lt;TableHeader&gt;
+          &lt;TableRow&gt;
+            &lt;TableHead
+              sortable
+              sortDirection={ascending ? &quot;asc&quot; : &quot;desc&quot;}
+              onSort={() =&gt; setAscending(!ascending)}
+            &gt;
+              Project
+            &lt;/TableHead&gt;
+            &lt;TableHead&gt;Owner&lt;/TableHead&gt;
+            &lt;TableHead&gt;Status&lt;/TableHead&gt;
+          &lt;/TableRow&gt;
+        &lt;/TableHeader&gt;
+        &lt;TableBody&gt;
+          {rows.map((row) =&gt; (
+            &lt;TableRow key={row.name}&gt;
+              &lt;TableCell&gt;{row.name}&lt;/TableCell&gt;
+              &lt;TableCell&gt;{row.owner}&lt;/TableCell&gt;
+              &lt;TableCell&gt;{row.status}&lt;/TableCell&gt;
+            &lt;/TableRow&gt;
+          ))}
+          {!rows.length &amp;&amp; (
+            &lt;TableRow&gt;
+              &lt;TableCell colSpan={3}&gt;No projects yet. Create one to get started.&lt;/TableCell&gt;
+            &lt;/TableRow&gt;
+          )}
+        &lt;/TableBody&gt;
+      &lt;/Table&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Table, header, row, and cell primitives provide the structure while your application owns the data and sorting. The Project header toggles the order of a small local collection.</p><h2>Try it</h2><p>Activate the Project column heading twice to reverse the order. Use the empty state to inspect the custom empty row.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

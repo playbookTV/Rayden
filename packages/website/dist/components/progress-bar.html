@@ -6,7 +6,30 @@ import { Button, ProgressBar } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [value, setValue] = useState(40);
-  return &lt;div style={{ width: &quot;min(100%, 480px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;&lt;ProgressBar label=&quot;Your workspace checklist&quot; value={value} type={state === &quot;segmented&quot; ? &quot;segmented&quot; : &quot;basic&quot;} metadata={`${value / 20} of 5 steps completed`} showPercentage /&gt;&lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot; }}&gt;&lt;Button disabled={value === 100} onClick={() =&gt; setValue(Math.min(100, value + 20))}&gt;Complete a step&lt;/Button&gt;&lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setValue(0)}&gt;Start again&lt;/Button&gt;&lt;/div&gt;&lt;p role=&quot;status&quot;&gt;{value === 100 ? &quot;All five demo steps are complete.&quot; : &quot;Progress updates when you complete a demo step.&quot;}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 480px)&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+      &lt;ProgressBar
+        label=&quot;Your workspace checklist&quot;
+        value={value}
+        type={state === &quot;segmented&quot; ? &quot;segmented&quot; : &quot;basic&quot;}
+        metadata={`${value / 20} of 5 steps completed`}
+        showPercentage
+      /&gt;
+      &lt;div style={{ display: &quot;flex&quot;, gap: 12, flexWrap: &quot;wrap&quot; }}&gt;
+        &lt;Button disabled={value === 100} onClick={() =&gt; setValue(Math.min(100, value + 20))}&gt;
+          Complete a step
+        &lt;/Button&gt;
+        &lt;Button variant=&quot;secondary&quot; onClick={() =&gt; setValue(0)}&gt;
+          Start again
+        &lt;/Button&gt;
+      &lt;/div&gt;
+      &lt;p role=&quot;status&quot;&gt;
+        {value === 100
+          ? &quot;All five demo steps are complete.&quot;
+          : &quot;Progress updates when you complete a demo step.&quot;}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A controlled progress indicator advances through five demo checklist steps. Its percentage and supporting text stay in sync, and the action disables on completion.</p><h2>Try it</h2><p>Complete the remaining steps, start again, and compare the segmented appearance.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

@@ -8,10 +8,62 @@ import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [period, setPeriod] = useState(&quot;monthly&quot;);
   const [selection, setSelection] = useState(&quot;&quot;);
-  return &lt;PricingPlansBlock eyebrow=&quot;DEMO WORKSPACE&quot; title=&quot;A plan for your next chapter.&quot; description=&quot;Illustrative pricing for a fictional product. Rayden UI is free.&quot; period={period} onPeriodChange={setPeriod} periods={[{ id: &quot;monthly&quot;, label: &quot;Monthly&quot; }, { id: &quot;yearly&quot;, label: &quot;Yearly&quot;, badge: &quot;Save 20%&quot; }]} state={state as PricingPlansState} errorDescription=&quot;Example error: plans could not be loaded.&quot; plans={[
-    { id: &quot;solo&quot;, name: &quot;Solo&quot;, description: &quot;For your next good idea.&quot;, prices: { monthly: { amount: 12, currency: &quot;GBP&quot;, unit: &quot;/ month&quot; }, yearly: { amount: 115, currency: &quot;GBP&quot;, unit: &quot;/ year&quot; } }, features: [{ id: &quot;projects&quot;, label: &quot;3 projects&quot; }, { id: &quot;team&quot;, label: &quot;1 editor&quot; }], cta: { label: &quot;Choose Solo&quot;, onClick: () =&gt; setSelection(&quot;Solo&quot;) } },
-    { id: &quot;studio&quot;, name: &quot;Studio&quot;, description: &quot;Room to make things together.&quot;, highlighted: true, badge: &quot;For teams&quot;, prices: { monthly: { amount: 29, currency: &quot;GBP&quot;, unit: &quot;/ month&quot; }, yearly: { amount: 278, currency: &quot;GBP&quot;, unit: &quot;/ year&quot; } }, features: [{ id: &quot;projects&quot;, label: &quot;Unlimited projects&quot; }, { id: &quot;team&quot;, label: &quot;5 editors&quot; }], cta: { label: &quot;Choose Studio&quot;, onClick: () =&gt; setSelection(&quot;Studio&quot;) } },
-  ]} notice={selection ? { tone: &quot;info&quot;, title: `${selection} selected in this demo.`, description: &quot;No subscription or payment has been created.&quot; } : undefined} /&gt;;
+  return (
+    &lt;PricingPlansBlock
+      eyebrow=&quot;DEMO WORKSPACE&quot;
+      title=&quot;A plan for your next chapter.&quot;
+      description=&quot;Illustrative pricing for a fictional product. Rayden UI is free.&quot;
+      period={period}
+      onPeriodChange={setPeriod}
+      periods={[
+        { id: &quot;monthly&quot;, label: &quot;Monthly&quot; },
+        { id: &quot;yearly&quot;, label: &quot;Yearly&quot;, badge: &quot;Save 20%&quot; },
+      ]}
+      state={state as PricingPlansState}
+      errorDescription=&quot;Example error: plans could not be loaded.&quot;
+      plans={[
+        {
+          id: &quot;solo&quot;,
+          name: &quot;Solo&quot;,
+          description: &quot;For your next good idea.&quot;,
+          prices: {
+            monthly: { amount: 12, currency: &quot;GBP&quot;, unit: &quot;/ month&quot; },
+            yearly: { amount: 115, currency: &quot;GBP&quot;, unit: &quot;/ year&quot; },
+          },
+          features: [
+            { id: &quot;projects&quot;, label: &quot;3 projects&quot; },
+            { id: &quot;team&quot;, label: &quot;1 editor&quot; },
+          ],
+          cta: { label: &quot;Choose Solo&quot;, onClick: () =&gt; setSelection(&quot;Solo&quot;) },
+        },
+        {
+          id: &quot;studio&quot;,
+          name: &quot;Studio&quot;,
+          description: &quot;Room to make things together.&quot;,
+          highlighted: true,
+          badge: &quot;For teams&quot;,
+          prices: {
+            monthly: { amount: 29, currency: &quot;GBP&quot;, unit: &quot;/ month&quot; },
+            yearly: { amount: 278, currency: &quot;GBP&quot;, unit: &quot;/ year&quot; },
+          },
+          features: [
+            { id: &quot;projects&quot;, label: &quot;Unlimited projects&quot; },
+            { id: &quot;team&quot;, label: &quot;5 editors&quot; },
+          ],
+          cta: { label: &quot;Choose Studio&quot;, onClick: () =&gt; setSelection(&quot;Studio&quot;) },
+        },
+      ]}
+      notice={
+        selection
+          ? {
+              tone: &quot;info&quot;,
+              title: `${selection} selected in this demo.`,
+              description: &quot;No subscription or payment has been created.&quot;,
+            }
+          : undefined
+      }
+    /&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A pricing comparison with controlled billing periods and explicit selection callbacks. Prices belong to a fictional product used for demonstration. Rayden UI itself is free and MIT-licensed.</p><h2>Try it</h2><p>Switch from monthly to yearly billing and choose a plan. The confirmation is local to this preview and creates no subscription.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

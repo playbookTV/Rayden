@@ -8,7 +8,48 @@ export default function Example({ state = &quot;default&quot; }: { state?: strin
   const [page, setPage] = useState(&quot;Overview&quot;);
   const [workspace, setWorkspace] = useState(0);
   const [message, setMessage] = useState(&quot;Choose a destination to try the header.&quot;);
-  return &lt;div style={{ width: &quot;100%&quot;, minHeight: 380 }}&gt;&lt;HeaderBlock variant={state === &quot;search&quot; ? 9 : state === &quot;workspace&quot; ? 10 : 1} logo={&lt;strong&gt;Form &amp; Field&lt;/strong&gt;} links={[&quot;Overview&quot;, &quot;Projects&quot;, &quot;Team&quot;].map(label =&gt; ({ label, active: page === label, onClick: () =&gt; { setPage(label); setMessage(`${label} selected in this demo.`); } }))} actions={[{ label: &quot;New project&quot;, variant: &quot;primary&quot;, onClick: () =&gt; setMessage(&quot;A local demo project was created.&quot;) }]} announcement={{ text: &quot;A little room for good work.&quot;, linkLabel: &quot;Take a look&quot;, onLinkClick: () =&gt; setMessage(&quot;Announcement opened in this demo.&quot;) }} searchPlaceholder=&quot;Search your workspace…&quot; onSearch={query =&gt; setMessage(query ? `Demo search: ${query}` : &quot;Type to search the demo workspace.&quot;)} switcher={{ tabs: [&quot;Studio&quot;, &quot;Personal&quot;], activeIndex: workspace, onChange: setWorkspace }} /&gt;&lt;div style={{ padding: 24 }}&gt;&lt;h2 style={{ fontSize: 28 }}&gt;{page}&lt;/h2&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;{message}&lt;/p&gt;{state === &quot;workspace&quot; &amp;&amp; &lt;p style={{ marginTop: 12 }}&gt;Workspace: {workspace === 0 ? &quot;Studio&quot; : &quot;Personal&quot;}&lt;/p&gt;}&lt;/div&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;100%&quot;, minHeight: 380 }}&gt;
+      &lt;HeaderBlock
+        variant={state === &quot;search&quot; ? 9 : state === &quot;workspace&quot; ? 10 : 1}
+        logo={&lt;strong&gt;Form &amp; Field&lt;/strong&gt;}
+        links={[&quot;Overview&quot;, &quot;Projects&quot;, &quot;Team&quot;].map((label) =&gt; ({
+          label,
+          active: page === label,
+          onClick: () =&gt; {
+            setPage(label);
+            setMessage(`${label} selected in this demo.`);
+          },
+        }))}
+        actions={[
+          {
+            label: &quot;New project&quot;,
+            variant: &quot;primary&quot;,
+            onClick: () =&gt; setMessage(&quot;A local demo project was created.&quot;),
+          },
+        ]}
+        announcement={{
+          text: &quot;A little room for good work.&quot;,
+          linkLabel: &quot;Take a look&quot;,
+          onLinkClick: () =&gt; setMessage(&quot;Announcement opened in this demo.&quot;),
+        }}
+        searchPlaceholder=&quot;Search your workspace…&quot;
+        onSearch={(query) =&gt;
+          setMessage(query ? `Demo search: ${query}` : &quot;Type to search the demo workspace.&quot;)
+        }
+        switcher={{ tabs: [&quot;Studio&quot;, &quot;Personal&quot;], activeIndex: workspace, onChange: setWorkspace }}
+      /&gt;
+      &lt;div style={{ padding: 24 }}&gt;
+        &lt;h2 style={{ fontSize: 28 }}&gt;{page}&lt;/h2&gt;
+        &lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;
+          {message}
+        &lt;/p&gt;
+        {state === &quot;workspace&quot; &amp;&amp; (
+          &lt;p style={{ marginTop: 12 }}&gt;Workspace: {workspace === 0 ? &quot;Studio&quot; : &quot;Personal&quot;}&lt;/p&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A responsive header with callback-driven destinations, a project action, and alternative search and workspace variants. Each control reports a local outcome.</p><h2>Try it</h2><p>Choose Projects, create a demo project, and try the search and workspace variants. On mobile, open the navigation menu.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a><a href="/components/input">Input</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

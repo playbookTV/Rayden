@@ -6,7 +6,21 @@ import { Button, Tooltip } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [saved, setSaved] = useState(false);
-  return &lt;div style={{ padding: &quot;70px 16px&quot;, textAlign: &quot;center&quot; }}&gt;&lt;Tooltip content=&quot;Save a draft in this preview only.&quot; placement=&quot;top&quot; defaultOpen={state === &quot;open&quot;} delay={100}&gt;&lt;Button onClick={() =&gt; setSaved(true)}&gt;Save draft&lt;/Button&gt;&lt;/Tooltip&gt;&lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;{saved ? &quot;Draft saved in this demo.&quot; : &quot;Hover or focus the button for a little guidance.&quot;}&lt;/p&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ padding: &quot;70px 16px&quot;, textAlign: &quot;center&quot; }}&gt;
+      &lt;Tooltip
+        content=&quot;Save a draft in this preview only.&quot;
+        placement=&quot;top&quot;
+        defaultOpen={state === &quot;open&quot;}
+        delay={100}
+      &gt;
+        &lt;Button onClick={() =&gt; setSaved(true)}&gt;Save draft&lt;/Button&gt;
+      &lt;/Tooltip&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 24 }}&gt;
+        {saved ? &quot;Draft saved in this demo.&quot; : &quot;Hover or focus the button for a little guidance.&quot;}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A tooltip attached to a real button appears on hover or keyboard focus. Its supporting text explains a demo action; activating the button reports a local save.</p><h2>Try it</h2><p>Hover or focus Save draft, then activate it. Compare the initially open state.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

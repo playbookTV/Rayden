@@ -4,11 +4,36 @@
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from &quot;@raydenui/ui&quot;;
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
-  return &lt;div style={{ width: &quot;min(100%, 580px)&quot; }}&gt;&lt;Accordion defaultValue={[&quot;start&quot;]} multiple={state === &quot;multiple&quot;} type={state === &quot;nested&quot; ? &quot;nested&quot; : &quot;default&quot;}&gt;
-    &lt;AccordionItem value=&quot;start&quot;&gt;&lt;AccordionTrigger&gt;Where should I start?&lt;/AccordionTrigger&gt;&lt;AccordionContent&gt;Choose a component, copy its example, and adapt it to your project. Import the Rayden stylesheet once.&lt;/AccordionContent&gt;&lt;/AccordionItem&gt;
-    &lt;AccordionItem value=&quot;theme&quot;&gt;&lt;AccordionTrigger&gt;Can I change the theme?&lt;/AccordionTrigger&gt;&lt;AccordionContent&gt;Rayden supports light and dark themes. Use the preview theme control to compare them.&lt;/AccordionContent&gt;&lt;/AccordionItem&gt;
-    &lt;AccordionItem value=&quot;blocks&quot;&gt;&lt;AccordionTrigger&gt;What makes a block different?&lt;/AccordionTrigger&gt;&lt;AccordionContent&gt;A block combines smaller components into a complete interface pattern. The blocks in this release are experimental.&lt;/AccordionContent&gt;&lt;/AccordionItem&gt;
-  &lt;/Accordion&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 580px)&quot; }}&gt;
+      &lt;Accordion
+        defaultValue={[&quot;start&quot;]}
+        multiple={state === &quot;multiple&quot;}
+        type={state === &quot;nested&quot; ? &quot;nested&quot; : &quot;default&quot;}
+      &gt;
+        &lt;AccordionItem value=&quot;start&quot;&gt;
+          &lt;AccordionTrigger&gt;Where should I start?&lt;/AccordionTrigger&gt;
+          &lt;AccordionContent&gt;
+            Choose a component, copy its example, and adapt it to your project. Import the Rayden
+            stylesheet once.
+          &lt;/AccordionContent&gt;
+        &lt;/AccordionItem&gt;
+        &lt;AccordionItem value=&quot;theme&quot;&gt;
+          &lt;AccordionTrigger&gt;Can I change the theme?&lt;/AccordionTrigger&gt;
+          &lt;AccordionContent&gt;
+            Rayden supports light and dark themes. Use the preview theme control to compare them.
+          &lt;/AccordionContent&gt;
+        &lt;/AccordionItem&gt;
+        &lt;AccordionItem value=&quot;blocks&quot;&gt;
+          &lt;AccordionTrigger&gt;What makes a block different?&lt;/AccordionTrigger&gt;
+          &lt;AccordionContent&gt;
+            A block combines smaller components into a complete interface pattern. The blocks in
+            this release are experimental.
+          &lt;/AccordionContent&gt;
+        &lt;/AccordionItem&gt;
+      &lt;/Accordion&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Accordion primitives organise related questions into expandable sections. This example compares a single open section, multiple open sections and a nested appearance.</p><h2>Try it</h2><p>Open the theme question, then compare the multiple and nested states. Use the keyboard to activate each heading.</p></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1

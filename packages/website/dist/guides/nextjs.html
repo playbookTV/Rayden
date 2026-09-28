@@ -127,9 +127,7 @@ export default function Page() {
       &lt;section className=&quot;profile-panel&quot; aria-labelledby=&quot;profile-title&quot;&gt;
         &lt;p className=&quot;profile-eyebrow&quot;&gt;RAYDEN UI / NEXT.JS&lt;/p&gt;
         &lt;h1 id=&quot;profile-title&quot;&gt;Make yourself at home.&lt;/h1&gt;
-        &lt;p className=&quot;profile-intro&quot;&gt;
-          A small profile form. A starting point for your next app.
-        &lt;/p&gt;
+        &lt;p className=&quot;profile-intro&quot;&gt;A small profile form. A starting point for your next app.&lt;/p&gt;
         &lt;ProfileForm /&gt;
       &lt;/section&gt;
     &lt;/main&gt;
@@ -156,12 +154,36 @@ export default function Page() {
   border-radius: 24px;
   box-shadow: 0 16px 48px #25232208;
 }
-.profile-eyebrow { color: #765c4c; font-size: 11px; letter-spacing: .12em; }
-.profile-panel h1 { font-size: clamp(28px, 5vw, 36px); line-height: 1.15; letter-spacing: -.04em; margin: 16px 0; }
-.profile-intro { color: #66615e; line-height: 1.6; margin-bottom: 28px; }
-.profile-form { display: grid; gap: 20px; }
-.profile-actions { display: flex; }
-.profile-status { min-height: 44px; margin: 0; font-size: 14px; line-height: 1.6; color: #365d46; }</code></pre></div>
+.profile-eyebrow {
+  color: #765c4c;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+.profile-panel h1 {
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin: 16px 0;
+}
+.profile-intro {
+  color: #66615e;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+.profile-form {
+  display: grid;
+  gap: 20px;
+}
+.profile-actions {
+  display: flex;
+}
+.profile-status {
+  min-height: 44px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #365d46;
+}</code></pre></div>
 </section>
 <section id="run"><h2>05. Run it and check the behaviour</h2>
 <p>Start the development server with <code>npm run dev</code> and open <code>http://localhost:3000</code> (or the address printed in your terminal). Enter a name, then select <strong>Save display name</strong>.</p>

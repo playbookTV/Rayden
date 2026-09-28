@@ -6,7 +6,23 @@ import { CreateAccountBlock, type CreateAccountStatus } from &quot;@raydenui/ui/
 import &quot;@raydenui/ui/styles.css&quot;;
 export default function Example({ state = &quot;default&quot; }: { state?: string }) {
   const [submitted, setSubmitted] = useState(false);
-  return &lt;div style={{ width: &quot;min(100%, 600px)&quot; }}&gt;&lt;CreateAccountBlock title=&quot;Make room for your ideas.&quot; description=&quot;Try the registration flow with example details. Nothing is sent.&quot; defaultValues={{ firstName: &quot;Avery&quot;, lastName: &quot;Morgan&quot;, email: &quot;avery@example.com&quot; }} consentLabel=&quot;I understand this is a local demonstration.&quot; onSubmit={() =&gt; setSubmitted(true)} status={submitted ? &quot;success&quot; : state === &quot;default&quot; ? &quot;idle&quot; : state as CreateAccountStatus} successMessage=&quot;Demo completed. No account was created and no details were sent.&quot; errorMessage=&quot;Example error: registration is temporarily unavailable.&quot; submitLabel=&quot;Try creating an account&quot; /&gt;&lt;/div&gt;;
+  return (
+    &lt;div style={{ width: &quot;min(100%, 600px)&quot; }}&gt;
+      &lt;CreateAccountBlock
+        title=&quot;Make room for your ideas.&quot;
+        description=&quot;Try the registration flow with example details. Nothing is sent.&quot;
+        defaultValues={{ firstName: &quot;Avery&quot;, lastName: &quot;Morgan&quot;, email: &quot;avery@example.com&quot; }}
+        consentLabel=&quot;I understand this is a local demonstration.&quot;
+        onSubmit={() =&gt; setSubmitted(true)}
+        status={
+          submitted ? &quot;success&quot; : state === &quot;default&quot; ? &quot;idle&quot; : (state as CreateAccountStatus)
+        }
+        successMessage=&quot;Demo completed. No account was created and no details were sent.&quot;
+        errorMessage=&quot;Example error: registration is temporarily unavailable.&quot;
+        submitLabel=&quot;Try creating an account&quot;
+      /&gt;
+    &lt;/div&gt;
+  );
 }
 </code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
 <div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A registration interface with local validation, password confirmation, consent and explicit submission states. The preview never sends personal details or creates an account.</p><h2>Try it</h2><p>Use example details, enter matching passwords, tick the demo consent, and submit. Compare loading, submitting and error states.</p><h2>Built with</h2><div class="detail-built"><a href="/components/input">Input</a><a href="/components/checkbox">Checkbox</a><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1
