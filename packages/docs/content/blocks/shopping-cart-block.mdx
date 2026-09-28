@@ -1,0 +1,157 @@
+---
+title: ShoppingCartBlock
+description: Review items, change quantity, remove items, and inspect current totals
+---
+
+# ShoppingCartBlock
+
+Review items, change quantity, remove items and inspect current totals.
+
+Plan idea 72, category **Commerce**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { ShoppingCartBlock } from "@raydenui/ui/blocks";
+import type { CommerceCartItem } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+Quantities are fully controlled: the block raises a callback and re-renders from the state
+you pass back.
+
+```tsx
+const [items, setItems] = useState<CommerceCartItem[]>([
+  { id: "cup-clay", name: "Everyday ceramic cup", variant: "Clay", price: 2400, quantity: 1, stock: 12 },
+]);
+
+<ShoppingCartBlock
+  title="Your bag"
+  items={items}
+  onQuantityChange={(id, quantity) =>
+    setItems((current) => current.map((item) => (item.id === id ? { ...item, quantity } : item)))
+  }
+  onRemoveItem={(id) => setItems((current) => current.filter((item) => item.id !== id))}
+  onCheckout={() => setStep("review")}
+  onContinueShopping={() => setStep("collection")}
+  shipping={500}
+  tax={0}
+  totalsNote="Prices include tax. Delivery shown for the selected address."
+/>;
+```
+
+Use a unique line id per variant — `id` identifies the **cart line**, not the product.
+`stock` is the maximum allowed quantity for that line, and checkout is disabled when a
+quantity exceeds it.
+
+### Read-only summary
+
+Omitting the callbacks renders a summary rather than a cart that appears editable.
+
+```tsx
+<ShoppingCartBlock items={items} shipping={500} totalsNote="Delivery is final." />
+```
+
+### Layout
+
+`layout="split"` (the default) places the summary beside the items when space permits.
+`layout="stacked"` keeps it below them at any width, which suits a drawer.
+
+```tsx
+<ShoppingCartBlock items={items} layout="stacked" onQuantityChange={setQuantity} />
+```
+
+The **Cart Drawer** story composes this layout with the library's `Modal`, retaining native
+focus containment, Escape dismissal and focus restoration. It is a composition of the same
+block, not another block.
+
+### Pending and error
+
+```tsx
+<ShoppingCartBlock
+  items={items}
+  onQuantityChange={setQuantity}
+  onCheckout={goToReview}
+  pending={updating}
+  errorMessage="That quantity is no longer available."
+/>
+```
+
+### Empty
+
+```tsx
+<ShoppingCartBlock items={[]} onContinueShopping={() => setStep("collection")} />
+```
+
+## Props
+
+| Prop                 | Type                                          | Default                    | Description                                              |
+| -------------------- | --------------------------------------------- | -------------------------- | -------------------------------------------------------- |
+| `items`              | `CommerceCartItem[]`                          | —                          | **Required.** Controlled cart lines.                      |
+| `title`              | `string`                                      | store-specific sample copy | Pass your own; the default is fixture copy.                |
+| `description`        | `string`                                      | —                          | Supporting sentence.                                      |
+| `headingLevel`       | `"h1"`–`"h6"`                                 | `"h2"`                     | Element for `title`.                                      |
+| `layout`             | `"split" \| "stacked"`                         | `"split"`                  | Stacked keeps the summary below the items.                 |
+| `onQuantityChange`   | `(id: string, quantity: number) => void`      | —                          | Omit for a read-only summary.                              |
+| `onRemoveItem`       | `(id: string) => void`                        | —                          | Omit for a read-only summary.                              |
+| `onCheckout`         | `() => void`                                  | —                          | The checkout control renders only with a handler.            |
+| `onContinueShopping` | `() => void`                                  | —                          | Useful on an empty cart.                                   |
+| `pending`            | `boolean`                                     | `false`                    | An update is in flight.                                    |
+| `errorMessage`       | `string`                                      | —                          | Announced through `role="alert"`.                          |
+| `totalsNote`         | `string`                                      | —                          | Clarifies whether shipping and tax are estimates or final.   |
+| `shipping`           | `number`                                      | `0`                        | Minor currency units.                                      |
+| `tax`                | `number`                                      | `0`                        | Minor currency units.                                      |
+| `discount`           | `number`                                      | `0`                        | Minor currency units.                                      |
+| `currency`           | `string`                                      | `"GBP"`                    | ISO 4217 code shared by every amount.                       |
+| `locale`             | `string`                                      | `"en-GB"`                  | Formatting locale.                                         |
+| `className`          | `string`                                      | —                          | Lands on the section root.                                  |
+
+### CommerceCartItem
+
+Extends `CommerceProduct` with:
+
+| Member     | Type     | Description                                                   |
+| ---------- | -------- | ------------------------------------------------------------- |
+| `id`       | `string` | A unique **cart-line** id, including the variant where applicable. |
+| `quantity` | `number` | Required. A positive integer.                                  |
+| `variant`  | `string` | The chosen option, shown beside the name.                       |
+
+## Totals
+
+Totals are `subtotal + shipping + tax - discount`, floored at zero. All amounts are
+non-negative integers in the same minor currency unit as item prices. The block contains no
+commerce rules: shipping, tax and discount are amounts your application calculates, and a
+discount should not exceed the order value.
+
+## States
+
+- **default** — the item rows and the summary.
+- **empty** — an empty-bag message, optionally offering `onContinueShopping`.
+- **pending** — with `aria-busy` on the section.
+- **error** — `role="alert"`.
+- **read-only** — no mutation callbacks supplied.
+- **over stock** — checkout is disabled and the affected line explains why.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 17 commerce stories passing with
+accessibility violations configured to fail the test, a live gallery inspected at 320, 390,
+768 and 1440 CSS pixels in light and dark mode with no document horizontal overflow, and a
+native keyboard check confirming Escape closes the cart drawer and restores focus to its
+opening button. Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, physical devices, or WCAG conformance.
+
+## Known limitations
+
+- **Most visible strings are hard-coded English**: the empty-cart wording, the Order
+  summary heading, the totals row labels, the unavailable-item sentence and the checkout
+  label. Only `title`, `description`, `errorMessage` and `totalsNote` are configurable.
+- The default `title` is store-specific fixture copy. Always pass your own.
+- Section titles such as Order summary are styled paragraphs, **not headings**, so they do
+  not appear in the page's heading outline. Item names are not headings either. This
+  diverges from the heading-level contract the other blocks follow.
+- Your application must validate prices, stock and totals on the server before accepting an
+  order.

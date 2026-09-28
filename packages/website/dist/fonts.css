@@ -1,63 +1,15 @@
 @font-face {
-  font-family: "Hanken Grotesk";
+  font-family: "Manrope";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 200 800;
   font-display: swap;
-  src: url(/assets/hanken-400.ttf) format("truetype");
+  src: url("/assets/manrope-latin-normal.woff2") format("woff2");
 }
-@font-face {
-  font-family: "Hanken Grotesk";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/assets/hanken-500.ttf) format("truetype");
-}
+
 @font-face {
   font-family: "Hanken Grotesk";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 100 900;
   font-display: swap;
-  src: url(/assets/hanken-600.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Hanken Grotesk";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/assets/hanken-700.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/assets/manrope-400.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(/assets/manrope-500.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(/assets/manrope-600.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/assets/manrope-700.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url(/assets/manrope-800.ttf) format("truetype");
+  src: url("/assets/hanken-grotesk-latin-normal.woff2") format("woff2");
 }

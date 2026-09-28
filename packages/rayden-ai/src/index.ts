@@ -30,4 +30,5 @@ export const metadata = {
   figmaFileKey: "tUAP8Crure0g1eewihmYUp",
 };
 
+export * from "./blocks";
 export * from "./catalog";

@@ -1,0 +1,166 @@
+---
+title: CreateAccountBlock
+description: Register with field validation, password guidance, and required consent
+---
+
+# CreateAccountBlock
+
+Register with field validation, password guidance and required consent.
+
+Plan idea 10, category **Authentication & onboarding**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { CreateAccountBlock, defaultCreateAccountPasswordRules } from "@raydenui/ui/blocks";
+import type { CreateAccountValues, CreateAccountFieldErrors } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`onSubmit` is **required**: the block never renders a submit control with no configured
+action. It fires only when every field passes local validation and no submission is
+already in flight.
+
+```tsx
+<CreateAccountBlock
+  title="Create your account"
+  description="Two minutes, then you are in."
+  headingLevel="h1"
+  onSubmit={(values) => register(values)}
+  signIn={{ label: "Sign in instead", href: "/sign-in" }}
+/>
+```
+
+### Lifecycle owned by your application
+
+```tsx
+<CreateAccountBlock
+  onSubmit={register}
+  status={status}
+  errorMessage="That email address is already registered."
+  successMessage="Your account is ready. Check your inbox to verify it."
+/>
+```
+
+`status="success"` means the account **exists**. The block never sets it, so a
+confirmation is never manufactured before your service reports one.
+
+### Server-reported field errors
+
+These are merged over local validation and shown immediately, without waiting for the
+field to be touched.
+
+```tsx
+const fieldErrors: CreateAccountFieldErrors = {
+  email: "This address belongs to another workspace.",
+};
+
+<CreateAccountBlock onSubmit={register} status="error" fieldErrors={fieldErrors} />;
+```
+
+### Password guidance
+
+```tsx
+<CreateAccountBlock
+  onSubmit={register}
+  passwordRules={[
+    ...defaultCreateAccountPasswordRules,
+    { id: "no-name", label: "Does not contain your name", test: (value) => !value.includes("alex") },
+  ]}
+  requireConfirmPassword
+/>
+```
+
+Every rule must pass before submission.
+
+### Registration unavailable
+
+```tsx
+<CreateAccountBlock
+  onSubmit={register}
+  disabled
+  disabledMessage="This invitation expired on 14 September. Ask an administrator for a new one."
+/>
+```
+
+### Translated labels and consent
+
+The consent sentence is the checkbox's accessible name, and links inside it stay
+independently operable.
+
+```tsx
+<CreateAccountBlock
+  onSubmit={register}
+  labels={{ firstName: "Vorname", lastName: "Nachname", email: "E-Mail-Adresse" }}
+  submitLabel="Konto erstellen"
+  submittingLabel="Konto wird erstellt…"
+  consentLabel={<>I accept the <a href="/terms">terms of service</a>.</>}
+  consentErrorMessage="Please accept the terms to continue."
+/>
+```
+
+## Props
+
+| Prop                     | Type                                                            | Default              | Description                                                        |
+| ------------------------ | --------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------ |
+| `onSubmit`               | `(values: CreateAccountValues) => void`                         | —                    | **Required.** Fires only on locally valid input with none in flight. |
+| `title`                  | `string`                                                        | —                    | Block title.                                                       |
+| `description`            | `string`                                                        | —                    | Supporting sentence.                                                |
+| `headingLevel`           | `"h1"`–`"h6"`                                                   | `"h2"`               | Element for `title`.                                                |
+| `status`                 | `"idle" \| "loading" \| "submitting" \| "error" \| "success"`     | `"idle"`             | Lifecycle owned by your application.                                 |
+| `errorMessage`           | `string`                                                        | —                    | Shown when `status="error"`.                                        |
+| `successMessage`         | `string`                                                        | —                    | Shown when `status="success"`.                                      |
+| `fieldErrors`            | `CreateAccountFieldErrors`                                      | —                    | Server-reported errors, shown immediately.                           |
+| `defaultValues`          | `Partial<Omit<CreateAccountValues, "consent">>`                   | —                    | Seeds the draft once. The block owns it afterwards.                  |
+| `passwordRules`          | `CreateAccountPasswordRule[]`                                    | built-in set         | Every rule must pass before submission.                             |
+| `requireConfirmPassword` | `boolean`                                                       | `true`               | Ask for the password twice.                                         |
+| `consentLabel`           | `ReactNode`                                                     | —                    | The whole sentence is the checkbox's accessible name.                |
+| `consentErrorMessage`    | `string`                                                        | —                    | Shown when consent is missing.                                       |
+| `signIn`                 | `CreateAccountLink`                                             | —                    | `{ label, href }`, rendered as a link.                               |
+| `submitLabel`            | `string`                                                        | `"Create account"`   | Submit label.                                                       |
+| `submittingLabel`        | `string`                                                        | `"Creating account…"` | Label announced while submitting.                                  |
+| `disabled`               | `boolean`                                                       | `false`              | Registration unavailable. Every control is disabled.                 |
+| `disabledMessage`        | `string`                                                        | —                    | Explanation shown while `disabled`.                                  |
+| `labels`                 | `Partial<Record<"firstName" \| "lastName" \| "email" \| "password" \| "confirmPassword", string>>` | — | Field labels, for translation.     |
+| `className`              | `string`                                                        | —                    | Additional class names.                                             |
+
+### CreateAccountValues
+
+`{ firstName, lastName, email, password, consent }`. `consent` is true only when the
+required consent control is checked.
+
+### CreateAccountPasswordRule
+
+`{ id, label, test }`. `label` is shown verbatim in the guidance list — translate it in
+your application. `test` receives the current password.
+
+## States
+
+- **idle** — the form is ready for input.
+- **loading** — your application is still fetching the context the form needs. Fields are not shown yet.
+- **submitting** — every control that could start a second registration attempt is disabled.
+- **error** — a failed attempt. Input is preserved.
+- **success** — the account is **confirmed** to exist. Set by your application only.
+- **disabled** — registration is closed, expired or not permitted, with a visible reason.
+
+## Verification
+
+No batch verification report exists for this block. The recorded evidence is its own
+14 stories — covering validation errors, password guidance, a valid submission,
+mismatched passwords, submitting, a server error, a confirmed success, loading, closed
+registration, translated labels, a themed surface, `headingLevel="h1"` and a narrow
+container — and the repository story suite, re-run on 23 September 2026.
+
+Not verified: a measured width, contrast or interaction sweep of the kind Batch A and
+Batch C recorded; a screen-reader pass; any non-Chromium engine; operating-system
+text-size settings.
+
+## Known limitations
+
+- Local validation is a convenience. The server remains responsible for uniqueness,
+  password policy and consent records.
+- `defaultValues` seeds the draft once. Later changes to that prop are ignored, as with
+  any React `default*` prop.
+- The field set is fixed. Labels are translatable; the fields themselves are not
+  configurable.

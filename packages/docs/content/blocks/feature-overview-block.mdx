@@ -1,0 +1,168 @@
+---
+title: FeatureOverviewBlock
+description: Scan differentiated capabilities and follow the details that matter
+---
+
+# FeatureOverviewBlock
+
+Lets a visitor scan differentiated capabilities and follow the details that matter to them.
+
+Plan idea 50, category **Marketing & conversion**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { FeatureOverviewBlock } from "@raydenui/ui/blocks";
+import type { FeatureOverviewItem, FeatureOverviewCta } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+const features: FeatureOverviewItem[] = [
+  {
+    id: "routing",
+    title: "Automatic routing",
+    description: "Shipments land with the team that owns the lane.",
+    icon: "map",
+    cta: { label: "How routing works", href: "/docs/routing" },
+  },
+  {
+    id: "audit",
+    title: "Full audit history",
+    description: "Every status change keeps its author and timestamp.",
+    badge: "Enterprise",
+  },
+];
+
+<FeatureOverviewBlock
+  eyebrow="Capabilities"
+  title="Built around the work your team already does"
+  description="Four capabilities that remove a manual step each."
+  features={features}
+  columns={2}
+  footerCta={{ label: "See the full feature list", href: "/features" }}
+/>;
+```
+
+### Columns and variant
+
+`columns` is the **widest** column count. Narrow containers always reduce to one column,
+so the count cannot be pinned.
+
+```tsx
+<FeatureOverviewBlock title="What you get" features={features} columns={4} variant="plain" />
+```
+
+### Empty source and no matches
+
+Both resolve to the same `empty` state. The difference is carried entirely by the wording
+you pass, so an empty catalogue and a filtered search never read the same.
+
+```tsx
+<FeatureOverviewBlock
+  title="Capabilities"
+  features={[]}
+  emptyState={{
+    title: "No capabilities published yet",
+    description: "This workspace has not published its capability list.",
+  }}
+/>
+```
+
+```tsx
+<FeatureOverviewBlock
+  title="Capabilities"
+  features={[]}
+  state="empty"
+  emptyState={{
+    title: "Nothing matches “audit”",
+    description: "Try a broader term.",
+    cta: { label: "Clear the filter", onClick: () => setQuery("") },
+  }}
+/>
+```
+
+### Loading and error
+
+```tsx
+<FeatureOverviewBlock
+  title="Capabilities"
+  features={[]}
+  state="loading"
+  loadingItemCount={3}
+  loadingLabel="Loading capabilities"
+/>
+```
+
+```tsx
+<FeatureOverviewBlock
+  title="Capabilities"
+  features={[]}
+  state="error"
+  errorTitle="Capabilities could not load"
+  onRetry={() => refetch()}
+/>
+```
+
+## Props
+
+| Prop               | Type                                                  | Default     | Description                                                     |
+| ------------------ | ----------------------------------------------------- | ----------- | --------------------------------------------------------------- |
+| `title`            | `ReactNode`                                           | —           | Required. Section title.                                        |
+| `eyebrow`          | `ReactNode`                                           | —           | Label above the title. Not a heading.                           |
+| `description`      | `ReactNode`                                           | —           | Supporting explanation.                                         |
+| `headingLevel`     | `"h1"`–`"h6"`                                         | `"h2"`      | Item titles use the next level down.                            |
+| `features`         | `FeatureOverviewItem[]`                               | —           | Required. Rendered as a `ul`.                                   |
+| `columns`          | `2 \| 3 \| 4`                                         | `3`         | Widest column count.                                            |
+| `variant`          | `"card" \| "plain"`                                   | `"card"`    | `card` draws a bordered surface per item.                       |
+| `footerCta`        | `FeatureOverviewCta`                                  | —           | Section-level follow-on step.                                   |
+| `state`            | `"default" \| "loading" \| "empty" \| "error"`         | derived     | Resolves to `empty` for an empty `features` array when omitted. |
+| `loadingItemCount` | `number`                                              | `3`         | Placeholder items while loading.                                |
+| `loadingLabel`     | `string`                                              | —           | Announced while loading.                                        |
+| `emptyState`       | `FeatureOverviewEmptyState`                           | —           | `{ title, description?, cta? }`. Your wording, not the block's.  |
+| `errorTitle`       | `string`                                              | —           | Shown while `state="error"`.                                    |
+| `errorDescription` | `ReactNode`                                           | —           | Shown while `state="error"`.                                    |
+| `onRetry`          | `() => void`                                          | —           | Retry handler. The control is omitted without it.                |
+| `retryLabel`       | `string`                                              | —           | Retry control label.                                            |
+| `className`        | `string`                                              | —           | Lands on the section root.                                      |
+
+`FeatureOverviewBlock` forwards its ref to the section element and accepts the remaining
+`HTMLAttributes<HTMLElement>`.
+
+### FeatureOverviewItem
+
+| Member        | Type                 | Description                                                                  |
+| ------------- | -------------------- | ---------------------------------------------------------------------------- |
+| `id`          | `string`             | Required, stable.                                                            |
+| `title`       | `ReactNode`          | Required.                                                                    |
+| `description` | `ReactNode`          | Optional.                                                                    |
+| `icon`        | `IconName`           | Rendered in the item's accent tile.                                          |
+| `badge`       | `string`             | Short qualifier, e.g. "Beta".                                                |
+| `cta`         | `FeatureOverviewCta` | Omitted entirely when absent, so no dead "Learn more" control is rendered.     |
+
+`FeatureOverviewCta` is a union of `{ label, href, external?, onClick? }` and
+`{ label, onClick }`: a destination renders an anchor, an action renders a button.
+
+## States
+
+- **default** — the capability grid.
+- **loading** — placeholder cards marked `aria-hidden`, with a status message.
+- **empty** — an empty source and a query with no matches, distinguished by your `emptyState` wording.
+- **error** — `role="alert"` with an optional retry.
+- **No success state.** The block submits nothing.
+
+## Verification
+
+Measured 22 September 2026 with Playwright 1.58.2 driving installed Google Chrome and
+axe-core 4.11.1, at 320, 390, 768 and 1440 CSS pixels in light and dark mode, plus a
+358px container on a 1440px viewport (three columns reduce to one) and 200% root text
+sizing. Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, or operating-system
+text-size and full-browser-zoom settings.
+
+## Known limitations
+
+- `columns` cannot be pinned; a narrow container always collapses to one column.
+- The block renders its own call-to-action recipe rather than composing `Button`.

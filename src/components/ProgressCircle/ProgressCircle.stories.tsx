@@ -33,7 +33,7 @@ export const Segmented: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div className="flex items-end gap-6">
+    <div className="flex flex-wrap items-end gap-6">
       <ProgressCircle value={75} size="xs" />
       <ProgressCircle value={75} size="sm" />
       <ProgressCircle value={75} size="md" />
@@ -45,7 +45,7 @@ export const AllSizes: Story = {
 
 export const SegmentedAllSizes: Story = {
   render: () => (
-    <div className="flex items-end gap-6">
+    <div className="flex flex-wrap items-end gap-6">
       <ProgressCircle value={75} size="xs" variant="segmented" />
       <ProgressCircle value={75} size="sm" variant="segmented" />
       <ProgressCircle value={75} size="md" variant="segmented" />
@@ -57,7 +57,7 @@ export const SegmentedAllSizes: Story = {
 
 export const ProgressSteps: Story = {
   render: () => (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-wrap items-center gap-6">
       <ProgressCircle value={0} size="lg" />
       <ProgressCircle value={25} size="lg" />
       <ProgressCircle value={50} size="lg" />
@@ -69,7 +69,7 @@ export const ProgressSteps: Story = {
 
 export const SegmentedSteps: Story = {
   render: () => (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-wrap items-center gap-6">
       <ProgressCircle value={0} size="lg" variant="segmented" />
       <ProgressCircle value={30} size="lg" variant="segmented" />
       <ProgressCircle value={50} size="lg" variant="segmented" />

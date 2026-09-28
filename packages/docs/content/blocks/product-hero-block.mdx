@@ -1,0 +1,181 @@
+---
+title: ProductHeroBlock
+description: Explain the product, show a relevant example, and lead to a primary next step
+---
+
+# ProductHeroBlock
+
+Explains the product, shows a relevant example, and leads to a primary next step.
+
+Plan idea 49, category **Marketing & conversion**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { ProductHeroBlock } from "@raydenui/ui/blocks";
+import type { ProductHeroBlockProps, ProductHeroCta } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+<ProductHeroBlock
+  eyebrow="Logistics platform"
+  eyebrowBadge="New"
+  headline="Every shipment, one clear view"
+  description="Track freight across carriers without stitching together four dashboards."
+  primaryCta={{ label: "Start free", href: "/signup" }}
+  secondaryCta={{ label: "Book a walkthrough", href: "/demo" }}
+  note="No credit card required."
+  highlights={[
+    { id: "uptime", label: "Uptime", value: "99.98%" },
+    { id: "carriers", label: "Carriers connected", value: "240" },
+  ]}
+  media={{
+    src: "/images/shipment-board.png",
+    alt: "Shipment board showing twelve active consignments grouped by carrier",
+    caption: "The shipment board after a morning sync.",
+  }}
+/>
+```
+
+### A call to action is a destination or an action, never both
+
+`ProductHeroCta` is a union. Supply `href` for a destination, which renders a native
+anchor, or `onClick` for an in-page action, which renders a native button. A control
+with neither cannot be configured.
+
+```tsx
+<ProductHeroBlock
+  headline="See it on your own data"
+  primaryCta={{ label: "Open the sandbox", onClick: () => setSandboxOpen(true) }}
+  secondaryCta={{ label: "Read the docs", href: "/docs", external: true }}
+/>
+```
+
+### Heading level
+
+`headingLevel` defaults to `"h1"`, because a hero usually owns the page heading.
+Drop it to `"h2"` when the page already has an `h1`.
+
+```tsx
+<ProductHeroBlock headingLevel="h2" headline="Built for operations teams" />
+```
+
+### Text-only, centred
+
+`align="center"` applies only when there is no media.
+
+```tsx
+<ProductHeroBlock
+  align="center"
+  headline="One place for freight decisions"
+  description="Start with the shipments that need you today."
+  primaryCta={{ label: "Start free", href: "/signup" }}
+/>
+```
+
+### Loading and error
+
+```tsx
+<ProductHeroBlock state="loading" headline="Loading" loadingLabel="Loading the hero example" />
+```
+
+```tsx
+<ProductHeroBlock
+  state="error"
+  headline="Every shipment, one clear view"
+  errorTitle="The example could not load"
+  errorDescription="The product screenshot is temporarily unavailable."
+  onRetry={() => refetch()}
+  retryLabel="Try again"
+/>
+```
+
+The retry control is omitted entirely when `onRetry` is absent, so the block never shows
+a button with nowhere to go.
+
+## Props
+
+| Prop             | Type                              | Default     | Description                                                          |
+| ---------------- | --------------------------------- | ----------- | -------------------------------------------------------------------- |
+| `headline`       | `ReactNode`                       | —           | Required. The product statement.                                     |
+| `eyebrow`        | `ReactNode`                       | —           | Small label above the headline. Not a heading.                       |
+| `eyebrowBadge`   | `string`                          | —           | Badge beside the eyebrow, e.g. a release tag.                        |
+| `description`    | `ReactNode`                       | —           | Supporting explanation.                                              |
+| `headingLevel`   | `"h1"`–`"h6"`                     | `"h1"`      | Element for the headline. Highlights use the next level down.        |
+| `primaryCta`     | `ProductHeroCta`                  | —           | Primary next step.                                                   |
+| `secondaryCta`   | `ProductHeroCta`                  | —           | Alternative step.                                                    |
+| `note`           | `ReactNode`                       | —           | Small print under the actions.                                       |
+| `highlights`     | `ProductHeroHighlight[]`          | —           | Proof points, rendered as a list.                                    |
+| `media`          | `ProductHeroMedia`                | —           | A relevant example image.                                            |
+| `mediaSlot`      | `ReactNode`                       | —           | Live demo or embed. Takes precedence over `media`.                   |
+| `mediaFallback`  | `ReactNode`                       | —           | Replaces the media when the image fails or `src` is empty.           |
+| `align`          | `"start" \| "center"`             | `"start"`   | Text alignment when there is no media.                               |
+| `state`          | `"default" \| "loading" \| "error"` | `"default"` | Lifecycle owned by the consuming application.                      |
+| `loadingLabel`   | `string`                          | —           | Announced while loading.                                             |
+| `errorTitle`     | `string`                          | —           | Shown while `state="error"`.                                         |
+| `errorDescription` | `ReactNode`                     | —           | Shown while `state="error"`.                                         |
+| `onRetry`        | `() => void`                      | —           | Retry handler. The control is omitted without it.                    |
+| `retryLabel`     | `string`                          | —           | Retry control label.                                                 |
+| `className`      | `string`                          | —           | Lands on the section root.                                           |
+
+`ProductHeroBlock` forwards its ref to the section element and accepts the remaining
+`HTMLAttributes<HTMLElement>`.
+
+### ProductHeroCta
+
+| Member     | Type                                        | Description                                         |
+| ---------- | ------------------------------------------- | --------------------------------------------------- |
+| `label`    | `string`                                    | Required.                                           |
+| `icon`     | `IconName`                                  | Optional leading icon.                              |
+| `href`     | `string`                                    | Destination. Renders an anchor.                     |
+| `external` | `boolean`                                   | Opens a new tab and adds `rel="noreferrer"`.        |
+| `onClick`  | `(event) => void` \| `() => void`           | Analytics hook with `href`; the action without it.   |
+
+### ProductHeroHighlight
+
+| Member  | Type        | Description                                               |
+| ------- | ----------- | --------------------------------------------------------- |
+| `id`    | `string`    | Required, stable.                                         |
+| `label` | `string`    | Required, e.g. "Uptime".                                  |
+| `value` | `ReactNode` | Emphasised value, pre-formatted by the caller.            |
+| `icon`  | `IconName`  | Optional.                                                 |
+
+### ProductHeroMedia
+
+| Member        | Type                                          | Default  | Description                                                     |
+| ------------- | --------------------------------------------- | -------- | --------------------------------------------------------------- |
+| `src`         | `string`                                      | —        | Required.                                                       |
+| `alt`         | `string`                                      | —        | Required. Describes the example, not the product.                |
+| `aspectRatio` | `"auto" \| "video" \| "wide" \| "square"`     | `"auto"` | `auto` keeps the image's proportions so a screenshot is never cropped. |
+| `width`       | `number`                                      | —        | Intrinsic width.                                                |
+| `height`      | `number`                                      | —        | Intrinsic height.                                               |
+| `caption`     | `ReactNode`                                   | —        | Rendered under the media.                                       |
+
+## States
+
+- **default** — headline, description, actions, highlights, media.
+- **loading** — placeholder shapes marked `aria-hidden`, a `role="status"` announcement, and `aria-busy` on the section.
+- **error** — a `role="alert"` panel with an optional retry control.
+- **missing media** — a labelled `role="img"` placeholder. Not a broken image and not a silent gap.
+- **No empty state.** `headline` is required: a hero without one is not a hero.
+- **No success state.** The block submits nothing, so it never claims an outcome.
+
+## Verification
+
+Measured 22 September 2026 with Playwright 1.58.2 driving installed Google Chrome and
+axe-core 4.11.1, at 320, 390, 768 and 1440 CSS pixels in light and dark mode, plus a
+358px container on a 1440px viewport and 200% root text sizing. Re-run in the
+repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system
+text-size or full-browser-zoom settings, or real photographic assets — the stories use
+inline SVG data URIs so they render offline.
+
+## Known limitations
+
+- The block renders its own call-to-action recipe rather than composing `Button`, which
+  cannot render an anchor. That duplication will drift until `Button` gains a
+  polymorphic escape hatch.
+- Target size was not measured for every control.

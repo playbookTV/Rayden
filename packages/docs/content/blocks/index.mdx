@@ -5,111 +5,139 @@ description: Reusable application, marketing, commerce, and finance patterns
 
 # Blocks
 
-24 reusable blocks for application UI, marketing, commerce, and finance. Import components and their TypeScript types from `@raydenui/ui/blocks`. The library is expanding toward the approved 100-block plan across 12 categories.
+28 reusable blocks for application UI, marketing, commerce and finance. Import components
+and their TypeScript types from `@raydenui/ui/blocks`. The library is expanding toward the
+approved 100-block plan across 12 categories.
+
+## Status
+
+**Every block is `experimental`.** They are publicly exported, documented and story-covered,
+and each block's page records exactly what was measured. None has had a screen-reader pass, a
+second browser engine, or an operating-system text-size test, so none has earned the `stable`
+status the plan reserves for the public supported count. Read a block's own **Verification**
+and **Known limitations** sections before adopting it.
+
+Within that, the catalog records a second field, `verificationLevel`. Twenty-four blocks are
+`measured`: a completed verification run stands behind them, and their page names its tools,
+widths, modes and scenarios. The four finance blocks —
+[AccountBalanceBlock](/blocks/account-balance-block),
+[TransferReviewBlock](/blocks/transfer-review-block),
+[InvoiceDetailBlock](/blocks/invoice-detail-block) and
+[SubscriptionBillingBlock](/blocks/subscription-billing-block) — are `unmeasured`: no
+verification run exists for them yet, so their documented contract is provisional and their
+responsive and contrast behaviour has not been measured at all.
+
+The machine-readable catalog behind this table — stable ids, category, domain and task tags,
+status, preview stories, documented states, verification evidence and limitations — is
+published at [`/ai/catalog.json`](/ai/catalog.json) under `blocks`.
 
 ## Import
 
 ```tsx
-import {
-  ApplicationShellBlock,
-  PageHeaderBlock,
-  WorkspaceSwitcherBlock,
-  CommandPaletteBlock,
-  NotificationsBlock,
-  LoginBlock,
-  TableBlock,
-  QuickSendBlock,
-  RecentTransactionsBlock,
-  EmptyStateBlock,
-  SearchableTableBlock,
-  HeaderBlock,
-  CreateAccountBlock,
-  KpiOverviewBlock,
-  ProfileSettingsBlock,
-  TaskListBlock,
-  ProductHeroBlock,
-  FeatureOverviewBlock,
-  PricingPlansBlock,
-  SiteFooterBlock,
-  ProductCollectionBlock,
-  ProductDetailBlock,
-  ShoppingCartBlock,
-  CheckoutReviewBlock,
-} from "@raydenui/ui/blocks";
+import { ProductHeroBlock, PricingPlansBlock, SiteFooterBlock } from "@raydenui/ui/blocks";
 ```
 
-Or import individually:
+Types come from the same entry point:
 
 ```tsx
-import { LoginBlock } from "@raydenui/ui/blocks";
+import type { PricingPlan, CommerceProduct, AppShellNavItem } from "@raydenui/ui/blocks";
 ```
 
-## Available Blocks
+## Navigation & shells
 
-| Block                                                        | Description                               |
-| ------------------------------------------------------------ | ----------------------------------------- |
-| [NotificationsBlock](/blocks/notifications-block)            | Notification list with read/unread states |
-| [LoginBlock](/blocks/login-block)                            | Authentication form with social providers |
-| [TableBlock](/blocks/table-block)                            | Data table with header and pagination     |
-| [QuickSendBlock](/blocks/quick-send-block)                   | Quick money transfer interface            |
-| [RecentTransactionsBlock](/blocks/recent-transactions-block) | Transaction history list                  |
-| [EmptyStateBlock](/blocks/empty-state-block)                 | Empty state with illustration and CTA     |
-| [SearchableTableBlock](/blocks/searchable-table-block)       | Table with search and filters             |
+| Block                                                          | Task                                                                 |
+| -------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [HeaderBlock](/blocks/header-block)                            | Navigate a public site with equivalent desktop and collapsed destinations |
+| [ApplicationShellBlock](/blocks/application-shell-block)       | Compose a sidebar, workspace, top bar and collapsed navigation          |
+| [PageHeaderBlock](/blocks/page-header-block)                   | Establish page context with breadcrumbs, title, status and actions      |
+| [WorkspaceSwitcherBlock](/blocks/workspace-switcher-block)     | Find and switch a workspace, and create or join another                 |
+| [CommandPaletteBlock](/blocks/command-palette-block)           | Search and activate destinations and actions from the keyboard          |
+| [SiteFooterBlock](/blocks/site-footer-block)                   | Browse grouped links, legal information, social links and locale controls |
 
-### Application and marketing additions
+See [Application chrome](/blocks/navigation) for composing the four application blocks.
 
-| Category       | Blocks                                                    |
-| -------------- | --------------------------------------------------------- |
-| Navigation     | HeaderBlock, SiteFooterBlock                              |
-| Authentication | CreateAccountBlock                                        |
-| Dashboards     | KpiOverviewBlock                                          |
-| Forms          | ProfileSettingsBlock                                      |
-| Collaboration  | TaskListBlock                                             |
-| Marketing      | ProductHeroBlock, FeatureOverviewBlock, PricingPlansBlock |
+## Application UI
 
-See [application and marketing blocks](/blocks/expanded-library) for their contracts and examples.
+| Block                                                          | Task                                                                |
+| -------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [LoginBlock](/blocks/login-block)                              | Authenticate with credentials or configured providers                |
+| [CreateAccountBlock](/blocks/create-account-block)             | Register with validation, password guidance and required consent      |
+| [KpiOverviewBlock](/blocks/kpi-overview-block)                 | Compare labelled metrics against an explicit period                  |
+| [TableBlock](/blocks/table-block)                              | Inspect and select payment records                                   |
+| [SearchableTableBlock](/blocks/searchable-table-block)         | Search, sort, select and act on configurable records                 |
+| [ProfileSettingsBlock](/blocks/profile-settings-block)         | Edit personal details and avatar, and track unsaved changes           |
+| [NotificationsBlock](/blocks/notifications-block)              | Read a contextual notification feed and follow its actions            |
+| [TaskListBlock](/blocks/task-list-block)                       | Add, assign, complete and filter actionable work                     |
+| [EmptyStateBlock](/blocks/empty-state-block)                   | Explain an absence of content and offer a next action                 |
 
-### Navigation and shells
+## Marketing & conversion
 
-ApplicationShellBlock, PageHeaderBlock, WorkspaceSwitcherBlock and CommandPaletteBlock compose into a responsive application frame. See [navigation blocks](/blocks/navigation) for public contracts and examples.
+| Block                                                          | Task                                                          |
+| -------------------------------------------------------------- | ------------------------------------------------------------- |
+| [ProductHeroBlock](/blocks/product-hero-block)                 | Explain the product and lead to a primary next step            |
+| [FeatureOverviewBlock](/blocks/feature-overview-block)         | Scan differentiated capabilities and follow the details        |
+| [PricingPlansBlock](/blocks/pricing-plans-block)               | Compare plans, switch billing period and see included usage     |
 
-### Commerce batch
+## Commerce
 
-| Block                  | Purpose                                                             |
-| ---------------------- | ------------------------------------------------------------------- |
-| ProductCollectionBlock | Search, category filters, sorting, and product actions              |
-| ProductDetailBlock     | Product options, stock limits, quantities, and add-to-cart callback |
-| ShoppingCartBlock      | Controlled cart items, quantities, removal, and totals              |
-| CheckoutReviewBlock    | Delivery, payment summary, order review, and confirmation states    |
+| Block                                                          | Task                                                           |
+| -------------------------------------------------------------- | -------------------------------------------------------------- |
+| [ProductCollectionBlock](/blocks/product-collection-block)     | Browse products with prices and availability                    |
+| [ProductDetailBlock](/blocks/product-detail-block)             | Inspect a product, choose an option and add it to a cart         |
+| [ShoppingCartBlock](/blocks/shopping-cart-block)               | Review items, change quantity and inspect totals                 |
+| [CheckoutReviewBlock](/blocks/checkout-review-block)           | Review an order before placing it                                |
 
-See [commerce blocks](/blocks/commerce) for a complete integration example.
+See [Commerce journey](/blocks/commerce) for the shared money contract and a connected
+example. Commerce blocks integrate provider callbacks: they never perform a payment, place
+an order or claim one succeeded.
 
-## Quick Examples
+## Finance & billing
 
-### NotificationsBlock
+| Block                                                            | Task                                                          |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| [QuickSendBlock](/blocks/quick-send-block)                       | Select a beneficiary to start a transfer                       |
+| [RecentTransactionsBlock](/blocks/recent-transactions-block)     | Inspect recent transactions and open their details              |
+| [AccountBalanceBlock](/blocks/account-balance-block)             | View available, pending and total balances                      |
+| [TransferReviewBlock](/blocks/transfer-review-block)             | Review a transfer before explicit confirmation                  |
+| [InvoiceDetailBlock](/blocks/invoice-detail-block)               | Inspect invoice lines, totals and payment actions                |
+| [SubscriptionBillingBlock](/blocks/subscription-billing-block)   | Manage a plan, its usage, renewal and cancellation                |
 
-<Preview>
-  <NotificationsBlockDemo />
-</Preview>
+The last four are `unmeasured`. Finance blocks integrate provider callbacks: they never move
+money, take a payment, cancel a subscription or claim an outcome your application has not
+reported.
 
-### LoginBlock
+## Shared contracts
 
-<Preview>
-  <LoginBlockDemo />
-</Preview>
+**Data and persistence belong to your application.** Every block exposes callbacks and
+fetches nothing.
 
-### EmptyStateBlock
+**Nothing is manufactured.** A block never claims a success your application has not
+confirmed. Where a success is meaningful it is a prop you pass — `notice`, `confirmation`,
+`successMessage` or `status="success"` — and where it is not meaningful the block has no
+success state at all.
 
-<Preview>
-  <EmptyStateBlockDemo />
-</Preview>
+**Availability is explicit.** A control renders only when its handler is supplied, is
+explicitly disabled with a visible reason, or is omitted. No block renders a control that
+has nowhere to go.
+
+**Layouts follow their container**, not the viewport, so a block dropped into a 400px column
+collapses there even on a wide screen.
+
+**Heading levels are a contract.** Blocks accept `headingLevel` as the element name,
+`"h1"` through `"h6"`, so a block fits the page outline it is embedded in. Sub-headings derive
+from it. Most blocks default to `"h2"`; `ProductHeroBlock` and `PageHeaderBlock` default to
+`"h1"` because they usually own the page heading.
 
 ## Customization
 
-Blocks accept a `className` prop for custom styling:
+Blocks accept a `className` prop, which lands on the block's own container root:
 
 ```tsx
 <TableBlock className="rounded-xl shadow-soft-lg" rows={rows} />
 ```
 
-For deeper customization, consider using the individual components directly from `@raydenui/ui`.
+Semantic surface, border, text and action roles control intended theming — see
+[design tokens](/design-tokens). Note that overriding `--color-surface` alone is **not**
+sufficient: pair it with the matching `--color-on-surface*` foreground roles.
+
+For deeper customization, compose the individual components from `@raydenui/ui`.

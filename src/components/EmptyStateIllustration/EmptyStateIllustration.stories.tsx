@@ -93,7 +93,7 @@ export const CustomPalette: Story = {
 /* ─── Custom size ─────────────────────────────────────────────────── */
 export const Sizes: Story = {
   render: () => (
-    <div className="flex items-end gap-6 p-6">
+    <div className="flex flex-wrap items-end gap-6 p-6">
       <div className="flex flex-col items-center gap-2">
         <EmptyStateIllustration name="search" size={80} />
         <span className="text-body-xs text-grey-500">80px</span>

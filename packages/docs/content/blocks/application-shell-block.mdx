@@ -1,0 +1,202 @@
+---
+title: ApplicationShellBlock
+description: Compose a sidebar, workspace area, top bar, and collapsed navigation
+---
+
+# ApplicationShellBlock
+
+Compose a sidebar, workspace area, top bar and collapsed navigation without losing
+destinations.
+
+Plan idea 02, category **Navigation & shells**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { ApplicationShellBlock } from "@raydenui/ui/blocks";
+import type { AppShellNavSection, AppShellAction } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+Each navigation entry is a destination (`href`), an action (`onClick`) or an entry the
+viewer may not open (`unavailableReason`). There is no fourth arm, so an item with nothing
+to do cannot be expressed.
+
+```tsx
+const navSections: AppShellNavSection[] = [
+  {
+    id: "workspace",
+    label: "Workspace",
+    items: [
+      { id: "overview", label: "Overview", href: "/overview", icon: "home", current: true },
+      { id: "shipments", label: "Shipments", href: "/shipments", badge: "12", badgeDescription: "12 shipments need attention" },
+      { id: "billing", label: "Billing", unavailableReason: "Only workspace owners can open billing." },
+    ],
+  },
+];
+
+<ApplicationShellBlock
+  brand="Citrionus"
+  brandHref="/"
+  navSections={navSections}
+  navLabel="Main"
+  actions={[{ id: "help", label: "Help", href: "/help", icon: "question-mark-circle" }]}
+>
+  <p>Your workspace content</p>
+</ApplicationShellBlock>;
+```
+
+Keep `current` in sync with your router.
+
+### Search and switcher slots
+
+Each slot keeps one mounted instance at every width, so neither is dropped from the
+collapsed arrangement. On a narrow shell, search wraps onto its own row.
+
+```tsx
+<ApplicationShellBlock
+  brand="Citrionus"
+  navSections={navSections}
+  switcher={<WorkspaceSwitcherBlock current={current} workspaces={workspaces} onSelect={setId} />}
+  search={<CommandPaletteBlock items={items} shortcut={{ key: "k", modifier: "mod", hint: "⌘K" }} />}
+>
+  <p>Your workspace content</p>
+</ApplicationShellBlock>
+```
+
+### Where the sidebar appears
+
+`expandAt` reads the **shell's own container width**, not the viewport, so a shell dropped
+into a 400px column collapses there even on a 1440px screen.
+
+| Value  | Container width |
+| ------ | --------------- |
+| `"sm"` | 720px           |
+| `"md"` | 900px (default) |
+| `"lg"` | 1080px          |
+
+### Who owns the scrollbar
+
+`mainScroll="page"` (the default) lets the document scroll, so the shell has exactly one
+scroll region and an overlay above it cannot fight a second one. `mainScroll="region"`
+gives the workspace its own scrollbar and needs a bounded height, which you pass through
+`className`.
+
+```tsx
+<ApplicationShellBlock
+  brand="Citrionus"
+  navSections={navSections}
+  mainScroll="region"
+  className="h-[100dvh]"
+>
+  <p>Your workspace content</p>
+</ApplicationShellBlock>
+```
+
+### Navigation loading, error and empty
+
+```tsx
+<ApplicationShellBlock navStatus="loading" navLoadingMessage="Loading your destinations">
+  <p>Your workspace content</p>
+</ApplicationShellBlock>
+```
+
+```tsx
+<ApplicationShellBlock
+  navStatus="error"
+  navErrorMessage="Your destinations could not load."
+  onRetryNav={() => refetchNav()}
+>
+  <p>Your workspace content</p>
+</ApplicationShellBlock>
+```
+
+`navEmptyMessage` has no default. Without it, a shell with no destinations renders no
+navigation rail at all rather than an empty one — so supply it when you want the rail to
+state why it is empty.
+
+```tsx
+<ApplicationShellBlock
+  navSections={[]}
+  navEmptyMessage="This workspace has no destinations yet."
+>
+  <p>Your workspace content</p>
+</ApplicationShellBlock>
+```
+
+## Props
+
+| Prop                  | Type                             | Default                   | Description                                                   |
+| --------------------- | -------------------------------- | ------------------------- | ------------------------------------------------------------- |
+| `children`            | `ReactNode`                      | —                         | Workspace content.                                            |
+| `brand`               | `ReactNode`                      | —                         | Wordmark or logo. In the sidebar when expanded, the top bar when collapsed. |
+| `brandHref`           | `string`                         | —                         | Without it (or `onBrandClick`) the brand is not a control.      |
+| `onBrandClick`        | `() => void`                     | —                         | Brand action.                                                 |
+| `navSections`         | `AppShellNavSection[]`           | —                         | `{ id, label?, items }`.                                       |
+| `navLabel`            | `string`                         | `"Main"`                  | Accessible name for the primary navigation landmark.            |
+| `sectionHeadingLevel` | `"h1"`–`"h6"`                    | `"h2"`                    | Element for section labels.                                    |
+| `navStatus`           | `"idle" \| "loading" \| "error"`  | `"idle"`                  | Navigation lifecycle.                                          |
+| `navErrorMessage`     | `string`                         | —                         | Shown when `navStatus="error"`.                                 |
+| `onRetryNav`          | `() => void`                     | —                         | The retry control is omitted without it.                        |
+| `navLoadingMessage`   | `string`                         | —                         | Announced while loading.                                        |
+| `navEmptyMessage`     | `string`                         | —                         | No default. Without it an empty rail is not rendered at all.      |
+| `search`              | `ReactNode`                      | —                         | One instance in the top bar at every width.                     |
+| `switcher`            | `ReactNode`                      | —                         | One instance in the top bar at every width.                     |
+| `actions`             | `AppShellAction[]`               | —                         | Trailing top-bar controls.                                      |
+| `actionsLabel`        | `string`                         | `"Account and tools"`     | Accessible name for the trailing group.                         |
+| `sidebarFooter`       | `ReactNode`                      | —                         | Rendered in both the sidebar and the collapsed panel.            |
+| `openMenuLabel`       | `string`                         | `"Open navigation"`       | Toggle label when closed.                                       |
+| `closeMenuLabel`      | `string`                         | `"Close navigation"`      | Toggle label when open.                                         |
+| `skipLinkLabel`       | `string`                         | `"Skip to main content"`  | Skip-link label.                                                |
+| `skipNavLabel`        | `string`                         | `"Skip links"`            | Accessible name for the skip-link landmark.                      |
+| `expandAt`            | `"sm" \| "md" \| "lg"`            | `"md"`                    | Container width at which the sidebar appears.                    |
+| `mainScroll`          | `"page" \| "region"`              | `"page"`                  | Who owns the vertical scrollbar.                                 |
+| `stickyTopBar`        | `boolean`                        | `true`                    | Keeps the top bar in view while the workspace scrolls.            |
+| `mainLabel`           | `string`                         | `"Workspace"`             | Accessible name for the workspace landmark.                       |
+| `className`           | `string`                         | —                         | Lands on the container root, outside the top bar and workspace padding. |
+
+### AppShellNavItem
+
+A union of three arms, all sharing `{ id, label, icon?, description?, badge?, badgeDescription?, current? }`:
+
+| Arm            | Extra members                        | Renders as                                   |
+| -------------- | ------------------------------------ | -------------------------------------------- |
+| Destination    | `href`, `external?`, `onClick?`      | a native anchor                              |
+| Action         | `onClick`                            | a native button                              |
+| Unavailable    | `unavailableReason`                  | a disabled button with a visible reason        |
+
+`AppShellAction` has the destination and action arms only.
+
+## States
+
+- **default** — sidebar beside the workspace, or the collapsed panel below `expandAt`.
+- **navigation loading** / **navigation error** — with an optional retry control.
+- **navigation empty** — only when `navEmptyMessage` is supplied.
+- **permission-blocked entry** — a disabled control with a visible reason.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 261 browser tests across 27 story files,
+light and dark compositions with no document overflow at 320, 390, 768 and 1440 CSS
+pixels, screenshots inspected at phone and desktop widths, and a clean consumer
+installation exercising every ESM and CommonJS block export plus server rendering.
+Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, or physical devices.
+
+## Known limitations
+
+- `expandAt` is a fixed set of three container tiers, because Tailwind needs each
+  `@min-[…]` class to exist as a literal string. An arbitrary threshold cannot be
+  expressed.
+- `mainScroll="region"` requires you to bound the shell's height through `className`; the
+  block cannot do it.
+- `sidebarFooter` renders in both the sidebar and the collapsed panel, so keep it
+  stateless or controlled by your application.
+- The shell renders its own navigation rather than composing `SidebarMenu`, which
+  hard-codes `bg-white`. That duplication will drift until `SidebarMenu` migrates to the
+  surface roles.
+- A negative-inset composition pattern relies on `className` landing on the container
+  root. That is the documented contract, but no test asserts it.

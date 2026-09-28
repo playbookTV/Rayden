@@ -152,7 +152,7 @@ function Connector({
   ) : (
     <div
       className={cn(
-        "w-0.5 flex-1 min-h-[20px] ml-[11px] rounded-full",
+        "w-0.5 flex-1 min-h-[20px] rounded-full",
         completed ? "bg-primary-400" : "bg-grey-300"
       )}
     />
@@ -232,7 +232,7 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
           const status = statuses[i];
           const isLast = i === steps.length - 1;
           return (
-            <div key={i} className="flex flex-col flex-1 items-center gap-2.5">
+            <div key={i} className="flex min-w-0 flex-col flex-1 items-center gap-2.5">
               <div className="flex items-center gap-1 w-full">
                 <Connector
                   orientation="horizontal"

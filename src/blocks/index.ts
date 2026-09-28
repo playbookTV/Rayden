@@ -1,3 +1,11 @@
+export { AccountBalanceBlock } from "./AccountBalanceBlock";
+export type {
+  AccountBalanceState,
+  AccountBalanceEntry,
+  AccountBalanceAction,
+  AccountBalanceBlockProps,
+} from "./AccountBalanceBlock";
+
 export { CheckoutReviewBlock } from "./CheckoutReviewBlock";
 export type { CheckoutReviewBlockProps } from "./CheckoutReviewBlock";
 
@@ -44,6 +52,15 @@ export type {
   HeaderBlockProps,
 } from "./HeaderBlock";
 
+export { InvoiceDetailBlock } from "./InvoiceDetailBlock";
+export type {
+  InvoiceDetailState,
+  InvoiceLine,
+  InvoiceAdjustment,
+  InvoiceParty,
+  InvoiceDetailBlockProps,
+} from "./InvoiceDetailBlock";
+
 export { KpiOverviewBlock } from "./KpiOverviewBlock";
 export type {
   KpiOverviewHeadingLevel,
@@ -62,7 +79,11 @@ export { LoginBlock } from "./LoginBlock";
 export type { LoginBlockVariant, LoginBlockSocialProvider, LoginBlockProps } from "./LoginBlock";
 
 export { NotificationsBlock } from "./NotificationsBlock";
-export type { NotificationItem, NotificationsBlockProps } from "./NotificationsBlock";
+export type {
+  NotificationsHeadingLevel,
+  NotificationItem,
+  NotificationsBlockProps,
+} from "./NotificationsBlock";
 
 export { PricingPlansBlock } from "./PricingPlansBlock";
 export type {
@@ -149,6 +170,17 @@ export type {
   SiteFooterBlockProps,
 } from "./SiteFooterBlock";
 
+export { SubscriptionBillingBlock } from "./SubscriptionBillingBlock";
+export type {
+  SubscriptionBillingState,
+  SubscriptionCancellationState,
+  SubscriptionPlan,
+  SubscriptionUsageMetric,
+  SubscriptionPlanOption,
+  SubscriptionCancellationReason,
+  SubscriptionBillingBlockProps,
+} from "./SubscriptionBillingBlock";
+
 export { TableBlock } from "./TableBlock";
 export type { TableBlockRow, TableBlockProps } from "./TableBlock";
 
@@ -165,6 +197,16 @@ export type {
   TaskListBlockProps,
 } from "./TaskListBlock";
 
+export { TransferReviewBlock } from "./TransferReviewBlock";
+export type {
+  TransferReviewState,
+  TransferReviewParty,
+  TransferReviewLine,
+  TransferReviewRate,
+  TransferReviewResult,
+  TransferReviewBlockProps,
+} from "./TransferReviewBlock";
+
 export type {
   CommerceHeadingLevel,
   CommerceImage,
@@ -173,6 +215,20 @@ export type {
   CommerceBaseProps,
   CommerceTotalsProps,
 } from "./commerce";
+
+// Shared finance vocabulary. The four finance blocks name these in their public
+// props, so they have to be nameable by consumers too; the runtime helpers in
+// ./finance stay internal, as ./commerce's do.
+export type {
+  FinanceHeadingLevel,
+  FinanceMoneyValue,
+  FinanceDateValue,
+  FinanceStatusTone,
+  FinanceStatus,
+  FinanceActionTone,
+  FinanceAction,
+  FinanceFigure,
+} from "./finance";
 
 export { ApplicationShellBlock } from "./ApplicationShellBlock";
 export type {

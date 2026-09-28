@@ -26,7 +26,7 @@ type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
   render: (args) => (
-    <Card {...args} className="w-80">
+    <Card {...args} className="w-80 max-w-full">
       <CardHeader title="Card Title" subtitle="Card subtitle goes here" />
       <CardBody>
         <p className="text-grey-600">
@@ -81,7 +81,7 @@ export const Sizes: Story = {
 
 export const WithImage: Story = {
   render: () => (
-    <Card className="w-80">
+    <Card className="w-80 max-w-full">
       <CardImage
         src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop"
         alt="Mountain landscape"
@@ -162,7 +162,7 @@ export const FooterAlignments: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       {(["left", "center", "right", "between"] as const).map((align) => (
-        <Card key={align} className="w-80">
+        <Card key={align} className="w-80 max-w-full">
           <CardBody>
             <p className="text-sm text-grey-600">Footer align: {align}</p>
           </CardBody>
@@ -182,7 +182,7 @@ export const FooterAlignments: Story = {
 
 export const Hoverable: Story = {
   render: () => (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-4">
       <Card hoverable className="w-64 cursor-pointer">
         <CardBody>
           <p className="font-medium text-grey-900">Hoverable Card</p>
@@ -231,7 +231,7 @@ export const ProductCard: Story = {
 
 export const UserProfileCard: Story = {
   render: () => (
-    <Card className="w-80">
+    <Card className="w-80 max-w-full">
       <CardHeader
         actions={
           <Button variant="grey" appearance="outlined" size="sm">

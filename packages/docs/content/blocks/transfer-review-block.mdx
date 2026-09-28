@@ -1,0 +1,284 @@
+---
+title: TransferReviewBlock
+description: Review recipient, amount, fee, rate, and arrival before explicit confirmation
+---
+
+# TransferReviewBlock
+
+Review the recipient, amount, fee, exchange rate and arrival estimate before an explicit
+confirmation.
+
+Plan idea 82, category **Finance & billing**. Status **experimental**, verification level
+**unmeasured** — see [verification](#verification) before adopting it.
+
+**The block sends no money.** `onConfirm` hands control to your application, and `result` is
+rendered only after your provider reports an outcome.
+
+## Import
+
+```tsx
+import { TransferReviewBlock } from "@raydenui/ui/blocks";
+import type { TransferReviewParty, TransferReviewRate, TransferReviewResult } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`sendAmount` and `sendCurrency` are **required with no defaults**, deliberately: an amount or
+currency the block invented would be its worst possible defect. Amounts are minor-unit
+integers.
+
+```tsx
+const recipient: TransferReviewParty = {
+  name: "Ada Lovelace",
+  reference: "•••• 8842",
+  institution: "Northbank",
+  detail: "United Kingdom",
+  initials: "AL",
+};
+
+<TransferReviewBlock
+  recipient={recipient}
+  source={{ name: "Everyday current account", reference: "•••• 4417" }}
+  sendAmount={150000}
+  sendCurrency="GBP"
+  fee={250}
+  totalDebited={150250}
+  arrival="2026-09-25T17:00:00Z"
+  timeZone="Europe/London"
+  reference="Invoice 2026-114"
+  locale="en-GB"
+  onConfirm={() => submitTransfer()}
+  onCancel={() => close()}
+  onEditAmount={() => goToAmount()}
+  onEditRecipient={() => goToRecipient()}
+/>;
+```
+
+`totalDebited` is **supplied, never derived**, because a fee may be deducted from the amount
+or added to it and the block does not know which.
+
+### Cross-currency
+
+```tsx
+const exchangeRate: TransferReviewRate = {
+  from: "GBP",
+  to: "EUR",
+  rate: 1.1642,
+  fractionDigits: 4,
+  validity: "Held for 30 minutes",
+};
+
+<TransferReviewBlock
+  recipient={recipient}
+  sendAmount={150000}
+  sendCurrency="GBP"
+  receiveAmount={174630}
+  receiveCurrency="EUR"
+  fee={250}
+  exchangeRate={exchangeRate}
+/>;
+```
+
+### Nothing is fabricated
+
+| Value                        | Meaning                                  |
+| ---------------------------- | ---------------------------------------- |
+| `fee={0}`                    | a real zero fee, printed as a zero amount  |
+| `fee={null}`                 | the provider returned no fee               |
+| `fee={undefined}`            | the row is omitted                         |
+| `exchangeRate={null}`        | no rate was returned                       |
+| `arrival="1–2 business days"` | an inherently fuzzy estimate, passed through unformatted |
+
+A real instant in `arrival` is formatted with the locale and zone; a string that is not a date
+passes through as written.
+
+### Requiring an acknowledgement
+
+```tsx
+<TransferReviewBlock
+  recipient={recipient}
+  sendAmount={150000}
+  sendCurrency="GBP"
+  requireAcknowledgement
+  acknowledgementLabel="I have checked the recipient details."
+  onAcknowledgementChange={(checked) => track("ack", checked)}
+  onConfirm={submitTransfer}
+/>
+```
+
+Confirmation is not possible until the box is ticked. Editing the recipient or amount, or receiving
+changed review details from the provider, clears that acknowledgement. Unchanged scalar values
+preserve it across parent renders. Keep custom React-node details stable when their content is unchanged.
+Edit controls are disabled after confirmation, while pending, and once a result exists; an error
+state makes editing available again.
+
+### Blocking confirmation
+
+```tsx
+<TransferReviewBlock
+  recipient={recipient}
+  sendAmount={150000}
+  sendCurrency="GBP"
+  onConfirm={submitTransfer}
+  confirmUnavailableReason="Daily transfer limit reached. Try again after midnight."
+/>
+```
+
+```tsx
+<TransferReviewBlock
+  recipient={recipient}
+  sendAmount={150000}
+  sendCurrency="GBP"
+  state="blocked"
+  blockedTitle="This transfer cannot be sent"
+  blockedDescription="The recipient account is closed."
+/>
+```
+
+### Pending, error and the outcome
+
+```tsx
+<TransferReviewBlock
+  recipient={recipient}
+  sendAmount={150000}
+  sendCurrency="GBP"
+  state="pending"
+  pendingMessage="Sending your transfer"
+/>
+```
+
+```tsx
+<TransferReviewBlock
+  recipient={recipient}
+  sendAmount={150000}
+  sendCurrency="GBP"
+  state="error"
+  errorTitle="This transfer could not be sent"
+  errorDescription="Your provider declined the payment."
+  onRetry={() => submitTransfer()}
+/>
+```
+
+```tsx
+const result: TransferReviewResult = {
+  title: "Transfer accepted",
+  description: "Northbank expects it to arrive by Thursday.",
+  reference: "TRF-20260924-00118",
+  tone: "pending",
+};
+
+<TransferReviewBlock recipient={recipient} sendAmount={150000} sendCurrency="GBP" result={result} />;
+```
+
+`tone` defaults to `"pending"`, which is the honest state for most rails: accepted, not yet
+settled. Use `"success"` only when your provider confirms settlement.
+
+## Props
+
+| Prop                       | Type                                                          | Default                | Description                                            |
+| -------------------------- | ------------------------------------------------------------- | ---------------------- | ------------------------------------------------------ |
+| `recipient`                | `TransferReviewParty`                                         | —                      | **Required.**                                           |
+| `sendAmount`               | `FinanceMoneyValue`                                           | —                      | **Required.** Minor units of `sendCurrency`.             |
+| `sendCurrency`             | `string`                                                      | —                      | **Required.** ISO 4217 code, never inferred.             |
+| `title`                    | `ReactNode`                                                   | `"Review transfer"`    | Block title.                                            |
+| `headingLevel`             | `"h1"`–`"h6"`                                                 | `"h2"`                 | Element for `title`.                                    |
+| `description`              | `ReactNode`                                                   | a nothing-is-sent-yet sentence | Supporting sentence.                            |
+| `eyebrow`                  | `ReactNode`                                                   | —                      | Small label above the title.                             |
+| `status`                   | `FinanceStatus`                                               | —                      | `{ label, tone?, description? }`.                        |
+| `recipientLabel`           | `string`                                                      | `"Recipient"`          | Label override.                                          |
+| `source`                   | `TransferReviewParty`                                         | —                      | The paying account. Display only.                        |
+| `sourceLabel`              | `string`                                                      | `"From"`               | Label override.                                          |
+| `locale`                   | `string`                                                      | `"en-GB"`              | Keeps server and client formatting identical.              |
+| `unknownLabel`             | `string`                                                      | `"Not available"`      | Words shown for a `null` amount or estimate.               |
+| `sendLabel`                | `string`                                                      | `"You send"`           | Label override.                                          |
+| `receiveAmount`            | `FinanceMoneyValue`                                           | —                      | Amount arriving, when the rail converts.                  |
+| `receiveCurrency`          | `string`                                                      | —                      | ISO 4217 code for `receiveAmount`.                        |
+| `receiveLabel`             | `string`                                                      | `"Recipient gets"`     | Label override.                                          |
+| `fee`                      | `FinanceMoneyValue`                                           | —                      | `0`, `null` and `undefined` are three different statements.  |
+| `feeCurrency`              | `string`                                                      | `sendCurrency`         | ISO 4217 code for `fee`.                                  |
+| `feeLabel`                 | `string`                                                      | `"Transfer fee"`       | Label override.                                          |
+| `exchangeRate`             | `TransferReviewRate \| null`                                   | —                      | `null` means no rate was returned.                        |
+| `exchangeRateLabel`        | `string`                                                      | `"Exchange rate"`      | Label override.                                          |
+| `totalDebited`             | `FinanceMoneyValue`                                           | —                      | Supplied, never derived.                                  |
+| `totalDebitedLabel`        | `string`                                                      | `"Total to pay"`       | Label override.                                          |
+| `arrival`                  | `FinanceDateValue`                                            | —                      | Instant, fuzzy string, or `null` for unknown.              |
+| `arrivalLabel`             | `string`                                                      | `"Estimated arrival"`  | Label override.                                          |
+| `timeZone`                 | `string`                                                      | —                      | IANA zone for `arrival`.                                  |
+| `formatArrival`            | `(value: Date) => string`                                     | —                      | Formatting escape hatch.                                  |
+| `arrivalNote`              | `ReactNode`                                                   | —                      | One line under the estimate.                              |
+| `extraLines`               | `TransferReviewLine[]`                                        | —                      | Further provider lines.                                   |
+| `reference`                | `ReactNode`                                                   | —                      | Payment reference. Display only.                           |
+| `referenceLabel`           | `string`                                                      | `"Reference"`          | Label override.                                          |
+| `disclosure`               | `ReactNode`                                                   | —                      | Provider terms, limits or regulatory text.                  |
+| `requireAcknowledgement`   | `boolean`                                                     | `false`                | Adds a checkbox that gates confirmation.                    |
+| `acknowledgementLabel`     | `ReactNode`                                                   | a recipient-check sentence | Checkbox label.                                        |
+| `onAcknowledgementChange`  | `(checked: boolean) => void`                                  | —                      | Acknowledgement handler.                                   |
+| `onConfirm`                | `() => void`                                                  | —                      | The confirmation control is omitted entirely without it.      |
+| `confirmLabel`             | `string`                                                      | `"Confirm transfer"`   | Confirmation label.                                        |
+| `confirmUnavailableReason` | `string`                                                      | —                      | Renders confirmation disabled with the reason visible.        |
+| `onCancel`                 | `() => void`                                                  | —                      | Cancel handler.                                            |
+| `cancelLabel`              | `string`                                                      | `"Cancel"`             | Cancel label.                                              |
+| `onEditAmount`             | `() => void`                                                  | —                      | Omitted entirely without the handler.                        |
+| `onEditRecipient`          | `() => void`                                                  | —                      | Omitted entirely without the handler.                        |
+| `editAmountLabel`          | `string`                                                      | `"Change amount"`      | Label override.                                            |
+| `editRecipientLabel`       | `string`                                                      | `"Change recipient"`   | Label override.                                            |
+| `state`                    | `"default" \| "loading" \| "pending" \| "error" \| "blocked"`   | `"default"`            | Lifecycle owned by your application.                         |
+| `loadingMessage`           | `string`                                                      | `"Loading transfer details"` | Announced while loading.                             |
+| `pendingMessage`           | `string`                                                      | `"Sending your transfer"` | Announced while pending.                                |
+| `errorTitle`               | `string`                                                      | `"This transfer could not be sent"` | Shown while `state="error"`.                |
+| `errorDescription`         | `ReactNode`                                                   | —                      | Shown while `state="error"`.                                |
+| `onRetry`                  | `() => void`                                                  | —                      | The retry control is omitted entirely without it.             |
+| `blockedTitle`             | `string`                                                      | —                      | Why confirmation is blocked. Supply it with `state="blocked"`.  |
+| `blockedDescription`       | `ReactNode`                                                   | —                      | Shown while `state="blocked"`.                               |
+| `result`                   | `TransferReviewResult`                                        | —                      | The outcome, supplied only after your provider reports one.     |
+| `className`                | `string`                                                      | —                      | Lands on the container root, outside the card padding.          |
+
+### TransferReviewParty
+
+`{ name, reference?, institution?, detail?, avatar?, initials?, icon? }`. `reference` must
+already be masked by the caller.
+
+### TransferReviewLine
+
+`{ id, label, amount?, text?, currency?, hint? }`. Use `text` instead of `amount` for a
+non-monetary value, and `currency` when the line is not in the send currency.
+
+### TransferReviewRate
+
+`{ from, to, rate, fractionDigits?, validity? }`. `rate` is units of `to` per one unit of
+`from`; `fractionDigits` defaults to 4.
+
+### TransferReviewResult
+
+`{ title, description?, reference?, tone? }`, where `tone` is `"success" | "pending"` and
+defaults to `"pending"`.
+
+## States
+
+- **default** — the reviewable transfer.
+- **loading** — the transfer details are still being read.
+- **pending** — your provider call is in flight.
+- **error** — with an optional retry control.
+- **blocked** — confirmation is not currently possible, with a reason.
+- **acknowledgement required** — confirmation gated on a ticked checkbox.
+- **consumer-supplied result** — the outcome panel, only from `result`.
+
+## Verification
+
+**No verification run exists for this block yet.** The batch that built it had its run
+interrupted and is repeating it, and its batch report (`docs/blocks-batch-d.md`) did not exist
+when this page was written. This page was reconciled against the block's public TypeScript
+types and its 14 story exports, and the block resolves from a built package with its types —
+nothing more.
+
+Not verified: layout at any width, contrast in either mode, keyboard flows, theme overrides, a
+screen-reader pass, any non-Chromium engine, operating-system text-size settings, or physical
+devices.
+
+## Known limitations
+
+- The block sends nothing, computes no fee and fetches no rate.
+- `totalDebited` is supplied, never derived.
+- `recipient.reference` and `source.reference` must already be masked by the caller.
+- Your application must validate limits, sanctions screening and funds on the server before
+  accepting a transfer.

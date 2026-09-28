@@ -4,21 +4,196 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#101011" />
-    <title>Rayden UI — Make the interface worth opening.</title>
+    <title>Rayden UI — React Component Library for Tailwind CSS</title>
     <meta
       name="description"
-      content="Thoughtfully crafted React components, flexible design tokens, and project starters. Build your next interface with Rayden UI."
+      content="Build React apps with Rayden UI: free, open-source components, TypeScript APIs, Tailwind CSS design tokens, Next.js and Vite starters, and an AI MCP companion."
     />
+    <link rel="canonical" href="https://www.rayden-ui.dev/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Rayden UI" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rayden UI" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content="https://www.rayden-ui.dev/" />
+    <meta property="og:title" content="Rayden UI — React Component Library for Tailwind CSS" />
+    <meta property="og:description" content="Build React apps with Rayden UI: free, open-source components, TypeScript APIs, Tailwind CSS design tokens, Next.js and Vite starters, and an AI MCP companion." />
+    <meta property="og:image" content="https://www.rayden-ui.dev/assets/copper-glass.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content="Rayden UI copper and smoked-glass artwork" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Rayden UI — React Component Library for Tailwind CSS" />
+    <meta name="twitter:description" content="Build React apps with Rayden UI: free, open-source components, TypeScript APIs, Tailwind CSS design tokens, Next.js and Vite starters, and an AI MCP companion." />
+    <meta name="twitter:image" content="https://www.rayden-ui.dev/assets/copper-glass.jpg" />
+    <meta name="twitter:image:alt" content="Rayden UI copper and smoked-glass artwork" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Rayden UI documentation for AI assistants" />
     <link rel="icon" href="/assets/rayden-mark.svg" type="image/svg+xml" />
     <link
       rel="preload"
-      href="/assets/manrope-600.ttf"
+      href="/assets/manrope-latin-normal.woff2"
       as="font"
-      type="font/ttf"
+      type="font/woff2"
       crossorigin
     />
     <link rel="stylesheet" href="/fonts.css" />
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/guide.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.rayden-ui.dev/#organization",
+      "name": "Rayden UI",
+      "url": "https://www.rayden-ui.dev/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.rayden-ui.dev/assets/rayden-logo.svg",
+        "width": 241,
+        "height": 99
+      },
+      "sameAs": [
+        "https://github.com/playbookTV/Rayden",
+        "https://www.npmjs.com/package/@raydenui/ui"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.rayden-ui.dev/#website",
+      "url": "https://www.rayden-ui.dev/",
+      "name": "Rayden UI",
+      "alternateName": "Rayden",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://www.rayden-ui.dev/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.rayden-ui.dev/#webpage",
+      "url": "https://www.rayden-ui.dev/",
+      "name": "Rayden UI — React Component Library for Tailwind CSS",
+      "description": "Build React apps with Rayden UI: free, open-source components, TypeScript APIs, Tailwind CSS design tokens, Next.js and Vite starters, and an AI MCP companion.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://www.rayden-ui.dev/#website"
+      },
+      "about": {
+        "@id": "https://www.rayden-ui.dev/#library"
+      },
+      "mainEntity": {
+        "@id": "https://www.rayden-ui.dev/#library"
+      },
+      "hasPart": {
+        "@id": "https://www.rayden-ui.dev/#faq"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.rayden-ui.dev/assets/copper-glass.jpg",
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://www.rayden-ui.dev/#library",
+      "name": "Rayden UI",
+      "alternateName": "@raydenui/ui",
+      "url": "https://www.rayden-ui.dev/",
+      "description": "Free, open-source React components, page blocks, icons, and design tokens built with TypeScript and Tailwind CSS v4. Includes Next.js and Vite starters and an AI MCP companion.",
+      "codeRepository": "https://github.com/playbookTV/Rayden",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript",
+        "CSS"
+      ],
+      "runtimePlatform": "React 18 or later",
+      "license": "https://github.com/playbookTV/Rayden/blob/main/LICENSE",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@id": "https://www.rayden-ui.dev/#organization"
+      },
+      "sameAs": [
+        "https://www.npmjs.com/package/@raydenui/ui"
+      ],
+      "subjectOf": {
+        "@type": "TechArticle",
+        "name": "Rayden UI documentation",
+        "url": "https://rayden-docs.vercel.app/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.rayden-ui.dev/#faq",
+      "url": "https://www.rayden-ui.dev/#faq",
+      "isPartOf": {
+        "@id": "https://www.rayden-ui.dev/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Rayden UI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rayden UI is a free, open-source React component library and design system. It includes TypeScript components, page blocks, icons, shared design tokens, light and dark themes, and project starters for Next.js and Vite."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Rayden UI free for commercial projects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Rayden UI is released under the MIT license and can be used in personal and commercial projects. Keep the copyright and license notice when distributing the software."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I install Rayden UI in a React app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Run npm install @raydenui/ui in a React 18+ project, then import @raydenui/ui/styles.css once in your app entry point or root layout. Import components such as Button and Input from @raydenui/ui. Follow the installation guide for a complete example."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Rayden UI work with Next.js and Vite?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Use Rayden UI in an existing Next.js or Vite React app, or run npx create-rayden-app@latest my-app to choose a framework and starter. In Next.js App Router, put interactive components and providers in a client component and import global styles in the root layout."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to install Tailwind CSS to use Rayden UI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Rayden UI is built with Tailwind CSS v4, but the package includes compiled component styles. Import @raydenui/ui/styles.css to use them. Configure Tailwind CSS v4 in your own app when you want to generate utility classes for layouts and customization."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I customize the components and themes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Rayden exposes shared design tokens, CSS variables, TypeScript props, and component variants. Customize colors, spacing, typography, and light or dark themes to match your product. Page blocks are available through the separate @raydenui/ui/blocks import."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the Rayden AI companion do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The @raydenui/ai package provides an MCP server with Rayden component information, design tokens, and composition recipes for compatible coding assistants. The documentation also publishes a component catalog and agent guidance. Check the integration guide for current setup instructions and features marked as local development pilots."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
     <script src="/app.js" defer></script>
   </head>
   <body>
@@ -96,16 +271,9 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="nav-shell">
       <nav class="nav container" aria-label="Main navigation">
-        <a class="brand" href="#" aria-label="Rayden UI home"
-          ><img
-            src="/assets/rayden-mark.svg"
-            alt=""
-            width="34"
-            height="34"
-          />rayden<span>ui</span></a
-        >
+        <a class="brand" href="#" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99" /></a>
         <div class="nav-links">
-          <a href="#components">Components</a><a href="#templates">Starters</a
+          <a href="/explore?type=components">Components</a><a href="/explore?type=blocks">Blocks</a><a href="#templates">Starters</a
           ><a href="#ai">For AI</a
           ><a href="https://rayden-docs.vercel.app/"
             >Documentation<svg class="icon small"><use href="#i-up" /></svg
@@ -138,7 +306,7 @@
         </div>
       </nav>
       <div id="mobile-nav" hidden>
-        <a href="#components">Components</a><a href="#templates">Starters</a
+        <a href="/explore?type=components">Components</a><a href="/explore?type=blocks">Blocks</a><a href="#templates">Starters</a
         ><a href="#ai">For AI</a
         ><a href="https://rayden-docs.vercel.app/">Documentation</a>
       </div>
@@ -146,16 +314,14 @@
     <main id="main">
       <section class="hero container">
         <a class="release" href="https://github.com/playbookTV/Rayden/releases"
-          ><span>OPEN SOURCE</span>A little less setup. A lot more
-          possibility.<svg class="icon small"><use href="#i-arrow" /></svg
+          ><span>OPEN SOURCE</span>React, TypeScript &amp; Tailwind CSS<svg class="icon small"><use href="#i-arrow" /></svg
         ></a>
-        <h1>Make the interface<br /><span>worth opening.</span></h1>
+        <h1>React components.<br /><span>Made to feel right.</span></h1>
         <p class="hero-description">
-          Considered components. Expressive details. All yours.<br />A React
-          library for the things you can’t wait to build.
+          Rayden UI is a free, open-source React component library.<br />TypeScript, Tailwind CSS, and starters for Next.js and Vite.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#components"
+          <a class="button primary" href="/explore?type=components"
             >Explore the components<svg class="icon">
               <use href="#i-arrow" /></svg></a
           ><a
@@ -181,7 +347,7 @@
           <div class="showcase-toolbar">
             <div class="showcase-title">
               <span class="tiny-cross">+</span>
-              <h2 id="playground-title">A few of the possibilities</h2>
+              <h2 id="playground-title">Explore React UI components</h2>
               <span class="live-tag">Interactive previews</span>
             </div>
             <div class="preview-tools">
@@ -196,7 +362,7 @@
               </button>
             </div>
           </div>
-          <div class="showcase-grid">
+          <div class="showcase-grid" data-nosnippet>
             <div class="showcase-column">
               <article class="bezel analytics-demo" data-category="data">
                 <div class="demo-card analytics-card">
@@ -558,7 +724,7 @@
               </button>
             </div>
             <a class="text-link" href="https://rayden-docs.vercel.app/"
-              >Find your building blocks<svg class="icon small">
+              >Browse the React component library<svg class="icon small">
                 <use href="#i-arrow" /></svg
             ></a>
           </div>
@@ -581,12 +747,11 @@
       <section class="details-section container" id="craft">
         <div class="section-intro">
           <div>
-            <p class="eyebrow accent">A FOUNDATION WITH CHARACTER</p>
+            <p class="eyebrow accent">A CUSTOMIZABLE REACT DESIGN SYSTEM</p>
             <h2>Looks considered.<br />Feels like yours.</h2>
           </div>
           <p>
-            The everyday essentials, with the details already thought through.
-            Start with a coherent system. Take it somewhere new.
+            Build forms, dashboards, and product interfaces with typed components, reusable page blocks, and shared design tokens. Use the defaults or make them your own.
           </p>
         </div>
         <div class="detail-grid">
@@ -598,15 +763,14 @@
               </div>
               <span class="token-caption">One token. A whole system.</span>
             </div>
-            <h3>A system, not a starting-over.</h3>
+            <h3>Design tokens that work together.</h3>
             <p>
-              Shared design tokens bring your colors, spacing, and type together
-              across every component.
+              Customize colors, typography, spacing, and light or dark themes through shared CSS variables and Tailwind CSS v4 design tokens.
             </p>
             <a
               class="text-link"
               href="https://rayden-docs.vercel.app/design-tokens"
-              >Explore the tokens<svg class="icon small">
+              >Explore Rayden design tokens<svg class="icon small">
                 <use href="#i-up" /></svg
             ></a>
           </article>
@@ -620,19 +784,18 @@
   <span class="syntax-white">Make it happen</span>
 &lt;/<span class="syntax-orange">Button</span>&gt;</pre>
             </div>
-            <h3>Familiar tools. A faster start.</h3>
+            <h3>Typed React components. Less setup.</h3>
             <p>
-              Typed React APIs and Tailwind styling keep you in your flow, from
-              first import to final detail.
+              Import React components with TypeScript definitions and compiled CSS. Add Rayden to an existing React 18+ app or start fresh with Next.js or Vite.
             </p>
             <a
               class="text-link"
               href="https://rayden-docs.vercel.app/getting-started"
-              >Meet the library<svg class="icon small"><use href="#i-up" /></svg
+              >Install Rayden UI<svg class="icon small"><use href="#i-up" /></svg
             ></a>
           </article>
           <article>
-            <div class="detail-visual activity-visual">
+            <div class="detail-visual activity-visual" data-nosnippet>
               <div class="activity-event">
                 <span class="avatar peach">JL</span>
                 <div>
@@ -654,10 +817,9 @@
                 ><span>Mark all as read</span>
               </button>
             </div>
-            <h3>Made for real interfaces.</h3>
+            <h3>From form inputs to data tables.</h3>
             <p>
-              Compose inputs, feedback, and data display into experiences that
-              feel connected.
+              Combine buttons, inputs, date pickers, tables, and activity feeds. Import page blocks separately from @raydenui/ui/blocks for larger layouts.
             </p>
             <a
               class="text-link"
@@ -672,12 +834,11 @@
         <div class="container">
           <div class="section-intro">
             <div>
-              <p class="eyebrow accent">FROM FIRST IDEA TO FIRST COMMIT</p>
+              <p class="eyebrow accent">REACT STARTERS FOR NEXT.JS &amp; VITE</p>
               <h2>Skip the blank canvas.</h2>
             </div>
             <p>
-              Give your next project a head start.<br />Choose a starter. Keep
-              building.
+              Create a React app with TypeScript and Rayden preconfigured. Choose a dashboard, landing page, e-commerce, or blog starter for Next.js or Vite.
             </p>
           </div>
           <div class="starter-layout">
@@ -744,7 +905,7 @@
                 <span>Layout concept</span
                 ><a
                   href="https://rayden-docs.vercel.app/getting-started/create-rayden-app"
-                  >Meet the starters<svg class="icon small">
+                  >Explore React starter templates<svg class="icon small">
                     <use href="#i-arrow" /></svg
                 ></a>
               </div>
@@ -770,17 +931,15 @@
       </section>
       <section class="ai-section container" id="ai">
         <div class="ai-copy">
-          <p class="eyebrow accent">MEET YOUR NEW COLLABORATOR</p>
+          <p class="eyebrow accent">RAYDEN MCP FOR AI CODING ASSISTANTS</p>
           <h2>Built for you.<br />Ready for your AI.</h2>
           <p>
-            Give your coding assistant the same context you have. Rayden’s AI
-            companion brings component manifests, design tokens, and composition
-            recipes into the conversation.
+            The @raydenui/ai companion uses the Model Context Protocol (MCP) to give coding assistants Rayden component APIs, design tokens, and layout recipes. Use the integration guide to connect a compatible client.
           </p>
           <a
             class="button secondary"
             href="https://rayden-docs.vercel.app/ai-integration"
-            >Explore the AI companion<svg class="icon">
+            >Set up the Rayden MCP server<svg class="icon">
               <use href="#i-arrow" /></svg
           ></a>
         </div>
@@ -821,10 +980,10 @@
           </div>
         </div>
       </section>
-      <section class="faq-section container">
+      <section class="faq-section container" id="faq" aria-labelledby="faq-title">
         <div>
           <p class="eyebrow">BEFORE YOU DIVE IN</p>
-          <h2>A few good<br />questions.</h2>
+          <h2 id="faq-title">Rayden UI.<br /> Your questions, answered.</h2>
           <a
             class="text-link"
             href="https://github.com/playbookTV/Rayden/issues"
@@ -832,53 +991,24 @@
           ></a>
         </div>
         <div class="faq-list">
-          <details>
-            <summary>
-              Can I use Rayden in a commercial project?<svg class="icon">
-                <use href="#i-plus" />
-              </svg>
-            </summary>
-            <p>
-              Yes. Rayden is open source and MIT licensed. Use it in personal or
-              commercial projects, following the license terms.
-            </p>
-          </details>
-          <details>
-            <summary>
-              What do I need to get started?<svg class="icon">
-                <use href="#i-plus" />
-              </svg>
-            </summary>
-            <p>
-              A React project with Tailwind CSS v4. Install @raydenui/ui and
-              follow the setup guide, or use create-rayden-app to start a new
-              Vite or Next.js project.
-            </p>
-          </details>
-          <details>
-            <summary>
-              Can I make it match my brand?<svg class="icon">
-                <use href="#i-plus" />
-              </svg>
-            </summary>
-            <p>
-              Yes. Customize shared design tokens and style components with
-              Tailwind. Colors, typography, spacing, and component variants give
-              you room to build your own visual language.
-            </p>
-          </details>
-          <details>
-            <summary>
-              How does the AI companion work?<svg class="icon">
-                <use href="#i-plus" />
-              </svg>
-            </summary>
-            <p>
-              @raydenui/ai provides an MCP server with structured information
-              about Rayden components, tokens, and recipes. Connect it to a
-              compatible coding assistant using the AI integration guide.
-            </p>
-          </details>
+<details id="faq-1" open><summary>What is Rayden UI?<svg class="icon"><use href="#i-plus" /></svg></summary><p>Rayden UI is a free, open-source React component library and design system. It includes TypeScript components, page blocks, icons, shared design tokens, light and dark themes, and project starters for Next.js and Vite.</p></details>
+<details id="faq-2"><summary>Is Rayden UI free for commercial projects?<svg class="icon"><use href="#i-plus" /></svg></summary><p>Yes. Rayden UI is released under the MIT license and can be used in personal and commercial projects. Keep the copyright and license notice when distributing the software.</p><a class="faq-resource" href="https://github.com/playbookTV/Rayden/blob/main/LICENSE">Read the MIT license ↗</a></details>
+<details id="faq-3"><summary>How do I install Rayden UI in a React app?<svg class="icon"><use href="#i-plus" /></svg></summary><p>Run npm install @raydenui/ui in a React 18+ project, then import @raydenui/ui/styles.css once in your app entry point or root layout. Import components such as Button and Input from @raydenui/ui. Follow the installation guide for a complete example.</p><a class="faq-resource" href="https://rayden-docs.vercel.app/getting-started">Read the installation guide ↗</a></details>
+<details id="faq-4"><summary>Does Rayden UI work with Next.js and Vite?<svg class="icon"><use href="#i-plus" /></svg></summary><p>Yes. Use Rayden UI in an existing Next.js or Vite React app, or run npx create-rayden-app@latest my-app to choose a framework and starter. In Next.js App Router, put interactive components and providers in a client component and import global styles in the root layout.</p><a class="faq-resource" href="https://rayden-docs.vercel.app/getting-started/create-rayden-app">Choose a React starter ↗</a></details>
+<details id="faq-5"><summary>Do I need to install Tailwind CSS to use Rayden UI?<svg class="icon"><use href="#i-plus" /></svg></summary><p>No. Rayden UI is built with Tailwind CSS v4, but the package includes compiled component styles. Import @raydenui/ui/styles.css to use them. Configure Tailwind CSS v4 in your own app when you want to generate utility classes for layouts and customization.</p><a class="faq-resource" href="https://rayden-docs.vercel.app/getting-started/tailwind">Configure Tailwind CSS ↗</a></details>
+<details id="faq-6"><summary>Can I customize the components and themes?<svg class="icon"><use href="#i-plus" /></svg></summary><p>Yes. Rayden exposes shared design tokens, CSS variables, TypeScript props, and component variants. Customize colors, spacing, typography, and light or dark themes to match your product. Page blocks are available through the separate @raydenui/ui/blocks import.</p><a class="faq-resource" href="https://rayden-docs.vercel.app/design-tokens">Explore design tokens ↗</a></details>
+<details id="faq-7"><summary>What does the Rayden AI companion do?<svg class="icon"><use href="#i-plus" /></svg></summary><p>The @raydenui/ai package provides an MCP server with Rayden component information, design tokens, and composition recipes for compatible coding assistants. The documentation also publishes a component catalog and agent guidance. Check the integration guide for current setup instructions and features marked as local development pilots.</p><a class="faq-resource" href="https://rayden-docs.vercel.app/ai-integration">Read the AI integration guide ↗</a></details>
+</div>
+</section>
+      <section id="guides" class="guide-list container" aria-label="Practical Rayden guides">
+        <p class="guide-kicker">BUILD WITH RAYDEN</p>
+        <div class="guide-announcement">
+          <h2>Your first Next.js form, from start to finish.</h2>
+          <a class="text-link" href="/guides/nextjs">Read the Next.js guide <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="guide-announcement">
+          <h2>Give your coding assistant the Rayden playbook.</h2>
+          <a class="text-link" href="/guides/rayden-ai">Read the Rayden AI guide <span aria-hidden="true">↗</span></a>
         </div>
       </section>
       <section class="closing container">
@@ -900,21 +1030,13 @@
     </main>
     <footer class="container">
       <div class="footer-top">
-        <a class="brand" href="#"
-          ><img
-            src="/assets/rayden-mark.svg"
-            alt=""
-            width="30"
-            height="30"
-          />rayden<span>ui</span></a
-        >
-        <p>Thoughtful tools for what comes next.</p>
+        <a class="brand" href="#" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99" /></a>
+        <p>Open-source React UI, built with care.</p>
         <div>
-          <a href="https://rayden-docs.vercel.app/">Docs</a
+          <a href="#guides">Guides</a><a href="https://rayden-docs.vercel.app/">Docs</a
           ><a href="https://github.com/playbookTV/Rayden">GitHub</a
           ><a href="https://github.com/playbookTV/Rayden/blob/main/LICENSE"
-            >License</a
-          >
+            >License</a><a href="https://www.npmjs.com/package/@raydenui/ui">npm</a>
         </div>
       </div>
       <div class="footer-bottom">

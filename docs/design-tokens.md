@@ -131,6 +131,156 @@ Neutral tones for text, borders, and backgrounds.
 | `info-400` | `#0BA5EC` |
 | `info-500` | `#0086C9` |
 
+There is deliberately **no `info` ground and no inverting `info` text role**. Every other
+feedback family has a `50`/`700`-style pair; `info` has these two values only. Components that
+need a full tone set therefore offer `neutral`, `success`, `warning` and `danger` but not
+`info` — `PageHeaderBlock`'s status tones are the visible example.
+
+---
+
+## Semantic roles
+
+The palettes above are raw ramps. The **semantic roles** below are the supported
+customisation surface: they are what components actually paint with, and what follows a
+consumer override into light mode, dark mode and scoped islands.
+
+### Surfaces and their paired foregrounds
+
+`--color-surface` and the `--color-on-surface*` family are **one unit**. Override them
+together, along with `--color-surface-muted` for the page ground behind the panels.
+
+| Token | Light | Dark | Role |
+|-------|-------|------|------|
+| `--color-surface` | `#FFFFFF` | `#101928` | Panel and card ground. |
+| `--color-surface-muted` | `#FFF7F4` | `#1D2739` | Page ground behind surface panels. |
+| `--color-surface-border` | `#F0F2F5` | `#344054` | Ordinary edge paired with the surface. |
+| `--color-surface-border-strong` | `#D0D5DD` | `#667185` | Emphasised edge, e.g. a totals rule. |
+| `--color-on-surface` | `grey-900` | `grey-900` (inverted) | Strongest foreground: headings. |
+| `--color-on-surface-body` | `grey-700` | `grey-700` (inverted) | Body text. |
+| `--color-on-surface-secondary` | `grey-600` | `grey-600` (inverted) | Supporting text. |
+| `--color-on-surface-muted` | `grey-500` | `grey-500` (inverted) | Metadata and hints. |
+| `--color-on-surface-subtle` | `grey-400` | `grey-400` (inverted) | Placeholders and disabled text. |
+
+Each `--color-on-surface*` default **references** the grey-ramp value the components already
+used rather than copying it, so an existing grey-ramp override keeps working. The literal
+fallback is that same value.
+
+```css
+/* Tailwind utilities: bg-surface, bg-surface-muted, border-surface-border,
+   border-surface-border-strong, text-on-surface, text-on-surface-body,
+   text-on-surface-secondary, text-on-surface-muted, text-on-surface-subtle */
+```
+
+### Migration warning: a surface-only override is now unreadable
+
+Overriding `--color-surface` on its own **used to be silently ignored** — components painted
+`bg-white dark:bg-grey-50`, so the variable never reached them. It now reaches components. A
+half override — a new surface with the inherited grey-ramp foregrounds — therefore produces
+unreadable text rather than doing nothing. A mid-tone brand surface with the default
+foregrounds measured **1.15:1**.
+
+```css
+/* Broken: was a no-op before, is now unreadable. */
+:root {
+  --color-surface: #3b2f2a;
+}
+
+/* Correct: override the paired foreground roles and the page ground too. */
+:root {
+  --color-surface: #3b2f2a;
+  --color-surface-muted: #2c231f;
+  --color-surface-border: #5a4a43;
+  --color-surface-border-strong: #7b675e;
+  --color-on-surface: #fdf8f6;
+  --color-on-surface-body: #f0e6e1;
+  --color-on-surface-secondary: #ddcdc5;
+  --color-on-surface-muted: #c4b0a6;
+  --color-on-surface-subtle: #a89388;
+}
+```
+
+Check the result: WCAG AA wants 4.5:1 for normal text and 3:1 for large text and control
+boundaries. Automated scans catch text contrast but not 1.4.11 control boundaries, so measure
+those yourself.
+
+### Control boundaries
+
+`--color-control-border` is the resting edge of an interactive control — input, select,
+checkbox, radio, chip, counter, secondary button. It is a separate, separately revertible
+token rather than a reuse of `--color-surface-border-strong`, because WCAG 1.4.11 asks 3:1
+against *both* adjacent grounds and axe-core does not test it.
+
+| Token | Light | Dark | Role |
+|-------|-------|------|------|
+| `--color-control-border` | `#667185` | `#667185` | Resting edge of an interactive control. |
+| `--color-control-border-disabled` | `#D0D5DD` | `#667185` | Disabled or read-only edge, exempt from 1.4.11. |
+
+Light `#667185` measures **4.92:1** on `#FFFFFF` and **4.65:1** on `--color-surface-muted`.
+The previous value `#D0D5DD` measured 1.47:1 and 1.39:1. To revert, set
+`--color-control-border` back to `#D0D5DD` in `:root` **and** in `.rayden-light`; the dark
+scopes were already compliant and are unchanged by that revert.
+
+### Action and feedback roles
+
+Action roles keep normal-sized labels readable in either theme. `--color-action-*` is a
+**fill** role; `--color-action-*-text` is the readable text role. Using a fill role for text
+is the most common contrast mistake here — `--color-action-primary` measures 3.69:1 on white,
+so orange link and label text must use `--color-action-primary-text`.
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `--color-action-primary` | `#CC400C` | unchanged |
+| `--color-action-primary-hover` | `#AD3307` | unchanged |
+| `--color-action-primary-text` | `#AD3307` | `#FCB59A` |
+| `--color-action-grey` / `-hover` | `#475367` / `#344054` | unchanged |
+| `--color-action-danger` / `-hover` | `#BA110B` / `#9E0A05` | unchanged |
+| `--color-action-danger-text` | `#BA110B` | `#EB9B98` |
+| `--color-action-success` / `-hover` | `#036B26` / `#015B20` | unchanged |
+| `--color-action-warning` / `-hover` | `#865503` / `#664101` | unchanged |
+| `--color-action-info` / `-hover` | `#034592` / `#04326B` | unchanged |
+| `--color-feedback-success` | `#036B26` | `#91D6A8` |
+| `--color-feedback-error` | `#BA110B` | `#EB9B98` |
+
+### Modes and scoped islands
+
+| Selector | Effect |
+|----------|--------|
+| `.dark` on `<html>` or the root | Puts the whole document in dark mode. |
+| `.rayden-dark` on a subtree | An explicit **dark island** inside a light document. |
+| `.rayden-light` on a subtree | An explicit **light island** inside a dark document. |
+
+`.dark` and `.rayden-dark` share one declaration block, so they cannot drift apart, and both
+are matched by Tailwind's `dark:` variant. A component that paints `bg-surface` with
+`text-on-surface` inherits the whole pair from either scope, so hand-inlining a variable block
+on a subtree is no longer necessary.
+
+Nesting resolves outermost-light-wins: the `dark:` variant applies inside `.dark` or
+`.rayden-dark`, and never inside an explicit `.rayden-light`. A `.rayden-dark` nested inside a
+`.rayden-light` keeps its own custom-property values but does not re-enable `dark:` utilities,
+so prefer one level of island.
+
+```tsx
+<div className="rayden-dark bg-surface text-on-surface p-6">
+  A dark island inside a light page. Blocks inside it need no extra configuration.
+</div>
+```
+
+### What is deliberately not themeable
+
+Authentic brand artwork is exempt. Social-provider marks on `LoginBlock`, and the `artwork`
+slot on `SiteFooterBlock`'s social links, are supplied by you and are not recoloured.
+`EmptyStateBlock`'s `illustrationPalette` is a customisation surface rather than a theme role:
+its values are literal colours and do not follow light or dark mode, so supply
+mode-appropriate colours yourself or omit it.
+
+### Known gaps
+
+- `Select`, `Alert`, `Chip`, `Divider`, `Modal`, `Input` and `SidebarMenu`'s `light` theme
+  still hard-code `bg-white dark:bg-grey-50`, so they do **not** follow a consumer
+  `--color-surface` override. Several blocks render local equivalents for this reason.
+- There is no `--color-overlay` default in the theme block. `CommandPaletteBlock` reads it, so
+  you can set it to change that backdrop, but it is not a documented library-wide role.
+
 ---
 
 ## Shadows

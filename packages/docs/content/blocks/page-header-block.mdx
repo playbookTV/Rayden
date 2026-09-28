@@ -1,0 +1,182 @@
+---
+title: PageHeaderBlock
+description: Establish page context with breadcrumbs, title, status, and prioritised actions
+---
+
+# PageHeaderBlock
+
+Establish page context with breadcrumbs, title, status and a prioritised action group.
+
+Plan idea 03, category **Navigation & shells**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { PageHeaderBlock } from "@raydenui/ui/blocks";
+import type { PageHeaderAction, PageHeaderBreadcrumb } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`title` is required; `headingLevel` defaults to `"h1"` because a page header usually owns
+the page's only heading. Drop it to `"h2"` when the shell already provides one.
+
+```tsx
+<PageHeaderBlock
+  eyebrow="Consignment"
+  title="Northwind Logistics"
+  description="Twelve active shipments across four lanes."
+  breadcrumbs={[
+    { id: "home", label: "Home", href: "/" },
+    { id: "customers", label: "Customers", href: "/customers" },
+    { id: "current", label: "Northwind Logistics" },
+  ]}
+  status={{ label: "On hold", tone: "warning", description: "Awaiting a credit check." }}
+  meta={[
+    { id: "owner", label: "Owner", value: "Alex Morgan" },
+    { id: "updated", label: "Updated", value: "2 hours ago" },
+  ]}
+  actions={[
+    { id: "new", label: "New shipment", onClick: () => openCreate(), priority: "primary" },
+    { id: "export", label: "Export", href: "/customers/northwind/export" },
+    { id: "delete", label: "Delete", unavailableReason: "Only owners can delete a customer." },
+  ]}
+/>
+```
+
+The last breadcrumb is the current page: it is rendered as plain text with
+`aria-current="page"`, so it needs neither `href` nor `onClick`.
+
+### Variant
+
+`variant="surface"` (the default) includes a background and horizontal padding. Use
+`variant="plain"` inside an existing page gutter rather than relying on negative margins.
+
+```tsx
+<PageHeaderBlock title="Overview" variant="plain" />
+```
+
+### Action priority and overflow
+
+Primary actions are never moved into the overflow disclosure. `maxInlineActions` limits
+how many of the remaining secondary actions stay inline.
+
+```tsx
+<PageHeaderBlock
+  title="Shipments"
+  actions={actions}
+  actionsLabel="Page actions"
+  maxInlineActions={2}
+  overflowLabel="More actions"
+/>
+```
+
+### Metadata on small containers
+
+Metadata collapses behind a disclosure below 640px of container width. Set
+`collapseMetaOnSmallScreens={false}` where the metadata is essential.
+
+```tsx
+<PageHeaderBlock title="Shipments" meta={meta} collapseMetaOnSmallScreens={false} />
+```
+
+### Long breadcrumb trails
+
+The first and the last two crumbs always stay visible; the middle collapses behind a
+reversible disclosure once the trail is longer than `maxVisibleBreadcrumbs`.
+
+```tsx
+<PageHeaderBlock
+  title="Line item 4"
+  breadcrumbs={deepTrail}
+  maxVisibleBreadcrumbs={4}
+  breadcrumbExpandLabel={(hidden) => `Show ${hidden} hidden levels`}
+  breadcrumbCollapseLabel={(hidden) => `Hide ${hidden} levels`}
+/>
+```
+
+### Loading and error
+
+```tsx
+<PageHeaderBlock title="Northwind Logistics" state="loading" loadingMessage="Loading the page" />
+```
+
+```tsx
+<PageHeaderBlock
+  title="Northwind Logistics"
+  state="error"
+  errorTitle="This page could not load"
+  errorDescription="The customer record is temporarily unavailable."
+  onRetry={() => refetch()}
+/>
+```
+
+## Props
+
+| Prop                         | Type                                  | Default        | Description                                                     |
+| ---------------------------- | ------------------------------------- | -------------- | --------------------------------------------------------------- |
+| `title`                      | `ReactNode`                           | —              | **Required.**                                                    |
+| `headingLevel`               | `"h1"`–`"h6"`                         | `"h1"`         | Drop to `"h2"` when the shell owns the page heading.              |
+| `eyebrow`                    | `ReactNode`                           | —              | Label above the title. Not a heading.                            |
+| `description`                | `ReactNode`                           | —              | Supporting explanation.                                          |
+| `breadcrumbs`                | `PageHeaderBreadcrumb[]`              | —              | The last crumb is the current page.                              |
+| `breadcrumbLabel`            | `string`                              | `"Breadcrumb"` | Accessible name for the breadcrumb landmark.                      |
+| `maxVisibleBreadcrumbs`      | `number`                              | `4`            | Trail length before the middle collapses.                         |
+| `breadcrumbExpandLabel`      | `(hiddenCount: number) => string`     | —              | Spoken label for the expand toggle.                               |
+| `breadcrumbCollapseLabel`    | `(hiddenCount: number) => string`     | —              | Spoken label once expanded.                                       |
+| `status`                     | `PageHeaderStatus`                    | —              | `{ label, tone?, description? }`.                                 |
+| `meta`                       | `PageHeaderMetaItem[]`                | —              | `{ id, label, value, icon? }`.                                    |
+| `metaLabel`                  | `string`                              | `"Page details"` | Accessible name for the meta list.                              |
+| `collapseMetaOnSmallScreens` | `boolean`                             | `true`         | Reveal metadata on demand below 640px of container width.          |
+| `variant`                    | `"surface" \| "plain"`                 | `"surface"`    | `plain` fits an existing page gutter.                             |
+| `backAction`                 | `PageHeaderBackAction`                | —              | `{ label, href?, onClick? }`.                                     |
+| `actions`                    | `PageHeaderAction[]`                  | —              | Prioritised action group.                                         |
+| `actionsLabel`               | `string`                              | `"Page actions"` | Accessible name for the action group.                           |
+| `maxInlineActions`           | `number`                              | `3`            | Primary actions are never moved.                                  |
+| `overflowLabel`              | `string`                              | `"More actions"` | Overflow disclosure label.                                      |
+| `state`                      | `"default" \| "loading" \| "error"`    | `"default"`    | Lifecycle owned by your application.                               |
+| `errorTitle`                 | `string`                              | —              | Shown while `state="error"`.                                       |
+| `errorDescription`           | `string`                              | —              | Shown while `state="error"`.                                       |
+| `onRetry`                    | `() => void`                          | —              | The retry control is omitted without it.                            |
+| `loadingMessage`             | `string`                              | —              | Announced while loading.                                           |
+| `children`                   | `ReactNode`                           | —              | Content under the header row, e.g. a tab bar or a filter row.        |
+| `className`                  | `string`                              | —              | Lands on the container root, outside the padded surface.              |
+
+### PageHeaderAction
+
+A union of three arms, all sharing `{ id, label, icon?, priority?, description? }` where
+`priority` is `"primary" | "secondary" | "overflow"` (default `"secondary"`):
+
+| Arm         | Extra members                   | Renders as                                |
+| ----------- | ------------------------------- | ----------------------------------------- |
+| Destination | `href`, `external?`, `onClick?` | a native anchor                           |
+| Action      | `onClick`                       | a native button                           |
+| Unavailable | `unavailableReason`             | a disabled control with a visible reason    |
+
+`PageHeaderBreadcrumb` has the same shape without `priority`, plus a third arm with
+neither `href` nor `onClick` for the current page.
+
+## States
+
+- **default** — the page header row.
+- **loading** / **error** — with an optional retry control.
+- **permission-blocked action** — a disabled control with a visible reason.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 261 browser tests across 27 story files,
+light and dark compositions with no document overflow at 320, 390, 768 and 1440 CSS
+pixels, and screenshots inspected at phone and desktop widths. A composition assertion
+checks a single `h1`. Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, or physical devices.
+
+## Known limitations
+
+- Status tones are `neutral`, `success`, `warning` and `danger`. There is **no** `info`
+  tone: the palette has `--color-info-400` and `--color-info-500` only, with no ground and
+  no text role that inverts for dark mode, so an info badge could not be made readable in
+  both modes without inventing a token.
+- The block renders its own action recipe rather than composing `Button`, which cannot
+  render an anchor.

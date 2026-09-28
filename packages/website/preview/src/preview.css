@@ -1,0 +1,49 @@
+:root {
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  background: var(--color-grey-50, #fafafa);
+  color: var(--color-grey-900, #171717);
+  font-family: "Hanken Grotesk", sans-serif;
+}
+body p {
+  line-height: 1.6;
+}
+.demo-stage {
+  min-height: 100svh;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.demo-stage > * {
+  max-width: 100%;
+}
+body[data-example="application-shell"] .demo-stage {
+  display: block;
+  padding: 0;
+}
+body[data-example="profile-settings"] .demo-stage,
+body[data-example="pricing-plans"] .demo-stage,
+body[data-example="searchable-table"] .demo-stage,
+body[data-example="shopping-cart"] .demo-stage {
+  align-items: stretch;
+}
+@media (max-width: 480px) {
+  .demo-stage {
+    padding: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

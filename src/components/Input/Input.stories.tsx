@@ -33,6 +33,13 @@ const meta: Meta<typeof Input> = {
   title: "Components/Input",
   component: Input,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-[375px]">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     size: { control: "select", options: ["xs", "sm", "md", "lg"] },
     disabled: { control: "boolean" },
@@ -121,7 +128,7 @@ export const ReadOnly: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <Input
         label="Extra Small (xs)"
         placeholder="Placeholder"
@@ -160,7 +167,7 @@ export const AllSizes: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <Input
         label="Default"
         placeholder="Placeholder"
@@ -241,7 +248,7 @@ const ButtonAddon = () => (
 
 export const WithLeadingAddon: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <Input
         label="Leading dropdown (separated)"
         placeholder="Placeholder"
@@ -263,7 +270,7 @@ export const WithLeadingAddon: Story = {
 
 export const WithTrailingAddon: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <Input
         label="Trailing button"
         placeholder="Placeholder"

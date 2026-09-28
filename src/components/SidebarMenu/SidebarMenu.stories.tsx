@@ -246,7 +246,7 @@ const ThemeSidebar = ({ theme }: { theme: SidebarMenuTheme }) => {
 
 export const AllThemes: Story = {
   render: () => (
-    <div className="flex gap-6 bg-grey-50 p-6">
+    <div className="flex flex-wrap gap-6 bg-grey-50 p-2 sm:p-6">
       <div className="flex flex-col items-center gap-2">
         <span className="text-body-xs font-medium text-grey-500">Light</span>
         <ThemeSidebar theme="light" />

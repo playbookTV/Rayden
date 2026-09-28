@@ -1,0 +1,241 @@
+---
+title: PricingPlansBlock
+description: Compare plans, switch billing period, and understand included usage and limits
+---
+
+# PricingPlansBlock
+
+Compares plans, switches billing period, and communicates included usage and limits.
+
+Plan idea 55, category **Marketing & conversion**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { PricingPlansBlock } from "@raydenui/ui/blocks";
+import type { PricingPlan, PricingBillingPeriod } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+const periods: PricingBillingPeriod[] = [
+  { id: "monthly", label: "Monthly" },
+  { id: "annual", label: "Annual", badge: "Save 20%" },
+];
+
+const plans: PricingPlan[] = [
+  {
+    id: "team",
+    name: "Team",
+    description: "For a single operations team.",
+    prices: {
+      monthly: { amount: 29, currency: "USD", unit: "per editor / month" },
+      annual: { amount: 24, currency: "USD", unit: "per editor / month", note: "billed annually" },
+    },
+    limits: [{ id: "events", label: "Included events", value: "250,000 / month" }],
+    features: [
+      { id: "routing", label: "Automatic routing" },
+      { id: "sso", label: "SAML single sign-on", included: false },
+    ],
+    cta: { label: "Choose Team", onClick: () => startCheckout("team") },
+  },
+  {
+    id: "scale",
+    name: "Scale",
+    badge: "Most popular",
+    highlighted: true,
+    prices: { monthly: { custom: "Custom pricing" }, annual: { custom: "Custom pricing" } },
+    cta: { label: "Talk to sales", href: "/contact" },
+  },
+];
+
+<PricingPlansBlock
+  title="Pricing that follows your volume"
+  periods={periods}
+  defaultPeriod="annual"
+  plans={plans}
+  locale="en-US"
+  footnote="Prices exclude local tax."
+/>;
+```
+
+### Controlled period
+
+```tsx
+const [period, setPeriod] = useState("monthly");
+
+<PricingPlansBlock
+  title="Plans"
+  periods={periods}
+  period={period}
+  onPeriodChange={setPeriod}
+  plans={plans}
+/>;
+```
+
+The switcher is a `fieldset` with a `legend` and a radio group. Supply `periodLegend` to
+rename it; it defaults to `"Billing period"`. Fewer than two periods hides the switcher.
+
+### Availability
+
+```tsx
+<PricingPlansBlock
+  title="Plans"
+  plans={[
+    { id: "team", name: "Team", prices: {}, availability: "current", currentLabel: "Your plan" },
+    {
+      id: "enterprise",
+      name: "Enterprise",
+      prices: {},
+      availability: "unavailable",
+      unavailableReason: "Available on annual billing only.",
+    },
+  ]}
+  defaultUnavailableReason="Contact sales to enable this plan."
+/>
+```
+
+An `unavailable` plan renders an explicitly disabled button whose visible reason is
+associated through `aria-describedby`. A `current` plan renders a non-interactive marker
+when it supplies no `cta`.
+
+### Never manufacture a success
+
+Choosing a plan only calls `cta.onClick` or follows `cta.href`. A confirmation appears
+only when your application passes `notice`.
+
+```tsx
+<PricingPlansBlock
+  title="Plans"
+  plans={plans}
+  notice={{
+    tone: "success",
+    title: "Your plan change is confirmed",
+    description: "Scale takes effect on 1 October.",
+  }}
+/>
+```
+
+### Loading, empty and error
+
+```tsx
+<PricingPlansBlock title="Plans" plans={[]} state="loading" loadingPlanCount={3} />
+```
+
+```tsx
+<PricingPlansBlock
+  title="Plans"
+  plans={[]}
+  emptyTitle="No plans published"
+  emptyDescription="Pricing for this region is not available yet."
+/>
+```
+
+```tsx
+<PricingPlansBlock
+  title="Plans"
+  plans={[]}
+  state="error"
+  errorTitle="Pricing could not load"
+  onRetry={() => refetch()}
+/>
+```
+
+## Props
+
+| Prop                       | Type                                                  | Default             | Description                                                   |
+| -------------------------- | ----------------------------------------------------- | ------------------- | ------------------------------------------------------------- |
+| `title`                    | `ReactNode`                                           | —                   | Required.                                                     |
+| `plans`                    | `PricingPlan[]`                                       | —                   | Required.                                                     |
+| `eyebrow`                  | `ReactNode`                                           | —                   | Label above the title.                                        |
+| `description`              | `ReactNode`                                           | —                   | Supporting explanation.                                       |
+| `headingLevel`             | `"h1"`–`"h6"`                                         | `"h2"`              | Plan names use the next level down.                           |
+| `periods`                  | `PricingBillingPeriod[]`                              | —                   | Fewer than two hides the switcher.                            |
+| `period`                   | `string`                                              | —                   | Controlled period id. Pair with `onPeriodChange`.              |
+| `defaultPeriod`            | `string`                                              | first period        | Uncontrolled initial period id.                               |
+| `onPeriodChange`           | `(periodId: string) => void`                          | —                   | Period change handler.                                        |
+| `periodLegend`             | `string`                                              | `"Billing period"`  | Accessible name for the switcher.                             |
+| `locale`                   | `string`                                              | `"en-US"`           | BCP 47 tag for currency formatting.                           |
+| `priceFormatOptions`       | `Intl.NumberFormatOptions`                            | —                   | Merged into the default format options.                       |
+| `formatPrice`              | `(price, context) => ReactNode`                       | —                   | Full override of price rendering.                             |
+| `limitsLabel`              | `string`                                              | `"Included usage"`  | Heading above each plan's limits.                             |
+| `featuresVisibleLimit`     | `number`                                              | —                   | Collapses longer feature lists behind a disclosure.            |
+| `defaultUnavailableReason` | `string`                                              | —                   | Used when a plan supplies none.                               |
+| `notice`                   | `PricingPlansNotice`                                  | —                   | A consumer-confirmed outcome. Never set by the block.          |
+| `footnote`                 | `ReactNode`                                           | —                   | Small print under the grid.                                   |
+| `state`                    | `"default" \| "loading" \| "empty" \| "error"`         | derived             | Resolves to `empty` for an empty `plans` array.                |
+| `loadingPlanCount`         | `number`                                              | —                   | Placeholder cards while loading.                              |
+| `loadingLabel`             | `string`                                              | —                   | Announced while loading.                                      |
+| `emptyTitle`               | `ReactNode`                                           | —                   | Shown while empty.                                            |
+| `emptyDescription`         | `ReactNode`                                           | —                   | Shown while empty.                                            |
+| `errorTitle`               | `string`                                              | —                   | Shown while `state="error"`.                                  |
+| `errorDescription`         | `ReactNode`                                           | —                   | Shown while `state="error"`.                                  |
+| `onRetry`                  | `() => void`                                          | —                   | Retry handler. The control is omitted without it.              |
+| `retryLabel`               | `string`                                              | —                   | Retry control label.                                          |
+| `className`                | `string`                                              | —                   | Lands on the section root.                                    |
+
+`PricingPlansBlock` forwards its ref to the section element and accepts the remaining
+`HTMLAttributes<HTMLElement>`.
+
+### PricingPlan
+
+| Member              | Type                                             | Description                                                     |
+| ------------------- | ------------------------------------------------ | --------------------------------------------------------------- |
+| `id`                | `string`                                         | Required, stable.                                               |
+| `name`              | `ReactNode`                                      | Required.                                                       |
+| `description`       | `ReactNode`                                      | Optional.                                                       |
+| `badge`             | `string`                                         | Carries the meaning of `highlighted` in words.                  |
+| `highlighted`       | `boolean`                                        | Visual emphasis. Always pair with `badge` so it is not colour-only. |
+| `prices`            | `Record<string, PricingPrice>`                   | Required. Keyed by `PricingBillingPeriod.id`.                    |
+| `limits`            | `PricingLimit[]`                                 | `{ id, label, value }`, pre-formatted.                          |
+| `features`          | `PricingFeature[]`                               | `{ id, label, included?, note? }`.                              |
+| `cta`               | `PricingCta`                                     | Required for an `available` plan; omit for `current`.            |
+| `availability`      | `"available" \| "current" \| "unavailable"`       | Defaults to `"available"`.                                      |
+| `unavailableReason` | `string`                                         | Announced through `aria-describedby`.                           |
+| `currentLabel`      | `string`                                         | Replaces the default "Current plan" marker.                     |
+
+### PricingPrice
+
+| Member           | Type        | Description                                                        |
+| ---------------- | ----------- | ------------------------------------------------------------------ |
+| `amount`         | `number`    | Amount in the currency's **major** unit, unlike the commerce blocks. |
+| `currency`       | `string`    | ISO 4217 code. Required alongside `amount`.                        |
+| `unit`           | `ReactNode` | Rendered after the amount, e.g. "per editor / month".              |
+| `custom`         | `ReactNode` | Replaces the amount entirely. Takes precedence.                    |
+| `originalAmount` | `number`    | Reference amount shown struck through.                             |
+| `note`           | `ReactNode` | Small print under the price.                                       |
+
+## States
+
+- **default** — the plan grid at the selected period.
+- **loading** — placeholder cards with a status message.
+- **empty** — no plans published.
+- **error** — `role="alert"` with an optional retry.
+- **Per plan** — `available`, `current`, `unavailable`.
+- **No success state is manufactured.** A confirmation requires `notice`.
+
+Excluded features carry a visually hidden "Not included:" prefix as well as a distinct
+icon, so the distinction never rests on colour.
+
+## Verification
+
+Measured 22 September 2026 with Playwright 1.58.2 driving installed Google Chrome and
+axe-core 4.11.1, at 320, 390, 768 and 1440 CSS pixels in light and dark mode. Interaction
+checks covered clicking and arrow-keying the period switcher, a 147×38px switch target,
+the feature disclosure expanding 14 to 23 items, and an `aria-describedby` on unavailable
+plans resolving to a real element. Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, or operating-system
+text-size and full-browser-zoom settings. Target size was measured for the period
+switcher only.
+
+## Known limitations
+
+- Prices are amounts in the currency's **major** unit. The commerce blocks use minor
+  units. The two families do not share a money convention.
+- The notice panel is rendered locally rather than with `Alert`, which hard-codes
+  `bg-white` and would not follow a consumer `--color-surface` override.
+- An earlier draft dimmed unavailable plan cards with `opacity-90`, which measured every
+  label in that card at 4.03:1 against white. The dimming was removed; unavailability is
+  now carried by the disabled control and its associated reason.

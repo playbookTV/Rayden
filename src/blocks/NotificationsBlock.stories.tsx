@@ -222,7 +222,7 @@ export const NarrowContainer: Story = {
     <div className="w-[288px] p-2">
       <NotificationsBlock
         title="Notifications"
-        headingLevel={2}
+        headingLevel="h2"
         unreadCount={2}
         items={[
           {

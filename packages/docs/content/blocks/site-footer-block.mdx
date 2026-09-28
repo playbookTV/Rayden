@@ -1,0 +1,164 @@
+---
+title: SiteFooterBlock
+description: Browse grouped site links, legal information, social destinations, and locale controls
+---
+
+# SiteFooterBlock
+
+Browse grouped site links, legal information, social destinations and locale controls.
+
+Plan idea 05, category **Navigation & shells**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { SiteFooterBlock } from "@raydenui/ui/blocks";
+import type { SiteFooterLinkGroup, SiteFooterLocaleControl } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+const groups: SiteFooterLinkGroup[] = [
+  {
+    id: "product",
+    title: "Product",
+    links: [
+      { id: "features", label: "Features", href: "/features" },
+      { id: "pricing", label: "Pricing", href: "/pricing", badge: "New" },
+    ],
+  },
+  {
+    id: "company",
+    title: "Company",
+    links: [{ id: "about", label: "About", href: "/about" }],
+  },
+];
+
+<SiteFooterBlock
+  label="Site footer"
+  brand={{ name: "Citrionus", description: "Freight visibility for operations teams.", href: "/" }}
+  groups={groups}
+  groupHeadingLevel="h2"
+  social={[{ id: "linkedin", label: "Citrionus on LinkedIn", href: "https://example.com/company" }]}
+  copyright="© 2026 Citrionus Ltd. Registered in England 09876543."
+  legalLinks={[
+    { id: "privacy", label: "Privacy", href: "/privacy" },
+    { id: "terms", label: "Terms", href: "/terms" },
+  ]}
+/>;
+```
+
+### Locale controls require a handler
+
+`onChange` is **required** on a locale control, so the footer can never render a switcher
+that does nothing. The control is a native `<select>`: it stays usable at 320px, gives the
+platform picker on touch devices, needs no floating layer inside a page-bottom landmark,
+and follows `--color-surface`.
+
+```tsx
+<SiteFooterBlock
+  localeControls={[
+    {
+      id: "language",
+      label: "Language",
+      value: locale,
+      options: [
+        { value: "en-GB", label: "English (UK)" },
+        { value: "de-DE", label: "Deutsch" },
+      ],
+      onChange: setLocale,
+      hint: "Changing language reloads the page.",
+    },
+  ]}
+/>
+```
+
+### Every section is optional
+
+Omitting a section removes it rather than leaving an empty shell.
+
+```tsx
+<SiteFooterBlock copyright="© 2026 Citrionus Ltd." />
+```
+
+## Props
+
+| Prop                | Type                        | Default           | Description                                                    |
+| ------------------- | --------------------------- | ----------------- | -------------------------------------------------------------- |
+| `label`             | `string`                    | `"Site footer"`   | Accessible name for the `contentinfo` landmark.                 |
+| `brand`             | `SiteFooterBrand`           | —                 | `{ logo?, name?, description?, href? }`. Artwork is yours.      |
+| `groups`            | `SiteFooterLinkGroup[]`     | —                 | Each group becomes a named `nav` landmark.                      |
+| `groupHeadingLevel` | `"h2"`–`"h6"`               | `"h2"`            | Used for every group heading. A footer never owns the page `h1`. |
+| `social`            | `SiteFooterSocialLink[]`    | —                 | Falls back to visible text when neither `icon` nor `artwork` is given. |
+| `socialLabel`       | `string`                    | `"Social media"`  | Accessible name for the social list.                            |
+| `copyright`         | `ReactNode`                 | —                 | Copyright or registration text.                                 |
+| `legalLinks`        | `SiteFooterLink[]`          | —                 | Privacy, terms and similar destinations.                        |
+| `legalLabel`        | `string`                    | `"Legal"`         | Accessible name for the legal list.                             |
+| `localeControls`    | `SiteFooterLocaleControl[]` | —                 | Language, region or currency switchers.                         |
+| `children`          | `ReactNode`                 | —                 | Extra content above the bottom bar.                             |
+| `className`         | `string`                    | —                 | Lands on the footer root.                                       |
+
+`SiteFooterBlock` forwards its ref to the footer element and accepts the remaining
+`HTMLAttributes<HTMLElement>`.
+
+### SiteFooterLink
+
+| Member     | Type              | Description                                                        |
+| ---------- | ----------------- | ------------------------------------------------------------------ |
+| `id`       | `string`          | Required, stable.                                                  |
+| `label`    | `string`          | Required.                                                          |
+| `href`     | `string`          | Required. Footer entries are destinations, so they are always links. |
+| `external` | `boolean`         | Adds `rel="noreferrer"`, a new tab and a visually hidden note.      |
+| `badge`    | `string`          | Short qualifier, e.g. "New". Wraps below a long label.              |
+| `onClick`  | `(event) => void` | Analytics hook. Navigation still belongs to the anchor.             |
+
+### SiteFooterSocialLink
+
+| Member     | Type        | Default | Description                                                              |
+| ---------- | ----------- | ------- | ------------------------------------------------------------------------ |
+| `id`       | `string`    | —       | Required.                                                                |
+| `label`    | `string`    | —       | Required accessible name, e.g. "Citrionus on LinkedIn".                   |
+| `href`     | `string`    | —       | Required.                                                                |
+| `icon`     | `IconName`  | —       | Library icon. Ignored when `artwork` is supplied.                         |
+| `artwork`  | `ReactNode` | —       | Authentic platform artwork, supplied by you rather than recoloured here.  |
+| `external` | `boolean`   | `true`  | Opens a new tab.                                                         |
+
+### SiteFooterLocaleControl
+
+| Member    | Type                        | Description                                                |
+| --------- | --------------------------- | ---------------------------------------------------------- |
+| `id`      | `string`                    | Required.                                                  |
+| `label`   | `string`                    | Required visible label, e.g. "Language".                   |
+| `value`   | `string`                    | Required. You own persistence.                             |
+| `options` | `SiteFooterLocaleOption[]`  | Required. `{ value, label }`.                               |
+| `onChange`| `(value: string) => void`   | **Required.** A control with no handler is never rendered.   |
+| `hint`    | `string`                    | Small print under the control.                             |
+
+## States
+
+**Default only, deliberately.** The footer presents destinations the consuming
+application already knows. There is nothing to load, submit or confirm, so no loading,
+error or success state is offered.
+
+## Verification
+
+Measured 22 September 2026 with Playwright 1.58.2 driving installed Google Chrome and
+axe-core 4.11.1, at 320, 390, 768 and 1440 CSS pixels in light and dark mode. Checks
+covered named landmarks, 26 of 26 anchors carrying an `href`, no anchor with
+`role="button"`, `rel="noreferrer"` on every `target="_blank"`, a labelled and wired
+locale select, and a consumer surface override reaching both the footer ground and the
+control. Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, or operating-system
+text-size and full-browser-zoom settings.
+
+## Known limitations
+
+- The locale control is a native `<select>` rather than the library's `Select`, which
+  hard-codes `bg-white` and would not follow a consumer `--color-surface` override.
+- The control border uses `border-grey-500` rather than the library's usual
+  `border-grey-300`, which measures 1.39:1 against the footer ground — below the 3:1
+  WCAG 1.4.11 asks of a control boundary. This is a deliberate divergence.
+- German compound words broke mid-word in a two-column group grid at 320px, so the group
+  grid starts at one column and adds the second at 420px.

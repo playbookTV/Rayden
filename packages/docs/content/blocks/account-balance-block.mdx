@@ -1,0 +1,224 @@
+---
+title: AccountBalanceBlock
+description: View available, pending, and total balances with currency and update time
+---
+
+# AccountBalanceBlock
+
+View available, pending and total balances with their currency and the time they were last
+known to be correct.
+
+Plan idea 81, category **Finance & billing**. Status **experimental**, verification level
+**unmeasured** — see [verification](#verification) before adopting it.
+
+## Import
+
+```tsx
+import { AccountBalanceBlock } from "@raydenui/ui/blocks";
+import type { AccountBalanceEntry, AccountBalanceAction } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+Every amount is a **minor-unit integer** in the block's single `currency`: GBP `248350`
+displays as £2,483.50, JPY `248350` as ¥248,350.
+
+```tsx
+<AccountBalanceBlock
+  title="Account balance"
+  account={{ name: "Everyday current account", reference: "•••• 4417", icon: "bank" }}
+  currency="GBP"
+  locale="en-GB"
+  available={248350}
+  pending={12000}
+  total={260350}
+  primary="available"
+  asOf="2026-09-24T08:15:00Z"
+  timeZone="Europe/London"
+  asOfNote="Balances refresh every 15 minutes."
+  onRefresh={() => refetchBalances()}
+/>
+```
+
+`total` is **supplied, never derived**. `available + pending` is wrong whenever a hold, an
+overdraft or a reserve is involved, and the block does not know which applies.
+
+### Three kinds of absence
+
+| Value       | Meaning                    | Renders                       |
+| ----------- | -------------------------- | ----------------------------- |
+| a number    | a real balance, `0` included | the formatted amount           |
+| `null`      | genuinely unknown           | `unknownLabel`                 |
+| `undefined` | not applicable here         | the figure is omitted entirely   |
+
+`0` is a real balance and never stands in for unknown.
+
+```tsx
+<AccountBalanceBlock
+  currency="GBP"
+  available={0}
+  pending={null}
+  unknownLabel="Not available"
+/>
+```
+
+### Extra balance lines
+
+```tsx
+const extraBalances: AccountBalanceEntry[] = [
+  { id: "reserved", label: "Reserved", amount: 4500, hint: "Held until 26 September", icon: "lock" },
+  { id: "overdraft", label: "Overdraft available", amount: 50000 },
+];
+
+<AccountBalanceBlock currency="GBP" available={248350} extraBalances={extraBalances} />;
+```
+
+### Masking balances
+
+`balancesHidden` is **controlled**. The block never decides to mask a balance and never
+stores the preference — your application owns both.
+
+```tsx
+const [hidden, setHidden] = useState(false);
+
+<AccountBalanceBlock
+  currency="GBP"
+  available={248350}
+  balancesHidden={hidden}
+  onToggleBalanceVisibility={() => setHidden((value) => !value)}
+  hiddenValueLabel="Hidden"
+/>;
+```
+
+The toggle is omitted entirely without `onToggleBalanceVisibility`, and so is the refresh
+control without `onRefresh`.
+
+### Actions
+
+`AccountBalanceAction` is `FinanceAction`: a destination, an action, or an entry the viewer
+may not use. There is no fourth arm, so a control with nothing to do cannot be expressed.
+
+```tsx
+<AccountBalanceBlock
+  currency="GBP"
+  available={248350}
+  actions={[
+    { id: "send", label: "Send money", onClick: () => startTransfer(), tone: "primary" },
+    { id: "statements", label: "Statements", href: "/statements" },
+    { id: "close", label: "Close account", unavailableReason: "Only the account owner can close it." },
+  ]}
+/>
+```
+
+### Loading, error and empty
+
+```tsx
+<AccountBalanceBlock currency="GBP" state="loading" loadingMessage="Loading balances" />
+```
+
+```tsx
+<AccountBalanceBlock
+  currency="GBP"
+  state="error"
+  errorTitle="Balances could not be loaded"
+  errorDescription="The banking service did not respond."
+  onRetry={() => refetchBalances()}
+/>
+```
+
+```tsx
+<AccountBalanceBlock
+  currency="GBP"
+  state="empty"
+  emptyTitle="No account selected"
+  emptyDescription="Choose an account to see its balances."
+  emptyAction={{ id: "choose", label: "Choose account", onClick: () => openPicker() }}
+/>
+```
+
+## Props
+
+| Prop                        | Type                                      | Default              | Description                                                |
+| --------------------------- | ----------------------------------------- | -------------------- | ---------------------------------------------------------- |
+| `title`                     | `ReactNode`                               | `"Account balance"`  | Block title.                                                |
+| `headingLevel`              | `"h1"`–`"h6"`                             | `"h2"`               | Element for `title`.                                        |
+| `description`               | `ReactNode`                               | —                    | Supporting sentence.                                        |
+| `eyebrow`                   | `ReactNode`                               | —                    | Small label above the title. Not a heading.                  |
+| `account`                   | `{ name, reference?, icon? }`             | —                    | Display only. `reference` must already be masked.            |
+| `status`                    | `FinanceStatus`                           | —                    | `{ label, tone?, description? }`.                            |
+| `currency`                  | `string`                                  | `"GBP"`              | ISO 4217 code shared by every figure.                        |
+| `locale`                    | `string`                                  | `"en-GB"`            | Keeps server and client formatting identical.                  |
+| `unknownLabel`              | `string`                                  | `"Not available"`    | Words shown wherever an amount is `null`.                     |
+| `available`                 | `FinanceMoneyValue`                       | —                    | Spendable balance.                                           |
+| `pending`                   | `FinanceMoneyValue`                       | —                    | Cleared soon, not yet spendable.                              |
+| `total`                     | `FinanceMoneyValue`                       | —                    | Total held. Supplied, never derived.                          |
+| `extraBalances`             | `AccountBalanceEntry[]`                   | —                    | Further lines, e.g. reserved, overdraft, incoming.             |
+| `primary`                   | `"available" \| "pending" \| "total"`      | `"available"`        | Which figure is the headline.                                 |
+| `availableLabel`            | `string`                                  | —                    | Label override.                                              |
+| `pendingLabel`              | `string`                                  | —                    | Label override.                                              |
+| `totalLabel`                | `string`                                  | —                    | Label override.                                              |
+| `asOf`                      | `FinanceDateValue`                        | —                    | When the figures were last known correct. `null` is unknown.    |
+| `asOfLabel`                 | `string`                                  | `"Updated"`          | Label for the timestamp.                                      |
+| `timeZone`                  | `string`                                  | —                    | IANA zone for `asOf`.                                         |
+| `formatAsOf`                | `(value: Date) => string`                 | —                    | Takes precedence over locale and zone formatting.               |
+| `asOfNote`                  | `ReactNode`                               | —                    | One line under the timestamp.                                  |
+| `onRefresh`                 | `() => void`                              | —                    | The refresh control is omitted entirely without it.             |
+| `refreshLabel`              | `string`                                  | `"Refresh balances"` | Refresh control label.                                         |
+| `balancesHidden`            | `boolean`                                 | —                    | Controlled. Masks every figure.                                 |
+| `onToggleBalanceVisibility` | `() => void`                              | —                    | The toggle is omitted entirely without it.                      |
+| `showBalancesLabel`         | `string`                                  | `"Show balances"`    | Toggle label when hidden.                                      |
+| `hideBalancesLabel`         | `string`                                  | `"Hide balances"`    | Toggle label when shown.                                       |
+| `hiddenValueLabel`          | `string`                                  | `"Hidden"`           | Shown in place of a masked figure.                              |
+| `actions`                   | `AccountBalanceAction[]`                  | —                    | Account actions.                                               |
+| `actionsLabel`              | `string`                                  | `"Account actions"`  | Accessible name for the action group.                           |
+| `state`                     | `"default" \| "loading" \| "empty" \| "error"` | `"default"`     | Lifecycle owned by your application.                             |
+| `loadingMessage`            | `string`                                  | `"Loading balances"` | Announced while loading.                                        |
+| `errorTitle`                | `string`                                  | `"Balances could not be loaded"` | Shown while `state="error"`.                       |
+| `errorDescription`          | `ReactNode`                               | —                    | Shown while `state="error"`.                                     |
+| `onRetry`                   | `() => void`                              | —                    | The retry control is omitted entirely without it.                 |
+| `emptyTitle`                | `string`                                  | `"No account selected"` | Shown while `state="empty"`.                                  |
+| `emptyDescription`          | `ReactNode`                               | —                    | Shown while `state="empty"`.                                     |
+| `emptyAction`               | `FinanceAction`                           | —                    | Recovery step on the empty panel.                                |
+| `className`                 | `string`                                  | —                    | Lands on the container root, outside the card padding.             |
+
+### AccountBalanceEntry
+
+| Member   | Type                | Description                                            |
+| -------- | ------------------- | ------------------------------------------------------ |
+| `id`     | `string`            | Required, stable.                                       |
+| `label`  | `string`            | Required.                                               |
+| `amount` | `FinanceMoneyValue` | Minor-unit integer, or `null` for genuinely unknown.     |
+| `hint`   | `ReactNode`         | One short line under the figure.                         |
+| `icon`   | `IconName`          | Optional.                                               |
+
+`FinanceMoneyValue` is `number | null | undefined`. `FinanceDateValue` is
+`Date | string | number | null | undefined`.
+
+## States
+
+- **default** — the balance figures.
+- **loading** / **error** — with an optional retry control.
+- **empty** — no account selected, with an optional recovery action.
+- **balances hidden** — every figure masked, under your application's control.
+- **unknown figure** — per figure, from a `null` amount.
+- **no figures supplied** — none of `available`, `pending` or `total` given.
+
+## Verification
+
+**No verification run exists for this block yet.** The batch that built it had its run
+interrupted and is repeating it, and its batch report (`docs/blocks-batch-d.md`) did not exist
+when this page was written. This page was reconciled against the block's public TypeScript
+types and its 14 story exports, and the block resolves from a built package with its types —
+nothing more.
+
+Not verified: layout at any width, contrast in either mode, keyboard flows, theme overrides, a
+screen-reader pass, any non-Chromium engine, operating-system text-size settings, or physical
+devices.
+
+## Known limitations
+
+- `total` is supplied, never derived.
+- The block reads no account data and refreshes nothing itself; `onRefresh` hands that to your
+  application.
+- Every amount in one block shares a single currency and locale.
+- `account.reference` must already be masked by the caller. Never pass a full account number.

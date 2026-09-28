@@ -17,7 +17,8 @@
     "installedProjectDetection": false,
     "flavorSwitching": false,
     "sourceCodeValidation": false,
-    "motionPilot": true
+    "motionPilot": true,
+    "blockCatalog": true
   },
   "icons": {
     "component": "Icon",
@@ -3157,8 +3158,3832 @@
       "SharedLayout animates one persistent node; cross-tree layout IDs and spring physics are not supported."
     ]
   },
+  "blocks": {
+    "schemaVersion": "1.0.0",
+    "flavor": "citrionus",
+    "uiVersion": "0.10.1",
+    "aiVersion": "0.1.5",
+    "entryPoint": "@raydenui/ui/blocks",
+    "plan": {
+      "reference": "docs/blocks-expansion-plan.md",
+      "categoryCount": 12,
+      "coreTarget": 80,
+      "extendedTarget": 100,
+      "note": "Counts describe capability targets in the owner-confirmed plan, not shipped capabilities. A block is counted once by task, irrespective of variants or modes."
+    },
+    "statuses": {
+      "planned": "An approved idea with no implementation.",
+      "internal": "Implemented but deliberately not reachable from a public entry point.",
+      "experimental": "Publicly exported and documented, with an incomplete release-gate record. Usable, but the contract may still change and the accessibility evidence is partial. Read verificationLevel as well: an experimental entry may be measured, or not measured at all.",
+      "stable": "Publicly exported with a complete release-gate record, including a screen-reader pass, more than one browser engine, and operating-system text-size testing.",
+      "deprecated": "Still exported, superseded by another entry."
+    },
+    "verificationLevels": {
+      "measured": "A completed verification run exists: the recorded evidence names its tools, widths, modes and scenarios.",
+      "unmeasured": "No completed verification run exists yet. Evidence is limited to implementation review and story coverage. Treat the contract as provisional and do not rely on the responsive or contrast behaviour without measuring it yourself."
+    },
+    "publicCountRule": "Only entries with status \"stable\" contribute to a public supported-block count. Experimental entries are counted separately and labelled. The plan's five statuses cannot distinguish an entry measured incompletely from one not measured at all, so verificationLevel carries that difference.",
+    "vocabularies": {
+      "domains": [
+        "application",
+        "marketing",
+        "commerce",
+        "finance"
+      ],
+      "tasks": [
+        "navigate",
+        "authenticate",
+        "discover",
+        "compare",
+        "create",
+        "review",
+        "manage",
+        "recover"
+      ],
+      "compositions": [
+        "section",
+        "panel",
+        "form",
+        "collection",
+        "shell"
+      ]
+    },
+    "categories": [
+      {
+        "id": "navigation-shells",
+        "label": "Navigation & shells",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "authentication-onboarding",
+        "label": "Authentication & onboarding",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "dashboards-analytics",
+        "label": "Dashboards & analytics",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "data-records",
+        "label": "Data & records",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "forms-settings",
+        "label": "Forms & settings",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "collaboration-workflow",
+        "label": "Collaboration & workflow",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "marketing-conversion",
+        "label": "Marketing & conversion",
+        "planCore": 10,
+        "planTotal": 12
+      },
+      {
+        "id": "content-community",
+        "label": "Content & community",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "commerce",
+        "label": "Commerce",
+        "planCore": 10,
+        "planTotal": 10
+      },
+      {
+        "id": "finance-billing",
+        "label": "Finance & billing",
+        "planCore": 6,
+        "planTotal": 8
+      },
+      {
+        "id": "support-feedback",
+        "label": "Support & feedback",
+        "planCore": 6,
+        "planTotal": 6
+      },
+      {
+        "id": "system-states-utilities",
+        "label": "System states & utilities",
+        "planCore": 6,
+        "planTotal": 8
+      }
+    ],
+    "capabilityDefinitions": {
+      "lightDark": "Covered by stories in both the light and the dark mode, and included in that batch's clean scans.",
+      "scopedThemeIsland": "Covered by a story that puts the block in a scoped .rayden-light or .rayden-dark island inside the opposite global mode.",
+      "consumerSurfaceOverride": "Covered by a story that overrides the semantic surface roles, with the override measured reaching the block's own grounds.",
+      "containerAdaptive": "Layout responds to the block's own container width, measured at the widths recorded under verification rather than inferred from breakpoint classes.",
+      "keyboardChecked": "At least one automated interaction check drives the block from the keyboard. This is narrower than a full keyboard-flow review.",
+      "controlledData": "The block fetches nothing. All data, persistence and outcomes belong to the consuming application.",
+      "optionalChartDependency": "Rendering needs chart.js and react-chartjs-2 at runtime."
+    },
+    "counts": {
+      "implemented": 28,
+      "byStatus": {
+        "experimental": 28
+      },
+      "byVerificationLevel": {
+        "measured": 28
+      },
+      "byCategory": {
+        "navigation-shells": 6,
+        "authentication-onboarding": 2,
+        "dashboards-analytics": 1,
+        "data-records": 2,
+        "forms-settings": 1,
+        "collaboration-workflow": 2,
+        "marketing-conversion": 3,
+        "commerce": 4,
+        "finance-billing": 6,
+        "system-states-utilities": 1
+      },
+      "publiclySupported": 0
+    },
+    "entries": [
+      {
+        "id": "site-header",
+        "planIdea": 1,
+        "name": "Site Header",
+        "task": "Navigate a public site with equivalent desktop and collapsed destinations.",
+        "export": "HeaderBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "HeaderBlockProps",
+          "HeaderBlockVariant",
+          "HeaderBlockLink",
+          "HeaderBlockAction",
+          "HeaderBlockAnnouncement",
+          "HeaderBlockSwitcher"
+        ],
+        "helpers": [],
+        "category": "navigation-shells",
+        "categoryLabel": "Navigation & shells",
+        "domains": [
+          "marketing",
+          "application"
+        ],
+        "tasks": [
+          "navigate"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Header",
+          "file": "src/blocks/HeaderBlock.stories.tsx",
+          "stories": [
+            "WithAnnouncement",
+            "Standard",
+            "PillNav",
+            "DarkPillNav",
+            "RoundedButtons",
+            "WithLanguage",
+            "CenteredLogo",
+            "DarkBackground",
+            "WithSearch",
+            "WithSwitcher",
+            "DoubleRow",
+            "LinkDestinations",
+            "InNarrowColumn",
+            "ControlledSwitcher",
+            "UncontrolledSwitcher",
+            "SwitcherIndexOutOfRange"
+          ]
+        },
+        "states": [
+          "default"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": false,
+          "containerAdaptive": true,
+          "keyboardChecked": false,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/HeaderBlock.tsx",
+        "docs": "/blocks/header-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "The 21 September audit recorded the library's worst navigation defects here: seven variants overflowed at 768px (B02), the collapsed renderer discarded href-only destinations and its aria-controls target was absent (B01), and explicit dark variants inverted to a near-white surface in global dark mode (B05). Shared link-aware rendering, named navigation landmarks and a permanently mounted menu element have since been added, and the controlled switcher contract was corrected, but the audit's width and contrast measurements have not been repeated.",
+          "The eleven variants are a fixed numeric set rather than a composed contract, so a layout outside that set cannot be expressed.",
+          "Uses bg-white with a dark-mode override rather than the semantic surface roles, so a consumer --color-surface override does not reach it."
+        ]
+      },
+      {
+        "id": "application-shell",
+        "planIdea": 2,
+        "name": "Application Shell",
+        "task": "Compose a sidebar, workspace area, top bar and collapsed navigation without losing destinations.",
+        "export": "ApplicationShellBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "ApplicationShellBlockProps",
+          "AppShellHeadingLevel",
+          "AppShellExpandTier",
+          "AppShellNavItem",
+          "AppShellNavSection",
+          "AppShellAction",
+          "AppShellNavStatus",
+          "AppShellMainScroll"
+        ],
+        "helpers": [],
+        "category": "navigation-shells",
+        "categoryLabel": "Navigation & shells",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "navigate"
+        ],
+        "composition": "shell",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Application Shell",
+          "file": "src/blocks/ApplicationShellBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "NarrowContainer",
+            "NavigationLoading",
+            "NavigationError",
+            "NoDestinations",
+            "NoNavigationRail",
+            "SingleDestination",
+            "LongTranslatedLabels",
+            "LargeNavigation",
+            "BoundedWorkspaceScroll",
+            "DarkIsland",
+            "CustomSurface",
+            "CallbackDestinations"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "empty"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/ApplicationShellBlock.tsx",
+        "docs": "/blocks/application-shell-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-c-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-c-polish.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "live composition measurement"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "261 browser tests across 27 story files, including ordinary typing beside an unmodified shortcut, unavailable workspaces, nested Escape behaviour, live task counts and text sizing",
+                "light and dark compositions measured with no document overflow at the recorded widths",
+                "screenshots inspected at phone and desktop widths, including the workspace and palette overlays",
+                "a clean consumer installation exercising every ESM and CommonJS block export and server rendering"
+              ],
+              "note": "A targeted regression and visual review. Earlier batch measurements were not all repeated."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "expandAt is a fixed set of three container tiers, because Tailwind needs each @min-[…] class to exist as a literal string. An arbitrary threshold cannot be expressed.",
+          "mainScroll=\"region\" requires the consumer to bound the shell's height through className; the block cannot do it.",
+          "sidebarFooter renders in both the sidebar and the collapsed panel, so it must be stateless or consumer-controlled.",
+          "Renders its own navigation rather than composing SidebarMenu, which hard-codes bg-white. That duplication will drift until SidebarMenu migrates to the surface roles.",
+          "A negative-inset composition pattern relies on className landing on the container root. That is the documented contract but no test asserts it."
+        ]
+      },
+      {
+        "id": "page-header",
+        "planIdea": 3,
+        "name": "Page Header & Actions",
+        "task": "Establish page context with breadcrumbs, title, status and a prioritised action group.",
+        "export": "PageHeaderBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "PageHeaderBlockProps",
+          "PageHeaderHeadingLevel",
+          "PageHeaderStatusTone",
+          "PageHeaderStatus",
+          "PageHeaderBreadcrumb",
+          "PageHeaderActionPriority",
+          "PageHeaderAction",
+          "PageHeaderMetaItem",
+          "PageHeaderBackAction",
+          "PageHeaderState"
+        ],
+        "helpers": [],
+        "category": "navigation-shells",
+        "categoryLabel": "Navigation & shells",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "navigate",
+          "manage"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Page Header",
+          "file": "src/blocks/PageHeaderBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "DeepBreadcrumbTrail",
+            "PrioritisedActions",
+            "Loading",
+            "ErrorWithRetry",
+            "ReadOnlyViewer",
+            "TitleOnly",
+            "NarrowContainer",
+            "LongTranslatedLabels",
+            "WithBackActionAndTabs",
+            "StatusTones",
+            "DarkIsland",
+            "CustomSurface"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "permission-blocked"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/PageHeaderBlock.tsx",
+        "docs": "/blocks/page-header-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-c-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-c-polish.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "live composition measurement"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "261 browser tests across 27 story files, including ordinary typing beside an unmodified shortcut, unavailable workspaces, nested Escape behaviour, live task counts and text sizing",
+                "light and dark compositions measured with no document overflow at the recorded widths",
+                "screenshots inspected at phone and desktop widths, including the workspace and palette overlays",
+                "a clean consumer installation exercising every ESM and CommonJS block export and server rendering"
+              ],
+              "note": "A targeted regression and visual review. Earlier batch measurements were not all repeated."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Status tones are neutral, success, warning and danger. There is no info tone, because the palette has info-400 and info-500 only, with no ground and no text role that inverts for dark mode.",
+          "Metadata collapses behind a disclosure below 640px of container width by default. Set collapseMetaOnSmallScreens={false} where the metadata is essential.",
+          "Renders its own action recipe rather than composing Button, which has no polymorphic escape hatch for a destination styled as a button."
+        ]
+      },
+      {
+        "id": "workspace-switcher",
+        "planIdea": 4,
+        "name": "Workspace Switcher",
+        "task": "Find and switch a workspace, see the current one, and create or join another.",
+        "export": "WorkspaceSwitcherBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "WorkspaceSwitcherBlockProps",
+          "WorkspaceSwitcherStatus",
+          "WorkspaceSwitcherItem",
+          "WorkspaceSwitcherFooterAction"
+        ],
+        "helpers": [],
+        "category": "navigation-shells",
+        "categoryLabel": "Navigation & shells",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "navigate",
+          "manage"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Workspace Switcher",
+          "file": "src/blocks/WorkspaceSwitcherBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "FilterToNoMatches",
+            "PermissionAware",
+            "ShortList",
+            "SingleWorkspace",
+            "EmptySource",
+            "Loading",
+            "ErrorWithRetry",
+            "WorkspacesAsDestinations",
+            "LongNames",
+            "LargeList",
+            "DarkIsland",
+            "CustomSurface",
+            "MissingSelectionHandler"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "empty",
+          "no-matches",
+          "permission-blocked",
+          "open",
+          "closed"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/WorkspaceSwitcherBlock.tsx",
+        "docs": "/blocks/workspace-switcher-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-c-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-c-polish.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "live composition measurement"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "261 browser tests across 27 story files, including ordinary typing beside an unmodified shortcut, unavailable workspaces, nested Escape behaviour, live task counts and text sizing",
+                "light and dark compositions measured with no document overflow at the recorded widths",
+                "screenshots inspected at phone and desktop widths, including the workspace and palette overlays",
+                "a clean consumer installation exercising every ESM and CommonJS block export and server rendering"
+              ],
+              "note": "A targeted regression and visual review. Earlier batch measurements were not all repeated."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "The popover is non-modal. Content behind it stays reachable, which is deliberate inside a shell top bar but is not a dialog.",
+          "onSelect is typed optional so a workspace can be supplied with neither an href nor a handler. Such entries render as visibly unavailable with an explanation rather than silently doing nothing, but the type does not prevent the configuration.",
+          "Selection is not persisted. The consuming application owns which workspace is current."
+        ]
+      },
+      {
+        "id": "site-footer",
+        "planIdea": 5,
+        "name": "Site Footer",
+        "task": "Browse grouped site links, legal information, social destinations and locale controls.",
+        "export": "SiteFooterBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "SiteFooterBlockProps",
+          "SiteFooterHeadingLevel",
+          "SiteFooterLink",
+          "SiteFooterLinkGroup",
+          "SiteFooterSocialLink",
+          "SiteFooterLocaleOption",
+          "SiteFooterLocaleControl",
+          "SiteFooterBrand"
+        ],
+        "helpers": [],
+        "category": "navigation-shells",
+        "categoryLabel": "Navigation & shells",
+        "domains": [
+          "marketing"
+        ],
+        "tasks": [
+          "navigate"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/SiteFooter",
+          "file": "src/blocks/SiteFooterBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "Minimal",
+            "LinksOnly",
+            "LongTranslatedLabels",
+            "ThemedSurface",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "default"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": false,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/SiteFooterBlock.tsx",
+        "docs": "/blocks/site-footer-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-a-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-a.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "312 layout and overflow checks across 39 story fixtures with no document horizontal overflow",
+                "156 axe-core scans at 390 and 1440 with zero violations across wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice",
+                "18 behavioural interaction checks",
+                "container adaptation measured in a 358px container on a 1440px viewport",
+                "200% root text sizing across five fixtures at 320 and 1440",
+                "a consumer surface override measured reaching the footer ground and its native control"
+              ],
+              "note": "Measured through a standalone harness because the repository's default Playwright browser binary was unavailable. Target size was measured for the period switcher only."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Only a default state is offered. A footer presents destinations the application already knows, so there is nothing to load, submit or confirm.",
+          "The locale control is a native select rather than the library's Select component, because Select hard-codes bg-white and would not follow a consumer surface override.",
+          "The control border uses border-grey-500 rather than the library's usual border-grey-300, which measures 1.39:1 against the footer ground and is below the 3:1 WCAG 1.4.11 asks of a control boundary. This is a deliberate divergence from the library's input border.",
+          "groupHeadingLevel accepts h2 through h6 only. A footer does not own a page's h1."
+        ]
+      },
+      {
+        "id": "command-palette",
+        "planIdea": 6,
+        "name": "Command Palette",
+        "task": "Search and activate application destinations and actions with keyboard support.",
+        "export": "CommandPaletteBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "CommandPaletteBlockProps",
+          "CommandPaletteStatus",
+          "CommandPaletteItem",
+          "CommandPaletteGroup",
+          "CommandPaletteShortcut",
+          "CommandPaletteFilterMode"
+        ],
+        "helpers": [],
+        "category": "navigation-shells",
+        "categoryLabel": "Navigation & shells",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "navigate",
+          "discover"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Command Palette",
+          "file": "src/blocks/CommandPaletteBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "KeyboardWalk",
+            "NoResults",
+            "FocusIsTrapped",
+            "DestinationsAreLinks",
+            "WithShortcut",
+            "RemoteSearch",
+            "Loading",
+            "ErrorWithRetry",
+            "EmptySource",
+            "LargeResultSet",
+            "NarrowContainer",
+            "LongTranslatedLabels",
+            "DarkIsland",
+            "CustomSurface",
+            "UnmodifiedShortcutRespectsTyping"
+          ]
+        },
+        "states": [
+          "prompt",
+          "results",
+          "no-matches",
+          "empty-source",
+          "loading",
+          "error",
+          "permission-blocked",
+          "open",
+          "closed"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/CommandPaletteBlock.tsx",
+        "docs": "/blocks/command-palette-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-c-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-c-polish.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "live composition measurement"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "261 browser tests across 27 story files, including ordinary typing beside an unmodified shortcut, unavailable workspaces, nested Escape behaviour, live task counts and text sizing",
+                "light and dark compositions measured with no document overflow at the recorded widths",
+                "screenshots inspected at phone and desktop widths, including the workspace and palette overlays",
+                "a clean consumer installation exercising every ESM and CommonJS block export and server rendering"
+              ],
+              "note": "A targeted regression and visual review. Earlier batch measurements were not all repeated."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Renders its own dialog rather than composing Modal, because Modal hard-codes bg-white and would not follow a consumer surface override.",
+          "A shortcut with modifier \"none\" registers a document listener. It ignores editable and contenteditable targets, composition events, repeated keys and modified keystrokes, but it is still a global listener the host shares.",
+          "filterMode=\"local\" matches label, description and keywords by substring. There is no ranking, fuzzy matching or highlighting."
+        ]
+      },
+      {
+        "id": "sign-in",
+        "planIdea": 9,
+        "name": "Sign In",
+        "task": "Authenticate with credentials or configured providers.",
+        "export": "LoginBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "LoginBlockProps",
+          "LoginBlockVariant",
+          "LoginBlockSocialProvider"
+        ],
+        "helpers": [],
+        "category": "authentication-onboarding",
+        "categoryLabel": "Authentication & onboarding",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "authenticate"
+        ],
+        "composition": "form",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Login",
+          "file": "src/blocks/LoginBlock.stories.tsx",
+          "stories": [
+            "Standard",
+            "Card",
+            "WorkEmail",
+            "WorkEmailDark",
+            "Pending",
+            "ThemedSurface",
+            "ErrorState",
+            "EmailOnly",
+            "Narrow",
+            "FormInteraction"
+          ]
+        },
+        "states": [
+          "default",
+          "pending",
+          "error"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/LoginBlock.tsx",
+        "docs": "/blocks/login-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "The block never authenticates. onSubmit hands the credentials to the consuming application, which owns the result and must report it back through pending and error.",
+          "There is no success state. A confirmed sign-in is a navigation the application performs.",
+          "socialProviders supplies its own artwork through icon. Brand marks are deliberately exempt from theme roles, so they are not recoloured for dark mode."
+        ]
+      },
+      {
+        "id": "create-account",
+        "planIdea": 10,
+        "name": "Create Account",
+        "task": "Register with field validation, password guidance and required consent.",
+        "export": "CreateAccountBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "CreateAccountBlockProps",
+          "CreateAccountHeadingLevel",
+          "CreateAccountStatus",
+          "CreateAccountValues",
+          "CreateAccountFieldName",
+          "CreateAccountFieldErrors",
+          "CreateAccountPasswordRule",
+          "CreateAccountLink"
+        ],
+        "helpers": [
+          "defaultCreateAccountPasswordRules"
+        ],
+        "category": "authentication-onboarding",
+        "categoryLabel": "Authentication & onboarding",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "authenticate",
+          "create"
+        ],
+        "composition": "form",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/CreateAccount",
+          "file": "src/blocks/CreateAccountBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "ValidationErrors",
+            "PasswordGuidance",
+            "SubmitsValidDetails",
+            "PasswordsDoNotMatch",
+            "Submitting",
+            "ServerError",
+            "SuccessConfirmed",
+            "Loading",
+            "RegistrationClosed",
+            "TranslatedLabels",
+            "ThemedSurface",
+            "HeadingLevelOne",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "idle",
+          "loading",
+          "submitting",
+          "error",
+          "success",
+          "disabled"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/CreateAccountBlock.tsx",
+        "docs": "/blocks/create-account-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "No batch verification report exists for this block. The recorded evidence is its own story coverage and the repository story suite, not a measured width, contrast or interaction sweep of the kind Batch A and Batch C recorded.",
+          "The block provisions nothing. status=\"success\" must be set by the consuming application after it has confirmed the account exists.",
+          "Local validation is a convenience. The server remains responsible for uniqueness, password policy and consent records.",
+          "The block owns the field draft after first render. defaultValues seeds it once; later changes to that prop are ignored."
+        ]
+      },
+      {
+        "id": "kpi-overview",
+        "planIdea": 17,
+        "name": "KPI Overview",
+        "task": "Compare labelled metrics against an explicit period with trends and textual context.",
+        "export": "KpiOverviewBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "KpiOverviewBlockProps",
+          "KpiOverviewHeadingLevel",
+          "KpiChangeDirection",
+          "KpiChangeSentiment",
+          "KpiChange",
+          "KpiTrend",
+          "KpiMetric",
+          "KpiPeriod",
+          "KpiPeriodOption",
+          "KpiOverviewStatus"
+        ],
+        "helpers": [],
+        "category": "dashboards-analytics",
+        "categoryLabel": "Dashboards & analytics",
+        "domains": [
+          "application",
+          "finance"
+        ],
+        "tasks": [
+          "review",
+          "compare"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/KpiOverview",
+          "file": "src/blocks/KpiOverviewBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "WithPeriodSelector",
+            "WithTrendlines",
+            "SingleMetric",
+            "TwelveMetrics",
+            "MetricUnavailable",
+            "Loading",
+            "LoadFailed",
+            "NoMetrics",
+            "WithDrillThrough",
+            "LongLabelsAndValues",
+            "ThemedSurface",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "idle",
+          "loading",
+          "error",
+          "empty",
+          "metric-unavailable"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/KpiOverviewBlock.tsx",
+        "docs": "/blocks/kpi-overview-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "No batch verification report exists for this block. The recorded evidence is its own story coverage and the repository story suite.",
+          "Batch C measured this block's visually hidden sparkline data table escaping its container at 200% root text size, producing a 407px document inside a 320px viewport. A relative containing block has since been added around the hidden table, but that measurement has not been repeated.",
+          "Sparklines are an inline SVG with a visually hidden data table, deliberately not chart.js, so importing blocks never pulls in the optional chart peers. Richer charts remain a separate @raydenui/ui/chart entry.",
+          "Every value is pre-formatted by the consuming application. The block applies no locale, currency or number formatting of its own.",
+          "The period selector renders only when periodOptions, selectedPeriodId and onPeriodChange are all supplied."
+        ]
+      },
+      {
+        "id": "payment-records-table",
+        "planIdea": 25,
+        "name": "Payment Records Table",
+        "task": "Inspect and select payment records.",
+        "export": "TableBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "TableBlockProps",
+          "TableBlockRow"
+        ],
+        "helpers": [],
+        "category": "data-records",
+        "categoryLabel": "Data & records",
+        "domains": [
+          "application",
+          "finance"
+        ],
+        "tasks": [
+          "review",
+          "manage"
+        ],
+        "composition": "collection",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Table",
+          "file": "src/blocks/TableBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "WithoutConfiguredActions",
+            "NarrowViewport",
+            "SelectionState",
+            "SelectionAcrossPagesUncontrolled",
+            "SelectionAcrossPagesControlled"
+          ]
+        },
+        "states": [
+          "default",
+          "partial-selection",
+          "no-configured-actions"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/TableBlock.tsx",
+        "docs": "/blocks/table-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "The row shape is fixed and payment-specific: TableBlockRow requires name, email, initials, amount, paymentType, date, time and status. The name TableBlock is broader than the block. Use SearchableTableBlock for configurable columns.",
+          "The table has its own bounded horizontal scroll region. That is intentional for two-dimensional data, not a reflow defect.",
+          "Uncontrolled selection drops ids that leave rows. Supply selectedIds to keep a selection across pages or across a filter applied outside the block."
+        ]
+      },
+      {
+        "id": "searchable-records-table",
+        "planIdea": 26,
+        "name": "Searchable Records Table",
+        "task": "Search, sort, select and act on configurable records.",
+        "export": "SearchableTableBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "SearchableTableBlockProps",
+          "SearchableTableColumn",
+          "SearchableTableRow"
+        ],
+        "helpers": [],
+        "category": "data-records",
+        "categoryLabel": "Data & records",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "discover",
+          "review",
+          "manage"
+        ],
+        "composition": "collection",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/SearchableTable",
+          "file": "src/blocks/SearchableTableBlock.stories.tsx",
+          "stories": [
+            "WithSearch",
+            "WithTitle",
+            "NarrowViewport",
+            "WithoutConfiguredActions",
+            "SelectionAcrossFilter"
+          ]
+        },
+        "states": [
+          "default",
+          "no-matches",
+          "partial-selection",
+          "no-configured-actions"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/SearchableTableBlock.tsx",
+        "docs": "/blocks/searchable-table-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Search and sort are local by default and become the consumer's responsibility as soon as onSearch or onSort is supplied. The two halves cannot be mixed for one concern.",
+          "The filter and date-selector buttons render only when onFilter and onDateSelect are supplied. showFilter and showDateSelector can hide them but cannot bring them back without a handler.",
+          "There is no loading or error state. Render your own around the block, or pass an empty rows array.",
+          "Uncontrolled selection drops ids that leave rows. Supply selectedIds to own selection across pages."
+        ]
+      },
+      {
+        "id": "profile-settings",
+        "planIdea": 33,
+        "name": "Profile Settings",
+        "task": "Edit personal details and avatar, track unsaved changes, and save or cancel.",
+        "export": "ProfileSettingsBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "ProfileSettingsBlockProps",
+          "ProfileSettingsHeadingLevel",
+          "ProfileSettingsStatus",
+          "ProfileSettingsValues",
+          "ProfileSettingsFieldName",
+          "ProfileSettingsFieldErrors",
+          "ProfileSettingsAvatar",
+          "ProfileSettingsTimeZoneOption"
+        ],
+        "helpers": [
+          "defaultProfileTimeZones"
+        ],
+        "category": "forms-settings",
+        "categoryLabel": "Forms & settings",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "manage"
+        ],
+        "composition": "form",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/ProfileSettings",
+          "file": "src/blocks/ProfileSettingsBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "UnsavedChanges",
+            "ValidationErrors",
+            "Saving",
+            "SaveFailed",
+            "SaveConfirmed",
+            "Loading",
+            "ReadOnlyNoPermission",
+            "DirectoryManagedEmail",
+            "AvatarUploading",
+            "AvatarUploadFailed",
+            "AvatarWithFileUpload",
+            "LongValuesNoPhoto",
+            "ThemedSurface",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "idle",
+          "loading",
+          "saving",
+          "error",
+          "success",
+          "read-only",
+          "field-read-only",
+          "avatar-uploading",
+          "avatar-error"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/ProfileSettingsBlock.tsx",
+        "docs": "/blocks/profile-settings-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "No batch verification report exists for this block. The recorded evidence is its own story coverage and the repository story suite.",
+          "value is the saved profile, not the draft. The block resets its working draft whenever the application reports new saved values, so do not feed it the draft back.",
+          "The block never uploads. onAvatarChange receives the File; the application owns the upload and reports the outcome through avatar and avatarStatus.",
+          "The field set is fixed: firstName, lastName, email, jobTitle, timeZone and bio. Labels are translatable but the fields themselves are not configurable."
+        ]
+      },
+      {
+        "id": "notifications-inbox",
+        "planIdea": 41,
+        "name": "Notifications Inbox",
+        "task": "Read a contextual notification feed and follow the available actions.",
+        "export": "NotificationsBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "NotificationsBlockProps",
+          "NotificationsHeadingLevel",
+          "NotificationItem"
+        ],
+        "helpers": [],
+        "category": "collaboration-workflow",
+        "categoryLabel": "Collaboration & workflow",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "review"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Notifications",
+          "file": "src/blocks/NotificationsBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "LongContent",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "default",
+          "unread"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": false,
+          "containerAdaptive": true,
+          "keyboardChecked": false,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/NotificationsBlock.tsx",
+        "docs": "/blocks/notifications-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "headingLevel changed from a numeric 2 | 3 | 4 | 5 | 6 union defaulting to 3 to the string union \"h1\" through \"h6\" defaulting to \"h2\". Consumers passing a number must pass the element name instead, and consumers passing nothing now render an h2 where they previously rendered an h3.",
+          "The list is native list content, not an ARIA feed. The feed pattern additionally needs per-article accessible names, aria-posinset and aria-setsize, and a focus-driven loading model that this block does not implement.",
+          "Uses bg-white with a dark-mode override rather than the semantic surface roles, so a consumer --color-surface override does not reach the panel.",
+          "There is no empty, loading or error state. Render your own around the block.",
+          "The block does not mark anything read. unread is supplied per item and unreadCount is supplied by the application."
+        ]
+      },
+      {
+        "id": "task-list",
+        "planIdea": 45,
+        "name": "Task List",
+        "task": "Add, assign, complete and filter actionable work with due-date context.",
+        "export": "TaskListBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "TaskListBlockProps",
+          "TaskListHeadingLevel",
+          "TaskListAssignee",
+          "TaskListTask",
+          "TaskListStatusFilter",
+          "TaskListStatus",
+          "TaskListAddStatus",
+          "TaskListAddInput",
+          "TaskListDueContext"
+        ],
+        "helpers": [],
+        "category": "collaboration-workflow",
+        "categoryLabel": "Collaboration & workflow",
+        "domains": [
+          "application"
+        ],
+        "tasks": [
+          "manage",
+          "create"
+        ],
+        "composition": "collection",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/TaskList",
+          "file": "src/blocks/TaskListBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "AddsATask",
+            "CompletesATask",
+            "FilteredToNoMatches",
+            "PartialSelectionReportsMixed",
+            "NoTasksYet",
+            "SingleTask",
+            "FiftyTasks",
+            "ReadOnly",
+            "Loading",
+            "LoadFailed",
+            "AddFailed",
+            "AddInFlight",
+            "CompletionOnly",
+            "LongTitles",
+            "ThemedSurface",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "idle",
+          "loading",
+          "error",
+          "empty",
+          "no-matches",
+          "read-only",
+          "add-submitting",
+          "add-error",
+          "partial-selection"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/TaskListBlock.tsx",
+        "docs": "/blocks/task-list-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "No batch verification report exists for this block. The recorded evidence is its own story coverage and the repository story suite.",
+          "Status and assignee filters are local UI state over the supplied tasks. There is no prop to control or observe them, so server-side filtering is not expressible.",
+          "tasks is the complete set for the current page. The block owns no pagination.",
+          "Every mutation is a callback. The block does not move a task to completed on its own; re-render it with the new state."
+        ]
+      },
+      {
+        "id": "product-hero",
+        "planIdea": 49,
+        "name": "Product Hero",
+        "task": "Explain the product, show a relevant example, and lead to a primary next step.",
+        "export": "ProductHeroBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "ProductHeroBlockProps",
+          "ProductHeroHeadingLevel",
+          "ProductHeroLinkCta",
+          "ProductHeroActionCta",
+          "ProductHeroCta",
+          "ProductHeroHighlight",
+          "ProductHeroMediaRatio",
+          "ProductHeroMedia",
+          "ProductHeroState",
+          "ProductHeroAlign"
+        ],
+        "helpers": [],
+        "category": "marketing-conversion",
+        "categoryLabel": "Marketing & conversion",
+        "domains": [
+          "marketing"
+        ],
+        "tasks": [
+          "discover"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/ProductHero",
+          "file": "src/blocks/ProductHeroBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "CentredWithoutMedia",
+            "ActionPrimaryStep",
+            "LongLabelsAndMissingImage",
+            "Loading",
+            "ErrorWithRetry",
+            "ErrorWithoutRetry",
+            "ThemedSurface",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "missing-media"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/ProductHeroBlock.tsx",
+        "docs": "/blocks/product-hero-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-a-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-a.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "312 layout and overflow checks across 39 story fixtures with no document horizontal overflow",
+                "156 axe-core scans at 390 and 1440 with zero violations across wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice",
+                "18 behavioural interaction checks",
+                "container adaptation measured in a 358px container on a 1440px viewport",
+                "200% root text sizing across five fixtures at 320 and 1440",
+                "a consumer surface override measured reaching the footer ground and its native control"
+              ],
+              "note": "Measured through a standalone harness because the repository's default Playwright browser binary was unavailable. Target size was measured for the period switcher only."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "There is no empty state. headline is required, because a hero without a headline is not a hero.",
+          "There is no success state. The block submits nothing.",
+          "Stories use inline SVG data URIs for product imagery so they render offline. Real photographic assets were not exercised.",
+          "Renders its own call-to-action recipe rather than composing Button, which cannot render an anchor."
+        ]
+      },
+      {
+        "id": "feature-overview",
+        "planIdea": 50,
+        "name": "Feature Overview",
+        "task": "Scan differentiated capabilities and follow the details that matter to the visitor.",
+        "export": "FeatureOverviewBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "FeatureOverviewBlockProps",
+          "FeatureOverviewHeadingLevel",
+          "FeatureOverviewLinkCta",
+          "FeatureOverviewActionCta",
+          "FeatureOverviewCta",
+          "FeatureOverviewItem",
+          "FeatureOverviewState",
+          "FeatureOverviewColumns",
+          "FeatureOverviewVariant",
+          "FeatureOverviewEmptyState"
+        ],
+        "helpers": [],
+        "category": "marketing-conversion",
+        "categoryLabel": "Marketing & conversion",
+        "domains": [
+          "marketing"
+        ],
+        "tasks": [
+          "discover",
+          "compare"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/FeatureOverview",
+          "file": "src/blocks/FeatureOverviewBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "TwoColumnsPlain",
+            "FourColumns",
+            "LongTranslatedLabels",
+            "Loading",
+            "EmptySource",
+            "NoMatches",
+            "ErrorWithRetry",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "no-matches",
+          "error"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/FeatureOverviewBlock.tsx",
+        "docs": "/blocks/feature-overview-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-a-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-a.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "312 layout and overflow checks across 39 story fixtures with no document horizontal overflow",
+                "156 axe-core scans at 390 and 1440 with zero violations across wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice",
+                "18 behavioural interaction checks",
+                "container adaptation measured in a 358px container on a 1440px viewport",
+                "200% root text sizing across five fixtures at 320 and 1440",
+                "a consumer surface override measured reaching the footer ground and its native control"
+              ],
+              "note": "Measured through a standalone harness because the repository's default Playwright browser binary was unavailable. Target size was measured for the period switcher only."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "An empty source and a search with no matches are the same state machine value. The difference is carried entirely by the wording the caller passes in emptyState, which the block does not supply for you.",
+          "columns is the widest column count only. Narrow containers always reduce to one column and the count cannot be pinned.",
+          "There is no success state. The block submits nothing."
+        ]
+      },
+      {
+        "id": "pricing-plans",
+        "planIdea": 55,
+        "name": "Pricing Plans",
+        "task": "Compare plans, switch billing period, and understand included usage and limits.",
+        "export": "PricingPlansBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "PricingPlansBlockProps",
+          "PricingPlansHeadingLevel",
+          "PricingLinkCta",
+          "PricingActionCta",
+          "PricingCta",
+          "PricingBillingPeriod",
+          "PricingPrice",
+          "PricingFeature",
+          "PricingLimit",
+          "PricingPlanAvailability",
+          "PricingPlan",
+          "PricingPlansState",
+          "PricingPlansNotice"
+        ],
+        "helpers": [],
+        "category": "marketing-conversion",
+        "categoryLabel": "Marketing & conversion",
+        "domains": [
+          "marketing",
+          "commerce"
+        ],
+        "tasks": [
+          "compare"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/PricingPlans",
+          "file": "src/blocks/PricingPlansBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "ControlledPeriod",
+            "LocaleAndLargeAmounts",
+            "ManyFeaturesCollapsed",
+            "CurrentAndUnavailablePlans",
+            "ConfirmedOutcomeNotice",
+            "ActionCallbacks",
+            "Loading",
+            "Empty",
+            "ErrorWithRetry",
+            "SinglePlanNoSwitcher",
+            "NarrowContainer"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "plan-available",
+          "plan-current",
+          "plan-unavailable",
+          "confirmed-notice"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/PricingPlansBlock.tsx",
+        "docs": "/blocks/pricing-plans-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "batch-a-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-a.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "312 layout and overflow checks across 39 story fixtures with no document horizontal overflow",
+                "156 axe-core scans at 390 and 1440 with zero violations across wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice",
+                "18 behavioural interaction checks",
+                "container adaptation measured in a 358px container on a 1440px viewport",
+                "200% root text sizing across five fixtures at 320 and 1440",
+                "a consumer surface override measured reaching the footer ground and its native control"
+              ],
+              "note": "Measured through a standalone harness because the repository's default Playwright browser binary was unavailable. Target size was measured for the period switcher only."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "The block performs no purchase and never claims one succeeded. A confirmation appears only when the consumer passes notice.",
+          "Prices are amounts in the currency's major unit, unlike the commerce blocks, which use minor units. The two families do not share a money convention.",
+          "Renders its own notice panel rather than composing Alert, because Alert hard-codes bg-white and would not follow a consumer surface override.",
+          "An earlier draft dimmed unavailable plan cards with opacity-90, which measured every label in that card at 4.03:1 against white. The dimming was removed; unavailability is now carried by the disabled control and its associated reason."
+        ]
+      },
+      {
+        "id": "product-collection",
+        "planIdea": 69,
+        "name": "Product Collection",
+        "task": "Browse products with prices, availability, filters and useful sorting.",
+        "export": "ProductCollectionBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "ProductCollectionBlockProps",
+          "CommerceProduct",
+          "CommerceImage"
+        ],
+        "helpers": [],
+        "category": "commerce",
+        "categoryLabel": "Commerce",
+        "domains": [
+          "commerce"
+        ],
+        "tasks": [
+          "discover",
+          "compare"
+        ],
+        "composition": "collection",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Commerce",
+          "file": "src/blocks/Commerce.stories.tsx",
+          "stories": [
+            "ProductCollection",
+            "CompactCollection",
+            "FullJourney",
+            "AllNewBlocks",
+            "DarkGallery",
+            "CustomTheme",
+            "NarrowContainer",
+            "EmptyAndErrorStates",
+            "LoadingAndPending",
+            "ZeroDecimalCurrency",
+            "DesignReview"
+          ]
+        },
+        "states": [
+          "ready",
+          "loading",
+          "error",
+          "empty",
+          "no-matches",
+          "pending-add"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/ProductCollectionBlock.tsx",
+        "docs": "/blocks/product-collection-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "commerce-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-b.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "Storybook accessibility addon"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "17 commerce stories passing with accessibility violations configured to fail the test",
+                "a live gallery inspected at the recorded widths in both modes with no document horizontal overflow",
+                "a packed-consumer installation exercising every ESM and CommonJS block export plus selected server renders",
+                "Escape closing the cart drawer and restoring focus to its opening button"
+              ],
+              "note": "Desktop Chromium only. No WCAG conformance, physical-device or cross-browser certification is claimed."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Search, category filtering and sorting are internal uncontrolled state. There is no prop to set, read or replace them, so a server-backed catalogue cannot drive them and a host cannot restore them from a URL.",
+          "Most visible strings are hard-coded English: the search label and placeholder, the category and sort option labels, the loading and retry text, the sold-out and add-to-cart labels and the no-matches sentence. Only title, description, errorMessage and emptyMessage are configurable.",
+          "The default title is store-specific fixture copy (\"Thoughtful everyday essentials\"). Pass your own.",
+          "Prices are non-negative integers in the currency's minor unit. Every product in one block must share the block's currency."
+        ]
+      },
+      {
+        "id": "product-detail",
+        "planIdea": 70,
+        "name": "Product Detail",
+        "task": "Inspect media and specifications, choose a purchasable option, and add it to a cart.",
+        "export": "ProductDetailBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "ProductDetailBlockProps",
+          "ProductDetailOption",
+          "ProductDetailSelection",
+          "CommerceProduct",
+          "CommerceImage"
+        ],
+        "helpers": [],
+        "category": "commerce",
+        "categoryLabel": "Commerce",
+        "domains": [
+          "commerce"
+        ],
+        "tasks": [
+          "review",
+          "create"
+        ],
+        "composition": "section",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Commerce",
+          "file": "src/blocks/Commerce.stories.tsx",
+          "stories": [
+            "ProductDetail",
+            "ProductGallery",
+            "StockLimit",
+            "FullJourney",
+            "AllNewBlocks",
+            "DarkGallery",
+            "CustomTheme",
+            "NarrowContainer",
+            "LoadingAndPending",
+            "DesignReview"
+          ]
+        },
+        "states": [
+          "default",
+          "pending",
+          "error",
+          "success",
+          "sold-out",
+          "option-unavailable"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/ProductDetailBlock.tsx",
+        "docs": "/blocks/product-detail-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "commerce-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-b.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "Storybook accessibility addon"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "17 commerce stories passing with accessibility violations configured to fail the test",
+                "a live gallery inspected at the recorded widths in both modes with no document horizontal overflow",
+                "a packed-consumer installation exercising every ESM and CommonJS block export plus selected server renders",
+                "Escape closing the cart drawer and restoring focus to its opening button"
+              ],
+              "note": "Desktop Chromium only. No WCAG conformance, physical-device or cross-browser certification is claimed."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Option and quantity selection are internal uncontrolled state. Changing product resets them; there is no prop to set or read the current selection.",
+          "Most visible strings are hard-coded English: the availability wording, the Quantity label, the add-to-cart and adding labels, and the quantity control's spoken names. Only title, description, optionLabel, errorMessage, successMessage and deliveryNote are configurable.",
+          "The maximum quantity is 99 when no stock is supplied, and that ceiling is not configurable.",
+          "successMessage must come from the consuming application after it confirms the cart update. The block never assumes one."
+        ]
+      },
+      {
+        "id": "shopping-cart",
+        "planIdea": 72,
+        "name": "Shopping Cart",
+        "task": "Review items, change quantity, remove items, and inspect current totals.",
+        "export": "ShoppingCartBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "ShoppingCartBlockProps",
+          "CommerceCartItem",
+          "CommerceTotalsProps"
+        ],
+        "helpers": [],
+        "category": "commerce",
+        "categoryLabel": "Commerce",
+        "domains": [
+          "commerce"
+        ],
+        "tasks": [
+          "review",
+          "manage"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Commerce",
+          "file": "src/blocks/Commerce.stories.tsx",
+          "stories": [
+            "ShoppingCart",
+            "CartDrawer",
+            "FullJourney",
+            "AllNewBlocks",
+            "DarkGallery",
+            "CustomTheme",
+            "NarrowContainer",
+            "EmptyAndErrorStates",
+            "LoadingAndPending",
+            "StockLimit",
+            "ZeroDecimalCurrency",
+            "DesignReview"
+          ]
+        },
+        "states": [
+          "default",
+          "empty",
+          "pending",
+          "error",
+          "read-only",
+          "over-stock"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/ShoppingCartBlock.tsx",
+        "docs": "/blocks/shopping-cart-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "commerce-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-b.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "Storybook accessibility addon"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "17 commerce stories passing with accessibility violations configured to fail the test",
+                "a live gallery inspected at the recorded widths in both modes with no document horizontal overflow",
+                "a packed-consumer installation exercising every ESM and CommonJS block export plus selected server renders",
+                "Escape closing the cart drawer and restoring focus to its opening button"
+              ],
+              "note": "Desktop Chromium only. No WCAG conformance, physical-device or cross-browser certification is claimed."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Quantities are fully controlled. Omitting onQuantityChange and onRemoveItem renders a read-only summary rather than a cart that appears editable.",
+          "Most visible strings are hard-coded English: the empty-cart wording, the Order summary heading, the totals row labels, the unavailable-item sentence and the checkout label. Only title, description, errorMessage and totalsNote are configurable.",
+          "The default title is store-specific fixture copy (\"Your bag\"). Pass your own.",
+          "Section titles such as Order summary are styled paragraphs, not headings, so they do not appear in the page's heading outline. Item names are not headings either.",
+          "Totals are subtotal + shipping + tax - discount, floored at zero. Shipping, tax and discount are supplied amounts; the block contains no commerce rules."
+        ]
+      },
+      {
+        "id": "checkout-review",
+        "planIdea": 75,
+        "name": "Checkout Review",
+        "task": "Review items, addresses, fees and a payment-method summary before placing an order.",
+        "export": "CheckoutReviewBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "CheckoutReviewBlockProps",
+          "CommerceCartItem",
+          "CommerceTotalsProps"
+        ],
+        "helpers": [],
+        "category": "commerce",
+        "categoryLabel": "Commerce",
+        "domains": [
+          "commerce"
+        ],
+        "tasks": [
+          "review"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Commerce",
+          "file": "src/blocks/Commerce.stories.tsx",
+          "stories": [
+            "CheckoutReview",
+            "FullJourney",
+            "AllNewBlocks",
+            "DarkGallery",
+            "CustomTheme",
+            "NarrowContainer",
+            "EmptyAndErrorStates",
+            "LoadingAndPending",
+            "ZeroDecimalCurrency",
+            "DesignReview"
+          ]
+        },
+        "states": [
+          "default",
+          "pending",
+          "error",
+          "blocked",
+          "confirmed"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/CheckoutReviewBlock.tsx",
+        "docs": "/blocks/checkout-review-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "commerce-2026-09-22",
+              "date": "2026-09-22",
+              "report": "docs/blocks-batch-b.md",
+              "tools": [
+                "Storybook browser test run in desktop Chromium",
+                "Storybook accessibility addon"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "17 commerce stories passing with accessibility violations configured to fail the test",
+                "a live gallery inspected at the recorded widths in both modes with no document horizontal overflow",
+                "a packed-consumer installation exercising every ESM and CommonJS block export plus selected server renders",
+                "Escape closing the cart drawer and restoring focus to its opening button"
+              ],
+              "note": "Desktop Chromium only. No WCAG conformance, physical-device or cross-browser certification is claimed."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "The block takes no payment and places no order. onConfirm hands control to the application, and the confirmation panel appears only when the application passes confirmation.",
+          "deliveryAddress and paymentSummary are display text. Never pass payment credentials; collect and validate the address elsewhere.",
+          "Most visible strings are hard-coded English: the Delivery details, Payment method, Items in your order and Order total section titles, the edit-control labels, the totals row labels, the blocked-confirmation sentence and the placing-order label. Only title, description, confirmLabel, errorMessage, totalsNote and terms are configurable.",
+          "Section titles are styled paragraphs, not headings, so they do not appear in the page's heading outline.",
+          "The blocked-confirmation explanation is announced through role=\"status\" while styled in the error colour."
+        ]
+      },
+      {
+        "id": "quick-send",
+        "planIdea": 79,
+        "name": "Quick Send",
+        "task": "Select a beneficiary to start a transfer.",
+        "export": "QuickSendBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "QuickSendBlockProps",
+          "QuickSendBeneficiary"
+        ],
+        "helpers": [],
+        "category": "finance-billing",
+        "categoryLabel": "Finance & billing",
+        "domains": [
+          "finance"
+        ],
+        "tasks": [
+          "navigate"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/QuickSend",
+          "file": "src/blocks/QuickSendBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "ThemedSurface"
+          ]
+        },
+        "states": [
+          "default"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": false,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/QuickSendBlock.tsx",
+        "docs": "/blocks/quick-send-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "The block does not collect an amount and does not send money. onSelect reports which beneficiary was chosen; the transfer belongs to the application.",
+          "There is no empty, loading or error state.",
+          "The beneficiary strip is a deliberate horizontal scroller. Long handles stay inside it rather than widening the panel."
+        ]
+      },
+      {
+        "id": "recent-transactions",
+        "planIdea": 80,
+        "name": "Recent Transactions",
+        "task": "Inspect recent incoming and outgoing transactions and open their details.",
+        "export": "RecentTransactionsBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "RecentTransactionsBlockProps",
+          "Transaction",
+          "TransactionDirection"
+        ],
+        "helpers": [],
+        "category": "finance-billing",
+        "categoryLabel": "Finance & billing",
+        "domains": [
+          "finance"
+        ],
+        "tasks": [
+          "review"
+        ],
+        "composition": "collection",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/RecentTransactions",
+          "file": "src/blocks/RecentTransactionsBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "ThemedSurface"
+          ]
+        },
+        "states": [
+          "default"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": false,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/RecentTransactionsBlock.tsx",
+        "docs": "/blocks/recent-transactions-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "amount is a pre-formatted string. The block applies no currency or locale formatting, so the application owns the sign convention as well as the digits.",
+          "Direction is carried by a visible \"to\" or \"from\" word as well as by colour, which is deliberate. It is not otherwise configurable.",
+          "There is no empty, loading or error state. Long names truncate."
+        ]
+      },
+      {
+        "id": "account-balance",
+        "planIdea": 81,
+        "name": "Account Balance",
+        "task": "View available, pending and total balances with currency and update time.",
+        "export": "AccountBalanceBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "AccountBalanceBlockProps",
+          "AccountBalanceState",
+          "AccountBalanceEntry",
+          "AccountBalanceAction",
+          "FinanceHeadingLevel",
+          "FinanceStatus",
+          "FinanceMoneyValue",
+          "FinanceDateValue",
+          "FinanceAction"
+        ],
+        "helpers": [],
+        "category": "finance-billing",
+        "categoryLabel": "Finance & billing",
+        "domains": [
+          "finance"
+        ],
+        "tasks": [
+          "review"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Account Balance",
+          "file": "src/blocks/AccountBalanceBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "UnknownPendingBalance",
+            "ZeroBalance",
+            "HiddenBalances",
+            "LargeAmountJapaneseYen",
+            "OverdrawnEuro",
+            "RestrictedActions",
+            "Loading",
+            "ErrorWithRetry",
+            "EmptyNoAccount",
+            "NoFiguresSupplied",
+            "NarrowContainers",
+            "DarkIsland",
+            "CustomSurface"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "empty",
+          "balances-hidden",
+          "unknown-figure",
+          "no-figures-supplied"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/AccountBalanceBlock.tsx",
+        "docs": "/blocks/account-balance-block",
+        "verification": {
+          "date": "2026-09-24",
+          "evidence": [
+            {
+              "id": "batch-d-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "Storybook browser test run in desktop Chrome via executable-path override",
+                "Playwright viewport sweep against the project's own Storybook dev server",
+                "axe-core 4.11.1",
+                "keyboard walk",
+                "screenshot review"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "64 stories across 5 files pass with story-level accessibility checks set to error, 13 of them carrying interaction play functions",
+                "152 viewport checks across 19 stories at the recorded widths in both modes, with no document overflow attributable to these blocks",
+                "108 axe-core scans across 18 stories at 320, 390 and 1440 in both modes against wcag2a, 2aa, 21a, 21aa, 22aa and best-practice, with no violations attributable to these blocks",
+                "39 keyboard tab stops across 9 fixtures at 1440, every stop showing a visible focus indicator",
+                "a confirmation control asserted to fire exactly once under three presses, and the block asserted to render no status role of its own afterwards",
+                "a 40-line invoice asserted to scroll inside a bounded region without moving the page or widening the document",
+                "6 screenshots inspected by eye, including a cross-currency transfer and a dark-mode subscription view"
+              ],
+              "note": "A completed verification run, replacing the source-review-only record authored while this batch's run was still interrupted. Desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size."
+            },
+            {
+              "id": "finance-source-review-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "source review of the public prop contracts",
+                "story-file inventory"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "every public prop contract read against the barrel export, so the documented surface matches the types",
+                "story exports and their Storybook group names checked to exist"
+              ],
+              "note": "NOT a verification run, and now superseded. These entries were authored while the batch that built the four blocks had its verification interrupted, and docs/blocks-batch-d.md did not yet exist. That run has since completed and is recorded as batch-d-2026-09-24. Retained as the historical record of what was known at the time. Their distribution wiring was added by a different agent from the one that wrote the implementations."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Verified in desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size. See batch-d-2026-09-24 for the widths, modes and scenarios measured.",
+          "total is supplied, never derived: available + pending is wrong whenever a hold, an overdraft or a reserve is involved, and the block does not know which applies.",
+          "A null amount means genuinely unknown and renders unknownLabel; 0 is a real balance and never stands in for unknown; undefined omits the figure entirely. Three different statements, kept apart.",
+          "balancesHidden is controlled and never stored. The block does not decide to mask a balance and does not persist the preference.",
+          "Every amount in one block shares a single currency and locale."
+        ]
+      },
+      {
+        "id": "transfer-review",
+        "planIdea": 82,
+        "name": "Transfer Review",
+        "task": "Review recipient, amount, fee, rate and arrival estimate before explicit confirmation.",
+        "export": "TransferReviewBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "TransferReviewBlockProps",
+          "TransferReviewState",
+          "TransferReviewParty",
+          "TransferReviewLine",
+          "TransferReviewRate",
+          "TransferReviewResult",
+          "FinanceHeadingLevel",
+          "FinanceStatus",
+          "FinanceMoneyValue",
+          "FinanceDateValue"
+        ],
+        "helpers": [],
+        "category": "finance-billing",
+        "categoryLabel": "Finance & billing",
+        "domains": [
+          "finance"
+        ],
+        "tasks": [
+          "review"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Transfer Review",
+          "file": "src/blocks/TransferReviewBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "ConfirmationLatches",
+            "ConfirmationIsCounted",
+            "AcknowledgementRequired",
+            "CrossCurrency",
+            "UnknownFeeRateAndArrival",
+            "Pending",
+            "ConsumerSuppliedResult",
+            "ErrorWithRetry",
+            "NotPermitted",
+            "Loading",
+            "NarrowContainer",
+            "DarkIsland",
+            "CustomSurface"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "pending",
+          "error",
+          "blocked",
+          "acknowledgement-required",
+          "consumer-supplied-result"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/TransferReviewBlock.tsx",
+        "docs": "/blocks/transfer-review-block",
+        "verification": {
+          "date": "2026-09-24",
+          "evidence": [
+            {
+              "id": "batch-d-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "Storybook browser test run in desktop Chrome via executable-path override",
+                "Playwright viewport sweep against the project's own Storybook dev server",
+                "axe-core 4.11.1",
+                "keyboard walk",
+                "screenshot review"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "64 stories across 5 files pass with story-level accessibility checks set to error, 13 of them carrying interaction play functions",
+                "152 viewport checks across 19 stories at the recorded widths in both modes, with no document overflow attributable to these blocks",
+                "108 axe-core scans across 18 stories at 320, 390 and 1440 in both modes against wcag2a, 2aa, 21a, 21aa, 22aa and best-practice, with no violations attributable to these blocks",
+                "39 keyboard tab stops across 9 fixtures at 1440, every stop showing a visible focus indicator",
+                "a confirmation control asserted to fire exactly once under three presses, and the block asserted to render no status role of its own afterwards",
+                "a 40-line invoice asserted to scroll inside a bounded region without moving the page or widening the document",
+                "6 screenshots inspected by eye, including a cross-currency transfer and a dark-mode subscription view"
+              ],
+              "note": "A completed verification run, replacing the source-review-only record authored while this batch's run was still interrupted. Desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size."
+            },
+            {
+              "id": "finance-source-review-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "source review of the public prop contracts",
+                "story-file inventory"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "every public prop contract read against the barrel export, so the documented surface matches the types",
+                "story exports and their Storybook group names checked to exist"
+              ],
+              "note": "NOT a verification run, and now superseded. These entries were authored while the batch that built the four blocks had its verification interrupted, and docs/blocks-batch-d.md did not yet exist. That run has since completed and is recorded as batch-d-2026-09-24. Retained as the historical record of what was known at the time. Their distribution wiring was added by a different agent from the one that wrote the implementations."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Verified in desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size. See batch-d-2026-09-24 for the widths, modes and scenarios measured.",
+          "The block sends no money. onConfirm hands control to the consuming application, and result is rendered only after that application's provider reports an outcome. result.tone defaults to \"pending\", which is the honest state for most rails.",
+          "sendAmount and sendCurrency are required with no defaults, deliberately: an amount or currency the block invented would be its worst possible defect.",
+          "totalDebited is supplied, never derived, because a fee may be deducted from the amount or added to it.",
+          "exchangeRate accepts null to mean no rate was returned; a rate is never fabricated.",
+          "An arrival string that is not a date passes through unformatted, which is how a caller supplies an inherently fuzzy estimate such as \"1-2 business days\"."
+        ]
+      },
+      {
+        "id": "invoice-detail",
+        "planIdea": 83,
+        "name": "Invoice Detail",
+        "task": "Inspect invoice lines, taxes, adjustments, amount due, status and payment actions.",
+        "export": "InvoiceDetailBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "InvoiceDetailBlockProps",
+          "InvoiceDetailState",
+          "InvoiceLine",
+          "InvoiceAdjustment",
+          "InvoiceParty",
+          "FinanceHeadingLevel",
+          "FinanceStatus",
+          "FinanceMoneyValue",
+          "FinanceDateValue",
+          "FinanceAction"
+        ],
+        "helpers": [],
+        "category": "finance-billing",
+        "categoryLabel": "Finance & billing",
+        "domains": [
+          "finance"
+        ],
+        "tasks": [
+          "review",
+          "manage"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Invoice Detail",
+          "file": "src/blocks/InvoiceDetailBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "SingleLine",
+            "FortyLinesScroll",
+            "InvoiceWithNoLines",
+            "FilteredWithNoMatches",
+            "UnknownAmounts",
+            "EuroDutchLocale",
+            "Loading",
+            "ErrorWithRetry",
+            "EmptyNoInvoice",
+            "PaymentNotPermitted",
+            "NarrowContainers",
+            "DarkIsland",
+            "CustomSurface"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "empty",
+          "lines-empty",
+          "unknown-amount",
+          "payment-unavailable"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/InvoiceDetailBlock.tsx",
+        "docs": "/blocks/invoice-detail-block",
+        "verification": {
+          "date": "2026-09-24",
+          "evidence": [
+            {
+              "id": "batch-d-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "Storybook browser test run in desktop Chrome via executable-path override",
+                "Playwright viewport sweep against the project's own Storybook dev server",
+                "axe-core 4.11.1",
+                "keyboard walk",
+                "screenshot review"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "64 stories across 5 files pass with story-level accessibility checks set to error, 13 of them carrying interaction play functions",
+                "152 viewport checks across 19 stories at the recorded widths in both modes, with no document overflow attributable to these blocks",
+                "108 axe-core scans across 18 stories at 320, 390 and 1440 in both modes against wcag2a, 2aa, 21a, 21aa, 22aa and best-practice, with no violations attributable to these blocks",
+                "39 keyboard tab stops across 9 fixtures at 1440, every stop showing a visible focus indicator",
+                "a confirmation control asserted to fire exactly once under three presses, and the block asserted to render no status role of its own afterwards",
+                "a 40-line invoice asserted to scroll inside a bounded region without moving the page or widening the document",
+                "6 screenshots inspected by eye, including a cross-currency transfer and a dark-mode subscription view"
+              ],
+              "note": "A completed verification run, replacing the source-review-only record authored while this batch's run was still interrupted. Desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size."
+            },
+            {
+              "id": "finance-source-review-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "source review of the public prop contracts",
+                "story-file inventory"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "every public prop contract read against the barrel export, so the documented surface matches the types",
+                "story exports and their Storybook group names checked to exist"
+              ],
+              "note": "NOT a verification run, and now superseded. These entries were authored while the batch that built the four blocks had its verification interrupted, and docs/blocks-batch-d.md did not yet exist. That run has since completed and is recorded as batch-d-2026-09-24. Retained as the historical record of what was known at the time. Their distribution wiring was added by a different agent from the one that wrote the implementations."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Verified in desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size. See batch-d-2026-09-24 for the widths, modes and scenarios measured.",
+          "amountDue is required and supplied, never derived from the lines, so a rounding rule or a credit the block does not know about cannot silently change it.",
+          "Three different absences are kept apart: state \"empty\" is no invoice at all, linesEmptyTitle and linesEmptyDescription describe an invoice carrying no lines, and a filtered view with no matches is the caller's own wording.",
+          "Beyond maxVisibleLines (default 12) the table body moves into a bounded, focusable vertical scroll region, so a long invoice cannot lengthen the page without limit.",
+          "The block takes no payment. primaryAction hands that to the consuming application."
+        ]
+      },
+      {
+        "id": "subscription-billing",
+        "planIdea": 84,
+        "name": "Subscription Billing",
+        "task": "Manage the current plan, usage, renewal date, and the upgrade or cancellation flow.",
+        "export": "SubscriptionBillingBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "SubscriptionBillingBlockProps",
+          "SubscriptionBillingState",
+          "SubscriptionCancellationState",
+          "SubscriptionPlan",
+          "SubscriptionUsageMetric",
+          "SubscriptionPlanOption",
+          "SubscriptionCancellationReason",
+          "FinanceHeadingLevel",
+          "FinanceStatus",
+          "FinanceMoneyValue",
+          "FinanceDateValue",
+          "FinanceAction"
+        ],
+        "helpers": [],
+        "category": "finance-billing",
+        "categoryLabel": "Finance & billing",
+        "domains": [
+          "finance"
+        ],
+        "tasks": [
+          "manage",
+          "review"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/Subscription Billing",
+          "file": "src/blocks/SubscriptionBillingBlock.stories.tsx",
+          "stories": [
+            "Default",
+            "CancellationIsTwoSteps",
+            "CancellationDismissRestoresFocus",
+            "CancellationPending",
+            "ConsumerSuppliedCancellationResult",
+            "CancellationError",
+            "UsageWithUnknownFigures",
+            "TrialWithUnknownPrice",
+            "ReadOnly",
+            "PlanOptionUnavailable",
+            "Loading",
+            "ErrorWithRetry",
+            "EmptyNoSubscription",
+            "NarrowContainers",
+            "YenLocale",
+            "DarkIsland",
+            "CustomSurface"
+          ]
+        },
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "empty",
+          "read-only",
+          "usage-empty",
+          "unknown-usage",
+          "cancellation-idle",
+          "cancellation-pending",
+          "cancellation-error",
+          "cancellation-result",
+          "plan-option-unavailable"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": true,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": true,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/SubscriptionBillingBlock.tsx",
+        "docs": "/blocks/subscription-billing-block",
+        "verification": {
+          "date": "2026-09-24",
+          "evidence": [
+            {
+              "id": "batch-d-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "Storybook browser test run in desktop Chrome via executable-path override",
+                "Playwright viewport sweep against the project's own Storybook dev server",
+                "axe-core 4.11.1",
+                "keyboard walk",
+                "screenshot review"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "64 stories across 5 files pass with story-level accessibility checks set to error, 13 of them carrying interaction play functions",
+                "152 viewport checks across 19 stories at the recorded widths in both modes, with no document overflow attributable to these blocks",
+                "108 axe-core scans across 18 stories at 320, 390 and 1440 in both modes against wcag2a, 2aa, 21a, 21aa, 22aa and best-practice, with no violations attributable to these blocks",
+                "39 keyboard tab stops across 9 fixtures at 1440, every stop showing a visible focus indicator",
+                "a confirmation control asserted to fire exactly once under three presses, and the block asserted to render no status role of its own afterwards",
+                "a 40-line invoice asserted to scroll inside a bounded region without moving the page or widening the document",
+                "6 screenshots inspected by eye, including a cross-currency transfer and a dark-mode subscription view"
+              ],
+              "note": "A completed verification run, replacing the source-review-only record authored while this batch's run was still interrupted. Desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size."
+            },
+            {
+              "id": "finance-source-review-2026-09-24",
+              "date": "2026-09-24",
+              "report": "docs/blocks-batch-d.md",
+              "tools": [
+                "source review of the public prop contracts",
+                "story-file inventory"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "every public prop contract read against the barrel export, so the documented surface matches the types",
+                "story exports and their Storybook group names checked to exist"
+              ],
+              "note": "NOT a verification run, and now superseded. These entries were authored while the batch that built the four blocks had its verification interrupted, and docs/blocks-batch-d.md did not yet exist. That run has since completed and is recorded as batch-d-2026-09-24. Retained as the historical record of what was known at the time. Their distribution wiring was added by a different agent from the one that wrote the implementations."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "Verified in desktop Chrome only. Not covered: screen-reader pass, non-Chromium engines, 200% root text sizing, and per-control target size. See batch-d-2026-09-24 for the widths, modes and scenarios measured.",
+          "Cancellation is two steps and fabricates nothing. Opening the panel calls onCancelRequest and confirming calls onCancelConfirm; neither changes the plan or the status. Only the consuming application changes those, once its provider has acted.",
+          "nextChargeAmount is supplied, never derived from the plan price.",
+          "A usage metric's used accepts null for unknown and is never shown as zero; limit null is unknown while undefined means unmetered.",
+          "readOnly hides every management control and states why, rather than rendering disabled controls."
+        ]
+      },
+      {
+        "id": "empty-state",
+        "planIdea": 93,
+        "name": "Empty State",
+        "task": "Explain an absence of content and offer an appropriate next action.",
+        "export": "EmptyStateBlock",
+        "entryPoint": "@raydenui/ui/blocks",
+        "types": [
+          "EmptyStateBlockProps",
+          "EmptyStateBlockVariant",
+          "EmptyStateBlockAction"
+        ],
+        "helpers": [],
+        "category": "system-states-utilities",
+        "categoryLabel": "System states & utilities",
+        "domains": [
+          "application",
+          "marketing",
+          "commerce",
+          "finance"
+        ],
+        "tasks": [
+          "recover"
+        ],
+        "composition": "panel",
+        "status": "experimental",
+        "verificationLevel": "measured",
+        "flavor": "citrionus",
+        "uiVersion": "0.10.1",
+        "aiVersion": "0.1.5",
+        "dependencies": {
+          "peer": [
+            "react",
+            "react-dom"
+          ],
+          "optional": []
+        },
+        "previewStories": {
+          "group": "Blocks/EmptyState",
+          "file": "src/blocks/EmptyStateBlock.stories.tsx",
+          "stories": [
+            "NoTasks",
+            "NoResults",
+            "UploadPhotos",
+            "LongActionLabel",
+            "ThemedSurface"
+          ]
+        },
+        "states": [
+          "default"
+        ],
+        "capabilities": {
+          "lightDark": true,
+          "scopedThemeIsland": false,
+          "consumerSurfaceOverride": true,
+          "containerAdaptive": true,
+          "keyboardChecked": false,
+          "controlledData": true,
+          "optionalChartDependency": false
+        },
+        "source": "src/blocks/EmptyStateBlock.tsx",
+        "docs": "/blocks/empty-state-block",
+        "verification": {
+          "date": "2026-09-23",
+          "evidence": [
+            {
+              "id": "audit-2026-09-21",
+              "date": "2026-09-21",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Playwright 1.58.2 driving installed Google Chrome",
+                "axe-core 4.11.1",
+                "standalone Vite story harness"
+              ],
+              "widths": [
+                320,
+                390,
+                768,
+                1440
+              ],
+              "modes": [
+                "light",
+                "dark"
+              ],
+              "scenarios": [
+                "184 layout checks across 23 story fixtures",
+                "92 axe-core scans at 390 and 1440",
+                "69 bare-component layouts with presentation wrappers removed",
+                "targeted probes for row replacement, partial selection, pending login controls, custom surface overrides, filtered selection and 200% root text sizing"
+              ],
+              "note": "A bounded review that recorded 13 findings. It is the baseline for the release gates, not a claim that the blocks passed them."
+            },
+            {
+              "id": "story-suite-2026-09-23",
+              "date": "2026-09-23",
+              "report": "docs/blocks-audit-2026-09-21.md",
+              "tools": [
+                "Vitest 4.1 Storybook browser runner driving installed Google Chrome through PLAYWRIGHT_EXECUTABLE_PATH"
+              ],
+              "widths": [],
+              "modes": [],
+              "scenarios": [
+                "the repository story suite run green across every block story file, which exercises each block's render, its documented interaction checks and the accessibility rules its stories enable"
+              ],
+              "note": "A regression run. It does not measure layout at specific widths and does not replace the per-batch evidence above."
+            }
+          ],
+          "notVerified": [
+            "A screen-reader pass",
+            "Any non-Chromium browser engine",
+            "Operating-system text-size or full-browser-zoom settings, as distinct from a changed root font size",
+            "Physical mobile or tablet devices",
+            "Every locale, every custom palette and every combination of states"
+          ]
+        },
+        "limitations": [
+          "variant selects the wrapper (inline or card), not the illustration. The illustration is chosen with the separate illustration prop, whose values are the library's illustration names.",
+          "illustrationPalette is a customisation surface, not a theme role: the values are literal colours and do not follow light or dark mode.",
+          "Exactly one action is supported. There is no secondary action.",
+          "The block does not distinguish an empty source from a search with no matches. That difference lives entirely in the title and description you pass."
+        ]
+      }
+    ],
+    "limitations": [
+      "Status, capabilities and verification are authored records of what was measured. They are not automated conformance results and no entry claims WCAG conformance.",
+      "A capability flag means the named scenario was exercised, not that the block is accessible or responsive in general. The presence of ARIA attributes or breakpoint classes is never the basis for a flag.",
+      "Every entry is experimental: no block in this release has had a screen-reader pass, a second browser engine, or operating-system text-size testing, so none has earned the stable status the plan reserves for the public count.",
+      "Entries carrying verificationLevel \"unmeasured\" have had no verification run at all. Their capability flags describe what their stories cover in principle, not a measurement, and are weaker evidence than a measured entry's.",
+      "Preview story names are authored and verified against their story file; a listed story is a fixture, not an end-to-end interaction test.",
+      "Prop contracts are not repeated here. Read them from the exported TypeScript types or the component manifests."
+    ]
+  },
   "limitations": [
     "Only the stated Citrionus UI release is represented; future flavors and other versions are not silently substituted.",
+    "Block catalog status, capabilities and verification are authored records of what was measured, not automated conformance results. Every block entry is experimental.",
     "Prop contracts derive from exported TypeScript types. Types do not establish runtime defaults or behavior.",
     "Examples are authored JSX fragments; not every example has an end-to-end interaction test.",
     "Token and anatomy data are separately authored reference data; full parity with runtime CSS is not certified."
@@ -3691,7 +7516,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -4176,7 +8002,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -5217,7 +9044,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -5688,7 +9516,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -6170,7 +9999,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -6850,7 +10680,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -7759,7 +11590,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -8182,7 +12014,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -8595,7 +12428,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -9008,7 +12842,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -9450,7 +13285,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -10214,7 +14050,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -11017,7 +14854,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -11480,7 +15318,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -11941,7 +15780,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -12420,7 +16260,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -12850,7 +16691,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -13257,7 +17099,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -13702,7 +17545,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -14063,7 +17907,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -14431,7 +18276,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -14822,7 +18668,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -16441,7 +20288,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -17494,7 +21342,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -19442,7 +23291,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -20234,7 +24084,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -20704,7 +24555,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -21099,7 +24951,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -22092,7 +25945,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -22526,7 +26380,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -23911,7 +27766,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -25692,7 +29548,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -26255,7 +30112,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -26802,7 +30660,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -29153,7 +33012,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -30309,7 +34169,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -30691,7 +34552,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -31036,7 +34898,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -31243,7 +35106,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     },
     {
@@ -31546,7 +35410,8 @@
         "installedProjectDetection": false,
         "flavorSwitching": false,
         "sourceCodeValidation": false,
-        "motionPilot": true
+        "motionPilot": true,
+        "blockCatalog": true
       }
     }
   ]

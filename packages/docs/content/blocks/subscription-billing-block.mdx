@@ -1,0 +1,304 @@
+---
+title: SubscriptionBillingBlock
+description: Manage the current plan, usage, renewal date, and the upgrade or cancellation flow
+---
+
+# SubscriptionBillingBlock
+
+Manage the current plan, its usage, the renewal date and the upgrade or cancellation flow.
+
+Plan idea 84, category **Finance & billing**. Status **experimental**, verification level
+**unmeasured** — see [verification](#verification) before adopting it.
+
+## Import
+
+```tsx
+import { SubscriptionBillingBlock } from "@raydenui/ui/blocks";
+import type {
+  SubscriptionPlan,
+  SubscriptionUsageMetric,
+  SubscriptionPlanOption,
+} from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+Amounts are **minor-unit integers** in the block's single `currency`.
+
+```tsx
+const plan: SubscriptionPlan = {
+  name: "Scale",
+  description: "For teams running multiple lanes.",
+  amount: 24900,
+  interval: "per month",
+  seats: "12 of 20 seats used",
+  badge: "Annual billing",
+};
+
+<SubscriptionBillingBlock
+  plan={plan}
+  status={{ label: "Active", tone: "success" }}
+  currency="GBP"
+  locale="en-GB"
+  renewsOn="2026-10-01"
+  timeZone="Europe/London"
+  renewalNote="Your card is charged on the renewal date."
+  nextChargeAmount={24900}
+  paymentMethodSummary="Visa ending 4242"
+  onManagePaymentMethod={() => openPaymentMethods()}
+  actions={[{ id: "history", label: "Billing history", href: "/billing/history" }]}
+/>;
+```
+
+`nextChargeAmount` is **supplied, never derived** from the plan price: a proration, a credit or
+a seat change can make the two differ.
+
+### Usage
+
+```tsx
+const usage: SubscriptionUsageMetric[] = [
+  { id: "events", label: "Events", used: 184_000, limit: 250_000, unit: "events" },
+  { id: "storage", label: "Storage", used: 41, limit: undefined, unit: "GB", unlimitedLabel: "Unlimited" },
+  { id: "seats", label: "Seats", used: null, limit: 20, unit: "seats", note: "Seat count refreshes nightly." },
+];
+
+<SubscriptionBillingBlock
+  plan={plan}
+  currency="GBP"
+  usage={usage}
+  usageLabel="Usage this period"
+  usagePeriod="1–30 September"
+/>;
+```
+
+| Value                | Meaning                                    |
+| -------------------- | ------------------------------------------ |
+| `used: null`         | genuinely unknown, and never shown as zero   |
+| `limit: null`        | the entitlement is unknown                  |
+| `limit: undefined`   | unmetered — renders `unlimitedLabel`         |
+
+### Changing plan
+
+Each option carries its own control, so an option the viewer may not choose renders disabled
+with the reason visible.
+
+```tsx
+const upgradeOptions: SubscriptionPlanOption[] = [
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    amount: 79900,
+    interval: "per month",
+    highlights: ["Unlimited events", "SAML single sign-on"],
+    recommended: true,
+    onSelect: () => startUpgrade("enterprise"),
+  },
+  {
+    id: "starter",
+    name: "Starter",
+    amount: 4900,
+    interval: "per month",
+    unavailableReason: "Downgrading needs fewer than 5 seats in use.",
+  },
+];
+
+<SubscriptionBillingBlock
+  plan={plan}
+  currency="GBP"
+  upgradeOptions={upgradeOptions}
+  upgradeLabel="Change plan"
+  upgradeDescription="Changes take effect on your next renewal."
+/>;
+```
+
+`recommended` is visual only — the words carry the meaning.
+
+### Cancellation is two steps and fabricates nothing
+
+Opening the panel calls `onCancelRequest`; confirming calls `onCancelConfirm`. **Neither changes
+the plan or the status.** Only your application changes those, once its provider has acted.
+
+Pending cancellation keeps the confirmation panel open and prevents dismissal, so its progress
+message stays visible. A provider error opens the panel with recovery feedback. A zero usage limit
+is shown as a real zero allowance, rather than being described as missing data.
+
+```tsx
+<SubscriptionBillingBlock
+  plan={plan}
+  currency="GBP"
+  onCancelRequest={() => track("cancel-opened")}
+  onCancelDismiss={() => track("cancel-dismissed")}
+  onCancelConfirm={(reasonId) => requestCancellation(reasonId)}
+  cancelHeading="Cancel this subscription?"
+  cancelExplanation="Scale stays active until 1 October. After that your workspace becomes read-only."
+  cancelReasons={[
+    { id: "price", label: "Too expensive" },
+    { id: "unused", label: "Not using it enough" },
+  ]}
+  requireCancelReason
+  cancellationState={cancelling ? "pending" : "idle"}
+/>
+```
+
+The cancellation affordance is omitted entirely without `onCancelConfirm`.
+
+```tsx
+<SubscriptionBillingBlock
+  plan={plan}
+  currency="GBP"
+  onCancelConfirm={requestCancellation}
+  cancellationResult={{
+    title: "Cancellation requested",
+    description: "Scale stays active until 1 October.",
+    reference: "CNL-20260924-0007",
+  }}
+/>
+```
+
+### Read-only
+
+`readOnly` hides every management control and states why, rather than rendering disabled ones.
+
+```tsx
+<SubscriptionBillingBlock
+  plan={plan}
+  currency="GBP"
+  readOnly
+  readOnlyReason="Only a billing administrator can change this subscription."
+/>
+```
+
+### Loading, error and empty
+
+```tsx
+<SubscriptionBillingBlock plan={plan} currency="GBP" state="loading" />
+```
+
+```tsx
+<SubscriptionBillingBlock
+  plan={plan}
+  currency="GBP"
+  state="error"
+  errorTitle="This subscription could not be loaded"
+  onRetry={() => refetch()}
+/>
+```
+
+```tsx
+<SubscriptionBillingBlock
+  plan={plan}
+  currency="GBP"
+  state="empty"
+  emptyTitle="No active subscription"
+  emptyAction={{ id: "choose", label: "Choose a plan", href: "/pricing" }}
+/>
+```
+
+## Props
+
+| Prop                           | Type                                            | Default                    | Description                                       |
+| ------------------------------ | ----------------------------------------------- | -------------------------- | ------------------------------------------------- |
+| `plan`                         | `SubscriptionPlan`                              | —                          | **Required.** The current plan.                     |
+| `title`                        | `ReactNode`                                     | `"Subscription"`           | Block title.                                       |
+| `headingLevel`                 | `"h1"`–`"h6"`                                   | `"h2"`                     | Element for `title`.                               |
+| `description`                  | `ReactNode`                                     | —                          | Supporting sentence.                                |
+| `eyebrow`                      | `ReactNode`                                     | —                          | Small label above the title.                         |
+| `status`                       | `FinanceStatus`                                 | —                          | e.g. Active, Trialling, Past due.                    |
+| `currency`                     | `string`                                        | `"GBP"`                    | ISO 4217 code shared by every amount.                |
+| `locale`                       | `string`                                        | `"en-GB"`                  | Keeps server and client formatting identical.          |
+| `unknownLabel`                 | `string`                                        | `"Not available"`          | Words shown for a `null` amount or date.              |
+| `timeZone`                     | `string`                                        | —                          | IANA zone for the renewal date.                       |
+| `formatRenewal`                | `(value: Date) => string`                       | —                          | Formatting escape hatch.                              |
+| `planLabel`                    | `string`                                        | `"Current plan"`           | Label override.                                      |
+| `renewsOn`                     | `FinanceDateValue`                              | —                          | Next renewal or charge. `null` is unknown.             |
+| `renewsOnLabel`                | `string`                                        | `"Renews"`                 | Label override.                                      |
+| `renewalNote`                  | `ReactNode`                                     | —                          | One line under the date.                              |
+| `nextChargeAmount`             | `FinanceMoneyValue`                             | —                          | Supplied, never derived from the plan price.            |
+| `nextChargeLabel`              | `string`                                        | `"Next charge"`            | Label override.                                      |
+| `paymentMethodSummary`         | `ReactNode`                                     | —                          | Display only. Never full credentials.                  |
+| `paymentMethodLabel`           | `string`                                        | `"Payment method"`         | Label override.                                      |
+| `onManagePaymentMethod`        | `() => void`                                    | —                          | The control is omitted entirely without it.             |
+| `managePaymentMethodLabel`     | `string`                                        | `"Update payment method"`  | Label override.                                      |
+| `usage`                        | `SubscriptionUsageMetric[]`                     | —                          | Metered usage for the period.                          |
+| `usageLabel`                   | `string`                                        | `"Usage this period"`      | Label override.                                      |
+| `usagePeriod`                  | `ReactNode`                                     | —                          | Period the usage covers.                               |
+| `usageEmptyTitle`              | `string`                                        | —                          | Wording when nothing is metered yet.                    |
+| `usageEmptyDescription`        | `ReactNode`                                     | —                          | Wording when nothing is metered yet.                    |
+| `upgradeOptions`               | `SubscriptionPlanOption[]`                      | —                          | Alternative plans, each with its own control.             |
+| `upgradeLabel`                 | `string`                                        | `"Change plan"`            | Label override.                                      |
+| `upgradeDescription`           | `ReactNode`                                     | —                          | One line above the options.                             |
+| `actions`                      | `FinanceAction[]`                               | —                          | Supporting actions.                                    |
+| `actionsLabel`                 | `string`                                        | `"Subscription actions"`   | Accessible name for the action group.                   |
+| `onCancelConfirm`              | `(reasonId?: string) => void`                   | —                          | The cancellation affordance is omitted entirely without it. |
+| `onCancelRequest`              | `() => void`                                    | —                          | Called when the panel opens.                            |
+| `onCancelDismiss`              | `() => void`                                    | —                          | Called when the reader backs out.                        |
+| `cancelLabel`                  | `string`                                        | `"Cancel subscription"`    | Label override.                                      |
+| `cancelConfirmLabel`           | `string`                                        | `"Yes, cancel subscription"` | Label override.                                    |
+| `cancelDismissLabel`           | `string`                                        | `"Keep subscription"`      | Label override.                                      |
+| `cancelHeading`                | `string`                                        | `"Cancel this subscription?"` | Panel heading.                                    |
+| `cancelExplanation`            | `ReactNode`                                     | —                          | What actually happens. Supplied, never assumed.           |
+| `cancelReasons`                | `SubscriptionCancellationReason[]`              | —                          | `{ id, label }` options.                                |
+| `cancelReasonLabel`            | `string`                                        | `"Reason for cancelling"`  | Label override.                                      |
+| `requireCancelReason`          | `boolean`                                       | `false`                    | Gates confirmation on a chosen reason.                   |
+| `cancellationState`            | `"idle" \| "pending" \| "error"`                 | `"idle"`                   | Your provider call's state, not the subscription's.        |
+| `cancellationPendingMessage`   | `string`                                        | `"Cancelling your subscription"` | Announced while pending.                          |
+| `cancellationErrorTitle`       | `string`                                        | `"This subscription could not be cancelled"` | Shown on error.               |
+| `cancellationErrorDescription` | `ReactNode`                                     | —                          | Shown on error.                                        |
+| `cancellationResult`           | `{ title, description?, reference? }`           | —                          | The outcome, supplied only after your provider reports one.  |
+| `readOnly`                     | `boolean`                                       | `false`                    | Hides every management control and states why.             |
+| `readOnlyReason`               | `ReactNode`                                     | —                          | Shown in place of those controls.                        |
+| `state`                        | `"default" \| "loading" \| "empty" \| "error"`    | `"default"`                | Lifecycle owned by your application.                      |
+| `loadingMessage`               | `string`                                        | `"Loading subscription"`   | Announced while loading.                                 |
+| `errorTitle`                   | `string`                                        | `"This subscription could not be loaded"` | Shown while `state="error"`.   |
+| `errorDescription`             | `ReactNode`                                     | —                          | Shown while `state="error"`.                              |
+| `onRetry`                      | `() => void`                                    | —                          | The retry control is omitted entirely without it.           |
+| `emptyTitle`                   | `string`                                        | `"No active subscription"` | Shown while `state="empty"`.                              |
+| `emptyDescription`             | `ReactNode`                                     | —                          | Shown while `state="empty"`.                              |
+| `emptyAction`                  | `FinanceAction`                                 | —                          | Recovery step on the empty panel.                          |
+| `className`                    | `string`                                        | —                          | Lands on the container root, outside the card padding.        |
+
+### SubscriptionPlan
+
+`{ name, description?, amount?, interval?, seats?, badge? }`. `interval` is words, not a
+duration. `seats` must already be pluralised by the caller.
+
+### SubscriptionUsageMetric
+
+`{ id, label, used, limit?, unit?, formatValue?, note?, unlimitedLabel? }`.
+
+### SubscriptionPlanOption
+
+`{ id, name, description?, amount?, interval?, highlights?, recommended?, onSelect?, selectLabel?, unavailableReason? }`.
+The control is omitted entirely without either `onSelect` or `unavailableReason`.
+
+## States
+
+- **default** — the plan, renewal, payment method and usage.
+- **loading** / **error** — with an optional retry control.
+- **empty** — no active subscription.
+- **read-only** — management controls hidden, with a reason.
+- **usage empty** / **unknown usage** — nothing metered, or a metric with an unknown figure.
+- **cancellation idle / pending / error / result** — your provider call's own lifecycle, which is
+  not the subscription's status.
+- **plan option unavailable** — per option, with the reason visible.
+
+## Verification
+
+**No verification run exists for this block yet.** The batch that built it had its run
+interrupted and is repeating it, and its batch report (`docs/blocks-batch-d.md`) did not exist
+when this page was written. This page was reconciled against the block's public TypeScript
+types and its 17 story exports, and the block resolves from a built package with its types —
+nothing more.
+
+Not verified: layout at any width, contrast in either mode, keyboard flows, theme overrides, a
+screen-reader pass, any non-Chromium engine, operating-system text-size settings, or physical
+devices. The story `CancellationDismissRestoresFocus` suggests focus restoration is exercised,
+but that has not been confirmed by a completed run.
+
+## Known limitations
+
+- `cancellationState="pending"` is your provider call in flight. It is **not** a cancelled
+  subscription: the plan and status change only when your application changes them.
+- `nextChargeAmount` is supplied, never derived.
+- The block cancels nothing, upgrades nothing and stores no payment method.
+- Every amount in one block shares a single currency and locale.

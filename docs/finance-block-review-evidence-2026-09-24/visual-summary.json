@@ -1,0 +1,34 @@
+[
+  {
+    "block": "account-balance",
+    "theme": "light",
+    "width": 390,
+    "sections": 1,
+    "scroll": 390,
+    "height": 1200
+  },
+  {
+    "block": "transfer-review",
+    "theme": "dark",
+    "width": 390,
+    "sections": 1,
+    "scroll": 390,
+    "height": 1200
+  },
+  {
+    "block": "invoice-detail",
+    "theme": "dark",
+    "width": 390,
+    "sections": 1,
+    "scroll": 390,
+    "height": 1552
+  },
+  {
+    "block": "subscription-billing",
+    "theme": "dark",
+    "width": 1440,
+    "sections": 1,
+    "scroll": 1440,
+    "height": 1206
+  }
+]

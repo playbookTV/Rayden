@@ -55,52 +55,60 @@ import { EmptyStateBlock } from "@raydenui/ui/blocks";
 />
 ```
 
-## Illustration Variants
+## Illustrations
 
-| Illustration         | Use Case                     |
-| -------------------- | ---------------------------- |
-| `task-templates`     | No tasks                     |
-| `search`             | No search results            |
-| `gallery`            | No photos/images             |
-| `folder`             | Empty folder                 |
-| `inbox`              | Empty inbox                  |
-| `notifications`      | No notifications             |
-| `documents`          | No documents                 |
-| `users`              | No team members              |
-| `chart`              | No data/analytics            |
-| `calendar`           | No events                    |
-| `cart`               | Empty cart                   |
-| `bookmark`           | No bookmarks                 |
-| `message`            | No messages                  |
-| `cloud`              | No cloud storage             |
-| `settings`           | No configuration             |
-| `error`              | General error state          |
-| `success`            | Action completed             |
-| `connection`         | No internet connection       |
-| `location`           | No location data             |
+`illustration` accepts an `IllustrationName`. These nineteen are the complete set:
+
+| Illustration      | Illustration      | Illustration      |
+| ----------------- | ----------------- | ----------------- |
+| `calendar`        | `chat`            | `contacts`        |
+| `dashboard`       | `favorites`       | `file-manager`    |
+| `forms`           | `gallery`         | `inbox`           |
+| `invoice`         | `notifications`   | `product-catalog` |
+| `project-list`    | `search`          | `shopping-cart`   |
+| `subscriptions`   | `survey`          | `task-templates`  |
+| `team`            |                   |                   |
 
 ## Props
 
-| Prop                  | Type                    | Default     | Description                |
-| --------------------- | ----------------------- | ----------- | -------------------------- |
-| `illustration`        | `string`                | —           | Illustration name          |
-| `illustrationColored` | `boolean`               | `true`      | Use colored illustration   |
-| `variant`             | `"default" \| "card"`   | `"default"` | Display variant            |
-| `title`               | `string`                | —           | Title text (required)      |
-| `description`         | `string`                | —           | Description text           |
-| `action`              | `EmptyStateBlockAction` | —           | Primary action button      |
-| `className`           | `string`                | —           | Additional CSS classes     |
+| Prop                  | Type                     | Default    | Description                                                    |
+| --------------------- | ------------------------ | ---------- | -------------------------------------------------------------- |
+| `illustration`        | `IllustrationName`       | —          | **Required.** One of the nineteen names above.                   |
+| `title`               | `string`                 | —          | **Required.** Bold title text.                                  |
+| `description`         | `string`                 | —          | **Required.** Supports `\n` for line breaks.                     |
+| `action`              | `EmptyStateBlockAction`  | —          | A single optional action.                                       |
+| `variant`             | `"inline" \| "card"`     | `"inline"` | `inline` has no wrapper; `card` draws a `--color-surface` panel.  |
+| `illustrationColored` | `boolean`                | `true`     | Coloured or monochrome illustration.                             |
+| `illustrationPalette` | `string[]`               | —          | Literal colours. A customisation surface, not a theme role.       |
+| `illustrationSize`    | `number`                 | —          | Illustration size in pixels.                                     |
+| `className`           | `string`                 | —          | Additional class names.                                         |
+
+`illustrationPalette` values do **not** follow light or dark mode. Supply mode-appropriate
+colours yourself, or omit it to inherit the flavor's illustration palette.
 
 ### EmptyStateBlockAction
 
-| Prop      | Type         | Required | Description         |
-| --------- | ------------ | -------- | ------------------- |
-| `label`   | `string`     | Yes      | Button label        |
-| `icon`    | `string`     | No       | Icon name           |
-| `onClick` | `() => void` | No       | Click handler       |
+| Prop      | Type                     | Required | Description                                  |
+| --------- | ------------------------ | -------- | -------------------------------------------- |
+| `label`   | `string`                 | Yes      | Button label.                                 |
+| `icon`    | `ReactNode \| IconName`  | No       | A library icon name or your own node.          |
+| `onClick` | `() => void`             | No       | Click handler.                                |
+
+## States
+
+**Default only.** The block presents an absence your application has already detected.
 
 ## Accessibility
 
-- Illustrations are decorative (aria-hidden)
-- Action buttons have proper focus states
-- Description text supports multi-line content
+- Illustrations are decorative and hidden from assistive technology.
+- The action is a native button with a visible focus ring.
+- `description` supports multi-line content through `\n`.
+
+## Known limitations
+
+- `variant` selects the **wrapper**, not the illustration. The illustration is chosen with
+  the separate `illustration` prop.
+- Exactly one action is supported. There is no secondary action.
+- The block does not distinguish an empty source from a search with no matches — that
+  difference lives entirely in the `title` and `description` you pass. The two demos above
+  show both wordings.

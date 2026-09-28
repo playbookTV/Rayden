@@ -1,0 +1,76 @@
+.guide-nav { display: flex; align-items: center; gap: 28px; color: #b9b8bc; font-size: 14px; }
+.guide-nav a { padding-block: 12px; }
+.guide-nav a:hover { color: var(--text); }
+.guide-hero { padding: 64px 0 56px; border-bottom: 1px solid var(--line); }
+.guide-breadcrumb { display: flex; gap: 12px; color: #b3b0af; font-size: 13px; margin-bottom: 38px; }
+.guide-breadcrumb span { color: #68666a; }
+.guide-hero-grid { display: grid; grid-template-columns: 1.12fr 1fr; align-items: center; gap: 64px; }
+.guide-kicker { color: var(--accent); font-size: 12px; letter-spacing: .11em; margin-bottom: 16px; }
+.guide-hero h1 { font-size: clamp(38px, 4.7vw, 62px); line-height: 1.09; max-width: 690px; text-wrap: balance; }
+.guide-lead { margin-top: 24px; font-size: 19px; line-height: 1.6; color: #b3b0af; max-width: 620px; }
+.guide-meta { display: flex; gap: 10px 20px; flex-wrap: wrap; margin: 26px 0; color: #a4a1a1; font-size: 13px; }
+.guide-download { display: inline-flex; align-items: center; gap: 20px; }
+.guide-preview { margin: 0; padding: 8px; background: #ffffff06; border: 1px solid var(--line); border-radius: 20px; }
+.guide-preview img { width: 100%; height: auto; border-radius: 12px; }
+.guide-preview figcaption { padding: 14px 12px 7px; font-size: 12px; color: #b3b0af; }
+.guide-layout { display: grid; grid-template-columns: 220px minmax(0, 760px); gap: 72px; padding-block: 64px 96px; justify-content: space-between; }
+.guide-toc { position: sticky; top: 36px; align-self: start; }
+.guide-toc p { font-size: 11px; letter-spacing: .12em; color: #8f8b8b; margin-bottom: 16px; }
+.guide-toc a { display: block; padding: 10px 0; font-size: 14px; color: #bdb9b7; }
+.guide-toc a:hover { color: var(--accent); }
+.guide-article { min-width: 0; }
+.guide-article section { margin-bottom: 54px; scroll-margin-top: 28px; }
+.guide-article h2 { font-size: 28px; line-height: 1.3; letter-spacing: -.035em; margin: 0 0 18px; }
+.guide-article h3 { font-size: 18px; letter-spacing: -.02em; margin: 28px 0 12px; }
+.guide-article p, .guide-article li { color: #bdb9b7; font-size: 17px; line-height: 1.8; }
+.guide-article p { margin-bottom: 18px; }
+.guide-article ul { padding-left: 22px; }
+.guide-article li + li { margin-top: 8px; }
+.guide-article a:not(.button) { color: var(--accent-bright); text-decoration: underline; text-underline-offset: 4px; }
+.guide-article :not(pre) > code { color: #e3cec0; font-size: .84em; background: #ffffff06; padding: 2px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+.guide-code { border: 1px solid #ffffff12; border-radius: 12px; overflow: hidden; margin: 22px 0; background: #151517; }
+.guide-code-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 7px 10px 7px 18px; background: #ffffff03; border-bottom: 1px solid var(--line); }
+.guide-code-head span { color: #bdb9b7; font-family: monospace; font-size: 12px; }
+.guide-copy { min-height: 36px; padding: 6px 12px; border-radius: 6px; font-size: 12px; color: #ccc6c1; background: #ffffff06; }
+.guide-copy:hover { background: #ffffff0e; }
+.guide-code pre { padding: 22px; overflow-x: auto; color: #e7d7cc; line-height: 1.8; font-size: 12px; tab-size: 2; }
+.guide-note { border-left: 2px solid var(--accent); padding: 6px 0 6px 20px; margin: 24px 0; }
+.guide-note p:last-child { margin-bottom: 0; }
+.guide-version { font-size: 14px !important; }
+.guide-links { border-top: 1px solid var(--line); padding-top: 32px; }
+.guide-announcement { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 56px; margin-bottom: 48px; }
+.guide-announcement h2 { font-size: 22px; letter-spacing: -.03em; margin-top: 5px; }
+.guide-announcement p { color: var(--accent); font-size: 11px; letter-spacing: .1em; }
+.guide-announcement a { flex-shrink: 0; }
+@media (max-width: 1000px) { .guide-hero-grid { gap: 32px; } .guide-layout { grid-template-columns: 170px minmax(0,1fr); gap: 36px; } }
+@media (max-width: 760px) {
+  .guide-hero { padding-top: 32px; } .guide-hero-grid { grid-template-columns: 1fr; }
+  .guide-hero h1 { font-size: 44px; } .guide-lead { font-size: 18px; }
+  .guide-preview { max-width: 480px; } .guide-layout { grid-template-columns: 1fr; gap: 36px; padding-top: 32px; }
+  .guide-toc { position: static; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .guide-toc div { display: flex; flex-wrap: wrap; gap: 0 22px; } .guide-toc a { font-size: 13px; }
+  .guide-announcement { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 480px) { .guide-nav { gap: 16px; font-size: 12px; } .guide-nav a:first-child { display: none; } .guide-hero h1 { font-size: 38px; } .guide-code pre { padding: 16px; font-size: 11px; } .guide-meta { font-size: 12px; } }
+
+/* Rayden AI guide: a compact, real component-contract example. */
+.ai-guide-preview { min-width: 0; padding: 28px; border: 1px solid #ffffff12; border-radius: 18px; background: linear-gradient(145deg, #211913, #151517 60%); }
+.ai-guide-preview-head { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 24px; margin-bottom: 26px; border-bottom: 1px solid var(--line); font-size: 11px; color: #bcb6b1; letter-spacing: .08em; }
+.ai-guide-preview-head span:first-child { color: var(--accent); }
+.ai-guide-preview-label { color: #a29a96; font-size: 10px; letter-spacing: .1em; margin: 22px 0 10px; }
+.ai-guide-preview pre { color: #ede6e1; font-size: clamp(15px, 1.65vw, 22px); white-space: pre-wrap; overflow-wrap: anywhere; }
+.ai-guide-check { display: flex; align-items: flex-start; gap: 14px; padding: 20px 0; color: var(--accent-bright); }
+.ai-guide-check > span { font-size: 22px; line-height: 1; }
+.ai-guide-check strong { font-size: 14px; font-weight: 500; }
+.ai-guide-check p { margin-top: 5px; color: #b5ada7; font-size: 13px; }
+.ai-guide-check.is-valid { color: #a9c8b2; }
+.ai-guide-preview-caption { padding-top: 20px; border-top: 1px solid var(--line); color: #a29a96; font-size: 12px; }
+.guide-table-wrap { overflow-x: auto; margin: 24px 0; }
+.guide-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
+.guide-table th { color: var(--text); font-weight: 500; padding: 14px 12px; border-bottom: 1px solid #ffffff22; }
+.guide-table td { color: #bdb9b7; padding: 16px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.guide-table td:first-child { min-width: 225px; }
+.guide-list { border-top: 1px solid var(--line); margin-top: 56px; padding-top: 28px; }
+.guide-list .guide-announcement { margin-block: 0; border-top: 0; }
+.guide-list > .guide-kicker { margin-bottom: 0; }
+@media (max-width: 480px) { .ai-guide-preview { padding: 22px; } .guide-table td:first-child { min-width: 180px; } }

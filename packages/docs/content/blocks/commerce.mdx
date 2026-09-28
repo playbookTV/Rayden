@@ -1,11 +1,16 @@
 ---
-title: Commerce blocks
-description: Product discovery, product detail, shopping cart, and checkout review
+title: Commerce journey
+description: Compose the four commerce blocks into a discovery-to-order-review journey
 ---
 
-# Commerce blocks
+# Commerce journey
 
-Four blocks cover discovery through order review. **Design Review** provides a switcher for each block, its layout, light/dark appearance, phone-width container, and ready/pending/error/empty states. Open **Blocks / Commerce / All New Blocks** in Storybook to see all four, or **Full Journey** to try the connected demo shop. Dark Gallery, Custom Theme, Narrow Container, and state stories show other supported contexts.
+[ProductCollectionBlock](/blocks/product-collection-block),
+[ProductDetailBlock](/blocks/product-detail-block),
+[ShoppingCartBlock](/blocks/shopping-cart-block) and
+[CheckoutReviewBlock](/blocks/checkout-review-block) cover discovery through order review.
+Each block's own page carries its full prop contract, states, verification record and
+limitations; this page is about the shared money contract and putting the four together.
 
 ```tsx
 import {
@@ -18,93 +23,60 @@ import {
 } from "@raydenui/ui/blocks";
 ```
 
-## Product collection
-
-The collection filters and sorts its supplied products locally. Use `href` for navigation or `onSelectProduct` for an in-page detail view. Add-to-cart controls appear only when `onAddToCart` is supplied. Products with configurable options should open their detail view first.
+## A connected journey
 
 ```tsx
-const products: CommerceProduct[] = [
-  { id: "cup", name: "Everyday ceramic cup", category: "Objects", price: 2400, stock: 12 },
-];
+const [step, setStep] = useState<"collection" | "detail" | "cart" | "review">("collection");
+const [selected, setSelected] = useState<CommerceProduct | null>(null);
+const [items, setItems] = useState<CommerceCartItem[]>([]);
 
-<ProductCollectionBlock products={products} currency="GBP" locale="en-GB" />;
+return step === "collection" ? (
+  <ProductCollectionBlock
+    products={products}
+    currency="GBP"
+    locale="en-GB"
+    onSelectProduct={(product) => {
+      setSelected(product);
+      setStep("detail");
+    }}
+  />
+) : step === "detail" && selected ? (
+  <ProductDetailBlock
+    product={selected}
+    onAddToCart={({ product, option, quantity }) => {
+      setItems((current) => [
+        ...current,
+        { ...product, id: `${product.id}-${option?.id ?? "default"}`, variant: option?.label, quantity },
+      ]);
+      setStep("cart");
+    }}
+  />
+) : step === "cart" ? (
+  <ShoppingCartBlock
+    items={items}
+    shipping={500}
+    onQuantityChange={(id, quantity) =>
+      setItems((current) => current.map((item) => (item.id === id ? { ...item, quantity } : item)))
+    }
+    onRemoveItem={(id) => setItems((current) => current.filter((item) => item.id !== id))}
+    onCheckout={() => setStep("review")}
+    onContinueShopping={() => setStep("collection")}
+  />
+) : (
+  <CheckoutReviewBlock
+    items={items}
+    deliveryAddress={["Alex Morgan", "24 Willow Lane", "London, N1 4AB"]}
+    deliveryMethod="Standard delivery · 3–5 working days"
+    paymentSummary="Visa ending in 4242"
+    shipping={500}
+    onEditCart={() => setStep("cart")}
+    onConfirm={submitOrder}
+  />
+);
 ```
 
-Supply `status="loading"` or `status="error"`, an `errorMessage`, and optionally `onRetry` for remote loading. Search with no matches and an empty product list have distinct empty states. `pendingProductIds` disables quick-add buttons while the host processes requests.
-
-### Collection layouts
-
-Use `layout="grid"` (the default) for image-led browsing or `layout="list"` for a compact catalogue. Grid cards become two columns when the container has at least 300px available, with four columns from 880px. Images are native links when a product has `href`, or labelled buttons when `onSelectProduct` is supplied. Product names are semantic subheadings. Quick-add buttons use a quieter outlined style.
-
-## Product detail
-
-`onAddToCart` receives `{ product, option, quantity }`. Options have stable IDs, labels, and optional stock limits. Changing products resets the local selection. Stock updates clamp the requested quantity; unavailable options cannot be selected.
-
-```tsx
-<ProductDetailBlock
-  product={products[0]}
-  optionLabel="Glaze"
-  options={[
-    { id: "clay", label: "Clay", stock: 12 },
-    { id: "chalk", label: "Chalk", stock: 0 },
-  ]}
-  onAddToCart={({ product, option, quantity }) => addItem(product, option, quantity)}
-  deliveryNote="Delivery costs are calculated for your address at checkout."
-/>
-```
-
-Supply `images` as an ordered array of `{ src, alt }` objects for a gallery with labelled thumbnail buttons. The product image remains the fallback. Use `layout="stacked"` for a narrow or quick-view context; the default `split` places product information beside the image when space permits. Gallery selection resets when the product changes.
-
-The host owns the add operation. Pass `pending`, `errorMessage`, and `successMessage` from its result. This block does not assume an order or cart update succeeded.
-
-## Controlled cart
-
-```tsx
-const [items, setItems] = useState<CommerceCartItem[]>([{ ...products[0], quantity: 1 }]);
-
-<ShoppingCartBlock
-  items={items}
-  onQuantityChange={(id, quantity) =>
-    setItems((current) => current.map((item) => (item.id === id ? { ...item, quantity } : item)))
-  }
-  onRemoveItem={(id) => setItems((current) => current.filter((item) => item.id !== id))}
-  onCheckout={() => setStep("review")}
-  shipping={500}
-  tax={0}
-  totalsNote="Prices include tax. Delivery shown for the selected address."
-/>;
-```
-
-Use unique line IDs for product variants. `stock` is the maximum allowed quantity for that line. Checkout is disabled when quantities exceed availability. Omit callbacks to render a read-only summary. Empty carts can offer `onContinueShopping`.
-
-Use `layout="stacked"` to keep the summary below the items at any width. The **Cart Drawer** story composes this layout with Rayden’s existing Modal, retaining native focus containment, Escape dismissal, and focus restoration. It is a composition of the same cart block, not another block in the count.
-
-## Checkout review
-
-```tsx
-<CheckoutReviewBlock
-  items={items}
-  deliveryAddress={["Alex Morgan", "24 Willow Lane", "London, N1 4AB"]}
-  deliveryMethod="Standard delivery · 3–5 working days"
-  paymentSummary="Visa ending in 4242"
-  shipping={500}
-  onEditCart={() => setStep("cart")}
-  onConfirm={submitOrder}
-  pending={submitting}
-  errorMessage={orderError}
-  confirmation={
-    confirmedOrder
-      ? {
-          title: "Order confirmed",
-          description: "We’ll email you when it’s on its way.",
-          reference: confirmedOrder.reference,
-        }
-      : undefined
-  }
-/>
-```
-
-Provide `onEditDelivery` and `onEditPayment` if the host offers these screens. `paymentSummary` is display text for an already tokenized payment method, not a payment input. Confirmation appears only when explicitly supplied by the host. The Storybook journey labels its simulated success as a demo and never sends payment or order requests.
+Cart-line ids must be unique per **variant**, not per product, which is why the example
+composes the product id with the chosen option id.
 
 ## Amounts and validation
 

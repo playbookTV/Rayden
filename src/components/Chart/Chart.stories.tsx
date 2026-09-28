@@ -5,6 +5,13 @@ const meta: Meta<typeof RaydenChart> = {
   title: "Components/Chart",
   component: RaydenChart,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-[640px]">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;

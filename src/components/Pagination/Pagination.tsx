@@ -114,7 +114,7 @@ export function Pagination({
 
         {showPrevNext && (
           <span
-            className="rayden-pagination-compact text-sm text-on-surface-body"
+            className="rayden-pagination-compact shrink-0 whitespace-nowrap text-sm text-on-surface-body"
             aria-live="polite"
           >
             Page {currentPage} of {totalPages}

@@ -61,7 +61,6 @@ Import blocks from `@raydenui/ui/blocks`. They provide UI and callbacks to conne
 
 - [Current block library](../packages/docs/content/blocks/index.mdx) - Application navigation, accounts, dashboards, marketing, and commerce
 - [Application navigation](../packages/docs/content/blocks/navigation.mdx) - ApplicationShellBlock, PageHeaderBlock, WorkspaceSwitcherBlock, and CommandPaletteBlock
-- [Expanded library](../packages/docs/content/blocks/expanded-library.mdx) - Account, profile, marketing, KPI, and task blocks
 - [Commerce](../packages/docs/content/blocks/commerce.mdx) - Product browsing, cart, and checkout review
 
 Additional block guides:

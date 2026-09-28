@@ -97,34 +97,75 @@ import { NotificationsBlock } from "@raydenui/ui/blocks";
 />
 ```
 
+### Heading level
+
+`headingLevel` is the **element name**, so the block fits any page outline. A standalone
+notifications page can own the `h1`; a dashboard panel beside other panels stays at `h2`.
+
+```tsx
+<NotificationsBlock headingLevel="h1" title="Notifications" items={items} />
+```
+
+> **Breaking change.** This prop was a numeric union `2 | 3 | 4 | 5 | 6` defaulting to `3`.
+> It is now the string union `"h1"`–`"h6"` defaulting to `"h2"`, so that a page owned by the
+> block can reach `h1` at all. Replace `headingLevel={3}` with `headingLevel="h3"`. Code that
+> passed nothing now renders an `h2` where it previously rendered an `h3`, which removes a
+> skipped heading level on a page whose only other content is the block.
+
 ## Props
 
 ### NotificationsBlockProps
 
-| Prop          | Type                 | Default           | Description                       |
-| ------------- | -------------------- | ----------------- | --------------------------------- |
-| `title`       | `string`             | `"Notifications"` | Header title                      |
-| `unreadCount` | `number`             | —                 | Number of unread notifications    |
-| `items`       | `NotificationItem[]` | —                 | Array of notifications (required) |
-| `onItemClick` | `(id: string) => void` | —               | Click handler                     |
-| `onMarkAllRead` | `() => void`       | —                 | Mark all as read handler          |
-| `className`   | `string`             | —                 | Additional CSS classes            |
+| Prop           | Type                  | Default           | Description                                       |
+| -------------- | --------------------- | ----------------- | ------------------------------------------------- |
+| `items`        | `NotificationItem[]`  | —                 | **Required.** The notifications to show.           |
+| `title`        | `string`              | `"Notifications"` | Block title.                                      |
+| `headingLevel` | `"h1"`–`"h6"`         | `"h2"`            | Element for the block title.                       |
+| `unreadCount`  | `number`              | —                 | Supplied by your application. A badge appears when above zero. |
+| `className`    | `string`              | —                 | Additional class names.                            |
 
 ### NotificationItem
 
-| Prop      | Type                          | Required | Description                    |
-| --------- | ----------------------------- | -------- | ------------------------------ |
-| `id`      | `string`                      | Yes      | Unique identifier              |
-| `avatar`  | `ReactNode`                   | Yes      | Avatar element                 |
-| `text`    | `ReactNode`                   | Yes      | Notification message           |
-| `date`    | `string`                      | Yes      | Date string                    |
-| `time`    | `string`                      | Yes      | Relative time (e.g., "10 mins")|
-| `unread`  | `boolean`                     | No       | Unread state indicator         |
-| `link`    | `{ label, href }`             | No       | Optional link                  |
-| `content` | `FileContent \| CTAContent \| CommentContent` | No | Additional content |
+| Prop      | Type                                            | Required | Description                                  |
+| --------- | ----------------------------------------------- | -------- | -------------------------------------------- |
+| `id`      | `string`                                        | Yes      | Unique identifier.                            |
+| `avatar`  | `ReactNode`                                     | Yes      | Avatar element.                               |
+| `text`    | `ReactNode`                                     | Yes      | Notification message.                         |
+| `date`    | `string`                                        | Yes      | Date label.                                   |
+| `time`    | `string`                                        | Yes      | Relative time, e.g. "10 mins".                 |
+| `unread`  | `boolean`                                       | No       | Adds the visible "Unread" text and dot.        |
+| `link`    | `{ label: string; href?: string; onClick?: () => void }` | No | A destination or an action.        |
+| `badge`   | `string`                                        | No       | Short qualifier beside the metadata.           |
+| `content` | file \| comment \| cta object                   | No       | Attached content. See below.                  |
+
+`content` is a discriminated union on `type`:
+
+- `{ type: "file", title, size?, fileType?, date? }`
+- `{ type: "comment", avatar, author, timestamp, comment, reactions?, replies? }`
+- `{ type: "cta", primaryAction: { label, onClick? }, secondaryAction?: { label, onClick? } }`
+
+## States
+
+- **default** — the notification list.
+- **unread** — per item, through `item.unread`.
+
+There is **no empty, loading or error state**. Render your own around the block.
 
 ## Accessibility
 
-- Notification items are keyboard navigable
-- Unread indicators are announced to screen readers
-- Action buttons have proper focus states
+- A named `section`, labelled by the block title.
+- Native list semantics with an explicit `role="list"`, so the list stays exposed when list
+  markers are removed. This is deliberately **not** an ARIA feed: the feed pattern also
+  needs per-article accessible names, `aria-posinset`, `aria-setsize` and a focus-driven
+  loading model this block does not implement.
+- Unread state is carried by visible "Unread" text as well as a dot, so it does not rest on
+  colour.
+- Each notification is an `article`, and metadata wraps according to the width the item
+  actually has.
+
+## Known limitations
+
+- The block marks nothing read. `unread` is supplied per item and `unreadCount` is supplied
+  by your application; there is no mark-all-read control or callback.
+- The panel uses `bg-white` with a dark-mode override rather than the semantic surface
+  roles, so a consumer `--color-surface` override does not reach it.

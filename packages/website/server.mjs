@@ -6,6 +6,9 @@ import { resolve, extname, sep } from "node:path";
 const root = fileURLToPath(new URL("./dist", import.meta.url));
 const types = {
   ".html": "text/html",
+  ".zip": "application/zip",
+  ".txt": "text/plain; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
   ".css": "text/css",
   ".js": "text/javascript",
   ".svg": "image/svg+xml",
@@ -17,13 +20,9 @@ const types = {
 const port = Number(process.env.PORT || 3002);
 createServer(async (req, res) => {
   try {
-    const pathname = decodeURIComponent(
-      new URL(req.url, "http://localhost").pathname,
-    );
-    const file = resolve(
-      root,
-      "." + (pathname === "/" ? "/index.html" : pathname),
-    );
+    const pathname = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
+    const asset = pathname === "/" ? "/index.html" : !extname(pathname) ? `${pathname}.html` : pathname;
+    const file = resolve(root, "." + asset);
     if (!file.startsWith(root + sep)) {
       res.writeHead(403).end();
       return;
@@ -37,6 +36,4 @@ createServer(async (req, res) => {
   } catch {
     res.writeHead(404, { "Content-Type": "text/plain" }).end("Page not found");
   }
-}).listen(port, "127.0.0.1", () =>
-  console.log(`Rayden website: http://127.0.0.1:${port}`),
-);
+}).listen(port, "127.0.0.1", () => console.log(`Rayden website: http://127.0.0.1:${port}`));

@@ -1,0 +1,265 @@
+---
+title: InvoiceDetailBlock
+description: Inspect invoice lines, taxes, adjustments, amount due, status, and payment actions
+---
+
+# InvoiceDetailBlock
+
+Inspect invoice lines, taxes, adjustments, the amount due, its status and the available
+payment actions.
+
+Plan idea 83, category **Finance & billing**. Status **experimental**, verification level
+**unmeasured** — see [verification](#verification) before adopting it.
+
+## Import
+
+```tsx
+import { InvoiceDetailBlock } from "@raydenui/ui/blocks";
+import type { InvoiceLine, InvoiceAdjustment, InvoiceParty } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+Amounts are **minor-unit integers** in the invoice's single `currency`. A negative amount is a
+credit.
+
+```tsx
+const lines: InvoiceLine[] = [
+  {
+    id: "design",
+    description: "Interface design",
+    detail: "1–15 September 2026",
+    quantity: 37.5,
+    quantityUnit: "hours",
+    unitPrice: 9500,
+    amount: 356250,
+  },
+  { id: "credit", description: "Goodwill credit", amount: -15000 },
+];
+
+<InvoiceDetailBlock
+  invoiceNumber="2026-114"
+  status={{ label: "Past due", tone: "danger", description: "Payment was due on 20 September." }}
+  currency="GBP"
+  locale="en-GB"
+  issuedOn="2026-09-01"
+  dueOn="2026-09-20"
+  billedTo={{ label: "Billed to", lines: ["Northwind Logistics", "24 Willow Lane", "London, N1 4AB"] }}
+  billedFrom={{ label: "From", lines: ["Citrionus Ltd", "Registered in England 09876543"] }}
+  lines={lines}
+  subtotal={341250}
+  taxes={[{ id: "vat", label: "VAT", detail: "VAT 20%", amount: 68250 }]}
+  amountPaid={100000}
+  amountDue={309500}
+  amountDueNote="Payable within 30 days of issue."
+  primaryAction={{ id: "pay", label: "Pay invoice", onClick: () => openPayment(), tone: "primary" }}
+  actions={[{ id: "pdf", label: "Download PDF", href: "/invoices/2026-114.pdf" }]}
+/>;
+```
+
+`amountDue` is **required and supplied, never derived from the lines**, so a rounding rule or a
+credit the block does not know about cannot silently change it.
+
+### Three different absences
+
+| Situation                         | How to express it                                     |
+| --------------------------------- | ----------------------------------------------------- |
+| No invoice at all                 | `state="empty"` with `emptyTitle` / `emptyDescription`  |
+| An invoice carrying no lines      | `lines={[]}` with `linesEmptyTitle` / `linesEmptyDescription` |
+| A filtered view with no matches   | `lines={[]}` with your own no-matches wording in the same props |
+
+```tsx
+<InvoiceDetailBlock
+  currency="GBP"
+  amountDue={0}
+  lines={[]}
+  linesEmptyTitle="This invoice has no lines yet"
+  linesEmptyDescription="Add a line to issue it."
+  linesEmptyAction={{ id: "add", label: "Add a line", onClick: () => addLine() }}
+/>
+```
+
+### Long invoices
+
+Beyond `maxVisibleLines` (default 12) the table body moves into a bounded, focusable, vertically
+scrolling region, so a long invoice cannot lengthen the page without limit.
+
+At enlarged text sizes, table columns can scroll horizontally inside a named, keyboard-focusable
+area. The page itself stays within its container, and totals remain outside the scrolling table.
+
+```tsx
+<InvoiceDetailBlock
+  currency="GBP"
+  amountDue={309500}
+  lines={fortyLines}
+  maxVisibleLines={12}
+  scrollRegionMaxHeight="26rem"
+/>
+```
+
+### Unknown amounts and translation
+
+```tsx
+<InvoiceDetailBlock
+  currency="EUR"
+  locale="nl-NL"
+  amountDue={null}
+  unknownLabel="Niet beschikbaar"
+  lines={lines}
+  linesLabel="Factuurregels"
+  columnLabels={{
+    description: "Omschrijving",
+    quantity: "Aantal",
+    unitPrice: "Stukprijs",
+    amount: "Bedrag",
+  }}
+/>
+```
+
+### Loading, error and empty
+
+```tsx
+<InvoiceDetailBlock currency="GBP" amountDue={null} lines={[]} state="loading" />
+```
+
+```tsx
+<InvoiceDetailBlock
+  currency="GBP"
+  amountDue={null}
+  lines={[]}
+  state="error"
+  errorTitle="This invoice could not be loaded"
+  onRetry={() => refetch()}
+/>
+```
+
+```tsx
+<InvoiceDetailBlock
+  currency="GBP"
+  amountDue={null}
+  lines={[]}
+  state="empty"
+  emptyTitle="No invoice selected"
+  emptyAction={{ id: "choose", label: "Choose invoice", onClick: () => openList() }}
+/>
+```
+
+### Payment the viewer may not make
+
+`primaryAction` is a `FinanceAction`, so a payment the viewer is not permitted to make renders
+disabled with the reason visible rather than as a dead button.
+
+```tsx
+<InvoiceDetailBlock
+  currency="GBP"
+  amountDue={309500}
+  lines={lines}
+  primaryAction={{
+    id: "pay",
+    label: "Pay invoice",
+    unavailableReason: "Only a billing administrator can pay an invoice.",
+  }}
+/>
+```
+
+## Props
+
+| Prop                    | Type                                              | Default                 | Description                                            |
+| ----------------------- | ------------------------------------------------- | ----------------------- | ------------------------------------------------------ |
+| `lines`                 | `InvoiceLine[]`                                   | —                       | **Required.**                                           |
+| `amountDue`             | `FinanceMoneyValue`                               | —                       | **Required.** Supplied, never derived. `null` is unknown.  |
+| `title`                 | `ReactNode`                                       | `"Invoice"`             | Block title.                                            |
+| `headingLevel`          | `"h1"`–`"h6"`                                     | `"h2"`                  | Element for `title`.                                    |
+| `description`           | `ReactNode`                                       | —                       | Supporting sentence.                                    |
+| `invoiceNumber`         | `string`                                          | —                       | Shown above the title and in the metadata list.           |
+| `status`                | `FinanceStatus`                                   | —                       | `{ label, tone?, description? }`.                        |
+| `currency`              | `string`                                          | `"GBP"`                 | ISO 4217 code shared by every amount.                    |
+| `locale`                | `string`                                          | `"en-GB"`               | Keeps server and client formatting identical.              |
+| `unknownLabel`          | `string`                                          | `"Not available"`       | Words shown wherever an amount is `null`.                 |
+| `timeZone`              | `string`                                          | —                       | IANA zone for the invoice dates.                          |
+| `formatDate`            | `(value: Date) => string`                         | —                       | Formatting escape hatch.                                  |
+| `issuedOn`              | `FinanceDateValue`                                | —                       | Issue date.                                              |
+| `dueOn`                 | `FinanceDateValue`                                | —                       | Due date.                                                |
+| `issuedOnLabel`         | `string`                                          | `"Issued"`              | Label override.                                          |
+| `dueOnLabel`            | `string`                                          | `"Due"`                 | Label override.                                          |
+| `meta`                  | `Array<{ id, label, value, icon? }>`              | —                       | Further metadata rows, e.g. purchase order, tax id.        |
+| `billedTo`              | `InvoiceParty`                                    | —                       | `{ label?, lines }`.                                     |
+| `billedFrom`            | `InvoiceParty`                                    | —                       | `{ label?, lines }`.                                     |
+| `linesLabel`            | `string`                                          | `"Invoice lines"`       | Names the table and its scroll region.                    |
+| `columnLabels`          | `{ description?, quantity?, unitPrice?, amount? }` | —                      | Column headers, for translation.                          |
+| `maxVisibleLines`       | `number`                                          | `12`                    | Beyond this the body becomes a bounded scroll region.       |
+| `scrollRegionMaxHeight` | `string`                                          | `"26rem"`               | Height of that region.                                    |
+| `linesEmptyTitle`       | `string`                                          | —                       | Wording for an invoice with no lines.                      |
+| `linesEmptyDescription` | `ReactNode`                                       | —                       | Wording for an invoice with no lines.                      |
+| `linesEmptyAction`      | `FinanceAction`                                   | —                       | Recovery step on that panel.                               |
+| `subtotal`              | `FinanceMoneyValue`                               | —                       | Before taxes and adjustments.                              |
+| `subtotalLabel`         | `string`                                          | `"Subtotal"`            | Label override.                                          |
+| `taxes`                 | `InvoiceAdjustment[]`                             | —                       | Tax lines applied after the subtotal.                      |
+| `adjustments`           | `InvoiceAdjustment[]`                             | —                       | Credits, discounts and other adjustments.                  |
+| `amountPaid`            | `FinanceMoneyValue`                               | —                       | Already settled. `undefined` omits the row.                 |
+| `amountPaidLabel`       | `string`                                          | `"Paid to date"`        | Label override.                                          |
+| `amountDueLabel`        | `string`                                          | `"Amount due"`          | Label override.                                          |
+| `totalsLabel`           | `string`                                          | `"Invoice totals"`      | Accessible name for the totals list.                       |
+| `amountDueNote`         | `ReactNode`                                       | —                       | One line under the amount due, e.g. payment terms.           |
+| `primaryAction`         | `FinanceAction`                                   | —                       | The dominant action. Omitted entirely when absent.           |
+| `actions`               | `FinanceAction[]`                                 | —                       | Supporting actions.                                        |
+| `actionsLabel`          | `string`                                          | `"Invoice actions"`     | Accessible name for the action group.                       |
+| `note`                  | `ReactNode`                                       | —                       | Terms, remittance details or notes. Rendered last.            |
+| `state`                 | `"default" \| "loading" \| "empty" \| "error"`      | `"default"`             | Lifecycle owned by your application.                         |
+| `loadingMessage`        | `string`                                          | `"Loading invoice"`     | Announced while loading.                                    |
+| `errorTitle`            | `string`                                          | `"This invoice could not be loaded"` | Shown while `state="error"`.                  |
+| `errorDescription`      | `ReactNode`                                       | —                       | Shown while `state="error"`.                                 |
+| `onRetry`               | `() => void`                                      | —                       | The retry control is omitted entirely without it.             |
+| `emptyTitle`            | `string`                                          | `"No invoice selected"` | Shown while `state="empty"`.                                 |
+| `emptyDescription`      | `ReactNode`                                       | —                       | Shown while `state="empty"`.                                 |
+| `emptyAction`           | `FinanceAction`                                   | —                       | Recovery step on the empty panel.                             |
+| `className`             | `string`                                          | —                       | Lands on the container root, outside the card padding.          |
+
+### InvoiceLine
+
+| Member         | Type                | Description                                             |
+| -------------- | ------------------- | ------------------------------------------------------- |
+| `id`           | `string`            | Required, stable.                                        |
+| `description`  | `ReactNode`         | Required.                                                |
+| `detail`       | `ReactNode`         | A second line, e.g. a period or a SKU.                    |
+| `quantity`     | `number \| null`     | Decimals allowed, e.g. 7.5 hours. `null` is unknown.       |
+| `quantityUnit` | `string`            | Unit `quantity` is measured in.                            |
+| `unitPrice`    | `FinanceMoneyValue` | Minor-unit integer, or `null` for unknown.                 |
+| `amount`       | `FinanceMoneyValue` | Required. Negative is a credit line.                       |
+
+### InvoiceAdjustment
+
+`{ id, label, amount, detail? }`. A negative `amount` is a credit or discount; `detail` carries
+the rate or basis, e.g. "VAT 21%".
+
+### InvoiceParty
+
+`{ label?, lines }`, where `lines` are address or identity lines in reading order.
+
+## States
+
+- **default** — the invoice.
+- **loading** / **error** — with an optional retry control.
+- **empty** — no invoice at all.
+- **lines empty** — an invoice carrying no lines, or a filtered view with no matches, in your
+  own wording.
+- **unknown amount** — per amount, from `null`.
+- **payment unavailable** — a permission-blocked `primaryAction`.
+
+## Verification
+
+**No verification run exists for this block yet.** The batch that built it had its run
+interrupted and is repeating it, and its batch report (`docs/blocks-batch-d.md`) did not exist
+when this page was written. This page was reconciled against the block's public TypeScript
+types and its 14 story exports, and the block resolves from a built package with its types —
+nothing more.
+
+Not verified: layout at any width, contrast in either mode, keyboard flows, theme overrides, a
+screen-reader pass, any non-Chromium engine, operating-system text-size settings, or physical
+devices. The bounded line-scroll region in particular has not been measured.
+
+## Known limitations
+
+- `amountDue` is supplied, never derived from the lines.
+- The block takes no payment. `primaryAction` hands that to your application.
+- Every amount in one invoice shares a single currency and locale.

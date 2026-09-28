@@ -30,7 +30,7 @@ export const Default: Story = {
 
 export const ImageSizes: Story = {
   render: () => (
-    <div className="flex items-end gap-3">
+    <div className="flex flex-wrap items-end gap-3">
       {(["xs", "sm", "md", "lg", "xl", "2xl"] as const).map((s) => (
         <div key={s} className="flex flex-col items-center gap-1">
           <Avatar type="image" size={s} src={sampleImage} />
@@ -43,7 +43,7 @@ export const ImageSizes: Story = {
 
 export const IconSizes: Story = {
   render: () => (
-    <div className="flex items-end gap-3">
+    <div className="flex flex-wrap items-end gap-3">
       {(["xs", "sm", "md", "lg", "xl", "2xl"] as const).map((s) => (
         <div key={s} className="flex flex-col items-center gap-1">
           <Avatar type="icon" size={s} />
@@ -56,7 +56,7 @@ export const IconSizes: Story = {
 
 export const InitialsSizes: Story = {
   render: () => (
-    <div className="flex items-end gap-3">
+    <div className="flex flex-wrap items-end gap-3">
       {(["xs", "sm", "md", "lg", "xl", "2xl"] as const).map((s) => (
         <div key={s} className="flex flex-col items-center gap-1">
           <Avatar type="initials" size={s} initials={s === "xs" ? "O" : "OM"} />

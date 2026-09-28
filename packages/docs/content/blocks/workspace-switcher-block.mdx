@@ -1,0 +1,202 @@
+---
+title: WorkspaceSwitcherBlock
+description: Find and switch a workspace, see the current one, and create or join another
+---
+
+# WorkspaceSwitcherBlock
+
+Find and switch a workspace, see the current one, and create or join another.
+
+Plan idea 04, category **Navigation & shells**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { WorkspaceSwitcherBlock } from "@raydenui/ui/blocks";
+import type { WorkspaceSwitcherItem } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`onSelect` is required whenever a workspace without an `href` can be chosen: a switcher
+that cannot switch is an inert control.
+
+```tsx
+const workspaces: WorkspaceSwitcherItem[] = [
+  { id: "studio", name: "Design studio", detail: "Pro · 14 members", initials: "DS" },
+  { id: "northwind", name: "Northwind Logistics", detail: "Team · 6 members", initials: "NL" },
+  { id: "archive", name: "2024 archive", unavailableReason: "Archived workspaces are read-only." },
+];
+
+<WorkspaceSwitcherBlock
+  current={workspaces[0]}
+  workspaces={workspaces}
+  onSelect={(id) => setWorkspaceId(id)}
+  triggerHint="Workspace"
+  footerActions={[
+    { id: "create", label: "Create workspace", onClick: () => openCreate() },
+    { id: "join", label: "Join workspace", href: "/workspaces/join" },
+  ]}
+/>;
+```
+
+### Workspaces as destinations
+
+A workspace that is genuinely a separate address may supply an `href`. It is then rendered
+as a real anchor, which keeps middle-click and open-in-new-tab working.
+
+```tsx
+<WorkspaceSwitcherBlock
+  current={{ id: "studio", name: "Design studio", href: "/w/studio" }}
+  workspaces={[
+    { id: "studio", name: "Design studio", href: "/w/studio" },
+    { id: "northwind", name: "Northwind Logistics", href: "/w/northwind" },
+  ]}
+/>
+```
+
+### Entries the viewer may not open
+
+An entry with neither an `href` nor a reachable `onSelect` is shown as visibly unavailable
+with an explanation. Customise it with `unavailableMessage`.
+
+```tsx
+<WorkspaceSwitcherBlock
+  workspaces={workspaces}
+  unavailableMessage="Ask an administrator for access to this workspace."
+/>
+```
+
+### Filtering
+
+Below `filterThreshold` workspaces the filter field is not rendered, because a filter over
+three entries is noise.
+
+```tsx
+<WorkspaceSwitcherBlock
+  workspaces={manyWorkspaces}
+  onSelect={setWorkspaceId}
+  filterThreshold={6}
+  filterLabel="Filter workspaces"
+  filterPlaceholder="Type a name"
+  resultCountLabel={(count) => `${count} workspaces match`}
+/>
+```
+
+### Empty source and no matches
+
+These are different situations and read differently.
+
+```tsx
+<WorkspaceSwitcherBlock
+  workspaces={[]}
+  onSelect={setWorkspaceId}
+  emptyTitle="You belong to no workspace"
+  emptyDescription="Ask a colleague for an invitation, or create one."
+  noMatchesTitle="Nothing matches that name"
+  noMatchesDescription="Check the spelling, or clear the filter."
+/>
+```
+
+### Loading and error
+
+```tsx
+<WorkspaceSwitcherBlock status="loading" loadingMessage="Loading your workspaces" />
+```
+
+```tsx
+<WorkspaceSwitcherBlock
+  status="error"
+  errorMessage="Your workspaces could not load."
+  onRetry={() => refetch()}
+/>
+```
+
+### Controlled visibility
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<WorkspaceSwitcherBlock
+  current={workspaces[0]}
+  workspaces={workspaces}
+  onSelect={setWorkspaceId}
+  open={open}
+  onOpenChange={setOpen}
+/>;
+```
+
+## Props
+
+| Prop                  | Type                               | Default                  | Description                                                    |
+| --------------------- | ---------------------------------- | ------------------------ | -------------------------------------------------------------- |
+| `current`             | `WorkspaceSwitcherItem`            | —                        | The workspace the application is currently showing.              |
+| `workspaces`          | `WorkspaceSwitcherItem[]`          | —                        | Everything the viewer may switch to, including `current`.         |
+| `onSelect`            | `(id: string) => void`             | —                        | Required whenever a workspace without an `href` can be chosen.     |
+| `unavailableMessage`  | `string`                           | —                        | Explanation for entries with neither a destination nor a handler.   |
+| `status`              | `"idle" \| "loading" \| "error"`    | `"idle"`                 | Lifecycle owned by your application.                              |
+| `errorMessage`        | `string`                           | —                        | Shown when `status="error"`.                                      |
+| `onRetry`             | `() => void`                       | —                        | The retry control is omitted without it.                           |
+| `loadingMessage`      | `string`                           | —                        | Announced while loading.                                          |
+| `triggerLabel`        | `string`                           | `"Switch workspace"`     | Accessible name for the trigger.                                   |
+| `triggerHint`         | `string`                           | —                        | Small label above the current name on the trigger.                  |
+| `placeholder`         | `string`                           | `"Choose a workspace"`   | Shown on the trigger when nothing is selected.                      |
+| `panelLabel`          | `string`                           | `"Workspaces"`           | Accessible name for the popover.                                    |
+| `filterLabel`         | `string`                           | `"Filter workspaces"`    | Accessible name for the filter field.                               |
+| `filterPlaceholder`   | `string`                           | —                        | Filter placeholder.                                                |
+| `filterThreshold`     | `number`                           | `6`                      | Below this many workspaces the filter is not rendered.               |
+| `emptyTitle`          | `string`                           | —                        | Shown when the viewer belongs to no workspace.                       |
+| `emptyDescription`    | `string`                           | —                        | Shown when the viewer belongs to no workspace.                       |
+| `noMatchesTitle`      | `string`                           | —                        | Shown when the filter matches nothing.                               |
+| `noMatchesDescription`| `string`                           | —                        | Shown when the filter matches nothing.                               |
+| `footerActions`       | `WorkspaceSwitcherFooterAction[]`  | —                        | Rendered only when supplied.                                         |
+| `resultCountLabel`    | `(count: number) => string`        | —                        | Announced and displayed result count.                                |
+| `defaultOpen`         | `boolean`                          | `false`                  | Uncontrolled initial visibility.                                      |
+| `open`                | `boolean`                          | —                        | Controlled visibility. Pair with `onOpenChange`.                      |
+| `onOpenChange`        | `(open: boolean) => void`          | —                        | Visibility handler.                                                  |
+| `className`           | `string`                           | —                        | Lands on the container root, outside the popover surface.               |
+
+### WorkspaceSwitcherItem
+
+A union of two arms, both sharing `{ id, name, detail?, logoSrc?, initials?, icon? }`:
+
+| Arm         | Extra members       | Behaviour                                                |
+| ----------- | ------------------- | -------------------------------------------------------- |
+| Selectable  | `href?`             | With `href` it is a real anchor; without it, `onSelect` switches. |
+| Unavailable | `unavailableReason` | Shown next to the entry; the entry cannot be chosen.       |
+
+`logoSrc` falls back to `initials`, then to the first character of `name`.
+
+## States
+
+- **default** — the trigger showing the current workspace.
+- **open** / **closed** — a non-modal popover.
+- **loading** / **error** — with an optional retry control.
+- **empty** — the viewer belongs to no workspace.
+- **no matches** — the filter matched nothing. A different situation from empty.
+- **permission-blocked entry** — visibly unavailable with an explanation.
+
+## Keyboard
+
+Arrow keys move through the list, Home and End jump to the ends, Enter chooses, and
+Escape closes the popover and restores focus to the trigger.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 261 browser tests across 27 story files —
+including filtering to no matches, unavailable workspaces, a missing selection handler and
+nested Escape behaviour that dismisses a child popover without also dismissing its parent
+collapsed navigation. Light and dark compositions measured no document overflow at 320,
+390, 768 and 1440 CSS pixels. Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, or physical devices.
+
+## Known limitations
+
+- The popover is non-modal. Content behind it stays reachable, which is deliberate inside a
+  shell top bar but is not a dialog.
+- `onSelect` is typed optional, so a workspace can be supplied with neither an `href` nor a
+  handler. Such entries render as visibly unavailable rather than silently doing nothing,
+  but the type does not prevent the configuration.
+- Selection is not persisted. Your application owns which workspace is current.

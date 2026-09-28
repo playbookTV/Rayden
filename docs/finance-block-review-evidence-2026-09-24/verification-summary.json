@@ -1,0 +1,14 @@
+{
+  "viewport_checks": 512,
+  "story_count": 64,
+  "widths": [320, 390, 768, 1440],
+  "themes": ["light", "dark"],
+  "page_overflows": [],
+  "accessibility_scans": 128,
+  "violations": [],
+  "stress_checks": 48,
+  "stress_overflows": [],
+  "default_action_targets_under_44px": [],
+  "storybook_test_files": 5,
+  "storybook_tests_passed": 69
+}
