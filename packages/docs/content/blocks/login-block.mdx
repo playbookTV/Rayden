@@ -5,17 +5,23 @@ description: Authentication form with email/password fields and social login opt
 
 # LoginBlock
 
-A complete authentication form with email/password fields and social login options.
+A complete authentication form with email and password fields and optional social
+providers.
+
+The block never authenticates. `onSubmit` hands the credentials to your application, which
+owns the result and reports it back through `pending` and `error`. There is no success
+state: a confirmed sign-in is a navigation your application performs.
 
 ## Import
 
 ```tsx
 import { LoginBlock } from "@raydenui/ui/blocks";
+import type { LoginBlockSocialProvider } from "@raydenui/ui/blocks";
 ```
 
 ## Usage
 
-### Card Variant
+### Card variant
 
 <Preview>
   <LoginBlockDemo />
@@ -25,12 +31,15 @@ import { LoginBlock } from "@raydenui/ui/blocks";
 <LoginBlock
   variant="card"
   onForgotPassword={() => navigate("/forgot-password")}
-  onSubmit={(data) => signIn(data.email, data.password)}
+  onSubmit={(data) => signIn(data.email, data.password, data.rememberMe)}
   onSignUp={() => navigate("/sign-up")}
 />
 ```
 
-### Standard Variant
+`onSubmit` receives `{ email, password, rememberMe }`, where `rememberMe` reflects the
+visible checkbox.
+
+### Standard variant
 
 <Preview>
   <LoginBlockStandardDemo />
@@ -45,7 +54,7 @@ import { LoginBlock } from "@raydenui/ui/blocks";
 />
 ```
 
-### Work Email Variant
+### Work email variant
 
 ```tsx
 <LoginBlock
@@ -57,35 +66,90 @@ import { LoginBlock } from "@raydenui/ui/blocks";
 />
 ```
 
-### With Social Providers
+Password recovery is rendered in every variant that supplies `onForgotPassword`,
+independently of `showRememberMe`.
+
+### Social providers
+
+`socialProviders` is an array of objects, not provider name strings. You supply the
+artwork, because brand marks are deliberately exempt from theme roles.
+
+```tsx
+const providers: LoginBlockSocialProvider[] = [
+  { name: "Google", icon: <GoogleMark />, onClick: () => startOAuth("google") },
+  { name: "GitHub", icon: <GitHubMark />, onClick: () => startOAuth("github") },
+];
+
+<LoginBlock variant="card" socialProviders={providers} onSubmit={(data) => signIn(data)} />;
+```
+
+Each provider carries its own `onClick`. There is no block-level social callback.
+
+### Pending and error
 
 ```tsx
 <LoginBlock
   variant="card"
-  socialProviders={["google", "github", "apple"]}
-  socialProviders={[{ name: "Google", icon: <Icon name="globe" /> }]}
-  onSubmit={(data) => signIn(data.email, data.password)}
+  onSubmit={(data) => signIn(data)}
+  pending={signingIn}
+  pendingLabel="Signing in…"
+  error="That email and password do not match."
 />
 ```
 
+While `pending` is true the block disables every control that could change the credentials
+being verified, change remembered-session intent, or start a competing authentication
+route: email, password, remember-me, password recovery, each social provider, submit and
+sign-up. Repeat submits are ignored, so pressing Enter cannot queue a second request. The
+password visibility toggle stays enabled, because it only changes how the already-entered
+value is displayed.
+
 ## Props
 
-| Prop                 | Type                                  | Default     | Description                   |
-| -------------------- | ------------------------------------- | ----------- | ----------------------------- |
-| `variant`            | `"standard" \| "card" \| "work-email"` | `"standard"` | Form variant                 |
-| `title`              | `string`                              | —           | Header title                  |
-| `subtitle`           | `string`                              | —           | Header subtitle               |
-| `onSubmit`           | `(data: { email, password }) => void` | —           | Form submit handler           |
-| `socialProviders`    | `("google" \| "github" \| "apple")[]` | —           | Social login buttons          |
-| `onSocialLogin`      | `(provider: string) => void`          | —           | Social login handler          |
-| `onForgotPassword`   | `() => void`                          | —           | Forgot password handler       |
-| `onSignUp`           | `() => void`                          | —           | Sign up link handler          |
-| `showRememberMe`     | `boolean`                             | `true`      | Show remember me checkbox     |
-| `className`          | `string`                              | —           | Additional CSS classes        |
+| Prop               | Type                                                             | Default      | Description                                                     |
+| ------------------ | ---------------------------------------------------------------- | ------------ | --------------------------------------------------------------- |
+| `variant`          | `"standard" \| "card" \| "work-email"`                            | `"standard"` | Visual variant.                                                 |
+| `title`            | `string`                                                         | —            | Form heading.                                                   |
+| `subtitle`         | `string`                                                         | —            | Subtitle or description.                                        |
+| `submitLabel`      | `string`                                                         | —            | Submit button label.                                            |
+| `onSubmit`         | `(data: { email: string; password: string; rememberMe: boolean }) => void` | —   | Form submit handler.                                    |
+| `onForgotPassword` | `() => void`                                                     | —            | Password recovery handler. Rendered whenever supplied.            |
+| `pending`          | `boolean`                                                        | `false`      | Authentication is in flight. See above for what it disables.       |
+| `pendingLabel`     | `string`                                                         | —            | Submit label while `pending` is true.                            |
+| `error`            | `string`                                                         | —            | Message shown above the submit button.                           |
+| `socialProviders`  | `LoginBlockSocialProvider[]`                                     | —            | Provider objects, each with its own artwork and handler.          |
+| `onSignUp`         | `() => void`                                                     | —            | Sign-up link handler.                                           |
+| `signUpPrompt`     | `string`                                                         | —            | Sign-up prompt text.                                            |
+| `signUpLabel`      | `string`                                                         | —            | Sign-up link text.                                              |
+| `showRememberMe`   | `boolean`                                                        | `true`       | Show the remember-me checkbox.                                   |
+| `rememberMeLabel`  | `string`                                                         | —            | Avoid promising a duration your application cannot honour.         |
+| `className`        | `string`                                                         | —            | Additional class names.                                          |
+
+### LoginBlockSocialProvider
+
+| Member    | Type         | Required | Description                                          |
+| --------- | ------------ | -------- | ---------------------------------------------------- |
+| `name`    | `string`     | Yes      | Provider name, used as the control's visible label.   |
+| `icon`    | `ReactNode`  | Yes      | Authentic provider artwork, supplied by you.           |
+| `onClick` | `() => void` | No       | Handler for this provider.                            |
+
+## States
+
+- **default** — the credential form.
+- **pending** — authentication in flight, with competing routes disabled.
+- **error** — an announced message above the submit control.
+- **No success state.** The block does not authenticate.
 
 ## Accessibility
 
-- Form inputs have proper labels
-- Error messages are announced to screen readers
-- Social login buttons have descriptive labels
-- Focus management on form submission
+- A real `form` element with associated labels and correct `autocomplete` hints.
+- A named password visibility toggle.
+- The error message occupies an announced slot above the submit control.
+- Provider artwork keeps its authentic colours in both light and dark mode.
+
+## Known limitations
+
+- Provider artwork is not recoloured for dark mode, deliberately. Supply marks that work on
+  both grounds.
+- The block does not offer a sign-up or password-reset form. `onSignUp` and
+  `onForgotPassword` are navigations your application performs.

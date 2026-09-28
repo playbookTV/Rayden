@@ -1,0 +1,180 @@
+---
+title: ProductCollectionBlock
+description: Browse products with prices, availability, filters, and useful sorting
+---
+
+# ProductCollectionBlock
+
+Browse products with prices, availability, filters and useful sorting.
+
+Plan idea 69, category **Commerce**. Status **experimental** — see [verification](#verification).
+Read [known limitations](#known-limitations) first: search, filtering and sorting are
+internal state with no public contract.
+
+## Import
+
+```tsx
+import { ProductCollectionBlock } from "@raydenui/ui/blocks";
+import type { CommerceProduct } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+const products: CommerceProduct[] = [
+  {
+    id: "cup",
+    name: "Everyday ceramic cup",
+    description: "Stoneware, 280ml, dishwasher safe.",
+    category: "Objects",
+    price: 2400,
+    stock: 12,
+    image: { src: "/images/cup.png", alt: "A pale stoneware cup on a linen cloth" },
+    href: "/products/everyday-ceramic-cup",
+  },
+  { id: "lamp", name: "Arc table lamp", category: "Lighting", price: 12900, stock: 0 },
+];
+
+<ProductCollectionBlock
+  title="Everyday objects"
+  description="A small, considered range."
+  products={products}
+  currency="GBP"
+  locale="en-GB"
+/>;
+```
+
+`price` is a **non-negative integer in the currency's minor unit**: GBP 2400 displays as
+£24.00 and JPY 2400 as ¥2,400. Every product in one block must share the block's currency.
+
+### Opening a product
+
+Use `href` for navigation, or `onSelectProduct` for an in-page detail view. With `href`
+the product image is a native link; with `onSelectProduct` it is a labelled button.
+
+```tsx
+<ProductCollectionBlock products={products} onSelectProduct={(product) => openDetail(product)} />
+```
+
+### Quick add
+
+Add-to-cart controls appear only when `onAddToCart` is supplied. Products that require
+options should open their detail view first.
+
+```tsx
+<ProductCollectionBlock
+  products={products}
+  onAddToCart={(product) => addToCart(product)}
+  pendingProductIds={pendingIds}
+/>
+```
+
+### Layouts
+
+`layout="grid"` (the default) is image-led. `layout="list"` is a compact horizontal
+catalogue. Grid cards become two columns from 300px of available container width and four
+from 880px.
+
+```tsx
+<ProductCollectionBlock products={products} layout="list" />
+```
+
+### Loading, error and empty
+
+```tsx
+<ProductCollectionBlock products={[]} status="loading" />
+```
+
+```tsx
+<ProductCollectionBlock
+  products={[]}
+  status="error"
+  errorMessage="The collection could not load."
+  onRetry={() => refetch()}
+/>
+```
+
+```tsx
+<ProductCollectionBlock products={[]} emptyMessage="This collection has no products yet." />
+```
+
+`emptyMessage` covers an empty source. A search that matches nothing shows the block's own
+no-matches sentence instead, so the two never read the same.
+
+### Heading levels
+
+Product names are semantic subheadings, one level below `headingLevel`.
+
+```tsx
+<ProductCollectionBlock headingLevel="h2" title="Everyday objects" products={products} />
+```
+
+## Props
+
+| Prop                | Type                                     | Default                              | Description                                                |
+| ------------------- | ---------------------------------------- | ------------------------------------ | ---------------------------------------------------------- |
+| `products`          | `CommerceProduct[]`                      | —                                    | **Required.**                                               |
+| `title`             | `string`                                 | store-specific sample copy           | Pass your own; the default is fixture copy.                  |
+| `description`       | `string`                                 | —                                    | Supporting sentence.                                        |
+| `headingLevel`      | `"h1"`–`"h6"`                            | `"h2"`                               | Product names use the next level down.                       |
+| `layout`            | `"grid" \| "list"`                        | `"grid"`                             | Image-led grid or compact list.                              |
+| `onSelectProduct`   | `(product: CommerceProduct) => void`     | —                                    | In-page detail view.                                        |
+| `onAddToCart`       | `(product: CommerceProduct) => void`     | —                                    | Omit to hide quick-add.                                      |
+| `pendingProductIds` | `string[]`                               | `[]`                                 | Disables quick-add while your application processes a request. |
+| `status`            | `"ready" \| "loading" \| "error"`         | `"ready"`                            | Lifecycle owned by your application.                          |
+| `errorMessage`      | `string`                                 | built-in English sentence            | Shown when `status="error"`.                                 |
+| `onRetry`           | `() => void`                             | —                                    | The retry control is omitted without it.                      |
+| `emptyMessage`      | `string`                                 | built-in English sentence            | Shown when `products` is empty.                              |
+| `currency`          | `string`                                 | `"GBP"`                              | ISO 4217 code shared by every price.                          |
+| `locale`            | `string`                                 | `"en-GB"`                            | Keeps server and client formatting consistent.                 |
+| `className`         | `string`                                 | —                                    | Lands on the section root.                                    |
+
+### CommerceProduct
+
+| Member        | Type             | Description                                                       |
+| ------------- | ---------------- | ----------------------------------------------------------------- |
+| `id`          | `string`         | Required, stable and unique.                                       |
+| `name`        | `string`         | Required.                                                          |
+| `description` | `string`         | Optional.                                                          |
+| `category`    | `string`         | Feeds the block's internal category filter.                         |
+| `price`       | `number`         | Required. Non-negative integer in the currency's minor unit.         |
+| `image`       | `CommerceImage`  | `{ src, alt }`. A missing image degrades to a labelled placeholder.  |
+| `href`        | `string`         | Destination for the product.                                        |
+| `badge`       | `string`         | Short qualifier.                                                   |
+| `stock`       | `number`         | Omit for unlimited availability. Zero means sold out.                |
+
+## States
+
+- **ready** — the product grid or list.
+- **loading** — a `role="status"` message, with `aria-busy` on the section.
+- **error** — `role="alert"` with an optional retry control.
+- **empty** — no products at all, using `emptyMessage`.
+- **no matches** — the internal search or category filter matched nothing.
+- **pending add** — per product, through `pendingProductIds`.
+- **sold out** — per product, when `stock` is zero.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 17 commerce stories passing with
+accessibility violations configured to fail the test, and a live gallery inspected at 320,
+390, 768 and 1440 CSS pixels in light and dark mode with no document horizontal overflow.
+A packed-consumer installation exercised the export in both ESM and CommonJS plus server
+rendering. Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, physical devices, or WCAG conformance.
+
+## Known limitations
+
+- **Search, category filtering and sorting are internal uncontrolled state.** There is no
+  prop to set, read or replace them, so a server-backed catalogue cannot drive them and
+  your application cannot restore them from a URL. This diverges from
+  [`SearchableTableBlock`](/blocks/searchable-table-block), which hands search and sort to
+  the consumer as soon as `onSearch` or `onSort` is supplied.
+- **Most visible strings are hard-coded English**: the search label and placeholder, the
+  category and sort option labels, the loading and retry text, the sold-out and
+  add-to-cart labels, and the no-matches sentence. Only `title`, `description`,
+  `errorMessage` and `emptyMessage` are configurable, so the block cannot currently be
+  fully translated.
+- The default `title` is store-specific fixture copy. Always pass your own.
+- Your application must validate prices and stock on the server before accepting an order.

@@ -19,6 +19,7 @@ import { Button } from "./Button";
 // cannot settle: geometry, ARIA relationships and portal behaviour.
 export default {
   title: "Quality/Sweep closures",
+  tags: ["!dev", "!autodocs"],
   parameters: { layout: "fullscreen" },
 } satisfies Meta;
 type Story = StoryObj;

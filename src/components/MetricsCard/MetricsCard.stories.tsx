@@ -5,6 +5,13 @@ const meta: Meta<typeof MetricsCard> = {
   title: "Elements/MetricsCard",
   component: MetricsCard,
   tags: ["autodocs"],
+  decorators: [
+    (Story, context) => (
+      <div className="w-full" style={{ maxWidth: context.parameters.previewWidth ?? 400 }}>
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     variation: {
       control: "select",
@@ -164,8 +171,9 @@ export const Variation6DataOnly: Story = {
 /* ─── All Variations Grid ─── */
 
 export const AllVariations: Story = {
+  parameters: { previewWidth: 768 },
   render: () => (
-    <div className="grid grid-cols-2 gap-6 max-w-3xl">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Row 1: Variation 1 */}
       <MetricsCard
         variation="1"

@@ -79,10 +79,14 @@ export function Breadcrumb({
   return (
     <nav
       aria-label="Breadcrumb"
-      className={cn("py-2.5", hasBorders && "border-y border-grey-100", className)}
+      className={cn(
+        "min-w-0 max-w-full py-2.5",
+        hasBorders && "border-y border-grey-100",
+        className
+      )}
       {...rest}
     >
-      <ol className="flex items-center gap-4 text-sm font-medium">
+      <ol className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
         {items.map((item, i) => (
           <li key={i} className="flex items-center gap-4">
             {i > 0 && (

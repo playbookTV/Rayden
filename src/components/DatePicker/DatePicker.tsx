@@ -664,7 +664,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         className={cn(
           "bg-surface border border-grey-75 rounded-2xl p-5 shadow-soft-xs",
           "flex flex-col gap-6",
-          mode !== "range" && "w-full max-w-[340px]",
+          "w-[340px] max-w-full",
+          mode === "range" && "md:w-auto",
           className
         )}
       >

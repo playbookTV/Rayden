@@ -1,0 +1,205 @@
+---
+title: TaskListBlock
+description: Add, assign, complete, and filter actionable work with due-date context
+---
+
+# TaskListBlock
+
+Add, assign, complete and filter actionable work with due-date context.
+
+Plan idea 45, category **Collaboration & workflow**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { TaskListBlock } from "@raydenui/ui/blocks";
+import type { TaskListTask, TaskListAssignee, TaskListAddInput } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`onToggleComplete` is **required**: a completion control is never rendered without an
+action. Every other control appears only when its handler is supplied, so the block cannot
+show an add form, a delete button or a bulk action with nowhere to go.
+
+```tsx
+const assignees: TaskListAssignee[] = [
+  { id: "alex", name: "Alex Morgan", initials: "AM" },
+  { id: "sam", name: "Sam Okafor", initials: "SO" },
+];
+
+const tasks: TaskListTask[] = [
+  { id: "t1", title: "Confirm the Rotterdam booking", completed: false, assigneeId: "alex", dueDate: "2026-09-25" },
+  { id: "t2", title: "Chase the missing bill of lading", completed: true, note: "Carrier replied on Friday." },
+];
+
+<TaskListBlock
+  title="Team tasks"
+  tasks={tasks}
+  assignees={assignees}
+  onToggleComplete={(id, completed) => setCompleted(id, completed)}
+  onAddTask={(input: TaskListAddInput) => createTask(input)}
+  onDeleteTask={(id) => deleteTask(id)}
+  onAssignTask={(id, assigneeId) => assign(id, assigneeId)}
+/>;
+```
+
+The block does not move a task to completed on its own. Re-render it with the new state.
+
+### Due dates
+
+`dueDate` is a calendar date as `YYYY-MM-DD`, parsed in local time and never UTC-shifted.
+Pass `today` to make the phrasing deterministic in tests, and `formatDueDate` to replace
+the built-in wording.
+
+```tsx
+<TaskListBlock
+  tasks={tasks}
+  onToggleComplete={setCompleted}
+  today={new Date("2026-09-23T09:00:00")}
+  locale="en-GB"
+  formatDueDate={(iso, { daysFromToday, completed }) =>
+    completed ? "Done" : daysFromToday < 0 ? `${-daysFromToday} days overdue` : iso
+  }
+/>
+```
+
+### Selection and bulk actions
+
+Selection is controlled. The bulk controls render only when their handler is supplied.
+
+```tsx
+const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+<TaskListBlock
+  tasks={tasks}
+  onToggleComplete={setCompleted}
+  selectedIds={selectedIds}
+  onSelectionChange={setSelectedIds}
+  onBulkComplete={(ids) => completeAll(ids)}
+  onBulkDelete={(ids) => deleteAll(ids)}
+/>;
+```
+
+### Permission-aware editing
+
+```tsx
+<TaskListBlock
+  tasks={tasks}
+  onToggleComplete={setCompleted}
+  canEdit={false}
+  readOnlyMessage="You can read this list but not change it."
+/>
+```
+
+### Empty, no matches, loading, error
+
+An empty source and a filter with no matches read differently.
+
+```tsx
+<TaskListBlock
+  tasks={[]}
+  onToggleComplete={setCompleted}
+  emptyTitle="No tasks yet"
+  emptyDescription="Add the first thing this team needs to do."
+  noMatchesTitle="Nothing matches this filter"
+  noMatchesDescription="Try the All filter, or a different assignee."
+/>
+```
+
+```tsx
+<TaskListBlock tasks={[]} onToggleComplete={setCompleted} status="loading" />
+```
+
+```tsx
+<TaskListBlock
+  tasks={[]}
+  onToggleComplete={setCompleted}
+  status="error"
+  errorMessage="The task service is unavailable."
+  onRetry={() => refetch()}
+/>
+```
+
+```tsx
+<TaskListBlock
+  tasks={tasks}
+  onToggleComplete={setCompleted}
+  onAddTask={createTask}
+  addStatus="error"
+  addErrorMessage="That task could not be created. Try again."
+/>
+```
+
+## Props
+
+| Prop                  | Type                                             | Default    | Description                                                     |
+| --------------------- | ------------------------------------------------ | ---------- | --------------------------------------------------------------- |
+| `tasks`               | `TaskListTask[]`                                 | —          | **Required.** The complete set for the current page.              |
+| `onToggleComplete`    | `(id: string, completed: boolean) => void`       | —          | **Required.**                                                    |
+| `title`               | `string`                                         | —          | Block title.                                                     |
+| `description`         | `string`                                         | —          | Supporting sentence.                                              |
+| `headingLevel`        | `"h1"`–`"h6"`                                    | `"h2"`     | Element for `title`.                                              |
+| `onAddTask`           | `(input: TaskListAddInput) => void`              | —          | The add form is not rendered without it.                          |
+| `onDeleteTask`        | `(id: string) => void`                           | —          | No delete control is rendered without it.                         |
+| `onAssignTask`        | `(id: string, assigneeId: string) => void`       | —          | Without it the assignee is shown but cannot be changed.            |
+| `assignees`           | `TaskListAssignee[]`                             | —          | Also drives the assignee filter.                                   |
+| `selectedIds`         | `string[]`                                       | —          | Controlled selection. Controls render only with a handler.          |
+| `onSelectionChange`   | `(ids: string[]) => void`                        | —          | Fired with the full resulting selection.                           |
+| `onBulkComplete`      | `(ids: string[]) => void`                        | —          | Bulk control renders only with this handler.                       |
+| `onBulkDelete`        | `(ids: string[]) => void`                        | —          | Bulk control renders only with this handler.                       |
+| `status`              | `"idle" \| "loading" \| "error"`                  | `"idle"`   | Lifecycle owned by your application.                               |
+| `errorMessage`        | `string`                                         | —          | Shown when `status="error"`.                                       |
+| `onRetry`             | `() => void`                                     | —          | The retry control renders only with a handler.                      |
+| `addStatus`           | `"idle" \| "submitting" \| "error"`               | `"idle"`   | Add-form lifecycle.                                                |
+| `addErrorMessage`     | `string`                                         | —          | Shown when `addStatus="error"`.                                     |
+| `canEdit`             | `boolean`                                        | `true`     | When false, completion is disabled and edit controls are omitted.    |
+| `readOnlyMessage`     | `string`                                         | —          | Explains why editing is unavailable.                                |
+| `today`               | `Date`                                           | now        | Reference date for due-date context.                                |
+| `locale`              | `string`                                         | `"en-GB"`  | BCP 47 tag used to format absolute dates.                           |
+| `formatDueDate`       | `(isoDate, context: TaskListDueContext) => string`| —          | Replaces the built-in phrasing.                                      |
+| `emptyTitle`          | `string`                                         | —          | Shown when there are no tasks at all.                               |
+| `emptyDescription`    | `string`                                         | —          | Shown when there are no tasks at all.                               |
+| `noMatchesTitle`      | `string`                                         | —          | Shown when tasks exist but none match the filters.                    |
+| `noMatchesDescription`| `string`                                         | —          | Shown when tasks exist but none match the filters.                    |
+| `footer`              | `ReactNode`                                      | —          | Extra content below the list.                                        |
+| `className`           | `string`                                         | —          | Additional class names.                                              |
+
+### TaskListTask
+
+`{ id, title, completed, assigneeId?, dueDate?, note? }`. `assigneeId` resolves against
+`assignees`.
+
+### TaskListDueContext
+
+`{ daysFromToday, date, completed }`. `daysFromToday` is whole days; negative means
+overdue.
+
+## States
+
+- **idle** — the task list.
+- **loading** / **error** — with an optional retry control.
+- **empty** — no tasks at all.
+- **no matches** — tasks exist but none match the current filters.
+- **read-only** — no permission to edit.
+- **add submitting** / **add error** — the add form's own lifecycle.
+- **partial selection** — the select-all control reports a mixed state.
+
+## Verification
+
+No batch verification report exists for this block. The recorded evidence is its own
+17 stories — including adding a task, completing a task, a filter with no matches, a
+partial selection reporting mixed, fifty tasks, read-only, loading, a failed load, a
+failed add, an add in flight, a completion-only configuration, long titles, a themed
+surface and a narrow container — and the repository story suite, re-run on 23 September
+2026.
+
+Not verified: a measured width, contrast or interaction sweep of the kind Batch A and
+Batch C recorded; a screen-reader pass; any non-Chromium engine; operating-system
+text-size settings.
+
+## Known limitations
+
+- The status and assignee filters are local UI state over the supplied `tasks`. There is
+  no prop to set or observe them, so server-side filtering is not expressible.
+- `tasks` is the complete set for the current page. The block owns no pagination.

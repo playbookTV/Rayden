@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
-    "check": "node --check dist/app.js"
+    "check": "node --check dist/app.js && node --check dist/guide.js && node --check dist/explore.js && node scripts/check-seo.mjs && node scripts/check-showcase.mjs",
+    "build:showcase": "python3 scripts/build-showcase.py && npm run build --prefix preview"
   }
 }

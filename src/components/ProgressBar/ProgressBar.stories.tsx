@@ -5,6 +5,13 @@ const meta: Meta<typeof ProgressBar> = {
   title: "Components/ProgressBar",
   component: ProgressBar,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-[375px]">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     value: { control: { type: "range", min: 0, max: 100 } },
     size: { control: "select", options: ["sm", "md", "lg"] },
@@ -70,7 +77,7 @@ export const Segmented: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <ProgressBar value={50} label="Small (sm)" size="sm" />
       <ProgressBar value={50} label="Medium (md)" size="md" />
       <ProgressBar value={50} label="Large (lg)" size="lg" />
@@ -80,7 +87,7 @@ export const AllSizes: Story = {
 
 export const AllTypes: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <ProgressBar value={50} label="Basic" type="basic" size="lg" />
       <ProgressBar value={50} label="Segmented" type="segmented" size="lg" />
     </div>
@@ -89,7 +96,7 @@ export const AllTypes: Story = {
 
 export const AllStages: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <ProgressBar value={0} label="0%" size="lg" />
       <ProgressBar value={25} label="25%" size="lg" />
       <ProgressBar value={50} label="50%" size="lg" />
@@ -101,7 +108,7 @@ export const AllStages: Story = {
 
 export const SegmentedStages: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       <ProgressBar value={0} label="0%" type="segmented" size="lg" />
       <ProgressBar value={30} label="30%" type="segmented" size="lg" />
       <ProgressBar value={50} label="50%" type="segmented" size="lg" />

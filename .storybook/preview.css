@@ -1,0 +1,15 @@
+/* Give responsive stories real available width in both Canvas and Docs.
+ * Storybook's centred layout otherwise sizes them from their text content. */
+.rayden-story-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+@layer base {
+  .rayden-story-frame > * {
+    max-width: 100%;
+  }
+}

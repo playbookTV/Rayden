@@ -1,0 +1,207 @@
+---
+title: CommandPaletteBlock
+description: Search and activate application destinations and actions with keyboard support
+---
+
+# CommandPaletteBlock
+
+Search and activate application destinations and actions with keyboard support.
+
+Plan idea 06, category **Navigation & shells**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { CommandPaletteBlock } from "@raydenui/ui/blocks";
+import type { CommandPaletteItem, CommandPaletteGroup } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+Each entry is a destination (`href`), an action (`onSelect`) or an entry the viewer may not
+use (`unavailableReason`). There is no arm with nothing to do.
+
+```tsx
+const groups: CommandPaletteGroup[] = [
+  { id: "go", label: "Go to" },
+  { id: "do", label: "Actions" },
+];
+
+const items: CommandPaletteItem[] = [
+  { id: "overview", label: "Overview", href: "/overview", groupId: "go", icon: "home" },
+  { id: "shipments", label: "Shipments", href: "/shipments", groupId: "go", keywords: ["freight", "consignments"] },
+  { id: "new", label: "New shipment", onSelect: () => openCreate(), groupId: "do", shortcut: "⌘ N" },
+  { id: "billing", label: "Billing", unavailableReason: "Only workspace owners can open billing." },
+];
+
+<CommandPaletteBlock
+  items={items}
+  groups={groups}
+  shortcut={{ key: "k", modifier: "mod", hint: "⌘K" }}
+  searchPlaceholder="Search destinations and actions"
+/>;
+```
+
+A destination keeps its `href` at every width, so middle-click and open-in-new-tab keep
+working. `onSelect` at the block level fires for every activation, including a destination
+followed by its `href`.
+
+### Suggestions before anything is typed
+
+With no suggestions and an empty query the palette prompts for a query rather than listing
+everything. Set `showAllWhenEmpty` to list `items` instead.
+
+```tsx
+<CommandPaletteBlock
+  items={items}
+  suggestions={recentDestinations}
+  suggestionsLabel="Recent"
+  promptTitle="What are you looking for?"
+  promptDescription="Search destinations, actions and records."
+/>
+```
+
+### Remote search
+
+`filterMode="local"` (the default) filters `items` in the browser by label, description and
+keywords. `filterMode="external"` renders `items` untouched, for an application that
+searches remotely.
+
+```tsx
+<CommandPaletteBlock
+  filterMode="external"
+  items={remoteResults}
+  onQueryChange={(query) => search(query)}
+  status={searching ? "loading" : "idle"}
+  loadingMessage="Searching"
+/>
+```
+
+### Empty source, no matches, error
+
+```tsx
+<CommandPaletteBlock
+  items={[]}
+  emptySourceTitle="Nothing is configured yet"
+  emptySourceDescription="This workspace has published no destinations."
+  noResultsTitle={(query) => `Nothing matches “${query}”`}
+  noResultsDescription="Try a shorter term."
+/>
+```
+
+```tsx
+<CommandPaletteBlock
+  items={[]}
+  status="error"
+  errorTitle="Search is unavailable"
+  errorDescription="The search service did not respond."
+  onRetry={() => retry()}
+/>
+```
+
+### Controlled visibility and your own trigger
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<>
+  <button type="button" onClick={() => setOpen(true)}>
+    Search
+  </button>
+  <CommandPaletteBlock items={items} showTrigger={false} open={open} onOpenChange={setOpen} />
+</>;
+```
+
+## Props
+
+| Prop                    | Type                                  | Default                                  | Description                                                   |
+| ----------------------- | ------------------------------------- | ---------------------------------------- | ------------------------------------------------------------- |
+| `items`                 | `CommandPaletteItem[]`                | —                                        | Everything the palette can offer for the current query.         |
+| `groups`                | `CommandPaletteGroup[]`               | —                                        | `{ id, label }`, resolved against `item.groupId`.               |
+| `suggestions`           | `CommandPaletteItem[]`                | —                                        | Shown while the query is empty.                                 |
+| `suggestionsLabel`      | `string`                              | `"Suggestions"`                          | Heading above suggestions.                                      |
+| `showAllWhenEmpty`      | `boolean`                             | `false`                                  | List `items` instead of prompting for a query.                    |
+| `filterMode`            | `"local" \| "external"`                | `"local"`                                | Where filtering happens.                                        |
+| `onQueryChange`         | `(query: string) => void`             | —                                        | Query handler.                                                  |
+| `onSelect`              | `(item: CommandPaletteItem) => void`  | —                                        | Fires for every activation.                                      |
+| `status`                | `"idle" \| "loading" \| "error"`       | `"idle"`                                 | Lifecycle owned by your application.                              |
+| `errorTitle`            | `string`                              | —                                        | Shown when `status="error"`.                                      |
+| `errorDescription`      | `string`                              | —                                        | Shown when `status="error"`.                                      |
+| `onRetry`               | `() => void`                          | —                                        | The retry control is omitted without it.                           |
+| `loadingMessage`        | `string`                              | —                                        | Announced while loading.                                          |
+| `dialogLabel`           | `string`                              | `"Command palette"`                      | Accessible name for the dialog.                                    |
+| `searchLabel`           | `string`                              | `"Search destinations and actions"`      | Accessible name for the field.                                     |
+| `searchPlaceholder`     | `string`                              | —                                        | Field placeholder.                                                |
+| `searchHint`            | `string`                              | —                                        | Hint under the field, associated with it.                           |
+| `promptTitle`           | `string`                              | —                                        | Shown before anything is typed.                                     |
+| `promptDescription`     | `string`                              | —                                        | Shown before anything is typed.                                     |
+| `noResultsTitle`        | `(query: string) => string`           | —                                        | Shown when the query matches nothing.                               |
+| `noResultsDescription`  | `string`                              | —                                        | Shown when the query matches nothing.                               |
+| `emptySourceTitle`      | `string`                              | —                                        | Shown when no entries are configured at all.                         |
+| `emptySourceDescription`| `string`                              | —                                        | Shown when no entries are configured at all.                         |
+| `resultCountLabel`      | `(count: number) => string`           | —                                        | Announced and displayed result count.                                |
+| `showTrigger`           | `boolean`                             | `true`                                   | Renders the block's own opening control.                              |
+| `triggerLabel`          | `string`                              | `"Search"`                               | Trigger label.                                                      |
+| `triggerClassName`      | `string`                              | —                                        | Extra classes for the built-in trigger.                               |
+| `shortcut`              | `CommandPaletteShortcut \| null`       | `null`                                   | Keyboard opener. `null` registers no document listener.                |
+| `defaultOpen`           | `boolean`                             | `false`                                  | Uncontrolled initial visibility.                                       |
+| `open`                  | `boolean`                             | —                                        | Controlled visibility. Pair with `onOpenChange`.                       |
+| `onOpenChange`          | `(open: boolean) => void`             | —                                        | Visibility handler.                                                   |
+| `closeLabel`            | `string`                              | `"Close"`                                | Close control label.                                                  |
+| `lockScroll`            | `boolean`                             | `true`                                   | Freezes the page behind the overlay.                                   |
+| `footer`                | `ReactNode`                           | —                                        | Extra content along the bottom of the dialog.                           |
+| `className`             | `string`                              | —                                        | Lands on the container root that holds the trigger.                     |
+
+### CommandPaletteItem
+
+A union of three arms, all sharing
+`{ id, label, description?, icon?, keywords?, shortcut?, groupId? }`:
+
+| Arm         | Extra members                    | Renders as                                 |
+| ----------- | -------------------------------- | ------------------------------------------ |
+| Destination | `href`, `external?`, `onSelect?` | a native anchor, at every width             |
+| Action      | `onSelect`                       | an activatable option                       |
+| Unavailable | `unavailableReason`              | a disabled entry with a visible reason        |
+
+`item.shortcut` is a presentational string. `CommandPaletteShortcut` is
+`{ key, modifier?, hint? }`, where `modifier` is `"mod"` (Command on Apple platforms,
+Control elsewhere) or `"none"`.
+
+## States
+
+- **prompt** — nothing typed and nothing else to offer.
+- **results** — matching entries, grouped where `groups` is supplied.
+- **no matches** — the query matched nothing. Distinct from the prompt.
+- **empty source** — no entries configured at all.
+- **loading** / **error** — with an optional retry control.
+- **permission-blocked entry** — a disabled entry with a visible reason.
+- **open** / **closed**.
+
+## Keyboard
+
+Arrow keys move the active option, Enter activates it, Escape closes the dialog and
+restores focus. A `"mod"` shortcut accepts Control or Command. A `"none"` shortcut ignores
+editable and contenteditable targets, composition events, repeated keys and modified
+keystrokes, so it never steals ordinary typing.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 261 browser tests across 27 story files,
+including a keyboard walk, focus containment, destinations remaining anchors, remote
+search, a large result set and a regression proving an unmodified shortcut does not
+intercept ordinary typing in either an external field or the palette's own input. Light and
+dark compositions measured no document overflow at 320, 390, 768 and 1440 CSS pixels.
+Re-run in the repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, or physical devices.
+
+## Known limitations
+
+- The palette renders its own dialog rather than composing `Modal`, which hard-codes
+  `bg-white` and would not follow a consumer `--color-surface` override. The overlay dims
+  both light and dark pages; override `--color-overlay` to change its backdrop.
+- A shortcut with `modifier: "none"` registers a document listener. It guards editable
+  targets and composition events, but it is still a global listener your application shares.
+- `filterMode="local"` matches by substring only. There is no ranking, fuzzy matching or
+  highlighting.

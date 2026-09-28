@@ -12,7 +12,7 @@ React components, page blocks, icons, and design tokens for building product int
 [![npm downloads](https://img.shields.io/npm/dm/@raydenui/ui.svg)](https://www.npmjs.com/package/@raydenui/ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[Documentation](https://rayden-docs.vercel.app) · [Storybook](https://main--69b6d5d8527b4eddb882e0a7.chromatic.com) · [Source](https://github.com/playbookTV/Rayden)
+[Documentation](https://rayden-docs.vercel.app) · [Storybook](https://main--69b6d5e6cb6bbc778afec0ee.chromatic.com) · [Source](https://github.com/playbookTV/Rayden)
 
 ## Quick start
 

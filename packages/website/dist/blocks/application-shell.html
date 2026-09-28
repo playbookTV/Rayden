@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101011"><title>Application shell — React UI block | Rayden UI</title><meta name="description" content="A workspace frame with responsive navigation and room for your product."><link rel="canonical" href="https://www.rayden-ui.dev/blocks/application-shell"><meta name="robots" content="index, follow, max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="Rayden UI"><meta property="og:title" content="Application shell — React UI block"><meta property="og:description" content="A workspace frame with responsive navigation and room for your product."><meta property="og:url" content="https://www.rayden-ui.dev/blocks/application-shell"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Application shell — React UI block"><meta name="twitter:description" content="A workspace frame with responsive navigation and room for your product."><link rel="icon" href="/assets/rayden-mark.svg" type="image/svg+xml"><link rel="preload" href="/assets/manrope-latin-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/explore.css"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "name": "Application shell — React UI block", "url": "https://www.rayden-ui.dev/blocks/application-shell", "description": "A workspace frame with responsive navigation and room for your product.", "isPartOf": {"@type": "CollectionPage", "url": "https://www.rayden-ui.dev/explore", "name": "Explore Rayden UI"}, "mainEntity": {"@type": "SoftwareSourceCode", "name": "ApplicationShellBlock usage example", "programmingLanguage": ["TypeScript", "React"], "codeSampleType": "full", "runtimePlatform": "@raydenui/ui 0.10.1", "license": "https://github.com/playbookTV/Rayden/blob/main/LICENSE"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Explore", "item": "https://www.rayden-ui.dev/explore"}, {"@type": "ListItem", "position": 2, "name": "Application shell", "item": "https://www.rayden-ui.dev/blocks/application-shell"}]}]}</script><script src="/explore.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="nav-shell"><nav class="nav explore-container" aria-label="Main navigation"><a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a><div class="explore-nav"><a href="/explore?type=components">Components</a><a href="/explore?type=blocks">Blocks</a><a href="/guides/rayden-ai">For AI</a><a href="https://rayden-docs.vercel.app/">Documentation ↗</a></div></nav></header>
+<main id="main" class="explore-container" data-detail="application-shell"><nav class="detail-breadcrumb" aria-label="Breadcrumb"><a data-back href="/explore?type=blocks">← Explore blocks</a><span>/</span><span aria-current="page">Application shell</span></nav><div class="detail-heading"><div><p class="library-kicker">NAVIGATION · BLOCK</p><h1>Application shell</h1><p class="detail-description">A workspace frame with responsive navigation and room for your product.</p><div class="detail-meta"><span>@raydenui/ui 0.10.1</span><span class="library-tag">Experimental</span><span>React + TypeScript</span></div></div><div class="detail-actions"><button class="showcase-button" data-copy-target="example-code" data-ai-prompt="Use @raydenui/ui@0.10.1 to build an interface based on this Application shell example. Import ApplicationShellBlock from @raydenui/ui/blocks. Preserve real supported props and the explicit demo behaviour. If Rayden MCP is available, check its reference UI version first and use only guidance it actually supports; do not assume it has a contract for every block. Review the following complete example, adapt it to my project, and run the build and interaction checks.">Copy for AI ↗</button><a class="showcase-button primary" href="https://rayden-docs.vercel.app/blocks/navigation#application-shell">Documentation ↗</a></div></div>
+<div class="preview-workbench"><div class="preview-toolbar"><div class="library-switch" role="group" aria-label="Example view"><button type="button" data-view="preview" aria-pressed="true" aria-controls="preview-panel">Preview</button><button type="button" data-view="code" aria-pressed="false" aria-controls="code-panel">Code</button></div><div class="preview-options" id="preview-options"><label>State<select id="preview-state"><option value="default">Default</option><option value="loading">Loading</option></select></label><label>Theme<select id="preview-theme"><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Viewport<select id="preview-viewport"><option value="desktop">Fit</option><option value="tablet">Tablet</option><option value="mobile">Mobile</option></select></label><button class="preview-reset" id="preview-reset" type="button">↺ Reset preview</button></div></div><div id="preview-panel"><div class="preview-failure" id="preview-failure" role="alert" hidden>The preview couldn’t load. Try Reset preview, or open Code to use the example.</div><div class="preview-surface"><div class="preview-loading" id="preview-loading" role="status">Loading the real component…</div><div class="preview-frame-wrap" id="preview-frame-wrap" data-viewport="desktop"><iframe id="live-preview" title="Interactive Application shell example" height="650" sandbox="allow-scripts allow-same-origin" data-example="application-shell"></iframe></div></div><noscript><p>Enable JavaScript to interact with this example. The full source is available below.</p></noscript></div><div class="preview-code" id="code-panel"><button class="showcase-button" data-copy-target="example-code">Copy code</button><pre tabindex="0" aria-label="Application shell example source"><code id="example-code">&quot;use client&quot;;
+import { useState } from &quot;react&quot;;
+import { ApplicationShellBlock } from &quot;@raydenui/ui/blocks&quot;;
+import {
+  Button,
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from &quot;@raydenui/ui&quot;;
+import &quot;@raydenui/ui/styles.css&quot;;
+
+export default function Example({ state = &quot;default&quot; }: { state?: string }) {
+  const [active, setActive] = useState(&quot;Overview&quot;);
+  const [count, setCount] = useState(3);
+  return (
+    &lt;ApplicationShellBlock
+      brand={&lt;strong&gt;Form &amp; Field&lt;/strong&gt;}
+      navSections={[
+        {
+          id: &quot;workspace&quot;,
+          label: &quot;Workspace&quot;,
+          items: [&quot;Overview&quot;, &quot;Projects&quot;, &quot;Team&quot;, &quot;Settings&quot;].map((label) =&gt; ({
+            id: label,
+            label,
+            current: label === active,
+            onClick: () =&gt; setActive(label),
+          })),
+        },
+      ]}
+      navStatus={state === &quot;loading&quot; ? &quot;loading&quot; : &quot;idle&quot;}
+      sidebarFooter={&lt;small&gt;Demo workspace · Personal&lt;/small&gt;}
+      expandAt=&quot;sm&quot;
+      stickyTopBar={false}
+    &gt;
+      &lt;div style={{ padding: &quot;16px 0&quot;, display: &quot;grid&quot;, gap: 28 }}&gt;
+        &lt;div&gt;
+          &lt;p style={{ marginBottom: 8 }}&gt;YOUR WORKSPACE&lt;/p&gt;
+          &lt;h2 style={{ fontSize: 30, letterSpacing: &quot;-.04em&quot; }}&gt;
+            {active === &quot;Overview&quot; ? &quot;A little room to do great work.&quot; : active}
+          &lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div
+          style={{
+            display: &quot;flex&quot;,
+            justifyContent: &quot;space-between&quot;,
+            gap: 20,
+            flexWrap: &quot;wrap&quot;,
+            alignItems: &quot;center&quot;,
+          }}
+        &gt;
+          &lt;p role=&quot;status&quot;&gt;{count} projects in this demo workspace.&lt;/p&gt;
+          &lt;Button onClick={() =&gt; setCount(count + 1)}&gt;New project&lt;/Button&gt;
+        &lt;/div&gt;
+        &lt;div style={{ overflowX: &quot;auto&quot; }}&gt;
+          &lt;Table aria-label=&quot;Workspace projects&quot;&gt;
+            &lt;TableHeader&gt;
+              &lt;TableRow&gt;
+                &lt;TableHead&gt;Project&lt;/TableHead&gt;
+                &lt;TableHead&gt;Status&lt;/TableHead&gt;
+              &lt;/TableRow&gt;
+            &lt;/TableHeader&gt;
+            &lt;TableBody&gt;
+              &lt;TableRow&gt;
+                &lt;TableCell&gt;Brand refresh&lt;/TableCell&gt;
+                &lt;TableCell&gt;In progress&lt;/TableCell&gt;
+              &lt;/TableRow&gt;
+              &lt;TableRow&gt;
+                &lt;TableCell&gt;Website launch&lt;/TableCell&gt;
+                &lt;TableCell&gt;In review&lt;/TableCell&gt;
+              &lt;/TableRow&gt;
+              &lt;TableRow&gt;
+                &lt;TableCell&gt;Customer portal&lt;/TableCell&gt;
+                &lt;TableCell&gt;Planned&lt;/TableCell&gt;
+              &lt;/TableRow&gt;
+            &lt;/TableBody&gt;
+          &lt;/Table&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/ApplicationShellBlock&gt;
+  );
+}
+</code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
+<div class="detail-information"><div><h2>Made for real interfaces.</h2><p>Compose a sidebar, top bar, and main workspace without tying the interface to a particular router. This example switches local navigation state and adds to a demo project count.</p><h2>Try it</h2><p>Switch between Overview and Projects, then add a demo project. Use the mobile viewport to try the navigation menu.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a><a href="/components/table">Table</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1
+
+import { ApplicationShellBlock } from &quot;@raydenui/ui/blocks&quot;;
+import &quot;@raydenui/ui/styles.css&quot;;</pre><button class="showcase-button" data-copy-target="install-code">Copy setup</button></div><p style="margin-top:20px;font-size:13px">The Code tab contains the full preview component. Import the stylesheet once in your app. Preview state changes reset local data. This block is experimental; review its documented limitations before using it in your product.</p></aside></div>
+<section class="showcase-related"><h2>A few more possibilities.</h2><div><a class="showcase-button" href="/blocks/header">Site header ↗</a><a class="showcase-button" href="/blocks/page-header">Page header ↗</a><a class="showcase-button" href="/blocks/workspace-switcher">Workspace switcher ↗</a></div></section></main><footer class="explore-container"><div class="footer-top"><a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a><p>Open-source React UI, built with care.</p><div><a href="/#guides">Guides</a><a href="https://rayden-docs.vercel.app/">Docs</a><a href="https://github.com/playbookTV/Rayden">GitHub</a></div></div><div class="footer-bottom"><span>© 2026 Rayden UI</span><span>Open source. Open possibilities.</span><a href="#main">Back to top ↑</a></div></footer><p class="sr-only" id="showcase-status" role="status"></p></body></html>

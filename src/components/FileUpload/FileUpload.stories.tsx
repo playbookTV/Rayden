@@ -10,6 +10,13 @@ const dropZoneMeta: Meta<typeof FileUploadDropZone> = {
   title: "Elements/FileUpload/DropZone",
   component: FileUploadDropZone,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-[500px]">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default dropZoneMeta;

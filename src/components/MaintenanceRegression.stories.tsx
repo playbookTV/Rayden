@@ -15,7 +15,10 @@ import { Input } from "./Input";
 import { Icon } from "./Icon";
 import { checkIcon, searchIcon, heartIcon } from "./Icon/icons";
 
-const meta: Meta = { title: "Quality/Shared interaction contracts" };
+const meta: Meta = {
+  title: "Quality/Shared interaction contracts",
+  tags: ["!dev", "!autodocs"],
+};
 export default meta;
 type Story = StoryObj;
 

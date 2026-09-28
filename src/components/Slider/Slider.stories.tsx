@@ -6,6 +6,13 @@ const sliderMeta: Meta<typeof Slider> = {
   title: "Components/Slider",
   component: Slider,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-[375px]">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     size: { control: "select", options: ["sm", "md", "lg"] },
     showPercentage: { control: "boolean" },
@@ -45,7 +52,7 @@ export const Medium: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-8 w-[375px]">
+    <div className="flex flex-col gap-8 w-[375px] max-w-full">
       <Slider value={50} label="Large (lg)" size="lg" metadata={["meta data", "meta data"]} />
       <Slider value={50} label="Medium (md)" size="md" metadata={["meta data", "meta data"]} />
       <Slider value={50} label="Small (sm)" size="sm" metadata={["meta data", "meta data"]} />
@@ -55,7 +62,7 @@ export const AllSizes: Story = {
 
 export const AllStages: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-[375px]">
+    <div className="flex flex-col gap-6 w-[375px] max-w-full">
       {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((v) => (
         <Slider key={v} value={v} label="Label" metadata={["meta data", "meta data"]} />
       ))}
@@ -66,7 +73,7 @@ export const AllStages: Story = {
 function InteractiveSlider() {
   const [val, setVal] = useState(40);
   return (
-    <div className="w-[375px]">
+    <div className="w-[375px] max-w-full">
       <Slider value={val} onChange={setVal} label="Label" metadata={["meta data", "meta data"]} />
     </div>
   );
@@ -75,7 +82,7 @@ function InteractiveSlider() {
 function InteractiveRangeSlider() {
   const [val, setVal] = useState<[number, number]>([20, 80]);
   return (
-    <div className="w-[375px]">
+    <div className="w-[375px] max-w-full">
       <RangeSlider value={val} onChange={setVal} label="Label" />
     </div>
   );
@@ -87,7 +94,7 @@ export const Interactive: Story = {
 
 export const Range: StoryObj<typeof RangeSlider> = {
   render: () => (
-    <div className="flex flex-col gap-8 w-[375px]">
+    <div className="flex flex-col gap-8 w-[375px] max-w-full">
       <RangeSlider value={[10, 70]} label="Label" size="lg" />
       <RangeSlider value={[10, 70]} label="Label" size="md" />
       <RangeSlider value={[10, 70]} label="Label" size="sm" />

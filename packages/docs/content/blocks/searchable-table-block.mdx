@@ -1,130 +1,223 @@
 ---
 title: SearchableTableBlock
-description: Full-featured table with search input, filters, and sortable columns
+description: Configurable records table with search, sort, selection and pagination
 ---
 
 # SearchableTableBlock
 
-A full-featured table with search input, filters, and sortable columns.
+A records table with configurable columns, search, sortable headers, selection and
+pagination.
 
 ## Import
 
 ```tsx
 import { SearchableTableBlock } from "@raydenui/ui/blocks";
+import type { SearchableTableColumn, SearchableTableRow } from "@raydenui/ui/blocks";
 ```
 
 ## Usage
 
+Each row is a `Record<string, unknown>` that must carry a string `id`. Columns look up
+values by `key`.
+
+```tsx
+const columns: SearchableTableColumn[] = [
+  { key: "name", label: "Name", sortable: true },
+  { key: "category", label: "Category" },
+  { key: "price", label: "Price", sortable: true, width: "140px" },
+];
+
+const rows: SearchableTableRow[] = [
+  { id: "sku-1", name: "Everyday ceramic cup", category: "Objects", price: "£24.00" },
+];
+
+<SearchableTableBlock columns={columns} rows={rows} searchPlaceholder="Search products…" />;
+```
+
+### Local or consumer-owned search and sort
+
+Search and sort are **local by default**. Supplying a handler moves that concern to you:
+
+- Supply `onSearch` and the block stops filtering `rows` itself; it renders exactly what you
+  pass.
+- Supply `onSort` and the block only renders the sort indicator; you reorder `rows`.
+
+The two halves cannot be mixed for one concern.
+
+```tsx
+<SearchableTableBlock
+  columns={columns}
+  rows={remoteRows}
+  onSearch={(query) => search(query)}
+  onSort={(key, direction) => reorder(key, direction)}
+/>
+```
+
+### Two toolbars
+
+Passing `title` renders a title-and-icon toolbar. Omitting it renders a search-input
+toolbar. In the title variant, the search and sort buttons render only when
+`onSearchClick` and `onSortClick` are supplied.
+
 ```tsx
 <SearchableTableBlock
   title="Products"
-  searchPlaceholder="Search products..."
-  columns={[
-    { key: "name", label: "Name", sortable: true },
-    { key: "category", label: "Category" },
-    { key: "price", label: "Price", sortable: true },
-    { key: "stock", label: "Stock" },
-  ]}
-  rows={products}
-  onSearch={(query) => searchProducts(query)}
-  onSort={(key, direction) => sortProducts(key, direction)}
+  columns={columns}
+  rows={rows}
+  onSearchClick={() => openSearchPanel()}
+  onSortClick={() => openSortPanel()}
 />
 ```
 
-### With Filters
+### Filter and date selector need handlers
+
+The filter button appears whenever `onFilter` is supplied; the date selector appears
+whenever `onDateSelect` is supplied. `showFilter` and `showDateSelector` can **hide** them,
+but setting either `true` without its handler does not bring it back — the block does not
+render a control that has nowhere to go.
 
 ```tsx
 <SearchableTableBlock
-  title="Orders"
-  columns={[
-    { key: "id", label: "Order ID" },
-    { key: "customer", label: "Customer", sortable: true },
-    { key: "status", label: "Status" },
-    { key: "total", label: "Total", sortable: true },
-  ]}
-  rows={orders}
-  onSearch={(query) => searchOrders(query)}
-  showFilter
+  columns={columns}
+  rows={rows}
   onFilter={() => openFilterPanel()}
+  onDateSelect={() => openDatePicker()}
 />
 ```
-
-### With Row Actions
 
 ```tsx
 <SearchableTableBlock
-  title="Users"
-  columns={[
-    { key: "name", label: "Name", sortable: true },
-    { key: "email", label: "Email" },
-    { key: "role", label: "Role" },
-    {
-      key: "actions",
-      label: "Actions",
-      render: (row) => (
-        <div className="flex gap-2">
-          <Button size="sm" variant="text">Edit</Button>
-          <Button size="sm" variant="text" variant="destructive">Delete</Button>
-        </div>
-      ),
-    },
-  ]}
-  rows={users}
-  onSearch={(query) => searchUsers(query)}
+  columns={columns}
+  rows={rows}
+  onFilter={() => openFilterPanel()}
+  showFilter={false}
 />
 ```
 
-### With Pagination
+### Custom cell rendering
+
+`render` receives the **cell value first, then the whole row**.
+
+```tsx
+const columns: SearchableTableColumn[] = [
+  { key: "name", label: "Name", sortable: true },
+  {
+    key: "actions",
+    label: "Actions",
+    render: (value, row) => (
+      <Button size="sm" variant="secondary" onClick={() => edit(String(row.id))}>
+        Edit
+      </Button>
+    ),
+  },
+];
+```
+
+### Selection
+
+```tsx
+const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+<SearchableTableBlock
+  columns={columns}
+  rows={rows}
+  selectable
+  selectedIds={selectedIds}
+  onSelectionChange={setSelectedIds}
+/>;
+```
+
+### Pagination
 
 ```tsx
 const [page, setPage] = useState(1);
 
 <SearchableTableBlock
-  title="Inventory"
   columns={columns}
-  rows={paginatedData}
-  onSearch={(query) => searchInventory(query)}
+  rows={pageRows}
   page={page}
   totalPages={totalPages}
   onPageChange={setPage}
-/>
+/>;
 ```
+
+## Selection reconciliation contract
+
+An **uncontrolled** selection covers only the rows the block is currently given. When
+`rows` changes, any selected id that is no longer present is dropped permanently.
+
+- Deleting a row deselects it; replacing rows with new ids clears the selection, so the
+  header never reports a stale "all selected" over unchecked rows.
+- A filter the block applies **itself** keeps the selection of rows that left view, because
+  the whole data set is still `rows`.
+- A filter or page you apply **outside** the block hands over a different `rows` array, so
+  the selections that left with it are dropped.
+- Reconciliation is never silent: dropping ids fires `onSelectionChange` with what remains.
+
+A **controlled** selection is never reconciled — supply `selectedIds` to keep a selection
+across pages, or across a filter you apply yourself.
+
+Full and partial selection are derived from membership of the rows on screen, never from set
+sizes.
 
 ## Props
 
-| Prop                | Type                       | Default       | Description              |
-| ------------------- | -------------------------- | ------------- | ------------------------ |
-| `title`             | `string`                   | —             | Header title             |
-| `searchPlaceholder` | `string`                   | `"Search..."` | Search input placeholder |
-| `columns`           | `SearchableTableColumn[]`  | —             | Column config (required) |
-| `data`              | `any[]`                    | —             | Table data (required)    |
-| `onSearch`          | `(query: string) => void`  | —             | Search handler           |
-| `onSort`            | `(key, direction) => void` | —             | Sort handler             |
-| `filters`           | `FilterConfig[]`           | —             | Filter options           |
-| `onFilterChange`    | `(filters) => void`        | —             | Filter change handler    |
-| `pagination`        | `PaginationProps`          | —             | Pagination config        |
-| `className`         | `string`                   | —             | Additional CSS classes   |
+| Prop                | Type                                                     | Default | Description                                                          |
+| ------------------- | -------------------------------------------------------- | ------- | -------------------------------------------------------------------- |
+| `columns`           | `SearchableTableColumn[]`                                 | —       | **Required.** Column definitions.                                     |
+| `rows`              | `SearchableTableRow[]`                                    | —       | **Required.** Each row needs a string `id`.                            |
+| `title`             | `string`                                                 | —       | Renders the title toolbar instead of the search-input toolbar.          |
+| `searchPlaceholder` | `string`                                                 | —       | Search input placeholder.                                             |
+| `onSearch`          | `(query: string) => void`                                | —       | Supplying it puts search under your control.                           |
+| `onSort`            | `(key: string, direction: SortDirection) => void`         | —       | Supplying it puts ordering under your control.                         |
+| `onSearchClick`     | `() => void`                                             | —       | Title toolbar only. The button renders only when supplied.              |
+| `onSortClick`       | `() => void`                                             | —       | Title toolbar only. The button renders only when supplied.              |
+| `showFilter`        | `boolean`                                                | —       | Hides the filter button. Cannot show it without `onFilter`.             |
+| `onFilter`          | `() => void`                                             | —       | Required for the filter button to appear.                              |
+| `showDateSelector`  | `boolean`                                                | —       | Hides the date selector. Cannot show it without `onDateSelect`.         |
+| `onDateSelect`      | `() => void`                                             | —       | Required for the date selector to appear.                              |
+| `selectable`        | `boolean`                                                | `false` | Enable row selection checkboxes.                                      |
+| `selectedIds`       | `string[]`                                               | —       | Controlled selection. Never reconciled.                                |
+| `onSelectionChange` | `(ids: string[]) => void`                                | —       | Fired with the full resulting selection, including on reconciliation.    |
+| `onRowAction`       | `(rowId: string) => void`                                | —       | Row kebab menu handler. The column renders only when supplied.           |
+| `page`              | `number`                                                 | —       | Current page, 1-indexed.                                               |
+| `totalPages`        | `number`                                                 | —       | Total pages.                                                          |
+| `onPageChange`      | `(page: number) => void`                                 | —       | Page change handler.                                                   |
+| `className`         | `string`                                                 | —       | Additional class names.                                               |
 
 ### SearchableTableColumn
 
-| Prop       | Type                           | Required | Description               |
-| ---------- | ------------------------------ | -------- | ------------------------- |
-| `key`      | `string`                       | Yes      | Data key                  |
-| `label`    | `string`                       | Yes      | Column header label       |
-| `sortable` | `boolean`                      | No       | Enable sorting            |
-| `render`   | `(row: any) => ReactNode`      | No       | Custom cell renderer      |
+| Member     | Type                                                       | Required | Description                                       |
+| ---------- | ---------------------------------------------------------- | -------- | ------------------------------------------------- |
+| `key`      | `string`                                                   | Yes      | Unique column key, used to look up row values.      |
+| `label`    | `string`                                                   | Yes      | Column header label.                               |
+| `sortable` | `boolean`                                                  | No       | Enable sorting on this column.                      |
+| `width`    | `string`                                                   | No       | Fixed column width as a CSS string, e.g. `"300px"`. |
+| `render`   | `(value: unknown, row: Record<string, unknown>) => ReactNode` | No    | Custom cell renderer. Value first, then the row.     |
 
-### FilterConfig
+### SearchableTableRow
 
-| Prop      | Type       | Required | Description          |
-| --------- | ---------- | -------- | -------------------- |
-| `key`     | `string`   | Yes      | Filter key           |
-| `label`   | `string`   | Yes      | Filter label         |
-| `options` | `string[]` | Yes      | Available options    |
+`Record<string, unknown> & { id: string }`.
+
+## States
+
+- **default** — the record table.
+- **no matches** — local search matched nothing.
+- **partial selection** — the select-all control reports `aria-checked="mixed"`.
+- **no configured actions** — filter, date selector, row actions and pagination are absent
+  rather than inert.
+
+There is **no loading or error state**. Render your own around the block, or pass an empty
+`rows` array.
 
 ## Accessibility
 
-- Search input has proper label
-- Sortable columns have ARIA sort attributes
-- Filters are keyboard navigable
-- Table uses semantic HTML elements
+- Native table structure with column scopes and `aria-sort` on sortable headers.
+- A keyboard-focusable, bounded horizontal scroll region for the table itself.
+- Named selection checkboxes and named row action controls.
+- A visually hidden "Actions" heading for the action column.
+
+## Known limitations
+
+- Search and sort cannot be partly local and partly consumer-owned for the same concern.
+- There is no built-in filter UI. `onFilter` opens a panel you provide.

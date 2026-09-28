@@ -1,0 +1,149 @@
+---
+title: CheckoutReviewBlock
+description: Review items, addresses, fees, and a payment summary before placing an order
+---
+
+# CheckoutReviewBlock
+
+Review items, addresses, fees and a payment-method summary before placing an order.
+
+Plan idea 75, category **Commerce**. Status **experimental** — see [verification](#verification).
+
+**This block takes no payment and places no order.** `onConfirm` hands control to your
+application, and the confirmation panel appears only when your application passes
+`confirmation`.
+
+## Import
+
+```tsx
+import { CheckoutReviewBlock } from "@raydenui/ui/blocks";
+import type { CommerceCartItem } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+```tsx
+<CheckoutReviewBlock
+  items={items}
+  deliveryAddress={["Alex Morgan", "24 Willow Lane", "London, N1 4AB"]}
+  deliveryMethod="Standard delivery · 3–5 working days"
+  paymentSummary="Visa ending in 4242"
+  shipping={500}
+  onEditCart={() => setStep("cart")}
+  onEditDelivery={() => setStep("address")}
+  onEditPayment={() => setStep("payment")}
+  onConfirm={() => submitOrder()}
+  confirmLabel="Place order"
+  totalsNote="Delivery is final for this address."
+  terms={<>By placing this order you accept our <a href="/terms">terms of sale</a>.</>}
+/>
+```
+
+`deliveryAddress` and `paymentSummary` are **display text** for details collected and
+tokenised elsewhere. Never pass payment credentials.
+
+### Pending and error
+
+```tsx
+<CheckoutReviewBlock
+  items={items}
+  deliveryAddress={address}
+  deliveryMethod="Standard delivery"
+  paymentSummary="Visa ending in 4242"
+  onConfirm={submitOrder}
+  pending={submitting}
+  errorMessage="The payment was declined. Try another method."
+/>
+```
+
+### Confirmation
+
+Pass `confirmation` only after your application confirms a successful order.
+
+```tsx
+<CheckoutReviewBlock
+  items={items}
+  deliveryAddress={address}
+  deliveryMethod="Standard delivery"
+  paymentSummary="Visa ending in 4242"
+  confirmation={{
+    title: "Order confirmed",
+    description: "We will email you when it is on its way.",
+    reference: "CIT-20260923-0041",
+  }}
+/>
+```
+
+The confirmation panel replaces the review content and becomes the block's title.
+
+### When confirmation is blocked
+
+Confirmation is disabled unless there is at least one item, every quantity is a positive
+integer within its available stock, and the delivery address, delivery method and payment
+summary are all non-empty. The block explains why rather than leaving a dead button.
+
+## Props
+
+| Prop              | Type                                                        | Default          | Description                                                 |
+| ----------------- | ----------------------------------------------------------- | ---------------- | ----------------------------------------------------------- |
+| `items`           | `CommerceCartItem[]`                                        | —                | **Required.**                                                |
+| `deliveryAddress` | `string[]`                                                  | —                | **Required.** Display only, one line per entry.               |
+| `deliveryMethod`  | `string`                                                    | —                | **Required.** Display only.                                  |
+| `paymentSummary`  | `string`                                                    | —                | **Required.** Display only, e.g. "Visa ending in 4242".        |
+| `onEditDelivery`  | `() => void`                                                | —                | The edit control renders only with a handler.                  |
+| `onEditPayment`   | `() => void`                                                | —                | The edit control renders only with a handler.                  |
+| `onEditCart`      | `() => void`                                                | —                | The edit control renders only with a handler.                  |
+| `onConfirm`       | `() => void`                                                | —                | The confirm control renders only with a handler.                |
+| `confirmLabel`    | `string`                                                    | `"Place order"`  | Confirm control label.                                        |
+| `pending`         | `boolean`                                                   | `false`          | An order submission is in flight.                             |
+| `errorMessage`    | `string`                                                    | —                | Announced through `role="alert"`.                             |
+| `confirmation`    | `{ title: string; description?: string; reference?: string }`| —                | Render only after your application confirms a successful order. |
+| `terms`           | `ReactNode`                                                 | —                | Terms text, with links kept operable.                          |
+| `totalsNote`      | `string`                                                    | —                | Clarifies whether shipping and tax are estimates or final.      |
+| `shipping`        | `number`                                                    | `0`              | Minor currency units.                                         |
+| `tax`             | `number`                                                    | `0`              | Minor currency units.                                         |
+| `discount`        | `number`                                                    | `0`              | Minor currency units.                                         |
+| `title`           | `string`                                                    | built-in English | Block title.                                                  |
+| `description`     | `string`                                                    | built-in English | Supporting sentence.                                           |
+| `headingLevel`    | `"h1"`–`"h6"`                                               | `"h2"`           | Element for `title`.                                           |
+| `currency`        | `string`                                                    | `"GBP"`          | ISO 4217 code shared by every amount.                          |
+| `locale`          | `string`                                                    | `"en-GB"`        | Formatting locale.                                             |
+| `className`       | `string`                                                    | —                | Lands on the section root.                                     |
+
+## Totals
+
+Totals are `subtotal + shipping + tax - discount`, floored at zero, in the same minor
+currency unit as item prices. Your application must validate prices, stock, addresses,
+shipping, tax and payment on the server before accepting an order.
+
+## States
+
+- **default** — delivery, payment, items and the order total.
+- **pending** — with `aria-busy` on the section.
+- **error** — `role="alert"`.
+- **blocked** — confirmation is disabled and the reason is stated.
+- **confirmed** — a `role="status"` panel, only from `confirmation`.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 17 commerce stories passing with
+accessibility violations configured to fail the test, including empty, error, loading and
+pending states, and a live gallery inspected at 320, 390, 768 and 1440 CSS pixels in light
+and dark mode with no document horizontal overflow. The Storybook journey labels its
+simulated success as a demo and never sends a payment or order request. Re-run in the
+repository story suite on 23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, physical devices, or WCAG conformance.
+
+## Known limitations
+
+- **Most visible strings are hard-coded English**: the Delivery details, Payment method,
+  Items in your order and Order total section titles, the edit-control labels, the totals
+  row labels, the blocked-confirmation sentence and the placing-order label. Only `title`,
+  `description`, `confirmLabel`, `errorMessage`, `totalsNote` and `terms` are configurable.
+- Section titles are styled paragraphs, **not headings**, so they do not appear in the
+  page's heading outline. This diverges from the heading-level contract the other blocks
+  follow.
+- The blocked-confirmation explanation is announced through `role="status"` while styled in
+  the error colour, which is an inconsistent pairing.

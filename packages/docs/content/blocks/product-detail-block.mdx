@@ -1,0 +1,137 @@
+---
+title: ProductDetailBlock
+description: Inspect media and specifications, choose an option, and add it to a cart
+---
+
+# ProductDetailBlock
+
+Inspect media and specifications, choose a purchasable option, and add it to a cart.
+
+Plan idea 70, category **Commerce**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { ProductDetailBlock } from "@raydenui/ui/blocks";
+import type { ProductDetailOption, ProductDetailSelection } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`onAddToCart` receives `{ product, option, quantity }`. Option ids must be stable and
+unique. Changing `product` resets the local selection, stock changes clamp the requested
+quantity, and unavailable options cannot be selected.
+
+```tsx
+const options: ProductDetailOption[] = [
+  { id: "clay", label: "Clay", stock: 12 },
+  { id: "chalk", label: "Chalk", stock: 0 },
+];
+
+<ProductDetailBlock
+  product={product}
+  optionLabel="Glaze"
+  options={options}
+  details={[
+    { label: "Material", value: "Stoneware" },
+    { label: "Capacity", value: "280ml" },
+  ]}
+  onAddToCart={({ product, option, quantity }) => addItem(product, option, quantity)}
+  deliveryNote="Delivery costs are calculated for your address at checkout."
+/>;
+```
+
+`title` defaults to `product.name` and `description` to `product.description`.
+
+### Gallery
+
+Supply `images` as an ordered array for a gallery with labelled thumbnail buttons. The
+product image remains the fallback. Gallery selection resets when the product changes.
+
+```tsx
+<ProductDetailBlock
+  product={product}
+  images={[
+    { src: "/images/cup-front.png", alt: "The cup seen from the front" },
+    { src: "/images/cup-base.png", alt: "The stamped base of the cup" },
+  ]}
+/>
+```
+
+### Layout
+
+`layout="split"` (the default) places product information beside the image when space
+permits. `layout="stacked"` suits a narrow page or a quick-view panel.
+
+```tsx
+<ProductDetailBlock product={product} layout="stacked" />
+```
+
+### The host owns the add
+
+```tsx
+<ProductDetailBlock
+  product={product}
+  onAddToCart={addItem}
+  pending={adding}
+  errorMessage={addError}
+  successMessage={added ? "Added to your bag." : undefined}
+/>
+```
+
+`successMessage` must come from your application after it confirms the cart update. The
+block never assumes one.
+
+## Props
+
+| Prop             | Type                                             | Default                | Description                                                  |
+| ---------------- | ------------------------------------------------ | ---------------------- | ------------------------------------------------------------ |
+| `product`        | `CommerceProduct`                                | —                      | **Required.**                                                 |
+| `images`         | `CommerceImage[]`                                | —                      | Ordered gallery; falls back to `product.image`.                |
+| `layout`         | `"split" \| "stacked"`                            | `"split"`              | Stacked suits a quick-view panel or narrow page.               |
+| `options`        | `ProductDetailOption[]`                          | —                      | `{ id, label, stock? }`. Native controls.                      |
+| `optionLabel`    | `string`                                         | —                      | Group label for the option control.                            |
+| `details`        | `{ label: string; value: string }[]`             | —                      | Specifications, rendered as a definition list.                  |
+| `onAddToCart`    | `(selection: ProductDetailSelection) => void`    | —                      | Receives `{ product, option, quantity }`.                      |
+| `pending`        | `boolean`                                        | `false`                | A cart update is in flight.                                    |
+| `errorMessage`   | `string`                                         | —                      | Announced through `role="alert"`.                              |
+| `successMessage` | `string`                                         | —                      | Supplied after your application confirms the cart update.       |
+| `deliveryNote`   | `string`                                         | —                      | Clarifies what is not yet included.                            |
+| `title`          | `string`                                         | `product.name`         | Block title.                                                   |
+| `description`    | `string`                                         | `product.description`  | Supporting sentence.                                            |
+| `headingLevel`   | `"h1"`–`"h6"`                                    | `"h2"`                 | Element for `title`.                                            |
+| `currency`       | `string`                                         | `"GBP"`                | ISO 4217 code.                                                  |
+| `locale`         | `string`                                         | `"en-GB"`              | Formatting locale.                                              |
+| `className`      | `string`                                         | —                      | Lands on the section root.                                      |
+
+## States
+
+- **default** — media, price, stock, options and the quantity control.
+- **pending** — a cart update in flight, with `aria-busy` on the section.
+- **error** — `role="alert"`.
+- **success** — `role="status"`, only from `successMessage`.
+- **sold out** — when `product.stock` is zero.
+- **option unavailable** — an option whose own `stock` is zero cannot be selected.
+
+## Verification
+
+Measured 22 September 2026 in desktop Chromium: 17 commerce stories passing with
+accessibility violations configured to fail the test, including a gallery and a stock
+limit, plus a live gallery inspected at 320, 390, 768 and 1440 CSS pixels in light and
+dark mode with no document horizontal overflow. Re-run in the repository story suite on
+23 September 2026.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings, physical devices, or WCAG conformance.
+
+## Known limitations
+
+- Option and quantity selection are internal uncontrolled state. There is no prop to set
+  or read the current selection, so it cannot be restored from a URL or a saved draft.
+- **Most visible strings are hard-coded English**: the availability wording, the Quantity
+  label, the add-to-cart and adding labels, and the quantity control's spoken names. Only
+  `title`, `description`, `optionLabel`, `errorMessage`, `successMessage` and
+  `deliveryNote` are configurable.
+- The maximum quantity is 99 when no `stock` is supplied, and that ceiling is not
+  configurable.
+- Your application must validate price and stock on the server before accepting an order.

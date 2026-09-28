@@ -287,8 +287,11 @@ pre {
   white-space: nowrap;
 }
 .brand img {
+  display: block;
+  width: auto;
+  height: 44px;
   object-fit: contain;
-  margin-right: 1px;
+  margin: 0;
 }
 .brand > span {
   font: 500 11px var(--font);
@@ -2962,8 +2965,8 @@ dialog::backdrop {
     font-size: 22px;
   }
   .brand img {
-    height: 31px;
-    width: 31px;
+    height: 38px;
+    width: auto;
   }
   .nav-links,
   .nav-actions .github {
@@ -3640,3 +3643,7 @@ dialog::backdrop {
     transform: none;
   }
 }
+
+/* Linked answers remain readable within the existing FAQ layout. */
+.faq-resource { display: inline-block; margin: -10px 0 22px; color: var(--accent); font-size: 13px; text-underline-offset: 4px; }
+.faq-resource:hover { text-decoration: underline; }

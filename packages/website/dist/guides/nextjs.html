@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101011"><title>How to use Rayden UI with Next.js App Router | Rayden UI</title>
+<meta name="description" content="Build a working Next.js profile form with Rayden UI. Install the React components, import styles, add a client boundary, and download the complete TypeScript example."><link rel="canonical" href="https://www.rayden-ui.dev/guides/nextjs">
+<meta name="robots" content="index, follow, max-image-preview:large"><meta name="author" content="Rayden UI">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Rayden UI">
+<meta property="og:title" content="How to use Rayden UI with Next.js App Router"><meta property="og:description" content="Build a working Next.js profile form with Rayden UI. Install the React components, import styles, add a client boundary, and download the complete TypeScript example."><meta property="og:url" content="https://www.rayden-ui.dev/guides/nextjs">
+<meta property="og:image" content="https://www.rayden-ui.dev/assets/nextjs-profile.png"><meta property="og:image:alt" content="The working Rayden UI profile form built in this Next.js guide">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to use Rayden UI with Next.js App Router"><meta name="twitter:description" content="Build a working Next.js profile form with Rayden UI. Install the React components, import styles, add a client boundary, and download the complete TypeScript example."><meta name="twitter:image" content="https://www.rayden-ui.dev/assets/nextjs-profile.png">
+<meta property="article:published_time" content="2026-09-23"><meta property="article:modified_time" content="2026-09-23">
+<link rel="icon" href="/assets/rayden-mark.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/manrope-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/guide.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "@id": "https://www.rayden-ui.dev/guides/nextjs#article", "headline": "How to use Rayden UI with Next.js App Router", "description": "Build a working Next.js profile form with Rayden UI. Install the React components, import styles, add a client boundary, and download the complete TypeScript example.", "url": "https://www.rayden-ui.dev/guides/nextjs", "mainEntityOfPage": "https://www.rayden-ui.dev/guides/nextjs", "datePublished": "2026-09-23", "dateModified": "2026-09-23", "inLanguage": "en", "author": {"@type": "Organization", "name": "Rayden UI", "url": "https://www.rayden-ui.dev/"}, "publisher": {"@type": "Organization", "name": "Rayden UI", "url": "https://www.rayden-ui.dev/"}, "image": "https://www.rayden-ui.dev/assets/nextjs-profile.png", "proficiencyLevel": "Beginner", "dependencies": "Next.js App Router, React, TypeScript, @raydenui/ui"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Rayden UI", "item": "https://www.rayden-ui.dev/"}, {"@type": "ListItem", "position": 2, "name": "Rayden UI with Next.js", "item": "https://www.rayden-ui.dev/guides/nextjs"}]}]}</script><script src="/guide.js" defer></script>
+</head><body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell"><nav class="nav container" aria-label="Main navigation">
+<a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a>
+<div class="guide-nav"><a href="/explore?type=components">Components</a><a href="/#guides">Guides</a><a href="https://rayden-docs.vercel.app/">Documentation ↗</a></div>
+</nav></header>
+<main id="main" class="container">
+<header class="guide-hero">
+<nav class="guide-breadcrumb" aria-label="Breadcrumb"><a href="/">Rayden UI</a><span aria-hidden="true">/</span><span aria-current="page">Next.js guide</span></nav>
+<div class="guide-hero-grid"><div>
+<p class="guide-kicker">BUILD WITH RAYDEN · GUIDE 01</p>
+<h1>How to use Rayden UI with Next.js App Router</h1>
+<p class="guide-lead">From a fresh app to your first interactive form. Real components, a small client boundary, and every file you need.</p>
+<div class="guide-meta"><span>By Rayden UI</span><time datetime="2026-09-23">23 September 2026</time><span>TypeScript · App Router</span></div>
+<a class="button primary guide-download" href="/examples/nextjs-profile.zip" download>Download the example <span aria-hidden="true">↓</span></a>
+</div><figure class="guide-preview"><img src="/assets/nextjs-profile.png" width="720" height="660" alt="Working profile form with a display name field and a Save display name button" fetchpriority="high"><figcaption>The example you’ll build, using Rayden’s Input and Button.</figcaption></figure></div>
+</header>
+<div class="guide-layout"><aside class="guide-toc"><nav aria-label="On this page"><p>ON THIS PAGE</p><div>
+<a href="#overview">What you’ll build</a><a href="#install">01 · Install</a><a href="#styles">02 · Load the styles</a><a href="#form">03 · Build the form</a><a href="#page">04 · Add the page</a><a href="#run">05 · Run and check</a><a href="#questions">Common questions</a>
+</div></nav></aside>
+<article class="guide-article">
+<section id="overview"><h2>How does Rayden work with Next.js?</h2>
+<p>Install <code>@raydenui/ui</code>, import <code>@raydenui/ui/styles.css</code> in your root layout, and use a Client Component for interactive UI. Your page and layout can stay as Server Components. Rayden ships compiled styles, so this example needs no Tailwind configuration.</p>
+<p>You’ll build a profile form that accepts a display name and confirms the change. It uses Rayden’s <code>Input</code> and <code>Button</code>, native form submission, and React state. The name stays in memory and resets when you reload; there is no account service or database.</p>
+<p class="guide-version">Example versions: Rayden UI 0.10.1, Next.js 16.3.6, React 19.3.0. Use Node.js 22 LTS or newer and npm. Already have an App Router project? Start with the Rayden install below and adapt the files to your existing layout.</p>
+</section>
+<section id="install"><h2>01. Install Rayden UI</h2>
+<p>For a fresh project, the download above includes every file in this guide and a dependency lockfile. Unzip it, open the <code>nextjs-profile</code> folder in your terminal, then run:</p>
+<div class="guide-code"><div class="guide-code-head"><span>Terminal · downloaded example</span><button class="guide-copy" type="button" data-copy-code="code-download" aria-label="Copy Terminal · downloaded example">Copy</button></div><pre tabindex="0" aria-label="Terminal · downloaded example code"><code id="code-download">npm ci
+npm run dev</code></pre></div>
+<p>To follow along in a new app of your own, run <code>npx create-next-app@latest my-rayden-app</code>. Choose TypeScript and App Router. The example uses a root-level <code>app</code> directory and plain CSS. If you choose a <code>src</code> directory, put the files below in <code>src/app</code> instead.</p>
+<p>Inside an existing or freshly created Next.js project, add the tested Rayden version:</p>
+<div class="guide-code"><div class="guide-code-head"><span>Terminal · existing Next.js app</span><button class="guide-copy" type="button" data-copy-code="code-install" aria-label="Copy Terminal · existing Next.js app">Copy</button></div><pre tabindex="0" aria-label="Terminal · existing Next.js app code"><code id="code-install">npm install @raydenui/ui@0.10.1</code></pre></div>
+<p>You don’t need a Rayden provider for the two components used here. Consult the documentation when adding components with their own provider requirements.</p>
+</section>
+<section id="styles"><h2>02. Import the component styles once</h2>
+<p>Load Rayden’s stylesheet from the root layout, followed by your app’s global styles. In an existing project, keep your metadata, fonts, and providers; add the imports to your current layout.</p>
+<div class="guide-code"><div class="guide-code-head"><span>app/layout.tsx</span><button class="guide-copy" type="button" data-copy-code="code-layout" aria-label="Copy app/layout.tsx">Copy</button></div><pre tabindex="0" aria-label="app/layout.tsx code"><code id="code-layout">import type { Metadata } from &quot;next&quot;;
+import &quot;@raydenui/ui/styles.css&quot;;
+import &quot;./globals.css&quot;;
+
+export const metadata: Metadata = {
+  title: &quot;Profile settings | Rayden UI&quot;,
+  description: &quot;A Next.js profile form built with Rayden UI.&quot;,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    &lt;html lang=&quot;en&quot;&gt;
+      &lt;body&gt;{children}&lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre></div>
+<p>Keep <code>layout.tsx</code> on the server. Next.js supports importing external CSS in the App Router, and the form will define its own client boundary.</p>
+</section>
+<section id="form"><h2>03. Create the interactive form</h2>
+<p>Add <code>app/profile-form.tsx</code>. The <code>"use client"</code> directive belongs before the imports because this component uses state and event handlers.</p>
+<div class="guide-code"><div class="guide-code-head"><span>app/profile-form.tsx</span><button class="guide-copy" type="button" data-copy-code="code-form" aria-label="Copy app/profile-form.tsx">Copy</button></div><pre tabindex="0" aria-label="app/profile-form.tsx code"><code id="code-form">&quot;use client&quot;;
+
+import { useState, type FormEvent } from &quot;react&quot;;
+import { Button, Input } from &quot;@raydenui/ui&quot;;
+
+export default function ProfileForm() {
+  const [name, setName] = useState(&quot;&quot;);
+  const [savedName, setSavedName] = useState(&quot;&quot;);
+
+  function handleSubmit(event: FormEvent&lt;HTMLFormElement&gt;) {
+    event.preventDefault();
+    const trimmedName = name.trim();
+    if (!trimmedName) return;
+    setSavedName(trimmedName);
+  }
+
+  return (
+    &lt;form className=&quot;profile-form&quot; onSubmit={handleSubmit}&gt;
+      &lt;Input
+        id=&quot;display-name&quot;
+        name=&quot;displayName&quot;
+        label=&quot;Display name&quot;
+        autoComplete=&quot;nickname&quot;
+        placeholder=&quot;How should we call you?&quot;
+        value={name}
+        onChange={(event) =&gt; {
+          setName(event.target.value);
+          setSavedName(&quot;&quot;);
+        }}
+        maxLength={60}
+        required
+        helperText=&quot;This demo keeps your name only until the page reloads.&quot;
+      /&gt;
+      &lt;div className=&quot;profile-actions&quot;&gt;
+        &lt;Button type=&quot;submit&quot; variant=&quot;primary&quot; disabled={!name.trim()}&gt;
+          Save display name
+        &lt;/Button&gt;
+      &lt;/div&gt;
+      &lt;p className=&quot;profile-status&quot; role=&quot;status&quot;&gt;
+        {savedName ? `Looking good, ${savedName}. Your demo profile is updated.` : &quot;&quot;}
+      &lt;/p&gt;
+    &lt;/form&gt;
+  );
+}</code></pre></div>
+<p><code>Input</code> supplies the visible label and helper text. Its value stays controlled by React. The save button is disabled for empty or whitespace-only names, and the form trims the name before displaying a confirmation. The status region announces that confirmation to assistive technology.</p>
+<div class="guide-note"><p>For a real account settings page, replace the in-memory update with your authenticated server action or API. Validate the name on the server and handle pending, success, and error states before treating the change as saved.</p></div>
+</section>
+<section id="page"><h2>04. Compose the page</h2>
+<p>Render the form from a Server Component. The heading and surrounding content do not need to become Client Components just because the form is interactive.</p>
+<div class="guide-code"><div class="guide-code-head"><span>app/page.tsx</span><button class="guide-copy" type="button" data-copy-code="code-page" aria-label="Copy app/page.tsx">Copy</button></div><pre tabindex="0" aria-label="app/page.tsx code"><code id="code-page">import ProfileForm from &quot;./profile-form&quot;;
+
+export default function Page() {
+  return (
+    &lt;main className=&quot;profile-page&quot;&gt;
+      &lt;section className=&quot;profile-panel&quot; aria-labelledby=&quot;profile-title&quot;&gt;
+        &lt;p className=&quot;profile-eyebrow&quot;&gt;RAYDEN UI / NEXT.JS&lt;/p&gt;
+        &lt;h1 id=&quot;profile-title&quot;&gt;Make yourself at home.&lt;/h1&gt;
+        &lt;p className=&quot;profile-intro&quot;&gt;A small profile form. A starting point for your next app.&lt;/p&gt;
+        &lt;ProfileForm /&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+  );
+}</code></pre></div>
+<p>Add the following app styles. These classes handle the page layout; Rayden’s stylesheet handles the input and button. For an existing app, merge them into your stylesheet rather than replacing its current rules.</p>
+<div class="guide-code"><div class="guide-code-head"><span>app/globals.css</span><button class="guide-copy" type="button" data-copy-code="code-css" aria-label="Copy app/globals.css">Copy</button></div><pre tabindex="0" aria-label="app/globals.css code"><code id="code-css">body {
+  margin: 0;
+  background: #f5f4f2;
+  color: #252322;
+  font-family: system-ui, sans-serif;
+}
+.profile-page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+}
+.profile-panel {
+  width: min(100%, 520px);
+  background: #fff;
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid #e6e3df;
+  border-radius: 24px;
+  box-shadow: 0 16px 48px #25232208;
+}
+.profile-eyebrow {
+  color: #765c4c;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+.profile-panel h1 {
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin: 16px 0;
+}
+.profile-intro {
+  color: #66615e;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+.profile-form {
+  display: grid;
+  gap: 20px;
+}
+.profile-actions {
+  display: flex;
+}
+.profile-status {
+  min-height: 44px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #365d46;
+}</code></pre></div>
+</section>
+<section id="run"><h2>05. Run it and check the behaviour</h2>
+<p>Start the development server with <code>npm run dev</code> and open <code>http://localhost:3000</code> (or the address printed in your terminal). Enter a name, then select <strong>Save display name</strong>.</p>
+<ul><li>An empty name leaves the save button disabled.</li><li>A valid name produces a confirmation below the button.</li><li>Editing the name clears the previous confirmation.</li><li>Reloading resets the form, because this example has no persistent storage.</li></ul>
+<p>Before deploying your own app, check its production build:</p>
+<div class="guide-code"><div class="guide-code-head"><span>Terminal · production check</span><button class="guide-copy" type="button" data-copy-code="code-build" aria-label="Copy Terminal · production check">Copy</button></div><pre tabindex="0" aria-label="Terminal · production check code"><code id="code-build">npm run build
+npm start</code></pre></div>
+</section>
+<section id="questions"><h2>Common questions</h2>
+<h3>Why do the components look unstyled?</h3><p>Check that the root layout imports <code>@raydenui/ui/styles.css</code>. Restart the development server after installing the package. If the import is present, inspect your app’s global CSS for broad rules that override component colours, borders, or spacing.</p>
+<h3>Do I need Tailwind CSS?</h3><p>No. This example uses the package’s compiled stylesheet and ordinary CSS. If you want Tailwind utilities in your own app, follow the separate <a href="https://rayden-docs.vercel.app/getting-started/tailwind">Tailwind setup guide</a>.</p>
+<h3>Why am I getting an event handler or useState error?</h3><p>Put <code>"use client"</code> at the top of the file that defines the interactive form. Keep its event handlers inside that client boundary. Do not pass ordinary callback functions from a Server Component into the form.</p>
+<h3>Does this work with the Pages Router?</h3><p>This guide is written for App Router. In a Pages Router project, global CSS belongs in <code>pages/_app.tsx</code>; its routing and layout files differ. Follow the <a href="https://nextjs.org/docs/pages/getting-started/css">Next.js Pages Router CSS instructions</a> for that setup.</p>
+</section>
+<section class="guide-links"><h2>Keep building</h2><p>Want your coding assistant to work from Rayden’s component contracts? Follow the <a href="/guides/rayden-ai">Rayden AI setup guide</a> to connect the MCP companion and validate proposed props.</p><p>Explore the <a href="https://rayden-docs.vercel.app/components/button">Button API</a>, <a href="https://rayden-docs.vercel.app/components/input">Input API</a>, and <a href="https://rayden-docs.vercel.app/design-tokens">design tokens</a> when you’re ready to adapt the form to your product.</p>
+<p>For the framework concepts used here, see Next.js’s official guides to <a href="https://nextjs.org/docs/app/getting-started/installation">installation</a>, <a href="https://nextjs.org/docs/app/getting-started/server-and-client-components">Server and Client Components</a>, and <a href="https://nextjs.org/docs/app/getting-started/css">CSS</a>.</p>
+<a class="button primary guide-download" href="/examples/nextjs-profile.zip" download>Get the complete example <span aria-hidden="true">↓</span></a>
+</section>
+</article></div></main>
+<footer class="container"><div class="footer-top"><a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a><p>Open-source React UI, built with care.</p><div><a href="https://rayden-docs.vercel.app/">Docs</a><a href="https://github.com/playbookTV/Rayden">GitHub</a><a href="https://www.npmjs.com/package/@raydenui/ui">npm</a></div></div><div class="footer-bottom"><span>© 2026 Rayden UI</span><span>Open source. Open possibilities.</span><a href="#main">Back to top ↑</a></div></footer>
+<p id="copy-status" class="sr-only" role="status"></p>
+</body></html>

@@ -25,6 +25,7 @@ import { useRaydenInput } from "../hooks/form/useRaydenInput";
 
 export default {
   title: "Quality/Interaction contracts",
+  tags: ["!dev", "!autodocs"],
   parameters: { a11y: { test: "error" }, layout: "padded" },
 } satisfies Meta;
 type Story = StoryObj;

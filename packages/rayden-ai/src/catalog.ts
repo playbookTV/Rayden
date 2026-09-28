@@ -7,6 +7,7 @@ import {
   publicContracts,
 } from "./manifests";
 import { getCompositionRules } from "./rules";
+import { getBlockCatalog } from "./blocks";
 import generated from "./manifests/contracts.generated.json";
 import iconCatalog from "./manifests/icons.generated.json";
 
@@ -22,6 +23,7 @@ export const capabilities = {
   flavorSwitching: false,
   sourceCodeValidation: false,
   motionPilot: true,
+  blockCatalog: true,
 } as const;
 
 export function getComponentGuidance(name: string) {
@@ -88,8 +90,10 @@ export function getCatalog() {
         "SharedLayout animates one persistent node; cross-tree layout IDs and spring physics are not supported.",
       ],
     },
+    blocks: getBlockCatalog(),
     limitations: [
       "Only the stated Citrionus UI release is represented; future flavors and other versions are not silently substituted.",
+      "Block catalog status, capabilities and verification are authored records of what was measured, not automated conformance results. Every block entry is experimental.",
       "Prop contracts derive from exported TypeScript types. Types do not establish runtime defaults or behavior.",
       "Examples are authored JSX fragments; not every example has an end-to-end interaction test.",
       "Token and anatomy data are separately authored reference data; full parity with runtime CSS is not certified.",

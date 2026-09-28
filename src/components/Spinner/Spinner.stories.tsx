@@ -43,7 +43,7 @@ export const AllTypes: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div className="flex items-end gap-6">
+    <div className="flex flex-wrap items-end gap-6">
       <Spinner size="xs" />
       <Spinner size="sm" />
       <Spinner size="md" />

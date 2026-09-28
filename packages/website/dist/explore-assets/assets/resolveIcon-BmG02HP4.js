@@ -1,0 +1,1 @@
+import{j as t}from"./preview-BsZLk0hN.js";import{I as n}from"./Icon-BdxEHhG5.js";function o(r,e="md"){if(r!=null)return typeof r=="string"?t.jsx(n,{name:r,size:e}):typeof r=="object"&&"outline"in r&&"solid"in r?t.jsx(n,{icon:r,size:e}):r}export{o as r};

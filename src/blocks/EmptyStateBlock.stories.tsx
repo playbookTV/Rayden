@@ -14,7 +14,7 @@ type Story = StoryObj<typeof EmptyStateBlock>;
 /* ─── No Tasks ────────────────────────────────────────────────────── */
 export const NoTasks: Story = {
   render: () => (
-    <div className="p-10 flex items-center justify-center">
+    <div className="w-full max-w-[640px] p-2 sm:p-10 flex items-center justify-center">
       <EmptyStateBlock
         illustration="task-templates"
         title="No tasks to show"
@@ -28,7 +28,7 @@ export const NoTasks: Story = {
 /* ─── No Results ──────────────────────────────────────────────────── */
 export const NoResults: Story = {
   render: () => (
-    <div className="p-10 flex items-center justify-center">
+    <div className="w-full max-w-[640px] p-2 sm:p-10 flex items-center justify-center">
       <EmptyStateBlock
         illustration="search"
         illustrationColored={false}
@@ -42,7 +42,7 @@ export const NoResults: Story = {
 /* ─── Upload Photos (Card) ────────────────────────────────────────── */
 export const UploadPhotos: Story = {
   render: () => (
-    <div className="p-10 flex items-center justify-center bg-grey-50">
+    <div className="w-full max-w-[640px] p-2 sm:p-10 flex items-center justify-center bg-grey-50">
       <EmptyStateBlock
         illustration="gallery"
         variant="card"
@@ -59,7 +59,7 @@ export const UploadPhotos: Story = {
    long translated label wraps deliberately instead of being clipped. */
 export const LongActionLabel: Story = {
   render: () => (
-    <div className="p-10 flex items-center justify-center bg-grey-50">
+    <div className="w-full max-w-[640px] p-2 sm:p-10 flex items-center justify-center bg-grey-50">
       <EmptyStateBlock
         illustration="gallery"
         variant="card"
@@ -76,7 +76,7 @@ export const LongActionLabel: Story = {
 export const ThemedSurface: Story = {
   render: () => (
     <div
-      className="p-10 flex items-center justify-center bg-grey-100"
+      className="w-full max-w-[640px] p-2 sm:p-10 flex items-center justify-center bg-grey-100"
       style={{ "--color-surface": "#f2e9da" } as CSSProperties}
     >
       <EmptyStateBlock

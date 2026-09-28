@@ -6,6 +6,16 @@ const meta: Meta<typeof DatePicker> = {
   title: "Components/DatePicker",
   component: DatePicker,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded",
+  },
+  decorators: [
+    (Story) => (
+      <div className="flex justify-center">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     mode: { control: "select", options: ["single", "range", "year"] },
     showFooter: { control: "boolean" },
@@ -47,7 +57,7 @@ export const YearPicker: Story = {
 function InteractiveDatePicker() {
   const [date, setDate] = useState<Date | null>(null);
   return (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex max-w-full flex-col gap-4 items-start">
       <p className="text-sm text-grey-500">Selected: {date ? date.toLocaleDateString() : "None"}</p>
       <DatePicker
         value={date}
@@ -63,7 +73,7 @@ function InteractiveDatePicker() {
 function InteractiveDateRangePicker() {
   const [range, setRange] = useState<[Date | null, Date | null]>([null, null]);
   return (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex max-w-full flex-col gap-4 items-start">
       <p className="text-sm text-grey-500">
         Range: {range[0]?.toLocaleDateString() ?? "—"} to {range[1]?.toLocaleDateString() ?? "—"}
       </p>

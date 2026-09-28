@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -9,6 +9,7 @@ import {
   schema,
 } from "../src/manifests";
 import aliases from "../src/rules/aliases.json";
+import { getBlockCatalog } from "../src/blocks";
 const base = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const errors: string[] = [];
 // The authored manifest schema uses this bounded subset of draft-07 keywords.
@@ -67,6 +68,56 @@ for (const [alias, target] of Object.entries(aliases.componentAliases)) {
   if (target && !componentExists(target))
     errors.push(`Alias target unavailable: ${alias} -> ${target}`);
 }
+// Block catalog entries name a public export, a source file, a docs page and story
+// exports. None of those are derivable from the authored JSON, so check them against
+// the real files: a catalog that silently disagrees with the barrel is worse than none.
+const uiRoot = resolve(base, "../..");
+const blocksBarrel = readFileSync(resolve(uiRoot, "src/blocks/index.ts"), "utf8");
+const barrelNames = new Set(blocksBarrel.match(/[A-Za-z_$][\w$]*/g) ?? []);
+const blockCatalog = getBlockCatalog();
+for (const entry of blockCatalog.entries) {
+  const label = `Block ${entry.id}`;
+  for (const name of [entry.export, ...entry.types, ...entry.helpers])
+    if (!barrelNames.has(name))
+      errors.push(`${label}: ${name} is not exported from src/blocks/index.ts`);
+  if (!existsSync(resolve(uiRoot, entry.source)))
+    errors.push(`${label}: missing source ${entry.source}`);
+  if (!existsSync(resolve(uiRoot, entry.previewStories.file)))
+    errors.push(`${label}: missing story file ${entry.previewStories.file}`);
+  else {
+    const stories = readFileSync(resolve(uiRoot, entry.previewStories.file), "utf8");
+    if (!stories.includes(`title: "${entry.previewStories.group}"`))
+      errors.push(
+        `${label}: story group ${entry.previewStories.group} not found in ${entry.previewStories.file}`
+      );
+    for (const story of entry.previewStories.stories)
+      if (!new RegExp(`^export const ${story}\\b`, "m").test(stories))
+        errors.push(`${label}: story ${story} not exported from ${entry.previewStories.file}`);
+  }
+  const page = resolve(uiRoot, `packages/docs/content${entry.docs}.mdx`);
+  if (!existsSync(page)) errors.push(`${label}: missing docs page for ${entry.docs}`);
+  if (!blockCatalog.vocabularies.tasks.includes(entry.tasks[0]) || !entry.tasks.length)
+    errors.push(`${label}: no recognised task tag`);
+  if (!entry.domains.length) errors.push(`${label}: no domain tag`);
+  if (!entry.states.length) errors.push(`${label}: no documented states`);
+  if (!entry.limitations.length) errors.push(`${label}: no recorded limitations`);
+  if (!entry.verification.evidence.length) errors.push(`${label}: no verification evidence`);
+  if (entry.status === "stable")
+    errors.push(
+      `${label}: stable requires a screen-reader, multi-engine and OS text-size record that no block has`
+    );
+}
+const barrelExports = new Set(
+  [
+    ...blocksBarrel.matchAll(
+      /^export (?:\{[^}]*\}|type \{[^}]*\}) from "\.\/([A-Za-z]+Block)";$/gms
+    ),
+  ].map((match) => match[1])
+);
+for (const name of barrelExports)
+  if (!blockCatalog.entries.some((entry) => entry.export === name))
+    errors.push(`Uncatalogued public block ${name}`);
+
 const dtcg = JSON.parse(readFileSync(resolve(base, "dist/tokens/tokens.dtcg.json"), "utf8"));
 function token(object: any, path: string): any {
   if (!object || typeof object !== "object") return undefined;
@@ -93,5 +144,5 @@ for (const [reference, files] of Object.entries(debt))
   errors.push(`Unresolved token {${reference}} in ${files.join(", ")}`);
 if (errors.length) throw new Error(errors.join("\n"));
 console.log(
-  "Manifest structure, export mappings, aliases, and all anatomy token references verified."
+  `Manifest structure, export mappings, aliases, all anatomy token references, and ${blockCatalog.entries.length} block catalog entries verified.`
 );

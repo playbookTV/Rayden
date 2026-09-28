@@ -1,0 +1,176 @@
+---
+title: HeaderBlock
+description: Navigate a public site with equivalent desktop and collapsed destinations
+---
+
+# HeaderBlock
+
+Navigate a public site with equivalent desktop and collapsed destinations.
+
+Plan idea 01, category **Navigation & shells**. Status **experimental** — the 21 September
+audit recorded the library's worst navigation defects here. Read [known
+limitations](#known-limitations) before adopting it.
+
+## Import
+
+```tsx
+import { HeaderBlock } from "@raydenui/ui/blocks";
+import type { HeaderBlockLink, HeaderBlockAction, HeaderBlockSwitcher } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+Set `active: true` on the current navigation link to show its selected state and expose
+`aria-current="page"`. A link or action with `href` renders an anchor; one with only
+`onClick` renders a button. The collapsed menu preserves both.
+
+```tsx
+<HeaderBlock
+  variant={2}
+  logo={<a href="/">Citrionus</a>}
+  links={[
+    { label: "Overview", href: "/overview", active: true },
+    { label: "Resources", href: "/resources" },
+  ]}
+  actions={[
+    { label: "Log in", href: "/login", variant: "text" },
+    { label: "Get started", href: "/signup", variant: "primary" },
+  ]}
+  navLabel="Main"
+/>
+```
+
+Header rows share a maximum width of 1440px and collapse according to their container
+width. Centered-logo variants reserve equal space on both sides of the logo.
+
+### Controlled and uncontrolled switcher
+
+Variants 10 and 11 carry a workspace switcher. Which mode applies is decided by whether
+`activeIndex` is a number.
+
+```tsx
+<HeaderBlock
+  variant={10}
+  logo={<span>Acme</span>}
+  switcher={{ tabs: ["Personal", "Team"], defaultActiveIndex: 0, onChange: (i) => track(i) }}
+/>
+```
+
+```tsx
+const [activeIndex, setActiveIndex] = useState(0);
+
+<HeaderBlock
+  variant={10}
+  logo={<span>Acme</span>}
+  switcher={{ tabs: ["Personal", "Team"], activeIndex, onChange: setActiveIndex }}
+  links={[{ label: "Overview", href: "/overview" }]}
+/>;
+```
+
+A controlled switcher without `onChange` is inert: clicking a tab does not move the
+selection. Supply `onChange` whenever you supply `activeIndex`. `onChange` fires only
+when the index actually changes, and both indices are clamped into
+`0 … tabs.length - 1`.
+
+### Announcement and search
+
+```tsx
+<HeaderBlock
+  variant={1}
+  logo={<a href="/">Citrionus</a>}
+  announcement={{
+    text: "Autumn release is live.",
+    linkLabel: "Read the notes",
+    onLinkClick: () => open("/changelog"),
+  }}
+/>
+```
+
+```tsx
+<HeaderBlock
+  variant={9}
+  logo={<a href="/">Citrionus</a>}
+  searchPlaceholder="Search the docs"
+  onSearch={(query) => runSearch(query)}
+/>
+```
+
+## Props
+
+| Prop                | Type                     | Default  | Description                                                  |
+| ------------------- | ------------------------ | -------- | ------------------------------------------------------------ |
+| `variant`           | `1`–`11`                 | `1`      | Visual variant. A fixed numeric set.                         |
+| `logo`              | `ReactNode`              | —        | Logo element, supplied by you.                                |
+| `links`             | `HeaderBlockLink[]`      | —        | Primary destinations.                                        |
+| `rightLinks`        | `HeaderBlockLink[]`      | —        | Right-side destinations for centered-logo variants 7, 8 and 9. |
+| `actions`           | `HeaderBlockAction[]`    | —        | Trailing action group.                                       |
+| `announcement`      | `HeaderBlockAnnouncement`| —        | Announcement banner (variant 1).                             |
+| `searchPlaceholder` | `string`                 | —        | Search placeholder (variant 9).                              |
+| `onSearch`          | `(query: string) => void`| —        | Search handler.                                              |
+| `switcher`          | `HeaderBlockSwitcher`    | —        | Workspace switcher (variants 10 and 11).                      |
+| `secondaryLinks`    | `HeaderBlockLink[]`      | —        | Policy or secondary links for the variant 11 top row.         |
+| `navLabel`          | `string`                 | `"Main"` | Accessible name for the primary navigation landmark.          |
+| `secondaryNavLabel` | `string`                 | —        | Accessible name for the secondary navigation landmark.        |
+| `className`         | `string`                 | —        | Additional class names.                                      |
+
+### HeaderBlockLink
+
+| Member        | Type         | Description                                                   |
+| ------------- | ------------ | ------------------------------------------------------------- |
+| `label`       | `string`     | Required.                                                     |
+| `href`        | `string`     | Renders an anchor. Without it, `onClick` renders a button.      |
+| `onClick`     | `() => void` | Action handler.                                               |
+| `active`      | `boolean`    | Marks the current destination and sets `aria-current="page"`.   |
+| `hasDropdown` | `boolean`    | Shows a dropdown affordance.                                   |
+| `dot`         | `boolean`    | Shows a notification dot next to the label.                    |
+
+### HeaderBlockAction
+
+| Member    | Type                                     | Description                                   |
+| --------- | ---------------------------------------- | --------------------------------------------- |
+| `label`   | `string`                                 | Required.                                     |
+| `href`    | `string`                                 | Renders an anchor for navigation.              |
+| `variant` | `"primary" \| "secondary" \| "text"`      | Visual treatment.                             |
+| `onClick` | `() => void`                             | Action handler.                               |
+
+### HeaderBlockSwitcher
+
+| Member               | Type                      | Default       | Description                                             |
+| -------------------- | ------------------------- | ------------- | ------------------------------------------------------- |
+| `tabs`               | `string[]`                | —             | Required, unique, in order. Empty renders nothing.       |
+| `activeIndex`        | `number`                  | —             | Controlled selection. Supply `onChange` with it.         |
+| `defaultActiveIndex` | `number`                  | `0`           | Uncontrolled initial selection, read once on mount.      |
+| `onChange`           | `(index: number) => void` | —             | Raised with the index the user asked for, in both modes.  |
+| `label`              | `string`                  | `"Workspace"` | Accessible name for the switcher group.                  |
+
+## States
+
+**Default only.** The header presents destinations the application already knows.
+
+## Verification
+
+Baseline is the [21 September 2026 audit](https://github.com/raydenui/rayden), which
+scanned the header with Playwright 1.58.2 driving installed Google Chrome and axe-core
+4.11.1 at 320, 390, 768 and 1440 CSS pixels in light and dark mode. Re-run in the
+repository story suite on 23 September 2026, which includes a switcher regression group.
+
+Not verified: a screen-reader pass, any non-Chromium engine, operating-system text-size
+settings — and, importantly, the audit's width and contrast measurements have **not**
+been repeated since the repairs below.
+
+## Known limitations
+
+- The audit recorded seven variants overflowing the viewport at 768px, a collapsed
+  renderer that discarded href-only destinations, an `aria-controls` target absent from
+  the DOM, and explicit dark variants inverting to a near-white surface in global dark
+  mode. Shared link-aware rendering, named navigation landmarks and a permanently
+  mounted menu element have since been added, and the controlled switcher contract was
+  corrected. Those measurements have not been repeated, so treat the header as the least
+  verified block in the catalog.
+- The eleven variants are a fixed numeric set rather than a composed contract, so a
+  layout outside that set cannot be expressed.
+- Uses `bg-white` with a dark-mode override rather than the semantic surface roles, so a
+  consumer `--color-surface` override does not reach it.
+- Going from a number to `undefined` on `switcher.activeIndex` hands ownership back to
+  the header, which resumes from its own last internal value. Do not switch modes
+  mid-life.

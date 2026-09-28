@@ -1,21 +1,22 @@
 ---
 title: TableBlock
-description: Transactions table with selection, row actions and built-in pagination
+description: Payment records table with selection, row actions and built-in pagination
 ---
 
 # TableBlock
 
-A ready-made transactions table with row selection, a per-row action menu and built-in
-pagination.
+A payment records table with row selection, a per-row action menu and built-in pagination.
 
-`TableBlock` has a fixed row shape rather than configurable columns. When you need
-arbitrary columns, use [SearchableTableBlock](/blocks/searchable-table-block), or compose
-`Table` directly from `@raydenui/ui`.
+`TableBlock` has a **fixed, payment-specific row shape** rather than configurable columns —
+the name is broader than the block. When you need arbitrary columns, use
+[SearchableTableBlock](/blocks/searchable-table-block), or compose `Table` directly from
+`@raydenui/ui`.
 
 ## Import
 
 ```tsx
 import { TableBlock } from "@raydenui/ui/blocks";
+import type { TableBlockRow } from "@raydenui/ui/blocks";
 ```
 
 ## Usage
@@ -25,7 +26,7 @@ import { TableBlock } from "@raydenui/ui/blocks";
 Each row supplies the full set of fields the table renders.
 
 ```tsx
-const rows = [
+const rows: TableBlockRow[] = [
   {
     id: "1",
     name: "Ada Lovelace",
@@ -43,18 +44,17 @@ const rows = [
 <TableBlock rows={rows} />;
 ```
 
-### Row actions
+### Every optional control needs its handler
 
-`onRowAction` fires with the row id when the kebab menu is activated. The control is
-named after the row, so screen reader users know which row it affects.
+The block does not render a control that has nowhere to go:
+
+- The **actions column** renders only when `onRowAction` is supplied.
+- **Pagination** renders only when `page`, `totalPages` and `onPageChange` are supplied
+  together.
 
 ```tsx
 <TableBlock rows={rows} onRowAction={(rowId) => openMenuFor(rowId)} />
 ```
-
-### Pagination
-
-Pagination is controlled: pass `page` and `totalPages` and update them in `onPageChange`.
 
 ```tsx
 const [page, setPage] = useState(1);
@@ -62,42 +62,99 @@ const [page, setPage] = useState(1);
 <TableBlock rows={rows} page={page} totalPages={8} onPageChange={setPage} />;
 ```
 
-### Custom styling
+### Selection
+
+Selection is uncontrolled unless you pass `selectedIds`. `onSelectionChange` fires with the
+**full resulting selection** on every user interaction, and also whenever reconciliation
+drops ids.
 
 ```tsx
-<TableBlock className="rounded-xl shadow-soft-lg" rows={rows} />
+<TableBlock rows={rows} onSelectionChange={(ids) => setBulkTargets(ids)} />
 ```
+
+Controlled selection is the only way to keep a selection across pages:
+
+```tsx
+const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+<TableBlock
+  rows={pageRows}
+  selectedIds={selectedIds}
+  onSelectionChange={setSelectedIds}
+  page={page}
+  totalPages={8}
+  onPageChange={setPage}
+/>;
+```
+
+## Selection reconciliation contract
+
+An **uncontrolled** selection covers only the rows the block is currently given. When
+`rows` changes, any selected id that is no longer present is dropped permanently — it does
+not come back if that row returns later.
+
+- Deleting a row deselects it.
+- Replacing rows with new ids clears the selection, so the header reports "none selected"
+  rather than a stale "all selected" over unchecked rows.
+- Paginating **outside** the block, where you hand over a different `rows` array, drops the
+  selections that left with it. From the block's side that is indistinguishable from
+  deletion.
+- Reconciliation is never silent. Dropping ids fires `onSelectionChange` with what remains,
+  so a bulk action cannot run against a row that is already gone.
+
+A **controlled** selection is never reconciled. The value you supply is authoritative, and
+ids outside the current page are preserved by the toggles rather than dropped.
+
+Full and partial selection are derived from membership of the rows on screen, never from set
+sizes, so one of two rows reports `aria-checked="mixed"` rather than fully checked.
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `rows` | `TableBlockRow[]` | — | Table rows (required) |
-| `page` | `number` | — | Current page, 1-indexed |
-| `totalPages` | `number` | — | Total pages |
-| `onPageChange` | `(page: number) => void` | — | Page change handler |
-| `onRowAction` | `(rowId: string) => void` | — | Row action (kebab menu) handler |
-| `className` | `string` | — | Additional CSS classes |
+| Prop                | Type                        | Default | Description                                                          |
+| ------------------- | --------------------------- | ------- | -------------------------------------------------------------------- |
+| `rows`              | `TableBlockRow[]`           | —       | **Required.** Table rows.                                             |
+| `selectedIds`       | `string[]`                  | —       | Controlled selection. The only way to keep a selection across pages.    |
+| `onSelectionChange` | `(ids: string[]) => void`   | —       | Fired with the full resulting selection, including on reconciliation.   |
+| `onRowAction`       | `(rowId: string) => void`   | —       | Row action handler. **The actions column renders only when supplied.**  |
+| `page`              | `number`                    | —       | Current page, 1-indexed. Pagination needs all three props.              |
+| `totalPages`        | `number`                    | —       | Total pages. Pagination needs all three props.                          |
+| `onPageChange`      | `(page: number) => void`    | —       | Page change handler. Pagination needs all three props.                  |
+| `className`         | `string`                    | —       | Additional class names.                                               |
 
 ### TableBlockRow
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | `string` | Unique row identifier |
-| `name` | `string` | Person's name |
-| `email` | `string` | Email address, shown under the name |
-| `initials` | `string` | Avatar initials |
-| `amount` | `string` | Formatted amount |
-| `paymentType` | `string` | Payment method label |
-| `date` | `string` | Date label |
-| `time` | `string` | Time label |
-| `status` | `string` | Status label |
-| `statusColor` | `"success" \| "warning" \| "error" \| "orange" \| "blue" \| "neutral"` | Status badge colour |
+| Field         | Type                                                                    | Description                    |
+| ------------- | ----------------------------------------------------------------------- | ------------------------------ |
+| `id`          | `string`                                                                | Unique row identifier.          |
+| `name`        | `string`                                                                | Person's name.                  |
+| `email`       | `string`                                                                | Shown under the name.           |
+| `initials`    | `string`                                                                | Avatar initials.                |
+| `amount`      | `string`                                                                | Pre-formatted amount.           |
+| `paymentType` | `string`                                                                | Payment method label.           |
+| `date`        | `string`                                                                | Date label.                     |
+| `time`        | `string`                                                                | Time label.                     |
+| `status`      | `string`                                                                | Status label.                   |
+| `statusColor` | `"success" \| "warning" \| "error" \| "orange" \| "blue" \| "neutral"`   | Status badge colour.            |
+
+Every field except `statusColor` is required.
+
+## States
+
+- **default** — the record table.
+- **partial selection** — the select-all control reports `aria-checked="mixed"`.
+- **no configured actions** — the actions column and pagination are absent rather than inert.
 
 ## Accessibility
 
 - Selection checkboxes are named after their row, and the select-all control is named
   "Select all rows".
 - The row action button is named `Actions for <name>`, using the row's own name.
-- The action column has a visually hidden "Actions" heading, so the column is not empty
-  for screen readers.
+- The action column has a visually hidden "Actions" heading, so the column is not empty for
+  screen readers.
+- The table has its own bounded horizontal scroll region, which is intentional for
+  two-dimensional data rather than a reflow defect.
+
+## Known limitations
+
+- The row shape is fixed and payment-specific. There is no column configuration.
+- There is no loading, error or empty state. Render your own around the block.

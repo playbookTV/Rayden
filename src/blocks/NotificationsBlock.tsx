@@ -5,6 +5,14 @@ import { ActivityContent } from "../components/ActivityFeed/ActivityContent";
 import { Badge } from "../components/Badge";
 
 // ─── Types ───────────────────────────────────────────────────────────
+/**
+ * Heading element used for the block title. The value is the element name, so a
+ * page that already owns its `h1` can pass `"h2"` and a standalone
+ * notifications page can pass `"h1"`. A numeric `2 | 3 | 4 | 5 | 6` range,
+ * which this prop used before, could not express the `h1` case.
+ */
+export type NotificationsHeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
 export interface NotificationItem {
   id: string;
   avatar: ReactNode;
@@ -41,8 +49,11 @@ export interface NotificationItem {
 export interface NotificationsBlockProps {
   /** Block title */
   title?: string;
-  /** Heading level for the block title, so the block fits a page's outline */
-  headingLevel?: 2 | 3 | 4 | 5 | 6;
+  /**
+   * Heading element for the block title, so the block fits a page's outline.
+   * @default "h2"
+   */
+  headingLevel?: NotificationsHeadingLevel;
   /** Unread notification count */
   unreadCount?: number;
   /** Notification items */
@@ -54,13 +65,12 @@ export interface NotificationsBlockProps {
 // ─── Component ───────────────────────────────────────────────────────
 export function NotificationsBlock({
   title = "Notifications",
-  headingLevel = 3,
+  headingLevel: Heading = "h2",
   unreadCount,
   items,
   className,
 }: NotificationsBlockProps) {
   const headingId = useId();
-  const Heading = `h${headingLevel}` as const;
 
   return (
     <section

@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101011"><title>Site header — React UI block | Rayden UI</title><meta name="description" content="Navigation, announcements and workspace controls in a shared header."><link rel="canonical" href="https://www.rayden-ui.dev/blocks/header"><meta name="robots" content="index, follow, max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="Rayden UI"><meta property="og:title" content="Site header — React UI block"><meta property="og:description" content="Navigation, announcements and workspace controls in a shared header."><meta property="og:url" content="https://www.rayden-ui.dev/blocks/header"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Site header — React UI block"><meta name="twitter:description" content="Navigation, announcements and workspace controls in a shared header."><link rel="icon" href="/assets/rayden-mark.svg" type="image/svg+xml"><link rel="preload" href="/assets/manrope-latin-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/explore.css"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "name": "Site header — React UI block", "url": "https://www.rayden-ui.dev/blocks/header", "description": "Navigation, announcements and workspace controls in a shared header.", "isPartOf": {"@type": "CollectionPage", "url": "https://www.rayden-ui.dev/explore", "name": "Explore Rayden UI"}, "mainEntity": {"@type": "SoftwareSourceCode", "name": "HeaderBlock usage example", "programmingLanguage": ["TypeScript", "React"], "codeSampleType": "full", "runtimePlatform": "@raydenui/ui 0.10.1", "license": "https://github.com/playbookTV/Rayden/blob/main/LICENSE"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Explore", "item": "https://www.rayden-ui.dev/explore"}, {"@type": "ListItem", "position": 2, "name": "Site header", "item": "https://www.rayden-ui.dev/blocks/header"}]}]}</script><script src="/explore.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="nav-shell"><nav class="nav explore-container" aria-label="Main navigation"><a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a><div class="explore-nav"><a href="/explore?type=components">Components</a><a href="/explore?type=blocks">Blocks</a><a href="/guides/rayden-ai">For AI</a><a href="https://rayden-docs.vercel.app/">Documentation ↗</a></div></nav></header>
+<main id="main" class="explore-container" data-detail="header"><nav class="detail-breadcrumb" aria-label="Breadcrumb"><a data-back href="/explore?type=blocks">← Explore blocks</a><span>/</span><span aria-current="page">Site header</span></nav><div class="detail-heading"><div><p class="library-kicker">NAVIGATION · BLOCK</p><h1>Site header</h1><p class="detail-description">Navigation, announcements and workspace controls in a shared header.</p><div class="detail-meta"><span>@raydenui/ui 0.10.1</span><span class="library-tag">Experimental</span><span>React + TypeScript</span></div></div><div class="detail-actions"><button class="showcase-button" data-copy-target="example-code" data-ai-prompt="Use @raydenui/ui@0.10.1 to build an interface based on this Site header example. Import HeaderBlock from @raydenui/ui/blocks. Preserve real supported props and the explicit demo behaviour. If Rayden MCP is available, check its reference UI version first and use only guidance it actually supports; do not assume it has a contract for every block. Review the following complete example, adapt it to my project, and run the build and interaction checks.">Copy for AI ↗</button><a class="showcase-button primary" href="https://rayden-docs.vercel.app/blocks/expanded-library#header-selection">Documentation ↗</a></div></div>
+<div class="preview-workbench"><div class="preview-toolbar"><div class="library-switch" role="group" aria-label="Example view"><button type="button" data-view="preview" aria-pressed="true" aria-controls="preview-panel">Preview</button><button type="button" data-view="code" aria-pressed="false" aria-controls="code-panel">Code</button></div><div class="preview-options" id="preview-options"><label>State<select id="preview-state"><option value="default">Default</option><option value="search">Search</option><option value="workspace">Workspace</option></select></label><label>Theme<select id="preview-theme"><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Viewport<select id="preview-viewport"><option value="desktop">Fit</option><option value="tablet">Tablet</option><option value="mobile">Mobile</option></select></label><button class="preview-reset" id="preview-reset" type="button">↺ Reset preview</button></div></div><div id="preview-panel"><div class="preview-failure" id="preview-failure" role="alert" hidden>The preview couldn’t load. Try Reset preview, or open Code to use the example.</div><div class="preview-surface"><div class="preview-loading" id="preview-loading" role="status">Loading the real component…</div><div class="preview-frame-wrap" id="preview-frame-wrap" data-viewport="desktop"><iframe id="live-preview" title="Interactive Site header example" height="590" sandbox="allow-scripts allow-same-origin" data-example="header"></iframe></div></div><noscript><p>Enable JavaScript to interact with this example. The full source is available below.</p></noscript></div><div class="preview-code" id="code-panel"><button class="showcase-button" data-copy-target="example-code">Copy code</button><pre tabindex="0" aria-label="Site header example source"><code id="example-code">&quot;use client&quot;;
+import { useState } from &quot;react&quot;;
+import { HeaderBlock } from &quot;@raydenui/ui/blocks&quot;;
+import &quot;@raydenui/ui/styles.css&quot;;
+export default function Example({ state = &quot;default&quot; }: { state?: string }) {
+  const [page, setPage] = useState(&quot;Overview&quot;);
+  const [workspace, setWorkspace] = useState(0);
+  const [message, setMessage] = useState(&quot;Choose a destination to try the header.&quot;);
+  return (
+    &lt;div style={{ width: &quot;100%&quot;, minHeight: 380 }}&gt;
+      &lt;HeaderBlock
+        variant={state === &quot;search&quot; ? 9 : state === &quot;workspace&quot; ? 10 : 1}
+        logo={&lt;strong&gt;Form &amp; Field&lt;/strong&gt;}
+        links={[&quot;Overview&quot;, &quot;Projects&quot;, &quot;Team&quot;].map((label) =&gt; ({
+          label,
+          active: page === label,
+          onClick: () =&gt; {
+            setPage(label);
+            setMessage(`${label} selected in this demo.`);
+          },
+        }))}
+        actions={[
+          {
+            label: &quot;New project&quot;,
+            variant: &quot;primary&quot;,
+            onClick: () =&gt; setMessage(&quot;A local demo project was created.&quot;),
+          },
+        ]}
+        announcement={{
+          text: &quot;A little room for good work.&quot;,
+          linkLabel: &quot;Take a look&quot;,
+          onLinkClick: () =&gt; setMessage(&quot;Announcement opened in this demo.&quot;),
+        }}
+        searchPlaceholder=&quot;Search your workspace…&quot;
+        onSearch={(query) =&gt;
+          setMessage(query ? `Demo search: ${query}` : &quot;Type to search the demo workspace.&quot;)
+        }
+        switcher={{ tabs: [&quot;Studio&quot;, &quot;Personal&quot;], activeIndex: workspace, onChange: setWorkspace }}
+      /&gt;
+      &lt;div style={{ padding: 24 }}&gt;
+        &lt;h2 style={{ fontSize: 28 }}&gt;{page}&lt;/h2&gt;
+        &lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;
+          {message}
+        &lt;/p&gt;
+        {state === &quot;workspace&quot; &amp;&amp; (
+          &lt;p style={{ marginTop: 12 }}&gt;Workspace: {workspace === 0 ? &quot;Studio&quot; : &quot;Personal&quot;}&lt;/p&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
+<div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A responsive header with callback-driven destinations, a project action, and alternative search and workspace variants. Each control reports a local outcome.</p><h2>Try it</h2><p>Choose Projects, create a demo project, and try the search and workspace variants. On mobile, open the navigation menu.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a><a href="/components/input">Input</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1
+
+import { HeaderBlock } from &quot;@raydenui/ui/blocks&quot;;
+import &quot;@raydenui/ui/styles.css&quot;;</pre><button class="showcase-button" data-copy-target="install-code">Copy setup</button></div><p style="margin-top:20px;font-size:13px">The Code tab contains the full preview component. Import the stylesheet once in your app. Preview state changes reset local data. This block is experimental; review its documented limitations before using it in your product.</p></aside></div>
+<section class="showcase-related"><h2>A few more possibilities.</h2><div><a class="showcase-button" href="/blocks/page-header">Page header ↗</a><a class="showcase-button" href="/blocks/workspace-switcher">Workspace switcher ↗</a><a class="showcase-button" href="/blocks/command-palette">Command palette ↗</a></div></section></main><footer class="explore-container"><div class="footer-top"><a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a><p>Open-source React UI, built with care.</p><div><a href="/#guides">Guides</a><a href="https://rayden-docs.vercel.app/">Docs</a><a href="https://github.com/playbookTV/Rayden">GitHub</a></div></div><div class="footer-bottom"><span>© 2026 Rayden UI</span><span>Open source. Open possibilities.</span><a href="#main">Back to top ↑</a></div></footer><p class="sr-only" id="showcase-status" role="status"></p></body></html>

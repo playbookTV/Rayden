@@ -1,0 +1,71 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101011"><title>Shopping cart — React UI block | Rayden UI</title><meta name="description" content="Editable quantities, item removal, and a readable order summary."><link rel="canonical" href="https://www.rayden-ui.dev/blocks/shopping-cart"><meta name="robots" content="index, follow, max-image-preview:large"><meta property="og:type" content="website"><meta property="og:site_name" content="Rayden UI"><meta property="og:title" content="Shopping cart — React UI block"><meta property="og:description" content="Editable quantities, item removal, and a readable order summary."><meta property="og:url" content="https://www.rayden-ui.dev/blocks/shopping-cart"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Shopping cart — React UI block"><meta name="twitter:description" content="Editable quantities, item removal, and a readable order summary."><link rel="icon" href="/assets/rayden-mark.svg" type="image/svg+xml"><link rel="preload" href="/assets/manrope-latin-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/explore.css"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "name": "Shopping cart — React UI block", "url": "https://www.rayden-ui.dev/blocks/shopping-cart", "description": "Editable quantities, item removal, and a readable order summary.", "isPartOf": {"@type": "CollectionPage", "url": "https://www.rayden-ui.dev/explore", "name": "Explore Rayden UI"}, "mainEntity": {"@type": "SoftwareSourceCode", "name": "ShoppingCartBlock usage example", "programmingLanguage": ["TypeScript", "React"], "codeSampleType": "full", "runtimePlatform": "@raydenui/ui 0.10.1", "license": "https://github.com/playbookTV/Rayden/blob/main/LICENSE"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Explore", "item": "https://www.rayden-ui.dev/explore"}, {"@type": "ListItem", "position": 2, "name": "Shopping cart", "item": "https://www.rayden-ui.dev/blocks/shopping-cart"}]}]}</script><script src="/explore.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="nav-shell"><nav class="nav explore-container" aria-label="Main navigation"><a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a><div class="explore-nav"><a href="/explore?type=components">Components</a><a href="/explore?type=blocks">Blocks</a><a href="/guides/rayden-ai">For AI</a><a href="https://rayden-docs.vercel.app/">Documentation ↗</a></div></nav></header>
+<main id="main" class="explore-container" data-detail="shopping-cart"><nav class="detail-breadcrumb" aria-label="Breadcrumb"><a data-back href="/explore?type=blocks">← Explore blocks</a><span>/</span><span aria-current="page">Shopping cart</span></nav><div class="detail-heading"><div><p class="library-kicker">COMMERCE · BLOCK</p><h1>Shopping cart</h1><p class="detail-description">Editable quantities, item removal, and a readable order summary.</p><div class="detail-meta"><span>@raydenui/ui 0.10.1</span><span class="library-tag">Experimental</span><span>React + TypeScript</span></div></div><div class="detail-actions"><button class="showcase-button" data-copy-target="example-code" data-ai-prompt="Use @raydenui/ui@0.10.1 to build an interface based on this Shopping cart example. Import ShoppingCartBlock from @raydenui/ui/blocks. Preserve real supported props and the explicit demo behaviour. If Rayden MCP is available, check its reference UI version first and use only guidance it actually supports; do not assume it has a contract for every block. Review the following complete example, adapt it to my project, and run the build and interaction checks.">Copy for AI ↗</button><a class="showcase-button primary" href="https://rayden-docs.vercel.app/blocks/commerce#controlled-cart">Documentation ↗</a></div></div>
+<div class="preview-workbench"><div class="preview-toolbar"><div class="library-switch" role="group" aria-label="Example view"><button type="button" data-view="preview" aria-pressed="true" aria-controls="preview-panel">Preview</button><button type="button" data-view="code" aria-pressed="false" aria-controls="code-panel">Code</button></div><div class="preview-options" id="preview-options"><label>State<select id="preview-state"><option value="default">Default</option><option value="empty">Empty</option></select></label><label>Theme<select id="preview-theme"><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Viewport<select id="preview-viewport"><option value="desktop">Fit</option><option value="tablet">Tablet</option><option value="mobile">Mobile</option></select></label><button class="preview-reset" id="preview-reset" type="button">↺ Reset preview</button></div></div><div id="preview-panel"><div class="preview-failure" id="preview-failure" role="alert" hidden>The preview couldn’t load. Try Reset preview, or open Code to use the example.</div><div class="preview-surface"><div class="preview-loading" id="preview-loading" role="status">Loading the real component…</div><div class="preview-frame-wrap" id="preview-frame-wrap" data-viewport="desktop"><iframe id="live-preview" title="Interactive Shopping cart example" height="730" sandbox="allow-scripts allow-same-origin" data-example="shopping-cart"></iframe></div></div><noscript><p>Enable JavaScript to interact with this example. The full source is available below.</p></noscript></div><div class="preview-code" id="code-panel"><button class="showcase-button" data-copy-target="example-code">Copy code</button><pre tabindex="0" aria-label="Shopping cart example source"><code id="example-code">&quot;use client&quot;;
+import { useState } from &quot;react&quot;;
+import { ShoppingCartBlock, type CommerceCartItem } from &quot;@raydenui/ui/blocks&quot;;
+import &quot;@raydenui/ui/styles.css&quot;;
+
+const productImage = (drawing: string) =&gt;
+  &quot;data:image/svg+xml,&quot; +
+  encodeURIComponent(
+    `&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 160 200&quot;&gt;&lt;rect width=&quot;160&quot; height=&quot;200&quot; fill=&quot;#e8e1d7&quot;/&gt;${drawing}&lt;/svg&gt;`
+  );
+const notebookImage = productImage(
+  &#x27;&lt;rect x=&quot;38&quot; y=&quot;28&quot; width=&quot;92&quot; height=&quot;146&quot; rx=&quot;5&quot; fill=&quot;#292824&quot;/&gt;&lt;path d=&quot;M49 29v144&quot; stroke=&quot;#5b5850&quot; stroke-width=&quot;2&quot;/&gt;&lt;path d=&quot;M117 29v144&quot; stroke=&quot;#ba7044&quot; stroke-width=&quot;4&quot;/&gt;&lt;path d=&quot;M67 65h34M67 73h23&quot; stroke=&quot;#c6b99f&quot;/&gt;&#x27;
+);
+const pencilImage = productImage(
+  &#x27;&lt;g transform=&quot;rotate(18 80 100)&quot;&gt;&lt;path d=&quot;M53 38h12v115l-6 18-6-18z&quot; fill=&quot;#b8794e&quot;/&gt;&lt;path d=&quot;M75 24h12v129l-6 18-6-18z&quot; fill=&quot;#d4a477&quot;/&gt;&lt;path d=&quot;M97 45h12v108l-6 18-6-18z&quot; fill=&quot;#45443f&quot;/&gt;&lt;path d=&quot;m56 162 3 9 3-9m16 0 3 9 3-9m16 0 3 9 3-9&quot; fill=&quot;#292824&quot;/&gt;&lt;/g&gt;&#x27;
+);
+
+const initial: CommerceCartItem[] = [
+  {
+    id: &quot;notebook&quot;,
+    name: &quot;Studio notebook&quot;,
+    image: { src: notebookImage, alt: &quot;Graphite notebook with a copper elastic band&quot; },
+    description: &quot;A place for the next idea.&quot;,
+    price: 1800,
+    quantity: 1,
+    variant: &quot;Graphite&quot;,
+    stock: 5,
+  },
+  {
+    id: &quot;pencils&quot;,
+    name: &quot;Sketching pencils&quot;,
+    image: { src: pencilImage, alt: &quot;Three drawing pencils&quot; },
+    description: &quot;A set of three essentials.&quot;,
+    price: 900,
+    quantity: 2,
+    stock: 8,
+  },
+];
+export default function Example({ state = &quot;default&quot; }: { state?: string }) {
+  const [items, setItems] = useState(state === &quot;empty&quot; ? [] : initial);
+  const [message, setMessage] = useState(&quot;&quot;);
+  return (
+    &lt;div&gt;
+      &lt;ShoppingCartBlock
+        title=&quot;Your bag&quot;
+        description=&quot;Thoughtful essentials for your workspace. Demo products only.&quot;
+        items={items}
+        currency=&quot;GBP&quot;
+        shipping={400}
+        totalsNote=&quot;Illustrative totals. No payment will be taken.&quot;
+        onQuantityChange={(id, quantity) =&gt;
+          setItems(items.map((item) =&gt; (item.id === id ? { ...item, quantity } : item)))
+        }
+        onRemoveItem={(id) =&gt; setItems(items.filter((item) =&gt; item.id !== id))}
+        onContinueShopping={() =&gt; setItems(initial)}
+        onCheckout={() =&gt; setMessage(&quot;Checkout preview only. No order has been placed.&quot;)}
+      /&gt;
+      &lt;p role=&quot;status&quot; style={{ marginTop: 20 }}&gt;
+        {message}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div class="preview-note"><span>Live library components · illustrative demo data · no remote submissions</span><span>Reset returns to the initial example.</span></div></div>
+<div class="detail-information"><div><h2>Made for real interfaces.</h2><p>A cart interface using prices in minor currency units and controlled line items. This example recalculates demo totals when quantities change; checkout does not create an order or take payment.</p><h2>Try it</h2><p>Change a quantity, remove an item, and try the empty cart. Continue shopping restores the demo products; the empty cart offers Explore the collection.</p><h2>Built with</h2><div class="detail-built"><a href="/components/button">Button</a></div></div><aside><div class="detail-install"><h2>Add it to your React app</h2><pre id="install-code">npm install @raydenui/ui@0.10.1
+
+import { ShoppingCartBlock } from &quot;@raydenui/ui/blocks&quot;;
+import &quot;@raydenui/ui/styles.css&quot;;</pre><button class="showcase-button" data-copy-target="install-code">Copy setup</button></div><p style="margin-top:20px;font-size:13px">The Code tab contains the full preview component. Import the stylesheet once in your app. Preview state changes reset local data. This block is experimental; review its documented limitations before using it in your product.</p></aside></div>
+<section class="showcase-related"><h2>A few more possibilities.</h2><div><a class="showcase-button" href="/blocks/product-detail">Product detail ↗</a><a class="showcase-button" href="/blocks/checkout-review">Checkout review ↗</a><a class="showcase-button" href="/blocks/product-collection">Product collection ↗</a></div></section></main><footer class="explore-container"><div class="footer-top"><a class="brand" href="/" aria-label="Rayden UI home"><img src="/assets/rayden-logo.svg" alt="Rayden" width="241" height="99"></a><p>Open-source React UI, built with care.</p><div><a href="/#guides">Guides</a><a href="https://rayden-docs.vercel.app/">Docs</a><a href="https://github.com/playbookTV/Rayden">GitHub</a></div></div><div class="footer-bottom"><span>© 2026 Rayden UI</span><span>Open source. Open possibilities.</span><a href="#main">Back to top ↑</a></div></footer><p class="sr-only" id="showcase-status" role="status"></p></body></html>

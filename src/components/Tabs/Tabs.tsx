@@ -204,7 +204,7 @@ export function Tabs({
         ref={listRef}
         data-rayden-motion={motion ? preset : undefined}
         className={cn(
-          "inline-flex",
+          "inline-flex max-w-full",
           motion && "relative isolate",
           isVertical ? "flex-col" : "",
           variant === "line" && !isVertical && "border-b border-grey-200",
@@ -212,6 +212,7 @@ export function Tabs({
           variant === "pill" && (isVertical ? "gap-1" : "gap-1"),
           variant === "segmented" &&
             "border border-grey-100 bg-grey-50 rounded-lg p-0.5 gap-0.5 overflow-hidden",
+          !isVertical && "overflow-x-auto",
           className
         )}
         role="tablist"

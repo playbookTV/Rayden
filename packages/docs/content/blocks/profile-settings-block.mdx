@@ -1,0 +1,178 @@
+---
+title: ProfileSettingsBlock
+description: Edit personal details and avatar, track unsaved changes, and save or cancel
+---
+
+# ProfileSettingsBlock
+
+Edit personal details and avatar, track unsaved changes, and save or cancel.
+
+Plan idea 33, category **Forms & settings**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { ProfileSettingsBlock, defaultProfileTimeZones } from "@raydenui/ui/blocks";
+import type { ProfileSettingsValues } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`value` is the **saved** profile, not the draft. Unsaved-change tracking compares the
+working draft against it, so the block resets its draft whenever your application reports
+new saved values. Do not feed the draft back into `value`.
+
+```tsx
+const [profile, setProfile] = useState<ProfileSettingsValues>({
+  firstName: "Alex",
+  lastName: "Morgan",
+  email: "alex@example.com",
+  jobTitle: "Operations lead",
+  timeZone: "Europe/London",
+  bio: "Keeps the northern lanes moving.",
+});
+
+<ProfileSettingsBlock
+  title="Your profile"
+  value={profile}
+  onSave={(next) => save(next)}
+  onCancel={() => track("profile-cancel")}
+  onDirtyChange={(dirty) => setBlockNavigation(dirty)}
+  timeZones={defaultProfileTimeZones}
+/>;
+```
+
+`onSave` is **required**: the Save control is never rendered without an action.
+
+### Lifecycle
+
+```tsx
+<ProfileSettingsBlock
+  value={profile}
+  onSave={save}
+  status="saving"
+/>
+```
+
+```tsx
+<ProfileSettingsBlock
+  value={profile}
+  onSave={save}
+  status="error"
+  errorMessage="The directory rejected the change. Try again in a minute."
+/>
+```
+
+`status="success"` means your application has **confirmed** the save. The block never
+sets it.
+
+### Permission-aware editing
+
+```tsx
+<ProfileSettingsBlock
+  value={profile}
+  onSave={save}
+  canEdit={false}
+  readOnlyMessage="Your administrator manages this profile."
+/>
+```
+
+Individual fields can be read-only while the rest stay editable, each with its own
+visible explanation.
+
+```tsx
+<ProfileSettingsBlock
+  value={profile}
+  onSave={save}
+  readOnlyFields={["email"]}
+  readOnlyFieldMessages={{ email: "Your email address comes from your identity provider." }}
+/>
+```
+
+### Avatar
+
+The block never uploads. `onAvatarChange` receives the chosen `File`; your application
+owns the upload and reports the outcome back through `avatar` and `avatarStatus`. When
+`onAvatarChange` is omitted, no upload control is rendered.
+
+```tsx
+<ProfileSettingsBlock
+  value={profile}
+  onSave={save}
+  avatar={{ src: photoUrl, initials: "AM", alt: "Alex Morgan" }}
+  onAvatarChange={(file) => upload(file)}
+  onAvatarRemove={() => clearPhoto()}
+  avatarStatus="uploading"
+/>
+```
+
+Replace the built-in control with `avatarSlot` to compose the library's `FileUpload`
+instead.
+
+## Props
+
+| Prop                    | Type                                                        | Default   | Description                                                   |
+| ----------------------- | ----------------------------------------------------------- | --------- | ------------------------------------------------------------- |
+| `value`                 | `ProfileSettingsValues`                                     | —         | **Required.** The saved profile.                               |
+| `onSave`                | `(values: ProfileSettingsValues) => void`                   | —         | **Required.** The Save control needs an action.                 |
+| `title`                 | `string`                                                    | —         | Block title.                                                   |
+| `description`           | `string`                                                    | —         | Supporting sentence.                                            |
+| `headingLevel`          | `"h1"`–`"h6"`                                               | `"h2"`    | Element for `title`.                                            |
+| `onCancel`              | `() => void`                                                | —         | Called after the draft is reset to `value`.                      |
+| `onDirtyChange`         | `(dirty: boolean) => void`                                  | —         | Fires whenever the unsaved-change state flips.                   |
+| `status`                | `"idle" \| "loading" \| "saving" \| "error" \| "success"`    | `"idle"`  | Lifecycle owned by your application.                             |
+| `errorMessage`          | `string`                                                    | —         | Shown when `status="error"`.                                     |
+| `successMessage`        | `string`                                                    | —         | Shown when `status="success"`.                                   |
+| `fieldErrors`           | `ProfileSettingsFieldErrors`                                | —         | Server-reported errors, shown immediately.                       |
+| `canEdit`               | `boolean`                                                   | `true`    | When false every field is read-only and the footer is omitted.    |
+| `readOnlyMessage`       | `string`                                                    | —         | Explains why editing is unavailable.                             |
+| `readOnlyFields`        | `ProfileSettingsFieldName[]`                                | —         | Fields the viewer may read but not change.                        |
+| `readOnlyFieldMessages` | `Partial<Record<ProfileSettingsFieldName, string>>`          | —         | Explanations keyed by field.                                      |
+| `avatar`                | `ProfileSettingsAvatar`                                     | —         | `{ src?, initials?, alt? }`.                                      |
+| `onAvatarChange`        | `(file: File) => void`                                      | —         | Receives the chosen image. No control is rendered without it.      |
+| `onAvatarRemove`        | `() => void`                                                | —         | No remove control is rendered without it.                         |
+| `avatarStatus`          | `"idle" \| "uploading" \| "error"`                           | `"idle"`  | Truthful upload state, owned by your application.                  |
+| `avatarErrorMessage`    | `string`                                                    | —         | Shown when `avatarStatus="error"`.                                |
+| `avatarSlot`            | `ReactNode`                                                 | —         | Replaces the built-in avatar control.                             |
+| `avatarAccept`          | `string`                                                    | `"image/png,image/jpeg,image/webp"` | Accepted image types.           |
+| `timeZones`             | `ProfileSettingsTimeZoneOption[]`                           | built-in  | `{ value, label }` options.                                        |
+| `bioMaxLength`          | `number`                                                    | `280`     | Maximum bio length. A live counter is shown.                       |
+| `labels`                | `Partial<Record<ProfileSettingsFieldName, string>>`          | —         | Field labels, for translation.                                     |
+| `saveLabel`             | `string`                                                    | —         | Save control label.                                               |
+| `cancelLabel`           | `string`                                                    | —         | Cancel control label.                                             |
+| `className`             | `string`                                                    | —         | Additional class names.                                           |
+
+### ProfileSettingsValues
+
+`{ firstName, lastName, email, jobTitle, timeZone, bio }`. `ProfileSettingsFieldName` is
+`keyof ProfileSettingsValues`.
+
+## States
+
+- **idle** — editable, nothing in flight.
+- **loading** — the profile is still being read. Fields are not shown yet.
+- **saving** — every field and both footer actions are disabled so a second save cannot start.
+- **error** — the save failed. The draft is preserved so nothing is retyped.
+- **success** — the save is **confirmed** by your application.
+- **read-only** — no permission to edit, with a visible reason.
+- **field read-only** — an individual field is managed elsewhere, with its own explanation.
+- **avatar uploading / avatar error** — truthful upload state, owned by your application.
+
+## Verification
+
+No batch verification report exists for this block. The recorded evidence is its own
+15 stories — covering unsaved changes, validation errors, saving, a failed save, a
+confirmed save, loading, two read-only shapes, three avatar states, an avatar composed
+from `FileUpload`, long values with no photo, a themed surface and a narrow container —
+and the repository story suite, re-run on 23 September 2026.
+
+Not verified: a measured width, contrast or interaction sweep of the kind Batch A and
+Batch C recorded; a screen-reader pass; any non-Chromium engine; operating-system
+text-size settings.
+
+## Known limitations
+
+- The field set is fixed: `firstName`, `lastName`, `email`, `jobTitle`, `timeZone` and
+  `bio`. Labels are translatable; the fields themselves are not configurable.
+- The block never uploads and never persists. Every outcome comes back from your
+  application.

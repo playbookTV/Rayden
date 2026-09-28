@@ -13,6 +13,7 @@ import { RaydenChart } from "./Chart";
 // aria-progressbar-name, role-img-alt and color-contrast.
 export default {
   title: "Quality/Accessibility contracts",
+  tags: ["!dev", "!autodocs"],
   parameters: { a11y: { test: "error" }, layout: "padded" },
 } satisfies Meta;
 type Story = StoryObj;

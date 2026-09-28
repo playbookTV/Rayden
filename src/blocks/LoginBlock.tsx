@@ -1,9 +1,8 @@
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { Checkbox } from "../components/FormControl";
-import { Divider } from "../components/Divider";
 import { Icon } from "../components/Icon";
 
 // ─── Types ───────────────────────────────────────────────────────────
@@ -94,7 +93,7 @@ function TwitterIcon() {
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <path
         d="M15.27 1.58H18.08L11.94 8.66L19.17 18.42H13.51L9.08 12.6L4.01 18.42H1.19L7.79 10.84L0.83 1.58H6.63L10.61 6.88L15.27 1.58ZM14.27 16.68H15.83L5.83 3.18H4.17L14.27 16.68Z"
-        fill="#1DA1F2"
+        fill="currentColor"
       />
     </svg>
   );
@@ -124,174 +123,177 @@ export function LoginBlock({
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // Defaults per variant
-  const resolvedTitle =
-    title ?? (variant === "work-email" ? "Sign in with your work email" : "Log In");
+  const uid = useId();
+  const headingId = `${uid}-heading`;
+  const passwordId = `${uid}-password`;
+  const errorId = `${uid}-error`;
+  const isWorkEmail = variant === "work-email";
+  const isCard = variant === "card";
+  const resolvedTitle = title ?? (isWorkEmail ? "Sign in to your workspace" : "Welcome back");
   const resolvedSubtitle =
     subtitle ??
-    (variant === "work-email"
-      ? "Use your work email to sign in to your team workspace"
-      : "Enter your credentials to access your account");
-  const resolvedSubmitLabel =
-    submitLabel ?? (variant === "work-email" ? "Sign in" : "Log into Account");
-  const resolvedSignUpPrompt =
-    signUpPrompt ?? (variant === "work-email" ? "Don't have an account?" : "Are you new here?");
-  const resolvedSignUpLabel =
-    signUpLabel ?? (variant === "work-email" ? "Sign up" : "Create Account");
+    (isWorkEmail
+      ? "Use your work email to continue to your team."
+      : "Enter your details to sign in to your account.");
+  const resolvedSubmitLabel = submitLabel ?? "Sign in";
+  const resolvedSignUpPrompt = signUpPrompt ?? "Don't have an account?";
+  const resolvedSignUpLabel = signUpLabel ?? "Create an account";
   const resolvedProviders: LoginBlockSocialProvider[] = socialProviders ?? [
     { name: "Google", icon: <GoogleIcon /> },
     { name: "Twitter", icon: <TwitterIcon /> },
   ];
+  const visibleProviders = isWorkEmail ? resolvedProviders.slice(0, 1) : resolvedProviders;
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    // Guard duplicate submission: `disabled` does not stop an implicit
-    // Enter-key submit in every browser, and the form may still be reachable
-    // while a request is in flight.
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
     if (pending) return;
     onSubmit?.({ email, password, rememberMe });
   };
 
-  const isWorkEmail = variant === "work-email";
-  const isCard = variant === "card";
+  const textActionClass =
+    "inline-flex min-h-8 items-center rounded text-sm font-semibold text-action-primary-text underline-offset-4 transition-colors hover:underline disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text cursor-pointer";
 
-  // Social providers start a competing authentication route, so they follow the
-  // pending contract. Provider artwork stays literal brand colour; only the
-  // surrounding interface chrome is themeable.
-  const providerButtonClass =
-    "flex items-center justify-center gap-4 w-full rounded-md border-[1.5px] border-surface-border-strong bg-surface p-4 text-base font-semibold text-grey-700 hover:bg-grey-50 dark:hover:bg-grey-100 transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text";
-
-  const socialSection = resolvedProviders.length > 0 && (
-    <div className="flex flex-col gap-3">
-      {resolvedProviders.map((provider) => (
-        <button
-          key={provider.name}
-          type="button"
-          onClick={provider.onClick}
-          disabled={pending}
-          className={providerButtonClass}
-        >
-          <span className="shrink-0 size-5">{provider.icon}</span>
-          Continue with {provider.name}
-        </button>
-      ))}
+  const socialSection = visibleProviders.length > 0 && (
+    <div className="flex w-full flex-col gap-4">
+      {!isWorkEmail && (
+        <div className="flex items-center gap-3" aria-hidden="true">
+          <span className="h-px flex-1 bg-surface-border-strong" />
+          <span className="shrink-0 text-xs text-on-surface-muted">Or continue with</span>
+          <span className="h-px flex-1 bg-surface-border-strong" />
+        </div>
+      )}
+      <div
+        className={cn("grid gap-3", !isWorkEmail && visibleProviders.length === 2 && "grid-cols-2")}
+      >
+        {visibleProviders.map((provider) => (
+          <button
+            key={provider.name}
+            type="button"
+            onClick={provider.onClick}
+            disabled={pending}
+            aria-label={`Continue with ${provider.name}`}
+            className="flex min-h-12 min-w-0 items-center justify-center gap-2.5 rounded-lg border border-surface-border-strong bg-surface px-3 py-2.5 text-sm font-medium text-on-surface-body transition-colors hover:bg-grey-50 active:bg-grey-100 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text cursor-pointer"
+          >
+            <span className="size-5 shrink-0" aria-hidden="true">
+              {provider.icon}
+            </span>
+            <span className="min-w-0 break-words">
+              {isWorkEmail ? `Continue with ${provider.name}` : provider.name}
+            </span>
+          </button>
+        ))}
+      </div>
+      {isWorkEmail && (
+        <div className="flex items-center gap-3" aria-hidden="true">
+          <span className="h-px flex-1 bg-surface-border-strong" />
+          <span className="shrink-0 text-xs text-on-surface-muted">Or use your work email</span>
+          <span className="h-px flex-1 bg-surface-border-strong" />
+        </div>
+      )}
     </div>
   );
 
-  // Password recovery is independent of the remember-me option so every variant
-  // that supplies a handler can offer it.
-  const forgotPasswordAction = onForgotPassword && (
-    <button
-      type="button"
-      onClick={onForgotPassword}
-      disabled={pending}
-      className="rounded text-sm font-medium text-action-primary-text cursor-pointer hover:underline underline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text"
+  return (
+    <div
+      className={cn(
+        "flex w-full min-w-0 max-w-[400px] flex-col gap-6",
+        isCard &&
+          "max-w-[448px] rounded-2xl border border-surface-border-strong bg-surface p-5 shadow-soft-md sm:p-8",
+        className
+      )}
     >
-      Forgot Password?
-    </button>
-  );
-
-  const showRememberMeRow = showRememberMe && !isWorkEmail;
-
-  const formContent = (
-    <>
-      {/* Header */}
-      <div className="flex flex-col items-center gap-2 text-center">
-        <h2 className="text-h4 font-semibold text-grey-900">{resolvedTitle}</h2>
-        <p className="text-base text-grey-500">{resolvedSubtitle}</p>
+      <div className="flex flex-col gap-2 pb-1">
+        <h2
+          id={headingId}
+          className="text-[28px] font-semibold leading-tight tracking-tight text-on-surface text-balance"
+        >
+          {resolvedTitle}
+        </h2>
+        <p className="text-sm leading-relaxed text-on-surface-muted text-pretty">
+          {resolvedSubtitle}
+        </p>
       </div>
 
-      {/* Work email: social first, then divider, then form */}
-      {isWorkEmail && socialSection && (
-        <div className="mt-10 flex w-full flex-col gap-4">
-          {/* Only Google for work email variant */}
-          <button
-            type="button"
-            onClick={resolvedProviders[0]?.onClick}
-            disabled={pending}
-            className={providerButtonClass}
-          >
-            <span className="shrink-0 size-5">{resolvedProviders[0]?.icon}</span>
-            {`Continue with ${resolvedProviders[0]?.name ?? "Google"}`}
-          </button>
-          {/* Laid out in flow rather than an opaque label over a rule, so the
-                separator reads correctly on any page background. */}
-          <div className="flex items-center gap-3">
-            <div className="h-px flex-1 bg-surface-border" />
-            <span className="text-sm text-grey-500">OR</span>
-            <div className="h-px flex-1 bg-surface-border" />
-          </div>
-        </div>
-      )}
+      {isWorkEmail && socialSection}
 
-      {/* Form fields */}
       <form
         onSubmit={handleSubmit}
-        className={cn("flex flex-col", isWorkEmail ? "gap-6" : "gap-8", !isWorkEmail && "mt-10")}
+        aria-labelledby={headingId}
+        aria-describedby={error ? errorId : undefined}
+        aria-busy={pending || undefined}
+        className="flex w-full min-w-0 flex-col gap-5"
       >
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-6">
-            <Input
-              label={isWorkEmail ? "Email Address" : "EMAIL ADDRESS"}
-              placeholder={isWorkEmail ? "" : "Enter Email"}
-              size="lg"
-              type="email"
-              autoComplete="email"
-              required
-              disabled={pending}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              trailingIcon="mail"
-            />
-            <Input
-              label="PASSWORD"
-              placeholder="Enter Password"
-              type={showPassword ? "text" : "password"}
-              size="lg"
-              autoComplete="current-password"
-              required
-              disabled={pending}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              trailingAction={
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  aria-pressed={showPassword}
-                  className="flex size-6 items-center justify-center rounded text-grey-500 hover:text-grey-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400"
-                >
-                  <Icon name={showPassword ? "eye" : "eye-slash"} size="sm" />
-                </button>
-              }
-            />
+        <Input
+          label={isWorkEmail ? "Work email" : "Email address"}
+          placeholder={isWorkEmail ? "you@company.com" : "you@example.com"}
+          size="md"
+          type="email"
+          autoComplete="email"
+          required
+          disabled={pending}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          wrapperClassName="gap-2"
+        />
+        <div className="flex min-w-0 flex-col gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+            <label htmlFor={passwordId} className="text-sm font-medium text-on-surface">
+              Password
+            </label>
+            {onForgotPassword && (
+              <button
+                type="button"
+                onClick={onForgotPassword}
+                disabled={pending}
+                className={textActionClass}
+              >
+                Forgot password?
+              </button>
+            )}
           </div>
-
-          {/* Remember me and/or password recovery. Either can appear alone. */}
-          {(showRememberMeRow || forgotPasswordAction) && (
-            <div
-              className={cn(
-                "flex items-center gap-4",
-                showRememberMeRow ? "justify-between" : "justify-end"
-              )}
-            >
-              {showRememberMeRow && (
-                <Checkbox
-                  label={rememberMeLabel}
-                  checked={rememberMe}
-                  disabled={pending}
-                  onChange={() => setRememberMe(!rememberMe)}
-                  wrapperClassName={cn(pending && "cursor-not-allowed opacity-50")}
-                />
-              )}
-              {forgotPasswordAction}
-            </div>
-          )}
+          <Input
+            id={passwordId}
+            placeholder="Enter your password"
+            type={showPassword ? "text" : "password"}
+            size="md"
+            autoComplete="current-password"
+            required
+            disabled={pending}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            trailingAction={
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-pressed={showPassword}
+                className="-mr-2 flex size-10 items-center justify-center rounded-md text-on-surface-muted transition-colors hover:text-on-surface focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-action-primary-text cursor-pointer"
+              >
+                <Icon name={showPassword ? "eye" : "eye-slash"} size="sm" />
+              </button>
+            }
+          />
         </div>
 
-        {/* Submit button */}
+        {showRememberMe && !isWorkEmail && (
+          <Checkbox
+            label={rememberMeLabel}
+            checked={rememberMe}
+            disabled={pending}
+            onChange={() => setRememberMe(!rememberMe)}
+            wrapperClassName={cn(
+              "min-h-6 self-start gap-2.5 [&_span]:text-sm [&_span]:font-normal",
+              pending && "cursor-not-allowed opacity-50"
+            )}
+          />
+        )}
+
         {error && (
-          <p role="alert" className="text-sm text-feedback-error leading-[1.45]">
+          <p
+            id={errorId}
+            role="alert"
+            className="rounded-lg bg-error-50 px-3 py-2.5 text-sm leading-relaxed text-feedback-error"
+          >
             {error}
           </p>
         )}
@@ -299,60 +301,30 @@ export function LoginBlock({
           type="submit"
           variant="primary"
           size="lg"
-          className="w-full"
+          className="h-12 w-full min-w-0 px-4 py-3 text-sm"
           disabled={pending}
           aria-busy={pending || undefined}
         >
+          {pending && (
+            <span
+              aria-hidden="true"
+              className="size-4 shrink-0 rounded-full border-2 border-current border-r-transparent motion-safe:animate-spin"
+            />
+          )}
           {pending ? pendingLabel : resolvedSubmitLabel}
         </Button>
       </form>
 
-      {/* Standard/Card: divider + social below form */}
-      {!isWorkEmail && socialSection && (
-        <>
-          <Divider variant="with-label" label="Or" />
-          {socialSection}
-        </>
-      )}
+      {!isWorkEmail && socialSection}
 
-      {/* Sign up link */}
-      <div className="flex items-center justify-center gap-1">
-        <span className="text-sm text-grey-500">{resolvedSignUpPrompt}</span>
-        <button
-          type="button"
-          onClick={onSignUp}
-          disabled={pending}
-          className="rounded text-sm font-medium text-action-primary-text cursor-pointer hover:underline underline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action-primary-text"
-        >
+      <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0 text-center">
+        <span className="text-sm leading-relaxed text-on-surface-muted">
+          {resolvedSignUpPrompt}
+        </span>
+        <button type="button" onClick={onSignUp} disabled={pending} className={textActionClass}>
           {resolvedSignUpLabel}
         </button>
       </div>
-    </>
-  );
-
-  // Card variant wraps in a bordered card
-  if (isCard) {
-    return (
-      <div
-        className={cn(
-          "bg-surface border border-surface-border-strong rounded-10 px-7 py-8 w-full max-w-[432px]",
-          className
-        )}
-      >
-        <div className="flex flex-col gap-8">{formContent}</div>
-      </div>
-    );
-  }
-
-  // Standard / Work-email: no card wrapper
-  return (
-    <div
-      className={cn(
-        "flex flex-col items-center justify-center gap-6 w-full max-w-[400px] px-4 sm:px-0",
-        className
-      )}
-    >
-      {formContent}
     </div>
   );
 }

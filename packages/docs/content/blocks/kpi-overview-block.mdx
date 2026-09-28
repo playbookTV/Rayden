@@ -1,0 +1,202 @@
+---
+title: KpiOverviewBlock
+description: Compare labelled metrics against an explicit period with trends and context
+---
+
+# KpiOverviewBlock
+
+Compare labelled metrics against an explicit period, with trends and textual context.
+
+Plan idea 17, category **Dashboards & analytics**. Status **experimental** — see [verification](#verification).
+
+## Import
+
+```tsx
+import { KpiOverviewBlock } from "@raydenui/ui/blocks";
+import type { KpiMetric, KpiPeriod } from "@raydenui/ui/blocks";
+```
+
+## Usage
+
+`period` is **required**: metrics are meaningless without a stated period. Every value is
+pre-formatted by your application, which owns locale and currency.
+
+```tsx
+const period: KpiPeriod = {
+  label: "1–21 September 2026",
+  comparisonLabel: "August 2026",
+};
+
+const metrics: KpiMetric[] = [
+  {
+    id: "orders",
+    label: "Orders",
+    value: "1,240",
+    comparisonValue: "1,100",
+    change: { label: "+12.7%", direction: "up", sentiment: "positive" },
+    description: "Growth is concentrated in the northern lanes.",
+    trend: { labels: ["Week 1", "Week 2", "Week 3", "Week 4"], values: [240, 290, 330, 380] },
+  },
+  {
+    id: "churn",
+    label: "Churn",
+    value: "1.8%",
+    change: { label: "−0.4pp", direction: "down", sentiment: "positive" },
+  },
+];
+
+<KpiOverviewBlock
+  title="This period"
+  headingLevel="h2"
+  period={period}
+  metrics={metrics}
+/>;
+```
+
+Direction and sentiment are separate, so churn falling is a `down` direction with a
+`positive` sentiment.
+
+### No chart dependency
+
+Sparklines are an inline SVG with a visually hidden data table. Importing blocks never
+pulls in `chart.js` or `react-chartjs-2`. The separate `@raydenui/ui/chart` entry remains
+available for richer charts.
+
+### Period selector
+
+The selector renders only when `periodOptions`, `selectedPeriodId` and `onPeriodChange`
+are **all** supplied.
+
+```tsx
+<KpiOverviewBlock
+  period={period}
+  metrics={metrics}
+  periodOptions={[
+    { id: "this-month", label: "This month" },
+    { id: "last-quarter", label: "Last quarter" },
+  ]}
+  selectedPeriodId={periodId}
+  onPeriodChange={setPeriodId}
+  periodSelectLabel="Reporting period"
+/>
+```
+
+### A metric that could not be computed
+
+The tile states why instead of showing a misleading zero.
+
+```tsx
+<KpiOverviewBlock
+  period={period}
+  metrics={[
+    {
+      id: "on-time",
+      label: "On-time delivery",
+      value: "—",
+      unavailableReason: "Carrier telemetry has not reported since 19 September.",
+    },
+  ]}
+/>
+```
+
+### Drill-through, loading, error and empty
+
+```tsx
+<KpiOverviewBlock period={period} metrics={metrics} onSelectMetric={(id) => openReport(id)} />
+```
+
+When `onSelectMetric` is supplied, each tile becomes an activating control.
+
+```tsx
+<KpiOverviewBlock period={period} metrics={[]} status="loading" loadingPlaceholderCount={4} />
+```
+
+```tsx
+<KpiOverviewBlock
+  period={period}
+  metrics={[]}
+  status="error"
+  errorMessage="The metrics service is unavailable."
+  onRetry={() => refetch()}
+/>
+```
+
+```tsx
+<KpiOverviewBlock
+  period={period}
+  metrics={[]}
+  emptyTitle="No metrics for this period"
+  emptyDescription="Nothing was recorded between 1 and 21 September."
+/>
+```
+
+## Props
+
+| Prop                      | Type                              | Default                | Description                                                      |
+| ------------------------- | --------------------------------- | ---------------------- | ---------------------------------------------------------------- |
+| `period`                  | `KpiPeriod`                       | —                      | **Required.** `{ label, comparisonLabel }`.                        |
+| `metrics`                 | `KpiMetric[]`                     | —                      | **Required.**                                                     |
+| `title`                   | `string`                          | —                      | Block title.                                                     |
+| `description`             | `string`                          | —                      | Supporting sentence.                                              |
+| `headingLevel`            | `"h1"`–`"h6"`                     | `"h2"`                 | Element for `title`.                                              |
+| `periodOptions`           | `KpiPeriodOption[]`               | —                      | `{ id, label }`. Needed for the selector.                         |
+| `selectedPeriodId`        | `string`                          | —                      | Needed for the selector.                                          |
+| `onPeriodChange`          | `(id: string) => void`            | —                      | Needed for the selector.                                          |
+| `periodSelectLabel`       | `string`                          | `"Reporting period"`   | Label for the selector.                                           |
+| `status`                  | `"idle" \| "loading" \| "error"`   | `"idle"`               | Lifecycle owned by your application.                               |
+| `errorMessage`            | `string`                          | —                      | Shown when `status="error"`.                                       |
+| `onRetry`                 | `() => void`                      | —                      | The retry control renders only with a handler.                     |
+| `onSelectMetric`          | `(id: string) => void`            | —                      | Makes each tile an activating control.                             |
+| `emptyTitle`              | `string`                          | —                      | Shown when `metrics` is empty.                                     |
+| `emptyDescription`        | `string`                          | —                      | Shown when `metrics` is empty.                                     |
+| `footer`                  | `ReactNode`                       | —                      | Extra content under the grid.                                      |
+| `loadingPlaceholderCount` | `number`                          | `4`                    | Loading placeholders.                                              |
+| `className`               | `string`                          | —                      | Additional class names.                                            |
+
+### KpiMetric
+
+| Member              | Type       | Description                                                             |
+| ------------------- | ---------- | ----------------------------------------------------------------------- |
+| `id`                | `string`   | Required, stable.                                                       |
+| `label`             | `string`   | Required. What is being counted.                                        |
+| `value`             | `string`   | Required. Pre-formatted by your application.                             |
+| `comparisonValue`   | `string`   | The same measure over the comparison period, pre-formatted.               |
+| `change`            | `KpiChange`| `{ label, direction, sentiment? }`. `label` is pre-formatted.             |
+| `description`       | `string`   | One sentence of plain-language context.                                  |
+| `trend`             | `KpiTrend` | `{ labels, values }`. Rendered with a visually hidden data table.          |
+| `unavailableReason` | `string`   | States why the metric could not be computed.                             |
+| `icon`              | `IconName` | Optional.                                                               |
+
+`KpiChange.direction` is `"up" \| "down" \| "flat"`. `KpiChange.sentiment` is
+`"positive" \| "negative" \| "neutral"`, defaulting to `"neutral"`.
+
+## States
+
+- **idle** — the metric grid.
+- **loading** — placeholders with a status message.
+- **error** — with an optional retry control.
+- **empty** — no metrics for the stated period.
+- **metric unavailable** — per tile, with the reason instead of a zero.
+
+## Verification
+
+No batch verification report exists for this block. The recorded evidence is its own
+13 stories — covering a period selector, trendlines, one metric, twelve metrics, an
+unavailable metric, loading, a failed load, no metrics, drill-through, long labels and
+values, a themed surface and a narrow container — and the repository story suite, re-run
+on 23 September 2026.
+
+Not verified: a measured width, contrast or interaction sweep of the kind Batch A and
+Batch C recorded; a screen-reader pass; any non-Chromium engine; operating-system
+text-size settings.
+
+## Known limitations
+
+- Batch C measured this block's visually hidden sparkline data table escaping its
+  container at 200% root text size, producing a 407px document inside a 320px viewport —
+  the shape of audit defect B03 recurring under text scaling. A `relative` containing
+  block has since been added around the hidden table, but **that measurement has not been
+  repeated**.
+- The block applies no locale, currency or number formatting. Every value is a string you
+  format.
+- The period selector is all-or-nothing: three props or no selector.

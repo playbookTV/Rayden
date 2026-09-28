@@ -1,0 +1,84 @@
+# Rayden UI
+
+> Rayden UI is a free, MIT-licensed React component library and design system built with TypeScript and Tailwind CSS v4. Its canonical website is https://www.rayden-ui.dev/.
+
+Rayden supports React and React DOM 18 or later. The npm package is `@raydenui/ui`; import `@raydenui/ui/styles.css` once to load its compiled component styles. Tailwind CSS is optional in the consuming app unless it generates its own utility classes.
+
+Components include buttons, inputs, date pickers, tables, navigation, and feedback. Page blocks use the separate `@raydenui/ui/blocks` entry point. Next.js and Vite project starters are available through `create-rayden-app`.
+
+The `@raydenui/ai` companion provides MCP-based component information, design tokens, and composition recipes. Refer to current documentation for setup and the availability of features marked as local development pilots. Marketing previews are illustrative UI concepts, not screenshots or embedded instances of published components.
+
+## Product and source
+- [Rayden UI](https://www.rayden-ui.dev/): Product overview, interactive concepts, starter choices, and common questions.
+- [Source code and license](https://github.com/playbookTV/Rayden): Maintained repository and MIT license.
+- [npm package](https://www.npmjs.com/package/@raydenui/ui): Published component package.
+
+## Interactive showcase
+- [Explore components and blocks](https://www.rayden-ui.dev/explore): A curated gallery of 50 examples rendered from published @raydenui/ui 0.10.1. Block entries are labelled experimental.
+- [Product hero](https://www.rayden-ui.dev/blocks/product-hero): Introduce a product with a clear promise and a working preview.
+- [Feature overview](https://www.rayden-ui.dev/blocks/feature-overview): Turn a set of capabilities into a useful, scannable story.
+- [Site footer](https://www.rayden-ui.dev/blocks/site-footer): A considered last stop, with grouped links and locale preferences.
+- [Site header](https://www.rayden-ui.dev/blocks/header): Navigation, announcements and workspace controls in a shared header.
+- [Page header](https://www.rayden-ui.dev/blocks/page-header): Give a project its context, status and next actions.
+- [Product detail](https://www.rayden-ui.dev/blocks/product-detail): A closer look at a product, with gallery, options and quantity.
+- [Checkout review](https://www.rayden-ui.dev/blocks/checkout-review): Let people review the details before a final confirmation.
+- [Recent transactions](https://www.rayden-ui.dev/blocks/recent-transactions): A readable activity ledger with selectable transaction details.
+- [Create account](https://www.rayden-ui.dev/blocks/create-account): A complete registration form, with password guidance and clear feedback.
+- [Task list](https://www.rayden-ui.dev/blocks/task-list): A working team checklist with owners, dates and completion.
+- [KPI overview](https://www.rayden-ui.dev/blocks/kpi-overview): A clear view of progress, with context behind every number.
+- [Workspace switcher](https://www.rayden-ui.dev/blocks/workspace-switcher): Move between workspaces without losing your sense of place.
+- [Command palette](https://www.rayden-ui.dev/blocks/command-palette): One place to find a page, a preference or your next action.
+- [Product collection](https://www.rayden-ui.dev/blocks/product-collection): An image-led collection with working product and quick-add actions.
+- [Notifications](https://www.rayden-ui.dev/blocks/notifications): Useful updates, contextual actions, and a way to catch up.
+- [Empty state](https://www.rayden-ui.dev/blocks/empty-state): Give an empty workspace a useful, welcoming next step.
+- [Application shell](https://www.rayden-ui.dev/blocks/application-shell): A workspace frame with responsive navigation and room for your product.
+- [Profile settings](https://www.rayden-ui.dev/blocks/profile-settings): Personal details, editable fields, and a considered save flow.
+- [Searchable table](https://www.rayden-ui.dev/blocks/searchable-table): Search, sort, and select records in a single working surface.
+- [Sign in](https://www.rayden-ui.dev/blocks/login): A focused sign-in form with clear input and feedback states.
+- [Pricing plans](https://www.rayden-ui.dev/blocks/pricing-plans): Compare plans, switch billing periods, and choose a next step.
+- [Shopping cart](https://www.rayden-ui.dev/blocks/shopping-cart): Editable quantities, item removal, and a readable order summary.
+- [Avatar](https://www.rayden-ui.dev/components/avatar): Give people a recognisable place in an interface.
+- [Badge](https://www.rayden-ui.dev/components/badge): Small labels that communicate a meaningful state.
+- [Banner](https://www.rayden-ui.dev/components/banner): A shared announcement with a clear next step and dismissal.
+- [Breadcrumb](https://www.rayden-ui.dev/components/breadcrumb): Show where someone is and offer a path back.
+- [Button group](https://www.rayden-ui.dev/components/button-group): Related choices, held together in one compact control.
+- [Card](https://www.rayden-ui.dev/components/card): Compose a project summary from a header, content and actions.
+- [Chip](https://www.rayden-ui.dev/components/chip): Keep selected tags visible and easy to remove.
+- [Counter](https://www.rayden-ui.dev/components/counter): A bounded quantity control with an immediate result.
+- [File upload](https://www.rayden-ui.dev/components/file-upload): Select documents locally, with type, size and count validation.
+- [Pagination](https://www.rayden-ui.dev/components/pagination): Break a collection into manageable, predictable pages.
+- [Progress circle](https://www.rayden-ui.dev/components/progress-circle): A compact view of progress toward a definite finish.
+- [Stepper](https://www.rayden-ui.dev/components/stepper): Guide a short flow with visible progress and room to go back.
+- [Accordion](https://www.rayden-ui.dev/components/accordion): Keep helpful detail within reach, one question at a time.
+- [Checkbox](https://www.rayden-ui.dev/components/checkbox): Independent preferences with a clear select-all state.
+- [Radio](https://www.rayden-ui.dev/components/radio): A single, deliberate choice from a small set of options.
+- [Toggle](https://www.rayden-ui.dev/components/toggle): Small switches for preferences that take effect immediately.
+- [Slider](https://www.rayden-ui.dev/components/slider): Adjust a value with both a broad gesture and precise steps.
+- [Progress bar](https://www.rayden-ui.dev/components/progress-bar): Make progress visible and give completion a clear end point.
+- [Tooltip](https://www.rayden-ui.dev/components/tooltip): A little context, exactly where someone needs it.
+- [Alert](https://www.rayden-ui.dev/components/alert): Clear information, useful actions and an easy dismissal.
+- [Button](https://www.rayden-ui.dev/components/button): Clear primary actions and quieter secondary choices.
+- [Input](https://www.rayden-ui.dev/components/input): Labelled text fields with helpful and error feedback.
+- [Select](https://www.rayden-ui.dev/components/select): A focused choice from a labelled set of options.
+- [Date picker](https://www.rayden-ui.dev/components/date-picker): An interactive calendar for choosing a single date.
+- [Tabs](https://www.rayden-ui.dev/components/tabs): Switch between related views with a shared visual rhythm.
+- [Dropdown menu](https://www.rayden-ui.dev/components/dropdown-menu): Keep contextual project actions close at hand.
+- [Modal](https://www.rayden-ui.dev/components/modal): A deliberate pause before an important action.
+- [Table](https://www.rayden-ui.dev/components/table): Readable records with a sortable project column.
+
+## Practical guides
+- [Rayden AI setup and usage](https://www.rayden-ui.dev/guides/rayden-ai): Connect the published MCP companion to Cursor or Claude Code, discover component contracts, validate props, and build with example prompts. Tested with AI 0.1.5 referencing UI 0.10.1.
+- [Rayden UI with Next.js App Router](https://www.rayden-ui.dev/guides/nextjs): Complete profile form tutorial using published Rayden UI 0.10.1, Next.js 16.3.6, and React 19.3.0. Includes TypeScript source and a downloadable project; demo state resets on reload.
+
+## Documentation
+- [Installation](https://rayden-docs.vercel.app/getting-started): Add Rayden to an existing React app.
+- [Component library](https://rayden-docs.vercel.app/components): Component APIs and examples.
+- [Tailwind setup](https://rayden-docs.vercel.app/getting-started/tailwind): Generate app utility classes with Tailwind CSS v4.
+- [Design tokens](https://rayden-docs.vercel.app/design-tokens): Colors, typography, spacing, and themes.
+- [Project starters](https://rayden-docs.vercel.app/getting-started/create-rayden-app): Next.js and Vite starter commands.
+- [AI integration](https://rayden-docs.vercel.app/ai-integration): MCP setup and capability notes.
+
+## Machine-readable component guidance
+- [Concise agent index](https://rayden-docs.vercel.app/llms.txt): Package identity, imports, and conventions.
+- [Full component guidance](https://rayden-docs.vercel.app/llms-full.txt): Component-specific implementation guidance.
+- [Component catalog](https://rayden-docs.vercel.app/ai/catalog.json): Structured component metadata.

@@ -1,6 +1,8 @@
 import type { Decorator, Preview } from "@storybook/react";
+import { createElement } from "react";
 import "../src/styles/globals.css";
 import "../src/styles/fonts.css";
+import "./preview.css";
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme || "light";
@@ -10,12 +12,20 @@ const withTheme: Decorator = (Story, context) => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }
 
-  return Story();
+  const story = Story();
+  if (context.parameters.layout === "fullscreen") return story;
+
+  return createElement("div", { className: "rayden-story-frame" }, story);
 };
 
 const preview: Preview = {
   parameters: {
-    layout: "centered",
+    layout: "padded",
+    options: {
+      storySort: {
+        order: ["Components", "Elements", "Blocks", "*"],
+      },
+    },
     backgrounds: {
       default: "light",
       values: [
